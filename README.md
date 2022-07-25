@@ -27,7 +27,7 @@ Cada desarrolador cuenta con un branch con la estructura ya creada a su nombre p
 
 1. Clonar el repositorio (branch y estructura)
    
-   `git clone git@github.com:extmarcavil/practicas-wave15.git`
+   `git clone git@github.com:AriJDH/practicas-w16.git`
    
 2. Entrar a la carpeta del proyecto clonado y crear el branch con su apellido y nombre
 
