@@ -1,0 +1,8 @@
+Hola mundo 1
+
+<<<<<<< HEAD
+Este es el cambio realizado para este archivo
+Prueba1
+=======
+Mi primer cambio (sgsilvero)
+>>>>>>> 1fdec7b39e71e24315aca2562061946f5b9f58a7
