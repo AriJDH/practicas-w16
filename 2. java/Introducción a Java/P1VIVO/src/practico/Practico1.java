@@ -16,20 +16,21 @@ public class Practico1 {
         System.out.println();
 
         for (int i = 0; i < ciudades.length; i++) {
-            System.out.println("Ingrese el nombre de la ciudad [" + i + "]: ");
+            System.out.println("Ingrese el nombre de la ciudad [" + i + "]: ");   //Se solicita el nombre de la ciudad en posicion i.
             ciudades[i] = entradaCiudad.nextLine();
 
             for (int j = 0; j < temperaturas[i].length; j++) {
                 if (j == 0) {
-                    System.out.print("Ingrese la temperatura MÍNIMA para la ciudad "+ ciudades[i] + " ["+i+"]: ");
+                    System.out.print("Ingrese la temperatura MÍNIMA para la ciudad "+ ciudades[i] + " ["+i+"]: ");  //Se solicita la temp. mínima para la ciudad i.
                 } else {
-                    System.out.print("Ingrese la temperatura MÁXIMA para la ciudad "+ ciudades[i] + " ["+i+"]: ");
+                    System.out.print("Ingrese la temperatura MÁXIMA para la ciudad "+ ciudades[i] + " ["+i+"]: ");  //Se solicita la temp. máxima para la ciudad i.
                 }
                 temperaturas[i][j] = entradaTemp.nextInt();
             }
             System.out.println();
         }
 
+        //Declarar e iniciar valores por defecto para obtener resultados y comparar.
         int tempMinima, tempMaxima;
         tempMaxima = tempMinima = temperaturas[0][0];
         String ciudadMax, ciudadMin;
@@ -49,6 +50,7 @@ public class Practico1 {
             }
         }
 
+        //Mostrar en pantalla los resultados obtenidos.
         System.out.println("--- INFORMACIÓN ---");
         System.out.println("La ciudad de " + ciudadMin + " tuvo la temperatura mínima de: " + tempMinima);
         System.out.println("La ciudad de " + ciudadMax + " tuvo la temperatura máxima de: " + tempMaxima);
