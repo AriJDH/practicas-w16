@@ -12,6 +12,7 @@ public class JavaP1Vivo {
         int temperatura_minima, temperatura_maxima = 0;
         String ciudad_minima = "", ciudad_maxima = "";
         Scanner teclado = new Scanner(System.in);
+
         for(int i = 0; i < temperatura.length; i++)
         {
             System.out.println("Ingrese la ciudad: ");
