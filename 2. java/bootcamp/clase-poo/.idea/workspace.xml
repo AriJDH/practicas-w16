@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c764038-50d3-4382-a9b7-f3e572f5b9d9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../intro-java-ejercicios" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/clase-poo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/clase-poo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/ejercicios-poo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/ejercicios-poo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/out/production/ejercicios-poo/poo/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/out/production/ejercicios-poo/poo/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/out/production/ejercicios-poo/poo/Persona.class" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/out/production/ejercicios-poo/poo/Persona.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/src/poo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/src/poo/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/ejercicios-poo/src/poo/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/ejercicios-poo/src/poo/Persona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/out/production/clase-poo/poo/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clase-poo/poo/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../clase-poo/out/production/clase-poo/poo/Persona.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/clase-poo/poo/Persona.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,16 +21,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/marmejia/Documents/bootcamp/practicas-w16/2. java/bootcamp/clase-poo",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/marmejia/Documents/bootcamp/practicas-w16/2. java/bootcamp/clase-poo&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="poo.Main" />
@@ -76,6 +61,7 @@
       <updated>1658937693199</updated>
       <workItem from="1658937694632" duration="405000" />
       <workItem from="1658938487424" duration="660000" />
+      <workItem from="1658940215201" duration="1246000" />
     </task>
     <servers />
   </component>
