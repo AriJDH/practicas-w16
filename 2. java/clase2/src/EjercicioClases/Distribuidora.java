@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Distribuidora {
     public static void main(String[] args) {
-        List<Producto> producto= new ArrayList<Producto>();
+        List<Producto> producto= new ArrayList<>();
         int cantidad=5;
         producto.add(new Producto("lapiz",21));
         producto.add(new Producto("lapiz",21));

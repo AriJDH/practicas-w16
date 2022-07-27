@@ -1,7 +1,7 @@
 package EjercicioClases;
 
 public class Parecedero extends Producto {
-    int diasPorCaducar;
+    protected int diasPorCaducar;
 
     public Parecedero(String nombre, double precio, int diasPorCaducar) {
         super(nombre, precio);
