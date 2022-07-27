@@ -1,13 +1,14 @@
 package EjercicioClases;
 
-public class PracticaDosExcepciones {
+public class Producto {
     String nombre;
     double precio;
 
-    public PracticaDosExcepciones(String nombre, double precio) {
+    public Producto(String nombre, double precio) {
         this.nombre = nombre;
         this.precio = precio;
     }
+
 
     @Override
     public String toString() {
@@ -32,6 +33,8 @@ public class PracticaDosExcepciones {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+    public double calcular(int cantidadDeProductos){
 
-
+        return getPrecio()*cantidadDeProductos;
+    }
 }

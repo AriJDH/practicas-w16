@@ -6,10 +6,11 @@ public class PracticaExcepciones {
         try {
             int a=0;
             int b=300;
+            if(a == 0) throw new IllegalArgumentException("No se puede dividir por cero");
             int calculate=b/a;
-        }catch (ArithmeticException e){
-            System.out.println("no se puede divir por cero");
 
+        }catch (java.lang.Exception e){
+            e.printStackTrace();
         }
 
 
