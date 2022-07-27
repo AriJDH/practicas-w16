@@ -20,6 +20,7 @@ public class Distribuidora {
 
         for (Producto prod: productos){
             System.out.println(prod.calcular(5));
+            System.out.println(prod.toString());
         }
     }
 

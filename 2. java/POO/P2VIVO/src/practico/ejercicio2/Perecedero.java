@@ -18,20 +18,21 @@ public class Perecedero extends Producto{
 
     @Override
     public String toString() {
-        return super.toString();
+        return super.toString() + " Días por caducar: " + diasPorCaducar;
     }
 
     @Override
     public double calcular(int cantidadProductos) {
+        double resultado = super.calcular(cantidadProductos);
         switch (diasPorCaducar){
             case 1:
-                return super.calcular(cantidadProductos) / 4;
+                return resultado / 4;
             case 2:
-                return super.calcular(cantidadProductos) / 3;
+                return resultado / 3;
             case 3:
-                return super.calcular(cantidadProductos) / 2;
+                return resultado / 2;
             default:
-                return super.calcular(cantidadProductos);
+                return resultado;
         }
     }
 }
