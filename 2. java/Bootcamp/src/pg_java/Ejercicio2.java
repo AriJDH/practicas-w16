@@ -1,4 +1,5 @@
-import java.io.IOException;
+package pg_java;
+
 import java.util.*;
 
 public class Ejercicio2 {

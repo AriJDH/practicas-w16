@@ -1,3 +1,5 @@
+package poo_p1_vivo;
+
 public class Persona {
     private String nombre;
     private int edad;
@@ -37,12 +39,24 @@ public class Persona {
         return nombre;
     }
 
+    public int getEdad() {
+        return edad;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public double getPeso() {
+        return peso;
+    }
+
+    public double getAltura() {
+        return altura;
+    }
+
     @Override
     public String toString() {
-        return "Nombre: " + nombre +
-                ", Edad: " + edad +
-                ", DNI: " + dni +
-                ", Peso: " + peso +
-                ", Altura:" + altura;
+        return String.format("Nombre: %s, Edad: %s, DNI: %s, Peso: %.1f y Altura: %.2f", nombre, edad, dni, peso, altura);
     }
 }

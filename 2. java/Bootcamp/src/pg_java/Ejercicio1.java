@@ -1,3 +1,5 @@
+package pg_java;
+
 public class Ejercicio1 {
     public static void main(String[] args) {
         String[] ciudades = {
