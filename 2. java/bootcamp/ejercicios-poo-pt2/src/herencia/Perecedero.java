@@ -2,7 +2,7 @@ package herencia;
 
 public class Perecedero extends Producto {
 
-    int diasPorCaducar;
+    private int diasPorCaducar;
 
     public Perecedero(String nombre, double precio, int diasPorCaducar) {
         super(nombre, precio);

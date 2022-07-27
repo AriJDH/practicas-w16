@@ -2,8 +2,8 @@ package herencia;
 
 public class Producto {
 
-    String nombre;
-    double precio;
+    public String nombre;
+    public double precio;
 
     public Producto(String nombre, double precio) {
         this.nombre = nombre;

@@ -2,7 +2,7 @@ package herencia;
 
 public class NoPerecedero extends Producto{
 
-    String tipo;
+    private String tipo;
 
     public NoPerecedero(String nombre, double precio, String tipo) {
         super(nombre, precio);
