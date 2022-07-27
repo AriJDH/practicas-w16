@@ -1,4 +1,4 @@
-package practico;
+package practicos;
 
 public class Automovil {
 
