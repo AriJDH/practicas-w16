@@ -15,4 +15,9 @@ public class NoPerecedero extends Producto{
         super(nombre, precio);
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + "y es de tipo " + this.tipo;
+    }
 }
