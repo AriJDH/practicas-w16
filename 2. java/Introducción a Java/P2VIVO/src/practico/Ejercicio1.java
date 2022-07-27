@@ -6,7 +6,7 @@ import java.util.*;
 public class Ejercicio1 {
     public static String SEPARADOR = "|";
     public int inscriptosTotales = -1;
-    HashMap<Integer, String> participantes = new HashMap<Integer, String>();
+    HashMap<Integer, List> participantes = new HashMap<Integer, List>();
     HashMap<Integer, Integer> participantesEdades = new HashMap<Integer, Integer>();
 
     HashMap<Integer, String> circuitos = new HashMap<Integer, String>();
@@ -84,17 +84,20 @@ public class Ejercicio1 {
     }
 
     public void inscribirParticipante(){
+        List<String> nuevoParticipante = new ArrayList<String>();
+
         inscriptosTotales++;
         int numeroId = inscriptosTotales;
         String nombre, apellido, grupoSanguineo, nroEmergencia, celular;
         int edad, dni;
         Scanner entradaInscripcion = new Scanner(System.in);
 
-        String datosParticipante = "N° " + numeroId + SEPARADOR;
+        nuevoParticipante.add(0, String.valueOf(numeroId));
         System.out.println();
         System.out.println("--- Ingresar datos de participante ---");
         System.out.print("DNI: ");
         dni = entradaInscripcion.nextInt();
+        nuevoParticipante.add(1, String.valueOf(dni));
         entradaInscripcion.nextLine();
         if (participantes.containsKey(dni)){ //Ya está registrado, elegír nueva categoria
             System.out.print("Ya está registrado el DNI: " + dni + " ");
@@ -103,7 +106,7 @@ public class Ejercicio1 {
 
             }else{
                 System.out.println();
-                edad = participantesEdades.get(dni);
+                edad = Integer.parseInt(participantes.get(dni).get(4).toString());
                 String circuito = elegirCircuito(edad);
 
                 circuitos.put(dni, circuito);
@@ -116,25 +119,27 @@ public class Ejercicio1 {
         }else{  //No existe, registrar y elegir categoria.
             System.out.print("Nombre: ");
             nombre =  entradaInscripcion.nextLine();
+            nuevoParticipante.add(2, nombre);
             System.out.print("Apellido: ");
             apellido = entradaInscripcion.nextLine();
+            nuevoParticipante.add(3, apellido);
             System.out.print("Edad: ");
             edad = entradaInscripcion.nextInt();
+            nuevoParticipante.add(4, String.valueOf(edad));
             entradaInscripcion.nextLine();
             System.out.print("Celular: ");
             celular = entradaInscripcion.nextLine();
+            nuevoParticipante.add(5, celular);
             System.out.print("Nro. Emergencia: ");
             nroEmergencia = entradaInscripcion.nextLine();
+            nuevoParticipante.add(6, nroEmergencia);
             System.out.print("Grupo Sanguíneo: ");
             grupoSanguineo = entradaInscripcion.nextLine();
+            nuevoParticipante.add(7, grupoSanguineo);
 
-            datosParticipante = datosParticipante + dni + SEPARADOR + nombre + SEPARADOR + apellido + SEPARADOR + edad + SEPARADOR + celular + SEPARADOR + nroEmergencia + SEPARADOR + grupoSanguineo + SEPARADOR;
-            participantes.put(dni,datosParticipante);
-            participantesEdades.put(dni, edad);
+            participantes.put(dni, nuevoParticipante);
             String circuito = elegirCircuito(edad);
-
             circuitos.put(dni, circuito);
-
 
             int costoInscripcion = calcularCostoInscripcion(edad, circuito);
 
