@@ -1,6 +1,5 @@
 package practico;
 
-import javax.sound.midi.spi.SoundbankReader;
 import java.util.*;
 
 public class Ejercicio1 {
