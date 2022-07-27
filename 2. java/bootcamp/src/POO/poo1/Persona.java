@@ -1,4 +1,4 @@
-package POO;
+package POO.poo1;
 
 public class Persona {
     String nombre;

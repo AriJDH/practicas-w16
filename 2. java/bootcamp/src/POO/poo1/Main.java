@@ -1,4 +1,4 @@
-package POO;
+package POO.poo1;
 
 public class Main {
 
@@ -21,6 +21,7 @@ public class Main {
         dni_2[3] = '9';
         dni_2[4] = '0';
         Persona persona3 = new Persona("Persona3", 28, dni_2, 63, 1.58);
+
 
         int imc = persona2.calcularIMC();
         if (imc == -1)
