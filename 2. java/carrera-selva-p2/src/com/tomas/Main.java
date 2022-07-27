@@ -15,6 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Mapas que recibirán Integer como clave y ArrayList como valores
         Map<Integer, ArrayList>  categoriaChico = new HashMap<Integer, ArrayList>();
         Map<Integer, ArrayList> categoriaMedio = new HashMap<Integer, ArrayList>();
         Map<Integer, ArrayList> categoriaAvanzado = new HashMap<Integer, ArrayList>();
@@ -48,6 +49,8 @@ public class Main {
             boolean existeParticipante = false;
             String categoria = "";
 
+            //Menú principal del programa
+
             System.out.println("\n------------------------------------------------");
             System.out.println("\tBienvenido a la carrera de la selva");
             System.out.println("------------------------------------------------\n");
@@ -69,7 +72,7 @@ public class Main {
                     System.out.println("Ingrese el dni del participante: ");
                     dni = entrada.nextLine();
 
-
+                    //Recorre el map para saber si el dni está registrado en el circuito chico
                     for(Map.Entry contenido : categoriaChico.entrySet()) {
 
                         datos = categoriaChico.get(contenido.getKey());
@@ -86,6 +89,7 @@ public class Main {
                     }
 
                     if(!existeParticipante) {
+                        //Recorre el map para saber si el dni está registrado en el circuito medio
                         for (Map.Entry contenido : categoriaMedio.entrySet()) {
 
                             datos = categoriaMedio.get(contenido.getKey());
@@ -103,6 +107,7 @@ public class Main {
                     }
 
                     if(!existeParticipante) {
+                        //Recorre el map para saber si el dni está registrado en el circuito avanzado
                         for (Map.Entry contenido : categoriaAvanzado.entrySet()) {
 
                             datos = categoriaAvanzado.get(contenido.getKey());
@@ -128,6 +133,8 @@ public class Main {
                         espera = entrada.nextLine();
 
                     } else {
+
+                        //Pide los demás datos del participante una vez validó que el dni no está registrado en ninguna categoría
 
                         System.out.println("Ingrese el nombre: ");
                         nombre = entrada.nextLine();
@@ -157,6 +164,7 @@ public class Main {
 
                         edadNumero = Integer.parseInt(edad);
 
+                        //Menú para seleccionar la categoría
                         do {
 
                             System.out.println("------------------------------------------------");
@@ -188,11 +196,13 @@ public class Main {
                                     System.out.println("Edad participante: " + edadNumero);
                                     System.out.println("Monto a abonar: " + valorPagar);
 
+                                    //Se obtienen las claves del maps en forma de set, se recorre para encontrar el último valor
                                     Set<Integer> clavesCategoriaChico = categoriaChico.keySet();
                                     for ( Integer clave : clavesCategoriaChico ) {
                                         numeroInscripcion = clave + 1;
                                     }
 
+                                    //Almacena número de inscripción y participantes en el circuito chico
                                     categoriaChico.put(numeroInscripcion, participante);
 
                                     System.out.println("\nPresione enter o cualquier tecla para volver al menú principal: ");
@@ -216,11 +226,13 @@ public class Main {
                                     System.out.println("Edad participante: " + edadNumero);
                                     System.out.println("Total a pagar: " + valorPagar);
 
+                                    //Se obtienen las claves del maps en forma de set, se recorre para encontrar el último valor
                                     Set<Integer> clavesCategoriaMedio = categoriaMedio.keySet();
                                     for ( Integer clave : clavesCategoriaMedio ) {
                                         numeroInscripcion = clave + 1;
                                     }
 
+                                    //Almacena número de inscripción y participantes en el circuito medio
                                     categoriaMedio.put(numeroInscripcion, participante);
 
                                     System.out.println("\nPresione enter o cualquier tecla para volver al menú principal: ");
@@ -238,11 +250,13 @@ public class Main {
                                         System.out.println("Edad participante: " + edadNumero);
                                         System.out.println("Total a pagar: " + valorPagar);
 
-                                        Set<Integer> clavesCategoriaAvanzado = categoriaMedio.keySet();
+                                        //Se obtienen las claves del maps en forma de set, se recorre para encontrar el último valor
+                                        Set<Integer> clavesCategoriaAvanzado = categoriaAvanzado.keySet();
                                         for ( Integer clave : clavesCategoriaAvanzado ) {
                                             numeroInscripcion = clave + 1;
                                         }
 
+                                        //Almacena número de inscripción y participantes en el circuito avanzado
                                         categoriaAvanzado.put(numeroInscripcion, participante);
 
                                         System.out.println("\nPresione enter o cualquier tecla para volver al menú principal: ");
@@ -266,6 +280,7 @@ public class Main {
 
                                     opcionCategoria = -1;
 
+                                    break;
 
                                 default:
                                     System.out.println("-----------¡Atención!------------");
@@ -286,6 +301,7 @@ public class Main {
 
                     do {
 
+                        //Menú de categorías
                         System.out.println("------------------------------------------------");
                         System.out.println("\tMenú de Categrías");
                         System.out.println("------------------------------------------------\n");
@@ -301,6 +317,8 @@ public class Main {
 
                             case 1:
 
+                                //Lista los participantes del circuito chico
+
                                 System.out.println("-----------------------------------------");
                                 System.out.println("Participantes categoría circuito chico");
                                 System.out.println("-----------------------------------------");
@@ -314,12 +332,14 @@ public class Main {
                                 System.out.print("\t Número de emergencia");
                                 System.out.print("\t Grupo Sanguineo");
 
+                                //Recorre el map encontrando el key (número de inscripción)
                                 for (Map.Entry contenido : categoriaChico.entrySet()) {
 
                                     System.out.print( "\n\t" + contenido.getKey() + "\t");
 
                                     datos = categoriaChico.get(contenido.getKey());
 
+                                    //Recorre el ArrayList encontrado dentro del key map especificado
                                     for(String elemento : datos) {
                                         System.out.print(elemento + "\t");
                                     }
@@ -334,6 +354,8 @@ public class Main {
 
                             case 2:
 
+                                //Lista los participantes del circuito medio
+
                                 System.out.println("-----------------------------------------");
                                 System.out.println("Participantes categoría circuito medio");
                                 System.out.println("-----------------------------------------");
@@ -347,12 +369,14 @@ public class Main {
                                 System.out.print("\t Número de emergencia");
                                 System.out.print("\t Grupo Sanguineo");
 
+                                //Recorre el map encontrando el key (número de inscripción)
                                 for (Map.Entry contenido : categoriaMedio.entrySet()) {
 
                                     System.out.print( "\n\t" + contenido.getKey() + "\t");
 
                                     datos = categoriaMedio.get(contenido.getKey());
 
+                                    //Recorre el ArrayList encontrado dentro del key map especificado
                                     for(String elemento : datos) {
                                         System.out.print(elemento + "\t");
                                     }
@@ -367,6 +391,8 @@ public class Main {
 
                             case 3:
 
+                                //Lista los participantes del circuito avanzado
+
                                 System.out.println("-----------------------------------------");
                                 System.out.println("Participantes categoría circuito avanzado");
                                 System.out.println("-----------------------------------------");
@@ -380,10 +406,12 @@ public class Main {
                                 System.out.print("\t Número de emergencia");
                                 System.out.print("\t Grupo Sanguineo");
 
+                                //Recorre el map encontrando el key (número de inscripción)
                                 for (Map.Entry contenido : categoriaAvanzado.entrySet()) {
 
                                     System.out.print( "\n\t" + contenido.getKey() + "\t");
 
+                                    //Recorre el ArrayList encontrado dentro del key map especificado
                                     datos = categoriaAvanzado.get(contenido.getKey());
 
                                     for(String elemento : datos) {
@@ -399,6 +427,8 @@ public class Main {
                             case 4:
 
                                 opcionCategoria = -1;
+
+                                break;
 
 
                             default:
@@ -421,6 +451,7 @@ public class Main {
                     System.out.println("Ingrese el dni del participante a eliminar: ");
                     dni = entrada.nextLine();
 
+                    //Recorre el map y luego obtiene del ArrayList el dni para saber si coincide con el ingresado
                     for(Map.Entry contenido : categoriaChico.entrySet()) {
 
                         datos = categoriaChico.get(contenido.getKey());
@@ -430,6 +461,7 @@ public class Main {
                             existeParticipante = true;
                             categoria = "Circuito chico";
 
+                            //Elimina los el ArrayList que contiene los datos del participante
                             categoriaChico.remove(contenido.getKey());
 
                             break;
@@ -439,6 +471,7 @@ public class Main {
                     }
 
                     if(!existeParticipante) {
+                        //Recorre el map y luego obtiene del ArrayList el dni para saber si coincide con el ingresado
                         for (Map.Entry contenido : categoriaMedio.entrySet()) {
 
                             datos = categoriaMedio.get(contenido.getKey());
@@ -448,7 +481,8 @@ public class Main {
                                 existeParticipante = true;
                                 categoria = "Circuito medio";
 
-                                categoriaChico.remove(contenido.getKey());
+                                //Elimina los el ArrayList que contiene los datos del participante
+                                categoriaMedio.remove(contenido.getKey());
 
                                 break;
 
@@ -458,6 +492,7 @@ public class Main {
                     }
 
                     if(!existeParticipante) {
+                        //Recorre el map y luego obtiene del ArrayList el dni para saber si coincide con el ingresado
                         for (Map.Entry contenido : categoriaAvanzado.entrySet()) {
 
                             datos = categoriaAvanzado.get(contenido.getKey());
@@ -467,7 +502,8 @@ public class Main {
                                 existeParticipante = true;
                                 categoria = "Circuito avanzado";
 
-                                categoriaChico.remove(contenido.getKey());
+                                //Elimina los el ArrayList que contiene los datos del participante
+                                categoriaAvanzado.remove(contenido.getKey());
 
                                 break;
 
@@ -478,7 +514,7 @@ public class Main {
 
                     if(existeParticipante) {
 
-                        System.out.println("\nEl participante fue eliminado satisfactoriamente del registro");
+                        System.out.println("\nEl participante con dni " + dni + " fue eliminado satisfactoriamente de la carrera que pertenencía al " + categoria);
 
                     } else {
 
