@@ -42,7 +42,6 @@ public class EjerciciosTemperatura {
 
     public static void main(String[] args) {
         initialize();
-
         int menor =temperatura[0][0];
         int mayor =temperatura[0][1];
         String ciudadMenor =ciudades[0];
