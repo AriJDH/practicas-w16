@@ -4,11 +4,8 @@ import javax.sound.midi.spi.SoundbankReader;
 import java.util.*;
 
 public class Ejercicio1 {
-    public static String SEPARADOR = "|";
     public int inscriptosTotales = -1;
     HashMap<Integer, List> participantes = new HashMap<Integer, List>();
-    HashMap<Integer, Integer> participantesEdades = new HashMap<Integer, Integer>();
-
     HashMap<Integer, String> circuitos = new HashMap<Integer, String>();
 
     public String elegirCircuito(int edad){
@@ -84,7 +81,7 @@ public class Ejercicio1 {
     }
 
     public void inscribirParticipante(){
-        List<String> nuevoParticipante = new ArrayList<String>();
+        List<String> nuevoParticipante = new ArrayList<>();
 
         inscriptosTotales++;
         int numeroId = inscriptosTotales;
