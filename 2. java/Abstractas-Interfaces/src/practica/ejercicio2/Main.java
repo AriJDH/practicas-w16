@@ -17,6 +17,8 @@ public class Main {
         documentos.add(new Informes("Este es el texto",1,"Javi","Bootcamp"));
 
         documentos.forEach(doc -> doc.imprimir());
+        System.out.println("---- Prueba de estatico-----");
+        Imprimible.imprimirEstatico(cv);
 
     }
 }
