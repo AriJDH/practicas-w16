@@ -38,6 +38,17 @@ public class Persona {
             return false;
         }
     }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "nombre=" + nombre +
+                ", edad=" + edad +
+                ", dni=" + dni +
+                ", peso=" + peso +
+                ", altura=" + altura +
+                "}";
+    }
 //podes preguntar si son nulos y vacios y mostras los que queres o sobrecargas el metodo
 }
 
