@@ -13,8 +13,8 @@ public class Main {
 
         documentos.add(cv);
 
-        documentos.add(new LibrosPdf(120,"titulo raro","Pedro","Terror"));
-        documentos.add(new Informes("Este es el texto",1,"Javi","Bootcamp"));
+        documentos.add(new LibroPdf(120,"titulo raro","Pedro","Terror"));
+        documentos.add(new Informe("Este es el texto",1,"Javi","Bootcamp"));
 
         documentos.forEach(doc -> doc.imprimir());
         System.out.println("---- Prueba de estatico-----");

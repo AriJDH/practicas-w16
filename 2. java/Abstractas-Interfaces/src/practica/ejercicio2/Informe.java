@@ -1,12 +1,12 @@
 package practica.ejercicio2;
 
-public class Informes implements Imprimible{
+public class Informe implements Imprimible{
 
     private String texto;
     private int cantidadDePaginas;
     private String autor;
 
-    public Informes(String texto, int cantidadDePaginas, String autor, String revisor) {
+    public Informe(String texto, int cantidadDePaginas, String autor, String revisor) {
         this.texto = texto;
         this.cantidadDePaginas = cantidadDePaginas;
         this.autor = autor;

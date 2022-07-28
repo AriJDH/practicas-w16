@@ -1,13 +1,13 @@
 package practica.ejercicio2;
 
-public class LibrosPdf implements Imprimible{
+public class LibroPdf implements Imprimible{
     private int cantidadDePaginas;
     private String titulo;
     private String autor;
     private String genero;
 
 
-    public LibrosPdf(int catidadDePaginas, String titulo, String autor, String genero) {
+    public LibroPdf(int catidadDePaginas, String titulo, String autor, String genero) {
         this.cantidadDePaginas = catidadDePaginas;
         this.titulo = titulo;
         this.autor = autor;
