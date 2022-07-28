@@ -1,0 +1,67 @@
+package Ejercicio2;
+
+public class Informe implements Documento {
+
+    protected String texto;
+    protected int cantPaginas;
+    protected String autor;
+    protected String revisor;
+
+    public Informe(){
+
+    }
+
+    public Informe(String texto, int cantPaginas, String autor, String revisor) {
+        this.texto = texto;
+        this.cantPaginas = cantPaginas;
+        this.autor = autor;
+        this.revisor = revisor;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public int getCantPaginas() {
+        return cantPaginas;
+    }
+
+    public void setCantPaginas(int cantPaginas) {
+        this.cantPaginas = cantPaginas;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getRevisor() {
+        return revisor;
+    }
+
+    public void setRevisor(String revisor) {
+        this.revisor = revisor;
+    }
+
+    @Override
+    public String toString() {
+        return "Informe{" +
+                "texto='" + texto + '\'' +
+                ", cantPaginas=" + cantPaginas +
+                ", autor='" + autor + '\'' +
+                ", revisor='" + revisor + '\'' +
+                '}';
+    }
+
+    @Override
+    public String infoDocumento() {
+        return toString();
+    }
+}
