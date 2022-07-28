@@ -1,6 +1,6 @@
 package main;
 
-public class Circulo extends FigurasGeometricas{
+public class Circulo extends FigurasGeometricas implements Graficable,Rotable{
     private float radio;
 
     public Circulo() {}
@@ -19,5 +19,15 @@ public class Circulo extends FigurasGeometricas{
 
     public void setRadio(float radio) {
         this.radio = radio;
+    }
+
+    @Override
+    public void graficable() {
+        System.out.println("graficando al circulo");
+    }
+
+    @Override
+    public void rotable() {
+        System.out.println("rotando el ciruclo");
     }
 }

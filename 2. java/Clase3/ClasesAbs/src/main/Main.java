@@ -8,6 +8,10 @@ public class Main {
         Triangulo fig1=new Triangulo(5,5,2,4);
         double result=fig.calcularArea();
         System.out.println(result);
+        fig.graficable();
+        fig.rotable();
+
+        fig1.graficable();
 
         result=fig1.calcularArea();
         System.out.println(result);

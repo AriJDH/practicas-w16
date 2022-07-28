@@ -1,6 +1,6 @@
 package main;
 
-public class Triangulo extends FigurasGeometricas {
+public class Triangulo extends FigurasGeometricas implements Graficable {
     private float base;
     private float altura;
 
@@ -31,5 +31,10 @@ public class Triangulo extends FigurasGeometricas {
 
     public void setAltura(float altura) {
         this.altura = altura;
+    }
+
+    @Override
+    public void graficable() {
+        System.out.println("graficando el triangulo");
     }
 }
