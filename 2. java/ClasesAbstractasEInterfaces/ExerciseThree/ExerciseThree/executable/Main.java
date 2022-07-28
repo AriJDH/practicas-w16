@@ -3,6 +3,7 @@ package ExerciseThree.executable;
 import ExerciseThree.actors.Gato;
 import ExerciseThree.actors.Perro;
 import ExerciseThree.actors.Vaca;
+import ExerciseThree.interfaces.Alimentable;
 
 public class Main {
     public static void main(String args[]){
@@ -17,5 +18,10 @@ public class Main {
         Perro p = new Perro();
         p.emitirSonido("Woof");
         p.comer();
+
+        System.out.println("\n Testing Alimentable interface");
+        Alimentable.comerAnimal(v);
+        Alimentable.comerAnimal(p);
+        Alimentable.comerAnimal(g);
     }
 }
