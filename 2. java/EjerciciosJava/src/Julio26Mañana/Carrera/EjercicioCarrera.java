@@ -18,11 +18,10 @@ public class EjercicioCarrera {
    //dni, nombre, apellido, edad, celular, número de emergencia y grupo sanguíneo,numeroCarrera
     public static void imprimirLista(List<Map> lista)
     {
-        System.out.println("Dni      Nombre    Apellido   Edad  Celular   NumeroEmergencia  GrupoSanguineo  Numero_de_carrera");
+        System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n", "Dni", "Nombre", "Apellido","Edad","Celular","NumeroEmergencia","GrupoSanguineo","Numero_de_carrera");
         for(Map<String,String> elemento :lista)
         {
-            //System.out.println(elemento.get("DNI")+elemento.get("Nombre")+elemento.get("Apellido")+elemento.get("Edad")+elemento.get("Celular")+elemento.get("NumEmergencia")+elemento.get("GrupoSang")+elemento.get("numeroInscripcion"));
-            System.out.println(elemento);
+            System.out.printf("%-10s %-10s %-10s %-10s %-10s %-10s %-10s %-10s\n",elemento.get("DNI"),elemento.get("Nombre"),elemento.get("Apellido"),elemento.get("Edad"),elemento.get("Celular"),elemento.get("NumEmergencia"),elemento.get("GrupoSang"),elemento.get("numeroInscripcion"));
         }
     }
     public static Map buscarUsuario(List<Map> lista,String dni){
@@ -51,7 +50,7 @@ public class EjercicioCarrera {
         nuevoUsuario.put("Celular",celular);
         nuevoUsuario.put("NumEmergencia",numEmergencia);
         nuevoUsuario.put("GrupoSang",grupoSang);
-        nuevoUsuario.put("numeroInscripcion",Integer.toString( numeroInscripcion));
+        nuevoUsuario.put("numeroInscripcion",Integer.toString(numeroInscripcion));
 
 
         switch(carrera)
@@ -81,26 +80,35 @@ public class EjercicioCarrera {
 
         if(!usuarios.containsKey(dni))
         {
-            System.out.println("ingrese el Nombre:");
-            String nombre = sc.next();
-            System.out.println("ingrese el apellido:");
-            String apellido = sc.next();
-            System.out.println("ingrese el edad:");
-            String edad = sc.next();
-            System.out.println("ingrese el celular:");
-            String celular = sc.next();
-            System.out.println("ingrese el Numero de emergencia:");
-            String numero_de_emergencia = sc.next();
-            System.out.println("ingrese el grupo sanguineo:");
-            String grupoSanguineo = sc.next();
-            clearScreen();
             System.out.println("A que carrera lo desea inscribir:");
             System.out.println("1_ Chica");
             System.out.println("2_ Mediana");
             System.out.println("3_ Avanzada");
             int tipoCarrera = sc.nextInt();
 
-            ingresarUsuario(dni,nombre,apellido,edad,celular,numero_de_emergencia,grupoSanguineo,tipoCarrera);
+            System.out.println("ingrese el edad:");
+            String edad = sc.next();
+
+            if(!(Integer.parseInt(edad) < 18 && tipoCarrera == 3)){
+                System.out.println("ingrese el Nombre:");
+                String nombre = sc.next();
+                System.out.println("ingrese el apellido:");
+                String apellido = sc.next();
+
+                System.out.println("ingrese el celular:");
+                String celular = sc.next();
+                System.out.println("ingrese el Numero de emergencia:");
+                String numero_de_emergencia = sc.next();
+                System.out.println("ingrese el grupo sanguineo:");
+                String grupoSanguineo = sc.next();
+                clearScreen();
+
+
+                ingresarUsuario(dni,nombre,apellido,edad,celular,numero_de_emergencia,grupoSanguineo,tipoCarrera);
+            }
+            else{
+                System.out.println("No se puede inscribir un menor a la categoria avanzado");
+            }
 
         }else
         {
