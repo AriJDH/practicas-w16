@@ -1,9 +1,4 @@
-/*
- *
- * Crear una clase Producto que cuente con los siguientes atributos: String nombre y double precio, la misma debe definir los métodos getters y setters para sus atributos, 
- *  un constructor que reciba todos sus atributos como parámetro y el método toString(). Crear el método calcular() al
- *  cual vamos a pasarle un parámetro de tipo int llamado cantidadDeProductos; este método tiene que multiplicar el precio por la cantidad de productos pasados.
- */
+package PooTwoExercises;
 
 public class Producto {
     protected String nombre;

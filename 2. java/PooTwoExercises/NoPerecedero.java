@@ -1,7 +1,5 @@
-/*
- * Crear la clase NoPerecedero, la misma va a tener un atributo llamado tipo, el mismo va a ser un String, crear setters, getters, constructor y método toString();
- *  en esta clase el método calcular() va a hacer exactamente lo mismo que en la clase Producto.
- */
+
+package PooTwoExercises;
 
 public class NoPerecedero extends Producto{
     private String tipo;

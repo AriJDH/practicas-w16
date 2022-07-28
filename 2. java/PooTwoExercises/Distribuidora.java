@@ -1,7 +1,5 @@
-/*
- * Crear una clase ejecutable llamada Distribuidora
- * donde van a crear un array de productos, imprimir el precio total al vender 5 productos de cada tipo. Crear los elementos del array con los datos que quieras.
- */
+
+package PooTwoExercises;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
