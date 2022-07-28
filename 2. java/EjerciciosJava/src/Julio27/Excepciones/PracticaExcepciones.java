@@ -1,4 +1,4 @@
-package Julio27;
+package Julio27.Excepciones;
 
 public class PracticaExcepciones {
 

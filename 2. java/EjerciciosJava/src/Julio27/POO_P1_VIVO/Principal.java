@@ -1,7 +1,6 @@
-package Julio27;
+package Julio27.POO_P1_VIVO;
 
-import java.util.ArrayList;
-import java.util.List;
+import Julio27.POO_P1_VIVO.Persona;
 
 public class Principal {
 

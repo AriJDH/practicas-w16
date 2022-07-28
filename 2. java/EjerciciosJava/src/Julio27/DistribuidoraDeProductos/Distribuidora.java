@@ -1,11 +1,12 @@
-package Julio27;
+package Julio27.DistribuidoraDeProductos;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Distribuidora {
-    public static List<Producto> productos = new ArrayList<Producto>();
+
     public static void main(String[] args) {
+        List<Producto> productos = new ArrayList<Producto>();
         productos.add(new Perecedero("Tomate",10,3));
         productos.add(new Perecedero("lechuga",30,1));
         productos.add(new Perecedero("leche",18,2));

@@ -1,4 +1,4 @@
-package Julio27;
+package Julio27.DistribuidoraDeProductos;
 
 public class Perecedero extends Producto {
     private int diasPorCaducar;

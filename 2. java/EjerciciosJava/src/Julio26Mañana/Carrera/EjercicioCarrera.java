@@ -1,4 +1,4 @@
-package Julio26Mañana;
+package Julio26Mañana.Carrera;
 
 import jdk.jfr.Category;
 
@@ -7,13 +7,13 @@ import java.util.*;
 
 public class EjercicioCarrera {
 
-    public static enum categoria{chico,mediano,avanzada};
-    public static int numeroInscripcion = 0;
-    public static Map<String,categoria> usuarios = new HashMap<String,categoria>();
+    private static enum categoria{chico,mediano,avanzada};
+    private static int numeroInscripcion = 0;
+    private static Map<String,categoria> usuarios = new HashMap<String,categoria>();
 
-    public static List<Map> carreraChica = new ArrayList<Map>();
-    public static List<Map> carreraMediana = new  ArrayList<Map>();
-    public static List<Map> carreraAvanzada = new ArrayList<Map>();
+    private static List<Map> carreraChica = new ArrayList<Map>();
+    private static List<Map> carreraMediana = new  ArrayList<Map>();
+    private static List<Map> carreraAvanzada = new ArrayList<Map>();
 
    //dni, nombre, apellido, edad, celular, número de emergencia y grupo sanguíneo,numeroCarrera
     public static void imprimirLista(List<Map> lista)

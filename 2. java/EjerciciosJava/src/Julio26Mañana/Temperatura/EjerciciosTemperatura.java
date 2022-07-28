@@ -1,8 +1,8 @@
-package Julio26Mañana;
+package Julio26Mañana.Temperatura;
 
 public class EjerciciosTemperatura {
-    public static String ciudades[] = new String[10];
-    public static int temperatura[][] = new int[10][2];
+    private static String ciudades[] = new String[10];
+    private static int temperatura[][] = new int[10][2];
 
     public  static void initialize(){
         //ciudad

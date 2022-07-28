@@ -1,6 +1,6 @@
-package Julio27;
+package Julio27.DistribuidoraDeProductos;
 
-public class NoPerecedero extends Producto{
+public class NoPerecedero extends Producto {
     private String tipo;
 
     @Override
