@@ -3,11 +3,13 @@ import java.util.*;
 
 public class Main {
 
-    private List<Map<String, String>> participantesCircuitoChico = new ArrayList<Map<String, String>>();
+    private static List<Map<String, String>> participantesCircuitoChico = new ArrayList<Map<String, String>>();
 
-    private List<Map<String, String>> participantesCircuitoMedio = new ArrayList<Map<String, String>>();
+    private static List<Map<String, String>> participantesCircuitoMedio = new ArrayList<Map<String, String>>();
 
-    private List<Map<String, String>> participantesCircuitoAvanzado = new ArrayList<Map<String, String>>();
+    private static List<Map<String, String>> participantesCircuitoAvanzado = new ArrayList<Map<String, String>>();
+
+    private static int numero_participante;
 
 
     static final List<String> campos_persona = new ArrayList<String>(Arrays.asList(
@@ -86,6 +88,8 @@ public class Main {
             System.out.println("Ingresar " + campo_persona + " :");
             persona.put(campo_persona, teclado_persona.nextLine());
         }
+        numero_participante = numero_participante +1;
+        persona.put("Número de participante", String.valueOf(numero_participante));
         int edad = 0;
         edad = ingresarEdad();
         persona.put("Edad", String.valueOf(edad));
@@ -129,12 +133,66 @@ public class Main {
             System.out.println(key+": " + map.get(key));
         }
     }
+    public void desinscribir(String numero_participante) {
+        Scanner teclado_opcion = new Scanner(System.in);
 
-    public void desinscribir(){
-        System.out.println("Digite el DNI de la persona a desinscribir");
+        int aux_indice = -1;
+
+        int opcion = -1;
+        while (opcion != 0) {
+            mensajeCircuitos();
+            opcion = teclado_opcion.nextInt();
+            switch (opcion) {
+                case 1:
+                    for (int i = 0; i < participantesCircuitoChico.size(); i++) {
+                        if (participantesCircuitoChico.get(i).get("Número de participante").equals(numero_participante)) {
+                            aux_indice = i;
+                        }
+                    }
+                    if (aux_indice != -1) {
+                        participantesCircuitoChico.remove(aux_indice);
+                        System.out.println("Participante Eliminado");
+                    } else {
+                        System.out.println("No se Encontro el Participante");
+                    }
+                    opcion = 0;
+                    break;
+                case 2:
+                    for (int i = 0; i < participantesCircuitoMedio.size(); i++) {
+                        if (participantesCircuitoMedio.get(i).get("Número de participante").equals(numero_participante)) {
+                            aux_indice = i;
+                        }
+                    }
+                    if (aux_indice != -1) {
+                        participantesCircuitoMedio.remove(aux_indice);
+                        System.out.println("Participante Eliminado");
+                    } else {
+                        System.out.println("No se Encontro el Participante");
+                    }
+                    opcion = 0;
+                    break;
+                case 3:
+                    for (int i = 0; i < participantesCircuitoAvanzado.size(); i++) {
+                        if (participantesCircuitoAvanzado.get(i).get("Número de participante").equals(numero_participante)) {
+                            aux_indice = i;
+                        }
+                    }
+                    if (aux_indice != -1) {
+                        participantesCircuitoChico.remove(aux_indice);
+                        System.out.println("Participante Eliminado");
+                    } else {
+                        System.out.println("No se Encontro el Participante");
+                    }
+                    opcion = 0;
+                    break;
+                default:
+                    System.out.println("Opcion Incorrecta");
+                    continue;
+            }
+        }
     }
-
     public void mostrarInscriptosPorCategoria(){
+        List<Map<String,String>> participo = participantesCircuitoChico;
         Scanner teclado_opcion = new Scanner(System.in);
         int opcion = -1;
         while (opcion == -1) {
@@ -143,21 +201,18 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    for (Map<String, String>participante:participantesCircuitoChico){
-                        System.out.println(participante);
-                        imprimirParticipantes(participante);
+                    for (int i =0; i < participantesCircuitoChico.size();i++){
+                        imprimirParticipantes(participantesCircuitoChico.get(i));
                     }
                     break;
                 case 2:
-                    for (Map<String, String>participante:participantesCircuitoMedio){
-                        System.out.println(participante);
-                        imprimirParticipantes(participante);
+                    for (int i =0; i < participantesCircuitoMedio.size();i++){
+                        imprimirParticipantes(participantesCircuitoMedio.get(i));
                     }
                     break;
                 case 3:
-                    for (Map<String, String>participante:participantesCircuitoAvanzado){
-                        System.out.println(participante);
-                        imprimirParticipantes(participante);
+                    for (int i =0; i < participantesCircuitoAvanzado.size();i++){
+                        imprimirParticipantes(participantesCircuitoAvanzado.get(i));
                     }
                     break;
                 default:
@@ -175,7 +230,9 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner teclado_opcion = new Scanner(System.in);
+        Scanner teclado_participante = new Scanner(System.in);
         int opcion = -1;
+        String participante_desinscribir ="";
         while (opcion != 0) {
             System.out.println("Digite la acción que desea realizar");
             System.out.println("1 - Inscribir nuevo participante");
@@ -193,7 +250,12 @@ public class Main {
                     new Main().mostrarInscriptosPorCategoria();
                     break;
                 case 3:
-                    new Main().desinscribir();
+                    System.out.println("Ingrese número de participante");
+                    participante_desinscribir = teclado_participante.nextLine();
+                    new Main().desinscribir(participante_desinscribir);
+                    break;
+                case 4:
+                    opcion = 0;
                     break;
                 default:
                     System.out.println("Opcion Incorrecta");
