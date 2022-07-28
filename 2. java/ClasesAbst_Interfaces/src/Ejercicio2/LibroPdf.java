@@ -1,10 +1,10 @@
 package Ejercicio2;
 
 public class LibroPdf implements Imprimible{
-    protected int cantidadPaginas;
-    protected String autor;
-    protected String titulo;
-    protected String genero;
+    private int cantidadPaginas;
+    private String autor;
+    private String titulo;
+    private String genero;
 
     public LibroPdf(int cantidadPaginas, String autor, String titulo, String genero) {
         this.cantidadPaginas = cantidadPaginas;

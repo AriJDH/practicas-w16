@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Curriculum implements Imprimible{
-    protected String nombre;
-    protected int edad;
-    protected String[] habilidades;
+    private String nombre;
+    private int edad;
+    private String[] habilidades;
 
     public Curriculum(String nombre, int edad, String[] habilidades){
         this.nombre = nombre;

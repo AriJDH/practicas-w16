@@ -1,10 +1,10 @@
 package Ejercicio2;
 
 public class Informe implements Imprimible{
-    protected String resumen;
-    protected int cantidadPaginas;
-    protected String autor;
-    protected String revisor;
+    private String resumen;
+    private int cantidadPaginas;
+    private String autor;
+    private String revisor;
 
     public Informe(String resumen, int cantidadPaginas, String autor, String revisor) {
         this.resumen = resumen;
