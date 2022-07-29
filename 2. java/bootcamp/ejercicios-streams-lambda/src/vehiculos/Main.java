@@ -50,6 +50,6 @@ public class Main {
         System.out.println("");
         System.out.println("---Promedio de todos los precios de la lista---");
         System.out.println(garaje.getVehiculos().stream().mapToDouble(Vehiculo::getCosto).average().getAsDouble());
-        
+
     }
 }
