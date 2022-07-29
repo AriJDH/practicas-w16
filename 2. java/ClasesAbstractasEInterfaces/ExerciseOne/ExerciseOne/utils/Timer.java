@@ -11,7 +11,7 @@ public class Timer {
     public static void run(int time){
         while(time > 0){
             try {
-                Thread.sleep(1);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -6,7 +6,8 @@ import ExerciseThree.actors.Vaca;
 import ExerciseThree.interfaces.Alimentable;
 
 public class Main {
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         Vaca v = new Vaca();
         v.emitirSonido("Muuuuu");
         v.comer();

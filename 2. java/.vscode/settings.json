@@ -2,6 +2,7 @@
     "java.project.sourcePaths": [
         "ClasesAbstractasEInterfaces/ExerciseOne",
         "ClasesAbstractasEInterfaces/ExerciseTwo",
-        "ClasesAbstractasEInterfaces/ExerciseThree"
+        "ClasesAbstractasEInterfaces/ExerciseThree",
+        "."
     ]
 }
