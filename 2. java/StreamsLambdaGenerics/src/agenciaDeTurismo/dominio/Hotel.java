@@ -2,12 +2,8 @@ package agenciaDeTurismo.dominio;
 
 public class Hotel extends Reserva{
 
-    private int capacidad;
 
-
-    public Hotel(int capacidad) {
-        this.capacidad = capacidad;
+    public Hotel(String nombre, double precio) {
+        super(nombre, precio);
     }
-
-
 }

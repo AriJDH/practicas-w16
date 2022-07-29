@@ -2,6 +2,7 @@ package agenciaDeTurismo.dominio;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Localizador {
@@ -19,7 +20,7 @@ public class Localizador {
     }
 
     public void agregarReserva(Reserva reserva) {
-      reservas.add(reserva);
+        reservas.add(reserva);
     }
 
     public Cliente getCliente() {
@@ -38,18 +39,42 @@ public class Localizador {
         this.total = total;
     }
 
-    public double getSubtotal(){
+    public double getSubtotal() {
 
-        return reservas.stream().mapToDouble(Reserva::getCosto).sum();
+        Predicate<Reserva> condicionHoteles = (reserva -> reserva instanceof Hotel);
+        aplicarDescuento(condicionHoteles);
+        Predicate<Reserva> condicionBoletos = (reserva -> reserva instanceof BoletosDeViaje);
+        aplicarDescuento(condicionBoletos);
+
+        double costo = reservas.stream().mapToDouble(Reserva::getPrecio).sum();
+
+        return esPaqueteCompleto() ? costo * 0.9 : costo;
     }
 
-    private boolean aplicarDescuentoHoteles(){
+
+    private void aplicarDescuento(Predicate<Reserva> condicion) {
         List<Reserva> hoteles;
         hoteles = reservas
                 .stream()
-                .filter(reserva -> reserva instanceof Reserva)
-        .collect(Collectors.toList());
+                .filter(condicion::test)
+                .collect(Collectors.toList());
 
-        return hoteles.size()>2;
+        if (hoteles.size() == 2) {
+            reservas.forEach(reserva -> {
+                if (condicion.test(reserva)) {
+                    double nuevoCosto = reserva.getPrecio() * 0.95;
+                    reserva.setPrecio(nuevoCosto);
+                }
+            });
+        }
+    }
+
+    public boolean esPaqueteCompleto() {
+        return
+                reservas.stream().anyMatch(e -> e instanceof Hotel) &&
+                        reservas.stream().anyMatch(e -> e instanceof Comida) &&
+                        reservas.stream().anyMatch(e -> e instanceof BoletosDeViaje) &&
+                        reservas.stream().anyMatch(e -> e instanceof BoletosDeTransporte);
+
     }
 }
