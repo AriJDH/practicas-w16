@@ -13,7 +13,10 @@ public class Ejercicio {
 
 
         Arrays.sort(array);
-
+        for (int i = 0; i < array.length; i++)
+        {
+            System.out.println(array[i]);
+        }
 
         return array;
     }
@@ -22,10 +25,12 @@ public class Ejercicio {
         int []pedro;
         int[] resultant =burbuja(numeros);
 
-        System.out.println(resultant);
-        for(int i=0;i<resultant.length;i++){
-            System.out.println(resultant[i]);
+        //imprimiendo fuera de la funcion
 
+        System.out.println(Arrays.stream(numeros).toArray());
+        for(int i=0;i<resultant.length;i++){
+            System.out.print(resultant[i]);
+            System.out.print(" ");
 
         }
     }
