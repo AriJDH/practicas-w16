@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7c764038-50d3-4382-a9b7-f3e572f5b9d9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ejercicios-poo-pt2/src/herencia/NoPerecedero.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ejercicios-poo-pt2/src/herencia/NoPerecedero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ejercicios-poo-pt2/src/herencia/Perecedero.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ejercicios-poo-pt2/src/herencia/Perecedero.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ejercicios-poo-pt2/src/herencia/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ejercicios-poo-pt2/src/herencia/Producto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
