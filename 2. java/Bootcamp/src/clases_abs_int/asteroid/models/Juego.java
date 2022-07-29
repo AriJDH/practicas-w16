@@ -22,7 +22,7 @@ public class Juego {
         this.asteroides = new ArrayList<>();
 
         this.agregarJugadores();
-        this.agregarAsteroides();
+        this.agregarAsteroides(true);
     }
 
     private void mostrarMenuJugadores(){
@@ -39,16 +39,56 @@ public class Juego {
                 opcion = sc.nextInt();
                 sc.nextLine();
             }while (opcion != 1 && opcion != 2);
-            if(opcion == 1) this.jugadores.add(new Nave());
-            else this.jugadores.add(new FlotaNaves());
+            if(opcion == 1) this.jugadores.add(this.crearNave(sc));
+            else this.jugadores.add(this.crearFlota(sc));
         }
     }
 
-    public void agregarAsteroides() {
+    public boolean esPosicionValida(int value, String eje){
+        if(eje.equalsIgnoreCase("x")) return value < 1 || value > this.tamañoMapaX;
+        else return value < 0 || value > this.tamañoMapaY;
+    }
+
+    public int ingresarPosicionNave(Scanner sc, String eje){
+        boolean esX = eje.equalsIgnoreCase("x");
+        System.out.printf("Ingresa la posicion en %s [%s-%s]:\n", eje, 1, esX ? this.tamañoMapaX : this.tamañoMapaY);
+        int value = sc.nextInt();
+        sc.nextLine();
+        while(esPosicionValida(value, eje)){
+            System.out.printf("Ingresa una posición válida para %s [%s-%s]:\n", eje, 1, esX ? this.tamañoMapaX : this.tamañoMapaY);
+            value = sc.nextInt();
+            sc.nextLine();
+        };
+        return value;
+    }
+
+    public Nave crearNave(Scanner sc){
+        System.out.println("Ingresa el nombre para la nave: ");
+        String nombre = sc.nextLine();
+        int x = this.ingresarPosicionNave(sc, "x");
+        int y = this.ingresarPosicionNave(sc, "y");
+        return new Nave(nombre, x, y);
+    }
+
+    public FlotaNaves crearFlota(Scanner sc) {
+        System.out.println("Creando flota: ");
+        System.out.println("Ingrese la cantidad de naves:");
+        int cantidadNaves = sc.nextInt();
+        sc.nextLine();
+        FlotaNaves flota = new FlotaNaves();
+        for(int i = 1; i <= cantidadNaves; i++) {
+            System.out.printf("Creando nave %s:\n", i);
+            flota.agregarNave(crearNave(sc));
+        }
+        return flota;
+    }
+
+    public void agregarAsteroides(boolean verboose) {
         System.out.println("Agregando asteroides ☄️☄️☄️");
         Random ran = new Random();
         for(int i = 0; i < this.cantAsteroides; i++) {
-            this.asteroides.add(new Asteroide(ran.nextInt(this.tamañoMapaX), ran.nextInt(this.tamañoMapaY)));
+            this.asteroides.add(new Asteroide(ran.nextInt(this.tamañoMapaX) + 1, ran.nextInt(this.tamañoMapaY) + 1) );
+            if(verboose) System.out.println(this.asteroides.get(this.asteroides.size() - 1));
         }
     }
 
@@ -61,9 +101,11 @@ public class Juego {
             System.out.println("-------------------------------------------------------");
         }
         System.out.println("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨");
-        System.out.printf("El ganador del juego es %s.\n", this.ganador());
+        System.out.printf("El ganador del juego es %s\n", this.ganador());
         System.out.println("✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨");
     }
+
+
 
     public ILogicaNave getGanadorRonda(Asteroide asteroide){
         return this.jugadores.stream()

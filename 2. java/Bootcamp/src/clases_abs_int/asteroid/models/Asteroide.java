@@ -16,4 +16,9 @@ public class Asteroide {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Asteroide en la posicion: (%s, %s).", this.x, this.y);
+    }
 }

@@ -10,21 +10,13 @@ public class Nave implements ILogicaNave {
     private int x;
     private int y;
 
-    public Nave() {
-        this.marcador = 0;
-        this.crearNave();
-    }
+    public Nave() {}
 
-    public void crearNave(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Ingresa el nombre para la nave: ");
-        this.nombre = sc.nextLine();
-        System.out.println("Ingresa la posicion en x:");
-        this.x = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Ingresa la posicion en y:");
-        this.y = sc.nextInt();
-        sc.nextLine();
+    public Nave(String nombre, int x, int y) {
+        this.marcador = 0;
+        this.nombre = nombre;
+        this.x = x;
+        this.y = y;
     }
 
     @Override

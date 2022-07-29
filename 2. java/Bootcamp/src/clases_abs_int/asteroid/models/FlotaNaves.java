@@ -16,19 +16,10 @@ public class FlotaNaves implements ILogicaNave {
 
     public FlotaNaves() {
         this.naves = new ArrayList<>();
-        this.añadirNaves();
     }
 
-    public void añadirNaves() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Creando flota: ");
-        System.out.println("Ingrese la cantidad de naves:");
-        int cantidadNaves = sc.nextInt();
-        sc.nextLine();
-        for(int i = 1; i <= cantidadNaves; i++) {
-            System.out.printf("Creando nave %s:\n", i);
-            this.naves.add(new Nave());
-        }
+    public void agregarNave(Nave nave){
+        this.naves.add(nave);
     }
 
     @Override
