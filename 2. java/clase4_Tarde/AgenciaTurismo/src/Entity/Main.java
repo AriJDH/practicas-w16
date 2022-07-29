@@ -11,7 +11,9 @@ public class Main {
         RepositorioCliente repositorioCliente = new RepositorioCliente();
         RepositorioLocalizador repositorioLocalizador = new RepositorioLocalizador();
         Cliente c = new Cliente("Cliente1","Apellido1","123456");
+        Cliente c2 = new Cliente("Cliente2","Apellido2","1234567");
         repositorioCliente.addClientes(c);
+        repositorioCliente.addClientes(c2);
         List<Reserva> aux = new ArrayList<>();
 
         //PAQUETE COMPLETO APLICA DESCUENTO 10%
@@ -27,7 +29,7 @@ public class Main {
         Localizador loc = new Localizador(aux);
         double costoTotal = repositorioLocalizador.historialCliente(c.getDni())*loc.costoReserva();
         System.out.println("Costo Total es: " + costoTotal);
-        repositorioLocalizador.addLocalizador(c.getDni(),loc);
+        repositorioLocalizador.addLocalizador(c.getDni(),loc,costoTotal);
 
         //APLICA DESCUENTO 2 RESERVAS DE HOTEL 5%
 
@@ -39,7 +41,7 @@ public class Main {
         Localizador loc3 = new Localizador(aux3);
         double costoTotal3 = repositorioLocalizador.historialCliente(c.getDni())*loc3.costoReserva();
         System.out.println("Costo Total es: " + costoTotal3);
-        repositorioLocalizador.addLocalizador(c.getDni(),loc3);
+        repositorioLocalizador.addLocalizador(c.getDni(),loc3,costoTotal3);
 
         //APLICA DESCUENTO DE HISTORIAL <= 2
 
@@ -51,9 +53,18 @@ public class Main {
         Localizador loc2 = new Localizador(aux2);
         double costoTotal2 = repositorioLocalizador.historialCliente(c.getDni())*loc2.costoReserva();
         System.out.println("Costo Total es: " + costoTotal2);
-        repositorioLocalizador.addLocalizador(c.getDni(),loc3);
+        repositorioLocalizador.addLocalizador(c.getDni(),loc3,costoTotal2);
 
+        //
+        Localizador loc4 = new Localizador(aux2);
+        double costoTotal4 = repositorioLocalizador.historialCliente(c2.getDni())*loc2.costoReserva();
+        System.out.println("Costo Total es: " + costoTotal4);
+        repositorioLocalizador.addLocalizador(c2.getDni(),loc4,costoTotal4);
 
+        System.out.println("Cantidad de Localizadores vendidos: "+ repositorioLocalizador.cantidadDeLocalizadores());
+        System.out.println("Cantidad de Reservas vendidas: "+ repositorioLocalizador.cantidadDeReservas());
+        System.out.println("Total de ventas: "+repositorioLocalizador.getGananciaTotal());
+        System.out.println("Promedio de ventas: "+ repositorioLocalizador.getGananciaTotal()/repositorioLocalizador.cantidadDeReservas());
     }
 
 

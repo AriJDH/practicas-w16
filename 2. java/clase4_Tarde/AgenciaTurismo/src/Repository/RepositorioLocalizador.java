@@ -1,6 +1,7 @@
 package Repository;
 
 import Entity.Localizador;
+import Entity.Reserva;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,12 +10,20 @@ import java.util.Map;
 
 public class RepositorioLocalizador {
     private Map<String, List<Localizador>> localizadores;
-
+    private double gananciaTotal;
     public int getLocalizadores(String cliente){
         return (localizadores.get(cliente).size());
     }
 
-    public void addLocalizador(String cliente, Localizador l){
+    public double getGananciaTotal() {
+        return gananciaTotal;
+    }
+
+    public void setGananciaTotal(double gananciaTotal) {
+        this.gananciaTotal = gananciaTotal;
+    }
+
+    public void addLocalizador(String cliente, Localizador l, double monto){
         if (localizadores.get(cliente)==null){
             List<Localizador> aux = new ArrayList<>();
             aux.add(l);
@@ -22,6 +31,7 @@ public class RepositorioLocalizador {
         }
         else
             localizadores.get(cliente).add(l);
+        this.gananciaTotal += monto;
     }
 
     public RepositorioLocalizador() {
@@ -30,8 +40,26 @@ public class RepositorioLocalizador {
 
     public double historialCliente(String cliente){
         double beneficio = 1;
-        if (localizadores.size()!=0 && localizadores.get(cliente).size() >= 2)
+        if (localizadores.size()!=0 && localizadores.get(cliente)!= null &&localizadores.get(cliente).size() >= 2)
             beneficio= 0.95;
         return beneficio;
+    }
+
+    public int cantidadDeLocalizadores(){
+        int contador = 0;
+        for (List<Localizador> l :localizadores.values()){
+            contador += l.size();
+        }
+        return contador;
+    }
+
+    public int cantidadDeReservas(){
+        int contador = 0;
+        for (List<Localizador> l  : localizadores.values()){
+            for (int i = 0 ; i<l.size();i++){
+                contador +=l.get(i).getReservas().size();
+            }
+        }
+        return contador;
     }
 }

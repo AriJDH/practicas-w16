@@ -10,6 +10,14 @@ public class Localizador {
         this.reservas = reservas;
     }
 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
     public double costoReserva(){
         double beneficio = 1;
         double costoTotal= reservas.stream()
