@@ -64,7 +64,7 @@ public class AgenciaDeTurismo {
         localizadorHotelYBoletos.setProductos(paqueteHotelYBoletos);
 
         Localizadores localizadorProducto = new Localizadores(3L,clienteCreadoPorRepository,new ArrayList<>());
-        localizadorHotelYBoletos.setProductos(paqueteProducto);
+        localizadorProducto.setProductos(paqueteProducto);
 
 
         List<Localizadores> localizadores = new ArrayList<Localizadores>();

@@ -4,6 +4,9 @@ import EjercicioIntegradorEnVivo.models.Cliente;
 import EjercicioIntegradorEnVivo.models.Localizadores;
 import EjercicioIntegradorEnVivo.models.Producto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClienteRepository implements ICliente{
 
     @Override
@@ -24,7 +27,11 @@ public class ClienteRepository implements ICliente{
         //historico
         if(cliente.getLocalizadoresList().size()>=2){
             localizadores.setTotal(localizadores.getTotal()*.95);
-            cliente.addLocalizador(localizadores);
+            List<Localizadores> localizadores2 = new ArrayList<Localizadores>();
+            localizadores2 = cliente.getLocalizadoresList();
+            localizadores2.add(localizadores);
+            cliente.setLocalizadoresList(localizadores2);
+            //cliente.addLocalizador(localizadores);
 
             System.out.println(cliente.toString());
 
