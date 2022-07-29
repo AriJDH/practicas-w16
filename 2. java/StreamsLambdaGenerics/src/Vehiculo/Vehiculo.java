@@ -1,4 +1,4 @@
-package recapitulandoJavaVivo;
+package Vehiculo;
 
 public class Vehiculo {
 

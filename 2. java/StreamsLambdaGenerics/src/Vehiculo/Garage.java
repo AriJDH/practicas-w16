@@ -1,4 +1,4 @@
-package recapitulandoJavaVivo;
+package Vehiculo;
 
 import java.util.ArrayList;
 import java.util.List;

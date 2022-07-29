@@ -1,4 +1,4 @@
-package recapitulandoJavaVivo;
+package Vehiculo;
 
 import java.util.Comparator;
 import java.util.List;
