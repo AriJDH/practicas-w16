@@ -11,6 +11,7 @@ public class Main {
     static List<HashMap> circuitoAvanzado = new ArrayList<>();
     static int numeroParticipante = 0;
 
+    //Función que muestra el menú principal del sistema y recibe la opción entregada por el usuario
     public static void iniciarPrograma(boolean programaIniciado){
         Scanner entrada = new Scanner(System.in);
         if (!programaIniciado){
@@ -40,6 +41,8 @@ public class Main {
         entrada.close();
     }
 
+    /* Función que inscribe a nuevos participantes.
+    Incluye algunas validaciones para evitar que el programa explote por errores de ingreso del usuario */
     public static void inscribirParticipante(){
         HashMap<String, String> participante = new HashMap<>();
         numeroParticipante += 1;
@@ -68,22 +71,14 @@ public class Main {
 
         switch (entrada.nextLine()){
             case "1":
-                if (Integer.parseInt(participante.get("edad")) < 18){
-                participante.put("abono", "1300");
-                }
-                else{
-                participante.put("abono", "1500");
-                }
+                String abono = (Integer.parseInt(participante.get("edad")) < 18) ? "1300" : "1500";
+                participante.put("abono", abono);
                 participante.put("numeroParticipante", numParticipante);
                 circuitoChico.add(participante);
             break;
             case "2":
-                if (Integer.parseInt(participante.get("edad")) < 18){
-                    participante.put("abono", "2000");
-                }
-                else{
-                    participante.put("abono", "2300");
-                }
+                abono = (Integer.parseInt(participante.get("edad")) < 18) ? "2000" : "2300";
+                participante.put("abono", abono);
                 participante.put("numeroParticipante", numParticipante);
                 circuitoMedio.add(participante);
                 break;
