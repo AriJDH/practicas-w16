@@ -32,17 +32,26 @@ public class Main {
                     + "4.- Cerrar el programa");
         }
 
-        if (entrada.nextLine().equals("1")){
-            inscribirParticipante();
-        }
-        else{
-            iniciarPrograma(true);
+        switch (entrada.nextLine()){
+            case "1":
+                inscribirParticipante();
+                break;
+            case "2":
+                imprimirParticipantes();
+                break;
+            case "3":
+                borrarParticipantes();
+                break;
+            case "4":
+                System.out.println("Apagando... Hasta la próxima!");
+                System.exit(0);
+            default:
+                iniciarPrograma(true);
         }
         entrada.close();
     }
 
-    /* Función que inscribe a nuevos participantes.
-    Incluye algunas validaciones para evitar que el programa explote por errores de ingreso del usuario */
+    //Método que inscribe a nuevos participantes
     public static void inscribirParticipante(){
         HashMap<String, String> participante = new HashMap<>();
         numeroParticipante += 1;
@@ -57,12 +66,12 @@ public class Main {
         participante.put("apellido", entrada.nextLine());
         System.out.println("Edad del participante: ");
         participante.put("edad", entrada.nextLine());
-        /*System.out.println("Celular del participante: ");
+        System.out.println("Celular del participante: ");
         participante.put("celular", entrada.nextLine());
         System.out.println("Número de emergencia del participante: ");
         participante.put("numEmergencia", entrada.nextLine());
         System.out.println("Grupo sanguíneo del participante: ");
-        participante.put("grupoSanguineo", entrada.nextLine());*/
+        participante.put("grupoSanguineo", entrada.nextLine());
 
         System.out.println("Ingrese el circuito de competición del participante: " + "\n"
         + "1.- Circuito chico" + "\n"
@@ -75,12 +84,14 @@ public class Main {
                 participante.put("abono", abono);
                 participante.put("numeroParticipante", numParticipante);
                 circuitoChico.add(participante);
+                System.out.println("Participante ingresado");
             break;
             case "2":
                 abono = (Integer.parseInt(participante.get("edad")) < 18) ? "2000" : "2300";
                 participante.put("abono", abono);
                 participante.put("numeroParticipante", numParticipante);
                 circuitoMedio.add(participante);
+                System.out.println("Participante ingresado");
                 break;
             case "3":
                 if (Integer.parseInt(participante.get("edad")) < 18){
@@ -92,28 +103,12 @@ public class Main {
                 }
                 participante.put("numeroParticipante", numParticipante);
                 circuitoAvanzado.add(participante);
+                System.out.println("Participante ingresado");
                 break;
             default:
                 System.out.println("Ingreso no permitido");
                 break;
         }
-
-        if (!circuitoChico.isEmpty()){
-            for (int i = 0; i < circuitoChico.size(); i++){
-            System.out.println(circuitoChico.get(i).values());
-        }
-        }
-        if (!circuitoMedio.isEmpty()){
-            for (int i = 0; i < circuitoMedio.size(); i++){
-                System.out.println(circuitoMedio.get(i).values());
-            }
-        }
-        if (!circuitoAvanzado.isEmpty()){
-            for (int i = 0; i < circuitoAvanzado.size(); i++){
-                System.out.println(circuitoAvanzado.get(i).values());
-            }
-        }
-
 
         System.out.println("¿Desea agregar a otro participante? (y/n)");
         String input = entrada.nextLine();
@@ -145,11 +140,200 @@ public class Main {
                 entrada.close();
             }
         }
+        entrada.close();
+    }
+
+    //Método que imprime participantes
+    public static void imprimirParticipantes(){
+        System.out.println("Ingrese un circuito de competición: " + "\n"
+                + "1.- Circuito chico" + "\n"
+                + "2.- Circuito medio" + "\n"
+                + "3.- Circuito avanzado");
+
+        Scanner entrada = new Scanner(System.in);
+        switch (entrada.nextLine()){
+            case "1":
+                if (!circuitoChico.isEmpty()) {
+                    for (HashMap circuito: circuitoChico) {
+                        System.out.println("Número: " + circuito.get("numeroParticipante")
+                        + ", DNI: " + circuito.get("dni") + ", Nombre: " + circuito.get("nombre")
+                        + " " + circuito.get("apellido") + ", Edad: " + circuito.get("edad")
+                        + ", Celular: " + circuito.get("celular") + ", Número de Emergencia: " + circuito.get("numEmergencia")
+                        + ", Grupo Sanguíneo: " + circuito.get("grupoSanguineo") + ", Abono: " + circuito.get("abono"));
+                    }
+                }
+                else{
+                    System.out.println("Aún no hay participantes inscritos para esta categoría");
+                }
+                break;
+            case "2":
+                if (!circuitoMedio.isEmpty()) {
+                    for (HashMap circuito: circuitoMedio) {
+                        System.out.println("Número: " + circuito.get("numeroParticipante")
+                                + ", DNI: " + circuito.get("dni") + ", Nombre: " + circuito.get("nombre")
+                                + " " + circuito.get("apellido") + ", Edad: " + circuito.get("edad")
+                                + ", Celular: " + circuito.get("celular") + ", Número de Emergencia: " + circuito.get("numEmergencia")
+                                + ", Grupo Sanguíneo: " + circuito.get("grupoSanguineo") + ", Abono: " + circuito.get("abono"));
+                    }
+                }
+                else{
+                    System.out.println("Aún no hay participantes inscritos para esta categoría");
+                }
+                break;
+            case "3":
+                if (!circuitoAvanzado.isEmpty()) {
+                    for (HashMap circuito: circuitoAvanzado) {
+                        System.out.println("Número: " + circuito.get("numeroParticipante")
+                                + ", DNI: " + circuito.get("dni") + ", Nombre: " + circuito.get("nombre")
+                                + " " + circuito.get("apellido") + ", Edad: " + circuito.get("edad")
+                                + ", Celular: " + circuito.get("celular") + ", Número de Emergencia: " + circuito.get("numEmergencia")
+                                + ", Grupo Sanguíneo: " + circuito.get("grupoSanguineo") + ", Abono: " + circuito.get("abono"));
+                    }
+                }
+                else{
+                    System.out.println("Aún no hay participantes inscritos para esta categoría");
+                }
+                break;
+            default:
+                System.out.println("Ingreso no permitido");
+                break;
+        }
+
+        System.out.println("¿Desea listar participantes de otro circuito? (y/n)");
+        String input = entrada.nextLine();
+        boolean entrarAWhile = false;
+
+        if (input.equals("y")){
+            imprimirParticipantes();
+            entrada.close();
+        }
+        else if (input.equals("n")){
+            iniciarPrograma(false);
+            entrada.close();
+        }
+        else{
+            entrarAWhile = true;
+        }
+
+        while(entrarAWhile){
+            System.out.println("Ingreso no permitido, intente nuevamente (y/n)");
+            String teclado = entrada.nextLine();
+            if (teclado.equals("y")){
+                entrarAWhile = false;
+                imprimirParticipantes();
+                entrada.close();
+            }
+            if (teclado.equals("n")){
+                entrarAWhile = false;
+                iniciarPrograma(false);
+                entrada.close();
+            }
+        }
+        entrada.close();
+    }
+
+    //Método que desinscribe participantes
+    public static void borrarParticipantes(){
+        System.out.println("Ingrese un circuito de competición: " + "\n"
+                + "1.- Circuito chico" + "\n"
+                + "2.- Circuito medio" + "\n"
+                + "3.- Circuito avanzado");
+
+        Scanner entrada = new Scanner(System.in);
+        switch (entrada.nextLine()){
+            case "1":
+                if (circuitoChico.isEmpty()){
+                    System.out.println("Esta categoría no cuenta con participantes para eliminar");
+                }
+                else{
+                    System.out.println("Ingrese el número del participante que desea eliminar");
+                    String indice = entrada.nextLine();
+                    for (int i = 0; i < circuitoChico.size(); i++) {
+                        if (indice.equals(circuitoChico.get(i).get("numeroParticipante"))){
+                            circuitoChico.remove(i);
+                            System.out.println("Participante eliminado del sistema");
+                        }
+                        else{
+                            System.out.println("El participante ingresado no se encuentra en esta categoría");
+                        }
+                    }
+                }
+                break;
+            case "2":
+                if (circuitoMedio.isEmpty()){
+                    System.out.println("Esta categoría no cuenta con participantes para eliminar");
+                }
+                else{
+                    System.out.println("Ingrese el número del participante que desea eliminar");
+                    String indice = entrada.nextLine();
+                    for (int i = 0; i < circuitoMedio.size(); i++) {
+                        if (indice.equals(circuitoMedio.get(i).get("numeroParticipante"))){
+                            circuitoMedio.remove(i);
+                            System.out.println("Participante eliminado del sistema");
+                        }
+                        else{
+                            System.out.println("El participante ingresado no se encuentra en esta categoría");
+                        }
+                    }
+                }
+                break;
+            case "3":
+                if (circuitoAvanzado.isEmpty()){
+                    System.out.println("Esta categoría no cuenta con participantes para eliminar");
+                }
+                else{
+                    System.out.println("Ingrese el número del participante que desea eliminar");
+                    String indice = entrada.nextLine();
+                    for (int i = 0; i < circuitoAvanzado.size(); i++) {
+                        if (indice.equals(circuitoAvanzado.get(i).get("numeroParticipante"))){
+                            circuitoAvanzado.remove(i);
+                            System.out.println("Participante eliminado del sistema");
+                        }
+                        else{
+                            System.out.println("El participante ingresado no se encuentra en esta categoría");
+                        }
+                    }
+                }
+                break;
+            default:
+                System.out.println("Ingreso no permitido");
+                break;
+        }
+
+        System.out.println("¿Desea eliminar participantes de otro circuito? (y/n)");
+        String input = entrada.nextLine();
+        boolean entrarAWhile = false;
+
+        if (input.equals("y")){
+            borrarParticipantes();
+            entrada.close();
+        }
+        else if (input.equals("n")){
+            iniciarPrograma(false);
+            entrada.close();
+        }
+        else{
+            entrarAWhile = true;
+        }
+
+        while(entrarAWhile){
+            System.out.println("Ingreso no permitido, intente nuevamente (y/n)");
+            String teclado = entrada.nextLine();
+            if (teclado.equals("y")){
+                entrarAWhile = false;
+                borrarParticipantes();
+                entrada.close();
+            }
+            if (teclado.equals("n")){
+                entrarAWhile = false;
+                iniciarPrograma(false);
+                entrada.close();
+            }
+        }
+        entrada.close();
     }
 
     public static void main(String[] args) {
-
         iniciarPrograma(false);
-
     }
 }
