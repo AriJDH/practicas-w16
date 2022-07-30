@@ -1,4 +1,4 @@
-package Main;
+package EjercicioFigurasGeometricas;
 
 public class Main {
     public  static void main(String[] args){

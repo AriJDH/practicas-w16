@@ -1,4 +1,4 @@
-package Main;
+package EjercicioFigurasGeometricas;
 
 public abstract class FiguraGeometrica {
     private int posx;

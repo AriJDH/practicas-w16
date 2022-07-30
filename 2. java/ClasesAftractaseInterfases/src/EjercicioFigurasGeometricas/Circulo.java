@@ -1,4 +1,4 @@
-package Main;
+package EjercicioFigurasGeometricas;
 
 public class Circulo extends FiguraGeometrica{
     private float radio;
