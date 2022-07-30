@@ -1,6 +1,6 @@
 package com.bootcamp.ejercicio2;
 
-public class Perecedero extends  Producto{
+public class Perecedero extends Producto {
   private Integer diasPorCaducar;
 
   public Integer getDiasPorCaducar() {
@@ -19,16 +19,16 @@ public class Perecedero extends  Producto{
   @Override
   public String toString() {
     return "Perecedero {" +
-            "diasPorCaducar=" + diasPorCaducar +
-            '}';
+        "diasPorCaducar=" + diasPorCaducar +
+        '}';
   }
 
   @Override
-  public Double calcular(Integer cantidadDeProductos){
+  public Double calcular(Integer cantidadDeProductos) {
     Double precioAuxiliar = this.getPrecio() * cantidadDeProductos;
-    if(this.diasPorCaducar == 3) return precioAuxiliar/2;
-    if(this.diasPorCaducar == 2) return precioAuxiliar/3;
-    if(this.diasPorCaducar == 1) return precioAuxiliar/4;
+    if (this.diasPorCaducar == 3) return precioAuxiliar / 2;
+    if (this.diasPorCaducar == 2) return precioAuxiliar / 3;
+    if (this.diasPorCaducar == 1) return precioAuxiliar / 4;
     return precioAuxiliar;
   }
 

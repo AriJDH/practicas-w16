@@ -28,12 +28,12 @@ public class Producto {
   @Override
   public String toString() {
     return "Producto {" +
-            "nombre='" + nombre + '\'' +
-            ", precio=" + precio +
-            '}';
+        "nombre='" + nombre + '\'' +
+        ", precio=" + precio +
+        '}';
   }
 
-  public Double calcular(Integer cantidadDeProductos){
+  public Double calcular(Integer cantidadDeProductos) {
     return this.precio * cantidadDeProductos;
   }
 }

@@ -12,9 +12,9 @@ public class Distribuidora {
     productos.add(new Perecedero(3, "Bananas", 2000.0));
     productos.add(new Perecedero(2, "Pan", 3000.90));
 
-    Double precioFinal = productos
-            .stream()
-            .reduce(0.0, (subtotal, producto) -> subtotal + producto.calcular(5), Double::sum);
+    Double precioFinal = productos.stream()
+        .mapToDouble(producto -> producto.calcular(5))
+        .sum();
 
     System.out.println("El precio total es: " + precioFinal);
 

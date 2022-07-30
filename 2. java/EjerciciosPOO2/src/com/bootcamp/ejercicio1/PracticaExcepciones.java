@@ -7,7 +7,7 @@ public class PracticaExcepciones {
 
   public static void calcular() {
     try {
-      double division = b/a;
+      double division = b / a;
     } catch (Exception e) {
       throw new IllegalArgumentException("No se puede dividir por cero");
     } finally {

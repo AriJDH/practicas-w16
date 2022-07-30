@@ -1,6 +1,6 @@
 package com.bootcamp.ejercicio2;
 
-public class NoPerecedero extends Producto{
+public class NoPerecedero extends Producto {
   private String tipo;
 
   public String getTipo() {
@@ -19,8 +19,8 @@ public class NoPerecedero extends Producto{
   @Override
   public String toString() {
     return "NoPerecedero {" +
-            "tipo='" + tipo + '\'' +
-            '}';
+        "tipo='" + tipo + '\'' +
+        '}';
   }
 
 }
