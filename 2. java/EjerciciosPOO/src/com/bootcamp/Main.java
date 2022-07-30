@@ -15,7 +15,7 @@ public class Main {
   public static void main(String[] args) {
     Persona kevin = new Persona();
     Persona sergio = new Persona("sergio", 28, "1110583037");
-    Persona mary = new Persona("Mary", 32, "1110583039", 61.7,168.1 );
+    Persona mary = new Persona("Mary", 32, "1110583039", 53.0,1.60 );
 
 //    Esto no es posible dado que no creamos un constructor que reciba solo estos dos parametros
 //    Persona Marlon = new Persona("Marlon", 25);

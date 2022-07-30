@@ -26,14 +26,10 @@ public class Persona {
 
   public Integer calcularIMC() {
     Double imc = (this.peso / (Math.pow(this.altura, 2)));
-    if (imc < 20) {
-      return -1;
-    } else {
-      if (imc <= 25) {
-        return 0;
-      } else {
-        return -1;
-      }
+    if (imc < 20) return -1;
+    else {
+      if (imc <= 25) return 0;
+      return 1;
     }
   }
 
@@ -43,12 +39,12 @@ public class Persona {
 
   @Override
   public String toString() {
-    return "Soy " + nombre +" y mis datos con los siguientes {" +
-            " edad=" + edad +
-            ", dni='" + dni + '\'' +
-            ", peso=" + peso +
-            ", altura=" + altura +
-            '}';
+    return "Soy " + nombre + " y mis datos con los siguientes {" +
+        " edad=" + edad +
+        ", dni='" + dni + '\'' +
+        ", peso=" + peso +
+        ", altura=" + altura +
+        '}';
   }
 
   public String getNombre() {
