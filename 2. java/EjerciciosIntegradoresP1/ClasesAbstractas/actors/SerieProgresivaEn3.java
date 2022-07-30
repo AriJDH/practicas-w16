@@ -1,4 +1,4 @@
-package ClasesAbstractas.actors;
+package EjerciciosIntegradoresP1.ClasesAbstractas.actors;
 
 public class SerieProgresivaEn3 extends Prototype<Number> {
     

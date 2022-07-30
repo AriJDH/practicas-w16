@@ -1,9 +1,10 @@
-package ClasesAbstractas.actors;
+package EjerciciosIntegradoresP1.ClasesAbstractas.actors;
 
-public class SerieProgresivaEn2 extends Prototype < Number >{
+public class SerieProgresivaEn2<T extends Number> extends Prototype<T> {
     
-    public SerieProgresivaEn2(Number element) {
-        super.setBase(2);
+    @SuppressWarnings("unchecked")
+    public SerieProgresivaEn2(T element) {
+        super.setBase((T)(Double)2.0);
         super.setElement(element);
     }
 }
