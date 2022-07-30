@@ -16,11 +16,17 @@ public class Main {
     System.out.println(separador);
     System.out.println("Bienvenido a la aplicacion");
     System.out.println("1. Inscribir participante");
+    System.out.println("2. Mostrar inscripciones");
+    System.out.println("3. Desinscribir participante");
+    System.out.println("4. Salir");
     System.out.println(separador);
     System.out.print(optionMenu);
     Integer option = input.nextInt();
     input.nextLine();
     if (option == 1) menuInscribirParticipante();
+    if (option == 2) menuMostrarInscripciones();
+    if (option == 3) menuDesinscribirParticipante();
+    if (option == 4) return;
   }
 
   public static void menuInscribirParticipante() {
@@ -31,10 +37,9 @@ public class Main {
     System.out.println("3. Circuito Avanzado");
     System.out.println(separador);
     System.out.print(optionMenu);
-    Integer optionCircuito = input.nextInt();
-    numeroCircuito = optionCircuito;
+    numeroCircuito = input.nextInt();
     input.nextLine();
-    menuDatosPersonales(optionCircuito);
+    menuDatosPersonales();
   }
 
   public static void inscribirParticipante(String dni, String nombre, String apellido, String edad, String celular,
@@ -56,7 +61,7 @@ public class Main {
     montoAbonar(Integer.valueOf(edad));
   }
 
-  public static void menuDatosPersonales(Integer optionCircuito) {
+  public static void menuDatosPersonales() {
     System.out.println(separador);
     System.out.println("Ingrese su DNI: ");
     String dni = input.nextLine();
@@ -73,6 +78,76 @@ public class Main {
     System.out.println("Ingrese su grupo sanguineo: ");
     String grupoSanguineo = input.nextLine();
     inscribirParticipante(dni, nombre, apellido, edad, celular, numeroEmergencia, grupoSanguineo);
+  }
+
+  public static void menuMostrarInscripciones() {
+    System.out.println(separador);
+    System.out.println("Para que circuito desea ver las inscripciones");
+    System.out.println("1. Circuito Chico");
+    System.out.println("2. Circuito Medio");
+    System.out.println("3. Circuito Avanzado");
+    System.out.println(separador);
+    System.out.print(optionMenu);
+    numeroCircuito = input.nextInt();
+    input.nextLine();
+    mostrarInscripciones();
+  }
+
+  public static void mostrarInscripciones() {
+    if (numeroCircuito.equals(1)) imprimible(circuitoChico);
+    if (numeroCircuito.equals(2)) imprimible(circuitoMedio);
+    if (numeroCircuito.equals(3)) imprimible(circuitoAvanzado);
+    System.out.println("Precione cualquier tecla para continuar");
+    input.nextLine();
+    menuPrincipal();
+
+  }
+
+  public static void imprimible(List<Map> circuitos) {
+    StringBuilder mensaje = new StringBuilder();
+    if (numeroCircuito.equals(1)) mensaje.append("Participantes Circuito Chico: \n");
+    if (numeroCircuito.equals(2)) mensaje.append("Participantes Circuito Medio: \n");
+    if (numeroCircuito.equals(3)) mensaje.append("Participantes Circuito Avanzado: \n");
+    for (Map m : circuitos) {
+      mensaje.append("Participante # ").append(m.get("numeroParticipante"))
+          .append(" con nombre ").append(m.get("nombre"))
+          .append(" y dni ").append(m.get("dni"))
+          .append(".\n");
+    }
+    System.out.println(mensaje);
+    System.out.println(separador);
+  }
+
+  public static void menuDesinscribirParticipante() {
+    System.out.println(separador);
+    System.out.println("Ingrese el dni del usuario a desinscribir");
+    String dni = input.nextLine();
+    System.out.println(separador);
+    eliminarUsuario(dni, circuitoChico);
+    eliminarUsuario(dni, circuitoMedio);
+    eliminarUsuario(dni, circuitoAvanzado);
+
+  }
+
+  public static Boolean eliminarUsuario(String dni, List<Map> circuito) {
+    for (Map participante : circuito) {
+      if (participante.get("dni").equals(dni)) {
+        circuito.remove(participante);
+        System.out.println("***** Participante " + participante.get("nombre") + " eliminado \ndel circuito correctamente");
+        System.out.println(separador);
+        System.out.println("Precione cualquier tecla para continuar");
+        input.nextLine();
+        menuPrincipal();
+        return true;
+      }
+      ;
+    }
+    System.out.println("***** No se encontro un usuario registrado \ncon dicho dni");
+    System.out.println(separador);
+    System.out.println("Precione cualquier tecla para continuar");
+    input.nextLine();
+    menuPrincipal();
+    return false;
   }
 
   public static boolean validarInscripcion(String dni) {
