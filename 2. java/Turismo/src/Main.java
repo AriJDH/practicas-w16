@@ -35,9 +35,6 @@ public class Main {
         Localizador loc = new Localizador(cli1, reservas);
         localizadores.addLocalizador(loc);
 
-        System.out.println("caso2");
-
-
 
         //
         //Segundo localizador - Caso 3
@@ -49,8 +46,6 @@ public class Main {
         Localizador loc1 = new Localizador(cli1,reservas2);
         localizadores.addLocalizador(loc1);
 
-        System.out.println("caso3");
-
         //
         //Segundo localizador - Caso 1
         Reserva res8 = new Hotel(500.0);
@@ -61,7 +56,6 @@ public class Main {
         Localizador loc2 = new Localizador(cli1,reservas3);
         localizadores.addLocalizador(loc2);
 
-        System.out.println("caso1");
         //
 
     }
