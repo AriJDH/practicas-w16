@@ -11,34 +11,66 @@ public class Main {
         Cliente cliente2 = new Cliente("456", "Gera", "Duran");
         Cliente cliente3 = new Cliente("789", "Samuel", "Zapata");
 
-        List<Cliente> listClients = new ArrayList<>();
-        listClients.add(cliente1);
-        listClients.add(cliente2);
-        listClients.add(cliente3);
+        List<Cliente> listOfClients = new ArrayList<>();
+        listOfClients.add(cliente1);
+        listOfClients.add(cliente2);
+        listOfClients.add(cliente3);
 
-        listClients.stream().forEach(System.out::println);//referencia de metodos
+        listOfClients.stream().forEach(System.out::println);//referencia de metodos
 
-        listClients.remove(cliente1);
+        listOfClients.remove(cliente1);
         System.out.println("\nSe elimino un cliente de la lista: \n");
-        listClients.stream().forEach(System.out::println);
+        listOfClients.stream().forEach(System.out::println);
 
         Scanner input = new Scanner(System.in);
         System.out.println("\nIngrese  el Dni del cliente que desea observar: ");
         String dniScanned = input.nextLine();
-        //clientFinder(dniScanned, listClients);
-        Cliente clientFound = listClients.stream().filter(x -> x.getDni().contains(dniScanned)).findFirst().orElse(null);//puede ser un cliente o un nulo
-//        List<Cliente> clientFound = listClients.stream().filter(x -> x.getDni().contains(dniScanned)).collect(Collectors.toList());//el collect me permite almacenar el filtrado en una nueva lista
+
+        Cliente clientFound = listOfClients.stream().filter(x -> x.getDni().contains(dniScanned)).findFirst().orElse(null);
+
         if(clientFound != null){
             System.out.println("*****Cliente encontrado: \n" + clientFound);
         } else {
             System.out.println("Cliente No Registrado!! ");
         }
 
+        Item arroz = new Item("001", "arroz", 2, 1.000);
+        Item platano = new Item("002", "platano", 4, 600);
+        Item harina = new Item("003", "harina", 3, 2.200);
+        Item aceite = new Item("004", "aceite", 1, 1.800);
+
+        List<Item> listOfItems = new ArrayList<>();
+        listOfItems.add(arroz);
+        listOfItems.add(platano);
+        listOfItems.add(harina);
+        listOfItems.add(aceite);
+
+        double totalCostCalculate = totalCostCalculate(listOfItems);
+        System.out.println("***********COSTO TOTAL: \n" + totalCostCalculate);
+
+
+        Factura factura001 = new Factura(83638282, cliente2, listOfItems, totalCostCalculate);
+        List<Factura> listOfFactura = new ArrayList<>();
+
+        Cliente existingClient = listOfClients.stream().filter(x -> x.getDni().contains(factura001.getClient().getDni())).findFirst().orElse(null);
+
+        if(existingClient != null){
+            System.out.println("Factura Agreagada a la lista: \n");
+            listOfFactura.add(factura001);
+        } else {
+            System.out.println(" ¡¡Este es un nuevo Cliente y debera ser registrado!!  \n");
+        }
+        listOfFactura.stream().forEach(System.out::println);
         input.close();
     }
 
-//    public static Cliente clientFinder(String dniScanned, List<Cliente> listClients){
-//        listClients.stream().filter(x -> x.getDni() == dniScanned).forEach(System.out::println);
-//    }
+    public static double totalCostCalculate(List<Item> listOfItems) {
+        double resultado = 0;
+        for (Item x : listOfItems){
+            resultado = resultado + (x.getUnitCost() * x.getAmount());
+        }
+        return resultado;
+    }
+
 }
 

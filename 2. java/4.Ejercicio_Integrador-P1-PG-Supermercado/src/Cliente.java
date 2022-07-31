@@ -40,7 +40,7 @@ public class Cliente {
     public String toString() {
         return "\n Clientes: \n" +
                 "Dni = " + dni + "\n" +
-                "Name = " + name + "\n" +
-                "Last Name = " + lastName;
+                "Nombre = " + name + "\n" +
+                "Apellido = " + lastName;
     }
 }

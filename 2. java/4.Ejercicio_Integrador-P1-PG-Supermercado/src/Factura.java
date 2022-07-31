@@ -47,4 +47,13 @@ public class Factura {
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
+
+    @Override
+    public String toString() {
+        return "\nFactura: \n" +
+                "Id = " + id + " \n" +
+                "Cliente = " + client + " \n" +
+                "Lista de Items = " + itemList + " \n" +
+                "Costo Total = " + totalCost + " \n";
+    }
 }

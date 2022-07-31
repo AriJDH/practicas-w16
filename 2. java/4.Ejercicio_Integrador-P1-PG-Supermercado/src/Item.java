@@ -45,4 +45,13 @@ public class Item {
     public void setUnitCost(double unitCost) {
         this.unitCost = unitCost;
     }
+
+    @Override
+    public String toString() {
+        return "\n Item = \n" +
+                "Codigo= " + code + " \n" +
+                "Nombre = " + name + " \n" +
+                "Cantidad = " + amount + " \n" +
+                "Costo Unitario = " + unitCost + " \n";
+    }
 }
