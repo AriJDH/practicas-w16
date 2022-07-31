@@ -19,15 +19,15 @@ public class Main {
 
     //Curriculum
     Curriculum curriculumKevin = new Curriculum("Kevin", habiliadesKevin);
-    Imprimible.imprimir(curriculumKevin);
+    curriculumKevin.imprimir();
 
     //PDF
     Pdf pdfMarwan = new Pdf(320, "Marwan", "Poesia", "Los amores imparables");
-    Imprimible.imprimir(pdfMarwan);
+    pdfMarwan.imprimir();
 
     //Informe
     Informe informeCuenta = new Informe("Texto del informe", 180, "Luis Miguel", "Margarita");
-    Imprimible.imprimir(informeCuenta);
+    informeCuenta.imprimir();
 
 
   }
