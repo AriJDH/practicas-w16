@@ -5,7 +5,7 @@ public class Main {
         Perro perro = new Perro();
         Gato gato = new Gato();
         Vaca vaca = new Vaca();
-        
+
         System.out.println("-------------------------");
         vaca.emitirSonidos();
         vaca.comerhierva();
