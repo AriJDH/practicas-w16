@@ -11,9 +11,12 @@ import EjerciciosIntegradoresP1.EjercicioIntegrador.ParteUno.model.*;
 public class Main {
 
     static Scanner scanner = new Scanner(System.in);
-
+    
     public static void main(String[] args) {
+        Repository<Factura> repositoryFactura = new RepositoryInvoice();
+        Repository<Item> repositoryItem = new RepositoryProduct();
         Repository<Cliente> repository = new RepositoryClient();
+
         repository.add(new Cliente("120310304", "Juan", "Perez"));
         repository.add(new Cliente("120310305", "Pedro", "Perez"));
         repository.add(new Cliente("120310306", "Jenny", "Sanchez"));
@@ -45,26 +48,26 @@ public class Main {
         }
 
         Factura factura = new Factura();
+        repositoryFactura.add(factura);
 
         Cliente cliente = new Cliente("113010425", "Maria", "Mojica");
         Cliente response = repository.get(cliente);
 
-        if(response == null) {
+        if(response == null) { //Adding Cliente to Repository
             repository.add(cliente);
         }
         
         factura.setCliente(cliente);
 
-        Repository<Factura> repositoryFactura = new RepositoryInvoice();
-        repositoryFactura.add(factura);
-
-        Repository<Item> repositoryItem = new RepositoryProduct();
+        //Addiing Items to local repository
         repositoryItem.add(new Item("1", "Producto 1", 10, 2));
         repositoryItem.add(new Item("2", "Producto 2", 20, 3));
         repositoryItem.add(new Item("3", "Producto 3", 30, 4));
 
+        //Adding Items to Factura
         factura.setItems((List<Item>) repositoryItem.getAll());
 
+        //Printing Factura
         System.out.println("Total factura: " + factura.getTotal());
         
     }
