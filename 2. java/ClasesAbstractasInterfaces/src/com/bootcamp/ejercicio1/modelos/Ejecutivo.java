@@ -1,4 +1,4 @@
-package com.bootcamp.ejercicio1.clientes;
+package com.bootcamp.ejercicio1.modelos;
 
 import com.bootcamp.ejercicio1.interfaces.Deposito;
 import com.bootcamp.ejercicio1.interfaces.Ramdon;

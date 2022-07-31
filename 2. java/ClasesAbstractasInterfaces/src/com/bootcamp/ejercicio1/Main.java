@@ -1,4 +1,8 @@
-package com.bootcamp.ejercicio1.clientes;
+package com.bootcamp.ejercicio1;
+
+import com.bootcamp.ejercicio1.modelos.Basic;
+import com.bootcamp.ejercicio1.modelos.Colaborador;
+import com.bootcamp.ejercicio1.modelos.Ejecutivo;
 
 public class Main {
   public static void main(String[] args) {
@@ -6,6 +10,7 @@ public class Main {
     Basic usuarioBasic = new Basic();
     Colaborador usuarioColaborador = new Colaborador();
 
+    //Ejecutando los diferentes metodos de cada tipo de cliente
     usuarioEjecutivo.hacerTransferencia();
     usuarioEjecutivo.hacerDeposito();
 

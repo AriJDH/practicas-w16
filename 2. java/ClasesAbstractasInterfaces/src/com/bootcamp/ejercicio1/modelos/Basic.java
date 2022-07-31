@@ -1,21 +1,30 @@
-package com.bootcamp.ejercicio1.clientes;
+package com.bootcamp.ejercicio1.modelos;
 
 import com.bootcamp.ejercicio1.interfaces.ConsultarSaldo;
+import com.bootcamp.ejercicio1.interfaces.PagoDeServicio;
 import com.bootcamp.ejercicio1.interfaces.Ramdon;
 import com.bootcamp.ejercicio1.interfaces.RetiroDeEfectivo;
 
-public class Colaborador implements RetiroDeEfectivo, ConsultarSaldo {
+public class Basic implements ConsultarSaldo, PagoDeServicio, RetiroDeEfectivo {
   @Override
-  public void hacerRetiroDeEfectivo() {
-    System.out.println("Usuario Colaborador haciendo retiro en efectivo");
+  public void hacerConsulaDeSaldo() {
+    System.out.println("Usuario basic consultando saldo");
     Integer ramdon = Ramdon.getRamdon();
     if (ramdon == 0) transaccionOk();
     if (ramdon == 1) transaccionNoOk();
   }
 
   @Override
-  public void hacerConsulaDeSaldo() {
-    System.out.println("Usuario Colaborador haciendo consulta de saldo");
+  public void hacerPagoDeServicio() {
+    System.out.println("Usuario basic haciendo pago de servicio");
+    Integer ramdon = Ramdon.getRamdon();
+    if (ramdon == 0) transaccionOk();
+    if (ramdon == 1) transaccionNoOk();
+  }
+
+  @Override
+  public void hacerRetiroDeEfectivo() {
+    System.out.println("Usuario basic haciendo retiro de efectivo");
     Integer ramdon = Ramdon.getRamdon();
     if (ramdon == 0) transaccionOk();
     if (ramdon == 1) transaccionNoOk();
