@@ -11,6 +11,8 @@ public interface Repository<T> {
 
     T get(FilterType ...labels);
 
+    T get(T item);
+
     boolean delete(FilterType ...labels);
 
     Collection<T> getAll();

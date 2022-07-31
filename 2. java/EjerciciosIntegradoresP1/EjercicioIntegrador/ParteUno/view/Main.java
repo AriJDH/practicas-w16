@@ -3,6 +3,8 @@ package EjerciciosIntegradoresP1.EjercicioIntegrador.ParteUno.view;
 import java.util.List;
 import java.util.Scanner;
 
+import EjerciciosIntegradoresP1.EjercicioIntegrador.ParteDos.RepositoryInvoice;
+import EjerciciosIntegradoresP1.EjercicioIntegrador.ParteDos.RepositoryProduct;
 import EjerciciosIntegradoresP1.EjercicioIntegrador.ParteUno.controller.*;
 import EjerciciosIntegradoresP1.EjercicioIntegrador.ParteUno.model.*;
 
@@ -42,5 +44,28 @@ public class Main {
             System.out.println("Cliente not found");
         }
 
+        Factura factura = new Factura();
+
+        Cliente cliente = new Cliente("113010425", "Maria", "Mojica");
+        Cliente response = repository.get(cliente);
+
+        if(response == null) {
+            repository.add(cliente);
+        }
+        
+        factura.setCliente(cliente);
+
+        Repository<Factura> repositoryFactura = new RepositoryInvoice();
+        repositoryFactura.add(factura);
+
+        Repository<Item> repositoryItem = new RepositoryProduct();
+        repositoryItem.add(new Item("1", "Producto 1", 10, 2));
+        repositoryItem.add(new Item("2", "Producto 2", 20, 3));
+        repositoryItem.add(new Item("3", "Producto 3", 30, 4));
+
+        factura.setItems((List<Item>) repositoryItem.getAll());
+
+        System.out.println("Total factura: " + factura.getTotal());
+        
     }
 }

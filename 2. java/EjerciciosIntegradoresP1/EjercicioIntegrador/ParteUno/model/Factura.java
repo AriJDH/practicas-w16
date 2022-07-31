@@ -1,12 +1,17 @@
 package EjerciciosIntegradoresP1.EjercicioIntegrador.ParteUno.model;
 
 import java.util.List;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class Factura {
     private Cliente cliente;
     private List<Item> items;
     private double total;
+
+    public Factura(){
+        
+    }
 
     public Factura(Cliente cliente) {
         this.cliente = cliente;
@@ -28,11 +33,15 @@ public class Factura {
 
     public void setItems(List<Item> items) {
         this.items = items;
+
+        for (Item item : items) {
+            this.total += item.getPrecio() * item.getCantidad();
+        }
     }
 
     public void addItem(Item item) {
         this.items.add(item);
-        total += item.getPrecio();
+        total += item.getPrecio() * item.getCantidad();
     }
 
     public double getTotal() {
@@ -55,6 +64,22 @@ public class Factura {
         }
         factura += "Total: " + getTotal();
         return factura;
+    }
+
+    public String get(String attr){
+        Field[] fields = this.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            if (field.getName().equals(attr)) {
+                try {
+                    return field.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return null;
     }
 
 }

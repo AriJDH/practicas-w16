@@ -1,5 +1,7 @@
 package EjerciciosIntegradoresP1.EjercicioIntegrador.ParteUno.model;
 
+import java.lang.reflect.Field;
+
 public class Item {
     private String nombre;
     private String codigo;
@@ -53,6 +55,22 @@ public class Item {
                 ", cantidad=" + cantidad +
                 ", precio=" + precio +
                 '}';
+    }
+
+    public String get(String attr){
+        Field[] fields = this.getClass().getDeclaredFields();
+
+        for (Field field : fields) {
+            if (field.getName().equals(attr)) {
+                try {
+                    return field.get(this).toString();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return null;
     }
     
 }
