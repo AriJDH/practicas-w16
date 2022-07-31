@@ -55,11 +55,11 @@ public class RepositoryClient implements Repository<Cliente> {
     }
 
     @Override
-    public void delete(FilterType ...filters) {
+    public boolean delete(FilterType ...filters) {
         Field[] fields = items.size() > 0 ? items.iterator().next().getClass().getDeclaredFields() : null;
-        
+        boolean match = false;
+
         for (Cliente item : this.items) {
-            boolean match = false;
             for (FilterType filter : filters) {
                 for (Field field : fields) {
                     if (field.getName().equals(filter.type)) {
@@ -71,9 +71,12 @@ public class RepositoryClient implements Repository<Cliente> {
             }
             if (match) {
                 this.items.remove(item);
+                match = true;
                 break;
             }
         }
+
+        return match;
     }
 
     @Override

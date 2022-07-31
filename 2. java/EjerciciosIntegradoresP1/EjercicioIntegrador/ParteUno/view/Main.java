@@ -20,9 +20,15 @@ public class Main {
         
         clients.forEach(System.out::println);
 
-        repository.delete(new FilterType("dni", "120310305"));
+        boolean deleted = repository.delete(new FilterType("dni", "120310305"));
 
-        System.out.println("\n\nAfter delete: \n");
+        if (deleted) {
+            System.out.println("\nCliente eliminado");
+        } else {
+            System.out.println("\nCliente no encontrado");
+        }
+
+        System.out.println("\n");
         clients = (List<Cliente>) repository.getAll();
         clients.forEach(System.out::println);
 
@@ -35,7 +41,6 @@ public class Main {
         } else {
             System.out.println("Cliente not found");
         }
-
 
     }
 }
