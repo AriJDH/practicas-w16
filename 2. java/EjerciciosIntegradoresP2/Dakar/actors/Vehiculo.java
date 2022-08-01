@@ -1,12 +1,12 @@
 package EjerciciosIntegradoresP2.Dakar.actors;
 
 public abstract class Vehiculo {
-    private double aceleracion;
-    private double velocidad;
-    private double anguloDeGiro;
-    private String patente;
-    private double peso;
-    private int cantidadDeRuedas;
+    protected double aceleracion;
+    protected double velocidad;
+    protected double anguloDeGiro;
+    protected String patente;
+    protected double peso;
+    protected int cantidadDeRuedas;
 
     public Vehiculo(double aceleracion, double velocidad, double anguloDeGiro, String patente, double peso, int cantidadDeRuedas) {
         this.aceleracion = aceleracion;

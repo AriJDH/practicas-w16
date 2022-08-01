@@ -1,0 +1,49 @@
+@startuml
+scale 1
+
+package actors<<folder>>{
+
+    abstract class Vehiculo {
+        - aceleracion : double
+        - velocidad : double
+        - anguloDeGiro : double
+        - patente : String
+        - peso : double
+        - cantidadDeRuedas : int
+        + getScore() : double
+    }
+
+    class Auto extends Vehiculo{
+        {static} - cantidadDeRuedas : final int
+        {static} - peso : final double
+    }
+
+    class Moto extends Vehiculo{
+        {static} - cantidadDeRuedas : final int
+        {static} - peso : final double
+    }
+
+    interface Socorrista<T> {
+        + socorrer(T vehiculo) : void
+    }
+
+    class SocorristaDeAuto<Auto> implements Socorrista{
+        {static} - cantidadDeRuedas : final int
+        {static} - peso : final double
+        + socorrer(Auto vehiculo) : void
+    }
+
+
+    class SocorristaDeMoto<Moto> implements Socorrista{
+        {static} - cantidadDeRuedas : final int
+        {static} - peso : final double
+        + socorrer(Moto vehiculo) : void
+    }
+
+
+}
+
+Speaker "1" *-- "*" Topic
+Event "1" o-- "*" Speaker
+Event "1" o-- "*" Attendee
+@enduml

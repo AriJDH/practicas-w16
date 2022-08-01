@@ -8,4 +8,9 @@ public class Auto extends Vehiculo {
     public Auto(double aceleracion, double velocidad, double anguloDeGiro, String patente) {
         super(aceleracion, velocidad, anguloDeGiro, patente, peso, cantidadDeRuedas);
     }
+
+    @Override
+    public String toString() {
+        return "Auto{" + "patente=" + patente + ", aceleracion=" + aceleracion + ", velocidad=" + velocidad + ", anguloDeGiro=" + anguloDeGiro + '}';
+    }
 }

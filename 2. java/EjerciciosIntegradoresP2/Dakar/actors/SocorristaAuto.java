@@ -1,12 +1,9 @@
 package EjerciciosIntegradoresP2.Dakar.actors;
 
-public class SocorristaAuto extends Vehiculo implements Socorrista<Auto> {
-
-    private final static int cantidadDeRuedas = 4;
-    private final static double peso = 1000;
+public class SocorristaAuto extends Auto implements Socorrista<Auto> {
 
     public SocorristaAuto(double aceleracion, double velocidad, double anguloDeGiro, String patente) {
-        super(aceleracion, velocidad, anguloDeGiro, patente, peso, cantidadDeRuedas);
+        super(aceleracion, velocidad, anguloDeGiro, patente);
     }
 
     @Override
