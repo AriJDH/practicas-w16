@@ -18,6 +18,8 @@ public class Main {
         carrera.darDeAltaAuto(300.0, 50.0, 90.0, "ABD 123");
         carrera.darDeAltaMoto(200.0, 30.0, 75.0, "DEG 456");
 
+        System.out.println("---------------------------");
+
         //Elimino un vehiculo por objeto (con error)
         carrera.eliminarVehiculo(new Auto(300.0, 50.0, 90.0, "ABZ 123"));
         //Elimino un vehiculo por objeto (sin error)
@@ -27,8 +29,13 @@ public class Main {
         //Elimino un vehiculo por patente (sin error)
         carrera.eliminarVehiculoConPatente("DEG 456");
 
+        System.out.println("---------------------------");
+
         //Defino el ganador de la carrera
+        System.out.println("Ganador: ");
         carrera.definirGanador();
+
+        System.out.println("---------------------------");
 
         //Socorro auto
         carrera.socorrerAuto("ABC 123");
