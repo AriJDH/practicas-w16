@@ -8,10 +8,10 @@ public class Factura {
     private List<Item> items;
     private double total;
 
-    public Factura(Cliente cliente, List<Item> items, double total) {
+    public Factura(Cliente cliente, List<Item> items) {
         this.cliente = cliente;
         this.items = items;
-        this.total = total;
+        this.total = items.stream().mapToDouble(Item::getPrecio).sum();
     }
 
     public Cliente getCliente() {
