@@ -23,6 +23,14 @@ public class Main {
         comerAnimal(objPerro);
     }
 
+    public class Ejercicio1 {
+
+        public int[] burbuja(int[] array) {
+            return array;
+        }
+
+    }
+
     public static void comerAnimal(Animal animal){
         if (animal instanceof Carnivoros){ // condicion para saber si es carnivoro el tipo de obj que resive por parametro
             ((Carnivoros)animal).comerCarne(); // para castear para usar los metodos de carnivoros
