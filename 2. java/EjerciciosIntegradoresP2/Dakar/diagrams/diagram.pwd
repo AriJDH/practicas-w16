@@ -27,23 +27,20 @@ package actors<<folder>>{
         + socorrer(T vehiculo) : void
     }
 
-    class SocorristaDeAuto<Auto> implements Socorrista{
-        {static} - cantidadDeRuedas : final int
-        {static} - peso : final double
+    class SocorristaDeAuto<Auto> extends Auto implements Socorrista{
         + socorrer(Auto vehiculo) : void
     }
 
 
-    class SocorristaDeMoto<Moto> implements Socorrista{
-        {static} - cantidadDeRuedas : final int
-        {static} - peso : final double
+    class SocorristaDeMoto<Moto> extends Moto implements Socorrista{
         + socorrer(Moto vehiculo) : void
     }
 
+    class Carrera{
+        + List<Vehiculo> getVehiculos() : List<Vehiculo>
+    }
 
 }
 
-Speaker "1" *-- "*" Topic
-Event "1" o-- "*" Speaker
-Event "1" o-- "*" Attendee
+Carrera "1" o-- "*" Vehiculo
 @enduml
