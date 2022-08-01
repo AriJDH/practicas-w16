@@ -3,44 +3,48 @@ package EjercicioIntegrador;
 import java.util.List;
 
 public class Factura {
-    private List<Clientes> nombre;
+    private Clientes cliente;
     private List<Items> listaItems;
-    private Integer totalCompra;
+    private double totalCompra;
 
-    public Factura(List<Clientes> nombre, List<Items> listaItems, Integer totalCompra) {
-        this.nombre = nombre;
+    public Factura() {
+    }
+
+    public Factura(Clientes cliente, List<Items> listaItems, double totalCompra) {
+        this.cliente = cliente;
         this.listaItems = listaItems;
         this.totalCompra = totalCompra;
     }
 
-    public List<Clientes> getNombre() {
-        return nombre;
+    public Clientes getNombre() {
+        return cliente;
     }
 
-    public void setNombre(List<Clientes> nombre) {
-        this.nombre = nombre;
+    public void setNombre(Clientes cliente) {
+        this.cliente = cliente;
     }
 
     public List<Items> getListaItems() {
         return listaItems;
     }
 
+
     public void setListaItems(List<Items> listaItems) {
         this.listaItems = listaItems;
     }
 
-    public Integer getTotalCompra() {
+    public double getTotalCompra() {
         return totalCompra;
     }
 
-    public void setTotalCompra(Integer totalCompra) {
+    public void setTotalCompra(double totalCompra) {
         this.totalCompra = totalCompra;
     }
 
     @Override
     public String toString() {
         return "Factura{" +
-                "nombre=" + nombre +
+                "nombre=" + cliente +
                 ", listaItems=" + listaItems +
                 ", totalCompra=" + totalCompra +
                 '}';

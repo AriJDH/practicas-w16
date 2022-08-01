@@ -3,12 +3,21 @@ package EjercicioIntegrador;
 public class Clientes {
     private String nombre;
     private String apellido;
-    private Integer dni;
+    private int dni;
 
-    public Clientes(String nombre, String apellido, Integer dni) {
+    public Clientes(String nombre, String apellido, int dni) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+    }
+
+    @Override
+    public String toString() {
+        return "Clientes{" +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni=" + dni +
+                '}';
     }
 
     public String getNombre() {
@@ -27,11 +36,11 @@ public class Clientes {
         this.apellido = apellido;
     }
 
-    public Integer getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(Integer dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 }
