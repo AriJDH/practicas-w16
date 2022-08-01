@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/POO.iml" filepath="$PROJECT_DIR$/.idea/POO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POO-P1-PG/POO-P1-PG.iml" filepath="$PROJECT_DIR$/POO-P1-PG/POO-P1-PG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POO-P1-VIVO/POO-P1-VIVO.iml" filepath="$PROJECT_DIR$/POO-P1-VIVO/POO-P1-VIVO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POO-P2-PG/POO-P2-PG.iml" filepath="$PROJECT_DIR$/POO-P2-PG/POO-P2-PG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/POO-P2-VIVO/POO-P2-VIVO.iml" filepath="$PROJECT_DIR$/POO-P2-VIVO/POO-P2-VIVO.iml" />
+    </modules>
+  </component>
+</project>
