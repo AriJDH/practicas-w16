@@ -1,4 +1,4 @@
-package integradores.dakar;
+package integradores.integrador2.dakar;
 
 import java.util.ArrayList;
 import java.util.Comparator;

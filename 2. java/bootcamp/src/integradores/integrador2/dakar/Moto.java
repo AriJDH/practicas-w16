@@ -1,4 +1,4 @@
-package integradores.dakar;
+package integradores.integrador2.dakar;
 
 public class Moto extends Vehiculo{
 
