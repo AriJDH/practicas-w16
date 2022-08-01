@@ -17,6 +17,8 @@ public class Carrera {
         this.nombre = nombre;
         this.cantidadDeVehiculosPermitidos = cantidadDeVehiculosPermitidos;
         this.listaDeVehiculos = new HashSet<>();
+        this.socorristaAuto = new SocorristaAuto();
+        this.socorristaMoto = new SocorristaMoto();
     }
 
     public void darDeAltaAuto(Double velocidad, Double aceleracion, Double anguloDeGiro, String patente) {
@@ -94,17 +96,12 @@ public class Carrera {
 
     public void socorrerAuto(String patente)
     {
-        Auto auto = new Auto();
+        Auto auto = null;
 
         try {
             for (Vehiculo vehiculo : listaDeVehiculos) {
                 if (vehiculo.getPatente().equals(patente) && vehiculo instanceof Auto){
-                    auto.setAceleracion(vehiculo.getAceleracion());
-                    auto.setAnguloDeGiro(vehiculo.getAnguloDeGiro());
-                    auto.setVelocidad(vehiculo.getVelocidad());
-                    auto.setPatente(vehiculo.getPatente());
-                    auto.setRuedas(vehiculo.getRuedas());
-                    auto.setPeso(vehiculo.getPeso());
+                    auto = (Auto)vehiculo;
                 }
             }
 

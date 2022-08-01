@@ -15,8 +15,8 @@ public class Main {
         carrera.darDeAltaAuto(300.0, 100.0, 75.0, "AJK 197");
         carrera.darDeAltaMoto(150.0, 59.7, 34.2, "MOT 069");
 
-        carrera.socorrerAuto("AJK 197");
-        carrera.socorrerMoto("MOT 069");
+        carrera.socorrerAuto("AA12");
+        carrera.socorrerMoto("MO32");
 
         carrera.ganador();
 
