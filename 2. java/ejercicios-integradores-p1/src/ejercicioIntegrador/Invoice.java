@@ -1,5 +1,6 @@
 package ejercicioIntegrador;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Invoice {
@@ -16,4 +17,7 @@ public class Invoice {
         return items.stream().mapToDouble(Item::price).sum();
     }
 
+    public Customer getCustomer() {
+        return buyer;
+    }
 }

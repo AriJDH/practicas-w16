@@ -8,28 +8,28 @@ import java.util.stream.Collectors;
 
 public class Market {
 
-    private List<Customer> customers;
+    private final CustomerCrud customerCrud;
+    private final InvoiceCrud invoiceCrud;
 
-    public Market(List<Customer> customers) {
-        this.customers = customers;
+    public Market() {
+        customerCrud = new CustomerCrud();
+        invoiceCrud = new InvoiceCrud();
     }
 
+    public void addCustomers(List<Customer> customers) {
+        customers.forEach(customer -> customerCrud.add(customer));
+    }
     public void printCustomers() {
         System.out.println("Datos de clientes:");
-        customers.forEach(System.out::println);
+        customerCrud.getAll().forEach(System.out::println);
     }
 
     public void removeCustomer(Integer aDNI) {
-        Optional<Customer> customerToDelete = findCustomerWith(aDNI);
-        if (customerToDelete.isPresent()) {
-            customers = customers.stream().filter(customer -> !customer.equals(customerToDelete.get())).collect(Collectors.toList());
-        } else {
-            System.out.println("No se encontro un cliente con el Dni dado, no se borro satisfactoriamente.");
-        }
+        customerCrud.removeCustomerByDni(aDNI);
     }
 
     public void printCustomerWith(Integer aDNI) {
-        Optional<Customer> filteredOptionalCustomer = findCustomerWith(aDNI);
+        Optional<Customer> filteredOptionalCustomer = customerCrud.findCustomerWith(aDNI);
         if (filteredOptionalCustomer.isPresent()) {
             System.out.println("Cliente encontrado: " + filteredOptionalCustomer.get().toString());
         } else {
@@ -37,7 +37,10 @@ public class Market {
         }
     }
 
-    private Optional<Customer> findCustomerWith(Integer aDNI) {
-        return customers.stream().filter(customer -> customer.getDni().equals(aDNI)).findFirst();
+    public void registerInvoice(Invoice anInvoice){
+        if (!customerCrud.findCustomerWith(anInvoice.getCustomer().getDni()).isEmpty()) {
+            customerCrud.add(anInvoice.getCustomer());
+        }
+        invoiceCrud.add(anInvoice);
     }
 }

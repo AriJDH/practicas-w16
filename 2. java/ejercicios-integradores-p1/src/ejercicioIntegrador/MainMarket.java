@@ -15,7 +15,9 @@ public class MainMarket {
                         new Customer(3399231, "John", "Doe")
                 );
 
-        Market market = new Market(customers);
+        Market market = new Market();
+
+        market.addCustomers(customers);
 
         market.printCustomers();
 
