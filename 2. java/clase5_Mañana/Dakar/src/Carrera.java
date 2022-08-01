@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.List;
 
 public class Carrera {
@@ -57,19 +58,10 @@ public class Carrera {
         }
     }
 
-    public void determinarGanador(){
-        Vehiculo ganador = null;
-        double velGanador = 0.0;
-        double velVehiculo;
-        for (Vehiculo v : this.vehiculos){
-            velVehiculo = ((v.getVelocidad()/2)*v.getAceleracion())/
-                    (v.getAnguloDeGiro()*(v.getPeso()-v.getRuedas()*100));
-            if (velVehiculo>velGanador){
-                velGanador=velVehiculo;
-                ganador=v;
-            }
-        }
-        System.out.println("El ganador de la carrera es: "+ ganador.toString());
+    public Vehiculo determinarGanador(){
+        return this.vehiculos.stream()
+                .max(Comparator.comparing(v->v.getVelocidad()*0.5*v.getAceleracion()/(v.getAnguloDeGiro()*(v.getPeso()-v.getRuedas()*100))))
+                .get();
     }
 
     public void socorrerAuto(String patente){

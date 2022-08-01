@@ -20,6 +20,7 @@ public class Main {
         carrera.socorrerAuto("auto1");
         carrera.socorrerMoto("moto1");
         carrera.eliminarVehiculoConPatente("moto2");
-        carrera.determinarGanador();
+        Vehiculo ganador = carrera.determinarGanador();
+        System.out.println("El ganador de la carrera fue: "+ ganador.toString());
     }
 }
