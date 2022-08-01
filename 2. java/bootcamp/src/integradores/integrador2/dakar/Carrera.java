@@ -122,7 +122,8 @@ public class Carrera {
     }
 
     public Vehiculo obtenerGanador() {
-        return this.vehiculos.stream().sorted(Comparator.comparing(Vehiculo::getResultado)).findFirst().orElse(null);
+        return this.vehiculos.stream().max(Comparator.comparing(Vehiculo::getResultado)).get();
+       // return this.vehiculos.stream().sorted(Comparator.comparing(Vehiculo::getResultado)).findFirst().orElse(null);
     }
 
 
