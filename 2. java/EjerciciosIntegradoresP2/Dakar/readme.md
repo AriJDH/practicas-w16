@@ -1,0 +1,1 @@
+![Diagram classes](../../out/EjerciciosIntegradoresP2/Dakar/diagrams/diagram/diagram.png?raw=true "Diagram classes")
