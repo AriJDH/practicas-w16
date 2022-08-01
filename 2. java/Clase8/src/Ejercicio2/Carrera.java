@@ -9,6 +9,8 @@ public class Carrera {
     protected String nombre;
     protected Integer cantidadDeVehiculosPermitidos;
     protected List<Vehiculo> listaDeVehiculos;
+    protected SocorristaAuto socorristaAuto = new SocorristaAuto();
+    protected SocorristaMoto socorristaMoto= new SocorristaMoto();
 
 
     public Carrera(Float distancia, Float premioEnDolares, String nombre, Integer cantidadDeVehiculosPermitidos, List<Vehiculo> listaDeVehiculos) {
@@ -35,8 +37,8 @@ public class Carrera {
     }
 
     public void eliminarVehiculoConPatente(String unaPatente){
-        Optional<Vehiculo> vehiculoABorrar = listaDeVehiculos.stream().filter(vehiculo -> vehiculo.patente == unaPatente).findFirst();
-        if(vehiculoABorrar.isPresent()){
+        Optional<Vehiculo> vehiculoABorrar = listaDeVehiculos.stream().filter(vehiculo -> vehiculo.patente.equals(unaPatente)).findFirst();
+        if (vehiculoABorrar.isPresent()) {
             listaDeVehiculos.remove(vehiculoABorrar);
         }
 
@@ -65,6 +67,36 @@ public class Carrera {
 
         return vehiculoGanador;
     }
+
+    public void socorrerAuto(String patente){
+        Optional<Vehiculo> vehuculop = listaDeVehiculos.stream().filter(vehiculo -> vehiculo.patente.equals(patente)).findFirst();
+        if(vehuculop.isPresent()){
+            if(vehuculop.get() instanceof Auto){
+                Auto auto = (Auto) vehuculop.get();
+                socorristaAuto.socorrer(auto);
+            }else{
+                System.out.println("No existe auto con la patente especificada.");
+            }
+        } else{
+            System.out.println("No existe vehiculo con la patente.");
+        }
+    }
+
+    public void socorrerMoto(String patente){
+        Optional<Vehiculo> vehuculop = listaDeVehiculos.stream().filter(vehiculo -> vehiculo.patente.equals(patente)).findFirst();
+        if(vehuculop.isPresent()){
+            if(vehuculop.get() instanceof Moto){
+                Moto moto = (Moto) vehuculop.get();
+                socorristaMoto.socorrer(moto);
+            }else{
+                System.out.println("No existe moto con la patente especificada.");
+            }
+        } else {
+            System.out.println("No existe vehiculo con la patente.");
+        }
+    }
+
+
 
 
 
