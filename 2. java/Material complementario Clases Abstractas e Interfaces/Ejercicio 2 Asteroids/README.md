@@ -5,4 +5,4 @@ Nave simple extiende de Nave con la idea de que mantenga los atributos comunes d
 Se define la clase participante, meteorito.
 
 La clase Asteroid estará definida con lista de participantes y meteoritos, más otra lógica para definir el ganador.
-![](/../../assets/asteroid.drawio.png)
+![](../../assets/asteroid.drawio.png)
