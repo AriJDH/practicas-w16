@@ -20,7 +20,9 @@ public class Main {
         carreraOficial.darDeAltaMoto(moto2.getVelocidad(),moto2.getAceleración(),moto2.getAnguloDeGiro(),moto2.getPatente());
 
         carreraOficial.eliminarVehiculo(auto2);
-        carreraOficial.eliminarVehiculoConPatente(moto1.getPatente());
+        //carreraOficial.eliminarVehiculoConPatente(moto1.getPatente());
+
+        System.out.println("Cantidad vehiculos:" + carreraOficial.getVehiculos().size());
 
         System.out.println("Vehiculos permitidos:" + carreraOficial.getCantidadDeVehiculosPermitidos());
 

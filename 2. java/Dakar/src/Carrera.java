@@ -1,4 +1,6 @@
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Carrera {
     private double distancia;
@@ -87,25 +89,30 @@ public class Carrera {
             vehiculos.add(moto);
         }
     }
-    public void eliminarVehiculo(Vehiculo vehículo){
+    public void eliminarVehiculo(Vehiculo vehiculoAEliminar){
         for (Vehiculo v: vehiculos){
-            if(v == vehículo){
+            if(v == vehiculoAEliminar){
                 vehiculos.remove(v);
                 break;
             }
         }
+
   //      vehiculos.stream()
    //             .filter(v ->  v != vehículo);
     }
     public void eliminarVehiculoConPatente(String unaPatente){
         for (Vehiculo v: vehiculos){
-            if(v.getPatente() == unaPatente){
+            if(Objects.equals(v.getPatente(), unaPatente)){
                 vehiculos.remove(v);
                 break;
             }
         }
     }
     public Vehiculo ganardor(){
+        return this.vehiculos.stream()
+                .max(Comparator.comparing(vehiculo -> vehiculo.getVelocidad() *( 0.5 * vehiculo.getAceleración()) / (vehiculo.getAnguloDeGiro()* vehiculo.getPeso() - vehiculo.getRuedas() * 100)))
+                        .get();
+        /*
         double puntajeMaximo = calcularPuntaje(vehiculos.get(0));
         Vehiculo vehiculoGanador = vehiculos.get(0);
         for (Vehiculo v: vehiculos){
@@ -116,14 +123,14 @@ public class Carrera {
             }
         }
         return vehiculoGanador;
+
+         */
     }
-    public double calcularPuntaje(Vehiculo vehiculo){
-        return vehiculo.getVelocidad() *( 0.5 * vehiculo.getAceleración()) / (vehiculo.getAnguloDeGiro()* vehiculo.getPeso() - vehiculo.getRuedas() * 100);
-    }
+
 
     public void socorrerAuto(String patente){
         for (Vehiculo v: vehiculos){
-            if (v.getPatente() == patente){
+            if (Objects.equals(v.getPatente(), patente)){
                 Auto autoASocorrer = new Auto(v.getVelocidad(),v.getAceleración(),v.getAnguloDeGiro(),v.getPatente());
                 unSocorristaDeAutos.socorrer(autoASocorrer);
                 break;
@@ -132,7 +139,7 @@ public class Carrera {
     }
     public void socorrerMoto(String patente){
         for (Vehiculo v: vehiculos){
-            if (v.getPatente() == patente){
+            if (Objects.equals(v.getPatente(), patente)){
                 Moto motoASocorrer = new Moto(v.getVelocidad(),v.getAceleración(),v.getAnguloDeGiro(),v.getPatente());
                 unSocorristaDeMotos.socorrer(motoASocorrer);
                 break;
