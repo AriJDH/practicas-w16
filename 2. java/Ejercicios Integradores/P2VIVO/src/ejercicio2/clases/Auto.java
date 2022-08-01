@@ -1,7 +1,7 @@
 package ejercicio2.clases;
 
 public class Auto extends Vehiculo{
-    public Auto(float velocidad, float aceleracion, float anguloDeGiro, String patente) {
+    public Auto(double velocidad, double aceleracion, double anguloDeGiro, String patente) {
         super(velocidad, aceleracion, anguloDeGiro, patente, 1000, 4);
     }
 

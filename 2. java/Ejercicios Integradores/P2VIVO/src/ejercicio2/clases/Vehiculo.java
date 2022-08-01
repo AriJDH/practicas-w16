@@ -1,11 +1,11 @@
 package ejercicio2.clases;
 
 public abstract class Vehiculo {
-    private float velocidad;
-    private float aceleracion;
-    private float anguloDeGiro;
+    private double velocidad;
+    private double aceleracion;
+    private double anguloDeGiro;
     private String patente;
-    private float peso;
+    private double peso;
     private int ruedas;
 
     @Override
@@ -20,27 +20,27 @@ public abstract class Vehiculo {
                 '}';
     }
 
-    public float getVelocidad() {
+    public double getVelocidad() {
         return velocidad;
     }
 
-    public void setVelocidad(float velocidad) {
+    public void setVelocidad(double velocidad) {
         this.velocidad = velocidad;
     }
 
-    public float getAceleracion() {
+    public double getAceleracion() {
         return aceleracion;
     }
 
-    public void setAceleracion(float aceleracion) {
+    public void setAceleracion(double aceleracion) {
         this.aceleracion = aceleracion;
     }
 
-    public float getAnguloDeGiro() {
+    public double getAnguloDeGiro() {
         return anguloDeGiro;
     }
 
-    public void setAnguloDeGiro(float anguloDeGiro) {
+    public void setAnguloDeGiro(double anguloDeGiro) {
         this.anguloDeGiro = anguloDeGiro;
     }
 
@@ -52,11 +52,11 @@ public abstract class Vehiculo {
         this.patente = patente;
     }
 
-    public float getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(float peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
@@ -68,7 +68,7 @@ public abstract class Vehiculo {
         this.ruedas = ruedas;
     }
 
-    public Vehiculo(float velocidad, float aceleracion, float anguloDeGiro, String patente, float peso, int ruedas) {
+    public Vehiculo(double velocidad, double aceleracion, double anguloDeGiro, String patente, double peso, int ruedas) {
         this.velocidad = velocidad;
         this.aceleracion = aceleracion;
         this.anguloDeGiro = anguloDeGiro;

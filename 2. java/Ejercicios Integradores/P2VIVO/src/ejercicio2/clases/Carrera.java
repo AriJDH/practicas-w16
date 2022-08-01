@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Carrera {
-    private float distancia;
-    private float premioEnDolares;
+    private double distancia;
+    private double premioEnDolares;
     private String nombre;
     private int cantidadDeVehiculosPermitidos;
     private List<Vehiculo> listaDeVehiculos;
@@ -29,7 +29,7 @@ public class Carrera {
         this.socorristaMoto = socorristaMoto;
     }
 
-    public Carrera(float distancia, float premioEnDolares, String nombre, int cantidadDeVehiculosPermitidos) {
+    public Carrera(double distancia, double premioEnDolares, String nombre, int cantidadDeVehiculosPermitidos) {
         this.listaDeVehiculos = new ArrayList<>();
         this.distancia = distancia;
         this.premioEnDolares = premioEnDolares;
@@ -37,19 +37,19 @@ public class Carrera {
         this.cantidadDeVehiculosPermitidos = cantidadDeVehiculosPermitidos;
     }
 
-    public float getDistancia() {
+    public double getDistancia() {
         return distancia;
     }
 
-    public void setDistancia(float distancia) {
+    public void setDistancia(double distancia) {
         this.distancia = distancia;
     }
 
-    public float getPremioEnDolares() {
+    public double getPremioEnDolares() {
         return premioEnDolares;
     }
 
-    public void setPremioEnDolares(float premioEnDolares) {
+    public void setPremioEnDolares(double premioEnDolares) {
         this.premioEnDolares = premioEnDolares;
     }
 
@@ -85,7 +85,7 @@ public class Carrera {
                 "Premio: U$S " + this.premioEnDolares;
     }
 
-    public void darDeAltaAuto(float velocidad, float aceleracion, float anguloDeGiro, String patente){
+    public void darDeAltaAuto(double velocidad, double aceleracion, double anguloDeGiro, String patente){
         if (this.listaDeVehiculos.size() < this.cantidadDeVehiculosPermitidos){
             Auto autoParticipante = new Auto(velocidad, aceleracion, anguloDeGiro, patente);
             this.listaDeVehiculos.add(autoParticipante);
@@ -94,7 +94,7 @@ public class Carrera {
             System.out.println("No se pudo agregar el Auto, no hay más cupos");
         }
     }
-    public void darDeAltaMoto(float velocidad, float aceleracion, float anguloDeGiro, String patente){
+    public void darDeAltaMoto(double velocidad, double aceleracion, double anguloDeGiro, String patente){
         if (this.listaDeVehiculos.size() < this.cantidadDeVehiculosPermitidos){
             Moto motoParticipante = new Moto(velocidad, aceleracion, anguloDeGiro, patente);
             this.listaDeVehiculos.add(motoParticipante);
@@ -131,8 +131,8 @@ public class Carrera {
 
     public Vehiculo definirGanador(){
         Vehiculo vehiculoGanador = this.listaDeVehiculos.get(0);
-        float valorActual = 0;
-        float valorAnterior = 0;
+        double valorActual = 0;
+        double valorAnterior = 0;
 
         for (Vehiculo veh : this.listaDeVehiculos){
             valorActual = ((veh.getVelocidad()*(veh.getAceleracion()/2))/(veh.getAnguloDeGiro()*(veh.getPeso()-veh.getRuedas()*100)));
