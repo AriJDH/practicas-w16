@@ -34,11 +34,9 @@ public class GuardarRopa {
         }
 
     public void mostrarPrendas(){
-        Set<Integer> claves = ropero.keySet();
-        for (Integer identificador:claves) {
-            System.out.println("Identificador: " + identificador);
-            for(int i = 0;i<ropero.get(identificador).size();i++)
-                System.out.println(ropero.get(identificador).get(i));
+        for (Map.Entry<Integer,List<Prenda>> entrada: this.ropero.entrySet()){
+            System.out.println(entrada.getKey()+": ");
+            System.out.println(entrada.getValue());
         }
     }
 
