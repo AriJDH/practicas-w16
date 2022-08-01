@@ -49,7 +49,18 @@ public abstract class Vehiculo {
     public abstract int getPeso();
     public abstract int getCantRuedas();
 
-    public int getResultado(){
-        return (int) (this.velocidad * (this.aceleracion / 2) / (this.anguloDeGiro*(this.getPeso()-this.getCantRuedas() * 100)));
+    public double getResultado(){
+        return (this.velocidad * this.aceleracion * 0.5) / (this.anguloDeGiro * (this.getPeso() - (this.getCantRuedas() * 100)));
+    }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "tipo= " + this.getClass().getSimpleName() +
+                ", velocidad=" + velocidad +
+                ", aceleracion=" + aceleracion +
+                ", anguloDeGiro=" + anguloDeGiro +
+                ", patente='" + patente + '\'' +
+                '}';
     }
 }

@@ -45,7 +45,7 @@ public class Main {
         teclado.close();
 
 
-
+        /*
 
         clientes.values().stream().forEach(System.out::println);
 
@@ -65,7 +65,7 @@ public class Main {
             System.out.println(clientes.get(dni));
         else
             System.out.println("El cliente no existe");
-
+        */
 
     }
 
