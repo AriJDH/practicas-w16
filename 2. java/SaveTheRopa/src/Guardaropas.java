@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Guardaropas {
-    private int id = 0;
+    private int id;
     private Map<Integer, List<Prenda>> prendasGuardadas  = new HashMap<>();
 
     public Guardaropas() {
