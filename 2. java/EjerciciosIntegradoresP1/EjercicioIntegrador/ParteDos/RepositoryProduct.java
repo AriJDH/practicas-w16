@@ -16,26 +16,48 @@ public class RepositoryProduct implements Repository<Item>{
         this.items = new ArrayList<Item>();
     }
 
+    
+    /** 
+     * @param item
+     */
     @Override
     public void add(Item item) {
         this.items.add(item);
     }
 
+    
+    /** 
+     * @param item
+     */
     @Override
     public void remove(Item item) {
         this.items.remove(item);
     }
 
+    
+    /** 
+     * @param item
+     */
     @Override
     public void update(Item item) {
         
     }
 
+    
+    /** 
+     * @param item
+     * @return Item
+     */
     @Override
     public Item get(Item item) {
         return this.items.contains(item) ? item : null;
     }
 
+    
+    /** 
+     * @param labels
+     * @return Item
+     */
     @Override
     public Item get(FilterType... labels) {
         Field[] fields = items.size() > 0 ? items.iterator().next().getClass().getDeclaredFields() : null;
@@ -61,6 +83,11 @@ public class RepositoryProduct implements Repository<Item>{
         return response;
     }
 
+    
+    /** 
+     * @param labels
+     * @return boolean
+     */
     @Override
     public boolean delete(FilterType... labels) {
         Field[] fields = items.size() > 0 ? items.iterator().next().getClass().getDeclaredFields() : null;
@@ -83,6 +110,10 @@ public class RepositoryProduct implements Repository<Item>{
         return match;
     }
 
+    
+    /** 
+     * @return Collection<Item>
+     */
     @Override
     public Collection<Item> getAll() {
         return items;

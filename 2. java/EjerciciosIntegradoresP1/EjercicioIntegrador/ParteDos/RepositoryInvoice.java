@@ -16,26 +16,48 @@ public class RepositoryInvoice implements Repository<Factura> {
             this.facturas = new ArrayList<Factura>();
         }
     
+        
+        /** 
+         * @param factura
+         */
         @Override
         public void add(Factura factura) {
             this.facturas.add(factura);
         }
     
+        
+        /** 
+         * @param factura
+         */
         @Override
         public void remove(Factura factura) {
             this.facturas.remove(factura);
         }
     
+        
+        /** 
+         * @param factura
+         */
         @Override
         public void update(Factura factura) {
             
         }
 
+        
+        /** 
+         * @param item
+         * @return Factura
+         */
         @Override
         public Factura get(Factura item) {
             return this.facturas.contains(item) ? item : null;
         }
     
+        
+        /** 
+         * @param labels
+         * @return Factura
+         */
         @Override
         public Factura get(FilterType... labels) {
             Field[] fields = facturas.size() > 0 ? facturas.iterator().next().getClass().getDeclaredFields() : null;
@@ -61,6 +83,11 @@ public class RepositoryInvoice implements Repository<Factura> {
             return response;
         }
     
+        
+        /** 
+         * @param labels
+         * @return boolean
+         */
         @Override
         public boolean delete(FilterType... labels) {
             Field[] fields = facturas.size() > 0 ? facturas.iterator().next().getClass().getDeclaredFields() : null;
@@ -86,6 +113,10 @@ public class RepositoryInvoice implements Repository<Factura> {
             return response;
         }
     
+        
+        /** 
+         * @return Collection<Factura>
+         */
         @Override
         public Collection<Factura> getAll() {
             return this.facturas;

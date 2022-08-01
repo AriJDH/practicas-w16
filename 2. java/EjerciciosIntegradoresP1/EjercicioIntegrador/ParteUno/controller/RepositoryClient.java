@@ -14,27 +14,49 @@ public class RepositoryClient implements Repository<Cliente> {
         this.items = new ArrayList<Cliente>();
     }
 
+    
+    /** 
+     * @param item
+     */
     @Override
     public void add(Cliente item) {
         this.items.add(item);
     }
 
+    
+    /** 
+     * @param item
+     */
     @Override
     public void remove(Cliente item) {
         this.items.remove(item);
     }
 
+    
+    /** 
+     * @param item
+     */
     @Override
     public void update(Cliente item) {
         this.items.remove(item);
         this.items.add(item);
     }
 
+    
+    /** 
+     * @param item
+     * @return Cliente
+     */
     @Override
     public Cliente get(Cliente item) {
         return this.items.contains(item) ? item : null;
     }
 
+    
+    /** 
+     * @param ...filters
+     * @return Cliente
+     */
     @Override
     public Cliente get(FilterType ...filters) {
         Field[] fields = items.size() > 0 ? items.iterator().next().getClass().getDeclaredFields() : null;
@@ -59,6 +81,11 @@ public class RepositoryClient implements Repository<Cliente> {
         return response;
     }
 
+    
+    /** 
+     * @param ...filters
+     * @return boolean
+     */
     @Override
     public boolean delete(FilterType ...filters) {
         Field[] fields = items.size() > 0 ? items.iterator().next().getClass().getDeclaredFields() : null;
@@ -84,6 +111,10 @@ public class RepositoryClient implements Repository<Cliente> {
         return match;
     }
 
+    
+    /** 
+     * @return Collection<Cliente>
+     */
     @Override
     public Collection<Cliente> getAll() {
         return items;

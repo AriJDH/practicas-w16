@@ -14,30 +14,58 @@ public class Cliente {
     }
 
 
+    
+    /** 
+     * @return String
+     */
     public String getDni() {
         return this.dni;
     }
 
+    
+    /** 
+     * @param dni
+     */
     public void setDni(String dni) {
         this.dni = dni;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getNombre() {
         return this.nombre;
     }
 
+    
+    /** 
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getApellido() {
         return this.apellido;
     }
 
+    
+    /** 
+     * @param apellido
+     */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Cliente{" +
@@ -47,6 +75,11 @@ public class Cliente {
                 '}';
     }
 
+    
+    /** 
+     * @param attr
+     * @return String
+     */
     public String get(String attr){
         Field[] fields = this.getClass().getDeclaredFields();
 

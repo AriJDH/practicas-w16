@@ -19,18 +19,34 @@ public class Factura {
         this.total = 0;
     }
 
+    
+    /** 
+     * @return Cliente
+     */
     public Cliente getCliente() {
         return cliente;
     }
 
+    
+    /** 
+     * @param cliente
+     */
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
+    
+    /** 
+     * @return List<Item>
+     */
     public List<Item> getItems() {
         return items;
     }
 
+    
+    /** 
+     * @param items
+     */
     public void setItems(List<Item> items) {
         this.items = items;
 
@@ -39,15 +55,27 @@ public class Factura {
         }
     }
 
+    
+    /** 
+     * @param item
+     */
     public void addItem(Item item) {
         this.items.add(item);
         total += item.getPrecio() * item.getCantidad();
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getTotal() {
         return total;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Factura{" +
@@ -56,6 +84,10 @@ public class Factura {
                 '}';
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getFactura() {
         String factura = "";
         factura += "Factura de " + cliente.getNombre() + " " + cliente.getApellido() + "\n";
@@ -66,6 +98,11 @@ public class Factura {
         return factura;
     }
 
+    
+    /** 
+     * @param attr
+     * @return String
+     */
     public String get(String attr){
         Field[] fields = this.getClass().getDeclaredFields();
 
