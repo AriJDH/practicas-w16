@@ -40,9 +40,12 @@ public class Main {
         for (Cliente c : listaDeClientes){
             if(c.getDni() == dniBuscado){
                 System.out.println("Cliente solicitado: ");
-                System.out.println(c.toString());
+                System.out.println(c);
                 break;
             }
         }
+        //listaDeClientes.forEach(c -> System.out.println(c));
+        listaDeClientes.forEach(System.out::println);
+
     }
 }
