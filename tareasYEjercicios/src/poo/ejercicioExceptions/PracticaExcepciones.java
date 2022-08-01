@@ -1,4 +1,4 @@
-package poo.exceptions;
+package poo.ejercicioExceptions;
 
 public class PracticaExcepciones {
 

@@ -1,4 +1,4 @@
-package poo.exceptions;
+package poo.ejercicioExceptions;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
