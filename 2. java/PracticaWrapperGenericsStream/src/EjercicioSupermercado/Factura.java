@@ -1,4 +1,4 @@
-package EjercicioIntegrador;
+package EjercicioSupermercado;
 
 import java.util.List;
 
@@ -35,5 +35,14 @@ public class Factura {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    @Override
+    public String toString() {
+        return "Factura{" +
+                "cliente=" + cliente +
+                ", items=" + items +
+                ", total=" + total +
+                '}';
     }
 }

@@ -1,4 +1,4 @@
-package EjercicioIntegrador;
+package EjercicioSupermercado;
 
 public class Item {
     private String codigo;
@@ -43,5 +43,15 @@ public class Item {
 
     public void setCosto(double costo) {
         this.costo = costo;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "codigo='" + codigo + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cantidad=" + cantidad +
+                ", costo=" + costo +
+                '}';
     }
 }

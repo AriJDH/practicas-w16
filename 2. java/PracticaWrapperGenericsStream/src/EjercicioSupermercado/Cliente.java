@@ -1,4 +1,4 @@
-package EjercicioIntegrador;
+package EjercicioSupermercado;
 
 public class Cliente {
     private String ci;
