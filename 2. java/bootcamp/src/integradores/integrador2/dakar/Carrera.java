@@ -121,8 +121,8 @@ public class Carrera {
         socorristaMoto.socorrer(moto);
     }
 
-    public Vehiculo obtenerGanador(){
-        return this.vehiculos.stream().sorted(Comparator.comparing(Vehiculo :: getResultado)).findFirst().orElse(null);
+    public Vehiculo obtenerGanador() {
+        return this.vehiculos.stream().sorted(Comparator.comparing(Vehiculo::getResultado)).findFirst().orElse(null);
     }
 
 
