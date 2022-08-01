@@ -172,7 +172,7 @@ public class EjercicioUno {
                     circuito = "Circuito Medio";
                     break;
                 case 3:
-                    circuito = "Circuito Avanzando";
+                    circuito = "Circuito Avanzado";
                     break;
                 default:
                     System.out.println("Error: Ingrese un apcion valida. Vuelva lo a intentar.");
