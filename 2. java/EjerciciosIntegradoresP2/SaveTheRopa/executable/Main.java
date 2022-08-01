@@ -20,5 +20,8 @@ public class Main {
         List<Prenda> prendasGuardadas = guardarPrenda.devolverPrendas(idPrendas);
 
         prendasGuardadas.forEach(System.out::println);
+        System.out.println("\nMostrando todas las prendas: \n");
+        guardarPrenda.mostrarPrendas();
+
     }
 }

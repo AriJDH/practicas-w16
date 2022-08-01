@@ -35,4 +35,8 @@ public class GuardarPrenda {
         return this.id;
     }
 
+    public void mostrarPrendas() {
+        this.prendas.forEach((k, v) -> System.out.println("Id: " + k + " Prendas: " + v));
+    }
+
 }
