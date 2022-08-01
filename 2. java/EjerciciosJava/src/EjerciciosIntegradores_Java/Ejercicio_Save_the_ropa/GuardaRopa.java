@@ -58,7 +58,7 @@ public class GuardaRopa {
         List<Prenda> lista = dicc.get(numero);
 
         if(lista == null){
-            System.out.println("No se encuenran prendas con ese código.");
+            System.out.println("No se encuentran prendas con ese código.");
             return lista;
         } else {
             return lista;
