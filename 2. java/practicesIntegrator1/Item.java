@@ -25,6 +25,30 @@ public class Item {
         this.code = code;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public float getUnitCost() {
+        return unitCost;
+    }
+
+    public void setUnitCost(float unitCost) {
+        this.unitCost = unitCost;
+    }
+
     @Override
     public String toString() {
         return "Item: " + " Codigo: " + code + " - Nombre: " + name + " - Cantidad: " + amount + " - Costo Unitario: " + unitCost;

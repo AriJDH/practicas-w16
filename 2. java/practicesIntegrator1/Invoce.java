@@ -1,6 +1,9 @@
 package practicesIntegrator1;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Invoce {
 
@@ -8,7 +11,15 @@ public class Invoce {
     private List<Item> listItems;
     private float total;
 
+    private List<Invoce> dbInvoce = new ArrayList<>();
+
     public Invoce() {
+    }
+
+    public Invoce(Client client, List<Item> listItems) {
+        this.client = client;
+        this.listItems = listItems;
+        this.total = 0;
     }
 
     public Invoce(Client client, List<Item> listItems, float total) {
@@ -37,6 +48,14 @@ public class Invoce {
         return total;
     }
 
+    public List<Invoce> getDbInvoce() {
+        return dbInvoce;
+    }
+
+    public void setDbInvoce(Invoce dbInvoce) {
+        this.dbInvoce.add(dbInvoce);
+    }
+
     public void setTotal(float total) {
         this.total = total;
     }
@@ -45,6 +64,7 @@ public class Invoce {
     public String toString() {
         return "Datos Factura: \n" +
                 "Cliente: " + client +
-                "Productos: " + listItems;
+                "Productos: " + listItems +
+                "Total: " + total;
     }
 }
