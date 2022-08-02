@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-RomanosApplication<romanos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.romanos.romanos.RomanosApplication",
+            "projectName": "romanos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
