@@ -4,3 +4,4 @@
 - 29-07-2022: se sube la resolución del ejercicio de estructuras dinámicas en el archivo "CarreraDeLaSelva"
 - 30-07-2022: entrega final del ejercicio contenido en el archivo "CarreraDeLaSelva" y subida de los ejercicios 1 a 5 de la unidad "Generic + Wrapper + Lambda + Streams" en el 
 archivo "GenWraLamStreams"
+- 01-08-2022: entrega de ejercicios integradores "Agencia de Turismo" y "SaveTheRopa S.A."
