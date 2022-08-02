@@ -1,0 +1,11 @@
+.idea
+.DS_Store/
+/out/
+*.iml
+*/
+*.iws
+*.ipr
+!**/src/main/**/target/
+!**/src/test/**/target/
+target/
+
