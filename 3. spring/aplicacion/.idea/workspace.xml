@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="649c5dad-51ea-4069-b2dc-d82cfc3fc3bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Supermercado.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/src/main/java/com/bootcamp/codigomorse/CodigomorseApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/src/main/java/com/bootcamp/codigomorse/CodigomorseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../codigomorse/src/test/java/com/bootcamp/codigomorse/CodigomorseApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Factura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/RepoClientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/RepoClientes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/RepoFacturas.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/RepoFacturas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Repositorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../2. java/bootcamp/src/integradores/integrador1/Repositorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../codigomorse/src/main/java/com/bootcamp/codigomorse/CodigomorseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../codigomorse/src/main/java/com/bootcamp/codigomorse/CodigomorseController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

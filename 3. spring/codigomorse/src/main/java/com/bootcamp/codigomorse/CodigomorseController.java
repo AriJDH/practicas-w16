@@ -31,7 +31,7 @@ public class CodigomorseController {
         morseCodeMap.put("--","M");
         morseCodeMap.put("-.","N");
         morseCodeMap.put("---","0");
-        morseCodeMap.put("--.","P");
+        morseCodeMap.put(".--.","P");
         morseCodeMap.put("--.-","Q");
         morseCodeMap.put(".-.","R");
         morseCodeMap.put("...","S");
