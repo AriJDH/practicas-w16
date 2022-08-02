@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class TraductorService {
 
-    public static Hashtable<String, String> obtenerEquivalencias() {
+    public Hashtable<String, String> obtenerDiccionarioClaveMorse() {
         Hashtable<String, String> equivalencias = new Hashtable<>();
         equivalencias.put("A", ".-");
         equivalencias.put("B", "-...");
@@ -52,7 +52,7 @@ public class TraductorService {
     }
 
     public String morseALetras(String letraEnMorse){
-        Hashtable<String,String> equivalencias = obtenerEquivalencias();//obtenemos el diccionario definido anteriormente
+        Hashtable<String,String> equivalencias = obtenerDiccionarioClaveMorse();//obtenemos el diccionario definido anteriormente
         Set<String> claves = equivalencias.keySet();//generamos un set de claves del diccionario(traduccion)
 
         for(String clave : claves){
@@ -66,9 +66,24 @@ public class TraductorService {
     }
 
     public String descifrarMorse(String palabraEnMorse){
-        String [] morseArray =  palabraEnMorse.split(" ");
+        String [] palabrasEnMorse = palabraEnMorse.split("   ");
+        String [] morseArray;
         StringBuilder decodificado = new StringBuilder();
+        if(palabrasEnMorse.length>1){
+            for(String palabraMorse : palabrasEnMorse){
+                morseArray =  palabraMorse.split(" ");
 
+
+                for(String letraEnMorse : morseArray){
+                    String caracterDescifrado = morseALetras(letraEnMorse);
+                    decodificado.append(caracterDescifrado);
+                }
+                decodificado.append(" ");
+            }
+            return decodificado.toString();
+        }
+
+        morseArray =  palabraEnMorse.split(" ");
         for(String letraEnMorse : morseArray){
             String caracterDescifrado = morseALetras(letraEnMorse);
             decodificado.append(caracterDescifrado);
@@ -76,6 +91,9 @@ public class TraductorService {
         return decodificado.toString();
     }
 
+    public void descifrarPalabrasMorse(String palabrasEnMorse){
+
+    }
 
 
 }
