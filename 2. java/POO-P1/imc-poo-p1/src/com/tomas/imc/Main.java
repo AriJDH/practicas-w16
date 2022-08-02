@@ -1,4 +1,4 @@
-package com.tomas;
+package com.tomas.imc;
 
 /**
  * Desarrollador: Tomas Octavio Rodriguez Herrera
