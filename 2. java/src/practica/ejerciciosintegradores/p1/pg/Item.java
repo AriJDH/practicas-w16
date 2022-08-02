@@ -1,0 +1,48 @@
+package practica.ejerciciosintegradores.p1.pg;
+
+public class Item {
+
+    protected String codigo;
+    protected String nombre;
+    protected int cantidad;
+    protected double costo;
+
+    public Item(String codigo, String nombre, int cantidad, double costo) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.costo = costo;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+}

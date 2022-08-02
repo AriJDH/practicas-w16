@@ -1,4 +1,4 @@
-package practica.ejerciciosintegradores;
+package practica.ejerciciosintegradores.p1.vivo;
 
 public class PaqueteTuristico {
 

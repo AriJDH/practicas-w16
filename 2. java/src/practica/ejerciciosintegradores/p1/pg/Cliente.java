@@ -1,14 +1,22 @@
-package practica.ejerciciosintegradores;
+package practica.ejerciciosintegradores.p1.pg;
 
 public class Cliente {
 
+    protected int dni;
     protected String nombre;
     protected String apellido;
-    protected int dni;
 
-    public Cliente(String nombre, String apellido, int dni) {
+    public Cliente(int dni, String nombre, String apellido) {
+        this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -28,20 +36,12 @@ public class Cliente {
         this.apellido = apellido;
     }
 
-    public int getDni() {
-        return dni;
-    }
-
-    public void setDni(int dni) {
-        this.dni = dni;
-    }
-
     @Override
     public String toString() {
         return "Cliente{" +
-                "nombre='" + nombre + '\'' +
+                "dni=" + dni +
+                ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
-                ", dni=" + dni +
                 '}';
     }
 }

@@ -1,6 +1,5 @@
-package practica.ejerciciosintegradores;
+package practica.ejerciciosintegradores.p1.vivo;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Localizador {
