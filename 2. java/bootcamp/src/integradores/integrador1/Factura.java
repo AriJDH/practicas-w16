@@ -7,6 +7,7 @@ public class Factura {
     private Cliente cliente;
     private List<Item> items;
     private double total;
+    private int id;
 
     public Factura(Cliente cliente, List<Item> items) {
         this.cliente = cliente;
@@ -33,10 +34,16 @@ public class Factura {
     public double getTotal() {
         return total;
     }
-
+    public int getID() {
+        return id;
+    }
+    public void setID(int id) {
+        this.id = id;
+    }
     public void setTotal(double total) {
         this.total = total;
     }
+
 
     @Override
     public String toString() {
