@@ -2,6 +2,16 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Spring Boot-MorseApplication<morse>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.morse.morse.MorseApplication",
+            "projectName": "morse",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-RomanosApplication<romanos>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
