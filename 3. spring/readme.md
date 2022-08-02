@@ -1,1 +1,1 @@
-- 02-08-2022: resolución del ejercicio "Código Morse" 
+- 02-08-2022: entrega de los ejercicios "Número Romanos" y "Código Morse" 

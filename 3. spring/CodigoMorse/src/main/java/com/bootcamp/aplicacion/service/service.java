@@ -11,7 +11,6 @@ public class service {
 
         for (String palabra : palabras){
             String[] coleccion = palabra.split(" ");
-
             for (String pos : coleccion){
                 equivalencia.append(diccionario.get(pos));
             }
