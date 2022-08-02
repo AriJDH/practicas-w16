@@ -1,0 +1,13 @@
+package com.bootcamp.ejnumerosromanos;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class EjnumerosromanosApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
