@@ -1,4 +1,4 @@
-package temperatura;
+package com.tomas.temperatura;
 
 /*************************************************************
  * Desarrollador: Tomas Octavio Rodriguez Herrera
