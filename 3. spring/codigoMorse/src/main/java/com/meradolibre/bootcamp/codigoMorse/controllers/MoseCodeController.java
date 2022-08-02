@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Hashtable;
 
 @RestController
-public class moseCodeController {
+public class MoseCodeController {
 
     @GetMapping("/{morseCode}")
     public String decode(@PathVariable String morseCode) {
