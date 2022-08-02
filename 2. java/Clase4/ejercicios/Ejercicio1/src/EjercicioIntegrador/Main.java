@@ -8,22 +8,35 @@ public class Main {
     Scanner teclado=new Scanner(System.in);
     public static void main(String[] args) {
         Scanner teclado=new Scanner(System.in);
-
-        List<Clientes> clienList=new ArrayList<>();
+        ClienteImp clienteI=new ClienteImp();
+        /*List<Clientes> clienList=new ArrayList<>();
         clienList.add(new Clientes("emanuel","rivero",478135));
         clienList.add(new Clientes("emanuel","rivero",4710432));
         clienList.add(new Clientes("emanuel","rivero",478445));
-        for(Clientes p:clienList){
+        */
+        /*for(Clientes p:clienList){
             System.out.println("Nombre: "+ p.getNombre());
             System.out.println("Apellido: "+ p.getApellido());
             System.out.println("Dni: "+ p.getDni());
+        }*/
+        clienteI.guardar(new Clientes("emanuel","rivero",478135));
+        clienteI.guardar(new Clientes("emanuel","rivero",4710432));
+        clienteI.guardar(new Clientes("emanuel","rivero",478445));
+        int data=0;
+
+        System.out.println("Ingrese Los valores segun el menu");
+        System.out.println("Presione 1 para empezar a utilizar el programa");
+
+        while (data!=0){
+            int elijo=teclado.nextInt();
+            clienteI.mostrarPantalla();
+            System.out.println("ingrese el dni, cual es el unico elemento unico");
+            int dniDate=teclado.nextInt();
         }
-        int m=0;
-        System.out.println("ingrese 1 para borrar o 2 para buscar x dni o 0 para seguir");
-        int elijo=teclado.nextInt();
-        System.out.println("ingrese el dni, cual es el unico elemento unico");
-        int dniDate=teclado.nextInt();
-        if(elijo==1) {
+
+        //int m=0;
+
+        /*if(elijo==1) {
             for (Clientes p : clienList) {
 
                 if (dniDate == p.getDni()) {
@@ -64,6 +77,8 @@ public class Main {
                 System.out.println("Dni: "+ j.getDni());
             }
         }
+        */
+
         }
 
     }
