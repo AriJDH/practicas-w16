@@ -86,7 +86,7 @@ public class Main {
         System.out.println("4. Salir.");
         Integer seleccion = this.leerSeleccion();
         while(seleccion<1 || seleccion>4) seleccion = seleccionInvalida(1,4);
-        if(seleccion.equals(5)) return false;
+        if(seleccion.equals(4)) return false;
         else if(seleccion.equals(1)) this.menuCrearFactura();
         else if(seleccion.equals(2)) this.menuListarClientes();
         else if(seleccion.equals(3)) this.menuListarFacturas();

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ItemRepository implements IRepository<Item, String> {
+public final class ItemRepository implements IRepository<Item, String> {
     private List<Item> items;
 
     public static ItemRepository instance;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class FacturaRepository implements IRepository<Factura, Integer> {
+public final class FacturaRepository implements IRepository<Factura, Integer> {
     private List<Factura> detallesFactura;
     private Integer id;
 
