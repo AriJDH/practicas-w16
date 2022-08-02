@@ -47,5 +47,5 @@ public class PruebaStreams {
         return result;
     }
 
-    
+
 }
