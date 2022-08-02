@@ -106,7 +106,6 @@ public class Juego {
     }
 
 
-
     public ILogicaNave getGanadorRonda(Asteroide asteroide){
         return this.jugadores.stream()
                 .min(Comparator.comparing(nave -> nave.calcularDistancia(asteroide.getX(), asteroide.getY())))

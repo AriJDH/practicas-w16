@@ -3,9 +3,9 @@ package pg_java;
 import java.util.*;
 
 public class Ejercicio2 {
-    public static List<HashMap<String, String>> chico = new ArrayList<HashMap<String, String>>();
-    public static List<HashMap<String, String>> medio = new ArrayList<HashMap<String, String>>();
-    public static List<HashMap<String, String>> avanzado = new ArrayList<HashMap<String, String>>();
+    public static List<HashMap<String, String>> chico = new ArrayList<>();
+    public static List<HashMap<String, String>> medio = new ArrayList<>();
+    public static List<HashMap<String, String>> avanzado = new ArrayList<>();
     public static Scanner input = new Scanner(System.in);
     public final static String[] CAMPOS = {"DNI", "NOMBRE", "APELLIDO", "EDAD", "CELULAR", "Nro EMERGENCIA", "Gpo SANGUINEO"};
 
