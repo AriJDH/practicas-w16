@@ -27,7 +27,8 @@ public class Producto {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Nombre : " + nombre + "\n" +
+                "Precio : " + precio + "\n";
     }
 
     double calcular(int cantidadProductos){
