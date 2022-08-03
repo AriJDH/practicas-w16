@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonsDto {
+public class SportPersonsDto {
   private String name;
   private String lastName;
-  private Integer age;
   private Sport sport;
 }
