@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.deportistas.repositories.SportRepository;
 
-import com.deportistas.dto.Persona;
 import com.deportistas.dto.Deporte;
-
+import com.deportistas.dto.DeportistaDTO;
 import com.deportistas.repositories.AthleteRepository;
 
 @Service
@@ -31,7 +30,7 @@ public class SportService {
         return sportRepository.findByName(name);
     }
 
-    public List<Persona> findSportsPersons() {
+    public List<DeportistaDTO> findSportsPersons() {
         return athleteRepository.findSportsPersons();
     }
 

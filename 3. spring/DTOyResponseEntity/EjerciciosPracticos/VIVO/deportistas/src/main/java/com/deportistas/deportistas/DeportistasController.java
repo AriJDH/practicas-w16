@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.deportistas.service.SportService;
 
-import com.deportistas.dto.Persona;
-
 import com.deportistas.dto.Deporte;
+import com.deportistas.dto.DeportistaDTO;
 
 @RestController
 public class DeportistasController {
@@ -42,8 +41,8 @@ public class DeportistasController {
     }
 
     @GetMapping("/findSportsPersons")
-    public ResponseEntity<List<Persona>> findSportsPersons() {
-        List<Persona> sportsPersons = deportistaService.findSportsPersons();
+    public ResponseEntity<List<DeportistaDTO>> findSportsPersons() {
+        List<DeportistaDTO> sportsPersons = deportistaService.findSportsPersons();
 
         return new ResponseEntity<>(sportsPersons, HttpStatus.OK);
     }

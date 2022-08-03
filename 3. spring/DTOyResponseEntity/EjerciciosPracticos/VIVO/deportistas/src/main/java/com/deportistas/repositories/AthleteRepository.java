@@ -6,6 +6,7 @@ import java.util.List;
 import com.deportistas.dto.Persona;
 import com.deportistas.dto.Deporte;
 import com.deportistas.dto.Deportista;
+import com.deportistas.dto.DeportistaDTO;
 
 public class AthleteRepository {
     List<Persona> deportistas;
@@ -16,8 +17,16 @@ public class AthleteRepository {
         deportistas.add(new Deportista("Pedro", "Perez", 24, new Deporte("Baloncesto", 2)));
     }
 
-    public List<Persona> findSportsPersons() {
-        return deportistas;
+    public List<DeportistaDTO> findSportsPersons() {
+        List<DeportistaDTO> deportistasDTO = new ArrayList<DeportistaDTO>();
+        for (Persona deportista : deportistas) {
+            DeportistaDTO deportistaDTO = new DeportistaDTO();
+            deportistaDTO.setNombre(deportista.getNombre());
+            deportistaDTO.setApellido(deportista.getApellido());
+            deportistaDTO.setDeporte(((Deportista) deportista).getDeporte().getNombre());
+            deportistasDTO.add(deportistaDTO);
+        }
+        return deportistasDTO;
     }
 
 }
