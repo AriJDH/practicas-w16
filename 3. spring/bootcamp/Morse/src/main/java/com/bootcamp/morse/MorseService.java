@@ -64,7 +64,7 @@ public class MorseService {
     }
 
     public String getDecodedMessage(String morse){
-        
+
         String decodedMessage = "";
 
       String[] words =   morse.split("   ");
