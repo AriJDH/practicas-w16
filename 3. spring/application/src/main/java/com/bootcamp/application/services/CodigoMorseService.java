@@ -44,13 +44,13 @@ public class CodigoMorseService {
     );
 
     public String getTraduccion(String codigoMorse){
-        List<String> palabras = Arrays.asList(codigoMorse.split("   ")), traducciones = new ArrayList<>();
-        for(String palabra : palabras){
-            traducciones.add(Arrays.asList(palabra.split(" ")).stream()
+        List<String> codigos = Arrays.asList(codigoMorse.split("   ")), palabras = new ArrayList<>();
+        for(String palabra : codigos){
+            palabras.add(Arrays.asList(palabra.split(" ")).stream()
                     .map(s->mapAbecedario.get(s))
                     .collect(Collectors.joining())
             );
         }
-        return String.join(" ", traducciones);
+        return String.join(" ", palabras);
     }
 }

@@ -4,14 +4,16 @@ import com.bootcamp.application.services.CodigoMorseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/codigoMorse")
 public class CodigoMorseController {
     @Autowired
     private CodigoMorseService codigoMorseService;
 
-    @GetMapping("/codigoMorse/{palabra}")
+    @GetMapping("{palabra}")
     public String traducir(@PathVariable String palabra) {
         return "<head>" +
                 "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/purecss@2.1.0/build/pure-min.css\" integrity=\"sha384-yHIFVG6ClnONEA5yB5DJXfW2/KC173DIQrYoZMEtBvGzmf0PKiGyNEqe9N6BNDBH\" crossorigin=\"anonymous\">" +
