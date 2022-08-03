@@ -25,8 +25,10 @@ public class ServiceTraduccionMorse {
             //Si el arreglo trae espacios, los cuenta y cuando es 2 añade el espacio (por palabras)
             if(elemento.equals("")) {
                 contadorEspacioPalabras += 1;
+
                 if(contadorEspacioPalabras == 2){
                     traduccion += " ";
+                    contadorEspacioPalabras = 0;
                 }
 
             } else {
