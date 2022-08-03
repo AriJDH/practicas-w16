@@ -8,12 +8,7 @@ public class CustomerCrud extends AbsEntityCrud<Customer> implements EntityCrud<
 
 
     public void removeCustomerByDni(Integer aDNI) {
-        Optional<Customer> customerToDelete = findCustomerWith(aDNI);
-        if (customerToDelete.isPresent()) {
-            entities = entities.stream().filter(customer -> !customer.equals(customerToDelete.get())).collect(Collectors.toList());
-        } else {
-            System.out.println("No se encontro un cliente con el Dni dado, no se borro satisfactoriamente.");
-        }
+        entities.removeIf(customer -> customer.getDni().equals(aDNI));
     }
 
     public Optional<Customer> findCustomerWith(Integer aDNI) {
