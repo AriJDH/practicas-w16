@@ -61,10 +61,6 @@ public class Localizador {
         '}';
   }
 
-  public void aplicarDescuento() {
-
-  }
-
   public Boolean paqueteCompleto(){
     List<TipoProducto> tiposProductos = this.reserva.getProductos().stream()
         .map(Producto::getTipoProducto)
