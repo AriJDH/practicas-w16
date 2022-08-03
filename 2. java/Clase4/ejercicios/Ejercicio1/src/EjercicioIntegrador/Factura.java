@@ -6,14 +6,24 @@ public class Factura {
     private Clientes cliente;
     private List<Items> listaItems;
     private double totalCompra;
+    private int codigo;
 
     public Factura() {
     }
 
-    public Factura(Clientes cliente, List<Items> listaItems, double totalCompra) {
+    public Factura(Clientes cliente, List<Items> listaItems, double totalCompra,int codigo) {
         this.cliente = cliente;
         this.listaItems = listaItems;
         this.totalCompra = totalCompra;
+        this.codigo=codigo;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public Clientes getNombre() {
@@ -47,6 +57,7 @@ public class Factura {
                 "nombre=" + cliente +
                 ", listaItems=" + listaItems +
                 ", totalCompra=" + totalCompra +
+                ", totalCompra=" + codigo +
                 '}';
     }
 }

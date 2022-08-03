@@ -62,6 +62,6 @@ public class ClienteImp implements RepositoryCrud<Clientes> {
 
     @Override
     public List<Clientes> traerDatos() {
-        return null;
+        return clientesList;
     }
 }

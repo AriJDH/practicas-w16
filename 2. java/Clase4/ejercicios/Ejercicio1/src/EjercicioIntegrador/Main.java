@@ -28,7 +28,21 @@ public class Main {
         System.out.println("Presione 1 para empezar a utilizar el programa");
 
         while (data!=0){
-            int elijo=teclado.nextInt();
+            System.out.println("-------Menu De Opciones-------");
+            System.out.println("1) Sector Clientes");
+            System.out.println("2) Sector Items");
+            System.out.println("3) Secotr Facturas");
+
+            Integer elijo=teclado.nextInt();
+            if(elijo.equals(1)){
+                while(elijo!=0) {
+                    System.out.println("-------Menu De Clientes-------");
+                    System.out.println("1) Mostrar Clientes");
+                    System.out.println("2) Buscar  Cliente");
+                    System.out.println("3) Elimijnar Cliente");
+                }
+
+            }
             clienteI.mostrarPantalla();
             System.out.println("ingrese el dni, cual es el unico elemento unico");
             int dniDate=teclado.nextInt();
