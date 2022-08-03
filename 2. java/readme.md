@@ -5,3 +5,4 @@
 - 30-07-2022: entrega final del ejercicio contenido en el archivo "CarreraDeLaSelva" y subida de los ejercicios 1 a 5 de la unidad "Generic + Wrapper + Lambda + Streams" en el 
 archivo "GenWraLamStreams"
 - 01-08-2022: entrega de ejercicios integradores "Agencia de Turismo" y "SaveTheRopa S.A."
+- 03-08-2022: entrega del ejercicio "Dakar"
