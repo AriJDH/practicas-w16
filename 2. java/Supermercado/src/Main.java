@@ -1,3 +1,4 @@
+import Repository.ClienteImp;
 import model.Cliente;
 
 import java.util.ArrayList;
@@ -6,17 +7,19 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ClienteImp cliImp = new ClienteImp();
         Cliente cliente1 = new Cliente("39828356", "Sabrina", "Silvero");
         Cliente cliente2 = new Cliente("39828456", "Sofia", "Tallera");
         Cliente cliente3 = new Cliente("39848356", "Camila", "DiIelsi");
-        List<Cliente> listaDeClientes = new ArrayList<>();
-        listaDeClientes.add(cliente1);
+        //List<Cliente> listaDeClientes = new ArrayList<>();
+       /* listaDeClientes.add(cliente1);
         listaDeClientes.add(cliente2);
         listaDeClientes.add(cliente3);
+        */
+        cliImp.save(cliente1); //guardar un cliente
 
-        for (Cliente c: listaDeClientes) {
-            System.out.println(c.toString());
-        }
+        cliImp.mostrarPantalla();
+
         Scanner teclado = new Scanner(System.in);
         System.out.println("Ingrese el dni de la persona a eliminar: ");
         String dniABorrar = teclado.next();
@@ -35,17 +38,6 @@ public class Main {
             System.out.println("Cliente borrado");
         }
 
-        System.out.println("Ingrese el dni de la persona a buscar: ");
-        String dniBuscado = teclado.next();
-        for (Cliente c : listaDeClientes){
-            if(c.getDni() == dniBuscado){
-                System.out.println("Cliente solicitado: ");
-                System.out.println(c);
-                break;
-            }
-        }
-        //listaDeClientes.forEach(c -> System.out.println(c));
-        listaDeClientes.forEach(System.out::println);
 
     }
 }
