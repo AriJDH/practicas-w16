@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/api/v1")
 public class EdadPersonaController {
   @GetMapping("/{dia}/{mes}/{anio}")
   public String getEdad(@PathVariable String dia, @PathVariable String mes, @PathVariable String anio) {
