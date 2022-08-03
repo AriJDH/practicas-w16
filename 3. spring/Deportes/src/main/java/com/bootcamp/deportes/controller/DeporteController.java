@@ -1,8 +1,9 @@
 package com.bootcamp.deportes.controller;
 
 
+import com.bootcamp.deportes.dto.DeporteDTO;
 import com.bootcamp.deportes.models.Deporte;
-import com.bootcamp.deportes.models.SportPersonPOJO;
+import com.bootcamp.deportes.dto.SportPersonDTO;
 import com.bootcamp.deportes.services.DeporteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,15 +21,15 @@ public class DeporteController {
     private DeporteService deporteService;
 
     @GetMapping("/findSports")
-    public ResponseEntity<List<Deporte>> findSports(){
+    public ResponseEntity<List<DeporteDTO>> findSports(){
         return new ResponseEntity<>(deporteService.findSports(), HttpStatus.OK);
     }
     @GetMapping("/findSports/{name}")
-    public ResponseEntity<List<Deporte>> findSportsByName(@PathVariable String name){
+    public ResponseEntity<DeporteDTO> findSportsByName(@PathVariable String name){
         return new ResponseEntity<>(deporteService.findSportByName(name), HttpStatus.OK);
     }
     @GetMapping("/findSportsPersons")
-    public ResponseEntity<List<SportPersonPOJO>> findSportsPerson(){
+    public ResponseEntity<List<SportPersonDTO>> findSportsPerson(){
         return new ResponseEntity<>(deporteService.findSportPerson(), HttpStatus.OK);
     }
 }

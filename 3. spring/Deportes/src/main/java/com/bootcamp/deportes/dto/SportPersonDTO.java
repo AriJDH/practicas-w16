@@ -1,12 +1,12 @@
-package com.bootcamp.deportes.models;
+package com.bootcamp.deportes.dto;
 
-public class SportPersonPOJO {
+public class SportPersonDTO {
 
     String nombre;
     String apellido;
     String nombreDeporte;
 
-    public SportPersonPOJO(String nombre, String apellido, String nombreDeporte) {
+    public SportPersonDTO(String nombre, String apellido, String nombreDeporte) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nombreDeporte = nombreDeporte;

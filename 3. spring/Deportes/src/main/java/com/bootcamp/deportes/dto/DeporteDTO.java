@@ -1,26 +1,25 @@
-package com.bootcamp.deportes.models;
+package com.bootcamp.deportes.dto;
 
+import com.bootcamp.deportes.models.Persona;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Deporte implements Serializable {
+public class DeporteDTO {
 
     private String nombre;
     private String nivel;
 
-
+    @JsonIgnore
     private List<Persona> personas;
 
-    public Deporte(String nombre, String nivel, List<Persona> personas) {
+    public DeporteDTO(String nombre, String nivel, List<Persona> personas) {
         this.nombre = nombre;
         this.nivel = nivel;
         this.personas = personas;
     }
 
-    public Deporte() {
+    public DeporteDTO() {
     }
 
     public String getNombre() {

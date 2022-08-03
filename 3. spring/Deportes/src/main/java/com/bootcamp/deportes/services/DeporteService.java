@@ -1,8 +1,9 @@
 package com.bootcamp.deportes.services;
 
+import com.bootcamp.deportes.dto.DeporteDTO;
 import com.bootcamp.deportes.models.Deporte;
 import com.bootcamp.deportes.models.Persona;
-import com.bootcamp.deportes.models.SportPersonPOJO;
+import com.bootcamp.deportes.dto.SportPersonDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ public class DeporteService {
         personasSoccer.add(p2);
         personasSoccer.add(p3);
         personasSoccer.add(p6);
-
-
 
         Deporte d1 = new Deporte("Padel","Profesional",personasPadel);
         Deporte d2 = new Deporte("Soccer","Amateur",personasSoccer);
@@ -61,24 +60,38 @@ public class DeporteService {
 
 
 
-    public List<Deporte> findSports(){
-        return cargarDeportes();
-    }
+    public List<DeporteDTO> findSports(){
 
-    public List<Deporte> findSportByName(String nombre){
-        return cargarDeportes().stream().filter(d -> d.getNombre().equals(nombre)).collect(Collectors.toList());
-
-    }
-
-    public List<SportPersonPOJO> findSportPerson(){
         List<Deporte> deportes = cargarDeportes();
-        List<SportPersonPOJO> sportsPersons = new ArrayList<>();
+        List<DeporteDTO> deporteDTOS = new ArrayList<>();
+
+        for (Deporte deporte : deportes){
+            DeporteDTO deporteDTO = new DeporteDTO(deporte.getNombre(),deporte.getNivel(),deporte.getPersonas());
+            deporteDTOS.add(deporteDTO);
+        }
+
+        return deporteDTOS;
+    }
+
+    public DeporteDTO findSportByName(String nombre){
+
+        List<Deporte> deportes = cargarDeportes().stream().filter(d -> d.getNombre().equals(nombre)).collect(Collectors.toList());
+        for(Deporte deporte: deportes){
+            return new DeporteDTO(deporte.getNombre(),deporte.getNivel(),deporte.getPersonas());
+        }
+        return null;
+
+    }
+
+    public List<SportPersonDTO> findSportPerson(){
+        List<Deporte> deportes = cargarDeportes();
+        List<SportPersonDTO> sportsPersons = new ArrayList<>();
 
 
 
         for(Deporte deporte :deportes ){
             for(Persona persona : deporte.getPersonas()){
-                SportPersonPOJO pojo = new SportPersonPOJO(persona.getNombre(),persona.getApellido(),deporte.getNombre());
+                SportPersonDTO pojo = new SportPersonDTO(persona.getNombre(),persona.getApellido(),deporte.getNombre());
                 sportsPersons.add(pojo);
             }
         }
