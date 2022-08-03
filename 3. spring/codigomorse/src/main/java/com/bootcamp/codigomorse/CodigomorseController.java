@@ -43,6 +43,23 @@ public class CodigomorseController {
         morseCodeMap.put("-.--","Y");
         morseCodeMap.put("--..","Z");
 
+        morseCodeMap.put(".----","1");
+        morseCodeMap.put("..---","2");
+        morseCodeMap.put("...--","3");
+        morseCodeMap.put("....-","4");
+        morseCodeMap.put(".....","5");
+        morseCodeMap.put("-....","6");
+        morseCodeMap.put("--...","7");
+        morseCodeMap.put("---..","8");
+        morseCodeMap.put("----.","9");
+        morseCodeMap.put("-----","0");
+
+        morseCodeMap.put("..--..","?");
+        morseCodeMap.put("-.-.--","!");
+        morseCodeMap.put(".-.-.-",".");
+        morseCodeMap.put("--..--",",");
+
+
         String[] words = morse.split("   ");
         for (int i=0 ; i< words.length ; i++){
             String[] letters = words[i].split(" ");
