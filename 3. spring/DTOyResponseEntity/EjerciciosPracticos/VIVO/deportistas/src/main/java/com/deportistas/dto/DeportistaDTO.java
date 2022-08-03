@@ -1,6 +1,8 @@
 package com.deportistas.dto;
 
-public class DeportistaDTO {
+import java.io.Serializable;
+
+public class DeportistaDTO implements Serializable{
     private String deporte;
     private String nombre;
     private String apellido;
