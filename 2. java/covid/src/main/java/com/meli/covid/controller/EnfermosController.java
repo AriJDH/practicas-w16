@@ -25,7 +25,7 @@ public class EnfermosController {
         return ResponseEntity.ok(serviceSintoma.getSintomas());
     }
 
-    @GetMapping("/findSympom/{name}")
+    @GetMapping("/findSymptom/{name}")
     public ResponseEntity<Sintoma> getSintoma(@PathVariable String name){
         return ResponseEntity.ok(serviceSintoma.getSintomas().stream().filter(x-> x.getNombre().equalsIgnoreCase(name)).findFirst().orElse(null));
     }
