@@ -17,7 +17,7 @@ public class DeportistaController {
     @Autowired
     private SportService service;
 
-    
+
 
     @GetMapping("/sports")
     public ResponseEntity<List<SportDTO>> findSports() {
