@@ -13,18 +13,18 @@ public class CharacterDTO {
     private String name;
 
     @JsonIgnore
-    private String hair_color;
+    private String hairColor;
 
     @JsonIgnore
-    private String skin_color;
+    private String skinColor;
 
     @JsonIgnore
-    private String eye_color;
+    private String eyeColor;
 
     @JsonIgnore
-    private String birth_year;
+    private String birthYear;
     private String gender;
-    private String homeworld;
+    private String homeWorld;
     private String species;
     private Integer height;
     private Integer mass;
