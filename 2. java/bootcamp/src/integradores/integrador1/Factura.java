@@ -1,5 +1,6 @@
 package integradores.integrador1;
 
+import java.lang.reflect.GenericArrayType;
 import java.util.List;
 
 public class Factura {
@@ -7,7 +8,7 @@ public class Factura {
     private Cliente cliente;
     private List<Item> items;
     private double total;
-    private int id;
+    private Long id;
 
     public Factura(Cliente cliente, List<Item> items) {
         this.cliente = cliente;
@@ -34,16 +35,15 @@ public class Factura {
     public double getTotal() {
         return total;
     }
-    public int getID() {
+    public Long getID() {
         return id;
     }
-    public void setID(int id) {
+    public void setID(Long id) {
         this.id = id;
     }
     public void setTotal(double total) {
         this.total = total;
     }
-
 
     @Override
     public String toString() {
@@ -51,6 +51,7 @@ public class Factura {
                 "cliente=" + cliente +
                 ", items=" + items +
                 ", total=" + total +
+                ", id=" + id +
                 '}';
     }
 }

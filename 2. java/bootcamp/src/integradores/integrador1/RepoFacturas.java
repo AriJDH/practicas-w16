@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class RepoFacturas implements Repositorio<Factura> {
 
-    private Map<Integer,Factura> facturas;
-    private int id;
+    private Map<Long,Factura> facturas;
+    private Long id;
 
     public RepoFacturas(){
         this.facturas = new HashMap<>();
@@ -23,31 +23,29 @@ public class RepoFacturas implements Repositorio<Factura> {
     }
 
     @Override
-    public void delete(Factura obj) {
-        this.facturas.remove(obj);
+    public void delete(Long id) {
+        this.facturas.remove(id);
     }
 
     @Override
     public void update(Factura obj, Factura newObj) {
-        delete(obj);
+        delete(obj.getID());
         add(newObj);
     }
 
     @Override
-    public Factura get(String id) {
+    public Factura get(Long id) {
         return this.facturas.get(id);
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(Long id) {
         return this.facturas.containsKey(id);
     }
 
-    public List<Factura> getFacturas() {
+    @Override
+    public List<Factura> getAll() {
         return this.facturas.values().stream().collect(Collectors.toList());
     }
 
-    public int getLastID(){
-        return id-1;
-    }
 }

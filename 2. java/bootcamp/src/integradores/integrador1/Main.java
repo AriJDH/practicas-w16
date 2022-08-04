@@ -4,15 +4,15 @@ import java.util.*;
 
 public class Main {
 
+   private static Supermercado supermercado = new Supermercado();
+
     public static void main(String[] args) {
         int opcion;
         Scanner teclado = new Scanner(System.in);
 
-        Supermercado supermercado = new Supermercado();
-
-        supermercado.agregarCliente("12345", "Sofia", "Petrides");
-        supermercado.agregarCliente("67890", "Juan", "Perez");
-        supermercado.agregarCliente("24680", "Martin", "Gomez");
+        supermercado.agregarCliente(12345L, "Sofia", "Petrides");
+        supermercado.agregarCliente(67890L, "Juan", "Perez");
+        supermercado.agregarCliente(24680L, "Martin", "Gomez");
 
         do{
             System.out.println("Menu Principal. Por favor, digite la opción que desee : \n 1: Agregar Cliente \n " +
@@ -23,47 +23,40 @@ public class Main {
 
             switch (opcion) {
                 case 1:
-                    agregarCliente(supermercado);
+                    agregarCliente();
                     break;
                case 2:
                     supermercado.mostrarClientes();
                     break;
                 case 3:
-                    eliminarCliente(supermercado);
+                    eliminarCliente();
                     break;
                 case 4:
-                   mostrarCliente(supermercado);
+                   mostrarCliente();
                     break;
                 case 5:
-                    mostrarCliente(supermercado);
+                    agregarFactura();
+                    break;
+                case 6:
+                    supermercado.mostrarFacturas();
+                    break;
+                case 7:
+                    eliminarFactura();
+                    break;
+                default:
                     break;
             }
         }while (opcion != 8);
 
         teclado.close();
 
-
-        /*
-
-        System.out.println("Ingrese número de DNI: ");
-        Scanner teclado = new Scanner(System.in);
-
-        String dni = teclado.nextLine();
-        teclado.close();
-
-        if (clientes.containsKey(dni))
-            System.out.println(clientes.get(dni));
-        else
-            System.out.println("El cliente no existe");
-        */
-
     }
 
-    private static void agregarCliente(Supermercado supermercado){
+    private static void agregarCliente(){
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Ingrese DNI del cliente: ");
-        String dni = teclado.nextLine();
+        Long dni = teclado.nextLong();
 
         System.out.println("Ingrese Nombre del cliente: ");
         String nombre = teclado.nextLine();
@@ -77,34 +70,32 @@ public class Main {
     }
 
 
-    private static void eliminarCliente(Supermercado supermercado) {
+    private static void eliminarCliente() {
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Ingrese DNI del cliente a eliminar: ");
-        String dni = teclado.nextLine();
+        Long dni = teclado.nextLong();
 
         teclado.close();
 
         supermercado.eliminarCliente(dni);
     }
 
-    private static void mostrarCliente(Supermercado supermercado) {
+    private static void mostrarCliente() {
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Ingrese DNI del cliente a consultar: ");
-        String dni = teclado.nextLine();
-
-        teclado.close();
+        Long dni = teclado.nextLong();
 
         supermercado.mostrarCliente(dni);
     }
 
 
-    private static void agregarFactura(Supermercado supermercado){
+    private static void agregarFactura(){
         Scanner teclado = new Scanner(System.in);
 
         System.out.println("Ingrese DNI del cliente asociado a la factura: ");
-        String dni = teclado.nextLine();
+        Long dni = teclado.nextLong();
 
         if (!supermercado.existeCliente(dni)) {
             System.out.println("Ingrese Nombre del cliente: ");
@@ -158,8 +149,16 @@ public class Main {
         System.out.println("Ingrese cantidad comprada del item: ");
         int cant = teclado.nextInt();
 
-        teclado.close();
-
         return new Item(codigo, nombre, cant, precio);
     }
+
+    private static void eliminarFactura() {
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("Ingrese id de factura a eliminar: ");
+        Long id = teclado.nextLong();
+
+        supermercado.eliminarFactura(id);
+    }
+
 }

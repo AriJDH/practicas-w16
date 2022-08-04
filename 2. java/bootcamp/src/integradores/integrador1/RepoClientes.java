@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class RepoClientes implements Repositorio<Cliente>{
 
-    private Map<String, Cliente> clientes;
+    private Map<Long, Cliente> clientes;
 
     public RepoClientes() {
         this.clientes = new HashMap<>();
@@ -20,8 +20,8 @@ public class RepoClientes implements Repositorio<Cliente>{
     }
 
     @Override
-    public void delete(Cliente obj) {
-        this.clientes.remove(obj.getDni());
+    public void delete(Long id) {
+        this.clientes.remove(id);
     }
 
 
@@ -36,16 +36,18 @@ public class RepoClientes implements Repositorio<Cliente>{
     }
 
     @Override
-    public Cliente get(String id) {
+    public Cliente get(Long id) {
         return this.clientes.get(id);
     }
 
     @Override
-    public boolean has(String id) {
+    public boolean has(Long id) {
         return this.clientes.containsKey(id);
     }
 
-    public List<Cliente> getClientes() {
+    @Override
+    public List<Cliente> getAll() {
         return clientes.values().stream().collect(Collectors.toList());
     }
+
 }

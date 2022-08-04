@@ -12,23 +12,23 @@ public class Supermercado {
         facturas = new RepoFacturas();
     }
 
-    public void agregarCliente(String dni, String nombre, String apellido){
+    public void agregarCliente(Long dni, String nombre, String apellido){
         clientes.add(new Cliente(dni, nombre, apellido));
     }
 
     public void mostrarClientes(){
-        clientes.getClientes().stream().forEach(System.out::println);
+        clientes.getAll().stream().forEach(System.out::println);
     }
 
-    public Cliente mostrarCliente(String dni){
+    public Cliente mostrarCliente(Long dni){
         return clientes.get(dni);
     }
 
-    public void eliminarCliente(String dni){
+    public void eliminarCliente(Long dni){
         clientes.delete(dni);
     }
 
-    public boolean existeCliente(String dni){
+    public boolean existeCliente(Long dni){
        return clientes.has(dni);
     }
 
@@ -37,4 +37,11 @@ public class Supermercado {
         facturas.add(factura);
     }
 
+    public void mostrarFacturas(){
+        facturas.getAll().stream().forEach(System.out::println);
+    }
+
+    public void eliminarFactura(Long id){
+        facturas.delete(id);
+    }
 }
