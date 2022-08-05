@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestDTO {
-    private String name;
-    private List<IngredienteRequestDTO> ingredientes;
+public class IngredienteRequestDTO {
+    private String nombre;
+    private int peso;
 }

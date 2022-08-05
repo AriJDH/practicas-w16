@@ -1,6 +1,7 @@
 package com.example.calculadoracalorias.Service;
 
 import com.example.calculadoracalorias.DTO.IngredienteDTO;
+import com.example.calculadoracalorias.DTO.IngredienteRequestDTO;
 import com.example.calculadoracalorias.DTO.RequestDTO;
 import com.example.calculadoracalorias.DTO.ResponseDTO;
 import com.example.calculadoracalorias.Repository.RCalorias;
@@ -19,19 +20,17 @@ public class ServiceIngrediente {
     public ResponseDTO calcularDatos(RequestDTO comida) {
         ResponseDTO res = new ResponseDTO();
         int caloriasTotales = comida.getIngredientes().stream()
-                .mapToInt(ingredientList -> {
-                    int i = platos.loadIngredientes().stream()
-                            .filter(ingredientes -> ingredientes.getName().equals(ingredientList))
-                            .findFirst()
-                            .get().getCalories();
-                    return i * comida.getPeso();
-                }).sum();
+                .mapToInt(ingredientesList-> platos.loadIngredientes().stream()
+                        .filter(ingrediente -> ingrediente.getName().equals(ingredientesList.getNombre()))
+                        .findFirst()
+                        .get().getCalories()*ingredientesList.getPeso())
+                .sum();
 
         res.setCaloriasTotales(caloriasTotales);
 
         List<IngredienteDTO> listIngredientes = comida.getIngredientes().stream()
-                .map(ingrediente -> new IngredienteDTO(ingrediente, platos.loadIngredientes().stream()
-                        .filter(ingredientes -> ingredientes.getName().equals(ingrediente))
+                .map(ingrediente -> new IngredienteDTO(ingrediente.getNombre(), platos.loadIngredientes().stream()
+                        .filter(ingredientes -> ingredientes.getName().equals(ingrediente.getNombre()))
                         .findFirst()
                         .get().getCalories()))
                 .collect(Collectors.toList());
