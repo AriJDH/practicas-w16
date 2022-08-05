@@ -23,11 +23,11 @@ public class IngredientService {
         res.setTotalCalories(request.getIngredients().stream()
                 .mapToInt(ingredientDish -> {
                     int calories = repo.getIngredients().stream()
-                            .filter(ingredient -> ingredient.getName().equals(ingredientDish))
+                            .filter(ingredient -> ingredient.getName().equals(ingredientDish.getName()))
                             .findFirst()
                             .get()
                             .getCalories();
-                    return request.getGrams() * calories;
+                    return ingredientDish.getGrams() * calories;
                 })
                 .sum());
 
@@ -44,8 +44,8 @@ public class IngredientService {
 //                    return ing;
 //                }).collect(Collectors.toList());
         List<IngredientsDto> listIngredients = request.getIngredients().stream()
-                        .map(ingredients-> new IngredientsDto(ingredients,repo.getIngredients().stream()
-                                .filter(ingredient -> ingredient.getName().equals(ingredients))
+                        .map(ingredients-> new IngredientsDto(ingredients.getName(),repo.getIngredients().stream()
+                                .filter(ingredient -> ingredient.getName().equals(ingredients.getName()))
                                 .findFirst()
                                 .get().getCalories()))
                                 .collect(Collectors.toList());

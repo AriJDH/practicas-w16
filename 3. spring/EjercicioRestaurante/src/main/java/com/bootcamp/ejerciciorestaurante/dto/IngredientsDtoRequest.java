@@ -1,19 +1,14 @@
 package com.bootcamp.ejerciciorestaurante.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.util.List;
-
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestDto {
-
+public class IngredientsDtoRequest {
     private String name;
-    private List<IngredientsDtoRequest> ingredients;
+    private int grams;
 
 }
