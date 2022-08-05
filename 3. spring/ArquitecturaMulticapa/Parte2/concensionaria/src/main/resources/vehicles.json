@@ -1,0 +1,392 @@
+[
+    {
+        "brand": "Chevrolet",
+        "model": "X5",
+        "manufacturingDate": "2019-4-13",
+        "numberOfKilometers": 446399,
+        "doors": 5,
+        "price": 696416,
+        "currency": "HUF",
+        "services": [
+            {
+                "date": "2007-8-17",
+                "kilometers": 36998,
+                "descriptions": "Change of tires"
+            },
+            {
+                "date": "2004-7-20",
+                "kilometers": 32705,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 2
+    },
+    {
+        "brand": "Toyota",
+        "model": "X14",
+        "manufacturingDate": "2000-10-2",
+        "numberOfKilometers": 765873,
+        "doors": 5,
+        "price": 869407,
+        "currency": "AR",
+        "services": [
+            {
+                "date": "2009-6-26",
+                "kilometers": 5899,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 6
+    },
+    {
+        "brand": "Volvo",
+        "model": "X10",
+        "manufacturingDate": "2009-2-11",
+        "numberOfKilometers": 612417,
+        "doors": 3,
+        "price": 518027,
+        "currency": "DKK",
+        "services": [
+            {
+                "date": "2006-2-26",
+                "kilometers": 45923,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 4
+    },
+    {
+        "brand": "Ferrari",
+        "model": "X5",
+        "manufacturingDate": "2002-6-13",
+        "numberOfKilometers": 543900,
+        "doors": 5,
+        "price": 63091,
+        "currency": "EUR",
+        "services": [
+            {
+                "date": "2013-12-25",
+                "kilometers": 37758,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 3
+    },
+    {
+        "brand": "Toyota",
+        "model": "V70",
+        "manufacturingDate": "2012-11-24",
+        "numberOfKilometers": 746747,
+        "doors": 2,
+        "price": 579027,
+        "currency": "JPY",
+        "services": [
+            {
+                "date": "2002-12-10",
+                "kilometers": 41432,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 10
+    },
+    {
+        "brand": "Ferrari",
+        "model": "X13",
+        "manufacturingDate": "2001-6-4",
+        "numberOfKilometers": 721200,
+        "doors": 5,
+        "price": 261485,
+        "currency": "MXN",
+        "services": [
+            {
+                "date": "2008-1-8",
+                "kilometers": 7240,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 3
+    },
+    {
+        "brand": "Audi",
+        "model": "X6",
+        "manufacturingDate": "2004-11-10",
+        "numberOfKilometers": 302563,
+        "doors": 5,
+        "price": 221843,
+        "currency": "SEK",
+        "services": [
+            {
+                "date": "2009-10-14",
+                "kilometers": 38127,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 5
+    },
+    {
+        "brand": "Porsche",
+        "model": "X6",
+        "manufacturingDate": "2018-9-19",
+        "numberOfKilometers": 772827,
+        "doors": 3,
+        "price": 807793,
+        "currency": "HUF",
+        "services": [
+            {
+                "date": "2013-7-10",
+                "kilometers": 41365,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 10
+    },
+    {
+        "brand": "Honda",
+        "model": "X9",
+        "manufacturingDate": "2015-3-21",
+        "numberOfKilometers": 831571,
+        "doors": 2,
+        "price": 850764,
+        "currency": "SEK",
+        "services": [
+            {
+                "date": "2007-4-23",
+                "kilometers": 9653,
+                "descriptions": "Change air filters"
+            },
+            {
+                "date": "2019-9-3",
+                "kilometers": 4019,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 1
+    },
+    {
+        "brand": "Chevrolet",
+        "model": "V70",
+        "manufacturingDate": "2018-8-24",
+        "numberOfKilometers": 539282,
+        "doors": 2,
+        "price": 548483,
+        "currency": "GBP",
+        "services": [
+            {
+                "date": "2001-9-19",
+                "kilometers": 46931,
+                "descriptions": "Change of tires"
+            },
+            {
+                "date": "2000-5-18",
+                "kilometers": 15622,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 10
+    },
+    {
+        "brand": "Chevrolet",
+        "model": "X9",
+        "manufacturingDate": "2004-2-27",
+        "numberOfKilometers": 714008,
+        "doors": 2,
+        "price": 492578,
+        "currency": "JPY",
+        "services": [
+            {
+                "date": "2001-6-19",
+                "kilometers": 10391,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 8
+    },
+    {
+        "brand": "Toyota",
+        "model": "X6",
+        "manufacturingDate": "2016-3-22",
+        "numberOfKilometers": 938992,
+        "doors": 5,
+        "price": 315925,
+        "currency": "USD",
+        "services": [
+            {
+                "date": "2015-2-7",
+                "kilometers": 16892,
+                "descriptions": "Change air filters"
+            },
+            {
+                "date": "2002-7-17",
+                "kilometers": 20907,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 4
+    },
+    {
+        "brand": "Honda",
+        "model": "X12",
+        "manufacturingDate": "2015-12-7",
+        "numberOfKilometers": 180130,
+        "doors": 5,
+        "price": 218237,
+        "currency": "DKK",
+        "services": [
+            {
+                "date": "2017-7-22",
+                "kilometers": 2450,
+                "descriptions": "Change air filters"
+            },
+            {
+                "date": "2018-8-6",
+                "kilometers": 47722,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 7
+    },
+    {
+        "brand": "Ford",
+        "model": "X8",
+        "manufacturingDate": "2013-4-6",
+        "numberOfKilometers": 903216,
+        "doors": 5,
+        "price": 366609,
+        "currency": "JPY",
+        "services": [
+            {
+                "date": "2017-1-6",
+                "kilometers": 27603,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 6
+    },
+    {
+        "brand": "Mercedes",
+        "model": "X8",
+        "manufacturingDate": "2019-5-8",
+        "numberOfKilometers": 560095,
+        "doors": 3,
+        "price": 206203,
+        "currency": "USD",
+        "services": [
+            {
+                "date": "2014-12-28",
+                "kilometers": 33187,
+                "descriptions": "Change air filters"
+            },
+            {
+                "date": "2006-12-3",
+                "kilometers": 40488,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 4
+    },
+    {
+        "brand": "Honda",
+        "model": "X8",
+        "manufacturingDate": "2008-11-14",
+        "numberOfKilometers": 346714,
+        "doors": 5,
+        "price": 862386,
+        "currency": "ZAR",
+        "services": [
+            {
+                "date": "2016-9-17",
+                "kilometers": 21288,
+                "descriptions": "Change air filters"
+            },
+            {
+                "date": "2009-4-11",
+                "kilometers": 2252,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 10
+    },
+    {
+        "brand": "Volvo",
+        "model": "X6",
+        "manufacturingDate": "2008-8-24",
+        "numberOfKilometers": 757934,
+        "doors": 5,
+        "price": 431021,
+        "currency": "INR",
+        "services": [
+            {
+                "date": "2007-12-18",
+                "kilometers": 28307,
+                "descriptions": "Change air filters"
+            },
+            {
+                "date": "2013-5-15",
+                "kilometers": 29967,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 1
+    },
+    {
+        "brand": "Ferrari",
+        "model": "X11",
+        "manufacturingDate": "2000-11-8",
+        "numberOfKilometers": 592188,
+        "doors": 4,
+        "price": 51262,
+        "currency": "GBP",
+        "services": [
+            {
+                "date": "2011-7-23",
+                "kilometers": 39776,
+                "descriptions": "Change of tires"
+            },
+            {
+                "date": "2014-2-23",
+                "kilometers": 35321,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 2
+    },
+    {
+        "brand": "BMW",
+        "model": "X5",
+        "manufacturingDate": "2003-11-6",
+        "numberOfKilometers": 392292,
+        "doors": 3,
+        "price": 984151,
+        "currency": "USD",
+        "services": [
+            {
+                "date": "2018-9-8",
+                "kilometers": 7106,
+                "descriptions": "Change of tires"
+            }
+        ],
+        "numberOfOwners": 5
+    },
+    {
+        "brand": "Audi",
+        "model": "X9",
+        "manufacturingDate": "2005-7-12",
+        "numberOfKilometers": 997616,
+        "doors": 3,
+        "price": 83911,
+        "currency": "TRY",
+        "services": [
+            {
+                "date": "2014-6-7",
+                "kilometers": 2802,
+                "descriptions": "Change of tires"
+            },
+            {
+                "date": "2002-8-12",
+                "kilometers": 32629,
+                "descriptions": "Change air filters"
+            }
+        ],
+        "numberOfOwners": 10
+    }
+]
