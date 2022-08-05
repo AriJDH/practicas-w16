@@ -1,7 +1,4 @@
-import javax.swing.*;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class Asteroid {
     private List<Participante> listaParticipantes;
@@ -37,52 +34,32 @@ public class Asteroid {
     }
 
     public void jugarAsteroid(){
-        Map<Meteorito, Participante> mapMeteoritoParticipante=new HashMap<Meteorito,Participante>();
-        Map<Participante, Long> puntajes = new HashMap<>();
-        Participante ganador;
 
-        //Mapeo los meteoritos con quien lo destruyó respectivamente
-        for (Meteorito meteoro:listaMeteoritos){
-            mapMeteoritoParticipante.put(meteoro, this.destruirMeteorito(meteoro, listaParticipantes));
+        Map<Participante,Integer> puntajes = new HashMap<>();
+
+        for (int i=0;i<listaMeteoritos.size();i++){
+            Map<Participante,Double> puntajes_parciales = new HashMap<>();
+            System.out.println("¡APARECE " + (i+1) + " METEORITO!");
+            for (int j=0;j<listaParticipantes.size();j++){
+                double distancia=listaParticipantes.get(j).getNave().calcularDistancia(listaMeteoritos.get(i).getCoordenada_x(),listaMeteoritos.get(i).getCoordenada_y());
+                System.out.printf(listaParticipantes.get(j).getNombre() + " se encuentra a %.2f del meteorito\n", distancia);
+
+
+                puntajes_parciales.put(listaParticipantes.get(j),distancia);
+            }
+            Participante m=Collections.min(puntajes_parciales.entrySet(), Map.Entry.comparingByValue()).getKey();
+            System.out.println("¡Meteorito impactado por " + m.getNombre()+"!");
+            m.getNave().setPuntuacion_inicial(1+m.getNave().getPuntuacion_inicial());
         }
-
-        //Mapeo los participantes con la cantidad de veces que destruyeron un meteorito
-        puntajes = mapMeteoritoParticipante.values().stream()
-                .collect(
-                        Collectors.groupingBy(
-                                Function.identity(), Collectors.counting()
-                        ));
-
-        //Obtengo el ganador contando quien tiene màs puntaje (value del map puntajes)
-        ganador = puntajes.entrySet().stream().max((a,b)->a.getValue()>b.getValue() ? 1:-1).get().getKey();
-
-        //Imprimo ganador
-        System.out.println("El ganador es: " + ganador.toString());
-
-        //Imprimo los puntajes de los participantes
-        System.out.println("Puntajes");
-        List<Map.Entry<Participante, Long>> list = new ArrayList<>(puntajes.entrySet());
-        list.sort(Map.Entry.comparingByValue());
-        list.forEach(System.out::println);
-
-        //Imprimo que nave destruyo cada meteorito
-        System.out.println("Destrucción por asteroide");
-        List<Map.Entry<Meteorito,Participante>> list2 = new ArrayList<>(mapMeteoritoParticipante.entrySet());
-        list2.forEach(System.out::println);
+        System.out.println("Los puntajes por participante son:");
+        for (Participante participante:listaParticipantes){
+            System.out.println(participante.getNombre() + ": " + participante.getNave().getPuntuacion_inicial());
+            puntajes.put(participante, participante.getNave().getPuntuacion_inicial());
+        }
+        System.out.println("EL ASTEROID ES: " + Collections.max(puntajes.entrySet(), Map.Entry.comparingByValue()).getKey().getNombre());
 
     }
 
-
-    public Participante destruirMeteorito(Meteorito meteoro, List<Participante> participantes) {
-        Comparator<Participante> comparator = getMinDistancia(meteoro.getCoordenada_x(), meteoro.getCoordenada_y());
-        Participante p = participantes.stream()
-                .min(comparator).get();
-        return p;
-    }
-
-    public Comparator<Participante> getMinDistancia(int coordenada_meteorito_x, int coordenada_meteorito_y){
-        return Comparator.comparingDouble(p->p.promedioDistancia(coordenada_meteorito_x,coordenada_meteorito_y));
-    }
 
 
 

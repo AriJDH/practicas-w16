@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Participante {
     private String nombre;
-    private List<Nave> flotaNave;
+    private Nave nave;
 
     public String getNombre() {
         return nombre;
@@ -14,34 +14,24 @@ public class Participante {
         this.nombre = nombre;
     }
 
-    public List<Nave> getFlotaNave() {
-        return flotaNave;
+    public Nave getNave() {
+        return nave;
     }
 
-    public void setFlotaNave(List<Nave> flotaNave) {
-        this.flotaNave = flotaNave;
+    public void setNave(Nave nave) {
+        this.nave = nave;
     }
 
     @Override
     public String toString() {
         return "Participante{" +
                 "nombre='" + nombre + '\'' +
-                ", flotaNave=" + flotaNave +
+                ", nave=" + nave +
                 '}';
     }
 
-    public Participante(String nombre, List<Nave> flotaNave) {
+    public Participante(String nombre, Nave nave) {
         this.nombre = nombre;
-        this.flotaNave = flotaNave;
-    }
-
-    public Double promedioDistancia(int coordenada_meteorito_x, int coordenada_meteorito_y){
-        Double sum = 0d;
-        Double promedio = 0d;
-        sum = flotaNave.stream()
-                .mapToDouble(x -> x.calcularDistancia(coordenada_meteorito_x,coordenada_meteorito_y))
-                .sum();
-        promedio = sum/flotaNave.stream().count();
-        return promedio;
+        this.nave = nave;
     }
 }
