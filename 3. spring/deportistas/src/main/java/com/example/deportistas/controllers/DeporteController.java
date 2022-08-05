@@ -1,9 +1,11 @@
-package controllers;
+package com.example.deportistas.controllers;
 
+import com.example.deportistas.dto.DeportistaDTO;
+import com.example.deportistas.dto.NivelDTO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import services.DeporteService;
-import dto.DeporteDTO;
+import com.example.deportistas.services.DeporteService;
+import com.example.deportistas.dto.DeporteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +27,15 @@ public class DeporteController {
     }
 
     @GetMapping("/findSports/{name}")
-    public ResponseEntity<DeporteDTO> findSportByName(@PathVariable String name){
-        return new ResponseEntity<>(servicio.obtenerDeporteXNombre(name), HttpStatus.ACCEPTED);
+    public ResponseEntity<NivelDTO> findSportByName(@PathVariable String name){
+        return new ResponseEntity<>(servicio.obtenerNivelDeporteXNombre(name), HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("/findSportsPersons")
+    public ResponseEntity<List<DeportistaDTO>> findSportPersons(){
+        return new ResponseEntity<>(servicio.obtenerDeportistas(), HttpStatus.ACCEPTED);
+    }
+
+
 
 }

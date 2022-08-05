@@ -1,4 +1,4 @@
-package dto;
+package com.example.deportistas.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +14,5 @@ public class PersonaDTO implements Serializable {
     private String nombre;
     private String apellido;
     private Integer edad;
+    private DeporteDTO deporte;
 }

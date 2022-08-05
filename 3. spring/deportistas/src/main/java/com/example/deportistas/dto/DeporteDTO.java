@@ -1,6 +1,5 @@
-package dto;
+package com.example.deportistas.dto;
 
-import entities.Deporte;
 import lombok.*;
 
 import java.io.Serializable;

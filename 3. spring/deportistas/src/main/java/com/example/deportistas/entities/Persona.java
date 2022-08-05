@@ -1,4 +1,5 @@
-package entities;
+package com.example.deportistas.entities;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +10,11 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Deporte {
+public class Persona {
 
     private String nombre;
-    private String nivel;
+    private String apellido;
+    private Integer edad;
+    private Deporte deporte;
 
 }
