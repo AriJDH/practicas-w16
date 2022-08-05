@@ -107,8 +107,6 @@ public class CarreraDeLaSelva {
                             }
                             break;
                     }
-
-
                     System.out.println("--3--");
                     break;
                 case 4:
