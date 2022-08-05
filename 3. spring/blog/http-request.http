@@ -1,0 +1,16 @@
+###
+POST http://localhost:8080/blog
+{
+    "id":2,
+    "title":"Titulo 2 new",
+    "authorName":"Author 99",
+    "publishDate":"2022-08-03"
+}
+
+
+<> 2022-08-05T182211.400.json
+<> 2022-08-05T182200.400.html
+<> 2022-08-05T182157.400.html
+<> 2022-08-05T182145.400.html
+
+###
