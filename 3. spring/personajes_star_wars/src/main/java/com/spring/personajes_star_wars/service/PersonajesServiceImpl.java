@@ -31,7 +31,5 @@ public class PersonajesServiceImpl implements IPersonajesService {
             listaFiltrados.add(nulo);
             return listaFiltrados;
         }
-
-        int e = listaTodos.stream().reduce(0, (a, b) -> a + b.getHeight(), Integer::sum);
     }
 }
