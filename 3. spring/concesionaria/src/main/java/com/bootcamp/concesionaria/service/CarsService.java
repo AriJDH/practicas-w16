@@ -2,19 +2,16 @@ package com.bootcamp.concesionaria.service;
 
 import com.bootcamp.concesionaria.dto.CarDto;
 import com.bootcamp.concesionaria.dto.CarRequestDto;
-import com.bootcamp.concesionaria.dto.ServiceDto;
 import com.bootcamp.concesionaria.model.Car;
 import com.bootcamp.concesionaria.model.CarService;
-import com.bootcamp.concesionaria.repository.CarsRepository;
 import com.bootcamp.concesionaria.repository.ICarsRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class CarsService {
