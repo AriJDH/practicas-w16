@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/3. spring.iml" filepath="$PROJECT_DIR$/.idea/3. spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CodigoMorse/CodigoMorse.iml" filepath="$PROJECT_DIR$/CodigoMorse/CodigoMorse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/calculadora_de_calorias/calculadora_de_calorias.iml" filepath="$PROJECT_DIR$/calculadora_de_calorias/calculadora_de_calorias.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejercicioCovid19/ejercicioCovid19.iml" filepath="$PROJECT_DIR$/ejercicioCovid19/ejercicioCovid19.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejercicioFechas/ejercicioFechas.iml" filepath="$PROJECT_DIR$/ejercicioFechas/ejercicioFechas.iml" />
+    </modules>
+  </component>
+</project>

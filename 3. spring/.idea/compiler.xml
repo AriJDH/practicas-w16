@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ejercicioCovid19" />
+        <module name="ejercicioFechas" />
+        <module name="calculadora_de_calorias" />
+        <module name="CodigoMorse" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="calculadora_de_calorias" target="11" />
+      <module name="CodigoMorse" target="11" />
+      <module name="ejercicioCovid19" target="11" />
+      <module name="ejercicioFechas" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CodigoMorse" options="-parameters" />
+      <module name="calculadora_de_calorias" options="-parameters" />
+      <module name="ejercicioCovid19" options="-parameters" />
+      <module name="ejercicioFechas" options="-parameters" />
+    </option>
+  </component>
+</project>
