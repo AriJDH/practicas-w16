@@ -128,7 +128,7 @@ public class Carrera_Selva {
                     System.out.println("Ingrese un numero valido");
             }
 
-        } while (opcion != 5);
+        } while (opcion != 3);
 
         entrada.close();
 
