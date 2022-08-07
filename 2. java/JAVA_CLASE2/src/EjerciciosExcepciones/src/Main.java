@@ -17,7 +17,7 @@ public class Main {
         try{
             numeros[5] = 10;
         }catch(ArrayIndexOutOfBoundsException exception){
-            System.out.println("error" + exception.getMessage());
+            System.out.println("Error " + exception.getMessage());
         }finally{
            imprimirMensaje(mensajeFinal);
         }
