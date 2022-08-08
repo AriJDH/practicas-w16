@@ -1,0 +1,26 @@
+package herencia.polimorfismo.encapsulamiento.ejercicio2;
+
+public class NoPerecedero extends Producto{
+    private String tipo;
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public NoPerecedero(String nombre, double precio, String tipo) {
+        setNombre(nombre);
+        setPrecio(precio);
+        setTipo(tipo);
+    }
+
+    @Override
+    public String toString() {
+        return "NoPerecedero{" +
+                "tipo='" + tipo + '\'' +
+                "} " + super.toString();
+    }
+}
