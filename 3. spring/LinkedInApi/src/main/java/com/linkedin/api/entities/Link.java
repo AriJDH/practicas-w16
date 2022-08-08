@@ -18,6 +18,7 @@ public class Link {
 
     private Integer count;
     private boolean valid;
+    private String password;
 
 
 

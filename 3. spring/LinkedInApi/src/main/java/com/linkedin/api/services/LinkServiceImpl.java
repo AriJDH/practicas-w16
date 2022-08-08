@@ -20,10 +20,10 @@ public class LinkServiceImpl implements LinkService{
 
 
     @Override
-    public LinkDTO saveLink(Link link) throws Exception {
+    public LinkDTO saveLink(Link link,String password) throws Exception {
 
         if (valideUrl(link.getUrl())){
-            return linkRepository.saveLink(new Link((long) linkRepository.getLinks().size(),link.getUrl(),0,true));
+            return linkRepository.saveLink(new Link((long) linkRepository.getLinks().size(),link.getUrl(),0,true,password));
         }
 
         throw new BadUrlException("la Url no tiene el formato adecuado");

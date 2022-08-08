@@ -21,8 +21,8 @@ public class LinkController {
     private LinkService linkService;
 
     @PostMapping("/link")
-    public ResponseEntity<LinkDTO> saveLink(@RequestBody Link link) throws Exception {
-        return new ResponseEntity<>(linkService.saveLink(link), HttpStatus.CREATED);
+    public ResponseEntity<LinkDTO> saveLink(@RequestBody Link link,@RequestParam String password) throws Exception {
+        return new ResponseEntity<>(linkService.saveLink(link, password), HttpStatus.CREATED);
     }
     @GetMapping("/link/{id}")
     public ResponseEntity<?> redirectLink(@PathVariable Long id) throws URISyntaxException, NotFoundException {
@@ -39,7 +39,7 @@ public class LinkController {
     }
     @GetMapping("/invalid/{id}")
     public ResponseEntity<LinkDTO> invalid(@PathVariable Long id) throws NotFoundException {
-        return new ResponseEntity<>(linkService.invalid(id),HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(linkService.invalid(id),HttpStatus.OK);
     }
 
 }
