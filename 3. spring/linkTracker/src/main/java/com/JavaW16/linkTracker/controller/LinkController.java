@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 public class LinkController {
@@ -27,12 +28,11 @@ public class LinkController {
     }
 
     @GetMapping("/link/{linkId}")
-    public void redirect(@PathVariable Integer linkId, HttpServletResponse response, @RequestParam String linkPassword) {
-        try {
-            response.sendRedirect(linkService.redirect(linkId, linkPassword));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+    public void redirect(@PathVariable Integer linkId, HttpServletResponse response, @RequestParam String linkPassword)
+    throws IOException {
+
+           response.sendRedirect(linkService.redirect(linkId, linkPassword));
+
     }
 
     @GetMapping("/metrics/{linkId}")

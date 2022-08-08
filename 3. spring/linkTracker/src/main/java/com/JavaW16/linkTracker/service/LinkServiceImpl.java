@@ -4,6 +4,9 @@ import com.JavaW16.linkTracker.dto.LinkDTO;
 import com.JavaW16.linkTracker.dto.ResponseDTO;
 import com.JavaW16.linkTracker.dto.StatisticsDTO;
 import com.JavaW16.linkTracker.entity.Link;
+import com.JavaW16.linkTracker.exception.LinkIsNotValid;
+import com.JavaW16.linkTracker.exception.LinkNotFound;
+import com.JavaW16.linkTracker.exception.LinkPasswordIncorrect;
 import com.JavaW16.linkTracker.repository.ILinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,7 @@ public class LinkServiceImpl implements ILinkService{
 
     @Override
     public ResponseDTO cargarDatos(LinkDTO linkDTO) {
+
         Link link = new Link(linkDTO.getLinkId(), linkDTO.getLinkURL(), linkDTO.getLinkPassword(), 0, true);
         ResponseDTO response = linkRepository.cargarDatos(link);
         return response;
@@ -23,11 +27,17 @@ public class LinkServiceImpl implements ILinkService{
     @Override
     public String redirect(Integer linkId, String linkPassword) {
         Link aux = linkRepository.traerDatos(linkId);
-        if (aux.getLinkPassword().equals(linkPassword) && aux.getIsValid()) {
-            // Se suma el redireccionamiento
-            aux.setRedirectCounter(aux.getRedirectCounter()+1);
-            return aux.getLinkURL();
-        }        return null;
+        if (aux==null){
+            throw new LinkNotFound(linkId);
+        }
+        if (aux.getLinkPassword().equals(linkPassword)){
+            if(aux.getIsValid()){
+                aux.setRedirectCounter(aux.getRedirectCounter()+1);
+                return aux.getLinkURL();
+            }else{
+                throw new LinkIsNotValid(linkId);
+            }
+        } throw new LinkPasswordIncorrect(linkPassword);
     }
 
     @Override

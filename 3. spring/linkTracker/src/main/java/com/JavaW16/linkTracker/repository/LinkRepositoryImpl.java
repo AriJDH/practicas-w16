@@ -26,6 +26,6 @@ public class LinkRepositoryImpl implements ILinkRepository{
     public Link traerDatos(Integer linkId) {
         return this.linkList.stream()
                 .filter(link -> link.getLinkId().equals(linkId))
-                .findFirst().get();
+                .findFirst().orElse(null);
     }
 }
