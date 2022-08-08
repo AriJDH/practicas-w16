@@ -19,12 +19,12 @@ public class BlogController {
   IBlogService findService;
 
   @GetMapping("/blogs")
-  public ResponseEntity<List<EntradaBlogDTO>> getAllBlogs(){
+  public ResponseEntity<List<EntradaBlogDTO>> getAllBlogs() {
     return findService.getAllSports();
   }
 
   @GetMapping("/blog/{id}")
-  public ResponseEntity<EntradaBlogDTO> getBlog(@PathVariable Integer id){
+  public ResponseEntity<EntradaBlogDTO> getBlog(@PathVariable Integer id) {
     return findService.getBlog(id);
   }
 }

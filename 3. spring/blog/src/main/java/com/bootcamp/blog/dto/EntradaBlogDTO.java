@@ -10,8 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EntradaBlogDTO {
-  //Mi DTO y mi modelo tienen los mismos datos (En el ejercicio no se me pidio no usar algun dato)
-  //Esta bien usar todos los datos del modelo?
   Integer id;
   String titulo;
   String autor;
