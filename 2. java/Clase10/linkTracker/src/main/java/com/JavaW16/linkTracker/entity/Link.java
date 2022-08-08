@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.URL;
 
 public class Link {
     private Integer linkId;
-    @URL private String linkURL;
+    private String linkURL;
     private String linkPassword;
     private Integer redirectCounter;
     private Boolean isValid;
