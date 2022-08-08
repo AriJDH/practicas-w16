@@ -22,7 +22,7 @@ public class LinkController {
     ILinkService linkService;
 
     @PostMapping()
-    public ResponseEntity<ResponseDTO> postLink(@Validated @RequestBody LinkDTO linkDTO){
+    public ResponseEntity<ResponseDTO> postLink(@RequestBody LinkDTO linkDTO) {
         ResponseDTO response = linkService.cargarDatos(linkDTO);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
@@ -30,7 +30,6 @@ public class LinkController {
     @GetMapping("/link/{linkId}")
     public void redirect(@PathVariable Integer linkId, HttpServletResponse response, @RequestParam String linkPassword)
     throws IOException {
-
            response.sendRedirect(linkService.redirect(linkId, linkPassword));
 
     }

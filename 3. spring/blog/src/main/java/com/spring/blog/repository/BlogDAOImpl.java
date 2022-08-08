@@ -45,4 +45,14 @@ public class BlogDAOImpl implements IBlogDAO{
         }
     }
 
+    @Override
+    public EntradaBlog findById(Integer id) {
+        return database.stream().filter(b -> b.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<EntradaBlog> findAll() {
+        return database;
+    }
+
 }
