@@ -13,8 +13,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-
-
         Cliente cli = new Cliente(1,"Pedro Picapiedra");
         Cliente cli1 = new Cliente(2,"Jessica Rodriguez");
         Cliente cli2 = new Cliente(3,"Luis Perez");

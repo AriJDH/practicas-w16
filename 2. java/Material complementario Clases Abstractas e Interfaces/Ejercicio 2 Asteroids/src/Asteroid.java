@@ -36,7 +36,8 @@ public class Asteroid {
     public void jugarAsteroid(){
 
         Map<Participante,Integer> puntajes = new HashMap<>();
-
+        //Recorro lista de materitos, cada meteorito correesponde a una ronda donde muestro distancia de cada participante del meteorito
+        //Luego lo ingreso a un mapa de participante y distrancias, selecciono la menor y asigno el puntaje a su Nave
         for (int i=0;i<listaMeteoritos.size();i++){
             Map<Participante,Double> puntajes_parciales = new HashMap<>();
             System.out.println("¡APARECE " + (i+1) + " METEORITO!");
@@ -51,6 +52,8 @@ public class Asteroid {
             System.out.println("¡Meteorito impactado por " + m.getNombre()+"!");
             m.getNave().setPuntuacion_inicial(1+m.getNave().getPuntuacion_inicial());
         }
+        //Recorro la lista de participante y muestro sus puntajes.
+        //Los ingreso a un mapa de participante, puntaje y selecciono el mayor que se muestra como ASTEROID
         System.out.println("Los puntajes por participante son:");
         for (Participante participante:listaParticipantes){
             System.out.println(participante.getNombre() + ": " + participante.getNave().getPuntuacion_inicial());

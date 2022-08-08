@@ -90,16 +90,7 @@ public class Localizador {
                 .collect(Collectors.toList());
         if (lstReservas.size()>=2){
             listaReservas.stream()
-                    .filter(x -> x instanceof Hotel)
-                    .forEach(x -> x.aplicarDescuento(5.0));
-        }
-
-        List<Reserva> lstReservas2 = listaReservas.stream()
-                .filter(x -> x instanceof Viaje)
-                .collect(Collectors.toList());
-        if (lstReservas2.size()>=2){
-            listaReservas.stream()
-                    .filter(x -> x instanceof Viaje)
+                    .filter(x -> x instanceof Hotel || x instanceof Viaje)
                     .forEach(x -> x.aplicarDescuento(5.0));
         }
     }
