@@ -23,4 +23,14 @@ public class GlobalHandler {
         ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found", e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.FORBIDDEN);
     }
+    @ExceptionHandler(LinkUrlNotValidated.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(LinkUrlNotValidated e){
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.FORBIDDEN);
+    }
+    @ExceptionHandler(LinkIdCreated.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(LinkIdCreated e){
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.FORBIDDEN);
+    }
 }

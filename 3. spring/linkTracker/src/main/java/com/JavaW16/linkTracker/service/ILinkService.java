@@ -10,4 +10,6 @@ public interface ILinkService {
     String redirect(Integer linkId, String linkPassword);
     StatisticsDTO traerStatistic(Integer linkId);
     LinkDTO invalidarLink(Integer linkId);
+    boolean urlValidator(String url);
+
 }
