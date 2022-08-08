@@ -3,17 +3,17 @@ package banco;
 public class Basic extends Cliente implements ConsultaDeSaldo, RetiroDeEfectivo, PagoDeServicios{
     @Override
     public void consultaDeSaldo() {
-        System.out.println("El Básico está haciendo consulta de saldo");
+        System.out.println("BASIC: realizando una consulta de saldo.");
     }
 
     @Override
     public void pagoDeServicios() {
-        System.out.println("El Básico está haciendo pago de servicios.");
+        System.out.println("BASIC: realizando un pago de servicios.");
     }
 
     @Override
     public void retiroDeEfectivo() {
-        System.out.println("El Básico está retirando efectivo.");
+        System.out.println("BASIC: realizando un retiro de efectivo.");
     }
 
     @Override
@@ -23,6 +23,6 @@ public class Basic extends Cliente implements ConsultaDeSaldo, RetiroDeEfectivo,
 
     @Override
     public void transaccionNoOk() {
-        System.out.println("BASIC: Transacción no exitosa.");
+        System.out.println("BASIC: Transacción fallida. Vuelva a intentarlo.");
     }
 }
