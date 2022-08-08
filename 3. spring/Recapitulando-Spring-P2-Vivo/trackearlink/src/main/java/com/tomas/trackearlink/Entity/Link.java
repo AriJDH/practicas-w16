@@ -1,4 +1,4 @@
-package com.tomas.trackearlink.Entity;
+package com.tomas.trackearlink.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

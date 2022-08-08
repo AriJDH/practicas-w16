@@ -1,6 +1,6 @@
 package com.tomas.trackearlink.repository;
 
-import com.tomas.trackearlink.Entity.Link;
+import com.tomas.trackearlink.entity.Link;
 
 public interface ILinkRepository {
 

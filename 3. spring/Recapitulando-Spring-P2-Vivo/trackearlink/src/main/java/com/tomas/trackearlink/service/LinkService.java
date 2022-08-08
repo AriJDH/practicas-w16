@@ -1,6 +1,6 @@
 package com.tomas.trackearlink.service;
 
-import com.tomas.trackearlink.Entity.Link;
+import com.tomas.trackearlink.entity.Link;
 import com.tomas.trackearlink.dto.ExceptionDTO;
 import com.tomas.trackearlink.dto.FullLinkDTO;
 import com.tomas.trackearlink.dto.LinkDTO;
