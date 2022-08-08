@@ -22,6 +22,7 @@ public class BlogController {
         System.out.println(body);
         return new ResponseEntity<>(blogService.cargaData(body), HttpStatus.OK);
     }
+
     @GetMapping("/blog/{id}")
     public ResponseEntity<EntradaBlogDTO> getBlog(@PathVariable Integer id){
         return new ResponseEntity<>(blogService.getData(id),HttpStatus.OK);

@@ -20,7 +20,7 @@ public class BlogService implements IBlogService{
     @Override
     public Integer cargaData(EntradaBlog body){
         if(validaCarga(body)){
-            throw new BlogExceptionNotFound(body.getId());
+            throw new BlogExceptionCreateNotFound(body.getId());
         }
         blogRepositor.cagarDatos(body);
         return body.getId();
