@@ -1,6 +1,6 @@
 package com.mercadolibre.bootcamp.controllers;
 
-import com.mercadolibre.bootcamp.dtos.FullLinkDto;
+import com.mercadolibre.bootcamp.dtos.response.FullLinkDto;
 import com.mercadolibre.bootcamp.dtos.request.LinkDto;
 import com.mercadolibre.bootcamp.dtos.response.LinkIdDto;
 import com.mercadolibre.bootcamp.services.ILinkService;
@@ -23,14 +23,20 @@ public class LinkController {
         return new ResponseEntity<>(createdLink, HttpStatus.CREATED);
     }
 
-    @GetMapping("/link/{id}")
-    public RedirectView redirect(@PathVariable int id){
-        return new RedirectView(service.redirect(id));
+    @GetMapping("/link/{linkId}")
+    public RedirectView redirect(@PathVariable int linkId, @RequestParam(required = false) String password){
+        return new RedirectView(service.redirect(linkId,password));
     }
 
     @GetMapping("/metrics/{linkId}")
     public ResponseEntity<FullLinkDto> getMetrics(@PathVariable int linkId){
         FullLinkDto metric = service.getMetrics(linkId);
         return new ResponseEntity<>(metric,HttpStatus.OK);
+    }
+
+    @PostMapping("/invalidate/{linkId}")
+    public ResponseEntity<String> disableLink(@PathVariable int linkId){
+        service.disableLink(linkId);
+        return new ResponseEntity<>("ok",HttpStatus.OK);
     }
 }

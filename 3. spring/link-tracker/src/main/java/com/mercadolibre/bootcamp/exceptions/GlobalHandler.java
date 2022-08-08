@@ -10,13 +10,28 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ExceptionDto> catchUrlInvalid(InvalidUrlException exception){
+    public ResponseEntity<ExceptionDto> catchUrlInvalid(InvalidUrlException exception) {
         ExceptionDto response = new ExceptionDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
     @ExceptionHandler
-    public ResponseEntity<ExceptionDto> catchLinkNotFound(LinkNotFoundException exception){
+    public ResponseEntity<ExceptionDto> catchLinkNotFound(LinkNotFoundException exception) {
         ExceptionDto response = new ExceptionDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionDto> catchLinkDisabled(DisabledLinkException exception) {
+        ExceptionDto response = new ExceptionDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.GONE);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionDto> catchWrongPass(PasswordMissmatchException exception) {
+        ExceptionDto response = new ExceptionDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+    }
+
+
 }

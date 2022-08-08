@@ -1,4 +1,4 @@
-package com.mercadolibre.bootcamp.dtos;
+package com.mercadolibre.bootcamp.dtos.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
