@@ -1,6 +1,6 @@
 # carpetas
-/out
-/target
+out/
+target/
 
 # archivos
 .DS_Store
