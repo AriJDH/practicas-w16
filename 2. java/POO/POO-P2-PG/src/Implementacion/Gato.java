@@ -1,6 +1,6 @@
 package Implementacion;
 
-public class Gato extends Animal {
+public class Gato extends Animal{
     //atributos
     private String nombre;
 

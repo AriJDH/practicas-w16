@@ -1,6 +1,7 @@
 package Implementacion;
 
 public class Animal {
+
     private String especie; //no queremos que otras clases directa a esta info
 
     public String getEspecie() {

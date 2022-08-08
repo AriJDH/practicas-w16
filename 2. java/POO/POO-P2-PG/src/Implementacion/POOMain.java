@@ -10,7 +10,7 @@ public class POOMain {
         Gato gato = new Gato("gato", "Luna");
         gato.mostrarEspecie();
         System.out.println(gato.getNombre());
-        gato.hacerSonidos();
+        //gato.hacerSonidos();
         System.out.println("Referenciado");
         Animal animal = perro; //le asigno una referencia existente - objeto que hereda la funcionalidad de la clase
         animal.hacerSonidos();
