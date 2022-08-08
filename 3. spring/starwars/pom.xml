@@ -8,11 +8,11 @@
         <version>2.7.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>EjercicioDeportistas</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>EjercicioDeportistas</name>
-    <description>EjercicioDeportistas</description>
+    <groupId>com.bootcam.starwars</groupId>
+    <artifactId>starwars</artifactId>
+    <version>0.0.1</version>
+    <name>starwars</name>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
     </properties>
