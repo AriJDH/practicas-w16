@@ -10,22 +10,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class GlobalHandler {
     @ExceptionHandler(LinkNotFoundException.class)
     public ResponseEntity<ErrorResponse> linkNotFoundException(LinkNotFoundException ex) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(ex.getMessage());
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.NOT_FOUND);
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        ErrorResponse errorResponse = new ErrorResponse(status, ex.getMessage());
+        errorResponse.setData(ex.getLink());
+ 
+        return new ResponseEntity<ErrorResponse>(errorResponse, status);
     }
 
     @ExceptionHandler(LinkNotAuthorizatedException.class)
     public ResponseEntity<ErrorResponse> linkNotAuthorizatedException(LinkNotAuthorizatedException ex) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(ex.getMessage());
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.UNAUTHORIZED);
+        HttpStatus status = HttpStatus.UNAUTHORIZED;
+        ErrorResponse errorResponse = new ErrorResponse(status, ex.getMessage());
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, status);
     }
 
     @ExceptionHandler(InvalidLinkException.class)
     public ResponseEntity<ErrorResponse> invalidLinkException(InvalidLinkException ex) {
-        ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage(ex.getMessage());
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ErrorResponse errorResponse = new ErrorResponse(status, ex.getMessage());
+        errorResponse.setData(ex.getLink());
+
+        return new ResponseEntity<ErrorResponse>(errorResponse, status);
     }
 }

@@ -1,11 +1,14 @@
 package com.linktracker.linktracker.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.linktracker.linktracker.dto.ResponseLinkDTO;
 import com.linktracker.linktracker.dto.RequestLinkDTO;
@@ -27,10 +30,14 @@ public class LinkTrackerController {
     }
 
     @GetMapping(value="/link/{linkId}")
-    public RedirectView getLink(@PathVariable Integer linkId, @RequestParam String password) {
+    public ResponseEntity<Object> getLink(@PathVariable Integer linkId, @RequestParam String password) {
         String link = linkTrackerService.getLinkAuthorizated(linkId, password);   
+        
+        HttpHeaders headers = new HttpHeaders();
 
-        return new RedirectView(link);
+        headers.setLocation(URI.create(link));
+
+        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
     }
 
     @GetMapping(value="/metrics/{linkId}")

@@ -40,7 +40,7 @@ public class LinkTrackerService implements IService{
         if(linkReturned == null){
             throw new LinkNotFoundException("Link not found.");
         }else if(!linkReturned.isValid()){
-            throw new InvalidLinkException("Link invalid.");
+            throw new InvalidLinkException("Link invalid.", linkReturned.getLink());
         }
         
         link = linkReturned.getLink();
@@ -58,7 +58,7 @@ public class LinkTrackerService implements IService{
         if(linkReturned == null){
             throw new LinkNotFoundException("Link not found.");
         }else if(!linkReturned.isValid()){
-            throw new InvalidLinkException("Link invalid.");
+            throw new InvalidLinkException("Link invalid.", linkReturned.getLink());
         }else if(!linkReturned.getPassword().equals(password)){
             throw new LinkNotAuthorizatedException("Link not authorized.");
         }
@@ -101,7 +101,7 @@ public class LinkTrackerService implements IService{
             new URL(link).toURI();
             return true;
         }catch(Exception e){
-            throw new InvalidLinkException("Invalid link");
+            throw new InvalidLinkException("Invalid link", link);
         }
     }
 }
