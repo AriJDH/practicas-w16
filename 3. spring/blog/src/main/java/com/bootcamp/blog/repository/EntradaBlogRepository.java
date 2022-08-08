@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class EntradaBlogRepository {
+public class EntradaBlogRepository implements IRepository<EntradaBlog, Long> {
     private List<EntradaBlog> entradaBlogs;
 
     public EntradaBlogRepository() {
@@ -29,6 +29,4 @@ public class EntradaBlogRepository {
                 .filter(entradaBlog -> entradaBlog.getId().equals(id))
                 .findFirst();
     }
-
-
 }
