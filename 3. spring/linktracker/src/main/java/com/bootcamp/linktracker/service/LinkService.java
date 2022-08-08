@@ -29,7 +29,9 @@ public class LinkService implements IService{
 
     @Override
     public LinkResDTO findById(Long id) {
-        return this.parseToLinkResDTO(linkRepository.findById(id));
+        Link link = this.linkRepository.findById(id);
+        if(link == null) throw new NotFoundException(String.format("No existe un link con la id: %s.", id));
+        return this.parseToLinkResDTO(link);
     }
 
     public LinkResDTO findByIdAndPassword(Long id, String password){

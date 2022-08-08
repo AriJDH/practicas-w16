@@ -25,7 +25,7 @@ public class LinkController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", link.getLink());
 
-        return new ResponseEntity<>(headers, HttpStatus.PERMANENT_REDIRECT);
+        return new ResponseEntity<>(headers, HttpStatus.SEE_OTHER);
     }
 
     @PostMapping("/link")
@@ -33,21 +33,23 @@ public class LinkController {
         return new ResponseEntity<>(this.linkService.save(link), HttpStatus.CREATED);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<LinkResDTO> findById(@RequestParam Long id){
-        return new ResponseEntity<>(this.linkService.findById(id), HttpStatus.OK);
+    @GetMapping("/metrics/{id}")
+    public ResponseEntity<LinkMetricsResDTO> metrics(@PathVariable Long id)
+    {
+        return new ResponseEntity<>(this.linkService.getLinkMetrics(id), HttpStatus.OK);
     }
 
-    @GetMapping("/metrics/{linkID}")
-    public ResponseEntity<LinkMetricsResDTO> metrics(@PathVariable Long linkID)
+    @PostMapping("/invalidate/{id}")
+    public ResponseEntity<?> invalidate(@PathVariable Long id)
     {
-        return new ResponseEntity<>(this.linkService.getLinkMetrics(linkID), HttpStatus.OK);
+        this.linkService.delete(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-    @DeleteMapping("/invalidate/{linkID}")
-    public ResponseEntity<?> invalidate(@PathVariable Long linkID)
+    @DeleteMapping("/invalidate/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id)
     {
-        this.linkService.delete(linkID);
+        this.linkService.delete(id);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 

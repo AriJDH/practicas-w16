@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> MissingServletRequestParameterException(Exception e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
-    
+
     public ResponseEntity<?> BadRequestException(Exception e){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
