@@ -15,7 +15,7 @@ public class ControllerApp {
     @GetMapping("/")
     public String traducir2(){
 
-        return "raiz";
+        return "método raiz";
     }
 
     @GetMapping("{cadena}")
