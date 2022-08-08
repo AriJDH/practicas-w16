@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Service
@@ -20,7 +19,6 @@ public class EntradaBlogService {
 
     public Integer createBlog(EntradaBlog entradaBlog){
         Integer blogListId = blogRepository.createBlog(entradaBlog);
-        System.out.println("Service ID: "+ blogListId);
         return blogListId;
     }
 
@@ -32,7 +30,6 @@ public class EntradaBlogService {
         blogFoundDto.setTitleBlog(blogFound.getTitleBlog());
         blogFoundDto.setNameAuthor(blogFound.getNameAuthor());
         blogFoundDto.setPublicationDate(blogFound.getPublicationDate());
-        System.out.println("SERVICE??:" + blogFoundDto);
 
         return blogFoundDto;
     }
@@ -45,7 +42,6 @@ public class EntradaBlogService {
             System.out.println("Blog "+blog);
             blogsDto.add(new EntradaBlogDto(blog.getIdBlog(), blog.getTitleBlog(), blog.getNameAuthor(), blog.getPublicationDate()));
         }
-        System.out.println("SERVICE TODOS:" + blogsDto);
 
         return blogsDto;
     }
