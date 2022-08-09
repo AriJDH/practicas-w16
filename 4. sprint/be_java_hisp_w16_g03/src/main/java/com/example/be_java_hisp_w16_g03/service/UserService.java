@@ -42,7 +42,7 @@ public class UserService implements IUserService{
         if (user==null){
             throw new UserNotExistException(id);
         }
-        if (user.getFollowers()==null){
+        if (user.getFollowers()==null ){
             return  new FollowerCountDTO(user.getUserId(), user.getUserName(), 0);
         }
         FollowerCountDTO followerCountDTO=new FollowerCountDTO(user.getUserId(), user.getUserName(),user.getFollowers().size()-1);
