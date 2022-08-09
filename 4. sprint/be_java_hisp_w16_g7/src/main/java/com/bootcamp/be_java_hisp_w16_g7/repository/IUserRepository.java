@@ -6,4 +6,5 @@ public interface IUserRepository {
 
     User findUserById(int idUser);
     boolean existsUser(int idUser);
+
 }
