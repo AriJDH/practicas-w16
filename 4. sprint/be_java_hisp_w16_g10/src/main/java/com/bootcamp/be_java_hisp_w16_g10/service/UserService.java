@@ -19,7 +19,10 @@ public class UserService implements IService {
 
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
-
+        User user = this.userRepository.findById(userId);
+        User userToFollow = this.userRepository.findById(userIdToFollow);
+        this.userRepository.addUserToList(user.getFollowers(), userToFollow);
+        this.userRepository.addUserToList(userToFollow.getFollowed(), user);
     }
 
     @Override

@@ -19,9 +19,11 @@ public class UserController {
 
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public void US001(){
-
+    public ResponseEntity US001(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+        this.userService.follow(userId, userIdToFollow);
+        return new ResponseEntity(HttpStatus.OK);
     }
+
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
     @GetMapping("/users/{userId}/followers/count")

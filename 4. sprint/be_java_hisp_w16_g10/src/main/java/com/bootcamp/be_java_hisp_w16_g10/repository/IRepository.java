@@ -9,4 +9,5 @@ public interface IRepository {
     List<User> findAll();
     void save(User user);
     void update(Integer userId, User user);
+    void addUserToList(List<User> users, User userToAdd);
 }
