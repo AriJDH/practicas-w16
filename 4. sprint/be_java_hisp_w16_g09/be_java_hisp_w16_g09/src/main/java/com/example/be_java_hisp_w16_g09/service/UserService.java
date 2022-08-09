@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
 import com.example.be_java_hisp_w16_g09.exception.UserAlreadyFollowedException;
 import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
+import com.example.be_java_hisp_w16_g09.exception.UserNotFollowing;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
@@ -74,10 +75,14 @@ public class UserService implements IUserService{
             throw new UserNotFoundException(userId);
         else if (userRepository.searchById(userIdToUfollow) == null)
             throw new UserNotFoundException(userIdToUfollow);
+
+        User unfollow = userRepository.searchById(userIdToUfollow);
+        User unfollow2 = userRepository.searchById(userId);
+
+        if (!userRepository.searchById(userId).isFollowing(unfollow))
+            throw new UserNotFollowing(userId,userIdToUfollow);
         else{
-            User unfollow = userRepository.searchById(userIdToUfollow);
             userRepository.searchById(userId).getFollowing().remove(unfollow);
-            User unfollow2 = userRepository.searchById(userId);
             userRepository.searchById(userIdToUfollow).getFollowers().remove(unfollow2);
         }
     }

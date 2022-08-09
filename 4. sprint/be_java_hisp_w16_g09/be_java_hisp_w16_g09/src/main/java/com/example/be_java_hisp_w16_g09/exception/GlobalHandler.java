@@ -27,4 +27,10 @@ public class GlobalHandler {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserNotFollowing.class)
+    public ResponseEntity<MessageDto> UserNotFollowing(UserNotFollowing exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }
