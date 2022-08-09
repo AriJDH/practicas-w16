@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Repository
 public class UserRepository implements IRepository{
@@ -45,5 +46,18 @@ public class UserRepository implements IRepository{
             throw new BadRequestException("The user is already following or is followed by the user");
         }
         users.add(userToAdd);
+    }
+
+    @Override
+    public Integer getIndexOfUser(Integer userId) {
+        return IntStream.range(0, users.size())
+                .filter(userInd -> users.get(userId).getId().equals(userId))
+                .findFirst()
+                .orElse(-1);
+    }
+
+    @Override
+    public void updateUserInList(Integer index, User user) {
+        users.set(index,user);
     }
 }

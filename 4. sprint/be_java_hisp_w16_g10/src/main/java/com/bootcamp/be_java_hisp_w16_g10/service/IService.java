@@ -5,6 +5,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowedListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 
 import java.util.List;
 

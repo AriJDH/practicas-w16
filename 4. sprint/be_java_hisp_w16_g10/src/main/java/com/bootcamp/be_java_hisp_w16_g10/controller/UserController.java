@@ -1,8 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g10.controller;
 
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowedListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.IService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +31,14 @@ public class UserController {
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
     @GetMapping("/users/{userId}/followers/count")
-    public void US002(){
-
+    public ResponseEntity<FollowersCountResDTO> US002(@PathVariable Integer userId){
+      return new ResponseEntity<>(this.userService.countFollowers(userId),HttpStatus.OK);
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
     @GetMapping("/users/{userId}/followers/list")
-    public void US003(){
-
+    public ResponseEntity<List<FollowersListResDTO>> US003(@PathVariable Integer userId, @RequestParam Optional<String> order){
+        return new ResponseEntity<>(this.userService.listFollowers(userId, order.orElse(null)),HttpStatus.OK);
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
@@ -45,8 +49,9 @@ public class UserController {
 
     //US 0005: Dar de alta una nueva publicación
     @PostMapping("/products/post")
-    public void US005(){
-
+    public ResponseEntity<?> US005(@RequestBody PostReqDTO postReqDTO){
+        userService.save(postReqDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
@@ -62,25 +67,6 @@ public class UserController {
 
     }
 
-    //US 0008: Ordenamiento alfabético ascendente y descendente
-    //      users/{UserID}/followers/list?order=name_asc
-    //      users/{UserID}/followers/list?order=name_desc
-    //      users/{UserID}/followed/list?order=name_asc
-    //      users/{UserID}/followed/list?order=name_desc
-    //  *Nota: Este ordenamiento aplica solo para US-003 y US-004.
-    @GetMapping("/US008") //Cambiar Endpoint
-    public void US008(){
-
-    }
-
-    //US 0009: Ordenamiento por fecha ascendente y descendente
-    //     products/followed/{userId}/list?order=date_asc
-    //     products/followed/{userId}/list?order=date_desc
-    //  *Nota: Este ordenamiento aplica solo para la US-006
-    @GetMapping("US009") //Cambiar Endpoint
-    public void US009(){
-
-    }
 
     /* B_Requerimientos_incrementales */
 
