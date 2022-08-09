@@ -2,6 +2,7 @@ package com.bootcamp.linktracer.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
@@ -13,4 +14,8 @@ public class Link {
     private String password;
     private int numRedirects;
     private boolean isActive;
+
+    public void incrementNumRedirects() {
+        numRedirects++;
+    }
 }

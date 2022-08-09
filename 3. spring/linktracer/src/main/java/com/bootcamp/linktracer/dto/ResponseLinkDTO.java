@@ -12,5 +12,4 @@ import lombok.Setter;
 public class ResponseLinkDTO {
     private int id;
     private String url;
-    private boolean hasPassword;
 }

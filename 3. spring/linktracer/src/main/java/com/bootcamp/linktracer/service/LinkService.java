@@ -27,14 +27,15 @@ public class LinkService implements ILinkService {
         if(!validator.isValid(link.getUrl()))
             throw new RuntimeException("Bad request");
         Link entity = factory.make(link.getUrl(), link.getPassword());
-        if(!repository.createLink(entity))
-            throw new RuntimeException("business logic exception");
-        return new ResponseLinkDTO(entity.getId(), entity.getUrl(), entity.getPassword() == null);
+        entity = repository.createLink(entity);
+        return new ResponseLinkDTO(entity.getId(), entity.getUrl());
     }
 
     @Override
     public String redirect(int id, String password) {
-        return validateAuthentication(id, password).getUrl();
+        Link link = validateAuthentication(id, password);
+        link.incrementNumRedirects();
+        return link.getUrl();
     }
 
     @Override

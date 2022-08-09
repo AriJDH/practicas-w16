@@ -9,26 +9,18 @@ import java.util.Map;
 @Repository
 public class LinkRepository implements ILinkRepository {
     private final Map<Integer,Link> links = new HashMap<>();
+    private int counter = 0;
 
 
     @Override
-    public boolean createLink(Link link) {
-        if(links.containsKey(link.getId()))
-            return false;
+    public Link createLink(Link link) {
+        link.setId(++counter);
         links.put(link.getId(), link);
-        return true;
+        return link;
     }
 
     @Override
     public Link getLink(int id) {
         return links.get(id);
-    }
-
-    @Override
-    public boolean putLink(Link link) {
-        if(!links.containsKey(link.getId()))
-            return false;
-        links.put(link.getId(), link);
-        return true;
     }
 }
