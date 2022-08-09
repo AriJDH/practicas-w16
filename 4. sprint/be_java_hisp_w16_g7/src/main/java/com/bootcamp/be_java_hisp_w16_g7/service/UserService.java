@@ -11,6 +11,7 @@ import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,16 @@ public class UserService implements IUserService{
 
 
     @Override
-    public ResponseUserFollowedDTO getUserFollowedList(int id) {
-        User user = userRepository.findUser(id);
+    public ResponseUserFollowedDTO getUserFollowedList(int id, String order) {
+        User user = userRepository.findUserById(id);
         if(user == null)
             throw new UserNotFoundException(id);
+        Comparator<ResponseUserDTO> userComp = Comparator.comparing(ResponseUserDTO::getUserName);
+        if("name_desc".equals(order))
+            userComp = userComp.reversed();
         List<ResponseUserDTO> followed = user.getFollows().stream()
                 .map(u -> mapper.map(u, ResponseUserDTO.class))
+                .sorted(userComp)
                 .collect(Collectors.toList());
         return new ResponseUserFollowedDTO(user.getId(), user.getName(), followed);
     }
