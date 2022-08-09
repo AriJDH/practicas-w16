@@ -6,6 +6,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
 import com.bootcamp.be_java_hisp_w16_g10.repository.IRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,23 +25,23 @@ public class UserService implements IService {
 
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
-
+        User user = this.userRepository.findById(userId);
+        User userToFollow = this.userRepository.findById(userIdToFollow);
+        this.userRepository.addUserToList(user.getFollowers(), userToFollow);
+        this.userRepository.addUserToList(userToFollow.getFollowed(), user);
     }
 
     @Override
     public void unfollow(Integer userId, Integer userIdToUnfollow) {
-        // TODO verificar que ambos usuarios existan
-
         User user = this.userRepository.findById(userId);
         if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
 
         User UserToDelete = this.userRepository.findById(userIdToUnfollow);
         if (UserToDelete == null) throw new NotFoundException(String.format("El usuario que se busca eliminar, con id: %s no existe.",userIdToUnfollow));
 
-        // TODO verificar que el usuario a eliminar es seguido por el usuario.
         List<User> followers = UserToDelete.getFollowers();
         boolean isFollowed = followers.stream().anyMatch(u -> u.getId().equals(userId));
-        //if (!isFollowed) throw new BadRequestException("The user is not being followed.");
+        if (!isFollowed) throw new BadRequestException("The user is not being followed.");
         followers.remove(user);
     }
 
