@@ -15,4 +15,8 @@ public class Post {
     private Product product;
     private int categoryId;
     private double price;
+
+    public boolean wasPublicatedAfter(LocalDate aDate) {
+        return date.isAfter(aDate);
+    }
 }

@@ -25,7 +25,8 @@ public class PostController {
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
     // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
     @PostMapping("/products/followed/{userId}/list")
-    public void US006(){
+    public ResponseEntity getRecentPostsOfSellersFollowedByUserWith(@PathVariable int userId){
+        return ResponseEntity.ok(postService.getRecentPostsOfSellersFollowedByUserWith(userId));
     }
     //US 0009: Ordenamiento por fecha ascendente y descendente
     //     products/followed/{userId}/list?order=date_asc
