@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IUserService {
 
+    public Boolean followUser(Integer userId, Integer userToFollowId);
+
 }
