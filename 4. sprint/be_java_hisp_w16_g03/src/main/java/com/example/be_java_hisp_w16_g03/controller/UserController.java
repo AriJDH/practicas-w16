@@ -16,6 +16,6 @@ public class UserController {
 
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<FollowersDTO> getMeFollowers(@PathVariable Integer userId){
-        return ResponseEntity.ok(service.getFollowers(userId));
+        return new ResponseEntity(service.getFollowers(userId),HttpStatus.OK);
     }
 }

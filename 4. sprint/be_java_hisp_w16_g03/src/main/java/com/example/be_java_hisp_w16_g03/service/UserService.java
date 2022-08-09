@@ -16,15 +16,20 @@ public class UserService implements IUserService{
     @Autowired
     IUserRepository repository;
 
-
     @Override
     public FollowersDTO getFollowers(Integer id) {
         User user=repository.getUserById(id);
+        System.out.printf("paso");
         if (user==null){
             throw new UserNotExistException(id);
         }
+        if (user.getFollowers()==null){
+            return  new FollowersDTO(user.getUserId(), user.getUserName(), null);
+        }
         List<UserDTO> userDTO= user.getFollowers().stream().map(userA->{
-            UserDTO userDTO1=new UserDTO(userA.getUserId(),userA.getUserName());
+            UserDTO userDTO1=new UserDTO();
+            userDTO1.setUserId(userA.getUserId());
+            userDTO1.setUserName(userA.getUserName());
             return userDTO1;
                 }).collect(Collectors.toList());
         FollowersDTO followersDTO= new FollowersDTO(user.getUserId(), user.getUserName(), userDTO);
