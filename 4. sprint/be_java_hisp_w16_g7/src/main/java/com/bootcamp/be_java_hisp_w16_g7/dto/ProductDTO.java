@@ -3,14 +3,12 @@ package com.bootcamp.be_java_hisp_w16_g7.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class ProductDTO {
 
 
     @JsonProperty("product_id")

@@ -1,7 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
@@ -26,7 +26,7 @@ public class ProductService implements IProductService{
 
 
     @Override
-    public ApiResponseDto createPost(PostDto postDto) {
+    public ApiResponseDto createPost(PostDTO postDto) {
 
         Post post = mapper.map(postDto, Post.class);
 
@@ -44,6 +44,6 @@ public class ProductService implements IProductService{
         count++;
         System.out.println(user);
 
-        return new ApiResponseDto("Post creado exitosamente", "Post del usuario con id " + post.getId() + " creado correctamente");
+        return new ApiResponseDto("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
     }
 }
