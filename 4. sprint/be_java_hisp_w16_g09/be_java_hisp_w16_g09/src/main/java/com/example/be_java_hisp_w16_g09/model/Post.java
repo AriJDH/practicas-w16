@@ -16,7 +16,7 @@ public class Post {
     private int categoryId;
     private double price;
 
-    public boolean wasPublicatedAfter(LocalDate aDate) {
+    public boolean wasPublishedAfter(LocalDate aDate) {
         return date.isAfter(aDate);
     }
 }
