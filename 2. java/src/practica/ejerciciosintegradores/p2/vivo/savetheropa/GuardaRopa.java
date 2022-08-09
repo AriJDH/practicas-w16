@@ -6,7 +6,6 @@ import java.util.List;
 
 public class GuardaRopa {
 
-    public static GuardaRopa guardaRopa = null;
     protected HashMap<Integer, List<Prenda>> prendas = new HashMap<>();
     protected int id = 1;
 
