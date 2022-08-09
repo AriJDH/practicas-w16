@@ -1,0 +1,28 @@
+package com.bootcamp.be_java_hisp_w16_g01.controller;
+
+import com.bootcamp.be_java_hisp_w16_g01.dto.FollowedPostsDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.MessageDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.PostDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.ResponsePostDto;
+import com.bootcamp.be_java_hisp_w16_g01.service.IPostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class PostController {
+    @Autowired
+    private IPostService postService;
+
+    @PostMapping("/products/post")
+    public ResponseEntity<MessageDto> createPost(@RequestBody PostDto postDTO) {
+        return new ResponseEntity<MessageDto>(postService.createPost(postDTO), HttpStatus.OK);
+    }
+
+    @GetMapping("/products/followed/{userId}/list")
+    public ResponseEntity<FollowedPostsDto> getFollowedPosts(@PathVariable int userId) {
+        return new ResponseEntity<FollowedPostsDto>(postService.getFollowedPosts(userId), HttpStatus.OK);
+    }
+}
