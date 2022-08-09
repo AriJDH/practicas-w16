@@ -71,11 +71,11 @@ public class UserService implements IService {
                 .map(this::parseToFollowedListResDTO)
                 .collect(Collectors.toList());
 
-        if(order.equals("name_asc")){
-            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
-        }
-        else if (order.equals("name_desc")) {
-            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+        switch (order) {
+            case "name_asc":
+                return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
+            case "name_desc":
+                return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
         }
 
         return resultado;
