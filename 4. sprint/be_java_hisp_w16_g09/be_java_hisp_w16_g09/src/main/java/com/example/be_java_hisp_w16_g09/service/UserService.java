@@ -1,12 +1,8 @@
 package com.example.be_java_hisp_w16_g09.service;
 
-import com.example.be_java_hisp_w16_g09.exception.UserAlreadyFollowedException;
-import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
-import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
-import com.example.be_java_hisp_w16_g09.dto.UserDto;
-import com.example.be_java_hisp_w16_g09.exception.GlobalHandler;
+import com.example.be_java_hisp_w16_g09.exception.UserAlreadyFollowedException;
 import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.User;
@@ -17,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService{

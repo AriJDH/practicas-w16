@@ -2,19 +2,17 @@ package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.NewPostDto;
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
+import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.Product;
 import com.example.be_java_hisp_w16_g09.model.User;
-import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
 import com.example.be_java_hisp_w16_g09.utility.Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 
 import java.time.LocalDate;
 import java.util.Comparator;
