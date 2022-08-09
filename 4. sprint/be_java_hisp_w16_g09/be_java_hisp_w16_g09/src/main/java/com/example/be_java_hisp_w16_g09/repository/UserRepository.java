@@ -1,9 +1,11 @@
 package com.example.be_java_hisp_w16_g09.repository;
 
 import com.example.be_java_hisp_w16_g09.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 
+@Repository
 public class UserRepository implements IUserRepository{
     private HashMap<Integer, User> users = new HashMap<>();
 

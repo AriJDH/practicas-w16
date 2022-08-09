@@ -1,11 +1,13 @@
 package com.example.be_java_hisp_w16_g09.repository;
 
 import com.example.be_java_hisp_w16_g09.model.Post;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Repository
 public class PostRepository implements IPostRepository{
     private HashMap<Integer, List<Post>> posts = new HashMap<>();
 
