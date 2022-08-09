@@ -10,5 +10,4 @@ public interface IUserRepository {
     User searchById(int id);
 
     void updateUser(User user);
-    public HashMap<Integer, User> addUsers();
 }

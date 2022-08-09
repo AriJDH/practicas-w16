@@ -14,4 +14,10 @@ public class GlobalHandler {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserHasNoFollowersException.class)
+    public ResponseEntity<MessageDto> UserHasNoFollowersException(UserHasNoFollowersException exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

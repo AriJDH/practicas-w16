@@ -1,11 +1,22 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
+import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
+import com.example.be_java_hisp_w16_g09.service.IUserService;
+import com.example.be_java_hisp_w16_g09.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
+
+    @Autowired
+    IUserService userService;
+
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public void US001(){
@@ -16,7 +27,8 @@ public class UserController {
     }
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
     @GetMapping("/users/{userId}/followers/list")
-    public void US003(){
+    public ResponseEntity<FollowersDtoResponse> US003(@PathVariable Integer userId){
+        return new ResponseEntity<>(userService.getAllFollowers(userId), HttpStatus.OK);
     }
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
     @GetMapping("/users/{userId}/followed/list")
