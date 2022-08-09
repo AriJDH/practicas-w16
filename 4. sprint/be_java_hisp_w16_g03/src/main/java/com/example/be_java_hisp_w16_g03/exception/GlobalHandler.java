@@ -13,4 +13,9 @@ public class GlobalHandler {
         ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO();
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.FORBIDDEN);
     }
+    @ExceptionHandler(UserNotExistException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(UserNotExistException e){
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found",e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
+    }
 }
