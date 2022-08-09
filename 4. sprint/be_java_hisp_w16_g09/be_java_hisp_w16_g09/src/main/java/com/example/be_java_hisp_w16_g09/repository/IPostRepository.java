@@ -11,5 +11,6 @@ public interface IPostRepository {
 
     List<Post> searchById(int id);
 
-
+    //Nico
+    List<Post> getPostsByUserIds(List<Integer> userIds);
 }

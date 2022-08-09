@@ -15,6 +15,13 @@ public class GlobalHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler
+    public ResponseEntity<MessageDto> catchUserAlreadyFollowedException(UserAlreadyFollowedException exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+
     @ExceptionHandler(UserHasNoFollowersException.class)
     public ResponseEntity<MessageDto> UserHasNoFollowersException(UserHasNoFollowersException exception) {
         MessageDto response = new MessageDto(exception.getMessage());

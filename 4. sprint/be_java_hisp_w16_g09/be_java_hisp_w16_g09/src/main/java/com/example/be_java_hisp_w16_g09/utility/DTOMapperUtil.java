@@ -1,0 +1,26 @@
+package com.example.be_java_hisp_w16_g09.utility;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
+public class DTOMapperUtil {
+
+    private ModelMapper modelMapper;
+
+    public DTOMapperUtil() {
+        this.modelMapper = new ModelMapper();
+    }
+
+    public <S, T> List<T> mapList(List<S> objectsToMap, Class<T> targetClass) {
+        return objectsToMap
+                .stream()
+                .map(element -> modelMapper.map(element, targetClass))
+                .collect(Collectors.toList());
+    }
+
+}

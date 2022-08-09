@@ -15,4 +15,16 @@ public class User {
     private String userName;
     private List<User> followers = new ArrayList<>();
     private List<User> following = new ArrayList<>();
+
+    public void addFollower(User newFollower) {
+        followers.add(newFollower);
+    }
+
+    public void addFollowed(User userToFollow) {
+        following.add(userToFollow);
+    }
+
+    public boolean isFollowing(User user){
+        return following.stream().anyMatch(u-> u.getUserId() == user.getUserId());
+    }
 }

@@ -7,10 +7,7 @@ import com.example.be_java_hisp_w16_g09.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostController {
@@ -25,7 +22,8 @@ public class PostController {
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
     // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
     @PostMapping("/products/followed/{userId}/list")
-    public void US006(){
+    public ResponseEntity getRecentPostsOfSellersFollowedByUserWith(@PathVariable int userId){
+        return ResponseEntity.ok(postService.getRecentPostsOfSellersFollowedByUserWith(userId));
     }
     //US 0009: Ordenamiento por fecha ascendente y descendente
     //     products/followed/{userId}/list?order=date_asc

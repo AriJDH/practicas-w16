@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository implements IPostRepository{
@@ -26,6 +27,11 @@ public class PostRepository implements IPostRepository{
 
     public List<Post> searchById(int id){
         return posts.get(id);
+    }
+
+    @Override
+    public List<Post> getPostsByUserIds(List<Integer> userIds) {
+        return userIds.stream().map(userId -> posts.get(userId)).flatMap(List::stream).collect(Collectors.toList());
     }
 
 }
