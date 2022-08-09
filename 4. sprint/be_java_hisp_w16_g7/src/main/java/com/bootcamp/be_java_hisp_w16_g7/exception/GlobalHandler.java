@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ApiResponseDto> catchExceptionUserNotFound(UserNotFoundException e) {
-        ApiResponseDto exceptionApiDTO = new ApiResponseDto("Usuario no encontrado", e.getMessage());
-        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ApiResponseDto> onUserNotFoundException(UserNotFoundException e) {
+        return new ResponseEntity<>(new ApiResponseDto("User Not Found", e.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

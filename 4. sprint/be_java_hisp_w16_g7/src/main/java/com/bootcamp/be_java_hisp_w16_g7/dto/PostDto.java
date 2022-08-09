@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PostDto {
 
-    @JsonProperty("userId")
+    @JsonProperty("user_id")
     private int id;
 
     @JsonProperty("date")
