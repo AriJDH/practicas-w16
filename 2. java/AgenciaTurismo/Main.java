@@ -1,2 +1,4 @@
-package AgenciaTurismo;public class Main {
+package AgenciaTurismo;
+
+public class Main {
 }

@@ -1,3 +1,5 @@
+package Distribuidora;
+
 import java.util.Scanner;
 
 public class ScannerUtils {
