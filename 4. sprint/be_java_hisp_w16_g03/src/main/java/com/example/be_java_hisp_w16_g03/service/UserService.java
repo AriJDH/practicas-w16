@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w16_g03.service;
 
+import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
 import com.example.be_java_hisp_w16_g03.dto.UserDTO;
 import com.example.be_java_hisp_w16_g03.entity.User;
@@ -19,7 +20,6 @@ public class UserService implements IUserService{
     @Override
     public FollowersDTO getFollowers(Integer id) {
         User user=repository.getUserById(id);
-        System.out.printf("paso");
         if (user==null){
             throw new UserNotExistException(id);
         }
@@ -34,5 +34,18 @@ public class UserService implements IUserService{
                 }).collect(Collectors.toList());
         FollowersDTO followersDTO= new FollowersDTO(user.getUserId(), user.getUserName(), userDTO);
         return followersDTO;
+    }
+
+    @Override
+    public FollowerCountDTO getCountFollowers(Integer id) {
+        User user=repository.getUserById(id);
+        if (user==null){
+            throw new UserNotExistException(id);
+        }
+        if (user.getFollowers()==null){
+            return  new FollowerCountDTO(user.getUserId(), user.getUserName(), 0);
+        }
+        FollowerCountDTO followerCountDTO=new FollowerCountDTO(user.getUserId(), user.getUserName(),user.getFollowers().size()-1);
+        return followerCountDTO;
     }
 }
