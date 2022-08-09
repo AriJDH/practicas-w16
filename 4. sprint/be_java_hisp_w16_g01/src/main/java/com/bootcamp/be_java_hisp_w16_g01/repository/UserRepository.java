@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public class UserRepository implements IUserRepository {
 
-    HashMap<Integer, User> users;
     protected List<User> users = new ArrayList<>();
 
     public UserRepository(){
