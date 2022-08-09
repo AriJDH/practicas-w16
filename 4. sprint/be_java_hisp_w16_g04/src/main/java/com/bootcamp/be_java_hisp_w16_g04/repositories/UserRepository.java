@@ -24,4 +24,8 @@ public class UserRepository implements IUserRepository {
 
   }
 
+  @Override
+  public User getByIdUser(Integer userId) {
+    return users.stream().filter(x -> x.getUserId().equals(userId)).findFirst().orElse(null);
+  }
 }
