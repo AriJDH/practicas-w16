@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepository implements IUserRepository {
+public class  UserRepository implements IUserRepository {
 
   List<User> users = new ArrayList<User>();
 
