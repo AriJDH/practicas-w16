@@ -1,12 +1,14 @@
 package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.Product;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,8 +17,10 @@ import org.modelmapper.ModelMapper;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
 public class PostServiceTest {
@@ -32,6 +36,15 @@ public class PostServiceTest {
         postService = new PostService(postRepository, userRepository, new DTOMapperUtil());
     }
 
+    @Test
+    public void shouldRaiseException_whenTryToGetPostsOfSellersForNonExistentUser(){
+        int nonExistentUserId = 1;
+        when(userRepository.searchById(nonExistentUserId)).thenReturn(null);
+
+        assertThatThrownBy(() -> postService.getRecentPostsOfSellersFollowedByUserWith(nonExistentUserId))
+                .isInstanceOf(UserNotFoundException.class)
+                .hasMessage(String.format("User with id: %d not found", nonExistentUserId));
+    }
     @Test
     public void shouldReturnEmptyPostList_whenGetPostsOfSellersForUserWithZeroFollowings() {
         int anUserId = 1;

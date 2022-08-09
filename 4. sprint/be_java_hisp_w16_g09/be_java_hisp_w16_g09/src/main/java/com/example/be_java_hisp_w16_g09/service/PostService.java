@@ -70,11 +70,12 @@ public class PostService implements IPostService{
     @Override
     public RecentPostsDTO getRecentPostsOfSellersFollowedByUserWith(int anUserId) {
         User user = userRepository.searchById(anUserId);
+        if (user == null) throw new UserNotFoundException(anUserId);
         List<User> sellers = user.getFollowing();
         List<Integer> sellersIds = sellers.stream().map(User::getUserId).collect(Collectors.toList());
         List<Post> postsOfSellers = postRepository.getPostsByUserIds(sellersIds);
         postsOfSellers = Filter
-                .apply(postsOfSellers, (post -> post.wasPublicatedAfter(LocalDate.now().minusWeeks(2))));
+                .apply(postsOfSellers, (post -> post.wasPublishedAfter(LocalDate.now().minusWeeks(2))));
         postsOfSellers.sort(Comparator.comparing(Post::getDate));
         List<PostDto> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostDto.class);
         return new RecentPostsDTO(user.getUserId(), postDtos);
