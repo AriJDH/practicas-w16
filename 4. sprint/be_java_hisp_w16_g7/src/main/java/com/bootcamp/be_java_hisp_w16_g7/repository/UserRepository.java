@@ -14,9 +14,11 @@ public class UserRepository implements IUserRepository{
     public UserRepository() {
         user = new ArrayList<>();
 
-        user.add(new User(1111, "User1", List.of(), List.of(), List.of()));
-        user.add(new User(2222, "User2", List.of(), List.of(), List.of()));
-        user.add(new User(3333, "User3", List.of(), List.of(), List.of()));
-        user.add(new User(4444, "User4", List.of(), List.of(), List.of()));
+        user.add(new User(1111, "User1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        user.add(new User(2222, "User2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        user.add(new User(3333, "User3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        user.add(new User(4444, "User4", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
     }
+
+
 }

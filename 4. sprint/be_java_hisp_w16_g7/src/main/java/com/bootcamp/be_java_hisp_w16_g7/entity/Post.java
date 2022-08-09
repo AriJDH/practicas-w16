@@ -12,6 +12,7 @@ import java.time.LocalDate;
 public class Post {
 
     private int id;
+    //atributo postId;
     private LocalDate creationDate;
     private Product product;
     private Category category;
