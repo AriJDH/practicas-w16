@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalHandlerException {
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<?> badRequestException(BadRequestException e){
+    public ResponseEntity<ApiExceptionDTO> badRequestException(BadRequestException e){
         return new ResponseEntity<>(new ApiExceptionDTO("Bad request", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }
