@@ -20,4 +20,11 @@ public class UserController {
         Boolean response = service.followUser(userId, userIdToFollow);
         return response ? new ResponseEntity<>(null, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+
+    @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
+    public ResponseEntity<ExceptionApiDTO> unfollowUser(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+        Boolean response = service.unfollowUser(userId, userIdToUnfollow);
+        return response ? new ResponseEntity<>(null, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
 }

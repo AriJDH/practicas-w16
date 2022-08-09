@@ -9,26 +9,35 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     @Autowired
     IUserRepository repository;
-
 
     @Override
     public Boolean followUser(Integer userId, Integer userToFollowId) {
 
         User user = repository.getUserById(userId);
         User userToFollow = repository.getUserById(userToFollowId);
-        Boolean isSeller = userToFollow.validatePosts().size()>0;
+        Boolean isSeller = userToFollow.validatePosts().size() > 0;
         Boolean follows = user.validateFolloweds().contains(userToFollow);
         Boolean isFollowed = userToFollow.validateFollowers().contains(user);
 
-        if (follows || isFollowed || !isSeller){
+        if (follows || isFollowed || !isSeller) {
             return false;
         }
 
         userToFollow.getFollowers().add(user);
         user.getFolloweds().add(userToFollow);
         return true;
+    }
+
+    public Boolean unfollowUser(Integer userId, Integer userToFollowId) {
+        User user = repository.getUserById(userId);
+        User userToUnfollow = repository.getUserById(userToFollowId);
+        
+        Boolean unfollowDone = user.validateFolloweds().remove(userToUnfollow);
+        Boolean followerRemove = userToUnfollow.validateFollowers().remove(user);
+
+        return unfollowDone && followerRemove;
     }
 }

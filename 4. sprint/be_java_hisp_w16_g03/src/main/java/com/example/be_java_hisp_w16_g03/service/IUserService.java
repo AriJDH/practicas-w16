@@ -8,4 +8,6 @@ public interface IUserService {
 
     public Boolean followUser(Integer userId, Integer userToFollowId);
 
+    public Boolean unfollowUser(Integer userId, Integer userToFollowId);
+
 }
