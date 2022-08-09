@@ -9,4 +9,7 @@ public interface IRepository {
     List<User> findAll();
     void save(User user);
     void update(Integer userId, User user);
+    Integer getIndexOfUser(Integer userId);
+
+    void updateUserInList(Integer index, User user);
 }
