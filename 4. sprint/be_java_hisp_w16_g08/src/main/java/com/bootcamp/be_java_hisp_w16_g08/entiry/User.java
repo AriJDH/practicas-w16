@@ -17,6 +17,5 @@ public class User {
     private String name;
     private List<User>  followerList;
     private List<User>  followedList;
-
-
+    private List<Post> postMade;
 }
