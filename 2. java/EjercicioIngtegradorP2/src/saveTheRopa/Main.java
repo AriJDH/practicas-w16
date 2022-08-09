@@ -18,7 +18,7 @@ public class Main {
 
         guardarRopa.mostrarPrendas();
 
-        listaPrendas = guardarRopa.devolverPrendas( 2);
+        listaPrendas = guardarRopa.devolverPrendas( numero);
 
         System.out.println(listaPrendas);
 

@@ -26,8 +26,12 @@ public class Main {
         carrera.socorrerMoto("DNG86C");
         carrera.socorrerMoto("ASD123");
         carrera.socorrerAuto("GMD123");
-
-
+        System.out.println("");
+        System.out.println("#################################################");
+        System.out.println("");
+        carrera.ganador();
+        System.out.println("");
+        System.out.println("#################################################");
 
 
     }

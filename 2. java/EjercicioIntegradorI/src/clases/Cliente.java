@@ -5,6 +5,9 @@ public class Cliente {
     private String nombre;
     private String apellido;
 
+    public Cliente() {
+    }
+
     public Cliente(String dni, String nombre, String apellido) {
         this.dni = dni;
         this.nombre = nombre;

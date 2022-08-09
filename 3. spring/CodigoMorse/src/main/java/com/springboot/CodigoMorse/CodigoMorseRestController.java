@@ -71,7 +71,12 @@ public class CodigoMorseRestController {
 
         for(String [] letras : letrasPorPalabra){
             for (String letra:letras) {
-                palabraEspanol.append(morseToEspanol.get(letra));
+                if(morseToEspanol.containsKey(letra)){
+                    palabraEspanol.append(morseToEspanol.get(letra));
+                }else{
+                    System.out.println("no esta la letra");
+
+                }
             }
             palabraEspanol.append(" ");
         }
