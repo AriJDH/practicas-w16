@@ -69,6 +69,19 @@ public class UserService implements IUserService{
         return followersCountDTO;
     }
 
+    public void unfollow(int userId, int userIdToUfollow){
+        if (userRepository.searchById(userId) == null)
+            throw new UserNotFoundException(userId);
+        else if (userRepository.searchById(userIdToUfollow) == null)
+            throw new UserNotFoundException(userIdToUfollow);
+        else{
+            User unfollow = userRepository.searchById(userIdToUfollow);
+            userRepository.searchById(userId).getFollowing().remove(unfollow);
+            User unfollow2 = userRepository.searchById(userId);
+            userRepository.searchById(userIdToUfollow).getFollowers().remove(unfollow2);
+        }
+    }
+
 
     //Guille
     public FollowersDtoResponse getAllFollowers(int id){

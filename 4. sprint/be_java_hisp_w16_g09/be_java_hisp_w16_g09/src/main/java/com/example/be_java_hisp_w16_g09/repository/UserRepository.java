@@ -35,10 +35,6 @@ public class UserRepository implements IUserRepository {
         User userC = new User(3,"Usuario3",new ArrayList<>(),new ArrayList<>());
         User userD = new User(4,"Usuario4",new ArrayList<>(),new ArrayList<>());
         User userE = new User(5,"Usuario5",new ArrayList<>(),new ArrayList<>());
-        List<User> followersUserA = new ArrayList<>(Arrays.asList(userB, userC));
-        userA.setFollowers(followersUserA);
-        List<User> followersUserD = new ArrayList<>(Arrays.asList(userB, userE));
-        userD.setFollowers(followersUserD);
         users.put(1,userA);
         users.put(2,userB);
         users.put(3,userC);
