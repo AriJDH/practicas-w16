@@ -1,4 +1,4 @@
 package universidad;
 
-public class Profesor extends PersonalUniversitario {
+public class Profesor extends MiembroUniversitario {
 }

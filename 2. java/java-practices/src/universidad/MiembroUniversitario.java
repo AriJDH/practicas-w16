@@ -2,8 +2,8 @@ package universidad;
 
 /*
  * Ejercicio > Modulo 5: Java > MaterialComplementarioClasesAbstractasEInterfaces
- * ESTADO: En curso...
+ * ESTADO: Finalizado.
  * @GonzaloNahuelDiPierro
  * */
-public abstract class PersonalUniversitario {
+public abstract class MiembroUniversitario {
 }

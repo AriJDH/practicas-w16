@@ -1,4 +1,4 @@
 package universidad;
 
-public abstract class Estudiante {
+public class Estudiante extends MiembroUniversitario {
 }
