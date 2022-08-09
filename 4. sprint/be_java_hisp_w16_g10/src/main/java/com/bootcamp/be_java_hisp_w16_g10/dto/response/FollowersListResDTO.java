@@ -10,8 +10,6 @@ import java.util.List;
 
 @Data
 @SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
 public class FollowersListResDTO extends UserResDTO {
     private List<UserResDTO> followers;
     public FollowersListResDTO(Integer user_id, String user_name, List<UserResDTO> followers) {

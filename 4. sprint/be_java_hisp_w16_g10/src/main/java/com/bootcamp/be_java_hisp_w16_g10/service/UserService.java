@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,27 +29,71 @@ public class UserService implements IService {
 
     @Override
     public void unfollow(Integer userId, Integer userIdToUnfollow) {
+        // TODO verificar que ambos usuarios existan
+
+        User user = this.userRepository.findById(userId);
+        if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
+
+        User toDelete = this.userRepository.findById(userIdToUnfollow);
+        if (toDelete == null)
+            throw new NotFoundException(String.format("El usuario que se busca eliminar, con id: %s no existe.", userIdToUnfollow));
+
+        // TODO verificar que el usuario a eliminar esté en la lista de follows.
 
     }
 
     @Override
     public FollowersCountResDTO countFollowers(Integer userId) {
-        return null;
+        User user = this.userRepository.findById(userId);
+        if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
+        return FollowersCountResDTO.builder()
+                .followers_count(user.getFollowers().size())
+                .user_id(user.getId())
+                .user_name(user.getUserName())
+                .build();
     }
 
     @Override
     public List<FollowersListResDTO> listFollowers(Integer userId, String order) {
-        return null;
+        User user = this.userRepository.findById(userId);
+        if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
+
+        List<UserResDTO> followers = user.getFollowers().stream()
+                .map(this::parseToUserResDTO)
+                .collect(Collectors.toList());
+
+        var resultado = user.getFollowers().stream()
+                .filter(y -> user.getPosts().size() > 0)
+                .map(follower -> new FollowersListResDTO(follower.getId(), follower.getUserName(), followers))
+                .collect(Collectors.toList());
+
+        if (order.equals("name_asc")) {
+            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
+        } else if (order.equals("name_desc")) {
+            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+        }
+
+        return resultado;
+
     }
 
     @Override
     public List<FollowedListResDTO> listFollowed(Integer userId, String order) {
         User user = this.userRepository.findById(userId);
-        if (user == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
-        return user.getFollowed().stream()
+        if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
+
+        var resultado = user.getFollowed().stream()
                 .filter(seller -> seller.getPosts().size() > 0)
                 .map(this::parseToFollowedListResDTO)
                 .collect(Collectors.toList());
+
+        if (order.equals("name_asc")) {
+            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
+        } else if (order.equals("name_desc")) {
+            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+        }
+
+        return resultado;
     }
 
     @Override
@@ -60,13 +105,13 @@ public class UserService implements IService {
     public List<PostResDTO> listFollowersPosts(Integer userId) {
         LocalDate localDate = LocalDate.now().minusDays(14);
         User user = this.userRepository.findById(userId);
-        if(user == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
+        if (user == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
 
         List<PostResDTO> postResDTOS = new ArrayList<>();
-        for (User u : user.getFollowed()){
-            if(user.getPosts().size() == 0) continue;
-            for(Post p : user.getPosts()){
-                if(p.getDate().compareTo(localDate) < 0) continue;
+        for (User u : user.getFollowed()) {
+            if (user.getPosts().size() == 0) continue;
+            for (Post p : user.getPosts()) {
+                if (p.getDate().compareTo(localDate) < 0) continue;
                 postResDTOS.add(this.parseToPostResDTO(u, p));
             }
         }
@@ -93,7 +138,7 @@ public class UserService implements IService {
                 .build();
     }
 
-    private PostResDTO parseToPostResDTO(User user, Post post){
+    private PostResDTO parseToPostResDTO(User user, Post post) {
         return PostResDTO.builder()
                 .user_id(user.getId())
                 .category(post.getCategory())
@@ -104,7 +149,7 @@ public class UserService implements IService {
                 .build();
     }
 
-    private ProductResDTO parseToProductResDTO(Product product){
+    private ProductResDTO parseToProductResDTO(Product product) {
         return ProductResDTO.builder()
                 .product_id(product.getId())
                 .brand(product.getBrand())
