@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d95465d-23c5-4dac-9e75-ef889edd50a1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../practicas-w16.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/IUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/IUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IUserService.java" afterDir="false" />
@@ -78,7 +69,7 @@
       <updated>1660057402734</updated>
       <workItem from="1660057404239" duration="307000" />
       <workItem from="1660058209324" duration="747000" />
-      <workItem from="1660079040943" duration="460000" />
+      <workItem from="1660079040943" duration="1728000" />
     </task>
     <servers />
   </component>

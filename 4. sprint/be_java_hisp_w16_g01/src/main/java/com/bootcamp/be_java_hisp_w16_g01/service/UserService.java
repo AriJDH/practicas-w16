@@ -24,8 +24,11 @@ public class UserService implements IUserService {
     public void addFollower(int userId, int userIdToFollow){
         if (userRepository.userExists(userId)) {
             if (userRepository.userExists(userIdToFollow)) {
-                userRepository.addFollower(userIdToFollow, userId);
-                userRepository.addFollowed(userId, userIdToFollow);
+                if (userRepository.userIsSeller(userIdToFollow)) {
+                    userRepository.addFollower(userId, userIdToFollow);
+                    userRepository.addFollowed(userId, userIdToFollow);
+                }
+                else throw new BadRequestException("Usuario con id: " + userIdToFollow + "no existe");
             }
             else throw new BadRequestException("Usuario con id: " + userIdToFollow + "no existe");
         }

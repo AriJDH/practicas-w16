@@ -16,26 +16,35 @@ public class UserRepository implements IUserRepository {
     protected List<User> users = new ArrayList<>();
 
     public UserRepository(){
-        users = new HashMap<>();
+        users = new ArrayList<>();
 
-        users.put(0,new User(0, "usuario1"));
-        users.put(1,new User(1, "usuario2"));
-        users.put(2,new User(2, "usuario3"));
-        users.put(3,new User(3, "usuario4"));
+        users.add(new User(0, "usuario1"));
+        users.add(new User(1, "usuario2"));
+        users.add(new User(2, "usuario3"));
+        users.add(new User(3, "usuario4"));
     }
 
-    public void addFollower(int idUser, int idFollower){
-        users.get(idUser).addFollower(users.get(idFollower));
+    public void addFollower(int idUser, int userIdToFollow){
+        User userToFollow = users.stream().filter(user -> user.getUserId() == userIdToFollow).findFirst().get();
+        User userFollows = users.stream().filter(u -> u.getUserId() == idUser).findFirst().get();
+
+        userToFollow.addFollower(userFollows);
     }
 
-    public void addFollowed(int idUser, int idFollowed){
-        users.get(idUser).addFollowed(users.get(idFollowed));
+    public void addFollowed(int idUser, int userIdToFollow){
+        User userFollowed = users.stream().filter(user -> user.getUserId() == userIdToFollow).findFirst().get();
+        User userFollows = users.stream().filter(u -> u.getUserId() == idUser).findFirst().get();
+
+        userFollows.addFollowed(userFollowed);
     }
 
     public boolean userExists(int idUser){
-        return users.containsKey(idUser);
+        return users.stream().anyMatch(x -> x.getUserId()==idUser);
     }
 
+    public boolean userIsSeller(int idUser){
+        return !users.stream().filter(u -> u.getUserId() == idUser).findFirst().get().getPosts().isEmpty();
+    }
 
     @Override
     public boolean unfollowUser(int userId, int userIdToUnfollow) {
