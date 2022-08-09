@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/be_java_hisp_w16_g01.iml" filepath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/be_java_hisp_w16_g01.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/practicas-w16.iml" filepath="$PROJECT_DIR$/.idea/practicas-w16.iml" />
+      <module fileurl="file://$PROJECT_DIR$/practicas-w16.iml" filepath="$PROJECT_DIR$/practicas-w16.iml" />
     </modules>
   </component>
 </project>
