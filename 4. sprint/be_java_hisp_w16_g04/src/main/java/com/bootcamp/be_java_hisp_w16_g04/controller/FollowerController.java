@@ -18,4 +18,11 @@ public class FollowerController {
   public ResponseEntity<FollowUserDTO> followUser(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
     return new ResponseEntity<>(ifollowerService.followUser(userId, userIdToFollow), HttpStatus.OK);
   }
+
+  @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
+  public ResponseEntity<FollowUserDTO> unFollowUser(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+    return new ResponseEntity<>(ifollowerService.unFollowUser(userId, userIdToUnfollow), HttpStatus.OK);
+  }
+
+
 }

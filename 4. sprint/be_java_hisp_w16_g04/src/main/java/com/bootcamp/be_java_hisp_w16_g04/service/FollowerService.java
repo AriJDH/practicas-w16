@@ -26,5 +26,11 @@ public class FollowerService implements IFollowerService {
     return new FollowUserDTO("Successful follow-up");
   }
 
+  @Override
+  public FollowUserDTO unFollowUser(Integer userId, Integer userIdToUnfollow) {
+    ifollowerRepository.unFollowUser(userIdToUnfollow, userId);
+    return new FollowUserDTO("Unfollow successful");
+  }
+
 
 }
