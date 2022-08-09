@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g10.service;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
@@ -103,7 +104,15 @@ public class UserService implements IService {
 
     @Override
     public void save(PostReqDTO model) {
-
+        User user = userRepository.findById(model.getUser_id());
+        if (user == null) throw new NotFoundException("This user with id: $s not found");
+        Product product = parseToProductFromProductDTO(model.getProduct());
+        List<Post> posts = user.getPosts();
+        posts.add(new Post(posts.size() + 1,product,model.getDate(),model.getPrice(),model.getCategory()));
+        user.setPosts(posts);
+        Integer index = userRepository.getIndexOfUser(model.getUser_id());
+        if (index == -1) throw new NotFoundException("This user with id: $s not found");
+        userRepository.updateUserInList(index,user);
     }
 
     @Override
@@ -162,6 +171,17 @@ public class UserService implements IService {
                 .notes(product.getNotes())
                 .type(product.getType())
                 .product_name(product.getName())
+                .build();
+    }
+
+    private Product parseToProductFromProductDTO(ProductReqDTO productReqDTO){
+        return Product.builder()
+                .id(productReqDTO.getProduct_id())
+                .name(productReqDTO.getProduct_name())
+                .type(productReqDTO.getType())
+                .brand(productReqDTO.getBrand())
+                .color(productReqDTO.getColor())
+                .notes(productReqDTO.getNotes())
                 .build();
     }
 }
