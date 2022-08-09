@@ -14,6 +14,11 @@ public class UserRepository implements IRepository{
 
     public UserRepository() {
         this.users = new ArrayList<>();
+        this.users.add(User.builder().id(1).userName("user1").build());
+        this.users.add(User.builder().id(2).userName("user2").build());
+        this.users.add(User.builder().id(3).userName("user3").build());
+        this.users.add(User.builder().id(4).userName("user4").build());
+        this.users.add(User.builder().id(5).userName("user5").build());
     }
 
     @Override

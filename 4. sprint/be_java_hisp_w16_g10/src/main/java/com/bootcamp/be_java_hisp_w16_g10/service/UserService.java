@@ -25,7 +25,10 @@ public class UserService implements IService {
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
         User user = this.userRepository.findById(userId);
+        if(user == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
         User userToFollow = this.userRepository.findById(userIdToFollow);
+        if(userToFollow == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userIdToFollow));
+
         this.userRepository.addUserToList(user.getFollowers(), userToFollow);
         this.userRepository.addUserToList(userToFollow.getFollowed(), user);
     }
