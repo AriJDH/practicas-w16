@@ -1,5 +1,10 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
+import com.example.be_java_hisp_w16_g09.dto.MessageDto;
+import com.example.be_java_hisp_w16_g09.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.service.IUserService;
 import com.example.be_java_hisp_w16_g09.service.UserService;
@@ -19,7 +24,9 @@ public class UserController {
 
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public void US001(){
+    public ResponseEntity<MessageDto> US001(@PathVariable int userId, @PathVariable int userIdToFollow) {
+        userService.followUser(userId, userIdToFollow);
+        return new ResponseEntity<>(new MessageDto("User " + userIdToFollow + " followed successfully"), HttpStatus.OK);
     }
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
     @GetMapping("/users/{userId}/followers/count")
