@@ -7,4 +7,6 @@ import java.util.List;
 public interface IRepository {
     User findById(Integer id);
     List<User> findAll();
+    void save(User user);
+    void update(Integer userId, User user);
 }

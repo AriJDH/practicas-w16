@@ -8,9 +8,12 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class FollowedListResDTO extends UserResDTO {
     private List<UserResDTO> followed;
+    @Builder
+    public FollowedListResDTO(Integer user_id, String user_name, List<UserResDTO> followed) {
+        super(user_id, user_name);
+        this.followed = followed;
+    }
 }
