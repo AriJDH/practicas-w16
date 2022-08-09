@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,9 +8,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PostsDTO {
     private Integer userId;
     private List<PostWithIDDTO> postDTOList;
-
-
 }

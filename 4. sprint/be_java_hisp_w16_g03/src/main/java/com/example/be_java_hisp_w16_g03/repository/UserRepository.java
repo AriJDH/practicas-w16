@@ -4,8 +4,10 @@ import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -63,6 +65,12 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getUserById(Integer id) {
         return listUser.stream().filter(user -> user.getUserId().equals(id)).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<User> getFollowedsByUserId(Integer userId) {
+        return listUser.stream().filter(u -> u.getUserId().equals(userId))
+                .findFirst().get().getFolloweds();
     }
 
 }

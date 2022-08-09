@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -11,11 +8,12 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PostWithIDDTO {
     private Integer userId;
     private Integer postId;
     private LocalDate date;
-    private ProductDTO productDTO;
+    private ProductDTO product;
     private Integer category;
     private Double price;
 }

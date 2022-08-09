@@ -16,5 +16,4 @@ public class Post {
     private Integer category;
     private Double price;
 
-
 }
