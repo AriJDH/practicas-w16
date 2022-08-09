@@ -1,8 +1,8 @@
 .idea
 .DS_Store/
-/out/
+*/out/*
 *.iml
-*/
+
 *.iws
 *.ipr
 !**/src/main/**/target/

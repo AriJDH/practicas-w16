@@ -2,8 +2,8 @@ package com.ejercicio.covid.service;
 
 import com.ejercicio.covid.dto.PersonaDTO;
 import com.ejercicio.covid.dto.SintomaDTO;
-import com.ejercicio.covid.entities.Persona;
-import com.ejercicio.covid.entities.Sintoma;
+import com.ejercicio.covid.entity.Persona;
+import com.ejercicio.covid.entity.Sintoma;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
