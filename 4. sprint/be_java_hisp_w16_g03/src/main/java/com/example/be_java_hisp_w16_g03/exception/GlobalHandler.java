@@ -13,4 +13,11 @@ public class GlobalHandler {
         ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO();
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.FORBIDDEN);
     }
+
+    //excpecion lanzada cuando el request no pasa el control de validacion
+    @ExceptionHandler(InvalidPostRequest.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(InvalidPostRequest e){
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
 }

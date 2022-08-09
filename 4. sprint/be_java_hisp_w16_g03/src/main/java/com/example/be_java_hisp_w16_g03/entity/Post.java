@@ -1,15 +1,13 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Post {
     private Integer userId;
     private Integer postId;
@@ -17,4 +15,6 @@ public class Post {
     private Product product;
     private Integer category;
     private Double price;
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.be_java_hisp_w16_g03.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,10 +11,22 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ProductDTO {
     private Integer productId;
     private String type;
     private String notes;
     private String color;
     private String brand;
+    private String productName;
+
+    public boolean validate() {
+        return this.productId != null && this.type != null
+                && this.notes != null && this.color != null
+                && this.brand != null && this.productName != null
+                && !this.type.isEmpty() && !this.notes.isEmpty()
+                && !this.color.isEmpty() && !this.brand.isEmpty()
+                && !this.productName.isEmpty();
+    }
+
 }

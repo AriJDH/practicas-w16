@@ -50,6 +50,7 @@ public class UserRepository implements IUserRepository {
         initUser.add(user4);
         initUser.add(user5);
         initUser.add(user6);
+        user1.setPosts(initPost);
 
         return initUser;
     }

@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
+import com.example.be_java_hisp_w16_g03.dto.PostDTO;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -36,6 +37,24 @@ public class User {
             this.posts = new ArrayList<>();
         }
         return this.posts;
+    }
+
+
+    public void addPostToUser(PostDTO request) {
+        this.validatePosts().add(Post.builder()
+                .userId(request.getUserId())
+                .date(request.getDate())
+                .price(request.getPrice())
+                .product(Product.builder().
+                        productId(request.getProduct().getProductId())
+                        .brand(request.getProduct().getBrand())
+                        .color(request.getProduct().getColor())
+                        .type(request.getProduct().getType())
+                        .notes(request.getProduct().getNotes())
+                        .productName(request.getProduct().getProductName())
+                        .build())
+                .category(request.getCategory())
+                .price(request.getPrice()).build());
     }
 
 
