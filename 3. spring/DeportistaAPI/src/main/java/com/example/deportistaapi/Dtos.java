@@ -1,2 +1,4 @@
-package com.example.deportistaapi;public class Dtos {
+package com.example.deportistaapi;
+
+public class Dtos {
 }
