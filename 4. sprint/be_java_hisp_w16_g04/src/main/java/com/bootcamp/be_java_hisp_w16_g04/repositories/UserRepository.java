@@ -24,4 +24,11 @@ public class  UserRepository implements IUserRepository {
 
   }
 
+  @Override
+  public User getUserById(Integer userId) {
+    return users.stream()
+            .filter(user -> user.getUserId().equals(userId))
+            .findFirst().get();
+  }
+
 }

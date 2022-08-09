@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class FollowerRepository implements IFollowerRepository{
@@ -20,4 +21,10 @@ public class FollowerRepository implements IFollowerRepository{
     followers.add(new Follower(104, 106));
   }
 
+  @Override
+  public List<Integer> getFollewersListById(Integer userId) {
+    return followers.stream().filter(follower -> follower.getIdUser().equals(userId))
+            .map(Follower::getIdFollower)
+            .collect(Collectors.toList());
+  }
 }
