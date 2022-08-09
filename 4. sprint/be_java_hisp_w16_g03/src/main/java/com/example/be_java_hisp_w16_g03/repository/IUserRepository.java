@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IUserRepository {
     List<User> initData();
+    List<User> getAllUser();
+    User getUserById(Integer id);
 }

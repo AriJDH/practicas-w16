@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalHandler {
-                        //poner la clase correspondiente
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionApiDTO> catchException(NotFoundException e){
         ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO();
