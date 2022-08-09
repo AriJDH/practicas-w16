@@ -8,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
-import com.bootcamp.be_java_hisp_w16_g04.model.User;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.IFollowerRepository;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,10 +29,10 @@ public class UserService implements IUserService {
     @Override
     public ResponseFollowersListDTO getListFolloersById(Integer userId) {
 
-        User user = userRepository.getUserById(userId);
+        User user = userRepository.getByIdUser(userId);
 
         List<User> FollowerList = followerRepository.getFollewersListById(userId).stream()
-                .map(id -> userRepository.getUserById(id))
+                .map(id -> userRepository.getByIdUser(id))
                 .collect(Collectors.toList());
 
         //Fill data

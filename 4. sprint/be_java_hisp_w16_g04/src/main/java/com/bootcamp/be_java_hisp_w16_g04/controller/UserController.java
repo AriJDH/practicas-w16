@@ -16,11 +16,11 @@ import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowersCountDTO;
 public class UserController {
 
     @Autowired
-    IUserService userService;
+    IUserService iUserService;
 
     @GetMapping("{userId}/followers/list")
     public ResponseEntity<ResponseFollowersListDTO> Followerslist(@PathVariable int userId){
-        return new ResponseEntity<>(userService.getListFolloersById(userId), HttpStatus.OK);
+        return new ResponseEntity<>(iUserService.getListFolloersById(userId), HttpStatus.OK);
     }
 
 
