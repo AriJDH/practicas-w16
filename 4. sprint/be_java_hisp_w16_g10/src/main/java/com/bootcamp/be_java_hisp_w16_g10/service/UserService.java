@@ -40,9 +40,16 @@ public class UserService implements IService {
 
     @Override
     public List<FollowersListResDTO> listFollowers(Integer userId, String order) {
-        return null;
-    }
+        User user = this.userRepository.findById(userId);
+        if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
 
+        List<UserResDTO> followers = user.getFollowers().stream().map(u -> new UserResDTO(u.getId(), u.getUserName())).collect(Collectors.toList());
+
+        return user.getFollowers().stream()
+                .filter(y -> user.getPosts().size() > 0)
+                .map(follower -> new FollowersListResDTO(follower.getId(), follower.getUserName(), followers))
+                .collect(Collectors.toList());
+    }
     @Override
     public List<FollowedListResDTO> listFollowed(Integer userId, String order) {
         User user = this.userRepository.findById(userId);
