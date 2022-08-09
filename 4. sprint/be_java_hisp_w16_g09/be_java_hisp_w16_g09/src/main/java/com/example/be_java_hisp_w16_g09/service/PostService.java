@@ -75,7 +75,7 @@ public class PostService implements IPostService{
         List<User> sellers = user.getFollowing();
         List<Integer> sellersIds = sellers.stream().map(User::getUserId).collect(Collectors.toList());
         List<Post> postsOfSellers = postRepository.getPostsByUserIds(sellersIds);
-        postsOfSellers = new Filter<Post>()
+        postsOfSellers = Filter
                 .apply(postsOfSellers, (post -> post.wasPublicatedAfter(LocalDate.now().minusWeeks(2))));
         postsOfSellers.sort(Comparator.comparing(Post::getDate));
         List<PostDto> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostDto.class);
