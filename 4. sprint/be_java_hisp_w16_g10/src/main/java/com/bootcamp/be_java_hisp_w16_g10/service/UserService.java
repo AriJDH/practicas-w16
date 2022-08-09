@@ -20,12 +20,21 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IService {
+
     @Autowired
     private IRepository userRepository;
 
     @Override
+    public List<UserResDTO> findAll() {
+        return this.userRepository.findAll().stream()
+                .map(this::parseToUserResDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void follow(Integer userId, Integer userIdToFollow) {
         User user = this.userRepository.findById(userId);
+        System.out.println(user);
         if(user == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
         User userToFollow = this.userRepository.findById(userIdToFollow);
         if(userToFollow == null) throw new NotFoundException(String.format("The user with id: %s don't exists.", userIdToFollow));
@@ -70,16 +79,19 @@ public class UserService implements IService {
 
         var resultado = user.getFollowers().stream()
                 .filter(y -> user.getPosts().size() > 0)
-                .map(follower -> new FollowersListResDTO(follower.getId(), follower.getUserName(), followers))
-                .collect(Collectors.toList());
+                .map(follower -> new FollowersListResDTO(follower.getId(), follower.getUserName(), followers));
 
-        if (order.equals("name_asc")) {
-            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
-        } else if (order.equals("name_desc")) {
-            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+
+        if(order != null) {
+            if (order.equals("name_asc")) {
+                resultado = resultado.sorted(Comparator.comparing(UserResDTO::getUser_name));
+            }
+            if (order.equals("name_desc")) {
+                resultado = resultado.sorted(Comparator.comparing(UserResDTO::getUser_name).reversed());
+            }
         }
 
-        return resultado;
+        return resultado.collect(Collectors.toList());
 
     }
     @Override
@@ -89,17 +101,18 @@ public class UserService implements IService {
 
         var resultado = user.getFollowed().stream()
                 .filter(seller -> seller.getPosts().size() > 0)
-                .map(this::parseToFollowedListResDTO)
-                .collect(Collectors.toList());
+                .map(this::parseToFollowedListResDTO);
 
-        switch (order) {
-            case "name_asc":
-                return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
-            case "name_desc":
-                return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+        if(order != null) {
+            if (order.equals("name_asc")) {
+                resultado = resultado.sorted(Comparator.comparing(UserResDTO::getUser_name));
+            }
+            if (order.equals("name_desc")) {
+                resultado = resultado.sorted(Comparator.comparing(UserResDTO::getUser_name).reversed());
+            }
         }
 
-        return resultado;
+        return resultado.collect(Collectors.toList());
     }
 
     @Override
@@ -111,7 +124,7 @@ public class UserService implements IService {
         posts.add(new Post(posts.size() + 1,product,model.getDate(),model.getPrice(),model.getCategory()));
         user.setPosts(posts);
         Integer index = userRepository.getIndexOfUser(model.getUser_id());
-        if (index == -1) throw new NotFoundException("This user with id: $s not found");
+        if (index == -1) throw new NotFoundException(String.format("This user with id: %s not found", model.getUser_id()));
         userRepository.updateUserInList(index,user);
     }
 

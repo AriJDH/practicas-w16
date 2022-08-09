@@ -1,10 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g10.controller;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowedListResDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersListResDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g10.service.IService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,10 @@ public class UserController {
     @Autowired
     private IService userService;
 
+    @GetMapping("/users")
+    public ResponseEntity<List<UserResDTO>> findAll() {
+        return new ResponseEntity(this.userService.findAll(), HttpStatus.OK);
+    }
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
     public ResponseEntity US001(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
@@ -56,7 +57,7 @@ public class UserController {
 
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
     // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
-    @PostMapping("/products/followed/{userId}/list")
+    @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<List<PostResDTO>> US006(@PathVariable Integer userId){
         return new ResponseEntity<>(this.userService.listFollowersPosts(userId), HttpStatus.OK);
     }

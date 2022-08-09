@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g10.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class PostReqDTO {
     private Integer user_id;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private ProductReqDTO product;
     private Integer category;
