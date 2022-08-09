@@ -4,7 +4,7 @@ import com.example.be_java_hisp_w16_g09.model.User;
 
 import java.util.HashMap;
 
-public class UserRepository {
+public class UserRepository implements IUserRepository{
     private HashMap<Integer, User> users = new HashMap<>();
 
     public User createElement(User newUser){

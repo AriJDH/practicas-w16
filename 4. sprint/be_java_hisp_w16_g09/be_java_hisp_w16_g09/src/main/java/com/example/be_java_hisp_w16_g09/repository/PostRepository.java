@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PostRepository {
+public class PostRepository implements IPostRepository{
     private HashMap<Integer, List<Post>> posts = new HashMap<>();
 
     public void createElement(Post newPost){
