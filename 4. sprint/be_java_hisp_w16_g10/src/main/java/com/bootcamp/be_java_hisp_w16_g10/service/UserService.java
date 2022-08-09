@@ -24,6 +24,15 @@ public class UserService implements IService {
 
     @Override
     public void unfollow(Integer userId, Integer userIdToUnfollow) {
+        // TODO verificar que ambos usuarios existan
+
+        User user = this.userRepository.findById(userId);
+        if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
+
+        User toDelete = this.userRepository.findById(userIdToUnfollow);
+        if (toDelete == null) throw new NotFoundException(String.format("El usuario que se busca eliminar, con id: %s no existe.",userIdToUnfollow));
+
+        // TODO verificar que el usuario a eliminar esté en la lista de follows.
 
     }
 

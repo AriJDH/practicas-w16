@@ -56,8 +56,9 @@ public class UserController {
 
     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public void US007(){
-
+    public ResponseEntity<String> US007(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+        this.userService.unfollow(userId, userIdToUnfollow);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //US 0008: Ordenamiento alfabético ascendente y descendente
