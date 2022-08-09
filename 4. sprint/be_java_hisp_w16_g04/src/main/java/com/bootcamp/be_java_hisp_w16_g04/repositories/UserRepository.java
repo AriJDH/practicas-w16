@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class  UserRepository implements IUserRepository {
+public class UserRepository implements IUserRepository {
 
   List<User> users = new ArrayList<User>();
 
@@ -24,11 +24,13 @@ public class  UserRepository implements IUserRepository {
 
   }
 
-  @Override
-  public User getUserById(Integer userId) {
-    return users.stream()
-            .filter(user -> user.getUserId().equals(userId))
-            .findFirst().get();
-  }
 
+
+  @Override
+  public User getByIdUser(Integer userId) {
+    return users.stream()
+            .filter(x -> x.getUserId().equals(userId))
+            .findFirst()
+            .orElse(null);
+  }
 }

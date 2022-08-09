@@ -27,4 +27,25 @@ public class FollowerRepository implements IFollowerRepository{
             .map(Follower::getIdFollower)
             .collect(Collectors.toList());
   }
+  @Override
+  public void followUser(Integer userIdToFollow, Integer  userId) {
+    followers.add(new Follower(userIdToFollow, userId));
+  }
+
+  @Override
+  public Boolean verifyFollower(Integer userIdToFollow, Integer userId) {
+    Long countFollow = followers.stream()
+        .filter(follower -> follower.getIdUser().equals(userIdToFollow) && follower.getIdFollower().equals(userId))
+        .count();
+
+    if (countFollow > 0) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public List<Follower> getFollowersByUserId(Integer userId) {
+    return followers.stream().filter(x -> x.getIdUser().equals(userId)).collect(Collectors.toList());
+  }
 }
