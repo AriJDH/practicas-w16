@@ -1,12 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g01.service;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserUnfollowDTO;
-import com.bootcamp.be_java_hisp_w16_g01.entities.User;
-import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
-import org.springframework.stereotype.Repository;
+import com.bootcamp.be_java_hisp_w16_g01.dto.UserUnfollowDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,5 +31,6 @@ public class UserService implements IUserService {
         }
         else throw new BadRequestException("Usuario con id: " + userId + "no existe");
     }
+
 
 }

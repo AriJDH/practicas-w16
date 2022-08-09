@@ -1,14 +1,14 @@
 package com.bootcamp.be_java_hisp_w16_g01.repository;
 
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
+import org.springframework.stereotype.Repository;
+
+import java.util.HashMap;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.stereotype.Repository;
-
-import java.util.HashMap;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -23,6 +23,19 @@ public class UserRepository implements IUserRepository {
         users.put(2,new User(2, "usuario3"));
         users.put(3,new User(3, "usuario4"));
     }
+
+    public void addFollower(int idUser, int idFollower){
+        users.get(idUser).addFollower(users.get(idFollower));
+    }
+
+    public void addFollowed(int idUser, int idFollowed){
+        users.get(idUser).addFollowed(users.get(idFollowed));
+    }
+
+    public boolean userExists(int idUser){
+        return users.containsKey(idUser);
+    }
+
 
     @Override
     public boolean unfollowUser(int userId, int userIdToUnfollow) {
@@ -46,18 +59,4 @@ public class UserRepository implements IUserRepository {
 
         return true;
     }
-
-
-    public void addFollower(int idUser, int idFollower){
-        users.get(idUser).addFollower(users.get(idFollower));
-    }
-
-    public void addFollowed(int idUser, int idFollowed){
-        users.get(idUser).addFollowed(users.get(idFollowed));
-    }
-
-    public boolean userExists(int idUser){
-        return users.containsKey(idUser);
-    }
-
 }
