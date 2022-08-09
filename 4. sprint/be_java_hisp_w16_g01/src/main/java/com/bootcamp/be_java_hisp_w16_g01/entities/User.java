@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,4 +16,20 @@ public class User {
     private List<User> followers;
     private List<User> followed;
     private List<Post> posts;
+
+    public User(int userId, String userName){
+        this.followed = new ArrayList<>();
+        this.followers = new ArrayList<>();
+        this.posts = new ArrayList<>();
+    }
+
+    public void addFollower(User user){
+        this.followers.add(user);
+        //user.addFollowed(this);
+    }
+    public void addFollowed(User user){
+        this.followed.add(user);
+        //user.addFollower(this);
+    }
+
 }
