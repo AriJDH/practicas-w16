@@ -20,4 +20,9 @@ public class Deporte {
     private String nombreDeporte;
     private String nivelDeporte;
 
+    @Override
+    public String toString(){
+        return nombreDeporte+" "+nivelDeporte;
+    }
 }
+

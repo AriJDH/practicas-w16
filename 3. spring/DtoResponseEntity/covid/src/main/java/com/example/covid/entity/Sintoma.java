@@ -1,4 +1,4 @@
-package com.example.ejercicioodtyresponseentity.Ejercicio2.DTO;
+package com.example.covid.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PersonaDeporteDTO {
-    private int id;
+
+public class Sintoma {
+    private int codigo;
     private String nombre;
-    private String apellido;
-    private String deporte;
+    private  String nivelGravedad;
+
 }

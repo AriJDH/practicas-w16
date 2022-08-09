@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CharacterService {
 
-
     private CharacterRepository characterRepository;
 
     public List<CharacterDTO> searchByName(String name) {

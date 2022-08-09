@@ -16,8 +16,5 @@ public class Persona {
     private String nombrePersona;
     private String apellidoPersona;
     private Integer edadPersona;
-    ArrayList<Persona> personas = new ArrayList<Persona>();
 
-    public Persona(int idPersona, String nombre, String apellido, Integer edad) {
-    }
 }

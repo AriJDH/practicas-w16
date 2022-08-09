@@ -1,17 +1,21 @@
-package com.example.ejercicioodtyresponseentity.Ejercicio2.DTO;
+package com.example.covid.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class PersonaDeporteDTO {
+
+public class Persona {
     private int id;
     private String nombre;
-    private String apellido;
-    private String deporte;
+    private  String apellido;
+    private int edad;
+    private List<Sintoma> listaSintomas;
 }

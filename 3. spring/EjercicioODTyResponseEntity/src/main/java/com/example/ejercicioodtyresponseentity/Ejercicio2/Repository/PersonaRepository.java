@@ -1,19 +1,16 @@
 package com.example.ejercicioodtyresponseentity.Ejercicio2.Repository;
 
 import com.example.ejercicioodtyresponseentity.Ejercicio2.Entity.Persona;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-
+@Repository
 public class PersonaRepository {
-    int idpersona;
-    ArrayList<Persona> personas = new ArrayList<>();
+    ArrayList<Persona> personasDeporte = new ArrayList<>();
 
-    int idPersona;
+    public void agregarPersona(Persona persona) {
+        personasDeporte.add(persona);
 
-    public ArrayList<Persona> agregarPersona(String nombrePersona, String apellidoPersona, Integer edadPersona) {
-        idPersona += 1;
-        Persona persona = new Persona(idPersona, nombrePersona, apellidoPersona, edadPersona);
-        personas.add(persona);
-        return personas;
     }
+    public ArrayList<Persona> showPersonsRepo() {return personasDeporte;}
 }

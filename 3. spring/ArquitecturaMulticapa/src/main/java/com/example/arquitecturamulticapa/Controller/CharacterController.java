@@ -25,7 +25,6 @@ public class CharacterController {
     public ResponseEntity<List<CharacterDTO>> searchByName(@PathVariable String name) {
         return new ResponseEntity<>(this.characterService.searchByName(name), HttpStatus.OK);
     }
-
     @PostMapping("/character") //ahora vemos como agregar
     public ResponseEntity addCharacters(@RequestBody List<Character> characters) {
         this.characterService.addCharacters(characters);

@@ -1,18 +1,19 @@
 package com.example.ejercicioodtyresponseentity.Ejercicio2.Repository;
 
 import com.example.ejercicioodtyresponseentity.Ejercicio2.Entity.Deporte;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-
+@Repository
 public class DeporteRepository {
-    int idpersona;
     ArrayList<Deporte> deportes = new ArrayList<>();
-    int idDeporte;
 
-    public ArrayList<Deporte> agregarDeporte(String nombreDeporte, String nivel) {
-        idDeporte += 1;
-        Deporte deporte = new Deporte(idDeporte,nombreDeporte,nivel);
+    public void agregarDeporte(Deporte deporte) {
         deportes.add(deporte);
-        return deportes;
     }
+    public ArrayList<Deporte> showDeportes() {return deportes;}
+
+
+
+
 }
