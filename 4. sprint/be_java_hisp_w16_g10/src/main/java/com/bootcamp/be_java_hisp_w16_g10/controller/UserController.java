@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g10.controller;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowedListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.IService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class UserController {
 
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
     @GetMapping("/users/{userId}/followers/count")
-    public void US002(){
-
+    public ResponseEntity<FollowersCountResDTO> US002(@PathVariable Integer userId){
+      return new ResponseEntity<>(this.userService.countFollowers(userId),HttpStatus.OK);
     }
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)

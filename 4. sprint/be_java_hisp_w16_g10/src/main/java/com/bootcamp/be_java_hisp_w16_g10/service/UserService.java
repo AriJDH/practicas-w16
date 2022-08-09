@@ -29,7 +29,13 @@ public class UserService implements IService {
 
     @Override
     public FollowersCountResDTO countFollowers(Integer userId) {
-        return null;
+      User user =  this.userRepository.findById(userId);   
+      if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
+        return FollowersCountResDTO.builder()
+               .followers_count(user.getFollowers().size())
+               .user_id(user.getId())
+               .user_name(user.getUserName())
+               .build();   
     }
 
     @Override
