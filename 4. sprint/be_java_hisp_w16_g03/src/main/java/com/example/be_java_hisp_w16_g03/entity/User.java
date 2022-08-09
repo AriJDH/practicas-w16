@@ -1,5 +1,7 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -16,6 +18,10 @@ public class User {
     private List<User> followeds;
     private List<Post> posts;
 
+    public User(Integer userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
+    }
 
     public List<User> validateFollowers() {
         if (this.followers == null) {

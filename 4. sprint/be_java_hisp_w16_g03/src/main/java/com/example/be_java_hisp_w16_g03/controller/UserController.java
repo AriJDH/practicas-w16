@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w16_g03.controller;
 
+import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
 import com.example.be_java_hisp_w16_g03.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}/followers/count")
-    public ResponseEntity<FollowersDTO> getCountFollowers(@PathVariable Integer userId){
+    public ResponseEntity<FollowerCountDTO> getCountFollowers(@PathVariable Integer userId){
         return new ResponseEntity(service.getCountFollowers(userId),HttpStatus.OK);
     }
 }

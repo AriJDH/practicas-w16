@@ -18,4 +18,9 @@ public class GlobalHandler {
         ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found",e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(UserExisException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(UserExisException e){
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found",e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
+    }
 }

@@ -6,15 +6,23 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository {
     private List<User> listUser;
 
     public UserRepository() {
-        this.listUser = initData();
+        this.listUser = new ArrayList<>();
+        this.listUser.addAll(initData());
     }
 
+
+    @Override
+    public List<User> postData(List<User> users) {
+        listUser.addAll(users);
+         return this.listUser;
+    }
 
     @Override
     public List<User> initData() {
