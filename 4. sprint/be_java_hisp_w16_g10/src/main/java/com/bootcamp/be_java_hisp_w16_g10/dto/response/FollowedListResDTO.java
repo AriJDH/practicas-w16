@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@Builder
 public class FollowedListResDTO extends UserResDTO {
     private List<UserResDTO> followed;
     @Builder
