@@ -15,7 +15,7 @@ public class FollowerRepository implements IFollowerRepository{
   @PostConstruct
   private void loadData(){
     followers.add(new Follower(100, 101));
-    followers.add(new Follower(100, 102));
+    followers.add(new Follower(100, 105));
     followers.add(new Follower(100, 103));
     followers.add(new Follower(104, 105));
     followers.add(new Follower(104, 106));
@@ -47,5 +47,15 @@ public class FollowerRepository implements IFollowerRepository{
   @Override
   public List<Follower> getFollowersByUserId(Integer userId) {
     return followers.stream().filter(x -> x.getIdUser().equals(userId)).collect(Collectors.toList());
+  }
+
+  @Override
+  public List<Integer> returnIds(Integer userId){
+    List<Integer> ids = new ArrayList<>();
+    followers.stream()
+            .filter(user -> user.getIdFollower() == userId)
+            .collect(Collectors.toList())
+            .forEach(follower -> ids.add(follower.getIdUser()));
+    return ids;
   }
 }
