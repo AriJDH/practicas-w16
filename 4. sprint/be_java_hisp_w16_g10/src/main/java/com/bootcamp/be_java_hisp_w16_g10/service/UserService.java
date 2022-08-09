@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +33,14 @@ public class UserService implements IService {
         User user = this.userRepository.findById(userId);
         if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
 
-        User toDelete = this.userRepository.findById(userIdToUnfollow);
-        if (toDelete == null)
-            throw new NotFoundException(String.format("El usuario que se busca eliminar, con id: %s no existe.", userIdToUnfollow));
+        User UserToDelete = this.userRepository.findById(userIdToUnfollow);
+        if (UserToDelete == null) throw new NotFoundException(String.format("El usuario que se busca eliminar, con id: %s no existe.",userIdToUnfollow));
 
-        // TODO verificar que el usuario a eliminar esté en la lista de follows.
-
+        // TODO verificar que el usuario a eliminar es seguido por el usuario.
+        List<User> followers = UserToDelete.getFollowers();
+        boolean isFollowed = followers.stream().anyMatch(u -> u.getId().equals(userId));
+        //if (!isFollowed) throw new BadRequestException("The user is not being followed.");
+        followers.remove(user);
     }
 
     @Override
@@ -76,7 +77,6 @@ public class UserService implements IService {
         return resultado;
 
     }
-
     @Override
     public List<FollowedListResDTO> listFollowed(Integer userId, String order) {
         User user = this.userRepository.findById(userId);
@@ -87,10 +87,11 @@ public class UserService implements IService {
                 .map(this::parseToFollowedListResDTO)
                 .collect(Collectors.toList());
 
-        if (order.equals("name_asc")) {
-            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
-        } else if (order.equals("name_desc")) {
-            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+        switch (order) {
+            case "name_asc":
+                return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
+            case "name_desc":
+                return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
         }
 
         return resultado;

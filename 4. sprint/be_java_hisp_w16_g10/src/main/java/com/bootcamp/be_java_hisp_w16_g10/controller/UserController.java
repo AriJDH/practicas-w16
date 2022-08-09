@@ -1,10 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g10.controller;
 
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowedListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.IService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +47,9 @@ public class UserController {
 
     //US 0005: Dar de alta una nueva publicación
     @PostMapping("/products/post")
-    public void US005(){
-
+    public ResponseEntity<?> US005(@RequestBody PostReqDTO postReqDTO){
+        userService.save(postReqDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
@@ -58,9 +61,8 @@ public class UserController {
 
     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<String> US007(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
-        this.userService.unfollow(userId, userIdToUnfollow);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public void US007(){
+
     }
 
 
