@@ -29,7 +29,12 @@ public class UserController {
 
     @Autowired
     protected IUserService userService;
-    
+
+    @PostMapping("/users/{userId}/follow/{userIdToFollow}")
+    public ResponseEntity addFollower(@PathVariable int userId, @PathVariable int userIdToFollow){
+        userService.addFollower(userId, userIdToFollow);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<UserUnfollowDTO> unfollowUser(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
