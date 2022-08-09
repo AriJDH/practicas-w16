@@ -40,6 +40,7 @@ public class UserService implements IService {
         List<UserResDTO> followers = user.getFollowers().stream().map(u -> new UserResDTO(u.getId(), u.getUserName())).collect(Collectors.toList());
 
         return user.getFollowers().stream()
+                .filter(y -> user.getPosts().size() > 0)
                 .map(follower -> new FollowersListResDTO(follower.getId(), follower.getUserName(), followers))
                 .collect(Collectors.toList());
     }
