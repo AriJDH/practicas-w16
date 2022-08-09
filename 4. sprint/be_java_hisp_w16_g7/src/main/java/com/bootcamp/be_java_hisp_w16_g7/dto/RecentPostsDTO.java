@@ -13,6 +13,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecentPostsDTO {
-    private int id;
-    private Map<Integer,List<Post>> postList;
+    private int userID;
+    private List<ResponsePostDTO> responsePostDTOS;
+
 }

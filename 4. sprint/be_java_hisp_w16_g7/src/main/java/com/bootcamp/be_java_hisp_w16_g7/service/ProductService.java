@@ -2,9 +2,11 @@ package com.bootcamp.be_java_hisp_w16_g7.service;
 
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.FollowsNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.PostNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -43,21 +42,26 @@ public class ProductService implements IProductService{
 
     @Override
     public RecentPostsDTO recentPost(int idUser) {
-        Map<Integer, List<Post>> postMap = new HashMap<>();
+        List<ResponsePostDTO> responsePostDTOS = new ArrayList<>();
         //validacion de la existencia del usuario
         if(userRepository.existsUser(idUser)) {
             User user = userRepository.findUserById(idUser);
             //validacion si sigue a alguien
             if (!user.getFollows().isEmpty()) {
-                for (User users: user.getFollowers()) {
+                for (User users: user.getFollows()) {
                     if (!users.getPosts().isEmpty()) {
                         List<Post> recentPost = users.getPosts().stream()
                                 .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
                                 .collect(Collectors.toList());
-                        postMap.put(users.getId(),orderByDateDes(recentPost));
+                        System.out.println(LocalDate.now());
+                        for (Post post : orderByDateDes(recentPost)) {
+                            responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
+                        }
+                    }else{
+                        throw new PostNotFoundException();
                     }
                 }
-                return new RecentPostsDTO(idUser,postMap);
+                return new RecentPostsDTO(idUser,responsePostDTOS);
             }else{
                 throw new FollowsNotFoundException();
             }
