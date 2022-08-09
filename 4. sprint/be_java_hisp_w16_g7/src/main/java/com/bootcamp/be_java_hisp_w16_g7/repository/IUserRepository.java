@@ -1,5 +1,4 @@
 package com.bootcamp.be_java_hisp_w16_g7.repository;
-
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 
 public interface IUserRepository {
@@ -14,6 +13,5 @@ public interface IUserRepository {
     void removeFromUserFollows(User userToRemove, User target);
 
     boolean existsUser(int idUser);
-
 }
 
