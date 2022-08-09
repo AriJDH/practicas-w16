@@ -1,0 +1,12 @@
+[submodule "2. java/ClasesAbstr_Interf"]
+	path = 2. java/ClasesAbstr_Interf
+	url = git@github.com:aladinoponce/clases_abstract.git
+[submodule "2. java/dakar"]
+	path = 2. java/dakar
+	url = git@github.com:aladinoponce/dakar.git
+[submodule "2. java/2."]
+	path = 2. java/2.
+	url = git@github.com:aladinoponce/dakar.git
+[submodule "2. java/Dakar"]
+	path = 2. java/Dakar
+	url = git@github.com:aladinoponce/dakar.git
