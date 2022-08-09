@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7.controller;
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g7.service.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,15 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{userId}/followed/list")
+    public ResponseEntity<ResponseUserFollowedDTO> getUserFollowedList(@PathVariable int userId,
+                                                                       @RequestParam(required = false) String order) {
+        return new ResponseEntity<>(userService.getUserFollowedList(userId, order), HttpStatus.OK);
+    }
+
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<FollowersCountDto> getFollowersCount(@PathVariable int userId){
         return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
 
     }
-
 }
