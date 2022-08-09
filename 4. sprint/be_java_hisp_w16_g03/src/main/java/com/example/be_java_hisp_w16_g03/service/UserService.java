@@ -19,14 +19,11 @@ public class UserService implements IUserService{
 
         User user = repository.getUserById(userId);
         User userToFollow = repository.getUserById(userToFollowId);
-        Boolean isSeller = userToFollow.getPosts().size()>0;
-        Boolean follows = user.getFolloweds().contains(userToFollow);
-        Boolean isFollowed = userToFollow.getFollowers().contains(user);
+        Boolean isSeller = userToFollow.validatePosts().size()>0;
+        Boolean follows = user.validateFolloweds().contains(userToFollow);
+        Boolean isFollowed = userToFollow.validateFollowers().contains(user);
 
         if (follows || isFollowed || !isSeller){
-            System.out.println(user.getFolloweds());
-            System.out.println(userToFollow.getFollowers());
-            System.out.println(user);
             return false;
         }
 

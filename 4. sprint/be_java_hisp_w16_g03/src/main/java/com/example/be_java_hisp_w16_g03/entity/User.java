@@ -8,7 +8,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class User {
     private Integer userId;
@@ -16,6 +15,28 @@ public class User {
     private List<User> followers;
     private List<User> followeds;
     private List<Post> posts;
+
+
+    public List<User> validateFollowers() {
+        if (this.followers == null) {
+            this.followers = new ArrayList<>();
+        }
+        return this.followers;
+    }
+
+    public List<User> validateFolloweds() {
+        if (this.followeds == null) {
+            this.followeds = new ArrayList<>();
+        }
+        return this.followeds;
+    }
+
+    public List<Post> validatePosts() {
+        if (this.posts == null) {
+            this.posts = new ArrayList<>();
+        }
+        return this.posts;
+    }
 
     @Override
     public String toString() {
@@ -25,4 +46,6 @@ public class User {
                 ", posts=" + posts +
                 '}';
     }
+
+
 }
