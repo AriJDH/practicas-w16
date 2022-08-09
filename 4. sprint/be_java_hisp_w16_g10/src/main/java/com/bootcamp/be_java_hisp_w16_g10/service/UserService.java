@@ -65,10 +65,20 @@ public class UserService implements IService {
     public List<FollowedListResDTO> listFollowed(Integer userId, String order) {
         User user = this.userRepository.findById(userId);
         if (user == null) throw new NotFoundException(String.format("El usuario con el id: %s no existe.", userId));
-        return user.getFollowed().stream()
+
+        var resultado = user.getFollowed().stream()
                 .filter(seller -> seller.getPosts().size() > 0)
                 .map(this::parseToFollowedListResDTO)
                 .collect(Collectors.toList());
+
+        if(order.equals("name_asc")){
+            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name)).collect(Collectors.toList());
+        }
+        else if (order.equals("name_desc")) {
+            return resultado.stream().sorted(Comparator.comparing(UserResDTO::getUser_name).reversed()).collect(Collectors.toList());
+        }
+
+        return resultado;
     }
 
     @Override
