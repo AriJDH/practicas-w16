@@ -1,5 +1,4 @@
 package com.bootcamp.be_java_hisp_w16_g7.repository;
-
 import com.bootcamp.be_java_hisp_w16_g7.entity.Category;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
@@ -44,8 +43,6 @@ public class UserRepository implements IUserRepository{
             }
         }
         return false;
-
-
     }
 
     @Override

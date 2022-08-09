@@ -27,4 +27,10 @@ public class GlobalHandler {
         return new ResponseEntity<>(apiResponseDto, HttpStatus.NOT_FOUND);
 
     }
+
+    @ExceptionHandler(UserIsNotSellerException.class)
+    public ResponseEntity<ApiResponseDto> catchException(UserIsNotSellerException e){
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Bad Request", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
 }
