@@ -28,7 +28,7 @@ public class UserService implements IUserService {
                     userRepository.addFollower(userId, userIdToFollow);
                     userRepository.addFollowed(userId, userIdToFollow);
                 }
-                else throw new BadRequestException("Usuario con id: " + userIdToFollow + "no existe");
+                else throw new BadRequestException("Usuario con id: " + userIdToFollow + "no es vendedor");
             }
             else throw new BadRequestException("Usuario con id: " + userIdToFollow + "no existe");
         }
