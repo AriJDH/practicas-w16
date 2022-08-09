@@ -16,11 +16,9 @@ public class CreatesService implements ICreateService {
     IUserRepository repository;
     @Override
     public List<UserDTO> postData(List<UserDTO> userDTOList) {
-        for(UserDTO p:userDTOList){
-            User valida=repository.getUserById(p.getUserId());
-            if (valida!=null){
-                throw new UserExisException(p.getUserId());
-            }
+        Integer valida=ValidateId(userDTOList);
+        if(valida!=0){
+            throw new UserExisException(valida);
         }
         List<User> users= userDTOList.stream().map(userDTO -> {
             User user=new User(userDTO.getUserId(),userDTO.getUserName());
@@ -34,5 +32,15 @@ public class CreatesService implements ICreateService {
             UserDTO userdto=new UserDTO(user.getUserId(),user.getUserName());
             return userdto;
         }).collect(Collectors.toList());
+    }
+
+    private Integer ValidateId(List<UserDTO> userDTOList) {
+        for(UserDTO p:userDTOList){
+            User valida=repository.getUserById(p.getUserId());
+            if (valida!=null){
+                return p.getUserId();
+            }
+        }
+        return 0;
     }
 }
