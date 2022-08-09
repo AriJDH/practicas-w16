@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
+import com.example.be_java_hisp_w16_g09.dto.FollowersCountDTO;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.service.IUserService;
 import com.example.be_java_hisp_w16_g09.service.UserService;
@@ -23,7 +24,8 @@ public class UserController {
     }
     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
     @GetMapping("/users/{userId}/followers/count")
-    public void US002(){
+    public ResponseEntity<FollowersCountDTO> US002(@PathVariable Integer userId){
+        return new ResponseEntity<>(userService.followerCount(userId), HttpStatus.OK);
     }
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
     @GetMapping("/users/{userId}/followers/list")

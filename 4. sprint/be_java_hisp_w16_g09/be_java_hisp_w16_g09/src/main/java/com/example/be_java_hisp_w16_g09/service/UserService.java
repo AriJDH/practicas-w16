@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w16_g09.service;
 
+import com.example.be_java_hisp_w16_g09.dto.FollowersCountDTO;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
 import com.example.be_java_hisp_w16_g09.dto.UserDto;
@@ -7,6 +8,7 @@ import com.example.be_java_hisp_w16_g09.exception.GlobalHandler;
 import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.User;
+import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService{
     @Autowired
     IUserRepository userRepository;
+    @Autowired
+    IPostRepository postRepository;
 
     //Javi
 
@@ -31,6 +35,20 @@ public class UserService implements IUserService{
 
 
     //MaxiN
+    public FollowersCountDTO followerCount(int id){
+        FollowersCountDTO followersCountDTO = new FollowersCountDTO();
+        followersCountDTO.setUser_id(id);
+        if (userRepository.searchById(id) == null)
+            throw new UserNotFoundException(id);
+
+        followersCountDTO.setUser_name(userRepository.searchById(id).getUserName());
+        int followersCount = 0;
+        if(postRepository.searchById(id)!=null)
+            followersCount = userRepository.searchById(id).getFollowers().size();
+
+        followersCountDTO.setFollowers_count(followersCount);
+        return followersCountDTO;
+    }
 
 
     //Guille
