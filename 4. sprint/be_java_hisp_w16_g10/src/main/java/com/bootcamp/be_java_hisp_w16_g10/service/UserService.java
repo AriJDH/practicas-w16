@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,9 +34,9 @@ public class UserService implements IService {
 
    @Override
    public void follow(Integer userId, Integer userIdToFollow) {
-      if(userId.equals(userIdToFollow)){
+      if(userId.equals(userIdToFollow))
          throw new BadRequestException("Cannot follow yourself");   
-      }
+
       User user = this.userRepository.findById(userId);
       if (user == null)
          throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
@@ -46,13 +47,14 @@ public class UserService implements IService {
          throw new BadRequestException("This is not a seller");   
       }
 
-
       this.userRepository.addUserToList(user.getFollowed(), userToFollow);
       this.userRepository.addUserToList(userToFollow.getFollowers(), user);
    }
 
    @Override
    public void unfollow(Integer userId, Integer userIdToUnfollow) {
+      if(userId.equals(userIdToUnfollow))
+         throw new BadRequestException("Cannot unfollow yourself");
       User user = this.userRepository.findById(userId);
       if (user == null)
          throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
@@ -105,7 +107,6 @@ public class UserService implements IService {
       }
 
       return listFollowers;
-
    }
 
    @Override
@@ -139,7 +140,7 @@ public class UserService implements IService {
          throw new NotFoundException(String.format("The user with id: %s don't exists.", post.getUserId()));
       Product product = parseToProductFromProductDTO(post.getProduct());
       List<Post> posts = user.getPosts();
-      posts.add(new Post(posts.size() + 1, product, post.getDate(), post.getPrice(), post.getCategory()));
+      posts.add(new Post(UUID.randomUUID().toString(), product, post.getDate(), post.getPrice(), post.getCategory()));
       user.setPosts(posts);
       Integer index = userRepository.getIndexOfUser(post.getUserId());
       if (index == -1)

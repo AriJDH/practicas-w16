@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-    private Integer id;
+    private String id;
     private Product product;
     private LocalDate date;
     private Double price;
