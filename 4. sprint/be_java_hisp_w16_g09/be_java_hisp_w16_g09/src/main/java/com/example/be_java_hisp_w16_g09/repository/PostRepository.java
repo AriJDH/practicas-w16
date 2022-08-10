@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w16_g09.repository;
 
 import com.example.be_java_hisp_w16_g09.model.Post;
+import com.example.be_java_hisp_w16_g09.utility.DataLoader;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class PostRepository implements IPostRepository{
     public PostRepository() {
         postIdCounter = 0;
         posts = new HashMap<>();
+        DataLoader.loadProducts(this);
     }
 
     public void createElement(Post newPost){

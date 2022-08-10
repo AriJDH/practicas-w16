@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w16_g09.service;
 
-import com.example.be_java_hisp_w16_g09.dto.*;
+import com.example.be_java_hisp_w16_g09.dto.PostDto;
+import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.Product;

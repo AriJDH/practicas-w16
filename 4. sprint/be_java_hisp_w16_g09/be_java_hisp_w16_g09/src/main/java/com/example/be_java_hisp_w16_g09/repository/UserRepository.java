@@ -1,19 +1,18 @@
 package com.example.be_java_hisp_w16_g09.repository;
 
 import com.example.be_java_hisp_w16_g09.model.User;
+import com.example.be_java_hisp_w16_g09.utility.DataLoader;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 @Repository
 public class UserRepository implements IUserRepository {
     private HashMap<Integer, User> users = new HashMap<>();
 
     public UserRepository() {
-        this.addUsers();
+        DataLoader.loadUsers(this);
     }
 
     public User createElement(User newUser) {

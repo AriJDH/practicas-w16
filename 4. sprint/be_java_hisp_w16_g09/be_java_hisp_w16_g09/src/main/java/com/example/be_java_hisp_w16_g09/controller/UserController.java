@@ -1,15 +1,10 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
 import com.example.be_java_hisp_w16_g09.dto.FollowersCountDTO;
+import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.MessageDto;
 import com.example.be_java_hisp_w16_g09.dto.UserFollowedDto;
 import com.example.be_java_hisp_w16_g09.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
-import com.example.be_java_hisp_w16_g09.service.IUserService;
-import com.example.be_java_hisp_w16_g09.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
