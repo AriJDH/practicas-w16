@@ -24,6 +24,7 @@ public class UserController {
     public UserController(IUserService userService) {
         this.userService = userService;
     }
+
     @Operation(summary = "Follow an user")
     @Parameter(name = "userId", description = "Id of user making the action")
     @Parameter(name = "userIdToFollow", description = "Id of user to be followed")
