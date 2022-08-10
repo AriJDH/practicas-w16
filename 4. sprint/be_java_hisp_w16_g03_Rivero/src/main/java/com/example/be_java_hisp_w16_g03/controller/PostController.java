@@ -23,7 +23,10 @@ public class PostController {
     public ResponseEntity<PostsDTO> getLatestPostsOrderedByUserId(@PathVariable Integer userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(service.getLatestPostsOrderedByUserId(userId, order), HttpStatus.OK);
     }
-
+    @GetMapping("/products/promo-post")
+    public ResponseEntity<PostsDTO> postProducPromo(@RequestBody String pepe) {
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 
 
 }

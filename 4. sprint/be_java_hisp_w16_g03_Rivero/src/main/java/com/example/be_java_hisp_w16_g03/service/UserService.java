@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService {
     public static final String NAME_ASC = "name_asc";
     public static final String NAME_DESC = "name_desc";
+    public static final String NAME_ASC1 = "name_asc";
     @Autowired
     IUserRepository repository;
 
@@ -98,7 +99,7 @@ public class UserService implements IUserService {
     public UserDTO followUser(Integer userId, Integer userToFollowId) {
 
         User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
-        User userToFollow = repository.getUserById(userToFollowId).orElseThrow(() -> new UserNotExistException(userToFollowId));
+        User userToFollow = repository.getUserById(userToFollowId).orElseThrow(() -> new UserNotExistException(userId));
 
 
         Boolean isSeller = userToFollow.getterPosts().size() > 0;
