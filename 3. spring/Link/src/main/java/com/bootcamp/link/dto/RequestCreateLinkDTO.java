@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class LinkDTO {
-    private int id;
+public class RequestCreateLinkDTO {
     private String url;
+    private String password;
 }
