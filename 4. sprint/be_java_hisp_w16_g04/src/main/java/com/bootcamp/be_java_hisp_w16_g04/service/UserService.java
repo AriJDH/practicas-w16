@@ -13,6 +13,9 @@ import com.bootcamp.be_java_hisp_w16_g04.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,13 +30,22 @@ public class UserService implements IUserService {
     IFollowerRepository iFollowerRepository;
 
     @Override
-    public ResponseFollowersListDTO getListFolloersById(Integer userId) {
+    public ResponseFollowersListDTO getListFollowersById(Integer userId, String order) {
 
         User user = iUserRepository.getByIdUser(userId);
 
         List<User> FollowerList = iFollowerRepository.getFollewersListById(userId).stream()
                 .map(id -> iUserRepository.getByIdUser(id))
                 .collect(Collectors.toList());
+
+        if (order.equals("name_asc")){
+            FollowerList = FollowerList.stream().sorted(Comparator.comparing(User::getUserName))
+                    .collect(Collectors.toList());
+        }
+        else if(order.equals("name_desc")){
+            FollowerList = FollowerList.stream().sorted(Comparator.comparing(User::getUserName).reversed())
+                    .collect(Collectors.toList());
+        }
 
         //Fill data
         ResponseFollowersListDTO responseFollowersListDTO = new ResponseFollowersListDTO();
@@ -60,7 +72,10 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserFollowedDTO listUserFollowed (Integer userId) {
+    public UserFollowedDTO orderListUserFollowed (Integer userId, String order) {
+
+        System.out.println(order);
+
         UserFollowedDTO user = new UserFollowedDTO();
         User user1 = iUserRepository.getByIdUser(userId);
 
@@ -73,6 +88,17 @@ public class UserService implements IUserService {
                 .map(id->iUserRepository.getByIdUser(id))
                 .collect(Collectors.toList());
 
+        if (order.equals("name_asc")){
+            System.out.println("Funciona");
+            users = users.stream().sorted(Comparator.comparing(User::getUserName))
+                    .collect(Collectors.toList());
+        }
+        else if(order.equals("name_desc")){
+            System.out.println("Hey");
+            users = users.stream().sorted(Comparator.comparing(User::getUserName).reversed())
+                    .collect(Collectors.toList());
+        }
+
         user.setFollowed(users);
 
         user.setUser_id(userId);
@@ -80,5 +106,10 @@ public class UserService implements IUserService {
 
         return user;
     }
+
+
+
+
+
 
 }

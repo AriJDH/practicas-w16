@@ -11,9 +11,9 @@ import java.util.List;
 public interface IUserService {
 
 
-    ResponseFollowersListDTO getListFolloersById(Integer userId);
+    ResponseFollowersListDTO getListFollowersById(Integer userId, String order);
 
     UserFollowersCountDTO followersCount(Integer userId);
 
-    UserFollowedDTO listUserFollowed(Integer userId);
+    UserFollowedDTO orderListUserFollowed (Integer userId, String order);
 }
