@@ -33,20 +33,13 @@ public class PostService implements IPostService{
 
     //Martin
     public void createPost(PostDto postDto){
-        Post post = new Post();
         int userId = postDto.getUserId();
         User user = userRepository.searchById(userId);
         if (user == null){
             throw new UserNotFoundException(userId);
         }
+        Post post = dtoMapperUtil.map(postDto, Post.class);
         post.setUser(user);
-        Product product = new Product(postDto.getProduct().getProductId(), postDto.getProduct().getProductName(),
-                postDto.getProduct().getType(), postDto.getProduct().getBrand(), postDto.getProduct().getColor(),
-                postDto.getProduct().getNotes());
-        post.setProduct(product);
-        post.setDate(postDto.getDate());
-        post.setCategoryId(postDto.getCategoryId());
-        post.setPrice(postDto.getPrice());
         postRepository.createElement(post);
     }
 
