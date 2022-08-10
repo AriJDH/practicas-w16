@@ -1,5 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g10.dto.response;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +13,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserPostResDTO {
-    private Integer user_id;
+    private Integer userId;
     private List<PostResDTO> posts;
 }
