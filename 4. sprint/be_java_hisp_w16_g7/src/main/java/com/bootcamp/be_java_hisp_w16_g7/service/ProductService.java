@@ -6,17 +6,12 @@ import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.FollowsNotFoundException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.PostNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
 import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
-import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
-import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 
 import org.springframework.stereotype.Service;
@@ -47,28 +42,25 @@ public class ProductService implements IProductService{
         if(userRepository.existsUser(idUser)) {
             User user = userRepository.findUserById(idUser);
             //validacion si sigue a alguien
-            if (!user.getFollows().isEmpty()) {
+
                 for (User users: user.getFollows()) {
-                    if (!users.getPosts().isEmpty()) {
+
                         List<Post> recentPost = users.getPosts().stream()
                                 .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
                                 .collect(Collectors.toList());
                         for (Post post : recentPost) {
                             responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
                         }
-                    }else{
-                        throw new PostNotFoundException();
-                    }
                 }
-                if("date_Asc".equals(order)){
+                if("date_asc".equals(order)){
                     return new RecentPostsDTO(idUser,orderByDateAsc(responsePostDTOS));
+                } else if ("date_desc".equals(order) || order == null) {
+                    return new RecentPostsDTO(idUser,orderByDateDes(responsePostDTOS));
+                }else{
+                    throw new InvalidQueryException("Unknown query");
                 }
 
-                return new RecentPostsDTO(idUser,orderByDateDes(responsePostDTOS));
 
-            }else{
-                throw new FollowsNotFoundException();
-            }
         }else{
             throw new UserNotFoundException(idUser);
         }

@@ -19,11 +19,6 @@ public class GlobalHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
-    @ExceptionHandler({PostNotFoundException.class})
-    public ResponseEntity<ApiResponseDto> catchException(PostNotFoundException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Not Found", e.getMessage());
-        return new ResponseEntity<>(apiResponseDto, HttpStatus.NOT_FOUND);
-    }
 
     @ExceptionHandler({FollowsNotFoundException.class})
     public ResponseEntity<ApiResponseDto> catchException(FollowsNotFoundException e) {
@@ -35,6 +30,18 @@ public class GlobalHandler {
     @ExceptionHandler(UserIsNotSellerException.class)
     public ResponseEntity<ApiResponseDto> catchException(UserIsNotSellerException e){
         ApiResponseDto apiResponseDto = new ApiResponseDto("Bad Request", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlreadyFollowingException.class)
+    public ResponseEntity<ApiResponseDto> catchException(AlreadyFollowingException e){
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Already following", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFollowingException.class)
+    public ResponseEntity<ApiResponseDto> catchException(NotFollowingException e){
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Not following", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 }

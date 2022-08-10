@@ -2,9 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g7.service;
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.*;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -34,7 +32,9 @@ public class UserService implements IUserService{
 
         if(user == null) throw new UserNotFoundException(userId);
         if(target == null) throw new UserNotFoundException(userIdToFollow);
-        if(!target.isSeller() || target.getFollowers().contains(user)) return HttpStatus.BAD_REQUEST;
+        if(!target.isSeller()) throw new UserIsNotSellerException(userIdToFollow);
+        if(target.getFollowers().contains(user)) throw new AlreadyFollowingException(userIdToFollow, userId);
+
 
         userRepository.addToUserFollows(target, user);
         userRepository.addToUserFollowers(user, target);
@@ -49,7 +49,7 @@ public class UserService implements IUserService{
 
         if(user == null) throw new UserNotFoundException(userId);
         if(target == null) throw new UserNotFoundException(userIdToUnfollow);
-        if(!target.getFollowers().contains(user)) return HttpStatus.BAD_REQUEST;
+        if(!target.getFollowers().contains(user)) throw new NotFollowingException(userIdToUnfollow, userId);
 
         userRepository.removeFromUserFollows(target, user);
         userRepository.removeFromUserFollowers(user, target);
@@ -63,6 +63,9 @@ public class UserService implements IUserService{
         if(user == null)
             throw new UserNotFoundException(id);
         Comparator<ResponseUserDTO> userComp = Comparator.comparing(ResponseUserDTO::getUserName);
+        if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
+            throw new InvalidQueryException("unknown query");
+        }
         if("name_desc".equals(order))
             userComp = userComp.reversed();
         List<ResponseUserDTO> followed = user.getFollows().stream()
@@ -87,7 +90,7 @@ public class UserService implements IUserService{
             comparator = comparator.reversed();
         }
         //Falta verificar si es vendedor.
-        if (response.getPosts().size() > 0) {
+        if (response.isSeller()) {
             //Falta verificar si es vendedor.
             List<FollowersDTO> followersToDTO = new ArrayList<>();
             response.getFollowers().forEach(u -> followersToDTO.add(new FollowersDTO(u.getId(), u.getName())));
@@ -95,7 +98,7 @@ public class UserService implements IUserService{
             return new FollowersSellersDTO(response.getId(), response.getName(), followersToDTO);
         }
 
-        return null;
+        throw new UserIsNotSellerException(id);
     }
 
     public FollowersCountDto getFollowersCount(int id) {
