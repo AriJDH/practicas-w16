@@ -14,6 +14,10 @@ public class GlobalHandler {
         return new ResponseEntity<>(new ApiResponseDto("User Not Found", e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(InvalidQueryException.class)
+    public ResponseEntity<?> InvalidQueryException(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 
     @ExceptionHandler({PostNotFoundException.class})
     public ResponseEntity<ApiResponseDto> catchException(PostNotFoundException e) {

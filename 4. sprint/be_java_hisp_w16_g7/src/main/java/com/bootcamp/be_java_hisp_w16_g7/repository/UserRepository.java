@@ -1,4 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g7.repository;
+
+
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
+
 import com.bootcamp.be_java_hisp_w16_g7.entity.Category;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
@@ -9,6 +14,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Repository
@@ -18,6 +26,7 @@ public class UserRepository implements IUserRepository{
 
     public UserRepository() {
         user = new ArrayList<>();
+
 /*        Post post1 = new Post(1, 1, LocalDate.now(),new Product(1,"asd","asd","asd","asdqw","aqq"),new Category(1,"asd"),123,false,0);
         Post post2 = new Post(2, 1, LocalDate.now().minusDays(4),new Product(2,"asd","asd","asd","asdqw","aqq"),new Category(1,"asd"),123,false,0);*/
         User user1 = new User(1111, "User1", new ArrayList<>(), new ArrayList<>(),new ArrayList<>() );
@@ -28,6 +37,7 @@ public class UserRepository implements IUserRepository{
         user.add(user2);
         user.add(user3);
         user.add(user4);
+
 
 
 

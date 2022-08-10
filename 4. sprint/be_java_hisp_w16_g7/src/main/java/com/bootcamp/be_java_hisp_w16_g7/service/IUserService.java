@@ -1,14 +1,14 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
-import org.springframework.http.HttpStatus;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
-import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
-import java.util.List;
+import org.springframework.http.HttpStatus;
 
 
 public interface IUserService {
+    public FollowersSellersDTO getSellersFollowers(int id, String order);
+
 
     HttpStatus follow(int userId, int userIdToFollow);
     HttpStatus unfollow(int userId, int userIdToUnfollow);
