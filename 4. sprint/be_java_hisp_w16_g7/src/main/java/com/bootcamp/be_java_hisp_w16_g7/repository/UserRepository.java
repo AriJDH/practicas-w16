@@ -1,7 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g7.repository;
 
+
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
+
 import com.bootcamp.be_java_hisp_w16_g7.entity.Category;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
@@ -10,8 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 import java.util.Optional;
+
 import java.util.stream.Collectors;
 
 @Repository
@@ -21,23 +26,36 @@ public class UserRepository implements IUserRepository{
 
     public UserRepository() {
         user = new ArrayList<>();
-        //Test
-        List<User> followersTest = new ArrayList<>();
-        List<Post> postTest = new ArrayList<>();
-        postTest.add(new Post(116,LocalDate.now(), new Product(88, "product1", "type1", "brand1", "red", "note1"), new Category(01, "c1"), 134, false, 12));
-        followersTest.add(new User(122, "Juana", List.of(), List.of(), List.of()));
-        followersTest.add(new User(567, "Anna", List.of(), List.of(), List.of()));
-        followersTest.add(new User(567, "Aana", List.of(), List.of(), List.of()));
+
+/*        Post post1 = new Post(1, 1, LocalDate.now(),new Product(1,"asd","asd","asd","asdqw","aqq"),new Category(1,"asd"),123,false,0);
+        Post post2 = new Post(2, 1, LocalDate.now().minusDays(4),new Product(2,"asd","asd","asd","asdqw","aqq"),new Category(1,"asd"),123,false,0);*/
+        User user1 = new User(1111, "User1", new ArrayList<>(), new ArrayList<>(),new ArrayList<>() );
+        User user2 = new User(2222, "User2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user3 = new User(3333, "User3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user4 = new User(4444, "User4", new ArrayList<>(),new ArrayList<>(), new ArrayList<>());
+        user.add(user1);
+        user.add(user2);
+        user.add(user3);
+        user.add(user4);
 
 
-        user.add(new User(1111, "User1", followersTest, List.of(), postTest));
-        user.add(new User(2222, "User2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        user.add(new User(3333, "User3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        user.add(new User(4444, "User4", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+
 
         initUsers();
+
     }
 
+    @Override
+    public boolean existsUser(int idUser) {
+        for (User users: user) {
+            if(users.getId()==idUser){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public User findUserById(int id) {
         return user.stream()
                 .filter(user -> user.getId() == id)
@@ -63,4 +81,22 @@ public class UserRepository implements IUserRepository{
         user.add(u3);
         user.add(u4);
     }
+
+    @Override
+    public void addToUserFollowers(User userToAdd, User user) {
+        user.getFollowers().add(userToAdd);
+    }
+
+    @Override
+    public void addToUserFollows(User userToAdd, User user) {
+        user.getFollows().add(userToAdd);
+    }
+
+    @Override
+    public void removeFromUserFollowers(User userToRemove, User user) { user.getFollowers().remove(userToRemove); }
+
+    @Override
+    public void removeFromUserFollows(User userToRemove, User user) { user.getFollows().remove(userToRemove); }
+
+
 }
