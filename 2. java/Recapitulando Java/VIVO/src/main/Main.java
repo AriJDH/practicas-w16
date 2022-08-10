@@ -48,6 +48,21 @@ public class Main {
         garaje.getVehiculosList().stream().filter(a -> a.getCosto() < 1000).forEach(System.out::println);
 
 
+        int[] array = new int[5];
+        array[0]=1;
+        array[1]=10;
+        array[2]=14;
+        array[3]=2;
+        array[4]=8;
+        for (int i: burbuja(array)){
+            System.out.println(i);
+        }
 
+
+    }
+
+    public static int[] burbuja(int[] array){
+        Arrays.sort(array);
+        return array;
     }
 }

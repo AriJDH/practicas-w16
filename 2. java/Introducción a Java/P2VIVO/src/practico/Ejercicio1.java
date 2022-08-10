@@ -134,6 +134,7 @@ public class Ejercicio1 {
             nuevoParticipante.add(7, grupoSanguineo);
 
             participantes.put(dni, nuevoParticipante);
+
             String circuito = elegirCircuito(edad);
             circuitos.put(dni, circuito);
 
