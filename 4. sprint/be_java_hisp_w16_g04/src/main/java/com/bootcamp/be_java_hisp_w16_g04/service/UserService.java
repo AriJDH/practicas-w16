@@ -14,7 +14,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+/**
+ * Method that takes care of everything related to the users.
+ */
 @Service
 public class UserService implements IUserService {
 
@@ -24,6 +26,12 @@ public class UserService implements IUserService {
   @Autowired
   IFollowerRepository iFollowerRepository;
 
+  /**
+   * Method to obtain a DTO with all the information of the followers of a user
+   * @param userId Current user id
+   * @param order Order in which the list will be submitted
+   * @return DTO with the information of the users I follow
+   */
   @Override
   public ResponseFollowersListDTO getListFollowersById(Integer userId, String order) {
 
@@ -54,6 +62,11 @@ public class UserService implements IUserService {
   }
 
 
+  /**
+   * Method that returns a DTO with the number of followers a user has.
+   * @param userId Current user id
+   * @return DTO with the information of followers that a user has
+   */
   @Override
   public UserFollowersCountDTO followersCount(Integer userId) {
 
@@ -67,6 +80,12 @@ public class UserService implements IUserService {
   }
 
 
+  /**
+   * Method that sorts the list of followers of a person
+   * @param userId Current user id
+   * @param order Order in which the list will be submitted
+   * @return DTO with the list of all followers of a person
+   */
   @Override
   public UserFollowedDTO orderListUserFollowed(Integer userId, String order) {
 

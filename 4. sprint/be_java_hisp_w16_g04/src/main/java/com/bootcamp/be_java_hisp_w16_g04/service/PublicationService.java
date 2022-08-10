@@ -15,6 +15,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service that takes care of everything related to publishing
+ */
 @Service
 public class PublicationService implements IPublicationService {
 
@@ -26,7 +29,12 @@ public class PublicationService implements IPublicationService {
   @Autowired
   IProductService iProductService;
 
-
+  /**
+   * Method that returns the publications of the people I follow in date order.
+   * @param userId Current user id
+   * @param order Order of the list (ascending or descending)
+   * @return DTO of a list of publications
+   */
   @Override
   public ListProductByDateDTO getListProductByDate(Integer userId, String order) {
 
@@ -39,6 +47,11 @@ public class PublicationService implements IPublicationService {
     return new ListProductByDateDTO(userId, listDTO);
   }
 
+  /**
+   * Method to obtain the list of publications of the people I follow.
+   * @param users List of users followed by the current user
+   * @return List with the publications of the users I follow
+   */
   private List<Publication> getListSeller(List<User> users) {
     List<Publication> sellers = new ArrayList<>();
     for (User user : users) {
@@ -50,6 +63,11 @@ public class PublicationService implements IPublicationService {
     return sellers;
   }
 
+  /**
+   * Method that filters the list of products and obtains the products of the last two weeks.
+   * @param publications List of publications of people followed by the current user
+   * @return List of publications for the last two weeks
+   */
   private List<PostDTO> listOrderByWeekend(List<Publication> publications) {
     LocalDate date = LocalDate.now().minusDays(15);
     List<PostDTO> result = publications.stream()
@@ -63,6 +81,11 @@ public class PublicationService implements IPublicationService {
   }
 
 
+  /**
+   * Method for creating a publication
+   * @param requestCreatePublicationDTO DTO of a publication that is sent from request
+   * @return Boolean that checks if the publication was created
+   */
   @Override
   public Boolean createPublication(RequestCreatePublicationDTO requestCreatePublicationDTO) {
 

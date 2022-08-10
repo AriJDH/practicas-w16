@@ -12,6 +12,9 @@ import com.bootcamp.be_java_hisp_w16_g04.exception.FailedToCreateResource;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import org.springframework.stereotype.Service;
 
+/**
+ * This service takes care of all matters related to products
+ */
 @Service
 public class ProductService implements IProductService {
 
@@ -26,6 +29,11 @@ public class ProductService implements IProductService {
     mapper = new ModelMapper();
   }
 
+  /**
+   * Method that returns me DTO of product given its id
+   * @param idProduct It is the product id
+   * @return Product DTO
+   */
   @Override
   public ProductDTO getProductById(Integer idProduct) {
     Product product = iProductRepository.getProductById(idProduct);
@@ -33,9 +41,13 @@ public class ProductService implements IProductService {
   }
 
 
+  /**
+   * Method in charge of creating a product and at the same time creating a publication
+   * @param productCreateDTO Contains the DTO of the publication and the product
+   * @return DTO with a response for the user
+   */
   @Override
   public ResponseApiDTO CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
-
     //Create product
     Product product = iProductRepository.createProduct(productCreateDTO.getProduct());
 
