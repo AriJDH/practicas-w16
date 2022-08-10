@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w16_g03.controller;
 
 import com.example.be_java_hisp_w16_g03.dto.ExceptionApiDTO;
 import com.example.be_java_hisp_w16_g03.dto.UserDTO;
+import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,15 +17,13 @@ public class UserController {
     IUserService service;
 
     @PostMapping("/users/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<ExceptionApiDTO> followUser(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
-        Boolean response = service.followUser(userId, userIdToFollow);
-        return response ? new ResponseEntity<>(null, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<UserDTO> followUser(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+        return new ResponseEntity<>(service.followUser(userId, userIdToFollow), HttpStatus.OK);
     }
 
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<ExceptionApiDTO> unfollowUser(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
-        Boolean response = service.unfollowUser(userId, userIdToUnfollow);
-        return response ? new ResponseEntity<>(null, HttpStatus.OK) : new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<UserDTO> unfollowUser(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+        return new ResponseEntity<>(service.unfollowUser(userId, userIdToUnfollow), HttpStatus.OK);
     }
 
 }

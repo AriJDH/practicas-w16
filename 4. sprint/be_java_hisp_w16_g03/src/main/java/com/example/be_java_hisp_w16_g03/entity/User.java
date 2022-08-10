@@ -38,14 +38,6 @@ public class User {
         return this.posts;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", posts=" + posts +
-                '}';
-    }
 
 
 }

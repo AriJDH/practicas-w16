@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface IUserService {
 
-    public Boolean followUser(Integer userId, Integer userToFollowId);
+    public UserDTO followUser(Integer userId, Integer userToFollowId);
 
-    public Boolean unfollowUser(Integer userId, Integer userToFollowId);
+    public UserDTO unfollowUser(Integer userId, Integer userToFollowId);
 
 }
