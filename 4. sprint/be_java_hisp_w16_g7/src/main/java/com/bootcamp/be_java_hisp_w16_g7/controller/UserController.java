@@ -5,6 +5,10 @@ import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g7.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +23,25 @@ public class UserController {
     public UserController(IUserService userService) {
         this.userService = userService;
     }
-
+    @Operation(summary = "Follow an user")
+    @Parameter(name = "userId", description = "Id of user making the action")
+    @Parameter(name = "userIdToFollow", description = "Id of user to be followed")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User followed"),
+            @ApiResponse(responseCode = "400", description = "User to follow is not a seller or User is already being followed"),
+            @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<Void> follow(@PathVariable int userId, @PathVariable int userIdToFollow) {
         return new ResponseEntity(userService.follow(userId, userIdToFollow));
     }
 
+    @Operation(summary = "Unfollow an user")
+    @Parameter(name = "userId", description = "Id of user making the action")
+    @Parameter(name = "userIdToUnfollow", description = "Id of user to be unfollowed")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User unfollowed"),
+            @ApiResponse(responseCode = "400", description = "User is not being followed"),
+            @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<Void> unfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
         return new ResponseEntity(userService.unfollow(userId, userIdToUnfollow));
