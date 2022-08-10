@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g01.repository;
 
 import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
+import com.bootcamp.be_java_hisp_w16_g01.entities.Product;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -28,5 +29,9 @@ public class PostRepository implements IPostRepository{
     public List<Post> getPostsByUserId(int userId) {
         LocalDate dateWeek = LocalDate.now().minusWeeks(2);
         return postList.stream().filter(x ->x.getUserId()==userId && x.getDate().isAfter(dateWeek)).collect(Collectors.toList());
+    }
+
+    public List<Post> getPromoPostsByUserId(int userID){
+        return postList.stream().filter(p -> p.getUserId() == userID && p.isHasPromo()).collect(Collectors.toList());
     }
 }

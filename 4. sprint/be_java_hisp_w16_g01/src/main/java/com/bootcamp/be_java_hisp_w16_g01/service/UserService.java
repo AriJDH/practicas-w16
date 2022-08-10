@@ -6,7 +6,7 @@ import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bootcamp.be_java_hisp_w16_g01.mapper.UserMapper;
+import com.bootcamp.be_java_hisp_w16_g01.mapper.Mapper;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +18,6 @@ public class UserService implements IUserService {
 
     @Autowired
     protected IUserRepository userRepository;
-    private UserMapper userMapper = new UserMapper();
 
     @Override
     public UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow) {
@@ -51,15 +50,15 @@ public class UserService implements IUserService {
                 if (order.equalsIgnoreCase("name_asc")) {
                     List<User> followers = user.getFollowers().stream()
                             .sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
-                    return userMapper.userFollowerDTO(followers, user);
+                    return Mapper.userFollowerDTO(followers, user);
                 } else if (order.equalsIgnoreCase("name_desc")) {
                     List<User> followers = user.getFollowers().stream()
                             .sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList());
-                    return userMapper.userFollowerDTO(followers, user);
+                    return Mapper.userFollowerDTO(followers, user);
                 } else throw new BadRequestException("El orden no está definido");
             }
             else
-                return userMapper.userFollowerDTO(user.getFollowers(), user);
+                return Mapper.userFollowerDTO(user.getFollowers(), user);
         } else {
             throw new BadRequestException("El usuario "+ userId +  " no existe");
         }
@@ -74,15 +73,15 @@ public class UserService implements IUserService {
                 if (order.equalsIgnoreCase("name_asc")) {
                     List<User> followed = user.getFollowed().stream()
                             .sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
-                    return userMapper.userFollowedDTO(followed, user);
+                    return Mapper.userFollowedDTO(followed, user);
                 } else if (order.equalsIgnoreCase("name_desc")) {
                     List<User> followed = user.getFollowed().stream()
                             .sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList());
-                    return userMapper.userFollowedDTO(followed, user);
+                    return Mapper.userFollowedDTO(followed, user);
                 } else throw new BadRequestException("El orden no está definido");
             }
             else
-                return userMapper.userFollowedDTO(user.getFollowed(), user);
+                return Mapper.userFollowedDTO(user.getFollowed(), user);
         } else {
             throw new BadRequestException("El usuario "+ userId +  " no existe");
         }

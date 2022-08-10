@@ -17,6 +17,6 @@ public class GlobalHandlerException {
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ApiExceptionDTO> missingParamException(){
-        return new ResponseEntity<>(new ApiExceptionDTO("Bad request", "No hay un orden indicado"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ApiExceptionDTO("Bad request", "Falta un parámetro en la solicitud"), HttpStatus.BAD_REQUEST);
     }
 }

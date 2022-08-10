@@ -7,5 +7,6 @@ import java.util.List;
 public interface IPostRepository {
      int createPost(Post post);
      List<Post> getPostsByUserId(int userId);
+     List<Post> getPromoPostsByUserId(int userId);
 
 }
