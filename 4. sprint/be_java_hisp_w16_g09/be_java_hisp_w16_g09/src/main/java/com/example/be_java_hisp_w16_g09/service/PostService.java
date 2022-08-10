@@ -45,7 +45,7 @@ public class PostService implements IPostService{
                 postDto.getProduct().getType(), postDto.getProduct().getBrand(), postDto.getProduct().getColor(),
                 postDto.getProduct().getNotes());
         post.setProduct(product);
-        post.setDate(LocalDate.now());
+        post.setDate(postDto.getDate());
         post.setCategoryId(postDto.getCategoryId());
         post.setPrice(postDto.getPrice());
         postRepository.createElement(post);
