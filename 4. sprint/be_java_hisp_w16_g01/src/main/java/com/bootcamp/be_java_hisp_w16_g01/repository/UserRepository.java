@@ -68,4 +68,14 @@ public class UserRepository implements IUserRepository {
 
         return true;
     }
+
+
+    @Override
+    public User getUser(int userId) {
+        return this.users.stream()
+                .filter(user -> user.getUserId() == userId)
+                .findFirst().get();
+    }
+
+
 }

@@ -1,13 +1,17 @@
 package com.bootcamp.be_java_hisp_w16_g01.repository;
 
+import com.bootcamp.be_java_hisp_w16_g01.entities.User;
+
 public interface IUserRepository {
 
-    public void addFollower(int idUser, int userIdToFollow);
+    void addFollower(int idUser, int userIdToFollow);
 
-    public void addFollowed(int idUser, int idFollowed);
+    void addFollowed(int idUser, int idFollowed);
 
-    public boolean userExists(int idUser);
-    public boolean userIsSeller(int idUser);
+    boolean userExists(int idUser);
+    boolean userIsSeller(int idUser);
 
     boolean unfollowUser(int userId, int userIdToUnfollow);
+
+    User getUser(int userId);
 }
