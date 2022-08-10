@@ -2,19 +2,14 @@ package com.bootcamp.be_java_hisp_w16_g08.service;
 
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.PostDto;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.ProductDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersList;
 import com.bootcamp.be_java_hisp_w16_g08.entiry.Post;
 import com.bootcamp.be_java_hisp_w16_g08.entiry.Product;
 import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
 import com.bootcamp.be_java_hisp_w16_g08.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g08.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g08.repository.IUserRepository;
-import com.bootcamp.be_java_hisp_w16_g08.repository.PostRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Service
@@ -42,7 +37,6 @@ public class ProductService implements IProductService{
 
         this.postRepository = postRepository;
         this.userRepository = userRepository;
-
     }
     @Override
     public void publishPost(PostDto post){

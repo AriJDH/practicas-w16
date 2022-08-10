@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g08.service;
 
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.ResponsePostFromFollowedDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersCountDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowers;
+import com.bootcamp.be_java_hisp_w16_g08.dto.response.*;
 
 public interface IUserService {
 
@@ -16,7 +13,7 @@ public interface IUserService {
     void unfollowUser(int userId, int userIdToUnfollow);
 
 
-    UserFollowers getVendorsFollowedByUser(int userId,String order);
+    UserFollowedDto getVendorsFollowedByUser(int userId, String order);
 
     UserFollowers getAllVendorFollowers(int id,String order);
 

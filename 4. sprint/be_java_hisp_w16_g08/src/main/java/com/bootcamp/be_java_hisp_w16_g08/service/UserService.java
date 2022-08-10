@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +47,6 @@ public class UserService implements IUserService {
         }
         followed.getFollowerList().add(follower);
         follower.getFollowedList().add(getUserIfExist(idUserToFollow));
-
     }
 
     private boolean alreadyFollowAUser(User user, User userToFollow) {
@@ -104,17 +102,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserFollowers getVendorsFollowedByUser(int userId, String order) {
+    public UserFollowedDto getVendorsFollowedByUser(int userId, String order) {
 
 
         User serchedUser = getUserIfExist(userId);
-        List<UserFollowersList> vendorsFollowed = serchedUser.getFollowedList().stream().
+        List<UserBasicInfoDto> vendorsFollowed = serchedUser.getFollowedList().stream().
                 filter(x -> isVendor(x)).
-                map(x -> new UserFollowersList(x.getUserId(), x.getName()))
+                map(x -> new UserBasicInfoDto(x.getUserId(), x.getName()))
                 .collect(Collectors.toList());
 
 
-        return new UserFollowers(serchedUser.getUserId(), serchedUser.getName(), OrderListFollowers(vendorsFollowed, order));
+        return new UserFollowedDto(serchedUser.getUserId(), serchedUser.getName(), OrderListFollowers(vendorsFollowed, order));
 
     }
 
@@ -130,17 +128,17 @@ public class UserService implements IUserService {
             throw new UserNotVendorException();
         }
         return new UserFollowers(id, user.getName(), OrderListFollowers(user.getFollowerList().stream()
-                .map(x -> mapper.map(x, UserFollowersList.class))
+                .map(x -> mapper.map(x, UserBasicInfoDto.class))
                 .collect(Collectors.toList()), order));
 
     }
 
-    private List<UserFollowersList> OrderListFollowers(List<UserFollowersList> list, String order) {
+    private List<UserBasicInfoDto> OrderListFollowers(List<UserBasicInfoDto> list, String order) {
         if (order != null) {
             if (order.equalsIgnoreCase("name_asc")) {
-                return list.stream().sorted(Comparator.comparing(UserFollowersList::getUserName)).collect(Collectors.toList());
+                return list.stream().sorted(Comparator.comparing(UserBasicInfoDto::getUserName)).collect(Collectors.toList());
             } else if (order.equalsIgnoreCase("name_desc")) {
-                return list.stream().sorted(Comparator.comparing(UserFollowersList::getUserName).reversed()).collect(Collectors.toList());
+                return list.stream().sorted(Comparator.comparing(UserBasicInfoDto::getUserName).reversed()).collect(Collectors.toList());
             } else {
                 throw new OrderNotPossibleException();
             }

@@ -15,6 +15,6 @@ public class UserFollowers {
 
     private int userId;
     private String userName;
-    private List<UserFollowersList> followers;
+    private List<UserBasicInfoDto> followers;
 
 }
