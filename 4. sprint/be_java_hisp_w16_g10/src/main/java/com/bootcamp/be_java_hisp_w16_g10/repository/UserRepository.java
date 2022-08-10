@@ -46,13 +46,13 @@ public class UserRepository implements IRepository {
     }
 
     @Override
-    public void addUserToList(List<User> users, User userToAdd) {
-        boolean isInList = users.stream()
-                .anyMatch(user -> user.getId().equals(userToAdd.getId()));
+    public void addUserToList(List<User> usersList, User userToAdd) {
+        boolean isInList = usersList.stream()
+                .anyMatch(userSingle -> userSingle.getId().equals(userToAdd.getId()));
         if (isInList) {
             throw new BadRequestException("The user is already following or is followed by the user");
         }
-        users.add(userToAdd);
+        usersList.add(userToAdd);
     }
 
     @Override

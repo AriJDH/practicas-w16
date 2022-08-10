@@ -11,5 +11,5 @@ public interface IRepository {
     void update(Integer userId, User user);
     Integer getIndexOfUser(Integer userId);
     void updateUserInList(Integer index, User user);
-    void addUserToList(List<User> users, User userToAdd);
+    void addUserToList(List<User> usersList, User userToAdd);
 }

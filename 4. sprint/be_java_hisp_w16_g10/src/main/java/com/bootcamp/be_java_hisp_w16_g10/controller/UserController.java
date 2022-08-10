@@ -38,13 +38,13 @@ public class UserController {
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
     @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<List<FollowersListResDTO>> US003(@PathVariable Integer userId, @RequestParam Optional<String> order){
+    public ResponseEntity<FollowersListResDTO> US003(@PathVariable Integer userId, @RequestParam Optional<String> order){
         return new ResponseEntity<>(this.userService.listFollowers(userId, order.orElse(null)),HttpStatus.OK);
     }
 
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<List<FollowedListResDTO>> US004(@PathVariable Integer userId, @RequestParam Optional<String> order){
+    public ResponseEntity<FollowedListResDTO> US004(@PathVariable Integer userId, @RequestParam Optional<String> order){
         return new ResponseEntity<>(this.userService.listFollowed(userId, order.orElse(null)), HttpStatus.OK);
     }
 
@@ -68,6 +68,8 @@ public class UserController {
         this.userService.unfollow(userId, userIdToUnfollow);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+
 
 
     /* B_Requerimientos_incrementales */

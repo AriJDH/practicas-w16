@@ -11,8 +11,8 @@ public interface IService {
     void follow(Integer userId, Integer userIdToFollow);
     void unfollow(Integer userId, Integer userIdToUnfollow);
     FollowersCountResDTO countFollowers(Integer userId);
-    List<FollowersListResDTO> listFollowers(Integer userId, String order);
-    List<FollowedListResDTO> listFollowed(Integer userId, String order);
+    FollowersListResDTO listFollowers(Integer userId, String order);
+    FollowedListResDTO listFollowed(Integer userId, String order);
     void save(PostReqDTO model);
     List<PostResDTO> listFollowersPosts(Integer userId);
 }
