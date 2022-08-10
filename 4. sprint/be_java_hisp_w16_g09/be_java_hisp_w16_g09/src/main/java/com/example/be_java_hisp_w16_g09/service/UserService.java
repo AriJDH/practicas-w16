@@ -29,6 +29,8 @@ public class UserService implements IUserService{
         User userFollower = getValidatedUser(userId);
         User userToFollow = getValidatedUser(userIdToFollow);
 
+        validateUserToFollowIsSeller(userToFollow);
+
         if(userFollower.isFollowing(userToFollow)){
             throw new UserAlreadyFollowedException(userIdToFollow);
         }
@@ -38,6 +40,11 @@ public class UserService implements IUserService{
 
         userRepository.updateUser(userFollower);
         userRepository.updateUser(userToFollow);
+    }
+
+    private void validateUserToFollowIsSeller(User anUser) {
+        if (postRepository.searchById(anUser.getUserId()) == null)
+            throw new UserToFollowIsNotSellerException(anUser.getUserId());
     }
 
     private User getValidatedUser(int userId) {
