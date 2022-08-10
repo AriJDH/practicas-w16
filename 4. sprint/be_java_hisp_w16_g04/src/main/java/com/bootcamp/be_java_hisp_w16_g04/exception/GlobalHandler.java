@@ -20,4 +20,10 @@ public class GlobalHandler {
     FollowUserDTO followUserDTO = new FollowUserDTO(e.getMessage());
     return new ResponseEntity<>(followUserDTO, HttpStatus.BAD_REQUEST);
   }
+
+  @ExceptionHandler(FailedToCreateResource.class)
+  public ResponseEntity<String> catchExeptionFailed(FailedToCreateResource e) {
+    return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+  }
+
 }
