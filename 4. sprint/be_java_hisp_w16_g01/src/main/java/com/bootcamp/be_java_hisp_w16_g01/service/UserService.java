@@ -1,14 +1,11 @@
 package com.bootcamp.be_java_hisp_w16_g01.service;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.FollowersCountDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.*;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserUnfollowDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowedDTO;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowerDTO;
 import com.bootcamp.be_java_hisp_w16_g01.mapper.UserMapper;
 
 
@@ -56,7 +53,7 @@ public class UserService implements IUserService {
         else throw new BadRequestException("Usuario con id: " + userId + " no existe");
     }
 
-    public void addFollower(int userId, int userIdToFollow){
+    public MessageDto addFollower(int userId, int userIdToFollow){
         if (userRepository.userExists(userId)) {
             if (userRepository.userExists(userIdToFollow)) {
                 if (userRepository.userIsSeller(userIdToFollow)) {
@@ -64,6 +61,7 @@ public class UserService implements IUserService {
                     if (!userRepository.getUser(userIdToFollow).getFollowers().contains(userRepository.getUser(userId))){
                         userRepository.addFollower(userId, userIdToFollow);
                         userRepository.addFollowed(userId, userIdToFollow);
+                        return new MessageDto("Usuario seguido correctamente");
                     }
                     else throw new BadRequestException("Usuario con id: " + userId + " ya sigue al usuario con id: " + userIdToFollow);
                 }

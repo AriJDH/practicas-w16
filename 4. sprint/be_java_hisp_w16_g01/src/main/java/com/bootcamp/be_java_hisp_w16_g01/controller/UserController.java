@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g01.controller;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.FollowersCountDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.*;
 import com.bootcamp.be_java_hisp_w16_g01.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowedDTO;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowerDTO;
 import org.springframework.web.bind.annotation.GetMapping;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserUnfollowDTO;
 
 
 @RestController
@@ -23,9 +20,8 @@ public class UserController {
     protected IUserService userService;
 
     @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity addFollower(@PathVariable int userId, @PathVariable int userIdToFollow){
-        userService.addFollower(userId, userIdToFollow);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<MessageDto> addFollower(@PathVariable int userId, @PathVariable int userIdToFollow){
+        return new ResponseEntity<>(userService.addFollower(userId, userIdToFollow),HttpStatus.OK);
     }
 
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
