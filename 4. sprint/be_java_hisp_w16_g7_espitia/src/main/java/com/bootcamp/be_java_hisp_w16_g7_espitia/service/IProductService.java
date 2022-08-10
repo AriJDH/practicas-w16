@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7_espitia.service;
 
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.*;
 
 import java.util.List;
 
@@ -15,5 +12,9 @@ public interface IProductService {
     List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList);
 
     ApiResponseDto createPost(PostDTO postDto);
+
+    ApiResponseDto createPromoPost(PromoPostDTO promoPostDTO);
+
+    ResponsePromoPostCountDTO countPromoPostByUser(int userId);
 
 }

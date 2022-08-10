@@ -1,10 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7_espitia.service;
 
 
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7_espitia.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7_espitia.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7_espitia.exception.InvalidQueryException;
@@ -96,4 +93,42 @@ public class ProductService implements IProductService {
 
         return new ApiResponseDto("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
     }
+
+    @Override
+    public ApiResponseDto createPromoPost(PromoPostDTO promoPostDTO) {
+
+        Post post = mapper.map(promoPostDTO, Post.class);
+
+        post.setPrice(post.getPrice()/( 1+post.getDiscount()));
+        post.setPostId(count);
+
+        User user = userRepository.findUserById(promoPostDTO.getId());
+
+        if (user == null) {
+            throw new UserNotFoundException(promoPostDTO.getId());
+        }
+
+        user.getPosts().add(post);
+
+        count++;
+        System.out.println(user);
+
+        return new ApiResponseDto("Post whit discount created successfully", "Post whit discount of user with id: " + post.getId() + " was created successfully");
+    }
+
+    @Override
+    public ResponsePromoPostCountDTO countPromoPostByUser(int userId) {
+
+        if(userRepository.existsUser(userId)){
+            User user = userRepository.findUserById(userId);
+            int promoPost = (int) user.getPosts().stream()
+                    .filter(post-> post.isHasPromo()).count();
+            return new ResponsePromoPostCountDTO(user.getId(),user.getName(),promoPost);
+        }else{
+            throw new UserNotFoundException(userId);
+        }
+
+    }
+
+
 }
