@@ -20,7 +20,7 @@ public class UserService implements IUserService{
     IUserRepository repository;
 
     @Override
-    public FollowersDTO getFollowers(Integer id) {
+    public FollowersDTO getFollowers(Integer id, String order) {
         User user=repository.getUserById(id);
         if (user==null){
             throw new UserNotExistException(id);
@@ -33,8 +33,17 @@ public class UserService implements IUserService{
             userDTO1.setUserId(userA.getUserId());
             userDTO1.setUserName(userA.getUserName());
             return userDTO1;
-                }).collect(Collectors.toList());
-        FollowersDTO followersDTO= new FollowersDTO(user.getUserId(), user.getUserName(), userDTO);
+        }).collect(Collectors.toList());
+
+        if (order != null) {
+            if (order.equals("name_asc")) {
+                Collections.sort(userDTO, Comparator.comparing(UserDTO::getUserName));
+            } else if (order.equals("name_desc")) {
+                Collections.sort(userDTO, Comparator.comparing(UserDTO::getUserName).reversed());
+            }
+        }
+        FollowersDTO followersDTO = new FollowersDTO(user.getUserId(), user.getUserName(), userDTO);
+
         return followersDTO;
     }
 
@@ -42,17 +51,21 @@ public class UserService implements IUserService{
     public FollowedsDTO getFollowedUsers(Integer userId, String order) {
         User user = repository.getUserById(userId);
         if (user == null) {
-            //return new UserNotFoundException();
+            throw new UserNotExistException(userId);
         }
         FollowedsDTO dto = new FollowedsDTO();
         List<UserDTO> followersDto = new ArrayList<>();
+        dto.setUserId(user.getUserId());
+        dto.setUserName(user.getUserName());
+
+        if (user.getFolloweds() == null){
+            dto.setUserDtoList(new ArrayList<>());
+            return dto;
+        }
 
         for (User follower : user.getFolloweds()) {
             followersDto.add(new UserDTO(follower.getUserId(), follower.getUserName()));
         }
-
-        dto.setUserId(user.getUserId());
-        dto.setUserName(user.getUserName());
         if (order != null) {
             if (order.equals("name_asc")) {
                 Collections.sort(followersDto, Comparator.comparing(UserDTO::getUserName));

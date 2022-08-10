@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface IUserService {
     FollowedsDTO getFollowedUsers(Integer userId, String order);
-    FollowersDTO getFollowers(Integer id);
+    FollowersDTO getFollowers(Integer id, String order);
     FollowerCountDTO getCountFollowers(Integer id);
 }
