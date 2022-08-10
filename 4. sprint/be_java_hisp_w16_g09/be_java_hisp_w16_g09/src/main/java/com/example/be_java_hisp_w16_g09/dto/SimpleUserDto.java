@@ -6,16 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class UserDto {
+public class SimpleUserDto {
     private int userId;
     private String userName;
-    private List<UserDto> followers = new ArrayList<>();
-    private List<UserDto> following = new ArrayList<>();
 }
