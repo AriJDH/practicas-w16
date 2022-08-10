@@ -12,11 +12,12 @@ import lombok.*;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ProductDTO {
     private Integer productId;
-    private String type;
-    private String notes;
-    private String color;
-    private String brand;
     private String productName;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
+    
 
     public boolean validate() {
         return this.productId != null && this.type != null

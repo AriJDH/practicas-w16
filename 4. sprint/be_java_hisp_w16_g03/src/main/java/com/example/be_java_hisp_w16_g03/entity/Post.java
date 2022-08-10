@@ -18,7 +18,6 @@ public class Post {
     private static int lastId;
 
     public void increaseId(){
-        this.lastId = 1;
         this.postId = lastId++;
     }
 

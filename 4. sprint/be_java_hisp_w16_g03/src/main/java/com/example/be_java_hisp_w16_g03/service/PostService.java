@@ -56,9 +56,7 @@ public class PostService implements IPostService {
                             .type(post.getProduct().getType())
                             .color(post.getProduct().getColor())
                             .brand(post.getProduct().getBrand())
-                            .notes(post.getProduct().getNotes()).build()).build()).collect(Collectors.toList());
-
-            postsWithIdDtos.sort(Comparator.comparing(PostWithIDDTO::getDate));
+                            .notes(post.getProduct().getNotes()).build()).build()).sorted(Comparator.comparing(PostWithIDDTO::getDate)).collect(Collectors.toList());
 
             return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
         }
@@ -68,7 +66,7 @@ public class PostService implements IPostService {
 
     private List<Post> getFilterPosts(List<User> vendors) {
         List<Post> filterPosts = new ArrayList<>();
-        vendors.stream().forEach(user -> user.getPostBetweenDate().forEach(post -> filterPosts.add(post)));
+        vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
         return filterPosts;
     }
 
