@@ -66,6 +66,12 @@ public class UserController {
         return new ResponseEntity<>(userService.getSellersFollowers(userId, order), HttpStatus.OK);
     }
 
+    @Operation(summary = "Get count of users who follow a seller")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Object given"),
+            @ApiResponse(responseCode = "400", description = "User is not a seller"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @GetMapping("/{userId}/followers/count")
     public ResponseEntity<FollowersCountDto> getFollowersCount(@PathVariable int userId) {
         return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
