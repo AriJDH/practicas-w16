@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserRepository implements IUserRepository{
+public class UserRepository implements IUserRepository {
 
     List<User> user;
 
@@ -17,16 +17,14 @@ public class UserRepository implements IUserRepository{
 
 /*        Post post1 = new Post(1, 1, LocalDate.now(),new Product(1,"asd","asd","asd","asdqw","aqq"),new Category(1,"asd"),123,false,0);
         Post post2 = new Post(2, 1, LocalDate.now().minusDays(4),new Product(2,"asd","asd","asd","asdqw","aqq"),new Category(1,"asd"),123,false,0);*/
-        User user1 = new User(1111, "User1", new ArrayList<>(), new ArrayList<>(),new ArrayList<>() );
+        User user1 = new User(1111, "User1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user2 = new User(2222, "User2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User user3 = new User(3333, "User3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user4 = new User(4444, "User4", new ArrayList<>(),new ArrayList<>(), new ArrayList<>());
+        User user4 = new User(4444, "User4", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         user.add(user1);
         user.add(user2);
         user.add(user3);
         user.add(user4);
-
-
 
 
         initUsers();
@@ -35,8 +33,8 @@ public class UserRepository implements IUserRepository{
 
     @Override
     public boolean existsUser(int idUser) {
-        for (User users: user) {
-            if(users.getId()==idUser){
+        for (User users : user) {
+            if (users.getId() == idUser) {
                 return true;
             }
         }
@@ -81,10 +79,14 @@ public class UserRepository implements IUserRepository{
     }
 
     @Override
-    public void removeFromUserFollowers(User userToRemove, User user) { user.getFollowers().remove(userToRemove); }
+    public void removeFromUserFollowers(User userToRemove, User user) {
+        user.getFollowers().remove(userToRemove);
+    }
 
     @Override
-    public void removeFromUserFollows(User userToRemove, User user) { user.getFollows().remove(userToRemove); }
+    public void removeFromUserFollows(User userToRemove, User user) {
+        user.getFollows().remove(userToRemove);
+    }
 
 
 }

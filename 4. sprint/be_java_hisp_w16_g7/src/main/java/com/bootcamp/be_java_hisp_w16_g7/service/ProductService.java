@@ -1,67 +1,65 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
 
+import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.exception.FollowsNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
-
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
 import org.modelmapper.ModelMapper;
-
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
 
 
     private final IUserRepository userRepository;
-    private final ModelMapper mapper ;
-    private int count=1;
+    private final ModelMapper mapper;
+    private int count = 1;
 
-    public ProductService( IUserRepository userRepository) {
+    public ProductService(IUserRepository userRepository) {
         this.userRepository = userRepository;
         this.mapper = new ModelMapper();
     }
-
 
 
     @Override
     public RecentPostsDTO recentPost(int idUser, String order) {
         List<ResponsePostDTO> responsePostDTOS = new ArrayList<>();
         //validacion de la existencia del usuario
-        if(userRepository.existsUser(idUser)) {
+        if (userRepository.existsUser(idUser)) {
             User user = userRepository.findUserById(idUser);
             //validacion si sigue a alguien
 
-                for (User users: user.getFollows()) {
+            for (User users : user.getFollows()) {
 
-                        List<Post> recentPost = users.getPosts().stream()
-                                .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
-                                .collect(Collectors.toList());
-                        for (Post post : recentPost) {
-                            responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
-                        }
+                List<Post> recentPost = users.getPosts().stream()
+                        .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
+                        .collect(Collectors.toList());
+                for (Post post : recentPost) {
+                    responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
                 }
-                if("date_asc".equals(order)){
-                    return new RecentPostsDTO(idUser,orderByDateAsc(responsePostDTOS));
-                } else if ("date_desc".equals(order) || order == null) {
-                    return new RecentPostsDTO(idUser,orderByDateDes(responsePostDTOS));
-                }else{
-                    throw new InvalidQueryException("Unknown query");
-                }
+            }
+            if ("date_asc".equals(order)) {
+                return new RecentPostsDTO(idUser, orderByDateAsc(responsePostDTOS));
+            } else if ("date_desc".equals(order) || order == null) {
+                return new RecentPostsDTO(idUser, orderByDateDes(responsePostDTOS));
+            } else {
+                throw new InvalidQueryException("Unknown query");
+            }
 
 
-        }else{
+        } else {
             throw new UserNotFoundException(idUser);
         }
     }
@@ -90,7 +88,7 @@ public class ProductService implements IProductService{
         post.setDiscount(0.0);
 
         User user = userRepository.findUserById(postDto.getId());
-        if(user == null){
+        if (user == null) {
             throw new UserNotFoundException(postDto.getId());
         }
 

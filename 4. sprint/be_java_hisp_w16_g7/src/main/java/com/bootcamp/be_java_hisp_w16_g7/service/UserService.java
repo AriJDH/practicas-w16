@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
     private final ModelMapper mapper;
@@ -30,10 +30,10 @@ public class UserService implements IUserService{
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToFollow);
 
-        if(user == null) throw new UserNotFoundException(userId);
-        if(target == null) throw new UserNotFoundException(userIdToFollow);
-        if(!target.isSeller()) throw new UserIsNotSellerException(userIdToFollow);
-        if(target.getFollowers().contains(user)) throw new AlreadyFollowingException(userIdToFollow, userId);
+        if (user == null) throw new UserNotFoundException(userId);
+        if (target == null) throw new UserNotFoundException(userIdToFollow);
+        if (!target.isSeller()) throw new UserIsNotSellerException(userIdToFollow);
+        if (target.getFollowers().contains(user)) throw new AlreadyFollowingException(userIdToFollow, userId);
 
 
         userRepository.addToUserFollows(target, user);
@@ -43,13 +43,13 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public HttpStatus unfollow(int userId, int userIdToUnfollow){
+    public HttpStatus unfollow(int userId, int userIdToUnfollow) {
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToUnfollow);
 
-        if(user == null) throw new UserNotFoundException(userId);
-        if(target == null) throw new UserNotFoundException(userIdToUnfollow);
-        if(!target.getFollowers().contains(user)) throw new NotFollowingException(userIdToUnfollow, userId);
+        if (user == null) throw new UserNotFoundException(userId);
+        if (target == null) throw new UserNotFoundException(userIdToUnfollow);
+        if (!target.getFollowers().contains(user)) throw new NotFollowingException(userIdToUnfollow, userId);
 
         userRepository.removeFromUserFollows(target, user);
         userRepository.removeFromUserFollowers(user, target);
@@ -60,13 +60,13 @@ public class UserService implements IUserService{
     @Override
     public ResponseUserFollowedDTO getUserFollowedList(int id, String order) {
         User user = userRepository.findUserById(id);
-        if(user == null)
+        if (user == null)
             throw new UserNotFoundException(id);
         Comparator<ResponseUserDTO> userComp = Comparator.comparing(ResponseUserDTO::getUserName);
         if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
             throw new InvalidQueryException("unknown query");
         }
-        if("name_desc".equals(order))
+        if ("name_desc".equals(order))
             userComp = userComp.reversed();
         List<ResponseUserDTO> followed = user.getFollows().stream()
                 .map(u -> mapper.map(u, ResponseUserDTO.class))

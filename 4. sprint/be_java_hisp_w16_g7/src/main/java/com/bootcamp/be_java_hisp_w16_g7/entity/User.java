@@ -1,8 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g7.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,7 +19,7 @@ public class User {
     private List<User> follows;
     private List<Post> posts;
 
-    public Boolean isSeller(){
+    public Boolean isSeller() {
         return !posts.isEmpty();
     }
 

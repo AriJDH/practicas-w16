@@ -7,11 +7,14 @@ import org.springframework.http.HttpStatus;
 
 
 public interface IUserService {
-    public FollowersSellersDTO getSellersFollowers(int id, String order);
+    FollowersSellersDTO getSellersFollowers(int id, String order);
 
 
     HttpStatus follow(int userId, int userIdToFollow);
+
     HttpStatus unfollow(int userId, int userIdToUnfollow);
+
     ResponseUserFollowedDTO getUserFollowedList(int id, String order);
+
     FollowersCountDto getFollowersCount(int id);
 }
