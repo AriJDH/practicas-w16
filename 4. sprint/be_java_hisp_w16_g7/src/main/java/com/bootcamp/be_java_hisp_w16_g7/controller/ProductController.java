@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private final IProductService iProductService;
-    @Autowired
-    IUserService iUserService;
+
 
     public ProductController(IProductService iProductService) {
         this.iProductService = iProductService;
@@ -29,6 +28,6 @@ public class ProductController {
 
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<RecentPostsDTO> recentPost(@PathVariable int userId){
-        return new ResponseEntity<>(iUserService.recentPost(userId), HttpStatus.OK);
+        return new ResponseEntity<>(iProductService.recentPost(userId), HttpStatus.OK);
     }
 }

@@ -72,5 +72,21 @@ public class UserRepository implements IUserRepository{
         user.add(u4);
     }
 
+    @Override
+    public void addToUserFollowers(User userToAdd, User user) {
+        user.getFollowers().add(userToAdd);
+    }
+
+    @Override
+    public void addToUserFollows(User userToAdd, User user) {
+        user.getFollows().add(userToAdd);
+    }
+
+    @Override
+    public void removeFromUserFollowers(User userToRemove, User user) { user.getFollowers().remove(userToRemove); }
+
+    @Override
+    public void removeFromUserFollows(User userToRemove, User user) { user.getFollows().remove(userToRemove); }
+
 
 }
