@@ -9,9 +9,12 @@ public interface IUserRepository {
     void addFollowed(int idUser, int idFollowed);
 
     boolean userExists(int idUser);
+
     boolean userIsSeller(int idUser);
 
-    boolean unfollowUser(int userId, int userIdToUnfollow);
-
     User getUser(int userId);
+
+    boolean userIsFollower(User userFollowing, User userFollowedId);
+
+    boolean userIsFollowed(User userFollowed, User userFollowingId);
 }
