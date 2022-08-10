@@ -23,4 +23,11 @@ public class GlobalHandler {
         ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found",e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
     }
+
+    //excpecion lanzada cuando el request no pasa el control de validacion
+    @ExceptionHandler(InvalidPostRequest.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(InvalidPostRequest e){
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+    }
 }

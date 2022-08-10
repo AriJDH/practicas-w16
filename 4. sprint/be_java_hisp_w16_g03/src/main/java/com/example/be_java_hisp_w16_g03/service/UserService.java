@@ -10,6 +10,7 @@ import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,7 @@ public class UserService implements IUserService {
             throw new UserNotExistException(id);
         }
         if (user.getFollowers()==null){
-            return  new FollowersDTO(user.getUserId(), user.getUserName(), null);
+            return  new FollowersDTO(user.getUserId(), user.getUserName(), new ArrayList<>());
         }
         List<UserDTO> userDTO= user.getFollowers().stream().map(userA->{
             UserDTO userDTO1=new UserDTO();
@@ -46,7 +47,7 @@ public class UserService implements IUserService {
         if (user.getFollowers() == null) {
             return new FollowerCountDTO(user.getUserId(), user.getUserName(), 0);
         }
-        FollowerCountDTO followerCountDTO = new FollowerCountDTO(user.getUserId(), user.getUserName(), user.getFollowers().size() - 1);
+        FollowerCountDTO followerCountDTO = new FollowerCountDTO(user.getUserId(), user.getUserName(), user.getFollowers().size());
         return followerCountDTO;
     }
 
@@ -59,7 +60,7 @@ public class UserService implements IUserService {
             throw new NotFoundException();
         }
 
-        Boolean isSeller = userToFollow.validatePosts().size() == 0;
+        Boolean isSeller = userToFollow.validatePosts().size() > 0;
         Boolean follows = user.validateFolloweds().contains(userToFollow);
         Boolean isFollowed = userToFollow.validateFollowers().contains(user);
 

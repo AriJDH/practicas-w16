@@ -4,6 +4,7 @@ import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,10 +27,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> initData() {
-        /*private List<User> followers;
-        private List<User> followeds;
-        private List<Post> posts;
-        */
+
         List<User> initFollowers = new ArrayList<>();
         List<User> initFolloweds = new ArrayList<>();
         List<Post> initPost = new ArrayList<>();
@@ -59,6 +57,7 @@ public class UserRepository implements IUserRepository {
         initUser.add(user4);
         initUser.add(user5);
         initUser.add(user6);
+        user1.setPosts(initPost);
 
         return initUser;
     }
@@ -71,6 +70,12 @@ public class UserRepository implements IUserRepository {
     @Override
     public User getUserById(Integer id) {
         return listUser.stream().filter(user -> user.getUserId().equals(id)).findFirst().orElse(null);
+    }
+
+    @Override
+    public List<User> getFollowedsByUserId(Integer userId) {
+        return listUser.stream().filter(u -> u.getUserId().equals(userId))
+                .findFirst().get().getFolloweds();
     }
 
 }

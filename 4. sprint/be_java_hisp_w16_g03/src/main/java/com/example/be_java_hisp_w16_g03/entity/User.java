@@ -3,9 +3,16 @@ package com.example.be_java_hisp_w16_g03.entity;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
+import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -44,6 +51,32 @@ public class User {
         return this.posts;
     }
 
+    public void addPostToUser(PostDTO request) {
+        Post post = Post.builder()
+                .userId(request.getUserId())
+                .date(request.getDate())
+                .price(request.getPrice())
+                .product(Product.builder().
+                        productId(request.getProduct().getProductId())
+                        .brand(request.getProduct().getBrand())
+                        .color(request.getProduct().getColor())
+                        .type(request.getProduct().getType())
+                        .notes(request.getProduct().getNotes())
+                        .productName(request.getProduct().getProductName())
+                        .build())
+                .category(request.getCategory())
+                .price(request.getPrice()).build();
+        //Se asigna un Id autoincremental al Post
+        post.increaseId();
+        this.validatePosts().add(post);
+    }
+
+
+    public List<Post> getPostBetweenDate() {
+
+        return this.validatePosts().stream().filter(p -> p.getDate().isBefore(LocalDate.now())
+                && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
+    }
 
 
 }
