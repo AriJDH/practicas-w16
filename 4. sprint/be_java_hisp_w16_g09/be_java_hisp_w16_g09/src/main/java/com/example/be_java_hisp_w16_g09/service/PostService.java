@@ -31,7 +31,7 @@ public class PostService implements IPostService{
 
 
     //Martin
-    public void createPost(NewPostDto postDto){
+    public void createPost(PostDto postDto){
         Post post = new Post();
         int userId = postDto.getUserId();
         User user = userRepository.searchById(userId);
@@ -55,11 +55,11 @@ public class PostService implements IPostService{
     //MaxiN
     public RecentPostsDTO orderByDate(int id, String order){
         RecentPostsDTO posts = getRecentPostsOfSellersFollowedByUserWith(id);
-        List<PostOfSimpleUserDTO> listOrder =  posts.getPosts().stream()
-                .sorted(Comparator.comparing(PostOfSimpleUserDTO::getDate))
+        List<PostDto> listOrder =  posts.getPosts().stream()
+                .sorted(Comparator.comparing(PostDto::getDate))
                 .collect(Collectors.toList());
         if (order.equals("date_desc"))
-            listOrder.sort(Comparator.comparing(PostOfSimpleUserDTO::getDate).reversed());
+            listOrder.sort(Comparator.comparing(PostDto::getDate).reversed());
         posts.setPosts(listOrder);
         return posts;
     }
@@ -69,6 +69,7 @@ public class PostService implements IPostService{
 
 
     //Nico
+    //Constructor hecho para poder testear - inicializar dependencias
     public PostService(IPostRepository postRepository, IUserRepository userRepository,DTOMapperUtil dtoMapperUtil) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
@@ -83,7 +84,7 @@ public class PostService implements IPostService{
         postsOfSellers = Filter
                 .apply(postsOfSellers, (post -> post.wasPublishedAfter(LocalDate.now().minusWeeks(2))));
         postsOfSellers.sort(Comparator.comparing(Post::getDate).reversed());
-        List<PostOfSimpleUserDTO> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostOfSimpleUserDTO.class);
+        List<PostDto> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostDto.class);
         return new RecentPostsDTO(user.getUserId(), postDtos);
     }
 
