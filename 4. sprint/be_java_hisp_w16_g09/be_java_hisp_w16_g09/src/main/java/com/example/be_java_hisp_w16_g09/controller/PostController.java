@@ -1,10 +1,8 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
-import com.example.be_java_hisp_w16_g09.dto.NewPostDto;
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.service.IPostService;
-import com.example.be_java_hisp_w16_g09.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +15,7 @@ public class PostController {
     IPostService postService;
     //US 0005: Dar de alta una nueva publicación
     @PostMapping("/products/post")
-    public void createPost(@RequestBody NewPostDto postDto){
+    public void createPost(@RequestBody PostDto postDto){
         postService.createPost(postDto);
     }
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
