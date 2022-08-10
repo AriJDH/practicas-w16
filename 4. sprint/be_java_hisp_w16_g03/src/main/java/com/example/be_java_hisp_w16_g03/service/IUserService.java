@@ -12,4 +12,8 @@ public interface IUserService {
 
     FollowerCountDTO getCountFollowers(Integer id);
 
+    public UserDTO followUser(Integer userId, Integer userToFollowId);
+
+    public UserDTO unfollowUser(Integer userId, Integer userToFollowId);
+
 }
