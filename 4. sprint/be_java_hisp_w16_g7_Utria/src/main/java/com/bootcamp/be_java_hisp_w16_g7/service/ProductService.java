@@ -1,13 +1,11 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
@@ -82,7 +80,33 @@ public class ProductService implements IProductService {
         post.setHasPromo(false);
         post.setDiscount(0.0);
 
+        return getUser(postDto, post);
+    }
+
+    @Override
+    public PromotionProductDTO getPromotionProducts(int id) {
+        User response = userRepository.findUserById(id);
+        if(response.isSeller()){
+            int count = (int)response.getPosts().stream().filter(Post::isHasPromo).count();
+            return new PromotionProductDTO(response.getId(), response.getName(), count);
+        }
+        throw new UserIsNotSellerException(id);
+    }
+
+    @Override
+    public ApiResponseDto createPromotionPost(PostDTO postDto) {
+        Post post = mapper.map(postDto, Post.class);
+
+        post.setPostId(count);
+        post.setHasPromo(true);
+        post.setDiscount(post.getDiscount());
+
+        return getUser(postDto, post);
+    }
+
+    private ApiResponseDto getUser(PostDTO postDto, Post post) {
         User user = userRepository.findUserById(postDto.getId());
+
         if (user == null) {
             throw new UserNotFoundException(postDto.getId());
         }

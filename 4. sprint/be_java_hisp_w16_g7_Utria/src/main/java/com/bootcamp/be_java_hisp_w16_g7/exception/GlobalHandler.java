@@ -11,7 +11,7 @@ public class GlobalHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ApiResponseDto> onUserNotFoundException(UserNotFoundException e) {
-        return new ResponseEntity<>(new ApiResponseDto("User Not Found", e.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ApiResponseDto("User Not Found", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidQueryException.class)
