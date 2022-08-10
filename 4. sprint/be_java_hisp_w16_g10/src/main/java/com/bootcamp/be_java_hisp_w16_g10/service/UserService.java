@@ -159,7 +159,7 @@ public class UserService implements IService {
    }
 
    @Override
-   public List<PostResDTO> listFollowersPosts(Integer userId) {
+   public List<PostResDTO> listFollowersPosts(Integer userId, String order) {
       LocalDate localDate = LocalDate.now().minusDays(14);
       User user = this.userRepository.findById(userId);
       if (user == null)
@@ -176,8 +176,14 @@ public class UserService implements IService {
          }
       }
 
-      return postResDTOS.stream()
-            .sorted(Comparator.comparing(PostResDTO::getDate).reversed())
+      var listFollowers = postResDTOS.stream();
+      if(order != null && order.equals("date_asc")){
+          listFollowers = listFollowers.sorted(Comparator.comparing(PostResDTO::getDate));
+      }else{
+          listFollowers = listFollowers.sorted(Comparator.comparing(PostResDTO::getDate).reversed());
+      }
+
+      return listFollowers
             .collect(Collectors.toList());
    }
 

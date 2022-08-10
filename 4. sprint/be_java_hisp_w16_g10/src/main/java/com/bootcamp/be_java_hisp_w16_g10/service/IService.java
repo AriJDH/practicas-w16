@@ -14,5 +14,5 @@ public interface IService {
     FollowersListResDTO listFollowers(Integer userId, String order);
     FollowedListResDTO listFollowed(Integer userId, String order);
     void save(PostReqDTO model);
-    List<PostResDTO> listFollowersPosts(Integer userId);
+    List<PostResDTO> listFollowersPosts(Integer userId, String order);
 }

@@ -58,8 +58,8 @@ public class UserController {
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
     // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
     @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<List<PostResDTO>> US006(@PathVariable Integer userId){
-        return new ResponseEntity<>(this.userService.listFollowersPosts(userId), HttpStatus.OK);
+    public ResponseEntity<List<PostResDTO>> US006(@PathVariable Integer userId,  @RequestParam Optional<String> order){
+        return new ResponseEntity<>(this.userService.listFollowersPosts(userId, order.orElse(null)), HttpStatus.OK);
     }
 
     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
