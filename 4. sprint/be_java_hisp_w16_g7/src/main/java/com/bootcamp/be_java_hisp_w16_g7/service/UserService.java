@@ -27,6 +27,7 @@ public class UserService implements IUserService {
 
     @Override
     public HttpStatus follow(int userId, int userIdToFollow) {
+        if(userId == userIdToFollow) throw new SameUserException(userId);
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToFollow);
 
@@ -34,7 +35,6 @@ public class UserService implements IUserService {
         if (target == null) throw new UserNotFoundException(userIdToFollow);
         if (!target.isSeller()) throw new UserIsNotSellerException(userIdToFollow);
         if (target.getFollowers().contains(user)) throw new AlreadyFollowingException(userIdToFollow, userId);
-
 
         userRepository.addToUserFollows(target, user);
         userRepository.addToUserFollowers(user, target);
@@ -44,6 +44,7 @@ public class UserService implements IUserService {
 
     @Override
     public HttpStatus unfollow(int userId, int userIdToUnfollow) {
+        if(userId == userIdToUnfollow) throw new SameUserException(userId);
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToUnfollow);
 
@@ -60,9 +61,9 @@ public class UserService implements IUserService {
     @Override
     public ResponseUserFollowedDTO getUserFollowedList(int id, String order) {
         User user = userRepository.findUserById(id);
-        if (user == null)
-            throw new UserNotFoundException(id);
+        if (user == null) throw new UserNotFoundException(id);
         Comparator<ResponseUserDTO> userComp = Comparator.comparing(ResponseUserDTO::getUserName);
+
         if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
             throw new InvalidQueryException("unknown query");
         }
@@ -72,6 +73,7 @@ public class UserService implements IUserService {
                 .map(u -> mapper.map(u, ResponseUserDTO.class))
                 .sorted(userComp)
                 .collect(Collectors.toList());
+
         return new ResponseUserFollowedDTO(user.getId(), user.getName(), followed);
     }
 

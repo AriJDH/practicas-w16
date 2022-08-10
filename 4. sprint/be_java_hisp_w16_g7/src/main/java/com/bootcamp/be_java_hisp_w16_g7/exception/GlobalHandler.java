@@ -44,4 +44,11 @@ public class GlobalHandler {
         ApiResponseDto apiResponseDto = new ApiResponseDto("Not following", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({SameUserException.class})
+    public ResponseEntity<ApiResponseDto> catchException(SameUserException e) {
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Same user", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+
+    }
 }

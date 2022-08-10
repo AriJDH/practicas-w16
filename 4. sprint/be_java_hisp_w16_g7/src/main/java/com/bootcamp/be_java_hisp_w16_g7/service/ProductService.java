@@ -35,10 +35,8 @@ public class ProductService implements IProductService {
     @Override
     public RecentPostsDTO recentPost(int idUser, String order) {
         List<ResponsePostDTO> responsePostDTOS = new ArrayList<>();
-        //validacion de la existencia del usuario
         if (userRepository.existsUser(idUser)) {
             User user = userRepository.findUserById(idUser);
-            //validacion si sigue a alguien
             for (User users : user.getFollows()) {
                 List<Post> recentPost = users.getPosts().stream()
                         .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
