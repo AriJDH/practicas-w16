@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.repositories;
 
+import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PublicationRepository implements IPublicationRepository {
@@ -20,12 +22,22 @@ public class PublicationRepository implements IPublicationRepository {
   private void loadData() {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     LocalDate date1 = LocalDate.parse("09-08-2022", dtf);
-    LocalDate date2 = LocalDate.parse("18-04-2022", dtf);
+    LocalDate date2 = LocalDate.parse("02-08-2022", dtf);
+    LocalDate date3 = LocalDate.parse("18-04-2022", dtf);
 
+    publications.add(new Publication(1,104, date1, 100, 100, 150.0));
+    publications.add(new Publication(2,104, date2, 200, 200, 350.0));
+    publications.add(new Publication(2,104, date3, 300, 200, 350.0));
+  }
 
-    publications.add(new Publication(100, date1, 100, 150.0, 100));
-    publications.add(new Publication(104, date2, 190, 350.0, 200));
+  @Override
+  public List<Publication> getPublications() {
+    return publications;
+  }
 
+  @Override
+  public List<Publication> getListPublicationsById(Integer userId) {
+    return publications.stream().filter(x -> x.getUserId().equals(userId)).collect(Collectors.toList());
   }
 
   @Override

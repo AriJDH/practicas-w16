@@ -58,4 +58,12 @@ public class FollowerRepository implements IFollowerRepository{
             .forEach(follower -> ids.add(follower.getIdUser()));
     return ids;
   }
+
+  @Override
+  public void unFollowUser(Integer userIdToUnfollow, Integer userId) {
+    followers = followers.stream()
+            .filter(follower -> !(follower.getIdUser().equals(userIdToUnfollow) && follower.getIdFollower().equals(userId)))
+            .collect(Collectors.toList());
+
+  }
 }

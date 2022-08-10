@@ -11,4 +11,6 @@ public interface IFollowerRepository {
     List<Follower> getFollowersByUserId(Integer userId);
 
     List<Integer> returnIds(Integer userId);
+
+    void unFollowUser(Integer userIdToUnfollow, Integer userId);
 }
