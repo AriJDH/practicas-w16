@@ -11,6 +11,7 @@ import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersList;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -97,7 +98,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserFollowers getVendorsFollowedByUser(int userId) {
+    public UserFollowers getVendorsFollowedByUser(int userId,String order) {
 
 
         User serchedUser = getUserIfExist(userId);
@@ -106,7 +107,9 @@ public class UserService implements IUserService {
                 map(x->new UserFollowersList(x.getUserId(),x.getName()))
                 .collect(Collectors.toList());
 
-        return new UserFollowers(serchedUser.getUserId(),serchedUser.getName(),vendorsFollowed);
+
+        return new UserFollowers(serchedUser.getUserId(),serchedUser.getName(),OrderListFollowers(vendorsFollowed,order));
+
     }
 
     public boolean isVendor(User user){
@@ -115,15 +118,28 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserFollowers getAllVendorFollowers(int id) {
+    public UserFollowers getAllVendorFollowers(int id,String order) {
       User user = getUserIfExist(id);
       if(!isVendor(user)){
           throw new UserNotVendorException();
       }
-      return new UserFollowers(id, user.getName(), user.getFollowerList().stream()
+      return new UserFollowers(id, user.getName(), OrderListFollowers(user.getFollowerList().stream()
                 .map(x -> mapper.map(x,UserFollowersList.class))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList()),order));
 
+    }
+
+    private List<UserFollowersList> OrderListFollowers(List<UserFollowersList> list,String order){
+        if(order != null){
+            if(order.equalsIgnoreCase("name_asc")){
+                return list.stream().sorted(Comparator.comparing(UserFollowersList::getUserName)).collect(Collectors.toList());
+            } else if (order.equalsIgnoreCase("name_desc")) {
+                return list.stream().sorted(Comparator.comparing(UserFollowersList::getUserName).reversed()).collect(Collectors.toList());
+            }else{
+                throw new OrderNotPossibleException();
+            }
+        }
+        return list;
     }
 }
 

@@ -15,8 +15,8 @@ public interface IUserService {
     void unfollowUser(int userId, int userIdToUnfollow);
 
 
-    UserFollowers getVendorsFollowedByUser(int userId);
+    UserFollowers getVendorsFollowedByUser(int userId,String order);
 
-    UserFollowers getAllVendorFollowers(int id);
+    UserFollowers getAllVendorFollowers(int id,String order);
 
 }
