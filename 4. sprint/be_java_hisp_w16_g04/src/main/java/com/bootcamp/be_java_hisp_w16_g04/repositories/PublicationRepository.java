@@ -46,11 +46,12 @@ public class PublicationRepository implements IPublicationRepository {
     Boolean successValidate = validateFields(publicationDTO);
     if(!successValidate) return null;
 
-    Publication publication = new Publication(publicationDTO.getUserId(),
+    Publication publication = new Publication(publications.size()+1,
+            publicationDTO.getUserId(),
             publicationDTO.getDate(),
+            publicationDTO.getProductId(),
             publicationDTO.getCategory(),
-            publicationDTO.getPrice(),
-            publicationDTO.getProductId());
+            publicationDTO.getPrice() );
 
     publications.add(publication);
 

@@ -18,7 +18,7 @@ public class ProductController {
     @Autowired
     IProductService iProductService;
 
-    @PostMapping("post")
+    @PostMapping("/post")
     public ResponseEntity<String> createPublicacion(@RequestBody RequestCreatePublicationDTO publicationDTO){
         return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO),HttpStatus.OK);
     }
