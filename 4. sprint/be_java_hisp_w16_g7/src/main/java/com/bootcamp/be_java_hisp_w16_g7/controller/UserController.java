@@ -5,6 +5,10 @@ import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g7.service.IUserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +41,11 @@ public class UserController {
 
     }
 
+    @Operation(summary = "Get a specific user and their followers")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", description = "User isn't a seller / Unknown query", content = @Content),
+            @ApiResponse(responseCode = "404", description = "User not found", content = @Content)})
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<FollowersSellersDTO> getSellersFollowers(@PathVariable int userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(userService.getSellersFollowers(userId, order), HttpStatus.OK);
