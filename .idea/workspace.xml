@@ -4,8 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="42ee8e5b-6881-4be6-a86a-58aa273bfa29" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/entities/User.java" afterDir="false" />
+=======
+    <list default="true" id="66eb71d1-a7a7-4a4f-bce2-cdea00c5b788" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/practicas-w16.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/entities/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/IUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/IUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/4. sprint/be_java_hisp_w16_g01/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/UserService.java" afterDir="false" />
+>>>>>>> a57855611a977f53e39c6e1e270323cd9dda0f55
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +33,11 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
+<<<<<<< HEAD
         <entry key="$PROJECT_DIR$" value="camilo_palma" />
+=======
+        <entry key="$PROJECT_DIR$" value="german.rodriguez-follow" />
+>>>>>>> a57855611a977f53e39c6e1e270323cd9dda0f55
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -23,11 +45,23 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="2CiWROJkMT4vCGzC5jZ7KbDlF45" />
+=======
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2D8Ql61bdZGbt0QuQhF86mGYrOn" />
+>>>>>>> a57855611a977f53e39c6e1e270323cd9dda0f55
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
@@ -67,12 +101,40 @@
       <workItem from="1660057999529" duration="141000" />
       <workItem from="1660058691987" duration="3184000" />
       <workItem from="1660076116457" duration="54000" />
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "11",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="66eb71d1-a7a7-4a4f-bce2-cdea00c5b788" name="Changes" comment="" />
+      <created>1660078380000</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660078380000</updated>
+      <workItem from="1660078381479" duration="373000" />
+>>>>>>> a57855611a977f53e39c6e1e270323cd9dda0f55
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -84,4 +146,6 @@
       </map>
     </option>
   </component>
+=======
+>>>>>>> a57855611a977f53e39c6e1e270323cd9dda0f55
 </project>

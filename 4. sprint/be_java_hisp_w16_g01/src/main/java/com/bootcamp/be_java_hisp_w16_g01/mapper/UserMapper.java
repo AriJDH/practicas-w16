@@ -14,11 +14,11 @@ public class UserMapper {
         return  new UserDTO(user.getUserId(), user.getUserName() );
     }
 
-    public UserFollowerDTO UserFollowerDTO(User user){
+    public UserFollowerDTO userFollowerDTO(User user){
         List<UserDTO> followers = user.getFollowers().stream().map(this::toDTO).collect(Collectors.toList());
         return new UserFollowerDTO(user.getUserId(), user.getUserName(), followers);
     }
-    public UserFollowedDTO UserFollowedDTO(User user){
+    public UserFollowedDTO userFollowedDTO(User user){
         List<UserDTO> followed = user.getFollowed().stream().map(this::toDTO).collect(Collectors.toList());
         return new UserFollowedDTO(user.getUserId(), user.getUserName(), followed);
     }
