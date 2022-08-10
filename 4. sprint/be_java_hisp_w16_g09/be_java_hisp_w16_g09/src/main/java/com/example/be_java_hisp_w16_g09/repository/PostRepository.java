@@ -10,10 +10,17 @@ import java.util.stream.Collectors;
 
 @Repository
 public class PostRepository implements IPostRepository{
-    private HashMap<Integer, List<Post>> posts = new HashMap<>();
+    private HashMap<Integer, List<Post>> posts;
+    private int postIdCounter;
+
+    public PostRepository() {
+        postIdCounter = 0;
+        posts = new HashMap<>();
+    }
 
     public void createElement(Post newPost){
         List<Post> newList;
+        newPost.setPostId(getNewPostId());
         int userId = newPost.getUser().getUserId();
         if(posts.containsKey(userId))
         {
@@ -23,6 +30,11 @@ public class PostRepository implements IPostRepository{
         }
         newList.add(newPost);
         posts.put(userId,newList);
+    }
+
+    private int getNewPostId() {
+        postIdCounter++;
+        return postIdCounter;
     }
 
     public List<Post> searchById(int id){

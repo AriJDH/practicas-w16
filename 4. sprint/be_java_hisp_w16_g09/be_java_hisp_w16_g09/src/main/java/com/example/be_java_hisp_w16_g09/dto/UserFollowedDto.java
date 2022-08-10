@@ -1,22 +1,20 @@
 package com.example.be_java_hisp_w16_g09.dto;
 
-import com.example.be_java_hisp_w16_g09.model.User;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
-//Response
-@Getter
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class RecentPostsDTO {
-
+public class UserFollowedDto {
     private int userId;
-    private List<PostOfSimpleUserDTO> posts;
-
+    private String userName;
+    private List<SimpleUserDto> following = new ArrayList<>();
 }

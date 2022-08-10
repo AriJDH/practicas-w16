@@ -3,10 +3,8 @@ package com.example.be_java_hisp_w16_g09.service;
 import com.example.be_java_hisp_w16_g09.dto.FollowersCountDTO;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
-import com.example.be_java_hisp_w16_g09.exception.UserAlreadyFollowedException;
-import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
-import com.example.be_java_hisp_w16_g09.exception.UserNotFollowing;
-import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.dto.UserFollowedDto;
+import com.example.be_java_hisp_w16_g09.exception.*;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
@@ -56,7 +54,17 @@ public class UserService implements IUserService{
 
 
     //MaxiM
+    public UserFollowedDto getUsersFollowedBySellers(int userId) {
+        User user = this.userRepository.searchById(userId);
+        if (user == null) {throw new UserNotFoundException(userId);}
+        else if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
+        ModelMapper mapper = new ModelMapper();
+        List<SimpleUserDto> followed = user.getFollowing().stream()
+                .map(following -> mapper.map(following, SimpleUserDto.class))
+                .collect(Collectors.toList());
 
+        return new UserFollowedDto(user.getUserId(), user.getUserName(), followed);
+    }
 
     //MaxiN
     public FollowersCountDTO followerCount(int id){
