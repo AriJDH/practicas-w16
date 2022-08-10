@@ -107,8 +107,7 @@ public class UserService implements IUserService {
         if (userFound == null) {
             throw new UserNotFoundException(id);
         }
-        int countPost = userFound.getPosts().size();
-        if (countPost > 0) {
+        if (userFound.isSeller()) {
             countFollowers = userFound.getFollowers().size();
         } else {
             throw new UserIsNotSellerException(id);
