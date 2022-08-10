@@ -13,14 +13,14 @@ import java.util.Optional;
 @RequestMapping("/products")
 public class PublicationController {
 
-    @Autowired
-    IPublicationService iPublicationService;
+  @Autowired
+  IPublicationService iPublicationService;
 
-    @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<ListProductByDateDTO> getProductByDate(@PathVariable Integer userId, @RequestParam Optional<String> order){
+  @GetMapping("/followed/{userId}/list")
+  public ResponseEntity<ListProductByDateDTO> getProductByDate(@PathVariable Integer userId, @RequestParam Optional<String> order) {
 
-        ListProductByDateDTO result = iPublicationService.getListProductByDate(userId, order.orElse(""));
-        return new ResponseEntity<>(result, HttpStatus.OK);
-    }
+    ListProductByDateDTO result = iPublicationService.getListProductByDate(userId, order.orElse(""));
+    return new ResponseEntity<>(result, HttpStatus.OK);
+  }
 
 }

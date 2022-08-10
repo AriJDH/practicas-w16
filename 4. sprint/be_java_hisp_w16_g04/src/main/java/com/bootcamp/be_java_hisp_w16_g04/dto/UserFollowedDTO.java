@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserFollowedDTO {
-    Integer user_id;
-    String user_name;
-    List<User> followed;
+  Integer user_id;
+  String user_name;
+  List<User> followed;
 }

@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.repositories;
 
-import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import org.springframework.stereotype.Repository;
 
@@ -25,9 +22,9 @@ public class PublicationRepository implements IPublicationRepository {
     LocalDate date2 = LocalDate.parse("02-08-2022", dtf);
     LocalDate date3 = LocalDate.parse("18-04-2022", dtf);
 
-    publications.add(new Publication(1,104, date1, 100, 100, 150.0));
-    publications.add(new Publication(2,104, date2, 200, 200, 350.0));
-    publications.add(new Publication(2,104, date3, 300, 200, 350.0));
+    publications.add(new Publication(1, 104, date1, 100, 100, 150.0));
+    publications.add(new Publication(2, 104, date2, 200, 200, 350.0));
+    publications.add(new Publication(2, 104, date3, 300, 200, 350.0));
   }
 
   @Override
@@ -44,28 +41,27 @@ public class PublicationRepository implements IPublicationRepository {
   public Publication createPublication(PublicationDTO publicationDTO) {
 
     Boolean successValidate = validateFields(publicationDTO);
-    if(!successValidate) return null;
+    if (!successValidate) return null;
 
-    Publication publication = new Publication(publications.size()+1,
-            publicationDTO.getUserId(),
-            publicationDTO.getDate(),
-            publicationDTO.getProductId(),
-            publicationDTO.getCategory(),
-            publicationDTO.getPrice() );
+    Publication publication = new Publication(publications.size() + 1,
+        publicationDTO.getUserId(),
+        publicationDTO.getDate(),
+        publicationDTO.getProductId(),
+        publicationDTO.getCategory(),
+        publicationDTO.getPrice());
 
     publications.add(publication);
-
     return publication;
 
   }
 
-  private Boolean validateFields(PublicationDTO publicationDTO){
+  private Boolean validateFields(PublicationDTO publicationDTO) {
 
     return publicationDTO.getUserId() != null &&
-            publicationDTO.getDate() != null &&
-            publicationDTO.getCategory() != null &&
-            publicationDTO.getPrice() != null &&
-            publicationDTO.getProductId() != null;
+        publicationDTO.getDate() != null &&
+        publicationDTO.getCategory() != null &&
+        publicationDTO.getPrice() != null &&
+        publicationDTO.getProductId() != null;
 
   }
 

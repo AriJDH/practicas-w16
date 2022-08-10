@@ -13,10 +13,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostDTO {
-    private Integer userId;
-    private Integer postId;
-    private LocalDate date;
-    private ProductDTO product;
-    private Integer category;
-    private Double price;
+  private Integer userId;
+  private Integer postId;
+  private LocalDate date;
+  private ProductDTO product;
+  private Integer category;
+  private Double price;
 }

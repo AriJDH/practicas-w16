@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Repository
@@ -14,7 +13,7 @@ public class UserRepository implements IUserRepository {
   List<User> users = new ArrayList<User>();
 
   @PostConstruct
-  private void loadData(){
+  private void loadData() {
     users.add(new User(100, "Andres Roa"));
     users.add(new User(101, "Javier Aguayo"));
     users.add(new User(102, "Ruth Cano"));
@@ -26,13 +25,12 @@ public class UserRepository implements IUserRepository {
   }
 
 
-
   @Override
   public User getByIdUser(Integer userId) {
     return users.stream()
-            .filter(x -> x.getUserId().equals(userId))
-            .findFirst()
-            .orElse(null);
+        .filter(x -> x.getUserId().equals(userId))
+        .findFirst()
+        .orElse(null);
   }
 
 }

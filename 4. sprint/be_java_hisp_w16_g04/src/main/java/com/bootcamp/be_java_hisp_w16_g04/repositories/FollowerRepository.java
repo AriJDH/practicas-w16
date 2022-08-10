@@ -9,26 +9,28 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class FollowerRepository implements IFollowerRepository{
+public class FollowerRepository implements IFollowerRepository {
   List<Follower> followers = new ArrayList<Follower>();
 
   @PostConstruct
-  private void loadData(){
+  private void loadData() {
     followers.add(new Follower(100, 101));
     followers.add(new Follower(100, 105));
     followers.add(new Follower(100, 103));
     followers.add(new Follower(104, 105));
     followers.add(new Follower(104, 106));
+    followers.add(new Follower(100, 106));
   }
 
   @Override
   public List<Integer> getFollewersListById(Integer userId) {
     return followers.stream().filter(follower -> follower.getIdUser().equals(userId))
-            .map(Follower::getIdFollower)
-            .collect(Collectors.toList());
+        .map(Follower::getIdFollower)
+        .collect(Collectors.toList());
   }
+
   @Override
-  public void followUser(Integer userIdToFollow, Integer  userId) {
+  public void followUser(Integer userIdToFollow, Integer userId) {
     followers.add(new Follower(userIdToFollow, userId));
   }
 
@@ -38,10 +40,7 @@ public class FollowerRepository implements IFollowerRepository{
         .filter(follower -> follower.getIdUser().equals(userIdToFollow) && follower.getIdFollower().equals(userId))
         .count();
 
-    if (countFollow > 0) {
-      return false;
-    }
-    return true;
+    return !(countFollow > 0);
   }
 
   @Override
@@ -50,20 +49,20 @@ public class FollowerRepository implements IFollowerRepository{
   }
 
   @Override
-  public List<Integer> returnIds(Integer userId){
+  public List<Integer> returnIds(Integer userId) {
     List<Integer> ids = new ArrayList<>();
     followers.stream()
-            .filter(user -> user.getIdFollower() == userId)
-            .collect(Collectors.toList())
-            .forEach(follower -> ids.add(follower.getIdUser()));
+        .filter(user -> user.getIdFollower() == userId)
+        .collect(Collectors.toList())
+        .forEach(follower -> ids.add(follower.getIdUser()));
     return ids;
   }
 
   @Override
   public void unFollowUser(Integer userIdToUnfollow, Integer userId) {
     followers = followers.stream()
-            .filter(follower -> !(follower.getIdUser().equals(userIdToUnfollow) && follower.getIdFollower().equals(userId)))
-            .collect(Collectors.toList());
+        .filter(follower -> !(follower.getIdUser().equals(userIdToUnfollow) && follower.getIdFollower().equals(userId)))
+        .collect(Collectors.toList());
 
   }
 }

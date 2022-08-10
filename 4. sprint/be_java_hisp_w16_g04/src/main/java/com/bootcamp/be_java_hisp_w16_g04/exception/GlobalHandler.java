@@ -23,7 +23,7 @@ public class GlobalHandler {
 
   @ExceptionHandler(FailedToCreateResource.class)
   public ResponseEntity<ResponseApiDTO> catchExeptionFailed(FailedToCreateResource e) {
-    return new ResponseEntity<>(new ResponseApiDTO("Failed","Failed to create resource"), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new ResponseApiDTO("Failed", "Failed to create resource"), HttpStatus.BAD_REQUEST);
   }
 
 }
