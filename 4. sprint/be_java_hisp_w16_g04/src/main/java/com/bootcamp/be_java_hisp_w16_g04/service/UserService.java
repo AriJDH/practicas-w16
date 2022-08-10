@@ -9,8 +9,6 @@ import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
 import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowedDTO;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
