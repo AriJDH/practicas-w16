@@ -8,9 +8,12 @@ import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +27,11 @@ public class PostService implements IPostService {
 
     @Override
     public MessageDto createPost(PostDto postDto) {
+        if (postDto.getDate() == null)
+            throw new BadRequestException("La fecha es un campo obligatorio");
+
+        if (postDto.getDate().isAfter(LocalDate.now()))
+            throw new BadRequestException("La fecha es posterior a la fecha actual");
 
         if(!userRepository.userExists(postDto.getUserId()))
             throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
@@ -48,19 +56,13 @@ public class PostService implements IPostService {
         return new MessageDto("Publicacion creada correctamente, id: " + id);
     }
 
-    @Override
-    public FollowedPostsDto getFollowedPosts(int userId) {
-        User user = userRepository.getUser(userId);
-
-        if(user == null)
-            throw new BadRequestException("No existe el usuario con Id: " + userId);
-
+    private List<ResponsePostDto> getPosts(User user){
         List<Post> post = new ArrayList<>();
         for (User u : user.getFollowed()) {
             post.addAll(postRepository.getPostsByUserId(u.getUserId()));
         }
 
-        FollowedPostsDto followedPostsDto = new FollowedPostsDto(userId,post.stream().map(
+        return post.stream().map(
                 x-> new ResponsePostDto(x.getUserId(),x.getPostId(),x.getDate(),new ProductDto(
                         x.getProduct().getProductId(),
                         x.getProduct().getProductName(),
@@ -70,9 +72,29 @@ public class PostService implements IPostService {
                         x.getProduct().getNotes()),
                         x.getCategory(),
                         x.getPrice())
-                ).collect(Collectors.toList()));
+        ).collect(Collectors.toList());
+    }
 
-        return followedPostsDto;
+
+    @Override
+    public FollowedPostsDto getFollowedPosts(int userId, String order) {
+        User user = userRepository.getUser(userId);
+
+        if(user == null)
+            throw new BadRequestException("No existe el usuario con Id: " + userId);
+
+        if (order!= null){
+            if (order.equalsIgnoreCase("date_desc")) {
+                return new FollowedPostsDto(userId, getPosts(user).stream()
+                        .sorted(Comparator.comparing(ResponsePostDto::getDate).reversed())
+                        .collect(Collectors.toList()));
+            } else
+                return new FollowedPostsDto(userId, getPosts(user).stream()
+                        .sorted(Comparator.comparing(ResponsePostDto::getDate))
+                        .collect(Collectors.toList()));
+        }
+        else
+            return new FollowedPostsDto(userId, getPosts(user));
     }
 
 

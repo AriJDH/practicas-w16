@@ -1,15 +1,16 @@
 package com.bootcamp.be_java_hisp_w16_g01.service;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.FollowersCountDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.*;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserUnfollowDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowedDTO;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowerDTO;
 import com.bootcamp.be_java_hisp_w16_g01.mapper.UserMapper;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -25,36 +26,63 @@ public class UserService implements IUserService {
         User userUnfollowing = this.userRepository.getUser(userId);
         User userToUnfollow = this.userRepository.getUser(userIdToUnfollow);
 
-        if (userToUnfollow == null || userUnfollowing == null) {
-            throw new BadRequestException("TODO");
-        }
+        if (userToUnfollow == null )
+            throw new BadRequestException("Usuario no existe id : " + userIdToUnfollow);
+        if (userUnfollowing == null)
+            throw new BadRequestException("Usuario no existe id : " + userId);
 
         if (!this.userRepository.userIsFollowed(userToUnfollow, userUnfollowing)
                 || !this.userRepository.userIsFollower(userUnfollowing, userToUnfollow)
         ) {
-            throw new BadRequestException("TODO-2");
+            throw new BadRequestException("El usuario : " + userId + " no sigue al usuario : " + userIdToUnfollow );
         }
 
         userToUnfollow.getFollowers().remove(userUnfollowing);
         userUnfollowing.getFollowed().remove(userToUnfollow);
 
-        return new UserUnfollowDTO("Ok", "User unfollowed succesfully");
+        return new UserUnfollowDTO("Ok", "Usuario dejado de seguir correctamente");
     }
 
-
-    public UserFollowerDTO getFollowers(int userId){
+    @Override
+    public UserFollowerDTO getFollowers(int userId, String order) {
         User user = userRepository.getUser(userId);
         if(user != null){
-            return userMapper.userFollowerDTO(user);
+            if (order!= null) {
+                if (order.equalsIgnoreCase("name_asc")) {
+                    List<User> followers = user.getFollowers().stream()
+                            .sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
+                    return userMapper.userFollowerDTO(followers, user);
+                } else if (order.equalsIgnoreCase("name_desc")) {
+                    List<User> followers = user.getFollowers().stream()
+                            .sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList());
+                    return userMapper.userFollowerDTO(followers, user);
+                } else throw new BadRequestException("El orden no está definido");
+            }
+            else
+                return userMapper.userFollowerDTO(user.getFollowers(), user);
         } else {
             throw new BadRequestException("El usuario "+ userId +  " no existe");
         }
     }
 
-    public UserFollowedDTO getFollowed(int userId) {
+
+    @Override
+    public UserFollowedDTO getFollowed(int userId, String order) {
         User user = userRepository.getUser(userId);
         if(user != null){
-            return userMapper.userFollowedDTO(user);
+            if (order != null) {
+                if (order.equalsIgnoreCase("name_asc")) {
+                    List<User> followed = user.getFollowed().stream()
+                            .sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList());
+                    return userMapper.userFollowedDTO(followed, user);
+                } else if (order.equalsIgnoreCase("name_desc")) {
+                    List<User> followed = user.getFollowed().stream()
+                            .sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList());
+                    return userMapper.userFollowedDTO(followed, user);
+                } else throw new BadRequestException("El orden no está definido");
+            }
+            else
+                return userMapper.userFollowedDTO(user.getFollowed(), user);
         } else {
             throw new BadRequestException("El usuario "+ userId +  " no existe");
         }

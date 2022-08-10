@@ -12,17 +12,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/products")
 public class PostController {
     @Autowired
     private IPostService postService;
 
-    @PostMapping("/products/post")
+    @PostMapping("/post")
     public ResponseEntity<MessageDto> createPost(@RequestBody PostDto postDTO) {
         return new ResponseEntity<MessageDto>(postService.createPost(postDTO), HttpStatus.OK);
     }
 
-    @GetMapping("/products/followed/{userId}/list")
-    public ResponseEntity<FollowedPostsDto> getFollowedPosts(@PathVariable int userId) {
-        return new ResponseEntity<FollowedPostsDto>(postService.getFollowedPosts(userId), HttpStatus.OK);
+    @GetMapping("/followed/{userId}/list")
+    public ResponseEntity<FollowedPostsDto> getFollowedPostsOrder(@PathVariable int userId, @RequestParam String order) {
+        return new ResponseEntity<>(postService.getFollowedPosts(userId, order), HttpStatus.OK);
     }
+
 }

@@ -7,8 +7,9 @@ public interface IUserService {
 
     UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow);
 
-    UserFollowerDTO getFollowers(int userId);
-    UserFollowedDTO getFollowed(int userId);
+    UserFollowerDTO getFollowers(int userId, String order);
+
+    UserFollowedDTO getFollowed(int userId, String order);
 
     FollowersCountDTO getCantFollowers(int userId);
 
