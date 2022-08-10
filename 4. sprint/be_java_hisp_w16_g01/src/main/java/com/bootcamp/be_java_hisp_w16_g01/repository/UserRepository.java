@@ -36,9 +36,9 @@ public class UserRepository implements IUserRepository {
 
         //Agrego los followers
         user1.addFollower(user3);
+
         //Agrego los followed
         user1.addFollowed(user3);
-
         user1.addFollowed(user4);
     }
     public void addFollower(int idUser, int userIdToFollow){

@@ -17,21 +17,6 @@ public class User {
     private List<User> followed;
     private List<Post> posts;
 
-<<<<<<< HEAD
-    public User(int userId, String userName){
-        this.followed = new ArrayList<>();
-        this.followers = new ArrayList<>();
-        this.posts = new ArrayList<>();
-    }
-
-    public void addFollower(User user){
-        this.followers.add(user);
-        //user.addFollowed(this);
-    }
-    public void addFollowed(User user){
-        this.followed.add(user);
-        //user.addFollower(this);
-=======
     public User(int userId, String userName) {
         this.userId = userId;
         this.userName = userName;
@@ -40,13 +25,14 @@ public class User {
         this.posts = new ArrayList<>();
     }
 
-    public void addFollower (User user){
-        followers.add(user);
+    public void addFollower(User user){
+        this.followers.add(user);
     }
 
-    public void addFollowed (User user){
-        followed.add(user);
->>>>>>> a57855611a977f53e39c6e1e270323cd9dda0f55
+    public void addFollowed(User user) {
+        this.followed.add(user);
     }
+
+
 
 }
