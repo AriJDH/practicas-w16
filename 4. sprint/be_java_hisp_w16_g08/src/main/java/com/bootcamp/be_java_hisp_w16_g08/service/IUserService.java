@@ -17,6 +17,6 @@ public interface IUserService {
 
     UserFollowers getVendorsFollowedByUser(int userId);
 
-    UserFollowers getAllFollowers(int id);
+    UserFollowers getAllVendorFollowers(int id);
 
 }

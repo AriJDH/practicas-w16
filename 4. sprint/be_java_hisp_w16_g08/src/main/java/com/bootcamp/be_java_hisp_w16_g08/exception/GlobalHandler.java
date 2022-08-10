@@ -18,4 +18,23 @@ public class GlobalHandler {
         ResponseApiDto exceptionApiDTO = new ResponseApiDto("User was not found");
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UserNotVendorException.class)
+    public ResponseEntity<ResponseApiDto> catchUserNotVendorException(UserNotVendorException e){
+        ResponseApiDto exceptionApiDTO = new ResponseApiDto("User not vendor");
+        return  new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlreadyFollowAUserException.class)
+    public  ResponseEntity<ResponseApiDto> catchAlreadyFollowAUserException(AlreadyFollowAUserException e){
+        ResponseApiDto exceptionApiDto = new ResponseApiDto("Already follow this user");
+        return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CanNotFollowYourSelfException.class)
+    public  ResponseEntity<ResponseApiDto> catchCanNotFollowYourSelfException(CanNotFollowYourSelfException e){
+        ResponseApiDto exceptionApiDto = new ResponseApiDto("Can not follow yourself");
+        return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
+    }
+
 }
