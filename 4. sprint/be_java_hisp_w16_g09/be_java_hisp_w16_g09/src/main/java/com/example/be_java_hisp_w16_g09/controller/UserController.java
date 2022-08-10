@@ -33,17 +33,17 @@ public class UserController {
         return new ResponseEntity<>(userService.followerCount(userId), HttpStatus.OK);
     }
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
-    @RequestMapping(value = "/users/{userId}/followers/list", params = "order")
+    @GetMapping( "/users/{userId}/followers/list")
     public ResponseEntity<FollowersDtoResponse> US003(@PathVariable Integer userId, @RequestParam(required = false) String order){
-        if (!order.isEmpty())
+        if (order != null)
             return new ResponseEntity<>(userService.orderByName(userId,order),HttpStatus.OK);
         else
             return new ResponseEntity<>(userService.getAllFollowers(userId), HttpStatus.OK);
     }
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
-    @RequestMapping(value ="/users/{userId}/followed/list", params = "order")
+    @GetMapping("/users/{userId}/followed/list")
     public ResponseEntity<UserFollowedDto> US004(@PathVariable int userId, @RequestParam(required = false) String order){
-        if (!order.isEmpty())
+        if (order != null)
             return new ResponseEntity<>(userService.orderByNameFollowed(userId,order),HttpStatus.OK);
         else
             return new ResponseEntity<>(userService.getUsersFollowedBySellers(userId),HttpStatus.OK);
@@ -54,10 +54,4 @@ public class UserController {
         userService.unfollow(userId,userIdToUnfollow);
         return new ResponseEntity<>(new MessageDto("User "+userId+" unfollow "+userIdToUnfollow),HttpStatus.OK );
     }
-    //US 0008: Ordenamiento alfabético ascendente y descendente
-    //      users/{UserID}/followers/list?order=name_asc
-    //      users/{UserID}/followers/list?order=name_desc
-    //      users/{UserID}/followed/list?order=name_asc
-    //      users/{UserID}/followed/list?order=name_desc
-    //  *Nota: Este ordenamiento aplica solo para US-003 y US-004.
 }
