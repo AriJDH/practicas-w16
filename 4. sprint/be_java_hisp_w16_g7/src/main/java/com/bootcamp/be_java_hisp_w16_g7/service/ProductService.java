@@ -32,7 +32,6 @@ public class ProductService implements IProductService {
         this.mapper = new ModelMapper();
     }
 
-
     @Override
     public RecentPostsDTO recentPost(int idUser, String order) {
         List<ResponsePostDTO> responsePostDTOS = new ArrayList<>();
@@ -40,9 +39,7 @@ public class ProductService implements IProductService {
         if (userRepository.existsUser(idUser)) {
             User user = userRepository.findUserById(idUser);
             //validacion si sigue a alguien
-
             for (User users : user.getFollows()) {
-
                 List<Post> recentPost = users.getPosts().stream()
                         .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
                         .collect(Collectors.toList());
@@ -57,12 +54,13 @@ public class ProductService implements IProductService {
             } else {
                 throw new InvalidQueryException("Unknown query");
             }
-
-
+            
         } else {
             throw new UserNotFoundException(idUser);
         }
     }
+
+
 
     @Override
     public List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList) {
