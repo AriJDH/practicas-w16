@@ -1,23 +1,11 @@
 package com.bootcamp.be_java_hisp_w16_g7.repository;
 
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
-
-import com.bootcamp.be_java_hisp_w16_g7.entity.Category;
-import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
-import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import java.util.Optional;
-
-import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository{

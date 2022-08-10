@@ -10,9 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 
 public class FollowersDTO {
-    @JsonProperty("userId")
+    @JsonProperty("user_id")
     private int id;
 
-    @JsonProperty("userName")
+    @JsonProperty("user_name")
     private String name;
 }
