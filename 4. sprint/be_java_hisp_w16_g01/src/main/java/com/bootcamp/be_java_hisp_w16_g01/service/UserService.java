@@ -21,11 +21,24 @@ public class UserService implements IUserService {
 
     @Override
     public UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow) {
-        if (this.userRepository.unfollowUser(userId, userIdToUnfollow)) {
-            return new UserUnfollowDTO("Ok", "User unfollowed succesfully");
+
+        User userUnfollowing = this.userRepository.getUser(userId);
+        User userToUnfollow = this.userRepository.getUser(userIdToUnfollow);
+
+        if (userToUnfollow == null || userUnfollowing == null) {
+            throw new BadRequestException("TODO");
         }
 
-        return new UserUnfollowDTO("Error", "An error has occurred");
+        if (!this.userRepository.userIsFollowed(userToUnfollow, userUnfollowing)
+                || !this.userRepository.userIsFollower(userUnfollowing, userToUnfollow)
+        ) {
+            throw new BadRequestException("TODO-2");
+        }
+
+        userToUnfollow.getFollowers().remove(userUnfollowing);
+        userUnfollowing.getFollowed().remove(userToUnfollow);
+
+        return new UserUnfollowDTO("Ok", "User unfollowed succesfully");
     }
 
 
@@ -52,26 +65,22 @@ public class UserService implements IUserService {
         if (userRepository.userExists(userId)) {
             User usr = userRepository.getUser(userId);
             return new FollowersCountDTO(userId, usr.getUserName(), usr.getFollowers().size());
-        }
-        else throw new BadRequestException("Usuario con id: " + userId + " no existe");
+        } else throw new BadRequestException("Usuario con id: " + userId + " no existe");
     }
 
-    public void addFollower(int userId, int userIdToFollow){
+    public void addFollower(int userId, int userIdToFollow) {
         if (userRepository.userExists(userId)) {
             if (userRepository.userExists(userIdToFollow)) {
                 if (userRepository.userIsSeller(userIdToFollow)) {
                     //si ya no lo sigue
-                    if (!userRepository.getUser(userIdToFollow).getFollowers().contains(userRepository.getUser(userId))){
+                    if (!userRepository.getUser(userIdToFollow).getFollowers().contains(userRepository.getUser(userId))) {
                         userRepository.addFollower(userId, userIdToFollow);
                         userRepository.addFollowed(userId, userIdToFollow);
-                    }
-                    else throw new BadRequestException("Usuario con id: " + userId + " ya sigue al usuario con id: " + userIdToFollow);
-                }
-                else throw new BadRequestException("Usuario con id: " + userIdToFollow + " no es vendedor");
-            }
-            else throw new BadRequestException("Usuario con id: " + userIdToFollow + " no existe");
-        }
-        else throw new BadRequestException("Usuario con id: " + userId + " no existe");
+                    } else
+                        throw new BadRequestException("Usuario con id: " + userId + " ya sigue al usuario con id: " + userIdToFollow);
+                } else throw new BadRequestException("Usuario con id: " + userIdToFollow + " no es vendedor");
+            } else throw new BadRequestException("Usuario con id: " + userIdToFollow + " no existe");
+        } else throw new BadRequestException("Usuario con id: " + userId + " no existe");
     }
 
 
