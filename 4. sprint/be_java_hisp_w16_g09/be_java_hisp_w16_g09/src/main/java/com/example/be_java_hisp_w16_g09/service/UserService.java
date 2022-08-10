@@ -8,6 +8,7 @@ import com.example.be_java_hisp_w16_g09.exception.*;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
+import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,9 @@ public class UserService implements IUserService{
     IUserRepository userRepository;
     @Autowired
     IPostRepository postRepository;
+
+   @Autowired
+    private DTOMapperUtil dtoMapperUtil;
 
     //Javi
     public void followUser(int userId, int userIdToFollow) {
@@ -65,12 +69,7 @@ public class UserService implements IUserService{
     public UserFollowedDto getUsersFollowedBySellers(int userId) {
         User user = getValidatedUser(userId);
         if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
-
-        ModelMapper mapper = new ModelMapper();
-        List<SimpleUserDto> followed = user.getFollowing().stream()
-                .map(following -> mapper.map(following, SimpleUserDto.class))
-                .collect(Collectors.toList());
-
+        List<SimpleUserDto> followed = dtoMapperUtil.mapList(user.getFollowing(), SimpleUserDto.class);
         return new UserFollowedDto(user.getUserId(), user.getUserName(), followed);
     }
 
@@ -130,12 +129,7 @@ public class UserService implements IUserService{
         if (user.getFollowers().isEmpty()){
             throw new UserHasNoFollowersException(id);
         }else{
-            ModelMapper mapper = new ModelMapper();
-            List<SimpleUserDto> followers = new ArrayList<>();
-            user.getFollowers().forEach(follower -> {
-                SimpleUserDto followerOfUser = mapper.map(follower, SimpleUserDto.class);
-                followers.add(followerOfUser);
-            });
+            List<SimpleUserDto> followers = dtoMapperUtil.mapList(user.getFollowers(), SimpleUserDto.class);
             return new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
         }
     }
