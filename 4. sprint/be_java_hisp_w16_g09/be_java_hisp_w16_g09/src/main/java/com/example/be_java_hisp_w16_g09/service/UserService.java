@@ -53,9 +53,8 @@ public class UserService implements IUserService{
 
     //MaxiM
     public UserFollowedDto getUsersFollowedBySellers(int userId) {
-        User user = this.userRepository.searchById(userId);
-        if (user == null) {throw new UserNotFoundException(userId);}
-        else if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
+        User user = getValidatedUser(userId);
+        if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
         ModelMapper mapper = new ModelMapper();
         List<SimpleUserDto> followed = user.getFollowing().stream()
                 .map(following -> mapper.map(following, SimpleUserDto.class))
@@ -68,26 +67,20 @@ public class UserService implements IUserService{
     public FollowersCountDTO followerCount(int id){
         FollowersCountDTO followersCountDTO = new FollowersCountDTO();
         followersCountDTO.setUser_id(id);
-        if (userRepository.searchById(id) == null)
-            throw new UserNotFoundException(id);
+        User user = getValidatedUser (id);
 
-        followersCountDTO.setUser_name(userRepository.searchById(id).getUserName());
+        followersCountDTO.setUser_name(user.getUserName());
         int followersCount = 0;
         if(postRepository.searchById(id)!=null)
-            followersCount = userRepository.searchById(id).getFollowers().size();
+            followersCount = user.getFollowers().size();
 
         followersCountDTO.setFollowers_count(followersCount);
         return followersCountDTO;
     }
 
     public void unfollow(int userId, int userIdToUfollow){
-        if (userRepository.searchById(userId) == null)
-            throw new UserNotFoundException(userId);
-        else if (userRepository.searchById(userIdToUfollow) == null)
-            throw new UserNotFoundException(userIdToUfollow);
-
-        User unfollow = userRepository.searchById(userIdToUfollow);
-        User unfollow2 = userRepository.searchById(userId);
+        User unfollow = getValidatedUser(userIdToUfollow);
+        User unfollow2 = getValidatedUser(userId);
 
         if (!userRepository.searchById(userId).isFollowing(unfollow))
             throw new UserNotFollowing(userId,userIdToUfollow);
@@ -121,27 +114,24 @@ public class UserService implements IUserService{
 
     //Guille
     public FollowersDtoResponse getAllFollowers(int id){
-        User user = userRepository.searchById(id);
-        if (user == null){
-            throw new UserNotFoundException(id);
+        User user = getValidatedUser(id);
+        if (user.getFollowers().isEmpty()){
+            throw new UserHasNoFollowersException(id);
         }else{
-            if (user.getFollowers().isEmpty()){
-                throw new UserHasNoFollowersException(id);
-            }else{
-                ModelMapper mapper = new ModelMapper();
-                List<SimpleUserDto> followers = new ArrayList<>();
-                user.getFollowers().forEach(follower -> {
-                    SimpleUserDto followerOfUser = mapper.map(follower, SimpleUserDto.class);
-                    followers.add(followerOfUser);
-                });
-                FollowersDtoResponse response = new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
-                return response;
-            }
+            ModelMapper mapper = new ModelMapper();
+            List<SimpleUserDto> followers = new ArrayList<>();
+            user.getFollowers().forEach(follower -> {
+                SimpleUserDto followerOfUser = mapper.map(follower, SimpleUserDto.class);
+                followers.add(followerOfUser);
+            });
+            FollowersDtoResponse response = new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
+            return response;
         }
     }
-
     //Nico
-
-
-
 }
+
+
+
+
+
