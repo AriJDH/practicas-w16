@@ -10,4 +10,5 @@ import java.util.List;
 public interface IPostService {
     void createPost(NewPostDto postDto);
     RecentPostsDTO getRecentPostsOfSellersFollowedByUserWith(int anUserId);
+     RecentPostsDTO orderByDate(int id, String order);
 }

@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g09.service;
 
-import com.example.be_java_hisp_w16_g09.dto.NewPostDto;
-import com.example.be_java_hisp_w16_g09.dto.PostDto;
-import com.example.be_java_hisp_w16_g09.dto.PostOfSimpleUserDTO;
-import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09.dto.*;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.Product;
@@ -56,6 +53,16 @@ public class PostService implements IPostService{
 
 
     //MaxiN
+    public RecentPostsDTO orderByDate(int id, String order){
+        RecentPostsDTO posts = getRecentPostsOfSellersFollowedByUserWith(id);
+        List<PostOfSimpleUserDTO> listOrder =  posts.getPosts().stream()
+                .sorted(Comparator.comparing(PostOfSimpleUserDTO::getDate))
+                .collect(Collectors.toList());
+        if (order.equals("date_desc"))
+            listOrder.sort(Comparator.comparing(PostOfSimpleUserDTO::getDate).reversed());
+        posts.setPosts(listOrder);
+        return posts;
+    }
 
 
     //Guille
