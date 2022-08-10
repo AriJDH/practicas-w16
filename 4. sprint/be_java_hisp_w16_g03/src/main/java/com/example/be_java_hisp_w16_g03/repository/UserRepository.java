@@ -4,10 +4,9 @@ import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -22,7 +21,7 @@ public class UserRepository implements IUserRepository {
     @Override
     public List<User> postData(List<User> users) {
         listUser.addAll(users);
-         return this.listUser;
+        return this.listUser;
     }
 
     @Override
@@ -31,6 +30,7 @@ public class UserRepository implements IUserRepository {
         List<User> initFollowers = new ArrayList<>();
         List<User> initFolloweds = new ArrayList<>();
         List<Post> initPost = new ArrayList<>();
+
         List<User> initUser = new ArrayList<>();
         User user1 = User.builder().userId(1).userName("pablo").build();
         User user2 = User.builder().userId(2).userName("emanuel").build();
@@ -68,8 +68,8 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUserById(Integer id) {
-        return listUser.stream().filter(user -> user.getUserId().equals(id)).findFirst().orElse(null);
+    public Optional<User> getUserById(Integer id) {
+        return listUser.stream().filter(user -> user.getUserId().equals(id)).findFirst();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.be_java_hisp_w16_g03.dto;
 
-import com.example.be_java_hisp_w16_g03.entity.Product;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

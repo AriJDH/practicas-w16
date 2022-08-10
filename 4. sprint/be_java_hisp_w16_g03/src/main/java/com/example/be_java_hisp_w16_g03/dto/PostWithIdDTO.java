@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostWithIDDTO {
+public class PostWithIdDTO {
     private Integer userId;
     private Integer postId;
     private LocalDate date;

@@ -15,8 +15,9 @@ import java.util.List;
 public class InitDataController {
     @Autowired
     ICreateService service;
+
     @PostMapping("/createUser")
-    public ResponseEntity<List<UserDTO>> createUser(@RequestBody List<UserDTO> userdto){
-       return new ResponseEntity<>(service.postData(userdto), HttpStatus.CREATED);
+    public ResponseEntity<List<UserDTO>> createUser(@RequestBody List<UserDTO> userdto) {
+        return new ResponseEntity<>(service.postData(userdto), HttpStatus.CREATED);
     }
 }

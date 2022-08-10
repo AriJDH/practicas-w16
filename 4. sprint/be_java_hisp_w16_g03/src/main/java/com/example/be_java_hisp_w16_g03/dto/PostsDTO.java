@@ -14,5 +14,5 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostsDTO {
     private Integer userId;
-    private List<PostWithIDDTO> posts;
+    private List<PostWithIdDTO> posts;
 }

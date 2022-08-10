@@ -17,7 +17,7 @@ public class ProductDTO {
     private String brand;
     private String color;
     private String notes;
-    
+
 
     public boolean validate() {
         return this.productId != null && this.type != null

@@ -8,26 +8,41 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class GlobalHandler {
-    @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionApiDTO> catchException(NotFoundException e){
-        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO();
-        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
-    }
+
     @ExceptionHandler(UserNotExistException.class)
-    public ResponseEntity<ExceptionApiDTO> catchException(UserNotExistException e){
-        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found",e.getMessage());
+    public ResponseEntity<ExceptionApiDTO> catchException(UserNotExistException e) {
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found", e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
     }
-    @ExceptionHandler(UserExisException.class)
-    public ResponseEntity<ExceptionApiDTO> catchException(UserExisException e){
-        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found",e.getMessage());
+
+    @ExceptionHandler(UserExistsException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(UserExistsException e) {
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Not Found", e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.NOT_FOUND);
     }
 
     //excpecion lanzada cuando el request no pasa el control de validacion
     @ExceptionHandler(InvalidPostRequest.class)
-    public ResponseEntity<ExceptionApiDTO> catchException(InvalidPostRequest e){
+    public ResponseEntity<ExceptionApiDTO> catchException(InvalidPostRequest e) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-
     }
+
+    @ExceptionHandler(AlreadyFollowException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(AlreadyFollowException e) {
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Error", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotSellerException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(NotSellerException e) {
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Error", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotFollowersException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(NotFollowersException e) {
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Error", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
+
 }
