@@ -26,6 +26,9 @@ public class UserService implements IUserService{
 
     //Javi
     public void followUser(int userId, int userIdToFollow) {
+        if (userId == userIdToFollow){
+            throw new UserNotAllowedToFollowException(userId);
+        }
         User userFollower = getValidatedUser(userId);
         User userToFollow = getValidatedUser(userIdToFollow);
 
