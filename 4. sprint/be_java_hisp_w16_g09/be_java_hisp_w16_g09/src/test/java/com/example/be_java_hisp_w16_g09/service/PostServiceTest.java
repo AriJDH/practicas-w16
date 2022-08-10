@@ -62,7 +62,7 @@ public class PostServiceTest {
         when(seller.getUserId()).thenReturn(2);
 
         when(userRepository.searchById(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), List.of(seller)));
-        when(postRepository.getPostsByUserIds(List.of(seller.getUserId()))).thenReturn(List.of(new Post(seller, LocalDate.now(), new Product(), 1, 100)));
+        when(postRepository.getPostsByUserIds(List.of(seller.getUserId()))).thenReturn(List.of(new Post(1, seller, LocalDate.now(), new Product(), 1, 100)));
 
         RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
 
@@ -77,9 +77,9 @@ public class PostServiceTest {
         User seller = Mockito.mock(User.class);
         when(seller.getUserId()).thenReturn(2);
 
-        Post outOfRangePost = new Post(seller, publicationDate.minusWeeks(3), new Product(), 2, 100);
-        Post newestPost = new Post(seller, publicationDate, new Product(), 1, 78);
-        Post oldestPost = new Post(seller, publicationDate.minusWeeks(1), new Product(), 1, 120);
+        Post outOfRangePost = new Post(1, seller, publicationDate.minusWeeks(3), new Product(), 2, 100);
+        Post newestPost = new Post(2, seller, publicationDate, new Product(), 1, 78);
+        Post oldestPost = new Post(3, seller, publicationDate.minusWeeks(1), new Product(), 1, 120);
 
         when(userRepository.searchById(anUserId))
                 .thenReturn(new User(anUserId, "pedrotest", new ArrayList(), List.of(seller)));
