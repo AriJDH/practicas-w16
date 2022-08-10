@@ -10,12 +10,16 @@ import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
+import org.modelmapper.Converters;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements IUserService{
@@ -85,6 +89,28 @@ public class UserService implements IUserService{
             userRepository.searchById(userId).getFollowing().remove(unfollow);
             userRepository.searchById(userIdToUfollow).getFollowers().remove(unfollow2);
         }
+    }
+
+    public FollowersDtoResponse orderByName(int id, String order){
+        FollowersDtoResponse followers = getAllFollowers(id);
+        List<SimpleUserDto> listOrder =  followers.getFollowers().stream()
+                .sorted(Comparator.comparing(SimpleUserDto::getUserName))
+                .collect(Collectors.toList());
+        if (order.equals("name_desc"))
+            listOrder.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
+        followers.setFollowers(listOrder);
+        return followers;
+    }
+
+    public FollowersDtoResponse orderByNameFollowed(int id, String order){
+        FollowersDtoResponse followers = getAllFollowers(id);
+        List<SimpleUserDto> listOrder =  followers.getFollowers().stream()
+                .sorted(Comparator.comparing(SimpleUserDto::getUserName))
+                .collect(Collectors.toList());
+        if (order.equals("name_desc"))
+            listOrder.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
+        followers.setFollowers(listOrder);
+        return followers;
     }
 
 
