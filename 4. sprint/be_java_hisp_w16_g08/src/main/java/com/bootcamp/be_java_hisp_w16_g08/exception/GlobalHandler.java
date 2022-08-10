@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g08.exception;
 
-import com.bootcamp.be_java_hisp_w16_g08.dto.ResponseApiDto;
+import com.bootcamp.be_java_hisp_w16_g08.dto.response.ResponseApiDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

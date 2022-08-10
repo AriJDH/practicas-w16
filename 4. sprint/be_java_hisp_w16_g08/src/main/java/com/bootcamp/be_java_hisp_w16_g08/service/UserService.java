@@ -1,7 +1,5 @@
 package com.bootcamp.be_java_hisp_w16_g08.service;
 
-import com.bootcamp.be_java_hisp_w16_g08.dto.ResponseUserInformationDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.ResponseVendorsFollowedDto;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowers;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersList;
 import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
@@ -21,18 +19,18 @@ public class UserService implements IUserService{
     IUserRepository userRepository;
     ModelMapper mapper= new ModelMapper();
     @Override
-    public ResponseVendorsFollowedDto getVendorsFollowedByUser(int userId) {
+    public UserFollowers getVendorsFollowedByUser(int userId) {
 
         if(!userRepository.isPresent(userId)){
             throw new UserNotFoundException();
         }
         User serchedUser = userRepository.getUserById(userId);
-        List<ResponseUserInformationDto> vendorsFollowed = serchedUser.getFollowedList().stream().
+        List<UserFollowersList> vendorsFollowed = serchedUser.getFollowedList().stream().
                                                                     filter(x->isVendor(x)).
-                                                                    map(x->new ResponseUserInformationDto(x.getUserId(),x.getName()))
+                                                                    map(x->new UserFollowersList(x.getUserId(),x.getName()))
                                                                     .collect(Collectors.toList());
 
-        return new ResponseVendorsFollowedDto(serchedUser.getUserId(),serchedUser.getName(),vendorsFollowed);
+        return new UserFollowers(serchedUser.getUserId(),serchedUser.getName(),vendorsFollowed);
     }
 
     public boolean isVendor(User user){

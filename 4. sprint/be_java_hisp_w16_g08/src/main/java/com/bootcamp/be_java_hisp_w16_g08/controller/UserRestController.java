@@ -1,6 +1,5 @@
 package com.bootcamp.be_java_hisp_w16_g08.controller;
 
-import com.bootcamp.be_java_hisp_w16_g08.dto.ResponseVendorsFollowedDto;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowers;
 import com.bootcamp.be_java_hisp_w16_g08.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ public class UserRestController {
 
 
     @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<ResponseVendorsFollowedDto> getVendorsFollowedByUser (@PathVariable int userId){
+    public ResponseEntity<UserFollowers> getVendorsFollowedByUser (@PathVariable int userId){
         return new ResponseEntity<>(userService.getVendorsFollowedByUser(userId), HttpStatus.OK);
     }
     @GetMapping("/users/{userId}/followers/list")

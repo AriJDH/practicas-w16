@@ -1,4 +1,4 @@
-package com.bootcamp.be_java_hisp_w16_g08.dto;
+package com.bootcamp.be_java_hisp_w16_g08.dto.response;
 
 
 import lombok.AllArgsConstructor;
