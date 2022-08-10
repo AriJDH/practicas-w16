@@ -33,6 +33,8 @@ public class User {
         this.followed.add(user);
     }
 
-
+    public void addPost(Post p){
+        this.posts.add(p);
+    }
 
 }

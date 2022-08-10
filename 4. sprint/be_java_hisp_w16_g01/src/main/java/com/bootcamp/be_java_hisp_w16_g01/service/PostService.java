@@ -5,6 +5,7 @@ import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Product;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
+import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ import java.util.stream.Collectors;
 public class PostService implements IPostService {
     @Autowired
     private IPostRepository postRepository;
+
+    @Autowired
+    private IUserRepository userRepository;
 
     @Override
     public MessageDto createPost(PostDto postDto) {
@@ -31,19 +35,23 @@ public class PostService implements IPostService {
                 product,
                 postDto.getCategory(),
                 postDto.getPrice());
-        return new MessageDto("Publicacion creada correctamente, id: " + postRepository.createPost(post));
+
+        int id = postRepository.createPost(post);
+        post.setPostId(id);
+        userRepository.getUser(postDto.getUserId()).addPost(post);
+        
+        return new MessageDto("Publicacion creada correctamente, id: " + id);
     }
 
     @Override
     public FollowedPostsDto getFollowedPosts(int userId) {
-        User user = new User(1, "German", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        user.getFollowed().add(new User(2, "Gabriel", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
-        user.getFollowed().add(new User(3, "Antonio", new ArrayList<>(), new ArrayList<>(), new ArrayList<>()));
+        User user = userRepository.getUser(userId);
 
         List<Post> post = new ArrayList<>();
         for (User u : user.getFollowed()) {
             post.addAll(postRepository.getPostsByUserId(u.getUserId()));
         }
+
         FollowedPostsDto followedPostsDto = new FollowedPostsDto(userId,post.stream().map(
                 x-> new ResponsePostDto(x.getUserId(),x.getPostId(),x.getDate(),new ProductDto(
                         x.getProduct().getProductId(),
