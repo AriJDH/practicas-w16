@@ -89,9 +89,7 @@ public class UserService implements IUserService {
         if ("name_desc".equals(order)) {
             comparator = comparator.reversed();
         }
-        //Falta verificar si es vendedor.
         if (response.isSeller()) {
-            //Falta verificar si es vendedor.
             List<FollowersDTO> followersToDTO = new ArrayList<>();
             response.getFollowers().forEach(u -> followersToDTO.add(new FollowersDTO(u.getId(), u.getName())));
             followersToDTO.sort(comparator);
@@ -112,7 +110,6 @@ public class UserService implements IUserService {
         } else {
             throw new UserIsNotSellerException(id);
         }
-        FollowersCountDto userFoundWithFollowers = new FollowersCountDto(userFound.getId(), userFound.getName(), countFollowers);
-        return userFoundWithFollowers;
+        return new FollowersCountDto(userFound.getId(), userFound.getName(), countFollowers);
     }
 }

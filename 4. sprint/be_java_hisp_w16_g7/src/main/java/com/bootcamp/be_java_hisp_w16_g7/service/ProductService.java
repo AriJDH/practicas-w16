@@ -54,12 +54,11 @@ public class ProductService implements IProductService {
             } else {
                 throw new InvalidQueryException("Unknown query");
             }
-            
+
         } else {
             throw new UserNotFoundException(idUser);
         }
     }
-
 
 
     @Override
