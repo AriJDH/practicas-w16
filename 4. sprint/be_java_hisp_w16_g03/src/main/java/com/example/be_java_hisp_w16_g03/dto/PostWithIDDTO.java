@@ -1,5 +1,7 @@
 package com.example.be_java_hisp_w16_g03.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -9,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostWithIDDTO {
     private Integer userId;
     private Integer postId;

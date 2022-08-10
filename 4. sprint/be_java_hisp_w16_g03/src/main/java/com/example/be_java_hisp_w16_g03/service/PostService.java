@@ -5,16 +5,13 @@ import com.example.be_java_hisp_w16_g03.dto.PostWithIDDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
 import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
-import com.example.be_java_hisp_w16_g03.entity.Product;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidPostRequest;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,42 +29,47 @@ public class PostService implements IPostService {
         // se trae usuario del repo para luego castearlo a User y agregarle el post
         User requestUser = repository.getUserById(request.getUserId());
         if (requestUser != null) {
-        // se delega responsabilidad a la entidad para agregar post a usuario
+            // se delega responsabilidad a la entidad para agregar post a usuario
             requestUser.addPostToUser(request);
         } else {
             throw new InvalidPostRequest();
         }
 
     }
+
     @Override
     public PostsDTO getLatestPostsByUserId(Integer userId) {
-        List<User> vendedores = repository.getFollowedsByUserId(userId);
+        //Se obtiene vendedores del repo
+        List<User> vendors = repository.getFollowedsByUserId(userId);
+        // Se filtran post segun reglas de negocio detalladas en el requerimiento US006
+        if (vendors != null) {
+            List<Post> filterPosts = getFilterPosts(vendors);
 
-        List<PostWithIDDTO> listaP = new ArrayList<>();
+            //Se mapea lista a DTO, luego se ordena y se retorna en el Dto correspondiente al requerimietno US006
+            List<PostWithIDDTO> postsWithIdDtos = filterPosts.stream().map(post -> PostWithIDDTO.builder().postId(post.getPostId())
+                    .userId(post.getUserId())
+                    .price(post.getPrice())
+                    .date(post.getDate())
+                    .category(post.getCategory())
+                    .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                            .productName(post.getProduct().getProductName())
+                            .type(post.getProduct().getType())
+                            .color(post.getProduct().getColor())
+                            .brand(post.getProduct().getBrand())
+                            .notes(post.getProduct().getNotes()).build()).build()).collect(Collectors.toList());
 
-        for(User u : vendedores){
-            for(Post p : u.getPosts()){
-                if(p.getDate().isBefore(LocalDate.now())
-                        && p.getDate().isAfter(LocalDate.now().minusWeeks(2))){
+            postsWithIdDtos.sort(Comparator.comparing(PostWithIDDTO::getDate));
 
-                    listaP.add(PostWithIDDTO.builder().postId(p.getPostId())
-                            .userId(p.getUserId())
-                            .price(p.getPrice())
-                            .date(p.getDate())
-                            .category(p.getCategory())
-                            .product(ProductDTO.builder().productId(p.getProduct().getProductId())
-                                    .productName(p.getProduct().getProductName())
-                                    .type(p.getProduct().getType())
-                                    .color(p.getProduct().getColor())
-                                    .brand(p.getProduct().getBrand())
-                                    .notes(p.getProduct().getNotes()).build()).build());
-                }
-            }
+            return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
         }
+        // si no hay vendedores retorno dto con lista vacia
+        return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
+    }
 
-        listaP.sort(Comparator.comparing(PostWithIDDTO::getDate));
-
-        return PostsDTO.builder().userId(userId).postDTOList(listaP).build();
+    private List<Post> getFilterPosts(List<User> vendors) {
+        List<Post> filterPosts = new ArrayList<>();
+        vendors.stream().forEach(user -> user.getPostBetweenDate().forEach(post -> filterPosts.add(post)));
+        return filterPosts;
     }
 
 

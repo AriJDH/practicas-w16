@@ -15,5 +15,11 @@ public class Post {
     private Product product;
     private Integer category;
     private Double price;
+    private static int lastId;
+
+    public void increaseId(){
+        this.lastId = 1;
+        this.postId = lastId++;
+    }
 
 }

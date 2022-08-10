@@ -1,10 +1,15 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -41,7 +46,7 @@ public class User {
 
 
     public void addPostToUser(PostDTO request) {
-        this.validatePosts().add(Post.builder()
+        Post post = Post.builder()
                 .userId(request.getUserId())
                 .date(request.getDate())
                 .price(request.getPrice())
@@ -54,7 +59,17 @@ public class User {
                         .productName(request.getProduct().getProductName())
                         .build())
                 .category(request.getCategory())
-                .price(request.getPrice()).build());
+                .price(request.getPrice()).build();
+        //Se asigna un Id autoincremental al Post
+        post.increaseId();
+        this.validatePosts().add(post);
+    }
+
+
+    public List<Post> getPostBetweenDate() {
+
+        return this.validatePosts().stream().filter(p -> p.getDate().isBefore(LocalDate.now())
+                && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
     }
 
 
