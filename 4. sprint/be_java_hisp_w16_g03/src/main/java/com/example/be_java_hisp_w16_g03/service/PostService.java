@@ -29,11 +29,9 @@ public class PostService implements IPostService {
         if (!request.validate())
             throw new InvalidPostRequest();
         User requestUser = repository.getUserById(request.getUserId()).orElseThrow(() -> new UserNotExistException(request.getUserId()));
-        if (requestUser != null) {
-            requestUser.addPostToUser(request);
-        } else {
-            throw new InvalidPostRequest();
-        }
+
+        requestUser.addPostToUser(request);
+
 
     }
 
