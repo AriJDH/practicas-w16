@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Service in charge of product-related functionalities
+ */
 @RestController
 @RequestMapping("products")
 public class ProductController {
@@ -18,6 +21,11 @@ public class ProductController {
   @Autowired
   IProductService iProductService;
 
+  /**
+   * Method for creating a publication
+   * @param publicationDTO DTO of the publication to be created
+   * @return ResponseEntity with a DTO to give information to the user
+   */
   @PostMapping("/post")
   public ResponseEntity<ResponseApiDTO> createPublicacion(@RequestBody RequestCreatePublicationDTO publicationDTO) {
     return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO), HttpStatus.OK);
