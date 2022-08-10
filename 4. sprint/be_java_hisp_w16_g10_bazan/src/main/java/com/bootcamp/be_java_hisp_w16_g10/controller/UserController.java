@@ -62,17 +62,18 @@ public class UserController {
     }
 
     @PostMapping("/products/promo-post")
-    public void US0010(){
-
+    public ResponseEntity<?> US0010(@RequestBody PostReqDTO postReqDTO){
+        userService.savePromo(postReqDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/products/promo-post/count?user_id={userId}")
-    public void US0011(){
-
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<PostPromoCountResDTO> US0011(@RequestParam Integer userId){
+        return new ResponseEntity<>(this.userService.countPosts(userId),HttpStatus.OK);
     }
 
-    @GetMapping("/products/promo-post/list?user_id={userId}")
-    public void US0012(){
-
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<List<PostPromoResDTO>> US0012(@RequestParam Integer userId){
+        return new ResponseEntity<>(this.userService.listPosts(userId),HttpStatus.OK);
     }
 }

@@ -84,6 +84,37 @@ public class UserService implements IService {
    }
 
    @Override
+   public PostPromoCountResDTO countPosts(Integer userId) {
+      var user = this.userRepository.findById(userId);
+        if (user == null)
+             throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
+
+        var promos = user.getPosts().stream()
+                .filter(p -> p.isHasPromo())
+                .collect(Collectors.toList());
+
+        return PostPromoCountResDTO.builder()
+                .postPromoCount(promos.size())
+                .userId(user.getId())
+                .userName(user.getUserName())
+                .build();
+   }
+
+   @Override
+   public List<PostPromoResDTO> listPosts(Integer userId) {
+      var user = this.userRepository.findById(userId);
+      if (user == null)
+         throw new NotFoundException(String.format("The user with id: %s don't exists.", userId));
+
+      var promos = user.getPosts().stream()
+              .filter(p -> p.isHasPromo())
+              .collect(Collectors.toList());
+
+      return promos.stream().map(post -> parseToPostPromoResDTO(user,post)).collect(Collectors.toList());
+
+   }
+
+   @Override
    public FollowersListResDTO listFollowers(Integer userId, String order) {
       User user = this.userRepository.findById(userId);
       if (user == null)
@@ -140,7 +171,22 @@ public class UserService implements IService {
          throw new NotFoundException(String.format("The user with id: %s don't exists.", post.getUserId()));
       Product product = parseToProductFromProductDTO(post.getProduct());
       List<Post> posts = user.getPosts();
-      posts.add(new Post(UUID.randomUUID().toString(), product, post.getDate(), post.getPrice(), post.getCategory()));
+      posts.add(new Post(UUID.randomUUID().toString(), product, post.getDate(), post.getPrice(), post.getCategory(),false,0.00));
+      user.setPosts(posts);
+      Integer index = userRepository.getIndexOfUser(post.getUserId());
+      if (index == -1)
+         throw new NotFoundException(String.format("This user with id: %s not found", post.getUserId()));
+      userRepository.updateUserInList(index, user);
+   }
+
+   @Override
+   public void savePromo(PostReqDTO post) {
+      User user = userRepository.findById(post.getUserId());
+      if (user == null)
+         throw new NotFoundException(String.format("The user with id: %s don't exists.", post.getUserId()));
+      Product product = parseToProductFromProductDTO(post.getProduct());
+      List<Post> posts = user.getPosts();
+      posts.add(new Post(UUID.randomUUID().toString(), product, post.getDate(), post.getPrice(), post.getCategory(),post.isHasPromo(),post.getDiscount()));
       user.setPosts(posts);
       Integer index = userRepository.getIndexOfUser(post.getUserId());
       if (index == -1)
@@ -203,6 +249,19 @@ public class UserService implements IService {
             .price(post.getPrice())
             .product(this.parseToProductResDTO(post.getProduct()))
             .build();
+   }
+
+   private PostPromoResDTO parseToPostPromoResDTO(User user, Post post) {
+      return PostPromoResDTO.builder()
+              .userId(user.getId())
+              .category(post.getCategory())
+              .postId(post.getId())
+              .date(post.getDate())
+              .price(post.getPrice())
+              .hasPromo(post.isHasPromo())
+              .discount(post.getDiscount())
+              .product(this.parseToProductResDTO(post.getProduct()))
+              .build();
    }
 
    private ProductResDTO parseToProductResDTO(Product product) {
