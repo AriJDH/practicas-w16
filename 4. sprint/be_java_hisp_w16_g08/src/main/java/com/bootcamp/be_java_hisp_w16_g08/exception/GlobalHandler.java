@@ -36,5 +36,11 @@ public class GlobalHandler {
         ResponseApiDto exceptionApiDto = new ResponseApiDto("Can not follow yourself");
         return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(OrderNotPossibleException.class)
+    public  ResponseEntity<ResponseApiDto> catchOrderNotPossibleException(OrderNotPossibleException e){
+        ResponseApiDto exceptionApiDto = new ResponseApiDto("That sorting order is not valid");
+        return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
+    }
+
 
 }
