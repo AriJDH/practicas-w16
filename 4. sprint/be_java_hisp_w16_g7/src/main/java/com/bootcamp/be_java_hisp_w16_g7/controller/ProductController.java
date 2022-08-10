@@ -32,6 +32,11 @@ public class ProductController {
         return new ResponseEntity<>(iProductService.createPost(postDto), HttpStatus.OK);
     }
 
+    @Operation(summary = "Recent posts from followed users")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Recent Posts found"),
+            @ApiResponse(responseCode = "404", description = "User not found"),
+            @ApiResponse(responseCode = "400", description = "Unknown query")})
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<RecentPostsDTO> recentPost(@PathVariable int userId,
                                                      @RequestParam(required = false) String order) {
