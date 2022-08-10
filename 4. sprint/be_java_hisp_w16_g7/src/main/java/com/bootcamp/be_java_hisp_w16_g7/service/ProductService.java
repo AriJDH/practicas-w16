@@ -41,7 +41,7 @@ public class ProductService implements IProductService{
 
 
     @Override
-    public RecentPostsDTO recentPost(int idUser) {
+    public RecentPostsDTO recentPost(int idUser, String order) {
         List<ResponsePostDTO> responsePostDTOS = new ArrayList<>();
         //validacion de la existencia del usuario
         if(userRepository.existsUser(idUser)) {
@@ -53,15 +53,19 @@ public class ProductService implements IProductService{
                         List<Post> recentPost = users.getPosts().stream()
                                 .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
                                 .collect(Collectors.toList());
-                        System.out.println(LocalDate.now());
-                        for (Post post : orderByDateDes(recentPost)) {
+                        for (Post post : recentPost) {
                             responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
                         }
                     }else{
                         throw new PostNotFoundException();
                     }
                 }
-                return new RecentPostsDTO(idUser,responsePostDTOS);
+                if("date_Asc".equals(order)){
+                    return new RecentPostsDTO(idUser,orderByDateAsc(responsePostDTOS));
+                }
+
+                return new RecentPostsDTO(idUser,orderByDateDes(responsePostDTOS));
+
             }else{
                 throw new FollowsNotFoundException();
             }
@@ -71,16 +75,16 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public List<Post> orderByDateAsc(List<Post> postList) {
+    public List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList) {
         return postList.stream()
-                .sorted(Comparator.comparing(Post::getCreationDate))
+                .sorted(Comparator.comparing(ResponsePostDTO::getDate))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Post> orderByDateDes(List<Post> postList) {
+    public List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList) {
         return postList.stream()
-                .sorted(Comparator.comparing(Post::getCreationDate).reversed())
+                .sorted(Comparator.comparing(ResponsePostDTO::getDate).reversed())
                 .collect(Collectors.toList());
     }
 

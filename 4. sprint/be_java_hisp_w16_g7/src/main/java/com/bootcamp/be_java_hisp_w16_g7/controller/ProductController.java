@@ -27,7 +27,8 @@ public class ProductController {
     }
 
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<RecentPostsDTO> recentPost(@PathVariable int userId){
-        return new ResponseEntity<>(iProductService.recentPost(userId), HttpStatus.OK);
+    public ResponseEntity<RecentPostsDTO> recentPost(@PathVariable int userId ,
+                                                     @RequestParam(required = false) String order){
+        return new ResponseEntity<>(iProductService.recentPost(userId, order), HttpStatus.OK);
     }
 }
