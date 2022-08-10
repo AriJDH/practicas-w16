@@ -55,6 +55,7 @@ public class UserService implements IUserService{
     public UserFollowedDto getUsersFollowedBySellers(int userId) {
         User user = getValidatedUser(userId);
         if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
+
         ModelMapper mapper = new ModelMapper();
         List<SimpleUserDto> followed = user.getFollowing().stream()
                 .map(following -> mapper.map(following, SimpleUserDto.class))
@@ -67,6 +68,7 @@ public class UserService implements IUserService{
     public FollowersCountDTO followerCount(int id){
         FollowersCountDTO followersCountDTO = new FollowersCountDTO();
         followersCountDTO.setUser_id(id);
+
         User user = getValidatedUser (id);
 
         followersCountDTO.setUser_name(user.getUserName());
@@ -124,8 +126,7 @@ public class UserService implements IUserService{
                 SimpleUserDto followerOfUser = mapper.map(follower, SimpleUserDto.class);
                 followers.add(followerOfUser);
             });
-            FollowersDtoResponse response = new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
-            return response;
+            return new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
         }
     }
     //Nico
