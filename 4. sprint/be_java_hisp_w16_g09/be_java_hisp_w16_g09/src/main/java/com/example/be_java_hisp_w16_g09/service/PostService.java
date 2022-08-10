@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.NewPostDto;
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
+import com.example.be_java_hisp_w16_g09.dto.PostOfSimpleUserDTO;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
@@ -71,14 +72,19 @@ public class PostService implements IPostService{
     public RecentPostsDTO getRecentPostsOfSellersFollowedByUserWith(int anUserId) {
         User user = userRepository.searchById(anUserId);
         if (user == null) throw new UserNotFoundException(anUserId);
+        List<Post> postsOfSellers = postsOfSellersFollowedBy(user);
+        postsOfSellers = Filter
+                .apply(postsOfSellers, (post -> post.wasPublishedAfter(LocalDate.now().minusWeeks(2))));
+        postsOfSellers.sort(Comparator.comparing(Post::getDate).reversed());
+        List<PostOfSimpleUserDTO> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostOfSimpleUserDTO.class);
+        return new RecentPostsDTO(user.getUserId(), postDtos);
+    }
+
+    private List<Post> postsOfSellersFollowedBy(User user) {
         List<User> sellers = user.getFollowing();
         List<Integer> sellersIds = sellers.stream().map(User::getUserId).collect(Collectors.toList());
         List<Post> postsOfSellers = postRepository.getPostsByUserIds(sellersIds);
-        postsOfSellers = Filter
-                .apply(postsOfSellers, (post -> post.wasPublishedAfter(LocalDate.now().minusWeeks(2))));
-        postsOfSellers.sort(Comparator.comparing(Post::getDate));
-        List<PostDto> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostDto.class);
-        return new RecentPostsDTO(user.getUserId(), postDtos);
+        return postsOfSellers;
     }
 }
 

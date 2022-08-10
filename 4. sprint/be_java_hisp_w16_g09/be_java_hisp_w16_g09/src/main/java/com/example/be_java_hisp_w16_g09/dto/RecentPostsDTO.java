@@ -17,6 +17,6 @@ import java.util.List;
 public class RecentPostsDTO {
 
     private int userId;
-    private List<PostDto> posts;
+    private List<PostOfSimpleUserDTO> posts;
 
 }
