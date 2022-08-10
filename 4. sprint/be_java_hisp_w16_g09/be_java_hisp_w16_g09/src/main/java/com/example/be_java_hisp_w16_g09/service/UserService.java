@@ -8,13 +8,11 @@ import com.example.be_java_hisp_w16_g09.exception.*;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
-import org.modelmapper.Converters;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -110,17 +108,16 @@ public class UserService implements IUserService{
         return followers;
     }
 
-    public FollowersDtoResponse orderByNameFollowed(int id, String order){
-        FollowersDtoResponse followers = getAllFollowers(id);
-        List<SimpleUserDto> listOrder =  followers.getFollowers().stream()
+    public UserFollowedDto orderByNameFollowed(int id, String order){
+        UserFollowedDto followers = getUsersFollowedBySellers(id);
+        List<SimpleUserDto> listOrder =  followers.getFollowing().stream()
                 .sorted(Comparator.comparing(SimpleUserDto::getUserName))
                 .collect(Collectors.toList());
         if (order.equals("name_desc"))
             listOrder.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
-        followers.setFollowers(listOrder);
+        followers.setFollowing(listOrder);
         return followers;
     }
-
 
     //Guille
     public FollowersDtoResponse getAllFollowers(int id){

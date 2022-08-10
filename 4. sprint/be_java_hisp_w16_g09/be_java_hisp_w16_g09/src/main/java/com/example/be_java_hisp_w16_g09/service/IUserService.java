@@ -10,6 +10,6 @@ public interface IUserService {
      FollowersCountDTO followerCount(int id);
     void unfollow(int userId, int userIdToUfollow);
      FollowersDtoResponse orderByName(int id, String order);
-    FollowersDtoResponse orderByNameFollowed(int id, String order);
-    public UserFollowedDto getUsersFollowedBySellers(int userId);
+    UserFollowedDto orderByNameFollowed(int id, String order);
+     UserFollowedDto getUsersFollowedBySellers(int userId);
 }

@@ -41,9 +41,12 @@ public class UserController {
             return new ResponseEntity<>(userService.getAllFollowers(userId), HttpStatus.OK);
     }
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
-    @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<UserFollowedDto> US004(@PathVariable int userId){
-        return new ResponseEntity<>(userService.getUsersFollowedBySellers(userId),HttpStatus.OK);
+    @RequestMapping(value ="/users/{userId}/followed/list", params = "order")
+    public ResponseEntity<UserFollowedDto> US004(@PathVariable int userId, @RequestParam(required = false) String order){
+        if (!order.isEmpty())
+            return new ResponseEntity<>(userService.orderByNameFollowed(userId,order),HttpStatus.OK);
+        else
+            return new ResponseEntity<>(userService.getUsersFollowedBySellers(userId),HttpStatus.OK);
     }
     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
