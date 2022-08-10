@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w16_g01.dto.*;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Product;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
+import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class PostService implements IPostService {
 
     @Override
     public MessageDto createPost(PostDto postDto) {
+
+        if(!userRepository.userExists(postDto.getUserId()))
+            throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
+
         ProductDto productDto = postDto.getProduct();
         Product product = new Product(productDto.getProductId(),
                 productDto.getProductName(),
@@ -39,13 +44,16 @@ public class PostService implements IPostService {
         int id = postRepository.createPost(post);
         post.setPostId(id);
         userRepository.getUser(postDto.getUserId()).addPost(post);
-        
+
         return new MessageDto("Publicacion creada correctamente, id: " + id);
     }
 
     @Override
     public FollowedPostsDto getFollowedPosts(int userId) {
         User user = userRepository.getUser(userId);
+
+        if(user == null)
+            throw new BadRequestException("No existe el usuario con Id: " + userId);
 
         List<Post> post = new ArrayList<>();
         for (User u : user.getFollowed()) {

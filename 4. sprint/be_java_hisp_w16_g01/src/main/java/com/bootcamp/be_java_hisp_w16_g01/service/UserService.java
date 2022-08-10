@@ -1,11 +1,14 @@
 package com.bootcamp.be_java_hisp_w16_g01.service;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.*;
+import com.bootcamp.be_java_hisp_w16_g01.dto.FollowersCountDTO;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g01.dto.UserUnfollowDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowedDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowerDTO;
 import com.bootcamp.be_java_hisp_w16_g01.mapper.UserMapper;
 
 
@@ -18,11 +21,24 @@ public class UserService implements IUserService {
 
     @Override
     public UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow) {
-        if (this.userRepository.unfollowUser(userId, userIdToUnfollow)) {
-            return new UserUnfollowDTO("Ok", "User unfollowed succesfully");
+
+        User userUnfollowing = this.userRepository.getUser(userId);
+        User userToUnfollow = this.userRepository.getUser(userIdToUnfollow);
+
+        if (userToUnfollow == null || userUnfollowing == null) {
+            throw new BadRequestException("TODO");
         }
 
-        return new UserUnfollowDTO("Error", "An error has occurred");
+        if (!this.userRepository.userIsFollowed(userToUnfollow, userUnfollowing)
+                || !this.userRepository.userIsFollower(userUnfollowing, userToUnfollow)
+        ) {
+            throw new BadRequestException("TODO-2");
+        }
+
+        userToUnfollow.getFollowers().remove(userUnfollowing);
+        userUnfollowing.getFollowed().remove(userToUnfollow);
+
+        return new UserUnfollowDTO("Ok", "User unfollowed succesfully");
     }
 
 
