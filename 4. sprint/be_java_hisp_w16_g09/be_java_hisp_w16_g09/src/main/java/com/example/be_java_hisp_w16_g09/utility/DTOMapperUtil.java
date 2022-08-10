@@ -21,5 +21,7 @@ public class DTOMapperUtil {
                 .map(element -> modelMapper.map(element, targetClass))
                 .collect(Collectors.toList());
     }
-
+    public <T> T map(Object anObject, Class<T> targetClass) {
+        return modelMapper.map(anObject, targetClass);
+    }
 }
