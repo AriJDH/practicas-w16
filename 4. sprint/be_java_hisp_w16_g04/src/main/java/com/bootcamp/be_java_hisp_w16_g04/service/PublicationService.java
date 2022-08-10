@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,11 +30,15 @@ public class PublicationService implements IPublicationService{
 
 
     @Override
-    public ListProductByDateDTO getListProductByDate(Integer userId) {
+    public ListProductByDateDTO getListProductByDate(Integer userId, String order) {
 
         List<User> users = iUserService.orderListUserFollowed(userId, "").getFollowed();
         List<Publication> sellers = getListSeller(users);
-        return new ListProductByDateDTO(userId, listOrderByWeekend(sellers));
+        List<PostDTO> listDTO = listOrderByWeekend(sellers);
+        if(order.equals("date_desc")){
+            listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).collect(Collectors.toList());
+        }
+        return new ListProductByDateDTO(userId, listDTO);
     }
 
     private List<Publication> getListSeller(List<User> users){
