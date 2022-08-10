@@ -30,11 +30,11 @@ public class UserRepository implements IUserRepository {
         users.put(user.getUserId(), user);
     }
     private void addUsers() {
-        User userA = new User(1,"Usuario1",new ArrayList<>(),new ArrayList<>());
-        User userB = new User(2,"Usuario2",new ArrayList<>(),new ArrayList<>());
-        User userC = new User(3,"Usuario3",new ArrayList<>(),new ArrayList<>());
-        User userD = new User(4,"Usuario4",new ArrayList<>(),new ArrayList<>());
-        User userE = new User(5,"Usuario5",new ArrayList<>(),new ArrayList<>());
+        User userA = new User(1,"Mauricio",new ArrayList<>(),new ArrayList<>());
+        User userB = new User(2,"Alvaro",new ArrayList<>(),new ArrayList<>());
+        User userC = new User(3,"Juan",new ArrayList<>(),new ArrayList<>());
+        User userD = new User(4,"Pedro",new ArrayList<>(),new ArrayList<>());
+        User userE = new User(5,"Carlos",new ArrayList<>(),new ArrayList<>());
         users.put(1,userA);
         users.put(2,userB);
         users.put(3,userC);

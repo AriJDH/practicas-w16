@@ -13,10 +13,7 @@ import com.example.be_java_hisp_w16_g09.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -36,14 +33,20 @@ public class UserController {
         return new ResponseEntity<>(userService.followerCount(userId), HttpStatus.OK);
     }
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
-    @GetMapping("/users/{userId}/followers/list")
-    public ResponseEntity<FollowersDtoResponse> US003(@PathVariable Integer userId){
-        return new ResponseEntity<>(userService.getAllFollowers(userId), HttpStatus.OK);
+    @RequestMapping(value = "/users/{userId}/followers/list", params = "order")
+    public ResponseEntity<FollowersDtoResponse> US003(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        if (!order.isEmpty())
+            return new ResponseEntity<>(userService.orderByName(userId,order),HttpStatus.OK);
+        else
+            return new ResponseEntity<>(userService.getAllFollowers(userId), HttpStatus.OK);
     }
     //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
-    @GetMapping("/users/{userId}/followed/list")
-    public ResponseEntity<UserFollowedDto> US004(@PathVariable int userId){
-        return new ResponseEntity<>(userService.getUsersFollowedBySellers(userId),HttpStatus.OK);
+    @RequestMapping(value ="/users/{userId}/followed/list", params = "order")
+    public ResponseEntity<UserFollowedDto> US004(@PathVariable int userId, @RequestParam(required = false) String order){
+        if (!order.isEmpty())
+            return new ResponseEntity<>(userService.orderByNameFollowed(userId,order),HttpStatus.OK);
+        else
+            return new ResponseEntity<>(userService.getUsersFollowedBySellers(userId),HttpStatus.OK);
     }
     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
     @PostMapping("/users/{userId}/unfollow/{userIdToUnfollow}")
@@ -57,7 +60,4 @@ public class UserController {
     //      users/{UserID}/followed/list?order=name_asc
     //      users/{UserID}/followed/list?order=name_desc
     //  *Nota: Este ordenamiento aplica solo para US-003 y US-004.
-    @GetMapping("/US008") //Cambiar Endpoint
-    public void US008(){
-    }
 }
