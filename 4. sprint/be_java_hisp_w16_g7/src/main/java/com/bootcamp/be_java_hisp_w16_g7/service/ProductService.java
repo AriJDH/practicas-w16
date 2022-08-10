@@ -49,23 +49,19 @@ public class ProductService implements IProductService{
             //validacion si sigue a alguien
             if (!user.getFollows().isEmpty()) {
                 for (User users: user.getFollows()) {
-                    if (!users.getPosts().isEmpty()) {
+
                         List<Post> recentPost = users.getPosts().stream()
                                 .filter(x -> x.getCreationDate().isAfter(LocalDate.now().minusDays(14)))
                                 .collect(Collectors.toList());
                         for (Post post : recentPost) {
                             responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
                         }
-                    }else{
-                        throw new PostNotFoundException();
-                    }
+
                 }
                 if("date_Asc".equals(order)){
                     return new RecentPostsDTO(idUser,orderByDateAsc(responsePostDTOS));
                 }
-
                 return new RecentPostsDTO(idUser,orderByDateDes(responsePostDTOS));
-
             }else{
                 throw new FollowsNotFoundException();
             }
