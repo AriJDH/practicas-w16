@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 public class PostDTO {
   private Integer userId;
   private Integer postId;
+  @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
   private LocalDate date;
   private ProductDTO product;
   private Integer category;
