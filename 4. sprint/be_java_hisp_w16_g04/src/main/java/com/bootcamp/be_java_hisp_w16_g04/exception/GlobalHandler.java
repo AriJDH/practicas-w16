@@ -22,8 +22,8 @@ public class GlobalHandler {
   }
 
   @ExceptionHandler(FailedToCreateResource.class)
-  public ResponseEntity<String> catchExeptionFailed(FailedToCreateResource e) {
-    return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+  public ResponseEntity<ResponseApiDTO> catchExeptionFailed(FailedToCreateResource e) {
+    return new ResponseEntity<>(new ResponseApiDTO("Failed","Failed to create resource"), HttpStatus.BAD_REQUEST);
   }
 
 }

@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseApiDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
 import org.modelmapper.ModelMapper;
@@ -33,7 +34,7 @@ public class ProductService implements IProductService {
 
 
     @Override
-    public String CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
+    public ResponseApiDTO CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
 
         //Create product
          Product product = iProductRepository.createProduct(productCreateDTO.getProduct());
@@ -54,6 +55,6 @@ public class ProductService implements IProductService {
         if (isCreatedPublication == null){
             throw new FailedToCreateResource("Bad request");
         }
-        return "Todo ok";
+        return new ResponseApiDTO("Success","All ok");
     }
 }
