@@ -23,7 +23,7 @@ public class DataLoader {
         Product productD = new Product(4, "Cafetera", "Electrodomestico", "Oster", "Negro", "");
 
 
-        Post post1 = new Post(1, userB, LocalDate.of(2022, 8, 17), productA, 2, 20000);
+        Post post1 = new Post(1, userB, LocalDate.of(2022, 8, 10), productA, 2, 20000);
         Post post2 = new Post(2, userB, LocalDate.of(2022, 8, 9), productB, 2, 20000);
         Post post3 = new Post(3, userB, LocalDate.of(2022, 2, 2), productC, 2, 20000);
         Post post4 = new Post(4, userB, LocalDate.of(2022, 3, 16), productD, 2, 20000);

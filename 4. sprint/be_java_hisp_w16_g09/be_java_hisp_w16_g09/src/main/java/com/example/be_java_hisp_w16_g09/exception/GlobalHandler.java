@@ -51,4 +51,10 @@ public class GlobalHandler {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(InvalidDateException.class)
+    public ResponseEntity<MessageDto> InvalidDateException(InvalidDateException exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
 }

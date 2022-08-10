@@ -2,9 +2,9 @@ package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09.exception.InvalidDateException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
-import com.example.be_java_hisp_w16_g09.model.Product;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
@@ -37,6 +37,9 @@ public class PostService implements IPostService{
         User user = userRepository.searchById(userId);
         if (user == null){
             throw new UserNotFoundException(userId);
+        }
+        if(LocalDate.now().isBefore(postDto.getDate())){
+            throw new InvalidDateException(String.valueOf(postDto.getDate()));
         }
         Post post = dtoMapperUtil.map(postDto, Post.class);
         post.setUser(user);
