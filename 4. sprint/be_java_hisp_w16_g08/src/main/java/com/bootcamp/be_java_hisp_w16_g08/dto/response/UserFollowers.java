@@ -1,20 +1,20 @@
-package com.bootcamp.be_java_hisp_w16_g08.entiry;
+package com.bootcamp.be_java_hisp_w16_g08.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class User {
+public class UserFollowers {
+
     private int userId;
-    private String name;
-    private List<User>  followerList;
-    private List<User>  followedList;
-    private List<Post> postMade;
+    private String userName;
+    private List<UserFollowersList> followers;
+
 }

@@ -3,6 +3,7 @@ package com.bootcamp.be_java_hisp_w16_g08.controller;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserDto;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersCountDto;
 import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
+import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowers;
 import com.bootcamp.be_java_hisp_w16_g08.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,4 +41,15 @@ public class UserRestController {
         userService.unfollowUser(userId,userIdToUnfollow);
         return  new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/users/{userId}/followed/list")
+    public ResponseEntity<UserFollowers> getVendorsFollowedByUser (@PathVariable int userId){
+        return new ResponseEntity<>(userService.getVendorsFollowedByUser(userId), HttpStatus.OK);
+    }
+    @GetMapping("/users/{userId}/followers/list")
+    public ResponseEntity<UserFollowers> requestAllFollowers(@PathVariable int userId){
+
+        return new ResponseEntity<>(userService.getAllFollowers(userId), HttpStatus.OK);
+    }
+
 }
