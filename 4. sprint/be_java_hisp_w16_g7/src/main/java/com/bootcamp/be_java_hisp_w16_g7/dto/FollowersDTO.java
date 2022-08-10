@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 @Data
@@ -9,6 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 
 public class FollowersDTO {
-    private int user_id;
-    private String user_name;
+    @JsonProperty("userId")
+    private int id;
+
+    @JsonProperty("userName")
+    private String name;
 }
