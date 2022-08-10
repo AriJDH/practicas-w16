@@ -35,8 +35,8 @@ public class ProductService implements IProductService{
         user3.getFollowerList().add(user1);
 
         Post post1 = new Post(1,user1, LocalDate.now(),100,120,new Product(1,"Silla Gamer","Gamer","Razer","black","High end"));
-        Post post2 = new Post(2,user2, LocalDate.of(2022,06,05),101,200,new Product(2,"Mouse","Gamer","Logitech","black",""));
-        Post post3 = new Post(3,user1, LocalDate.now(),103,300,new Product(3,"Notebook","Gamer","Asus","black",""));
+        Post post2 = new Post(2,user2, LocalDate.of(2022,06,05),101,200,new Product(2,"Mouse","Gamer","Logitech","black","N/D"));
+        Post post3 = new Post(3,user1, LocalDate.now(),103,300,new Product(3,"Notebook","Gamer","Asus","black","N/D"));
 
         user1.getPostMade().add(post1);
         user2.getPostMade().add(post2);

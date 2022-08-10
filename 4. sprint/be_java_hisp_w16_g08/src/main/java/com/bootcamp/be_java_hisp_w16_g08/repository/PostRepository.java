@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g08.repository;
 
 import com.bootcamp.be_java_hisp_w16_g08.entiry.Post;
+import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
 import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 
@@ -22,7 +23,6 @@ public class PostRepository implements IPostRepository {
     public boolean isPresent(int id){
         return this.postCollection.containsKey(id);
     }
-
 
 
 }

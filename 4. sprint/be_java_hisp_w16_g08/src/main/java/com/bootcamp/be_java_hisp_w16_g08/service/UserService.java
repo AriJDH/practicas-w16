@@ -1,19 +1,18 @@
 package com.bootcamp.be_java_hisp_w16_g08.service;
 
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.ResponseUserInformationDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserDto;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersCountDto;
+import com.bootcamp.be_java_hisp_w16_g08.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
 import com.bootcamp.be_java_hisp_w16_g08.exception.*;
+import com.bootcamp.be_java_hisp_w16_g08.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g08.repository.IUserRepository;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowers;
-import com.bootcamp.be_java_hisp_w16_g08.dto.response.UserFollowersList;
+import com.bootcamp.be_java_hisp_w16_g08.util.MapperProduct;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 
 @Service
@@ -21,8 +20,16 @@ public class UserService implements IUserService {
     final
     IUserRepository iUserRepository;
 
-    public UserService(IUserRepository iUserRepository) {
+    final
+    IPostRepository iPostRepository;
+
+    final MapperProduct utilMapper;
+
+    public UserService(IUserRepository iUserRepository, IPostRepository iPostRepository, MapperProduct utilMapper) {
         this.iUserRepository = iUserRepository;
+        this.iPostRepository = iPostRepository;
+
+        this.utilMapper = utilMapper;
     }
 
     ModelMapper mapper = new ModelMapper();
@@ -30,12 +37,12 @@ public class UserService implements IUserService {
 
     @Override
     public void addFollower(int idUser, int idUserToFollow) {
-        if(idUser==idUserToFollow){
+        if (idUser == idUserToFollow) {
             throw new CanNotFollowYourSelfException();
         }
         User follower = getUserIfExist(idUser);
         User followed = getUserIfExist(idUserToFollow);
-        if(alreadyFollowAUser(follower,followed)){
+        if (alreadyFollowAUser(follower, followed)) {
             throw new AlreadyFollowAUserException();
         }
         followed.getFollowerList().add(follower);
@@ -43,7 +50,7 @@ public class UserService implements IUserService {
 
     }
 
-    private boolean alreadyFollowAUser(User user, User userToFollow){
+    private boolean alreadyFollowAUser(User user, User userToFollow) {
         List<User> followed = user.getFollowedList();
         return followed.contains(userToFollow);
     }
@@ -51,7 +58,7 @@ public class UserService implements IUserService {
     @Override
     public UserFollowersCountDto getUserFollowerCount(int userId) {
         User user = getUserIfExist(userId);
-        if(!isVendor(user)){
+        if (!isVendor(user)) {
             throw new UserNotVendorException();
         }
         int followersCount = user.getFollowerList().size();
@@ -82,7 +89,6 @@ public class UserService implements IUserService {
     }
 
 
-
     public UserDto getUserById(int idUser) {
         User user = getUserIfExist(idUser);
 
@@ -102,28 +108,41 @@ public class UserService implements IUserService {
 
         User serchedUser = getUserIfExist(userId);
         List<UserFollowersList> vendorsFollowed = serchedUser.getFollowedList().stream().
-                filter(x->isVendor(x)).
-                map(x->new UserFollowersList(x.getUserId(),x.getName()))
+                filter(x -> isVendor(x)).
+                map(x -> new UserFollowersList(x.getUserId(), x.getName()))
                 .collect(Collectors.toList());
 
-        return new UserFollowers(serchedUser.getUserId(),serchedUser.getName(),vendorsFollowed);
+        return new UserFollowers(serchedUser.getUserId(), serchedUser.getName(), vendorsFollowed);
     }
 
-    public boolean isVendor(User user){
-        return user.getPostMade().size()>0;
+    public boolean isVendor(User user) {
+        return user.getPostMade().size() > 0;
     }
 
 
     @Override
     public UserFollowers getAllVendorFollowers(int id) {
-      User user = getUserIfExist(id);
-      if(!isVendor(user)){
-          throw new UserNotVendorException();
-      }
-      return new UserFollowers(id, user.getName(), user.getFollowerList().stream()
-                .map(x -> mapper.map(x,UserFollowersList.class))
+        User user = getUserIfExist(id);
+        if (!isVendor(user)) {
+            throw new UserNotVendorException();
+        }
+        return new UserFollowers(id, user.getName(), user.getFollowerList().stream()
+                .map(x -> mapper.map(x, UserFollowersList.class))
                 .collect(Collectors.toList()));
 
+    }
+
+    @Override
+    public ResponsePostFromFollowedDto getPostFromFollowed(int userId) {
+        User user = getUserIfExist(userId);
+        List<User> list = user.getFollowedList().stream()
+                .filter(x -> isVendor(x))
+                .collect(Collectors.toList());
+        List<ResponsePostDto> orderedList = utilMapper
+                .mapUserPostDto(list).stream()
+                .filter(x -> x.getDate().isAfter(LocalDate.now().minusDays(14)))
+                .collect(Collectors.toList());
+        return new ResponsePostFromFollowedDto(userId, orderedList);
     }
 }
 
