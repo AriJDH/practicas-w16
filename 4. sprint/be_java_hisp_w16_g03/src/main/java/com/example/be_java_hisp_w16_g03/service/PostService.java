@@ -56,11 +56,27 @@ public class PostService implements IPostService {
                             .type(post.getProduct().getType())
                             .color(post.getProduct().getColor())
                             .brand(post.getProduct().getBrand())
-                            .notes(post.getProduct().getNotes()).build()).build()).sorted(Comparator.comparing(PostWithIDDTO::getDate)).collect(Collectors.toList());
+                            .notes(post.getProduct().getNotes()).build()).build()).sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
 
             return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
         }
         // si no hay vendedores retorno dto con lista vacia
+        return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
+    }
+
+    public PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order){
+
+        //valido que el request param tenga uno de los dos valores correctos
+        if(order == null || order.equals("date_desc"))
+            // filtro de forma descendiente utilizando el método ya creado anteriormente
+            return getLatestPostsByUserId(userId);
+        else if(order.equals("date_asc")){
+            // filtro de forma ascendente
+            List<PostWithIDDTO> postsWithIdDtos = getLatestPostsByUserId(userId).getPosts().stream().sorted(Comparator.comparing(PostWithIDDTO::getDate)).collect(Collectors.toList());
+            return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
+        }
+
+        // devuelvo una lista vacía si el request param es incorrecto
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
     }
 

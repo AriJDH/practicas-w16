@@ -8,4 +8,5 @@ import java.util.List;
 public interface IPostService {
     void addPost(PostDTO request);
     PostsDTO getLatestPostsByUserId(Integer userId);
+    PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order);
 }

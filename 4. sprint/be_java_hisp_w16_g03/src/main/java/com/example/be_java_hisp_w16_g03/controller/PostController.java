@@ -18,10 +18,15 @@ public class PostController {
         service.addPost(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
+/*
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<PostsDTO> getLatestPostsByUserId(@PathVariable Integer userId){
         return new ResponseEntity<>(service.getLatestPostsByUserId(userId), HttpStatus.OK);
+    }
+*/
+    @GetMapping("/products/followed/{userId}/list")
+    public ResponseEntity<PostsDTO> getLatestPostsOrderedByUserId(@PathVariable Integer userId, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.getLatestPostsOrderedByUserId(userId, order), HttpStatus.OK);
     }
 
 }
