@@ -8,8 +8,8 @@ import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,6 +25,12 @@ public class PostService implements IPostService {
 
     @Autowired
     private IUserRepository userRepository;
+
+    private ModelMapper modelMapper;
+
+    public PostService() {
+        this.modelMapper = new ModelMapper();
+    }
 
     @Override
     public MessageDto createPost(PostDto postDto) {
@@ -97,7 +103,6 @@ public class PostService implements IPostService {
         ).collect(Collectors.toList());
     }
 
-
     @Override
     public FollowedPostsDto getFollowedPosts(int userId, String order) {
         User user = userRepository.getUser(userId);
@@ -118,18 +123,27 @@ public class PostService implements IPostService {
             return new FollowedPostsDto(userId, getPosts(user));
     }
 
-    public ResponsePromoPostDTO getPromoPostsQty(int userId) {
+    public ResponsePromoPostQtyDTO getPromoPostsQty(int userId) {
         UserRepository userRepository = new UserRepository();
         if (!userRepository.userExists(userId)) {
             throw new BadRequestException("El usuario con el id: " + userId + " no existe.");
         }
-        return new ResponsePromoPostDTO(userId, userRepository.getUser(userId).getUserName(), this.getPromoPostsQtyByUser(userId));
+        return new ResponsePromoPostQtyDTO(userId, userRepository.getUser(userId).getUserName(), this.getPromoPostsQtyByUser(userId));
     }
 
     protected long getPromoPostsQtyByUser(int userId) {
         return this.postRepository.getPostsByUserId(userId)
                 .stream()
                 .filter(Post::isHasPromo).count();
+    }
+
+    public ResponsePromoPostsDTO getPromoPostsDto(int userId) {
+        List<ResponsePostDto> promoPosts = this.postRepository.getPostsByUserId(userId)
+                .stream()
+                .filter(Post::isHasPromo)
+                .map(post -> this.modelMapper.map(post, ResponsePromoPostDTO.class)).collect(Collectors.toList());
+
+        return new ResponsePromoPostsDTO(userId, promoPosts);
     }
 
 

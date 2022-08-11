@@ -5,7 +5,6 @@ import com.bootcamp.be_java_hisp_w16_g01.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,8 +29,12 @@ public class PostController {
     }
 
     @GetMapping("promo-post/count")
-    public ResponseEntity<?> getPromoPostQty(@RequestParam("user_id") int userId) {
+    public ResponseEntity<ResponsePromoPostQtyDTO> getPromoPostQty(@RequestParam("user_id") int userId) {
         return ResponseEntity.ok(postService.getPromoPostsQty(userId));
     }
 
+    @GetMapping("promo-post/list")
+    public ResponseEntity<ResponsePromoPostsDTO> getPromoPosts(@RequestParam("user_id") int userId) {
+        return ResponseEntity.ok(postService.getPromoPostsDto(userId));
+    }
 }
