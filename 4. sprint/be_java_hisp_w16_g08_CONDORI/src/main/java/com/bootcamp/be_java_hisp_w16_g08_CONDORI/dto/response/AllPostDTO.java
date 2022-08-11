@@ -18,6 +18,6 @@ public class AllPostDTO {
     private int userId;
     private String userName;
     private List<PromoPostDto> postsPromotions;
-    private List<PostDto> posts;
+    private List<ResponsePostDto> posts;
 
 }

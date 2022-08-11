@@ -212,7 +212,7 @@ public class UserService implements IUserService {
     public AllPostDTO getAllPost(int i) {
         User x = getUserIfExist(i);
         List<PromoPostDto> listaPromo = new ArrayList<>();
-        List<PostDto> lista = new ArrayList<>();
+        List<ResponsePostDto> lista = new ArrayList<>();
         x.getPostPromotionsMade().stream().forEach(e -> {
             Product prod = e.getProduct();
             ProductDto prodDto = new ProductDto(prod.getId(), prod.getName(), prod.getType(), prod.getBrand(), prod.getColor(), prod.getNotes());
@@ -222,8 +222,9 @@ public class UserService implements IUserService {
 
         x.getPostMade().stream().forEach(e -> {
             Product prod = e.getProduct();
-            ProductDto prodDto = new ProductDto(prod.getId(), prod.getName(), prod.getType(), prod.getBrand(), prod.getColor(), prod.getNotes());
-            PostDto nuevo = new PostDto(e.getUser().getUserId(), e.getDate(), prodDto, e.getCategory(), e.getPrice());
+            ResponseProductDto prodDto = new ResponseProductDto(prod.getId(), prod.getName(), prod.getType(), prod.getBrand(), prod.getColor(), prod.getNotes());
+            ResponsePostDto nuevo = new ResponsePostDto(e.getPostId(), e.getUser().getUserId(), e.getDate(), prodDto, e.getPrice(), e.getCategory());
+
             lista.add(nuevo);
         });
 
