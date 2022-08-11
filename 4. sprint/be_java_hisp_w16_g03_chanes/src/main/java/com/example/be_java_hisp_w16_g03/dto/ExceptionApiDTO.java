@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExceptionApiDTO {
-
     private String title;
     private String message;
 }

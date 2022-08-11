@@ -1,12 +1,14 @@
 # ---------Meli Social----------
 
-Meli Social es una plataforma en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de todas las novedades que los mismos posteen.
+Meli Social es una plataforma en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de
+todas las novedades que los mismos posteen.
 
-## Endopoints disponibles en Beta 
+## Endopoints disponibles en Beta
+
 {url} url a definir...
 
-
 ## Creación de usuarios recibe una lista de users
+
 ```
 POST /createUser
 body[
@@ -17,7 +19,9 @@ body[
 ]
 Return listaCompleta de users cargados.
 ```
+
 ## Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
+
 ```
 GET /users/{userId}/followers/count
 userId= Número que identifica a cada usuario
@@ -28,7 +32,9 @@ Response
     "followers_count": 35
 }
 ```
+
 ## Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
+
 ```
 GET /users/{userId}/followers/list
 userId= Número que identifica a cada usuario
@@ -53,7 +59,9 @@ Response
 }
 
 ```
+
 ## Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
+
 ```
 GET /users/{userId}/followers/list
 userId= Número que identifica a cada usuario
@@ -77,7 +85,9 @@ Response
     ]
 }
 ```
+
 ## Dar de alta una nueva publicación
+
 ```
 POST /products/post
 body
@@ -100,7 +110,9 @@ Status Code 200 (todo OK)
 Status Code 400 (Bad Request)
 
 ```
+
 ## Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero
+
 ```
 GET /products/followed/{userId}/list
 userId= Número que identifica a cada usuario
@@ -141,6 +153,7 @@ Response
 }
 
 ```
+
 ## Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
 
 ```
@@ -148,7 +161,9 @@ POST /users/{userId}/unfollow/{userIdToUnfollow}
 userId= Número que identifica a cada usuario
 userIdToUnfollow=Número que identifica al usuario a dejar de seguir
 ```
+
 ## Endpoints de ordenamiento
+
 ```
 userId= Número que identifica a cada usuario
 

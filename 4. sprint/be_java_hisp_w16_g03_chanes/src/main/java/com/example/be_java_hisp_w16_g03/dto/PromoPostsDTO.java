@@ -14,8 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class FollowersDTO {
+public class PromoPostsDTO {
+
     private Integer userId;
     private String userName;
-    private List<UserDTO> followers;
+    private List<PromoPostDTO> posts;
 }

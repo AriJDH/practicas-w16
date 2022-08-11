@@ -17,6 +17,8 @@ public class Post {
     private Product product;
     private Integer category;
     private Double price;
+    private boolean hasPromo;
+    private double discount;
 
     public void increaseId() {
         this.postId = lastId++;

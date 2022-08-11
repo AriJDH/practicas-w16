@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.service;
 
-import com.example.be_java_hisp_w16_g03.dto.PostDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
-import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
+import com.example.be_java_hisp_w16_g03.dto.*;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidPostRequest;
@@ -39,6 +36,7 @@ public class PostService implements IPostService {
 
     @Override
     public PostsDTO getLatestPostsByUserId(Integer userId) {
+
         List<User> vendors = repository.getFollowedsByUserId(userId);
         if (vendors != null) {
             List<Post> filterPosts = getFilterPosts(vendors);
@@ -76,6 +74,56 @@ public class PostService implements IPostService {
         List<Post> filterPosts = new ArrayList<>();
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
         return filterPosts;
+    }
+
+    @Override
+    public void addPromoPost(PromoPostDTO request) {
+        if (!request.validate())
+            throw new InvalidPostRequest();
+        User requestUser = repository.getUserById(request.getUserId()).orElseThrow(() -> new UserNotExistException(request.getUserId()));
+        if (requestUser != null) {
+            requestUser.addPromoPostToUser(request);
+        } else {
+            throw new InvalidPostRequest();
+        }
+    }
+
+    @Override
+    public PromoPostCountDTO getCountPromoPost(Integer id) {
+
+        User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
+        if (user.getPosts() == null) {
+            return new PromoPostCountDTO(user.getUserId(), user.getUserName(), 0);
+        }
+        Integer promoCount = (int) user.getterPosts().stream().filter(Post::isHasPromo).count();
+        PromoPostCountDTO promoPostCountDTO = new PromoPostCountDTO(user.getUserId(), user.getUserName(), promoCount);
+
+        return promoPostCountDTO;
+    }
+
+    @Override
+    public PromoPostsDTO getPromoPosts(Integer id) {
+
+        User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
+
+        List<Post> promoList = user.getterPosts().stream().filter(x -> x.isHasPromo()).collect(Collectors.toList());
+        List<PromoPostDTO> promoPostDTOList = promoList.stream().map(post -> PromoPostDTO.builder().userId(post.getUserId())
+                .postId(post.getPostId())
+                .date(post.getDate())
+                .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                        .productName(post.getProduct().getProductName())
+                        .type(post.getProduct().getType())
+                        .color(post.getProduct().getColor())
+                        .brand(post.getProduct().getBrand())
+                        .notes(post.getProduct().getNotes()).build())
+                .category(post.getCategory())
+                .price(post.getPrice())
+                .hasPromo(post.isHasPromo())
+                .discount(post.getDiscount()).build()).collect(Collectors.toList());
+
+        PromoPostsDTO promoPostsDTO = new PromoPostsDTO(user.getUserId(), user.getUserName(), promoPostDTOList);
+
+        return promoPostsDTO;
     }
 
 
