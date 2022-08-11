@@ -152,6 +152,10 @@ userIdToUnfollow=Número que identifica al usuario a dejar de seguir
 ```
 userId= Número que identifica a cada usuario
 
+
+
+
+
 -----alfabético ascendente y descendente
 /users/{UserID}/followers/list?order=name_asc
 /users/{UserID}/followers/list?order=name_desc
@@ -164,3 +168,82 @@ userId= Número que identifica a cada usuario
 /products/followed/{userId}/list?order=date_desc
 
 ```
+
+## Agregar un Posteo con promoción
+
+```
+POST /products/promo-post
+
+user_id = Número que identifica a cada usuario
+
+Body 
+
+{
+    "user_id": 234,
+    "date": "29-04-2021",
+    "product": {
+        "product_id": 1,
+        "product_name": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 1500.50,
+    "has_promo": true,
+    "discount": 0.25
+}
+```
+## Obtener la cantidad de productos con promoción de un determinado vendedor
+```
+GET
+/products/promo-post/count?user_id={userId}
+
+user_id = Número que identifica a cada usuario, en este caso un vendedor.
+
+Response
+{  
+   "user_id" : 234,
+   "user_name": "vendedor1",
+   "promo_products_count": 23
+}
+````
+
+## Obtener los productos con promoción de un determinado vendedor.
+
+```
+GET
+/products/promo-post/list?user_id={userId}
+
+Response 
+{
+    "user_id": 234,
+    "user_name": "vendedor1",
+    "posts": [
+        {
+            “user_id”: 234
+            "post_id": 18,
+            "date": "29-04-2021",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": "100",
+            "price": 15000.50,
+            "has_promo": true,
+            "discount": 0.25
+        }
+    ]
+}
+
+
+
+
+
+
+
