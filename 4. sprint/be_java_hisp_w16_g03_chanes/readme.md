@@ -417,3 +417,51 @@ userId - number
     ]
 }
 ```
+​
+
+### Obtener listado de publicaciones con promoción de todos los usuarios a los que sigue un determinado usuario
+
+#### Endpoint (GET)
+
+```
+{host}/products/promo-post/followed/{userId}/list
+```
+
+#### Request Param
+
+```
+userId - number
+```
+
+#### Request Body
+
+```
+```
+
+#### Response (OK - 200)
+
+```
+{
+    "user_id": 234,
+    "user_name": "vendedor1",
+    "posts": [
+        {
+            “user_id”: 234
+            "post_id": 18,
+            "date": "29-04-2021",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": "100",
+            "price": 15000.50,
+            "has_promo": true,
+            "discount": 0.25
+        }
+    ]
+}
+```
