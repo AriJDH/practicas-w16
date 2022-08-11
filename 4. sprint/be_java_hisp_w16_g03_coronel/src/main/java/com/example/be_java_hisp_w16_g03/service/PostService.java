@@ -65,6 +65,9 @@ public class PostService implements IPostService {
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
     }
 
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++++ Métodos Individuales ++++++++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @Override
     public PromoPostDTO addPromoPost(PromoPostDTO promoDto) {
         if (!validatePromo(promoDto))
@@ -88,17 +91,30 @@ public class PostService implements IPostService {
 
     }
 
+    @Override
+    public PromoPostsDTO getProductsPromoByUserId(Integer userId) {
+        User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+        List<PromoPostDTO> postsDto = user.getterPosts().stream()
+                .filter(post -> post.isHasPromo())
+                .map(post -> Mapper.promoPostToDto(post))
+                .collect(Collectors.toList());
+        return new PromoPostsDTO(userId, user.getUserName(), postsDto);
+    }
+
     private boolean validatePromo(PromoPostDTO promoDto) {
         return promoDto.getUserId() != null && promoDto.getDate() != null && promoDto.getProduct().validate() &&
                 promoDto.getCategory() != null && promoDto.getPrice() != null
                 && promoDto.getDiscount() != 0;
     }
 
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++ Fin de Métodos Individuales +++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
     private List<Post> getFilterPosts(List<User> vendors) {
         List<Post> filterPosts = new ArrayList<>();
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
         return filterPosts;
     }
-
 
 }

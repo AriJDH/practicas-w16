@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w16_g03.utils;
 
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
 import com.example.be_java_hisp_w16_g03.dto.PromoPostDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.Product;
@@ -41,5 +42,25 @@ public class Mapper {
                         .build())
                 .category(postDto.getCategory())
                 .price(postDto.getPrice()).build();
+    }
+
+    public static PromoPostDTO promoPostToDto(Post post) {
+        return PromoPostDTO.builder()
+                .userId(post.getUserId())
+                .date(post.getDate())
+                .price(post.getPrice())
+                .product(ProductDTO.builder().
+                        productId(post.getProduct().getProductId())
+                        .brand(post.getProduct().getBrand())
+                        .color(post.getProduct().getColor())
+                        .type(post.getProduct().getType())
+                        .notes(post.getProduct().getNotes())
+                        .productName(post.getProduct().getProductName())
+                        .build())
+                .category(post.getCategory())
+                .price(post.getPrice())
+                .hasPromo(post.isHasPromo())
+                .discount(post.getDiscount())
+                .build();
     }
 }
