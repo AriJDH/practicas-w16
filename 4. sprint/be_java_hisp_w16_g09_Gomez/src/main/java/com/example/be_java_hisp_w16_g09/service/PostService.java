@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w16_g09.dto.PromoPostCounterDto;
 import com.example.be_java_hisp_w16_g09.dto.PromoPostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.InvalidDateException;
+import com.example.be_java_hisp_w16_g09.exception.PostNotFoundException;
 import com.example.be_java_hisp_w16_g09.exception.UserIsNotSellerException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
@@ -51,6 +52,17 @@ public class PostService implements IPostService {
         int promoCount = Filter.apply(posts,(post -> post.isHasPromo())).size();
 
         return new PromoPostCounterDto(userId,user.getUserName(),promoCount);
+    }
+
+    public void removePost(int postId){
+        List<Post> usersPosts = postRepository.searchByPostId(postId);
+        if(usersPosts == null)
+            throw new PostNotFoundException(postId);
+        int userId = usersPosts.get(0).getUser().getUserId();
+        usersPosts.removeIf(post -> post.getPostId() == postId);
+
+        postRepository.update(userId,usersPosts); ;
+
     }
 
     //Martin

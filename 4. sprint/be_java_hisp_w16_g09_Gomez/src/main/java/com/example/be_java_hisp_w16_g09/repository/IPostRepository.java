@@ -12,4 +12,6 @@ public interface IPostRepository {
 
     //Nico
     List<Post> getPostsByUserIds(List<Integer> userIds);
+    List<Post> searchByPostId(int postId);
+    void update(int userId,List<Post> newList);
 }

@@ -12,8 +12,10 @@ public interface IPostService {
 
     RecentPostsDTO orderByDate(int id, String order);
 
-    void  createPromoPost(PromoPostDto promoPostDto);
+    void createPromoPost(PromoPostDto promoPostDto);
 
     PromoPostCounterDto countPromoPosts(int userId);
+
+    void removePost(int postId);
 
 }

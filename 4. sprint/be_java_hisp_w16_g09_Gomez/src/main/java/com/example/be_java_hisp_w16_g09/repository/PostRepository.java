@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
-public class PostRepository implements IPostRepository{
+public class PostRepository implements IPostRepository {
     private HashMap<Integer, List<Post>> posts;
     private int postIdCounter;
 
@@ -20,18 +20,17 @@ public class PostRepository implements IPostRepository{
         DataLoader.loadProducts(this);
     }
 
-    public void createElement(Post newPost){
+    public void createElement(Post newPost) {
         List<Post> newList;
         newPost.setPostId(getNewPostId());
         int userId = newPost.getUser().getUserId();
-        if(posts.containsKey(userId))
-        {
+        if (posts.containsKey(userId)) {
             newList = posts.get(userId);
-        }else{
+        } else {
             newList = new ArrayList<>();
         }
         newList.add(newPost);
-        posts.put(userId,newList);
+        posts.put(userId, newList);
     }
 
     private int getNewPostId() {
@@ -39,13 +38,27 @@ public class PostRepository implements IPostRepository{
         return postIdCounter;
     }
 
-    public List<Post> searchById(int id){
+    public List<Post> searchById(int id) {
         return posts.get(id);
     }
 
     @Override
     public List<Post> getPostsByUserIds(List<Integer> userIds) {
         return userIds.stream().map(userId -> posts.getOrDefault(userId, new ArrayList<>())).flatMap(List::stream).collect(Collectors.toList());
+    }
+
+    public List<Post> searchByPostId(int postId) {
+        return posts
+                .values()
+                .stream()
+                .filter(usersPosts -> usersPosts.stream().anyMatch(post -> post.getPostId() == postId))
+                .findFirst()
+                .orElse(null);
+
+    }
+
+    public void update(int userId, List<Post> newList) {
+        posts.put(userId,newList);
     }
 
 }
