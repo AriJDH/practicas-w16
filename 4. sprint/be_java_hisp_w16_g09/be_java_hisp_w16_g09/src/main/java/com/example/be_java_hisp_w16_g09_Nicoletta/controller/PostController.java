@@ -39,7 +39,7 @@ public class PostController {
         return new ResponseEntity<>(postService.calculatePromoCount(user_id),HttpStatus.OK);
     }
     @GetMapping("/products/promo-post/list")
-    public ResponseEntity<PostPromoListDTO> US00(@RequestParam int user_id){
+    public ResponseEntity<PostPromoListDTO> US0012(@RequestParam int user_id){
         return new ResponseEntity<>(postService.getPromoOfSeller(user_id),HttpStatus.OK);
     }
 
