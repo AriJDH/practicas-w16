@@ -103,7 +103,8 @@ public class PostService implements IPostService {
       List<SellerPromoProductsListResDTO> promoProductList = new ArrayList<>();
       postRepository.findAll().stream()
             .filter(post -> post.getHasPromo())
-            .forEach(user -> promoProductList.add(sellerPromoProductsListWhitDaysFilterDTOMapper(userService.findById(user.getUserId()))));
+            .filter(post -> post.getDate().compareTo(LocalDate.now().minusDays(1)) > 0)
+            .forEach(post -> promoProductList.add(sellerPromoProductsListWhitDaysFilterDTOMapper(userService.findById(post.getUserId()),post)));
       return promoProductList;
    }
 
@@ -118,11 +119,11 @@ public class PostService implements IPostService {
             .build();
    }
 
-   private SellerPromoProductsListResDTO sellerPromoProductsListWhitDaysFilterDTOMapper(User user) {
+   private SellerPromoProductsListResDTO sellerPromoProductsListWhitDaysFilterDTOMapper(User user,Post post) {
       return SellerPromoProductsListResDTO.builder()
             .userId(user.getId())
             .userName(user.getUserName())
-            .posts(findPromoPostAndRetriveListWithDaysFilter(user))
+            .posts(findPromoPostAndRetriveListWithDaysFilter(post))
             .build();
    }
 
@@ -144,15 +145,8 @@ public class PostService implements IPostService {
       return listWithPromoTrue;
    }
 
-   private List<PostResDTO> findPromoPostAndRetriveListWithDaysFilter(User user) {
-
-      List<PostResDTO> listWithPromoTrue = new ArrayList<>();
-      postRepository.findByUserId(user.getId())
-            .stream()
-            .filter(post -> post.getHasPromo())
-            .filter(post -> post.getDate().compareTo(LocalDate.now().minusDays(1)) > 0)
-            .forEach(postFiltred -> listWithPromoTrue.add(Mapper.parseToPostResDTO(postFiltred)));
-      return listWithPromoTrue;
+   private PostResDTO findPromoPostAndRetriveListWithDaysFilter(Post post) {
+      return Mapper.parseToPostResDTO(post);
    }
 
    private Post validatePost(Integer postID) {

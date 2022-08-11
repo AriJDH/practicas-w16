@@ -11,8 +11,8 @@ import java.util.List;
 @SuperBuilder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class SellerPromoProductsListResDTO extends UserResDTO {
-    private List<PostResDTO> posts;
-    public SellerPromoProductsListResDTO(Integer userId, String userName, List<PostResDTO> posts) {
+    private PostResDTO posts;
+    public SellerPromoProductsListResDTO(Integer userId, String userName, PostResDTO posts) {
         super(userId, userName);
         this.posts = posts;
     }
