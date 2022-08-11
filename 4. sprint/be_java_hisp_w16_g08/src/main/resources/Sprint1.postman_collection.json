@@ -12,16 +12,16 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/{userId}/follow/{userIdToFollow}",
+					"raw": "localhost:8080/users/2/follow/1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"{userId}",
+						"2",
 						"follow",
-						"{userIdToFollow}"
+						"1"
 					]
 				}
 			},
@@ -33,14 +33,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/{userId}/followers/count",
+					"raw": "localhost:8080/users/1/followers/count",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"{userId}",
+						"1",
 						"followers",
 						"count"
 					]
@@ -54,16 +54,28 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/{userId}/followers/list",
+					"raw": "localhost:8080/users/1/followers/list",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"{userId}",
+						"1",
 						"followers",
 						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_desc",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "name_asc",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -75,16 +87,28 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/{userId}/followed/list",
+					"raw": "localhost:8080/users/2/followed/list",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"{userId}",
+						"2",
 						"followed",
 						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_desc",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "name_asc",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -95,17 +119,24 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"01-08-2022\",\n    \"product\": {\n        \"product_id\": 11,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "localhost:8080/users/{userId}/follow/{userIdToFollow}",
+					"raw": "localhost:8080/products/post",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"users",
-						"{userId}",
-						"follow",
-						"{userIdToFollow}"
+						"products",
+						"post"
 					]
 				}
 			},
@@ -117,7 +148,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/products/followed/{userId}/list",
+					"raw": "localhost:8080/products/followed/2/list",
 					"host": [
 						"localhost"
 					],
@@ -125,8 +156,20 @@
 					"path": [
 						"products",
 						"followed",
-						"{userId}",
+						"2",
 						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "date_desc",
+							"disabled": true
+						},
+						{
+							"key": "order",
+							"value": "date_asc",
+							"disabled": true
+						}
 					]
 				}
 			},
@@ -138,16 +181,16 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/users/{userId}/unfollow/{userIdToUnfollow}",
+					"raw": "localhost:8080/users/1/unfollow/3",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
 						"users",
-						"{userId}",
+						"1",
 						"unfollow",
-						"{userIdToUnfollow}"
+						"3"
 					]
 				}
 			},
@@ -158,6 +201,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"10-08-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "localhost:8080/products/promo-post",
 					"host": [
@@ -178,7 +230,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/products/promo-post/count?user_id={userId}",
+					"raw": "localhost:8080/products/promo-post/count?user_id=1",
 					"host": [
 						"localhost"
 					],
@@ -191,7 +243,7 @@
 					"query": [
 						{
 							"key": "user_id",
-							"value": "{userId}"
+							"value": "1"
 						}
 					]
 				}
@@ -204,7 +256,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/products/promo-post/list?user_id={userId}",
+					"raw": "localhost:8080/products/promo-post/list?user_id=1",
 					"host": [
 						"localhost"
 					],
@@ -217,7 +269,7 @@
 					"query": [
 						{
 							"key": "user_id",
-							"value": "{userId}"
+							"value": "1"
 						}
 					]
 				}
