@@ -11,7 +11,7 @@
 - Los usuarios no poseen seguidores, seguidos ni posts.
 - Solo se considera vendedor si el usuario tiene al menos un post.
 - Solo se puede seguir a vendedores.
-- Solo se puede listar seguidores .
+- Solo se puede listar seguidores de un vendedor.
 
 ## Parte Individual - Bonus
 
