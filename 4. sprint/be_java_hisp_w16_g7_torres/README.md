@@ -7,6 +7,7 @@
 
 ## Test de Postman
 
+- La collection se encuentra en la ruta src/main/resources.
 - En la aplicación ya estan creados previamente 4 usuarios con la siguiente información:
   - User1: {"id": 1111, "name": "John Doe"}
   - User2: {"id": 2222, "name": "Alexander The Great"}
