@@ -20,7 +20,7 @@ public class PostController {
     @ApiOperation(value = "Crear publicación", notes = "Dar de alta una nueva publicación")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Publicación creada correctamente"),
-            @ApiResponse(code = 404, message = "Bad Request")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @PostMapping("/post")
     public ResponseEntity<MessageDto> createPost(@RequestBody PostDto postDTO) {
@@ -30,7 +30,7 @@ public class PostController {
     @ApiOperation(value = "Crear publicación en promoción", notes = "Llevar a cabo la publicación de un nuevo producto en promoción")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Publicación creada correctamente"),
-            @ApiResponse(code = 404, message = "Bad Request")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @PostMapping("/promo-post")
     public ResponseEntity<MessageDto> createPromoPost(@RequestBody PromoPostDto postDTO) {
@@ -39,7 +39,7 @@ public class PostController {
     @ApiOperation(value = "Ver publicaciones", notes = "Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero)")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Publicaciones obtenidas"),
-            @ApiResponse(code = 404, message = "Bad Request")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<FollowedPostsDto> getFollowedPostsOrder(@PathVariable int userId, @RequestParam String order) {
@@ -49,7 +49,7 @@ public class PostController {
     @ApiOperation(value = "Cantidad promociones", notes = "Obtener la cantidad de productos en promoción de un determinado vendedor")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Publicaciones obtenidas"),
-            @ApiResponse(code = 404, message = "Bad Request")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("/promo-post/count")
     public ResponseEntity<PromoPostCountDto> getPromoPostsCount(@RequestParam int user_id) {
@@ -59,7 +59,7 @@ public class PostController {
     @ApiOperation(value = "Ver promociones", notes = "Obtener un listado de todos los productos en promoción de un determinado vendedor")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Publicaciones obtenidas"),
-            @ApiResponse(code = 404, message = "Bad Request")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @GetMapping("/promo-post/list")
     public ResponseEntity<PromoPostListDto> getPromoPostsList(@RequestParam int user_id) {
@@ -69,7 +69,7 @@ public class PostController {
     @ApiOperation(value = "Eliminar publicación", notes = "Permite eliminar una publicación")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Publicacion eliminada"),
-            @ApiResponse(code = 404, message = "Bad Request")
+            @ApiResponse(code = 400, message = "Bad Request")
     })
     @DeleteMapping("/post")
     public ResponseEntity<MessageDto> deletePost(@RequestParam int postId) {
