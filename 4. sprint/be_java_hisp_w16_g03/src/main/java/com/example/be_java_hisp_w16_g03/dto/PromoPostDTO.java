@@ -15,17 +15,20 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostDTO {
+
+public class PromoPostDTO {
     private Integer userId;
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
     private ProductDTO product;
     private Integer category;
     private Double price;
+    private Boolean has_promo;
+    private Double discount;
 
     public boolean validate() {
         return this.userId != null && this.date != null &&
                 this.product.validate() && this.category != null &&
-                this.price != null;
+                this.price != null && has_promo != null && discount != null;
     }
 }

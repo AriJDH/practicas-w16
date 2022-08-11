@@ -1,20 +1,19 @@
 package com.example.be_java_hisp_w16_g03.service;
 
-import com.example.be_java_hisp_w16_g03.dto.PostDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
-import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
+import com.example.be_java_hisp_w16_g03.dto.*;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidPostRequest;
 import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,16 +24,27 @@ public class PostService implements IPostService {
     IUserRepository repository;
 
     @Override
-    public void addPost(PostDTO request) {
+    public void addPost(PostDTO request, Boolean hasPromo, Double discount) {
         if (!request.validate())
             throw new InvalidPostRequest();
         User requestUser = repository.getUserById(request.getUserId()).orElseThrow(() -> new UserNotExistException(request.getUserId()));
         if (requestUser != null) {
-            requestUser.addPostToUser(request);
+            requestUser.addPostToUser(request, hasPromo, discount);
         } else {
             throw new InvalidPostRequest();
         }
 
+    }
+
+    @Override
+    public void addPromoPost(PromoPostDTO promoPost) {
+        if (promoPost.getHas_promo() == null || promoPost.getDiscount() == null){
+            throw new InvalidPostRequest();
+        }
+        PostDTO post = new PostDTO();
+        BeanUtils.copyProperties(promoPost, post);
+
+        addPost(post, promoPost.getHas_promo(), promoPost.getDiscount());
     }
 
     @Override
@@ -43,7 +53,8 @@ public class PostService implements IPostService {
         if (vendors != null) {
             List<Post> filterPosts = getFilterPosts(vendors);
 
-            List<PostWithIdDTO> postsWithIdDtos = filterPosts.stream().map(post -> PostWithIdDTO.builder().postId(post.getPostId())
+            List<PostWithIdDTO> postsWithIdDtos = filterPosts.stream().map(post -> PostWithIdDTO.builder()
+                    .postId(post.getPostId())
                     .userId(post.getUserId())
                     .price(post.getPrice())
                     .date(post.getDate())
@@ -72,11 +83,24 @@ public class PostService implements IPostService {
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
     }
 
+    @Override
+    public PromoPostCountDTO getPromoPostCountByUserId(Integer userId) {
+        Optional<User> user = repository.getUserById(userId);
+        if (!user.isPresent()){
+            throw new UserNotExistException(userId);
+        }
+
+        if (user.get().getPosts() == null){
+            return new PromoPostCountDTO(user.get().getUserId(), user.get().getUserName(), 0);
+        } else {
+            Integer promoProductsCount = ((int) user.get().getPosts().stream().filter(x -> x.getProduct().getHas_promo()).count());
+            return new PromoPostCountDTO(user.get().getUserId(), user.get().getUserName(), promoProductsCount);
+        }
+    }
+
     private List<Post> getFilterPosts(List<User> vendors) {
         List<Post> filterPosts = new ArrayList<>();
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
         return filterPosts;
     }
-
-
 }

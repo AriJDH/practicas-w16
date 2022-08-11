@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -48,7 +49,7 @@ public class User {
         return this.posts;
     }
 
-    public void addPostToUser(PostDTO request) {
+    public void addPostToUser(PostDTO request, Boolean hasPromo, Double discount) {
         Post post = Post.builder()
                 .userId(request.getUserId())
                 .date(request.getDate())
@@ -60,6 +61,8 @@ public class User {
                         .type(request.getProduct().getType())
                         .notes(request.getProduct().getNotes())
                         .productName(request.getProduct().getProductName())
+                        .has_promo(hasPromo)
+                        .discount(discount)
                         .build())
                 .category(request.getCategory())
                 .price(request.getPrice()).build();

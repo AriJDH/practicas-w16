@@ -14,5 +14,6 @@ public class Product {
     private String color;
     private String notes;
     private String productName;
-
+    private Boolean has_promo;
+    private Double discount;
 }
