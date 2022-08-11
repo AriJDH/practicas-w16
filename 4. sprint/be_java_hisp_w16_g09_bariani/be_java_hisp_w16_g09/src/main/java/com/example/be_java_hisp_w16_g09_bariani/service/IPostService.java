@@ -6,7 +6,7 @@ public interface IPostService {
     void createPost(PostDto postDto);
     RecentPostsDTO getRecentPostsOfSellersFollowedByUserWith(int anUserId);
     RecentPostsDTO orderByDate(int id, String order);
-    void createPromoPost(PromoPostDtoRequest promoPostDtoRequest);
+    void createPromoPost(PromoPostDto promoPostDto);
     PromoPostCountDtoResponse countSellerPromoProducts(int anUserId);
 
     PromoPostListDtoResponse getAllPromoPostOfSeller(int user_id, String order);

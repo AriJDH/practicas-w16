@@ -15,5 +15,5 @@ import java.util.List;
 public class PromoPostListDtoResponse {
     private int userId;
     private String userName;
-    private List<PostDto> posts;
+    private List<PromoPostDto> promoPosts;
 }

@@ -29,8 +29,8 @@ public class PostController {
 
     //US 0010 Dar de alta una publicacion promo
     @PostMapping("/products/promo-post")
-    public void createPromoPost(@RequestBody PromoPostDtoRequest promoPostDtoRequest){
-        postService.createPromoPost(promoPostDtoRequest);
+    public void createPromoPost(@RequestBody PromoPostDto promoPostDto){
+        postService.createPromoPost(promoPostDto);
     }
 
     //US 0011 Obtener cantidad de productos en promo de un seller

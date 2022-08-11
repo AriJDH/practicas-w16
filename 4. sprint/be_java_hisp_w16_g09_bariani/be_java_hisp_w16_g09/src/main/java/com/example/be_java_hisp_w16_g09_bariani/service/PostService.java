@@ -55,9 +55,9 @@ public class PostService implements IPostService {
 
     //Guille
     @Override
-    public void createPromoPost(PromoPostDtoRequest promoPostDtoRequest) {
-        Post post = dtoMapperUtil.map(promoPostDtoRequest, Post.class);
-        createValidatedPost(post, promoPostDtoRequest.getUserId());
+    public void createPromoPost(PromoPostDto promoPostDto) {
+        Post post = dtoMapperUtil.map(promoPostDto, Post.class);
+        createValidatedPost(post, promoPostDto.getUserId());
     }
 
     @Override
@@ -76,7 +76,7 @@ public class PostService implements IPostService {
         if (order != null){
             promoPostList = orderPostListByDate(promoPostList, order);
         }
-        List<PostDto> promosDtoList = dtoMapperUtil.mapList(promoPostList, PostDto.class);
+        List<PromoPostDto> promosDtoList = dtoMapperUtil.mapList(promoPostList, PromoPostDto.class);
         return new PromoPostListDtoResponse(seller.getUserId(), seller.getUserName(), promosDtoList);
     }
 
