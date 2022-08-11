@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="dd07d7af-7e61-4fba-8f9c-062bb950c945" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../calculador.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/CalculadorApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/controller/PlatoController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/dtos/IngredienteDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/dtos/PlatoDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/entity/Ingredientes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/entity/Plato.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/repository/CaloriesRespository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/repository/ICaloriesRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/java/com/meli/calculador/service/CaloriesService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/main/resources/food.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../calculador/src/test/java/com/meli/calculador/CalculadorApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/StarwarsApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/controller/PersonajeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/dto/request/PersonajeDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/dto/response/PersonajeDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/entity/Personaje.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/repository/IPersonajeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/repository/PersonajeRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/service/PersonajeService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/java/com/bootcamp/starwars/utils/Util.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/main/resources/starwars.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../starwars/src/test/java/com/bootcamp/starwars/StarwarsApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="2D4kY2PvX08jnVmtfCRGL7ZSMgB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="restartRequiresConfirmation" value="false" />
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564874000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524874000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGNBEoHHaMIp2C_my3CIY2OcR63V6k3qTUfQOgjK5nyGOeV4Ct6Xdg" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675784074000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=t_oCjPKABA3O0AeVWMtoq6EFKRdNmF1QJhHyXK1totzX6Xy9Uy6VIYm90D2hfRwjOLOsV-cQw0dKPpGPGQsWOUOMF2GUZ-kLdj5P_8SaYqESEWwxAiRXP7ezGHa6qvAwh4hY5gov19-eaIOubW_ji8l5iK1ThXDCX5KU5zNTJYQ" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/estadisticas/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGMNd_nRXLFn5p9SuNGlOCtVrLxGHUcDvAQv58SFGwJVizcKTY_Bog" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783778000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=nZ9MGdEs_6Zk_gEfp6k7U2WXXDOZDyrln-DPZFrmVDgNfRjchJ1GtJ8wsIfFQroRYbRq1GpwbgVqcCwvhg8zs9IujZUbkwAgPw65TsrgzWTuttNd6loxJ9kUrbRsFGZaHWIvBH8VZXaL-1gXxHfMIzcV98hjND9RcYHS_glPbdA" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGMNd_nRXLFn5p9SuNGlOCtVrLxGHUcDvAQv58SFGwJVizcKTY_Bog" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783778000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=nZ9MGdEs_6Zk_gEfp6k7U2WXXDOZDyrln-DPZFrmVDgNfRjchJ1GtJ8wsIfFQroRYbRq1GpwbgVqcCwvhg8zs9IujZUbkwAgPw65TsrgzWTuttNd6loxJ9kUrbRsFGZaHWIvBH8VZXaL-1gXxHfMIzcV98hjND9RcYHS_glPbdA" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGMNd_nRXLFn5p9SuNGlOCtVrLxGHUcDvAQv58SFGwJVizcKTY_Bog" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783778000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=nZ9MGdEs_6Zk_gEfp6k7U2WXXDOZDyrln-DPZFrmVDgNfRjchJ1GtJ8wsIfFQroRYbRq1GpwbgVqcCwvhg8zs9IujZUbkwAgPw65TsrgzWTuttNd6loxJ9kUrbRsFGZaHWIvBH8VZXaL-1gXxHfMIzcV98hjND9RcYHS_glPbdA" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="url" />
+                <option name="value" value="https://www.google.cl/" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524578000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGMNd_nRXLFn5p9SuNGlOCtVrLxGHUcDvAQv58SFGwJVizcKTY_Bog" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783778000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=nZ9MGdEs_6Zk_gEfp6k7U2WXXDOZDyrln-DPZFrmVDgNfRjchJ1GtJ8wsIfFQroRYbRq1GpwbgVqcCwvhg8zs9IujZUbkwAgPw65TsrgzWTuttNd6loxJ9kUrbRsFGZaHWIvBH8VZXaL-1gXxHfMIzcV98hjND9RcYHS_glPbdA" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/estadisticas/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564570000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524570000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGPKc_ESpllfm5xxKEGsiiryrC8AbevJMGVyNDy2sQxIJlIKxoVgAw" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783770000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=PORJxpm7uJhSqApuuzO8xZ1kODnTSaWCAXCzkHxtrTe-_yxxDnYqlpRgBy9iwj2OSsQAqArnZOiJxNbxRfngzAzj1FOcB94F3ZG3YgcZNo7K7PZ0hJ3fYQ967YZBLLd5LSrSR_QzX_tPCTOU_GUKKeO1ZhvoFmBszWozcllApu0" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGNz_FO86AZ8EQSthKTRTwmbTEacglmPYqCVxmUSBNV5gao0KR_fJQ" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783629000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=pOkV3_LlYzqR_3u7tIhTQhgHwyAp-Y-bwcbKA-D43GXQiA6GNQWQaRreAfUMxpZAoqrGrtzsl8IxrvSSN4gMP4ZALJ1W1le44LMF79txohz6ptedEcwxDadN_rEN7CYt2VXyaNZQ8F2-1jpWSq-i08wfYvTOuWKu1m0Yay-bfm4" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGNz_FO86AZ8EQSthKTRTwmbTEacglmPYqCVxmUSBNV5gao0KR_fJQ" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783629000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=pOkV3_LlYzqR_3u7tIhTQhgHwyAp-Y-bwcbKA-D43GXQiA6GNQWQaRreAfUMxpZAoqrGrtzsl8IxrvSSN4gMP4ZALJ1W1le44LMF79txohz6ptedEcwxDadN_rEN7CYt2VXyaNZQ8F2-1jpWSq-i08wfYvTOuWKu1m0Yay-bfm4" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGNz_FO86AZ8EQSthKTRTwmbTEacglmPYqCVxmUSBNV5gao0KR_fJQ" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783629000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=pOkV3_LlYzqR_3u7tIhTQhgHwyAp-Y-bwcbKA-D43GXQiA6GNQWQaRreAfUMxpZAoqrGrtzsl8IxrvSSN4gMP4ZALJ1W1le44LMF79txohz6ptedEcwxDadN_rEN7CYt2VXyaNZQ8F2-1jpWSq-i08wfYvTOuWKu1m0Yay-bfm4" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="url" />
+                <option name="value" value="https://www.google.cl/" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524429000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGNz_FO86AZ8EQSthKTRTwmbTEacglmPYqCVxmUSBNV5gao0KR_fJQ" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783629000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=pOkV3_LlYzqR_3u7tIhTQhgHwyAp-Y-bwcbKA-D43GXQiA6GNQWQaRreAfUMxpZAoqrGrtzsl8IxrvSSN4gMP4ZALJ1W1le44LMF79txohz6ptedEcwxDadN_rEN7CYt2VXyaNZQ8F2-1jpWSq-i08wfYvTOuWKu1m0Yay-bfm4" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/estadisticas/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564310000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524310000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGPU7oYAyyBz5Iu1s3-5sS-kNeM0Xk-GKApuabD1btDaOaOwbvuk7w" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783510000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=XD089aoa_WumW2m55D-Vp_-PGN70GXKwDAP_mP7aLnI99wsWOsx87iQBZri6W7ec1cZdc1_DhBOq9Rp4CVSzOSno9v3RY5KizBWS54N9l685SjWfTg-7CGTiNzsrm_V2gtzBA0HMCorlXAQYco94PYaicpI2Je6KCQEWDWFnvXk" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564310000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524310000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGPU7oYAyyBz5Iu1s3-5sS-kNeM0Xk-GKApuabD1btDaOaOwbvuk7w" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783510000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=XD089aoa_WumW2m55D-Vp_-PGN70GXKwDAP_mP7aLnI99wsWOsx87iQBZri6W7ec1cZdc1_DhBOq9Rp4CVSzOSno9v3RY5KizBWS54N9l685SjWfTg-7CGTiNzsrm_V2gtzBA0HMCorlXAQYco94PYaicpI2Je6KCQEWDWFnvXk" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="url" />
+                <option name="value" value="https://www.google.cl/" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564310000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524310000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGPU7oYAyyBz5Iu1s3-5sS-kNeM0Xk-GKApuabD1btDaOaOwbvuk7w" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783510000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=XD089aoa_WumW2m55D-Vp_-PGN70GXKwDAP_mP7aLnI99wsWOsx87iQBZri6W7ec1cZdc1_DhBOq9Rp4CVSzOSno9v3RY5KizBWS54N9l685SjWfTg-7CGTiNzsrm_V2gtzBA0HMCorlXAQYco94PYaicpI2Je6KCQEWDWFnvXk" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/estadisticas/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564285000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524285000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGMRTLL6rlsJw-2LUCszP5DEJFksHXpsMas67f3Vu4EX_y4QNNJjqw" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783485000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=SnCfNQ_0uzHGlcviTn4guwxnlLeZApTrRcthn84OEEEqS9aYNPEOQhU3OjAEHSzfzOknuUY94GfHSxGHhZA_CtCdcCnORVTAi76m7dRZcIl6UnD0Wc79yCaeaKf-W8-TS5j8yfOPSLn0rbMOUcfEowi0aYrP0w0eW4yY4ul8lOI" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662564285000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675524285000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGMRTLL6rlsJw-2LUCszP5DEJFksHXpsMas67f3Vu4EX_y4QNNJjqw" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675783485000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=SnCfNQ_0uzHGlcviTn4guwxnlLeZApTrRcthn84OEEEqS9aYNPEOQhU3OjAEHSzfzOknuUY94GfHSxGHhZA_CtCdcCnORVTAi76m7dRZcIl6UnD0Wc79yCaeaKf-W8-TS5j8yfOPSLn0rbMOUcfEowi0aYrP0w0eW4yY4ul8lOI" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/estadisticas/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662562973000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675522973000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGN9wqDTwv4uyuOXQtn8zSZXUIK7PMU7XGsdJ544b7qBbpdCeo31IxQ" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675782173000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=ezaUMCXXPCD8DIrq7ze-7N5fkSuptu0DlFhgitTOaM5zOn0bd0tlWWLOn2TqH8OZWiWFcmfDWsJU4tf--788FJjZeKVnidUu4kaALiwkcVzbzu1rnvkzd0Kj_2uZKpeoKTmiBLMrTflgBPmgzx4AK_fUY4xStW4LBcHAZco-_YA" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="biscuits">
+            <list>
+              <Biscuit>
+                <option name="date" value="1662562973000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="1P_JAR" />
+                <option name="path" value="/" />
+                <option name="value" value="2022-08-08-15" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675522973000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="AEC" />
+                <option name="path" value="/" />
+                <option name="value" value="AakniGN9wqDTwv4uyuOXQtn8zSZXUIK7PMU7XGsdJ544b7qBbpdCeo31IxQ" />
+              </Biscuit>
+              <Biscuit>
+                <option name="date" value="1675782173000" />
+                <option name="domain" value="google.cl" />
+                <option name="name" value="NID" />
+                <option name="path" value="/" />
+                <option name="value" value="511=ezaUMCXXPCD8DIrq7ze-7N5fkSuptu0DlFhgitTOaM5zOn0bd0tlWWLOn2TqH8OZWiWFcmfDWsJU4tf--788FJjZeKVnidUu4kaALiwkcVzbzu1rnvkzd0Kj_2uZKpeoKTmiBLMrTflgBPmgzx4AK_fUY4xStW4LBcHAZco-_YA" />
+              </Biscuit>
+            </list>
+          </option>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="url" />
+                <option name="value" value="https://www.google.cl/" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost:8080/redireccion/1" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="url" />
+                <option name="value" value="https://www.google.cl/" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl" />
+          <option name="urlPath" value="" />
+          <option name="parameters">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="url" />
+                <option name="value" value="http://www.google.cl/" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="POST" />
+          <option name="urlBase" value="http://localhost:8080/crearUrl/www.google.cl" />
+          <option name="urlPath" value="" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LinktrackerApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="generated-requests#13" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="13" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests#16" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="16" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests#17" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" index="17" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="LinktrackerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="linktracker" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.meli.linktracker.LinktrackerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.generated-requests#17" />
+        <item itemvalue="HTTP Request.generated-requests#16" />
+        <item itemvalue="HTTP Request.generated-requests#13" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd07d7af-7e61-4fba-8f9c-062bb950c945" name="Default Changelist" comment="" />
+      <created>1659965788891</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659965788891</updated>
+      <workItem from="1659965793181" duration="8651000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
