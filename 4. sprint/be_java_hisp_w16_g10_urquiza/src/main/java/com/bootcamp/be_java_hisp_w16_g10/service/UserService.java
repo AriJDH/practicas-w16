@@ -1,275 +1,137 @@
 package com.bootcamp.be_java_hisp_w16_g10.service;
 
-import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
-import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
-import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
-import com.bootcamp.be_java_hisp_w16_g10.repository.IRepository;
+import com.bootcamp.be_java_hisp_w16_g10.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements IService {
+public class UserService implements IUserService {
+    @Autowired
+    private IUserRepository userRepository;
+    @Lazy
+    @Autowired
+    private PostService postService;
 
-   @Autowired
-   private IRepository userRepository;
+    //Recibe un id como parámetro y devuelve el User si es que existe, de lo contrario lanza un NotFoundException.
+    @Override
+    public User findById(Integer id) {
+        return this.validateUser(id);
+    }
 
-   @Override
-   public List<UserResDTO> findAll() {
-      return this.userRepository.findAll().stream()
-            .map(this::parseToUserResDTO)
-            .collect(Collectors.toList());
-   }
+    //Devuelve todos los Users
+    @Override
+    public List<UserResDTO> findAll() {
+        return this.userRepository.findAll().stream()
+                .map(Mapper::parseToUserResDTO)
+                .collect(Collectors.toList());
+    }
 
-   @Override
-   public void follow(Integer userId, Integer userIdToFollow) {
-      if(userId.equals(userIdToFollow))
-         throw new BadRequestException("Can't follow oneself.");
+    //Recibe un userID y un userIdToFollow, realiza validaciones y en caso de que esté correcto
+    //se añade al user2 a la lista de seguidos por el user1 y se agrega el user1 a la
+    //lista de seguidores del user2
+    @Override
+    public void follow(Integer userId, Integer userIdToFollow) {
+        if (userId.equals(userIdToFollow)) //revisa que los dos id sean iguales
+            throw new BadRequestException("Cannot follow yourself");
 
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
-      User userToFollow = this.userRepository.findById(userIdToFollow);
-      if (userToFollow == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userIdToFollow));
-      if(userToFollow.getPosts().size() <= 0){
-         throw new BadRequestException("This is not a seller.");
-      }
+        User user = this.validateUser(userId); //valida que exista el usuario1
+        User userToFollow = this.validateUser(userIdToFollow); //valida que exista el usuario2
 
-      this.userRepository.addUserToList(user.getFollowed(), userToFollow);
-      this.userRepository.addUserToList(userToFollow.getFollowers(), user);
-   }
+        if (user.getFollowed().contains(userToFollow)) //revisa si el usuario1 sigue al usuario2
+            throw new BadRequestException("Can't follow a user you already follow.");
 
-   @Override
-   public void unfollow(Integer userId, Integer userIdToUnfollow) {
-      if(userId.equals(userIdToUnfollow))
-         throw new BadRequestException("Can't unfollow oneself.");
+        if (this.postService.findByUserId(userIdToFollow).size() == 0) //valida que sea un vendendor
+            throw new BadRequestException(String.format("The user with the id %s is not a seller.", userIdToFollow));
 
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
+        user.getFollowed().add(userToFollow);
+        userToFollow.getFollowers().add(user);
 
-      User userToDelete = this.userRepository.findById(userIdToUnfollow);
-      if (userToDelete == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userIdToUnfollow));
-      List<User> followers = userToDelete.getFollowers();
-      boolean isFollowed = followers.stream().anyMatch(u -> u.getId().equals(userId));
-      if (!isFollowed)
-         throw new BadRequestException("The user is not being followed.");
-      user.getFollowed().remove(userToDelete);   
-      followers.remove(user);
-   }
+        //lineas redundantes, al ser una BD en memoria ya se encuentran actualizados
+        //simulamos el funcionamiento del repositorio
+        this.userRepository.update(user);
+        this.userRepository.update(userToFollow);
+    }
 
-   @Override
-   public FollowersCountResDTO countFollowers(Integer userId) {
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
+    //Recibe un userID y un userIdToFollow, realiza validaciones y en caso de que esté correcto
+    //se quita al user2 de la lista de seguidos por el user1 y se quita el user1 de la
+    //lista de seguidores del user2
+    @Override
+    public void unfollow(Integer userId, Integer userIdToUnfollow) {
+        if (userId.equals(userIdToUnfollow)) //revisa que los dos id sean iguales
+            throw new BadRequestException("Cannot unfollow yourself");
 
-      return FollowersCountResDTO.builder()
-            .followersCount(user.getFollowers().size())
-            .userId(user.getId())
-            .userName(user.getUserName())
-            .build();
-   }
+        User user = this.validateUser(userId); //valida que exista el usuario1
+        User userToDelete = this.validateUser(userIdToUnfollow); //valida que exista el usuario2
 
-   @Override
-   public PromoCountResDTO countPromos(Integer userId) {
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
+        if (!userToDelete.getFollowers().contains(user)) //revisa que el usuario1 no siga al usuario2
+            throw new BadRequestException("The user is not being followed.");
 
-      Integer promosCountAux = Math.toIntExact(user.getPosts().stream().filter(Post::getHasPromo).count());
+        user.getFollowed().remove(userToDelete);
+        userToDelete.getFollowers().remove(user);
 
-      return PromoCountResDTO.builder()
-              .promosCount(promosCountAux)
-              .userId(user.getId())
-              .userName(user.getUserName())
-              .build();
-   }
-   @Override
-   public FollowersListResDTO listFollowers(Integer userId, String order) {
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
+        //lineas redundantes, al ser una BD en memoria ya se encuentran actualizados
+        //simulamos el funcionamiento del repositorio
+        this.userRepository.update(user);
+        this.userRepository.update(userToDelete);
+    }
 
-      List<UserResDTO> followers = user.getFollowers().stream()
-            .map(this::parseToUserResDTO)
-            .collect(Collectors.toList());
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowesCountResDTO con
+    //la cantidad de seguidores del user.
+    @Override
+    public FollowersCountResDTO countFollowers(Integer userId) {
+        User user = this.validateUser(userId); //valida que exista el usuario1
+        if (this.postService.findByUserId(userId).size() == 0) //valida que sea un vendendor
+            throw new BadRequestException(String.format("The user with the id %s is not a seller.", userId));
+        return Mapper.parseToFollowersCountResDTO(user);
+    }
 
-      var listFollowers = new FollowersListResDTO(user.getId(), user.getUserName(), followers);
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowersListResDTO con
+    //la todos los users que sigue el user.
+    @Override
+    public FollowersListResDTO listFollowers(Integer userId, String order) {
+        User user = this.validateUser(userId);
 
-      if (order != null) {
-         if (order.equals("name_asc")) {
-            listFollowers.setFollowers(listFollowers.getFollowers().stream()
-                  .sorted(Comparator.comparing(UserResDTO::getUserName)).collect(Collectors.toList()));
-         }
-         if (order.equals("name_desc")) {
-            listFollowers.setFollowers(listFollowers.getFollowers().stream()
-                  .sorted(Comparator.comparing(UserResDTO::getUserName).reversed()).collect(Collectors.toList()));
-         }
-      }
+        if (this.postService.findByUserId(userId).size() == 0) //valida que sea un vendendor
+            throw new BadRequestException(String.format("The user with the id %s is not a seller.", userId));
 
-      return listFollowers;
-   }
+        var followers = user.getFollowers().stream();
+        if (order == null || !order.equals("name_desc")) //por defecto ascendente
+            followers = followers.sorted(Comparator.comparing(User::getUserName));
+        else
+            followers = followers.sorted(Comparator.comparing(User::getUserName).reversed());
 
-   @Override
-   public FollowedListResDTO listFollowed(Integer userId, String order) {
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
+        return Mapper.parseToFollowersListResDTO(user, followers.collect(Collectors.toList()));
+    }
 
-      List<UserResDTO> followeds = user.getFollowed().stream()
-            .map(this::parseToUserResDTO)
-            .collect(Collectors.toList());
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowedListResDTO con
+    //la todos los users que siguen al user.
+    @Override
+    public FollowedListResDTO listFollowed(Integer userId, String order) {
+        User user = this.validateUser(userId); //valida que exista el usuario
 
-      var listFollowed = new FollowedListResDTO(user.getId(), user.getUserName(), followeds);
+        var followeds = user.getFollowed().stream();
+        if (order == null || !order.equals("name_desc")) //por defecto ascendente
+            followeds = followeds.sorted(Comparator.comparing(User::getUserName));
+        else
+            followeds = followeds.sorted(Comparator.comparing(User::getUserName).reversed());
 
-      if (order != null) {
-         if (order.equals("name_asc")) {
-            listFollowed.setFollowed(listFollowed.getFollowed().stream().sorted(Comparator.comparing(UserResDTO::getUserName)).collect(Collectors.toList()));
-         }
-         if (order.equals("name_desc")) {
-            listFollowed.setFollowed(listFollowed.getFollowed().stream().sorted(Comparator.comparing(UserResDTO::getUserName).reversed()).collect(Collectors.toList()));
-         }
-      }
+        return Mapper.parseToFollowedListResDTO(user, followeds.collect(Collectors.toList()));
+    }
 
-      return listFollowed;
-   }
-
-   @Override
-   public void save(PostReqDTO post, Boolean hasPromo, Double discount) {
-      User user = userRepository.findById(post.getUserId());
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", post.getUserId()));
-      Product product = parseToProductFromProductDTO(post.getProduct());
-      List<Post> posts = user.getPosts();
-      posts.add(new Post(UUID.randomUUID().toString(), product, post.getDate(), post.getPrice(), post.getCategory(), hasPromo, discount));
-      user.setPosts(posts);
-      Integer index = userRepository.getIndexOfUser(post.getUserId());
-      if (index == -1)
-         throw new NotFoundException(String.format("The user with id: %s not found", post.getUserId()));
-      userRepository.updateUserInList(index, user);
-   }
-
-   @Override
-   public List<PostResDTO> listFollowersPosts(Integer userId, String order) {
-      LocalDate localDate = LocalDate.now().minusDays(14);
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
-
-      List<PostResDTO> postResDTOS = new ArrayList<>();
-      for (User u : user.getFollowed()) {
-         if (u.getPosts().size() == 0)
-            continue;
-         for (Post p : u.getPosts()) {
-            if (p.getDate().compareTo(localDate) < 0)
-               continue;
-            postResDTOS.add(this.parseToPostResDTO(u, p));
-         }
-      }
-
-      var listFollowers = postResDTOS.stream();
-      if(order != null && order.equals("date_asc")){
-          listFollowers = listFollowers.sorted(Comparator.comparing(PostResDTO::getDate));
-      }else{
-          listFollowers = listFollowers.sorted(Comparator.comparing(PostResDTO::getDate).reversed());
-      }
-
-      return listFollowers
-            .collect(Collectors.toList());
-   }
-
-   @Override
-   public List<PromoPostResDTO> listPromoPosts(Integer userId) {
-      User user = this.userRepository.findById(userId);
-      if (user == null)
-         throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
-
-      List<PromoPostResDTO> promoPostResDTOS = new ArrayList<>();
-      for (Post p : user.getPosts()) {
-         if (p.getHasPromo())
-            promoPostResDTOS.add(this.parseToPromoPostResDTO(user,p));
-      }
-
-      return promoPostResDTOS;
-      //return user.getPosts().stream().filter(Post::getHasPromo).collect(Collectors.toList());
-
-   }
-
-   private FollowedListResDTO parseToFollowedListResDTO(User user) {
-      return FollowedListResDTO.builder()
-            .userId(user.getId())
-            .userName(user.getUserName())
-            .followed(user.getFollowed().stream()
-                  .map(this::parseToUserResDTO)
-                  .collect(Collectors.toList()))
-            .build();
-   }
-
-   private UserResDTO parseToUserResDTO(User user) {
-      return UserResDTO.builder()
-            .userId(user.getId())
-            .userName(user.getUserName())
-            .build();
-   }
-
-   private PostResDTO parseToPostResDTO(User user, Post post) {
-      return PostResDTO.builder()
-            .userId(user.getId())
-            .category(post.getCategory())
-            .postId(post.getId())
-            .date(post.getDate())
-            .price(post.getPrice())
-            .product(this.parseToProductResDTO(post.getProduct()))
-            .build();
-   }
-
-   private PromoPostResDTO parseToPromoPostResDTO(User user, Post post) {
-      return PromoPostResDTO.builder()
-              .userId(user.getId())
-              .userName(user.getUserName())
-              .postId(post.getId())
-              .date(post.getDate())
-              .product(this.parseToProductResDTO(post.getProduct()))
-              .category(post.getCategory())
-              .price(post.getPrice())
-              .hasPromo(post.getHasPromo())
-              .discount(post.getDiscount())
-              .build();
-   }
-
-   private ProductResDTO parseToProductResDTO(Product product) {
-      return ProductResDTO.builder()
-            .productId(product.getId())
-            .brand(product.getBrand())
-            .color(product.getColor())
-            .notes(product.getNotes())
-            .type(product.getType())
-            .productName(product.getName())
-            .build();
-   }
-
-   private Product parseToProductFromProductDTO(ProductReqDTO productReqDTO) {
-      return Product.builder()
-            .id(productReqDTO.getProductId())
-            .name(productReqDTO.getProductName())
-            .type(productReqDTO.getType())
-            .brand(productReqDTO.getBrand())
-            .color(productReqDTO.getColor())
-            .notes(productReqDTO.getNotes())
-            .build();
-   }
+    //Recibe un userID y aplica el control para verificar que el User exista.
+    private User validateUser(Integer userID) {
+        User user = this.userRepository.findById(userID);
+        if (user == null) //valida si existe un usuario, sino devuelve un error
+            throw new NotFoundException(String.format("The user with id: %s don't exists.", userID));
+        return user;
+    }
 }
