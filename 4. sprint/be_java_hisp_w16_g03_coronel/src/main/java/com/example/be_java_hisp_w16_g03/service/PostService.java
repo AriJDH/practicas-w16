@@ -32,7 +32,6 @@ public class PostService implements IPostService {
             throw new InvalidPostRequest();
         User requestUser = repository.getUserById(request.getUserId()).orElseThrow(() -> new UserNotExistException(request.getUserId()));
         requestUser.addPostToUser(Mapper.postDtoToEntity(request));
-        System.out.println(requestUser.getPosts());
     }
 
     @Override
@@ -77,7 +76,6 @@ public class PostService implements IPostService {
         }
         User user = repository.getUserById(promoDto.getUserId()).orElseThrow(() -> new UserNotExistException(promoDto.getUserId()));
         user.addPostToUser(Mapper.promoPostDtoToEntity(promoDto));
-        System.out.println(user.getPosts());
         return null;
     }
 

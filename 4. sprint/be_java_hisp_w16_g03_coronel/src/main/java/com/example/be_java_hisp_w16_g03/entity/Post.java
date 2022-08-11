@@ -23,18 +23,4 @@ public class Post {
     public void increaseId() {
         this.postId = lastId++;
     }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "userId=" + userId +
-                ", postId=" + postId +
-                ", date=" + date +
-                ", product=" + product +
-                ", category=" + category +
-                ", price=" + price +
-                ", hasPromo=" + hasPromo +
-                ", discount=" + discount +
-                '}';
-    }
 }
