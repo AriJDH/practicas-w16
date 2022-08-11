@@ -61,7 +61,7 @@ public class PostService implements IPostService {
         int userId = usersPosts.get(0).getUser().getUserId();
         usersPosts.removeIf(post -> post.getPostId() == postId);
 
-        postRepository.update(userId,usersPosts); ;
+        postRepository.update(userId,usersPosts);
 
     }
 
