@@ -27,21 +27,13 @@ public class PostService implements IPostService {
     @Autowired
     private IUserService userService;
     public void addPost(PostDto newPost) {
-        User user = userService.getById(newPost.getUserId());
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + newPost.getUserId() + " no existe.");
-        }
+        userExistenceVerification(newPost.getUserId());
         Post post = Mapper.mapperToPost(newPost);
         this.postRepository.add(post);
     }
     public PostListLastTwoWeeksDto getFollowedPostListLastTwoWeeks(Integer userId, Optional<String> order) {
         String orderString= order.orElse("");
-        User user = userService.getById(userId);
-
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
-        }
-
+        User user = userExistenceVerification(userId);
         List<Post> followedPostList = new ArrayList<>();
 
         List<Post> postList = postRepository.getAll();
@@ -60,18 +52,12 @@ public class PostService implements IPostService {
         return Mapper.mapperToPostListLastTwoWeeksDto(userId, followedPostList);
     }
     public void addPostPromo(PostPromoDto newPostPromo) {
-        User user = userService.getById(newPostPromo.getUserId());
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + newPostPromo.getUserId() + " no existe.");
-        }
+        userExistenceVerification(newPostPromo.getUserId());
         Post post = Mapper.mapperToPromoPost(newPostPromo);
         this.postRepository.add(post);
     }//US0010
     public PostPromoCountDto getPostPromoCount(Integer userId){
-        User user = userService.getById(userId);
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
-        }
+        User user = userExistenceVerification(userId);
         List<Post> postList = postRepository.getAll();
         Long count = postList.stream()
                 .filter(post -> post.getUserId() == userId)
@@ -81,10 +67,7 @@ public class PostService implements IPostService {
         return  Mapper.mapperToPostPromoDto(user, count.intValue());
     }
     public PostPromoListDto getPostPromoList(Integer userId){
-        User user = userService.getById(userId);
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
-        }
+        User user = userExistenceVerification(userId);
         List<Post> postList = postRepository.getAll();
         List<Post> postPromoListOfUserId = postList.stream()
                 .filter(post -> post.getUserId() == userId)
@@ -93,6 +76,13 @@ public class PostService implements IPostService {
 
         return  Mapper.mapperToPostPromoListDto(user,postPromoListOfUserId);
 
+    }
+    public User userExistenceVerification(Integer userId){
+        User user = userService.getById(userId);
+        if (user == null) {
+            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
+        }
+        return user;
     }
     @PostConstruct
     public void initPostData() {

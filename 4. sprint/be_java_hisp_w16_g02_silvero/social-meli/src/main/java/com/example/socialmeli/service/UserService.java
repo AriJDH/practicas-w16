@@ -81,22 +81,14 @@ public class UserService implements IUserService {
 
     }//US0007
     public UserFollowersCountDto getFollowersCountByUserId(Integer userId) {
-
-        User userFollowing = this.getById(userId);
-        if (userFollowing == null) {
-            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
-        }
+        User userFollowing = userExistenceVerification(userId);
         return Mapper.mapperToUserFollowersCountDto(userFollowing);
 
     }//US0002
     public UserFollowersListDto getFollowersListByUserId(Integer userId, Optional<String> order) {
 
         String orderString = order.orElse("");
-        User user = this.getById(userId);
-
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
-        }
+        User user = userExistenceVerification(userId);
         UserFollowersListDto followers = Mapper.mapperToUserFollowersListDto(user);
 
         if (orderString.equals("name_asc"))
@@ -110,11 +102,7 @@ public class UserService implements IUserService {
     public UserFollowedListDto getFollowedListByUserId(Integer userId, Optional<String> order) {
 
         String orderString = order.orElse("");
-
-        User user = this.getById(userId);
-        if (user == null) {
-            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
-        }
+        User user = userExistenceVerification(userId);
         UserFollowedListDto followed = Mapper.mapperToUserFollowedListDto(user);
 
         if (orderString.equals("name_asc"))
@@ -124,6 +112,13 @@ public class UserService implements IUserService {
 
         return followed;
     }//US0004 y US0008
+    public User userExistenceVerification(Integer userId){
+        User user = this.getById(userId);
+        if (user == null) {
+            throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
+        }
+        return user;
+    }
     @PostConstruct
     public void initUserData() {
         if (userRepository.getAll().isEmpty()) {
