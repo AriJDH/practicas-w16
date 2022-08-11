@@ -1,7 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g08.service;
 
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.*;
-import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
+import com.bootcamp.be_java_hisp_w16_g08.entity.User;
 import com.bootcamp.be_java_hisp_w16_g08.exception.*;
 import com.bootcamp.be_java_hisp_w16_g08.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g08.repository.IUserRepository;
@@ -130,7 +130,6 @@ public class UserService implements IUserService {
         return new UserFollowers(id, user.getName(), OrderListFollowers(user.getFollowerList().stream()
                 .map(x -> mapper.map(x, UserBasicInfoDto.class))
                 .collect(Collectors.toList()), order));
-
     }
 
     private List<UserBasicInfoDto> OrderListFollowers(List<UserBasicInfoDto> list, String order) {
@@ -148,8 +147,6 @@ public class UserService implements IUserService {
 
     @Override
     public ResponsePostFromFollowedDto getPostFromFollowed(int userId, String order) {
-
-
         User user = getUserIfExist(userId);
         List<User> list = user.getFollowedList().stream()
                 .filter(x -> isVendor(x))

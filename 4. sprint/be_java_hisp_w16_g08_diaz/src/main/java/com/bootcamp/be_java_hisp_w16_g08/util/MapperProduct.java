@@ -2,7 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g08.util;
 
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.ResponsePostDto;
 import com.bootcamp.be_java_hisp_w16_g08.dto.response.ResponseProductDto;
-import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
+import com.bootcamp.be_java_hisp_w16_g08.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

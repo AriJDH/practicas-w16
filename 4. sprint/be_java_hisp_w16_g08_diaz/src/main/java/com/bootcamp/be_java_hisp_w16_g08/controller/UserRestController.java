@@ -43,7 +43,6 @@ public class UserRestController {
 
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<UserFollowers> requestAllFollowers(@PathVariable int userId, @RequestParam(required = false) String order) {
-
         return new ResponseEntity<>(userService.getAllVendorFollowers(userId, order), HttpStatus.OK);
     }
 

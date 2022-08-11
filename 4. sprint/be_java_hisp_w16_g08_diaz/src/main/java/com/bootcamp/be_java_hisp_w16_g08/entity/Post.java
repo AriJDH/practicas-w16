@@ -1,27 +1,25 @@
-package com.bootcamp.be_java_hisp_w16_g08.dto.response;
+package com.bootcamp.be_java_hisp_w16_g08.entity;
 
-import com.bootcamp.be_java_hisp_w16_g08.entiry.Product;
-import com.bootcamp.be_java_hisp_w16_g08.entiry.User;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 
+
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostDto {
-    private int userId;
+public class Post {
+    private int postId;
+    private User user;
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
-    private ProductDto product;
     private int category;
     private double price;
+    private Product product;
+
 }
