@@ -11,4 +11,6 @@ public interface IPostService {
     PromoPostCountDto getPromoPostsCount(int userId);
 
     PromoPostListDto getPromoPostsList(int userId);
+
+    MessageDto deletePost(int postId);
 }

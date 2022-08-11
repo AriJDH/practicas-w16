@@ -37,4 +37,8 @@ public class User {
         this.posts.add(p);
     }
 
+    public void removePost(int postId){
+        this.posts.removeIf(p -> p.getPostId()==postId);
+    }
+
 }

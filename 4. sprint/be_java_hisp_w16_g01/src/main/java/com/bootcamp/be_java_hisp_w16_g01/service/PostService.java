@@ -119,5 +119,15 @@ public class PostService implements IPostService {
 
     }
 
+    public MessageDto deletePost(int postId){
+        Post post = postRepository.getPost(postId);
+        if (post == null)
+            throw new BadRequestException("No existe el post con Id: " + postId);
 
+        userRepository.getUser(post.getUserId()).removePost(postId);
+
+        postRepository.deletePost(postId);
+
+        return new MessageDto("Publicación eliminada correctamente");
+    }
 }

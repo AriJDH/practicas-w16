@@ -9,4 +9,8 @@ public interface IPostRepository {
      List<Post> getPostsByUserId(int userId);
      List<Post> getPromoPostsByUserId(int userId);
 
+     Post getPost(int postId);
+
+     void deletePost(int postId);
+
 }
