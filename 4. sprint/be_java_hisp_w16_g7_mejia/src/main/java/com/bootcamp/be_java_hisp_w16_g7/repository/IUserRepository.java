@@ -2,6 +2,8 @@ package com.bootcamp.be_java_hisp_w16_g7.repository;
 
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 
+import java.util.List;
+
 public interface IUserRepository {
     User findUserById(int userId);
 
@@ -14,5 +16,7 @@ public interface IUserRepository {
     void removeFromUserFollows(User userToRemove, User target);
 
     boolean existsUser(int idUser);
+
+    List<User> getAllUsers();
 }
 

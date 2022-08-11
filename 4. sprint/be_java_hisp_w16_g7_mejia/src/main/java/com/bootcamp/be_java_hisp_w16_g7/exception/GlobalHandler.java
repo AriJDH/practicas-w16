@@ -56,4 +56,10 @@ public class GlobalHandler {
         ApiResponseDto apiResponseDto = new ApiResponseDto("No promo posts", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler({NoPostWithProductTypeException.class})
+    public ResponseEntity<ApiResponseDto> catchException(NoPostWithProductTypeException e) {
+        ApiResponseDto apiResponseDto = new ApiResponseDto("No post with this type", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.NOT_FOUND);
+    }
 }

@@ -4,10 +4,7 @@ package com.bootcamp.be_java_hisp_w16_g7.service;
 import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.NoPromoPostException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.*;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -118,7 +115,7 @@ public class ProductService implements IProductService {
         return new ApiResponseDto("Promo post created successfully", "Promo post of user with id: " + post.getId() + " was created successfully");
     }
 
-    private double getPricewithDiscount(PostPromoDto promoDto){
+    private double getPricewithDiscount(PostPromoDto promoDto) {
         return promoDto.getPrice() - (promoDto.getPrice() * promoDto.getDiscount());
     }
 
@@ -130,11 +127,11 @@ public class ProductService implements IProductService {
         if (user == null) {
             throw new UserNotFoundException(id);
         }
-        if(!user.isSeller()){
+        if (!user.isSeller()) {
             throw new UserIsNotSellerException(id);
         }
 
-        long count =  user.getPosts().stream().filter(Post::isHasPromo).count();
+        long count = user.getPosts().stream().filter(Post::isHasPromo).count();
 
         return new PromoPostCountDto(user.getId(), user.getName(), (int) count);
     }
@@ -147,7 +144,7 @@ public class ProductService implements IProductService {
         if (user == null) {
             throw new UserNotFoundException(id);
         }
-        if(!user.isSeller()){
+        if (!user.isSeller()) {
             throw new UserIsNotSellerException(id);
         }
 
@@ -156,12 +153,39 @@ public class ProductService implements IProductService {
                 .map(post -> mapper.map(post, ResponsePostPromoDto.class))
                 .collect(Collectors.toList());
 
-        if(postPromoDtos.isEmpty()){
+        if (postPromoDtos.isEmpty()) {
             throw new NoPromoPostException(id);
         }
 
 
         return new PromoPostListDto(user.getId(), user.getName(), postPromoDtos);
+    }
+
+    @Override
+    public List<PromoPostListDto> getAllPostByProductType(String type) {
+
+            List<PromoPostListDto> postsByType = userRepository.getAllUsers().stream()
+                    .filter(User::isSeller)
+                    .map(User::getPosts)
+                    .map(posts -> posts.stream()
+                            .filter(post -> post.getProduct().getType().equalsIgnoreCase(type))
+                            .map(post -> mapper.map(post, ResponsePostPromoDto.class)
+                            ).collect(Collectors.toList()))
+                    .map(responsePostPromoDtos -> {
+                        if(responsePostPromoDtos.isEmpty()){
+                            throw new NoPostWithProductTypeException(type);
+                        }
+                                int id = responsePostPromoDtos.get(0).getId();
+                                User user = userRepository.findUserById(id);
+                                return new PromoPostListDto(id, user.getName(), responsePostPromoDtos);
+                            }
+                    ).collect(Collectors.toList());
+
+            if(postsByType.isEmpty()){
+                throw new NoPostWithProductTypeException(type);
+            }
+
+            return postsByType;
     }
 
 }

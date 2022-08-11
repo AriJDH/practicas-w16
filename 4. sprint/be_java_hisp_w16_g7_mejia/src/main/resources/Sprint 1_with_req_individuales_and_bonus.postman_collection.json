@@ -285,7 +285,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"user_id\": \"1111\",\n    \"date\": \"2022-07-10\",\n    \"product\": {\n        \"product_id\": 324234,\n        \"product_name\": \"Bike\",\n        \"type\": \"Sports\",\n        \"brand\": \"Jeep\",\n        \"color\": \"Gold\",\n        \"notes\": \"Special edition\"\n    },\n    \"category\": \"423\",\n    \"price\": 800,\n    \"has_promo\": true,\n    \"discount\": 0.10\n}",
+					"raw": "{\n    \"user_id\": \"2222\",\n    \"date\": \"2022-07-10\",\n    \"product\": {\n        \"product_id\": 324234,\n        \"product_name\": \"Airpods\",\n        \"type\": \"Tech\",\n        \"brand\": \"Apple\",\n        \"color\": \"White\",\n        \"notes\": \"New collection\"\n    },\n    \"category\": \"423\",\n    \"price\": 500,\n    \"has_promo\": true,\n    \"discount\": 0.22\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -313,7 +313,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/products/promo-post/count?user_id=1111",
+					"raw": "http://localhost:8080/products/promo-post/count?user_id=2222",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -327,8 +327,30 @@
 					"query": [
 						{
 							"key": "user_id",
-							"value": "1111"
+							"value": "2222"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(Bonus) US 0013 - Listar post por tipo de producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/post/list/Tech",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"post",
+						"list",
+						"Tech"
 					]
 				}
 			},
@@ -340,7 +362,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/products/promo-post/list?user_id=1111",
+					"raw": "http://localhost:8080/products/promo-post/list?user_id=2222",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -354,7 +376,7 @@
 					"query": [
 						{
 							"key": "user_id",
-							"value": "1111"
+							"value": "2222"
 						}
 					]
 				}

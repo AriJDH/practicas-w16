@@ -19,4 +19,6 @@ public interface IProductService {
 
      PromoPostListDto getPromoPostList(int id);
 
+    List<PromoPostListDto> getAllPostByProductType(String type);
+
 }

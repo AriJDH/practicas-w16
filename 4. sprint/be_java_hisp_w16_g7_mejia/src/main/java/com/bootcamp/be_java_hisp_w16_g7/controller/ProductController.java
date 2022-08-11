@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -60,6 +62,16 @@ public class ProductController {
         return new ResponseEntity<>(iProductService.countPostPromo(user_id), HttpStatus.OK);
     }
 
+
+    @Operation(summary = "(Bonus) List all posts with specific type of product")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lists all post with specific type of product"),
+            @ApiResponse(responseCode = "404", description = "No post with this type"),})
+    @GetMapping("/post/list/{type}")
+    public ResponseEntity<List<PromoPostListDto>> listPostsByProductType(@PathVariable String type) {
+        return new ResponseEntity<>(iProductService.getAllPostByProductType(type), HttpStatus.OK);
+    }
+
     @Operation(summary = "(Bonus) List all promo posts of specific user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lists promo posts of user"),
@@ -69,4 +81,6 @@ public class ProductController {
     public ResponseEntity<PromoPostListDto> listPromoPost(@RequestParam() int user_id) {
         return new ResponseEntity<>(iProductService.getPromoPostList(user_id), HttpStatus.OK);
     }
+
+
 }
