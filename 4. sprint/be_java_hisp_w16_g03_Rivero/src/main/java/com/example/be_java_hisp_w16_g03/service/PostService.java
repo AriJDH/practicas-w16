@@ -9,10 +9,7 @@ import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,8 +33,8 @@ public class PostService implements IPostService {
     @Override
     public PostHasPromoCountDTO countPostHasPromoDTO(Integer id) {
         User user=repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
-        List<Post> total=user.getterPosts().stream().filter(userWithPromo-> userWithPromo.getHasPromo()!=false).collect(Collectors.toList());
-        PostHasPromoCountDTO postHasPromoCountDTO=new PostHasPromoCountDTO(user.getUserId(), user.getUserName(), total.size());
+        Integer total=user.getterPosts().stream().filter(userWithPromo-> userWithPromo.isHasPromo()).collect(Collectors.toList()).size();
+        PostHasPromoCountDTO postHasPromoCountDTO=new PostHasPromoCountDTO(user.getUserId(), user.getUserName(), total);
         return postHasPromoCountDTO;
     }
 

@@ -17,5 +17,4 @@ public interface IUserRepository {
 
     List<User> getFollowedsByUserId(Integer userId);
 
-    Optional<User> getUserWithPromoById(Integer id);
 }

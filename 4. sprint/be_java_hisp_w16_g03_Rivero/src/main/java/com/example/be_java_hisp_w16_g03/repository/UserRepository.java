@@ -65,22 +65,18 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<User> getAllUserWithoutPromo() {
-        return listUser.stream().filter(user -> user.getterPosts().stream().filter(userWithoutPromo-> userWithoutPromo.getHasPromo() ==false).equals(false)).collect(Collectors.toList());
+        return listUser.stream().filter(user -> user.getterPosts().stream().filter(userWithoutPromo-> userWithoutPromo.isHasPromo() ==false).equals(false)).collect(Collectors.toList());
     }
     @Override
     public List<User> getAllUserWithPromo() {
-        return listUser.stream().filter(user -> user.getterPosts().stream().filter(userWithPromo-> userWithPromo.getHasPromo() ==true).equals(true)).collect(Collectors.toList());
+        return listUser.stream().filter(user -> user.getterPosts().stream().filter(userWithPromo-> userWithPromo.isHasPromo() ==true).equals(true)).collect(Collectors.toList());
     }
 
     @Override
     public Optional<User> getUserById(Integer id) {
         return listUser.stream().filter(user -> user.getUserId().equals(id)).findFirst();
     }
-    @Override
-    public Optional<User> getUserWithPromoById(Integer id) {
-        return listUser.stream().filter(user -> user.getUserId().equals(id)).
-                filter(user -> user.getterPosts().stream().filter(userPromo-> userPromo.getHasPromo() ==true)).collect(Collectors.toList());
-    }
+
 
     @Override
     public List<User> getFollowedsByUserId(Integer userId) {
