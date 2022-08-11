@@ -14,4 +14,6 @@ public interface IPostService {
     PromoPostCountDTO getCountPromoPost(Integer id);
 
     PromoPostsDTO getPromoPosts(Integer id);
+
+    public PromoPostsDTO getFollowedPromoPosts(Integer userId);
 }

@@ -58,6 +58,7 @@ public class PostService implements IPostService {
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
     }
 
+    @Override
     public PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order) {
 
         if (order == null || order.equals(DATE_DESC))
@@ -92,13 +93,12 @@ public class PostService implements IPostService {
     public PromoPostCountDTO getCountPromoPost(Integer id) {
 
         User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
-        if (user.getPosts() == null) {
-            return new PromoPostCountDTO(user.getUserId(), user.getUserName(), 0);
-        }
+
         Integer promoCount = (int) user.getterPosts()
                 .stream()
                 .filter(Post::isHasPromo)
                 .count();
+
         PromoPostCountDTO promoPostCountDTO = new PromoPostCountDTO(user.getUserId(), user.getUserName(), promoCount);
 
         return promoPostCountDTO;
@@ -115,21 +115,7 @@ public class PostService implements IPostService {
 
         List<PromoPostDTO> promoPostDTOList = promoList
                 .stream()
-                .map(post -> PromoPostDTO.builder()
-                        .userId(post.getUserId())
-                        .postId(post.getPostId())
-                        .date(post.getDate())
-                        .product(ProductDTO.builder().productId(post.getProduct().getProductId())
-                                .productName(post.getProduct().getProductName())
-                                .type(post.getProduct().getType())
-                                .color(post.getProduct().getColor())
-                                .brand(post.getProduct().getBrand())
-                                .notes(post.getProduct().getNotes()).build())
-                        .category(post.getCategory())
-                        .price(post.getPrice())
-                        .hasPromo(post.isHasPromo())
-                        .discount(post.getDiscount())
-                        .build())
+                .map(post -> buildPromoPostDTO(post))
                 .collect(Collectors.toList());
 
         PromoPostsDTO promoPostsDTO = new PromoPostsDTO(user.getUserId(), user.getUserName(), promoPostDTOList);
@@ -137,5 +123,44 @@ public class PostService implements IPostService {
         return promoPostsDTO;
     }
 
+    private PromoPostDTO buildPromoPostDTO(Post post) {
+        return PromoPostDTO.builder()
+                .userId(post.getUserId())
+                .postId(post.getPostId())
+                .date(post.getDate())
+                .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                        .productName(post.getProduct().getProductName())
+                        .type(post.getProduct().getType())
+                        .color(post.getProduct().getColor())
+                        .brand(post.getProduct().getBrand())
+                        .notes(post.getProduct().getNotes()).build())
+                .category(post.getCategory())
+                .price(post.getPrice())
+                .hasPromo(post.isHasPromo())
+                .discount(post.getDiscount())
+                .build();
+    }
+
+
+    public PromoPostsDTO getFollowedPromoPosts(Integer userId) {
+
+        User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+        List<User> vendors = repository.getFollowedsByUserId(userId);
+
+        if (vendors != null) {
+
+            List<PromoPostDTO> promoList = new ArrayList<>();
+
+            vendors.forEach(vendor -> promoList
+                    .addAll(vendor.getterPosts()
+                            .stream()
+                            .filter(x -> x.isHasPromo())
+                            .map(post -> buildPromoPostDTO(post))
+                            .collect(Collectors.toList())));
+
+            return PromoPostsDTO.builder().userId(userId).userName(user.getUserName()).posts(promoList).build();
+        }
+        return PromoPostsDTO.builder().userId(userId).userName(user.getUserName()).posts(new ArrayList<>()).build();
+    }
 
 }

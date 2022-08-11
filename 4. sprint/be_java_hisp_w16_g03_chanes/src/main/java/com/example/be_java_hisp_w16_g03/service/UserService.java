@@ -32,10 +32,7 @@ public class UserService implements IUserService {
 
         User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
 
-        if (user.getFollowers() == null) {
-            return new FollowersDTO(user.getUserId(), user.getUserName(), new ArrayList<>());
-        }
-        List<UserDTO> userDTO = user.getFollowers().stream().map(userA -> {
+        List<UserDTO> userDTO = user.getterFollowers().stream().map(userA -> {
             UserDTO userDTO1 = new UserDTO();
             userDTO1.setUserId(userA.getUserId());
             userDTO1.setUserName(userA.getUserName());
@@ -88,10 +85,7 @@ public class UserService implements IUserService {
     public FollowerCountDTO getCountFollowers(Integer id) {
         User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
 
-        if (user.getFollowers() == null) {
-            return new FollowerCountDTO(user.getUserId(), user.getUserName(), 0);
-        }
-        FollowerCountDTO followerCountDTO = new FollowerCountDTO(user.getUserId(), user.getUserName(), user.getFollowers().size());
+        FollowerCountDTO followerCountDTO = new FollowerCountDTO(user.getUserId(), user.getUserName(), user.getterFollowers().size());
         return followerCountDTO;
     }
 

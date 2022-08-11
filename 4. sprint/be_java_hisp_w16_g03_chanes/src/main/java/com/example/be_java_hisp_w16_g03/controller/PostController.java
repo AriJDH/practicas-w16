@@ -39,4 +39,9 @@ public class PostController {
         return new ResponseEntity<>(service.getPromoPosts(user_id), HttpStatus.OK);
     }
 
+    @GetMapping("/products/followed/promo-post/{userId}")
+    public ResponseEntity<PromoPostsDTO> getFollowedPromoPosts(@PathVariable Integer userId) {
+        return new ResponseEntity<>(service.getFollowedPromoPosts(userId), HttpStatus.OK);
+    }
+
 }
