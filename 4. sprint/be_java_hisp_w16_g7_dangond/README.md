@@ -7,6 +7,8 @@
 
 ## Test de Postman
 
+- La coleccion de Postman se encuentra en la carpeta de resources con el nombre de Sprint 1- g7- dangond_silena
+
 - En la aplicación ya estan creados previamente 4 usuarios con la siguiente información:
   - User1: {"id": 1111, "name": "John Doe"}
   - User2: {"id": 2222, "name": "Alexander The Great"}
