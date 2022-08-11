@@ -8,15 +8,11 @@
         <version>2.7.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-<<<<<<< HEAD
-    <groupId>com.starwars</groupId>
-=======
     <groupId>com.bootcamp</groupId>
->>>>>>> be_java_hisp_w16_g10_Lamela
-    <artifactId>starwars</artifactId>
+    <artifactId>dealership</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>starwars</name>
-    <description>starwars</description>
+    <name>dealership</name>
+    <description>dealership</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -33,14 +29,6 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-<<<<<<< HEAD
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-=======
->>>>>>> be_java_hisp_w16_g10_Lamela
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -50,15 +38,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<<<<<<< HEAD
-=======
-
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
->>>>>>> be_java_hisp_w16_g10_Lamela
     </dependencies>
 
     <build>
