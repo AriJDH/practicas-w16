@@ -210,53 +210,75 @@ userId - number
     ]
 }
 ```
-
-## Dar de alta una nueva publicacion en promoción
-
+​
+### Alta de nueva publicacion con promoción
+#### Endpoint (POST)
 ```
-POST /products/promo-post
-body
+{host}/products/promo-post
+```
+#### Request Param
+```
+```
+#### Request Body
+```
 {
-    "user_id": 123,
-    "date": "29-04-2021",
+    "user_id": number,
+    "date": "Date",
     "product": {
-        "product_id": 1,
-        "product_name": "Silla Gamer",
-        "type": "Gamer",
-        "brand": "Racer",
-        "color": "Red & Black",
-        "notes": "Special Edition"
+        "product_id": number,
+        "product_name": "String",
+        "type": "String",
+        "brand": "String",
+        "color": "String",
+        "notes": "String"
     },
-    "category": 100,
-    "price": 1500.50,
+    "category": number,
+    "price": double,
     "has_promo":"true",
     "discount": 0.25
 }
-Response
-Status Code 200 (todo OK)
-Status Code 400 (Bad Request)
-
 ```
-
-## Obtener el resultado de la cantidad de publicaciones en promocion que tiene un usuario
-
+#### Notas
+Formato Date: "01-05-2022"
+#### Response (OK - 200)
 ```
-GET /products/promo-post/count?user_id={userId}
-userId = Número que identifica a cada usuario
-Response
+```
+​
+### Obtener cantidad de publicaciones con promoción de un usuario
+#### Endpoint (GET)
+```
+{host}/products/promo-post/count?user_id={userId}
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
-    "user_id" : 234,
+   "user_id" : 234,
    "user_name": "vendedor1",
    "promo_products_count": 23
 }
 ```
-
-## Obtener un listado de todos los productos en promoción de un determinado vendedor
-
+​
+### Obtener un listado de todos los productos en promoción de un determinado vendedor
+#### Endpoint (GET)
 ```
-GET /products/promo-post/list?user_id={userId}
-userId= Número que identifica a cada usuario
-Response
+/products/promo-post/list?user_id={userId}
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
     "user_id": 234,
     "user_name": "vendedor1",
@@ -280,5 +302,4 @@ Response
         }
     ]
 }
-
 ```
