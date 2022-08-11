@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService {
     public static final String NAME_ASC = "name_asc";
     public static final String NAME_DESC = "name_desc";
-    public static final String NAME_ASC1 = "name_asc";
     @Autowired
     IUserRepository repository;
 
@@ -42,7 +41,6 @@ public class UserService implements IUserService {
             return userDTO1;
         }).collect(Collectors.toList());
 
-        //Ordenamos ASC & DESC
         if (order != null) {
             if (order.equals(NAME_ASC)) {
                 Collections.sort(userDTO, Comparator.comparing(UserDTO::getUserName));
@@ -101,26 +99,28 @@ public class UserService implements IUserService {
         User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
         User userToFollow = repository.getUserById(userToFollowId).orElseThrow(() -> new UserNotExistException(userId));
 
-
-        Boolean isSeller = userToFollow.getterPosts().size() > 0;
-        Boolean follows = user.getterFolloweds().contains(userToFollow);
-        Boolean isFollowed = userToFollow.getterFollowers().contains(user);
-
-        if (follows || isFollowed) {
-            throw new AlreadyFollowException(userId, userToFollowId);
-        }
-        if (!isSeller) {
-            throw new NotSellerException(userToFollowId);
-        }
+        validateFollowUser(user, userToFollow);
         userToFollow.getFollowers().add(user);
         user.getFolloweds().add(userToFollow);
 
         return null;
     }
 
+    private void validateFollowUser(User user, User userToFollow) {
+        Boolean isSeller = userToFollow.getterPosts().size() > 0;
+        Boolean follows = user.getterFolloweds().contains(userToFollow);
+        Boolean isFollowed = userToFollow.getterFollowers().contains(user);
+
+        if (follows || isFollowed) {
+            throw new AlreadyFollowException(user.getUserId(), userToFollow.getUserId());
+        }
+        if (!isSeller) {
+            throw new NotSellerException(userToFollow.getUserId());
+        }
+    }
+
     @Override
     public UserDTO unfollowUser(Integer userId, Integer userToUnfollowId) {
-
         User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
         User userToUnfollow = repository.getUserById(userToUnfollowId).orElseThrow(() -> new UserNotExistException(userToUnfollowId));
 
@@ -129,7 +129,24 @@ public class UserService implements IUserService {
         if (!(unfollowDone && followerRemove)) {
             throw new NotFollowersException(userId, userToUnfollowId);
         }
-
         return null;
     }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++++ Métodos Individuales ++++++++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    @Override
+    public List<UserDTO> getSellers() {
+        List<User> users = repository.getAllUser();
+        return users != null ? users.stream()
+                .filter(user -> user.getterPosts().size() > 0)
+                .map(seller -> new UserDTO(seller.getUserId(), seller.getUserName()))
+                .collect(Collectors.toList()) : new ArrayList<>();
+
+    }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++ Fin de Métodos Individuales +++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 }

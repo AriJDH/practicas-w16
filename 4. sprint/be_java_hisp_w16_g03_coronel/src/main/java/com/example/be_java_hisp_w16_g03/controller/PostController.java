@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/products")
 public class PostController {
@@ -26,9 +24,14 @@ public class PostController {
         return new ResponseEntity<>(service.getLatestPostsOrderedByUserId(userId, order), HttpStatus.OK);
     }
 
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++++ Métodos Individuales ++++++++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
     @PostMapping("/promo-post")
     public ResponseEntity<PromoPostDTO> addPromoPost(@RequestBody PromoPostDTO promoPostDTO) {
-        return new ResponseEntity<>(service.addPromoPost(promoPostDTO), HttpStatus.OK);
+        service.addPromoPost(promoPostDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/promo-post/count")
@@ -40,5 +43,14 @@ public class PostController {
     public ResponseEntity<PromoPostsDTO> getProductsPromoByUserId(@RequestParam Integer user_id) {
         return new ResponseEntity<>(service.getProductsPromoByUserId(user_id), HttpStatus.OK);
     }
+
+    @GetMapping("/biggest-discount")
+    public ResponseEntity<PromoPostDTO> getBiggestDiscountByUserId(@RequestParam Integer user_id) {
+        return new ResponseEntity<>(service.getBiggestDiscountByUserId(user_id), HttpStatus.OK);
+    }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++ Fin de Métodos Individuales +++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 }

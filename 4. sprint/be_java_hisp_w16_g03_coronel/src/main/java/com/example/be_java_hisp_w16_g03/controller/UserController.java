@@ -39,4 +39,18 @@ public class UserController {
     public ResponseEntity<FollowersDTO> getMeFollowers(@PathVariable Integer userId, @RequestParam(required = false) String order) {
         return new ResponseEntity(service.getFollowers(userId, order), HttpStatus.OK);
     }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++++ Métodos Individuales ++++++++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    @GetMapping("/users/seller/list")
+    public ResponseEntity<UserDTO> getSellers() {
+        return new ResponseEntity(service.getSellers(), HttpStatus.OK);
+    }
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // ++++++++++++++++++++ Fin de Métodos Individuales +++++++++++++++++
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 }

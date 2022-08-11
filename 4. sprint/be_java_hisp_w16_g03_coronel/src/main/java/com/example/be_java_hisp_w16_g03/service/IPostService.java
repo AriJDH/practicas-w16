@@ -9,9 +9,11 @@ public interface IPostService {
 
     PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order);
 
-    PromoPostDTO addPromoPost(PromoPostDTO request);
+    void addPromoPost(PromoPostDTO request);
 
     ProductCountDTO getProductCountByUserId(Integer userId);
 
     PromoPostsDTO getProductsPromoByUserId(Integer userId);
+
+    PromoPostDTO getBiggestDiscountByUserId(Integer userId);
 }

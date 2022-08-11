@@ -65,11 +65,17 @@ public class PostService implements IPostService {
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
     }
 
+    private List<Post> getFilterPosts(List<User> vendors) {
+        List<Post> filterPosts = new ArrayList<>();
+        vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
+        return filterPosts;
+    }
+
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // ++++++++++++++++++++++ Métodos Individuales ++++++++++++++++++++++
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     @Override
-    public PromoPostDTO addPromoPost(PromoPostDTO promoDto) {
+    public void addPromoPost(PromoPostDTO promoDto) {
         if (!validatePromo(promoDto))
             throw new InvalidPostRequest();
         if (!promoDto.isHasPromo()) {
@@ -77,7 +83,6 @@ public class PostService implements IPostService {
         }
         User user = repository.getUserById(promoDto.getUserId()).orElseThrow(() -> new UserNotExistException(promoDto.getUserId()));
         user.addPostToUser(Mapper.promoPostDtoToEntity(promoDto));
-        return null;
     }
 
     @Override
@@ -88,7 +93,6 @@ public class PostService implements IPostService {
         }
         Long count = user.getterPosts().stream().filter(post -> post.isHasPromo()).count();
         return new ProductCountDTO(userId, user.getUserName(), (Integer.valueOf(count.intValue())));
-
     }
 
     @Override
@@ -101,6 +105,16 @@ public class PostService implements IPostService {
         return new PromoPostsDTO(userId, user.getUserName(), postsDto);
     }
 
+    @Override
+    public PromoPostDTO getBiggestDiscountByUserId(Integer userId) {
+        User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+        Post postWithBiggestDiscount = user.getterPosts().stream()
+                .filter(post -> post.isHasPromo())
+                .max(Comparator.comparing(Post::getDiscount))
+                .orElse(null);
+        return postWithBiggestDiscount != null ? Mapper.promoPostToDto(postWithBiggestDiscount) : null;
+    }
+
     private boolean validatePromo(PromoPostDTO promoDto) {
         return promoDto.getUserId() != null && promoDto.getDate() != null && promoDto.getProduct().validate() &&
                 promoDto.getCategory() != null && promoDto.getPrice() != null
@@ -110,11 +124,5 @@ public class PostService implements IPostService {
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // ++++++++++++++++++++ Fin de Métodos Individuales +++++++++++++++++
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-    private List<Post> getFilterPosts(List<User> vendors) {
-        List<Post> filterPosts = new ArrayList<>();
-        vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
-        return filterPosts;
-    }
 
 }
