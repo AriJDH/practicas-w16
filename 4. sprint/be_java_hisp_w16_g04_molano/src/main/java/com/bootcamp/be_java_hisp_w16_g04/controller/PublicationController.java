@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g04.controller;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.ProductsUserPromotionsDTO;
 import com.bootcamp.be_java_hisp_w16_g04.service.IPublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,16 @@ public class PublicationController {
 
     ListProductByDateDTO result = iPublicationService.getListProductByDate(userId, order.orElse(""));
     return new ResponseEntity<>(result, HttpStatus.OK);
+  }
+
+  /**
+   * Method in charge of obtaining all the products in promotion of a user.
+   * @param user_id current user id
+   * @return ResponseEntity with a DTO to give information to the user
+   */
+  @GetMapping("/promo-post/list")
+  public ResponseEntity<ProductsUserPromotionsDTO> promoProductsByUserId(@RequestParam Integer user_id){
+    return new ResponseEntity<>(iPublicationService.promoProductsByUserId(user_id), HttpStatus.OK);
   }
 
 }

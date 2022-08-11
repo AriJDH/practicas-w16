@@ -1,13 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -28,6 +27,9 @@ public class PublicationService implements IPublicationService {
 
   @Autowired
   IProductService iProductService;
+
+  @Autowired
+  IUserRepository iUserRepository;
 
   /**
    * Method that returns the publications of the people I follow in date order.
@@ -103,5 +105,24 @@ public class PublicationService implements IPublicationService {
     Publication publication = iPublicationRepository.createPublication(publicationDTO);
 
     return publication != null;
+  }
+
+  /**
+   * Method in charge of obtaining all the products in promotion from the current user
+   * @param userId current user id
+   * @return DTO with the information of all the products in promotion of a user
+   */
+  @Override
+  public ProductsUserPromotionsDTO promoProductsByUserId(Integer userId) {
+    User currentUser = iUserRepository.getByIdUser(userId);
+    List<PostDTO> publicationList = iPublicationRepository.getListPublicationsById(userId)
+        .stream()
+        .filter(Publication::getHasPromo)
+        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(), p.getDate(),
+            iProductService.getProductById(p.getProductId()), p.getCategory(),
+            p.getPrice(), p.getHasPromo(), p.getDiscount()))
+        .collect(Collectors.toList());
+
+    return new ProductsUserPromotionsDTO(userId, currentUser.getUserName(), publicationList);
   }
 }
