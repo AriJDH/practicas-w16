@@ -13,10 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     private int userId;
-    @NonNull
     private String userName;
     private List<User> followers = new ArrayList<>();
     private List<User> following = new ArrayList<>();
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public void addFollower(User newFollower) {
         followers.add(newFollower);
@@ -26,7 +29,7 @@ public class User {
         following.add(userToFollow);
     }
 
-    public boolean isFollowing(User user){
-        return following.stream().anyMatch(u-> u.getUserId() == user.getUserId());
+    public boolean isFollowing(User user) {
+        return following.stream().anyMatch(u -> u.getUserId() == user.getUserId());
     }
 }

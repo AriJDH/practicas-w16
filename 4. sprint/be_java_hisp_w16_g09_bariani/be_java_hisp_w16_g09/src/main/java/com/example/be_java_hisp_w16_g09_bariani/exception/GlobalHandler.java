@@ -15,6 +15,12 @@ public class GlobalHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidBlankUserNameException.class)
+    public ResponseEntity<MessageDto> InvalidBlankUserNameException(InvalidBlankUserNameException exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler
     public ResponseEntity<MessageDto> catchUserIsNotSellerException(UserIsNotSellerException exception) {
         MessageDto response = new MessageDto(exception.getMessage());
