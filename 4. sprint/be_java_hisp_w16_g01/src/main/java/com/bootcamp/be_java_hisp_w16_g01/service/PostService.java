@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 public class PostService implements IPostService {
     @Autowired
     private IPostRepository postRepository;
-
     @Autowired
     private IUserRepository userRepository;
 
@@ -33,7 +32,7 @@ public class PostService implements IPostService {
         if (postDto.getDate().isAfter(LocalDate.now()))
             throw new BadRequestException("La fecha es posterior a la fecha actual");
 
-        if(!userRepository.userExists(postDto.getUserId()))
+        if (!userRepository.userExists(postDto.getUserId()))
             throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
 
         ProductDto productDto = postDto.getProduct();
@@ -56,14 +55,14 @@ public class PostService implements IPostService {
         return new MessageDto("Publicacion creada correctamente, id: " + id);
     }
 
-    private List<ResponsePostDto> getPosts(User user){
+    private List<ResponsePostDto> getPosts(User user) {
         List<Post> post = new ArrayList<>();
         for (User u : user.getFollowed()) {
             post.addAll(postRepository.getPostsByUserId(u.getUserId()));
         }
 
         return post.stream().map(
-                x-> new ResponsePostDto(x.getUserId(),x.getPostId(),x.getDate(),new ProductDto(
+                x -> new ResponsePostDto(x.getUserId(), x.getPostId(), x.getDate(), new ProductDto(
                         x.getProduct().getProductId(),
                         x.getProduct().getProductName(),
                         x.getProduct().getType(),
@@ -80,10 +79,10 @@ public class PostService implements IPostService {
     public FollowedPostsDto getFollowedPosts(int userId, String order) {
         User user = userRepository.getUser(userId);
 
-        if(user == null)
+        if (user == null)
             throw new BadRequestException("No existe el usuario con Id: " + userId);
 
-        if (order!= null){
+        if (order != null) {
             if (order.equalsIgnoreCase("date_desc")) {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate).reversed())
@@ -92,8 +91,7 @@ public class PostService implements IPostService {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate))
                         .collect(Collectors.toList()));
-        }
-        else
+        } else
             return new FollowedPostsDto(userId, getPosts(user));
     }
 

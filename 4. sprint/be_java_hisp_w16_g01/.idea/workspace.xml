@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d95465d-23c5-4dac-9e75-ef889edd50a1" name="Changes" comment="">
+    <list default="true" id="4d95465d-23c5-4dac-9e75-ef889edd50a1" name="Changes" comment="commit para guardar cambios y crear rama definitiva">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/exception/GlobalHandlerException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/exception/GlobalHandlerException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IPostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IPostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/IUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/repository/PostRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,8 +101,20 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cambio mensaje en exception para control de usuario no vendedor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambio mensaje en exception para control de usuario no vendedor" />
+    <MESSAGE value="commit para guardar cambios y crear rama definitiva" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit para guardar cambios y crear rama definitiva" />
   </component>
 </project>

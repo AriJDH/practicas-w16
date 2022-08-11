@@ -27,4 +27,6 @@ public class PostController {
         return new ResponseEntity<>(postService.getFollowedPosts(userId, order), HttpStatus.OK);
     }
 
+
+
 }

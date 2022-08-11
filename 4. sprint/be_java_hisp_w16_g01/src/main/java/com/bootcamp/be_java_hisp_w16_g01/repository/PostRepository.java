@@ -23,7 +23,6 @@ public class PostRepository implements IPostRepository{
         postList.add(post);
         return post.getPostId();
     }
-
     @Override
     public List<Post> getPostsByUserId(int userId) {
         LocalDate dateWeek = LocalDate.now().minusWeeks(2);
