@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -28,6 +30,13 @@ public class UserRepository implements IUserRepository {
     public void updateUser(User user) {
         users.put(user.getUserId(), user);
     }
+
+    @Override
+    public List<User> getUsers() {
+        var result = users.values().stream().collect(Collectors.toList());
+        return result;
+    }
+
     private void addUsers() {
         User userA = new User(1,"Mauricio",new ArrayList<>(),new ArrayList<>());
         User userB = new User(2,"Alvaro",new ArrayList<>(),new ArrayList<>());

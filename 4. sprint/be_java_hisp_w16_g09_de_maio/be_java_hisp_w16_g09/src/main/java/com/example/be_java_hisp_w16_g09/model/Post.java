@@ -11,14 +11,18 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Post {
 
-    private int postId;
-    private User user;
-    private LocalDate date;
-    private Product product;
-    private int categoryId;
-    private double price;
+    protected int postId;
+    protected User user;
+    protected LocalDate date;
+    protected Product product;
+    protected int categoryId;
+    protected double price;
 
     public boolean wasPublishedAfter(LocalDate aDate) {
         return date.isAfter(aDate);
+    }
+
+    public boolean isPromo() {
+        return false;
     }
 }

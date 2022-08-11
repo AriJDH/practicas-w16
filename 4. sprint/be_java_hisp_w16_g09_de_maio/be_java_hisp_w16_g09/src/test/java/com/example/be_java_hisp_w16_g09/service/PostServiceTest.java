@@ -24,19 +24,19 @@ public class PostServiceTest {
 
     private IPostService postService;
     private IPostRepository postRepository;
-    private IUserRepository userRepository;
+    private IUserService userService;
 
     @BeforeEach
     void setUp() {
         postRepository = Mockito.mock(IPostRepository.class);
-        userRepository = Mockito.mock(IUserRepository.class);
-        postService = new PostService(postRepository, userRepository, new DTOMapperUtil());
+        userService = Mockito.mock(IUserService.class);
+        postService = new PostService(postRepository, userService, new DTOMapperUtil());
     }
 
     @Test
     public void shouldRaiseException_whenTryToGetPostsOfSellersForNonExistentUser(){
         int nonExistentUserId = 1;
-        when(userRepository.searchById(nonExistentUserId)).thenReturn(null);
+        when(userService.getValidatedUser(nonExistentUserId)).thenThrow(new UserNotFoundException(nonExistentUserId));
 
         assertThatThrownBy(() -> postService.getRecentPostsOfSellersFollowedByUserWith(nonExistentUserId))
                 .isInstanceOf(UserNotFoundException.class)
@@ -45,7 +45,7 @@ public class PostServiceTest {
     @Test
     public void shouldReturnEmptyPostList_whenGetPostsOfSellersForUserWithZeroFollowings() {
         int anUserId = 1;
-        when(userRepository.searchById(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), new ArrayList()));
+        when(userService.getValidatedUser(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), new ArrayList()));
         RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
 
         assertThat(response.getPosts().isEmpty()).isTrue();
@@ -58,7 +58,7 @@ public class PostServiceTest {
         User seller = Mockito.mock(User.class);
         when(seller.getUserId()).thenReturn(2);
 
-        when(userRepository.searchById(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), List.of(seller)));
+        when(userService.getValidatedUser(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), List.of(seller)));
         when(postRepository.getPostsByUserIds(List.of(seller.getUserId()))).thenReturn(List.of(new Post(1, seller, LocalDate.now(), new Product(), 1, 100)));
 
         RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
@@ -78,7 +78,7 @@ public class PostServiceTest {
         Post newestPost = new Post(2, seller, publicationDate, new Product(), 1, 78);
         Post oldestPost = new Post(3, seller, publicationDate.minusWeeks(1), new Product(), 1, 120);
 
-        when(userRepository.searchById(anUserId))
+        when(userService.getValidatedUser(anUserId))
                 .thenReturn(new User(anUserId, "pedrotest", new ArrayList(), List.of(seller)));
         when(postRepository.getPostsByUserIds(List.of(seller.getUserId())))
                 .thenReturn(List.of(

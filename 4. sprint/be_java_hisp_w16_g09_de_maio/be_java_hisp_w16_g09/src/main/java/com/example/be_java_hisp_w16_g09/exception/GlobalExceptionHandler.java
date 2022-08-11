@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GlobalHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<MessageDto> catchUserNotFound(UserNotFoundException exception) {

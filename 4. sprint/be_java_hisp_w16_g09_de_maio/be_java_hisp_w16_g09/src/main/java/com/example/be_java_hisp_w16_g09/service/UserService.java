@@ -9,11 +9,10 @@ import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
-import org.modelmapper.ModelMapper;
+import com.example.be_java_hisp_w16_g09.utility.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,12 +53,19 @@ public class UserService implements IUserService{
             throw new UserToFollowIsNotSellerException(anUser.getUserId());
     }
 
-    private User getValidatedUser(int userId) {
+    public User getValidatedUser(int userId) {
         User user = userRepository.searchById(userId);
         if (user == null) {
             throw new UserNotFoundException(userId);
         }
         return user;
+    }
+
+    @Override
+    public List<SimpleUserDto> getRegisteredUsersConsidering(String anOrder) {
+        var users = userRepository.getUsers();
+        users = Sort.orderSequenceBasedOn(anOrder, "name").sortingBy(User::getUserName, users);
+        return dtoMapperUtil.mapList(users, SimpleUserDto.class);
     }
 
     //Martin

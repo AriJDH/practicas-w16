@@ -49,4 +49,11 @@ public class UserController {
         userService.unfollow(userId,userIdToUnfollow);
         return new ResponseEntity<>(new MessageDto("User "+userId+" unfollow "+userIdToUnfollow),HttpStatus.OK );
     }
+
+    // US BONUS: Obtener lista de usuarios registrados. Parametros: order = name_asc o name_desc
+    @GetMapping(path = "/users")
+    public ResponseEntity registeredUsers(@RequestParam(required = false) String order) {
+        return ResponseEntity.ok(userService.getRegisteredUsersConsidering(order));
+    }
+
 }
