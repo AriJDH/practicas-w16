@@ -1,23 +1,23 @@
 package com.example.be_java_hisp_w16_g03.dto;
 
-import com.example.be_java_hisp_w16_g03.entity.Post;
-import com.example.be_java_hisp_w16_g03.entity.Product;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostHasPromoDTO {
+public class PostsHasPromoWIthIdDTO {
+
     private Integer userId;
+    private Integer postId;
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
     private ProductDTO product;
@@ -25,11 +25,5 @@ public class PostHasPromoDTO {
     private Double price;
     private boolean hasPromo;
     private double discount;
-
-    public boolean validate() {
-        return this.userId != null && this.date != null &&
-                this.product.validate() && this.category != null &&
-                this.price != null && this.hasPromo==true && this.discount!=0;
-    }
 
 }

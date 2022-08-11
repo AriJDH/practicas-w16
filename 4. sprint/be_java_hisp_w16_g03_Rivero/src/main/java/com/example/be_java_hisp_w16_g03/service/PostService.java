@@ -9,7 +9,9 @@ import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,9 +34,9 @@ public class PostService implements IPostService {
 
     @Override
     public PostHasPromoCountDTO countPostHasPromoDTO(Integer id) {
-        User user=repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
-        Integer total=user.getterPosts().stream().filter(userWithPromo-> userWithPromo.isHasPromo()).collect(Collectors.toList()).size();
-        PostHasPromoCountDTO postHasPromoCountDTO=new PostHasPromoCountDTO(user.getUserId(), user.getUserName(), total);
+        User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
+        Integer total = user.getterPosts().stream().filter(userWithPromo -> userWithPromo.isHasPromo()).collect(Collectors.toList()).size();
+        PostHasPromoCountDTO postHasPromoCountDTO = new PostHasPromoCountDTO(user.getUserId(), user.getUserName(), total);
         return postHasPromoCountDTO;
     }
 
@@ -83,13 +85,29 @@ public class PostService implements IPostService {
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
     }
 
+    @Override
+    public PostsHasPromoDTO getPostWithPromoById(Integer id) {
+        User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
+        List<Post> posts = user.getPosts();
+        List<PostsHasPromoWIthIdDTO> postsPromo = posts.stream().filter(postWithPromo -> postWithPromo.isHasPromo()).map(post ->
+                        PostsHasPromoWIthIdDTO.builder().userId(post.getUserId()).postId(post.getPostId()).date(post.getDate())
+                                .category(post.getCategory()).price(post.getPrice()).hasPromo(post.isHasPromo()).discount(post.getDiscount())
+                                .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                                        .productName(post.getProduct().getProductName())
+                                        .type(post.getProduct().getType())
+                                        .color(post.getProduct().getColor())
+                                        .brand(post.getProduct().getBrand())
+                                        .notes(post.getProduct().getNotes()).build()).build())
+                .collect(Collectors.toList());
+        PostsHasPromoDTO postsHasPromoDTO = new PostsHasPromoDTO(user.getUserId(), user.getUserName(), postsPromo);
+        return postsHasPromoDTO;
+    }
+
     private List<Post> getFilterPosts(List<User> vendors) {
         List<Post> filterPosts = new ArrayList<>();
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
         return filterPosts;
     }
-
-
 
 
 }
