@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.service;
 
-import com.example.be_java_hisp_w16_g03.dto.FollowedsDTO;
-import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
-import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
-import com.example.be_java_hisp_w16_g03.dto.UserDTO;
+import com.example.be_java_hisp_w16_g03.dto.*;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.AlreadyFollowException;
 import com.example.be_java_hisp_w16_g03.exception.NotFollowersException;
@@ -135,8 +132,9 @@ public class UserService implements IUserService {
     @Override
     public List<UserDTO> getAllUsers() {
         List<User> user= repository.getAllUsers();
-        List<UserDTO> userDTOList=user.stream().map(user1 -> {
-            return new UserDTO(user1.getUserId(), user1.getUserName());
+
+        List<UserDTO> userDTOList=user.stream().map(user1 ->{
+             return new UserDTO(user1.getUserId(), user1.getUserName());
         }).collect(Collectors.toList());
         return userDTOList;
     }

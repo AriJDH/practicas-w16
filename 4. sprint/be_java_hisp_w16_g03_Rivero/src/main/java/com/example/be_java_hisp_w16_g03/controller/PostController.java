@@ -24,7 +24,7 @@ public class PostController {
     }
     @PostMapping("/products/promo-post")
     public ResponseEntity<PostHasPromoDTO> postProducPromo(@RequestBody PostHasPromoDTO postHasPromoDTO) {
-        return new ResponseEntity<>(service.addPostHasPromo(postHasPromoDTO), HttpStatus.OK);
+        return new ResponseEntity<>(service.addPostHasPromo(postHasPromoDTO), HttpStatus.CREATED);
     }
     @GetMapping ("/products/promo-post/count")
     public ResponseEntity<PostHasPromoCountDTO> getCountPostWithPromo(@RequestParam(required = false) Integer user_id){
