@@ -1,9 +1,9 @@
 package com.example.be_java_hisp_w16_g09.service;
 
-import com.example.be_java_hisp_w16_g09.dto.PostDto;
-import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09.dto.*;
 import com.example.be_java_hisp_w16_g09.exception.InvalidDateException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.exception.UserToFollowIsNotSellerException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
@@ -33,15 +33,24 @@ public class PostService implements IPostService{
 
     //Martin
     public void createPost(PostDto postDto){
-        int userId = postDto.getUserId();
+        User user = validateNewPost(postDto.getDate(), postDto.getUserId());
+        Post post = dtoMapperUtil.map(postDto, Post.class);
+        post.setUser(user);
+        postRepository.createElement(post);
+    }
+    public User validateNewPost(LocalDate date, int userId){
         User user = userRepository.searchById(userId);
         if (user == null){
             throw new UserNotFoundException(userId);
         }
-        if(LocalDate.now().isBefore(postDto.getDate())){
-            throw new InvalidDateException(String.valueOf(postDto.getDate()));
+        if(LocalDate.now().isBefore(date)){
+            throw new InvalidDateException(String.valueOf(date));
         }
-        Post post = dtoMapperUtil.map(postDto, Post.class);
+        return user;
+    }
+    public void createPostPromo(PostPromoDto postPromoDto){
+        User user = validateNewPost(postPromoDto.getDate(), postPromoDto.getUserId());
+        Post post = dtoMapperUtil.map(postPromoDto, Post.class);
         post.setUser(user);
         postRepository.createElement(post);
     }
@@ -91,6 +100,31 @@ public class PostService implements IPostService{
         List<Post> postsOfSellers = postRepository.getPostsByUserIds(sellersIds);
         return postsOfSellers;
     }
+    public PromoPostCountDto getTotalPromoPost(int userId){
+        User user = getUserValidatedAndSeller(userId);
+        int countPostPromo = postRepository.getPostsPromoByUserId(userId).size();
+        PromoPostCountDto promoPostCountDto = new PromoPostCountDto(userId, user.getUserName(), countPostPromo);
+        return promoPostCountDto;
+    }
+
+    @Override
+    public PromoPostSellerListDto getListPromoPostSeller(int userId) {
+        User user = getUserValidatedAndSeller(userId);
+        List<Post> postsPromo = postRepository.getPostsPromoByUserId(userId);
+        List<PostPromoDto> postsPromoDto = dtoMapperUtil.mapList(postsPromo, PostPromoDto.class);
+        return new PromoPostSellerListDto(userId, user.getUserName(), postsPromoDto);
+    }
+    private User getUserValidatedAndSeller(int userId){
+        User user = userRepository.searchById(userId);
+        if (user == null){
+            throw new UserNotFoundException(userId);
+        }
+        if (postRepository.searchById(userId) == null){
+            throw new UserToFollowIsNotSellerException(userId);
+        }
+        return user;
+    }
+
 }
 
 

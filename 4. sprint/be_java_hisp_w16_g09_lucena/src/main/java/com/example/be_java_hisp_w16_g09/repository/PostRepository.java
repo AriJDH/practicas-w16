@@ -47,5 +47,11 @@ public class PostRepository implements IPostRepository{
     public List<Post> getPostsByUserIds(List<Integer> userIds) {
         return userIds.stream().map(userId -> posts.getOrDefault(userId, new ArrayList<>())).flatMap(List::stream).collect(Collectors.toList());
     }
+    @Override
+    public List<Post> getPostsPromoByUserId(int userId){
+        return posts.get(userId).stream()
+                .filter(Post::isHasPromo)
+                .collect(Collectors.toList());
+    }
 
 }

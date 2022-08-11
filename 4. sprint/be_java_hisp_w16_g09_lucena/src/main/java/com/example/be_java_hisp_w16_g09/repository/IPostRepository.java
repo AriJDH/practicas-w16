@@ -12,4 +12,6 @@ public interface IPostRepository {
 
     //Nico
     List<Post> getPostsByUserIds(List<Integer> userIds);
+
+    List<Post> getPostsPromoByUserId(int userId);
 }
