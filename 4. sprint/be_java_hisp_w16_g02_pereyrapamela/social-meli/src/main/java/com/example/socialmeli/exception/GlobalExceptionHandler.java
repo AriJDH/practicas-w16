@@ -39,4 +39,10 @@ public class GlobalExceptionHandler {
         ExceptionApiDto exceptionApiDTO = new ExceptionApiDto("Input not valid.", e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({PostWhitoutPromoException.class})
+    public ResponseEntity<ExceptionApiDto> catchException(PostWhitoutPromoException e) {
+        ExceptionApiDto exceptionApiDTO = new ExceptionApiDto("Input not valid.", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
 }
