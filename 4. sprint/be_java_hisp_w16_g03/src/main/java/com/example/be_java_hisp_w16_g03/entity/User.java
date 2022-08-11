@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import com.example.be_java_hisp_w16_g03.dto.PromoPostDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,24 +49,34 @@ public class User {
         return this.posts;
     }
 
-    public void addPostToUser(PostDTO request) {
-        Post post = Post.builder()
-                .userId(request.getUserId())
-                .date(request.getDate())
-                .price(request.getPrice())
-                .product(Product.builder().
-                        productId(request.getProduct().getProductId())
-                        .brand(request.getProduct().getBrand())
-                        .color(request.getProduct().getColor())
-                        .type(request.getProduct().getType())
-                        .notes(request.getProduct().getNotes())
-                        .productName(request.getProduct().getProductName())
-                        .build())
-                .category(request.getCategory())
-                .price(request.getPrice()).build();
-        //Se asigna un Id autoincremental al Post
-        post.increaseId();
-        this.getterPosts().add(post);
+    public void addPostWithOutPromo(PostDTO request) {
+
+        Post postWithOutPromo = new PostWithOutPromo(request.getUserId(), request.getDate(), request.getPrice(), Product.builder()
+                .productName(request.getProduct().getProductName())
+                .productId(request.getProduct().getProductId())
+                .notes(request.getProduct().getNotes())
+                .type(request.getProduct().getType())
+                .color(request.getProduct().getColor())
+                .brand(request.getProduct().getBrand()).build(), request.getCategory());
+        postWithOutPromo.increaseId();
+        this.getterPosts().add(postWithOutPromo);
+    }
+
+
+    public void addPostWithPromo(PromoPostDTO request) {
+
+        Post postWithOutPromo = new PostPromo(request.getUserId(), request.getDate()
+                , request.getPrice(), Product.builder()
+                .productName(request.getProduct().getProductName())
+                .productId(request.getProduct().getProductId())
+                .notes(request.getProduct().getNotes())
+                .type(request.getProduct().getType())
+                .color(request.getProduct().getColor())
+                .brand(request.getProduct().getBrand()).build(), request.getCategory(), request.getHasPromo(), request.getDiscount());
+
+        postWithOutPromo.increaseId();
+
+        this.getterPosts().add(postWithOutPromo);
     }
 
 

@@ -29,7 +29,7 @@ public class UserRepository implements IUserRepository {
 
         List<User> initFollowers = new ArrayList<>();
         List<User> initFolloweds = new ArrayList<>();
-        List<Post> initPost = new ArrayList<>();
+        List<Post> posts = new ArrayList<>();
 
         List<User> initUser = new ArrayList<>();
         User user1 = User.builder().userId(1).userName("pablo").build();
@@ -57,7 +57,7 @@ public class UserRepository implements IUserRepository {
         initUser.add(user4);
         initUser.add(user5);
         initUser.add(user6);
-        user1.setPosts(initPost);
+        user1.setPosts(posts);
 
         return initUser;
     }

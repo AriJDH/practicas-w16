@@ -2,10 +2,7 @@ package com.example.be_java_hisp_w16_g03.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -13,9 +10,10 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class FollowersDTO {
+public class UserPost {
     private Integer userId;
     private String userName;
-    private List<UserDTO> followers;
+    private List<PromoPostDTO> posts;
 }

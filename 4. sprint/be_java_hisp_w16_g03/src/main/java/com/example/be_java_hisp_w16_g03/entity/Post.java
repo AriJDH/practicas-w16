@@ -1,25 +1,28 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-public class Post {
-    private static int lastId;
-    private Integer userId;
-    private Integer postId;
-    private LocalDate date;
-    private Product product;
-    private Integer category;
-    private Double price;
+@Data
+public abstract class Post {
 
-    public void increaseId() {
-        this.postId = lastId++;
+    protected static int lastId;
+    protected Integer userId;
+    protected Integer postId;
+    protected LocalDate date;
+    protected Product product;
+    protected Integer category;
+    protected Double price;
+
+    public Post(Integer userId, LocalDate date, Double price, Product product, Integer category) {
+        this.userId = userId;
+        this.date = date;
+        this.price = price;
+        this.product = product;
+        this.category = category;
     }
+
+    public abstract void increaseId();
 
 }
