@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostResDTO {
     private Integer userId;
-    private String postId;
+    private Integer postId;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate date;
     private ProductResDTO product;

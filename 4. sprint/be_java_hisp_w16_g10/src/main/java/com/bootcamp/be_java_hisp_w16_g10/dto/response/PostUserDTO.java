@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class PostUserDTO extends PostResDTO{
     private String userName;
 
-    public PostUserDTO(Integer userId, String postId, LocalDate date, ProductResDTO product, Integer category, Double price, String userName) {
+    public PostUserDTO(Integer userId, Integer postId, LocalDate date, ProductResDTO product, Integer category, Double price, String userName) {
         super(userId, postId, date, product, category, price);
         this.userName = userName;
     }

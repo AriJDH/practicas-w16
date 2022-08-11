@@ -14,8 +14,8 @@ public class PromoPost extends Post {
     private boolean hasPromo;
     private double discount;
 
-    public PromoPost(String id, Product product, LocalDate date, Double price, Integer category, boolean hasPromo, double discount) {
-        super(id, product, date, price, category);
+    public PromoPost(Integer id, Integer userId, Product product, LocalDate date, Double price, Integer category, boolean hasPromo, double discount) {
+        super(id,userId, product, date, price, category);
         this.hasPromo = hasPromo;
         this.discount = discount;
     }
