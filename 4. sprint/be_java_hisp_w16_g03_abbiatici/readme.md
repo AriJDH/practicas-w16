@@ -6,7 +6,7 @@ Meli Social es una plataforma en donde los compradores van a poder seguir a sus 
 
 ## Endopoints disponibles en Beta
 
-### Creacion de usuarios
+### US 0000: Creacion de usuarios
 #### Endpoint (POST)
 ```
 {host}/createUser
@@ -33,8 +33,7 @@ Meli Social es una plataforma en donde los compradores van a poder seguir a sus 
 ]
 ```
 
-
-### Agregar seguidor a usuario
+### US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
 #### Endpoint (POST)
 ```
 {host}/users/{userId}/follow/{userIdToFollow}
@@ -51,24 +50,7 @@ userIdToFollow - number
 ```
 ```
 
-### Quitar seguidor de usuario
-#### Endpoint (POST)
-```
-{host}/users/{userId}/follow/{userIdToFollow}
-```
-#### Request Param
-```
-userId - number
-userIdToFollow - number
-```
-#### Request Body
-```
-```
-#### Response (OK - 200)
-```
-```
-
-### Obtener cantidad de seguidores de usuario
+### US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
 #### Endpoint (GET)
 ```
 {host}/users/{userId}/followers/count
@@ -89,15 +71,14 @@ userId - number
 }
 ```
 
-### Obtener listado de usuarios que siguen a un vendedor
+### US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
 #### Endpoint (GET)
 ```
-{host}/users/{userId}/followers/list?order={order}
+{host}/users/{userId}/followers/list
 ```
 #### Request Param
 ```
 userId - number
-(Optional) order - "name_asc" or "name_desc"
 ```
 #### Request Body
 ```
@@ -116,15 +97,14 @@ userId - number
 }
 ```
 
-### Obtener listado de vendedores que sigue un usuario
+### US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
 #### Endpoint (GET)
 ```
-{host}/users/{userId}/followed/list?order={order}
+{host}/users/{userId}/followed/list
 ```
 #### Request Param
 ```
 userId - number
-(Optional) order - "name_asc" or "name_desc"
 ```
 #### Request Body
 ```
@@ -143,7 +123,7 @@ userId - number
 }
 ```
 
-### Alta de publicacion
+### US 0005: Dar de alta una nueva publicación
 #### Endpoint (POST)
 ```
 {host}/products/post
@@ -174,15 +154,14 @@ Formato Date: "20-05-2022"
 ```
 ```
 
-### Obtener listado de publicaciones de vendedor que usuario sigue de las ultimas dos semanas
+### US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
 #### Endpoint (GET)
 ```
-{host}/products/followed/{userId}/list?order={order}
+{host}/products/followed/{userId}/list
 ```
 #### Request Param
 ```
 userId - number
-(Optional) order - "name_asc" or "name_desc"
 ```
 #### Request Body
 ```
@@ -210,7 +189,93 @@ userId - number
     ]
 }
 ```
-### Llevar a cabo la publicación de un nuevo producto en promoción
+
+### US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
+#### Endpoint (POST)
+```
+{host}/users/{userId}/follow/{userIdToFollow}
+```
+#### Request Param
+```
+userId - number
+userIdToFollow - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+```
+
+### US 0008: Ordenamiento alfabético ascendente y descendente
+#### Endpoint (GET) - ejemplos
+```
+{host}/users/{UserID}/followers/list?order=name_asc
+{host}/users/{UserID}/followers/list?order=name_desc
+{host}/users/{UserID}/followed/list?order=name_asc
+{host}/users/{UserID}/followed/list?order=name_desc
+```
+#### Request Param
+```
+userId - number
+(Optional) order - "name_asc" or "name_desc"
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+{
+    "user_id": number,
+    "user_name": "String",
+    "followed": [
+        {
+            "user_id": number,
+            "user_name": "String"
+        }
+    ]
+}
+```
+
+### US 0009: Ordenamiento por fecha ascendente y descendente
+#### Endpoint (GET) - ejemplos
+```
+{host}/products/followed/{userId}/list?order=date_asc
+{host}/products/followed/{userId}/list?order=date_desc
+```
+#### Request Param
+```
+userId - number
+(Optional) order - "date_asc" or "date_desc"
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+{
+    "user_id": number,
+    "posts": [
+        {
+            userId = number,
+            postId = number,
+            date = Date,
+            "product": {
+                "product_id": number,
+                "product_name": "String",
+                "type": "String",
+                "brand": "String",
+                "color": "String",
+                "notes": "String"
+            },
+            category = number,
+            price = double
+        }
+    ]
+}
+```
+
+### US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
 #### Endpoint (POST)
 ```
 {host}/products/promo-post
@@ -242,7 +307,7 @@ Formato Date: "20-05-2022"
 #### Response (OK - 200)
 ```
 ```
-### Obtener la cantidad de productos en promoción de un determinado vendedor
+### US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
 #### Endpoint (GET)
 ```
 {host}/products/promo-post/count?user_id={userId}
@@ -263,7 +328,7 @@ userId - number
 }
 ```
 
-### Obtener un listado de todos los productos en promoción de un determinado vendedor
+### US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
 #### Endpoint (GET)
 ```
 {host}/products/promo-post/list?user_id={userId}
@@ -295,6 +360,47 @@ userId - number
             },
             category = number,
             price = double,
+            "has_promo": boolean,
+            "discount": double
+        }
+    ]
+}
+```
+
+### US 0013: Obtener un listado de todos los productos en promoción de un determinado vendedor ordenados por fecha
+#### Endpoint (GET) - ejemplos
+```
+{host}/products/promo-post/list?user_id={userId}&order=date_asc
+{host}/products/promo-post/list?user_id={userId}&order=date_desc
+```
+#### Request Param
+```
+userId - number
+(Optional) order - "date_asc" or "date_desc"
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+{
+    "user_id": number,
+    "user_name": "String",
+    "posts": [
+        {
+            userId = number,
+            postId = number,
+            date = Date,
+            "product": {
+                "product_id": number,
+                "product_name": "String",
+                "type": "String",
+                "brand": "String",
+                "color": "String",
+                "notes": "String"
+            },
+            category = number,
+            price = double
             "has_promo": boolean,
             "discount": double
         }

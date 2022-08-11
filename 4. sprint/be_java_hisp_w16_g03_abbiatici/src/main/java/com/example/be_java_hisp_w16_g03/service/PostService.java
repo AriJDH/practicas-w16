@@ -82,9 +82,7 @@ public class PostService implements IPostService {
                 .promoProductsCount(promoPosts.size()).build();
     }
 
-    @Override
-    public PromoPostsDTO getPromoPostsByUserId(Integer userId) {
-        User vendor = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+    private PromoPostsDTO getPromoPostsByUserId(Integer userId, User vendor) {
 
         List<PromoPostWithIdDTO> promoPostsWithIdDtos = vendor.getterPosts().stream()
                 .filter(Post::isHasPromo) //filtro para mostrar solo los posts con promo
@@ -101,9 +99,30 @@ public class PostService implements IPostService {
                         .notes(post.getProduct().getNotes()).build())
                         .hasPromo(post.isHasPromo())
                         .discount(post.getDiscount()).build())
-                .sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
+                .collect(Collectors.toList());
 
         return PromoPostsDTO.builder().userId(userId).userName(vendor.getUserName()).posts(promoPostsWithIdDtos).build();
+
+    }
+
+    @Override
+    public PromoPostsDTO getPromoPostsOrderedByUserId(Integer userId, String order) {
+
+        User vendor = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+
+        if(order == null){
+            return getPromoPostsByUserId(userId, vendor);
+        } else if(order.equals(DATE_DESC)){
+            PromoPostsDTO promoPostsDTO = getPromoPostsByUserId(userId, vendor);
+            promoPostsDTO.setPosts(promoPostsDTO.getPosts().stream().sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList()));
+            return promoPostsDTO;
+        } else if(order.equals(DATE_ASC)){
+            PromoPostsDTO promoPostsDTO = getPromoPostsByUserId(userId, vendor);
+            promoPostsDTO.setPosts(promoPostsDTO.getPosts().stream().sorted(Comparator.comparing(PromoPostWithIdDTO::getDate)).collect(Collectors.toList()));
+            return promoPostsDTO;
+        } else {
+            return getPromoPostsByUserId(userId, vendor);
+        }
 
     }
 
