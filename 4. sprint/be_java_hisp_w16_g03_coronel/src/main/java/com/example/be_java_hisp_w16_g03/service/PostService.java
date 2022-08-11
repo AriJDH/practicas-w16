@@ -84,7 +84,7 @@ public class PostService implements IPostService {
             throw new NotSellerException(userId);
         }
         Long count = user.getterPosts().stream().filter(post -> post.isHasPromo()).count();
-        return new ProductCountDTO((Integer.valueOf(count.intValue())));
+        return new ProductCountDTO(userId, user.getUserName(), (Integer.valueOf(count.intValue())));
 
     }
 
