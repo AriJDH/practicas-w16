@@ -1,0 +1,192 @@
+Index: 2. java/clasesabtractasyinterfacesvivo/RetiroDeEfectivo.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/RetiroDeEfectivo.java b/2. java/clasesabtractasyinterfacesvivo/RetiroDeEfectivo.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/RetiroDeEfectivo.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,5 +0,0 @@
+-package ejercicio1;
+-
+-public interface RetiroDeEfectivo extends Transaccion{
+-    void hacerRetiro();
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Cobrador.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Cobrador.java b/2. java/clasesabtractasyinterfacesvivo/Cobrador.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Cobrador.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,24 +0,0 @@
+-package ejercicio1;
+-
+-public class Cobrador implements RetiroDeEfectivo, ConsultaDeSaldo{
+-
+-    @Override
+-    public void consultarPago() {
+-        System.out.println("Cobrador consulto pago");
+-    }
+-
+-    @Override
+-    public void hacerRetiro() {
+-        System.out.println("Cobrador realizo retiro");
+-    }
+-
+-    @Override
+-    public void transaccionOk() {
+-        System.out.println("Cobrador trasaccion OK");
+-    }
+-
+-    @Override
+-    public void transaccionNoOk() {
+-        System.out.println("Cobrador transaccion no OK");
+-    }
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/PagoDeServicio.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/PagoDeServicio.java b/2. java/clasesabtractasyinterfacesvivo/PagoDeServicio.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/PagoDeServicio.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,5 +0,0 @@
+-package ejercicio1;
+-
+-public interface PagoDeServicio extends Transaccion{
+-    void pagarServicio();
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Basic.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Basic.java b/2. java/clasesabtractasyinterfacesvivo/Basic.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Basic.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,28 +0,0 @@
+-package ejercicio1;
+-
+-public class Basic implements ConsultaDeSaldo, PagoDeServicio, RetiroDeEfectivo{
+-    @Override
+-    public void consultarPago() {
+-        System.out.println("Basic consulta pago");
+-    }
+-
+-    @Override
+-    public void pagarServicio() {
+-        System.out.println("Basic pago servicio");
+-    }
+-
+-    @Override
+-    public void hacerRetiro() {
+-        System.out.println("Basic Retiro dinero");
+-    }
+-
+-    @Override
+-    public void transaccionOk() {
+-        System.out.println(" Basic trasaccion OK");
+-    }
+-
+-    @Override
+-    public void transaccionNoOk() {
+-        System.out.println(" Basic trasaccion No OK");
+-    }
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Deposito.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Deposito.java b/2. java/clasesabtractasyinterfacesvivo/Deposito.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Deposito.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,5 +0,0 @@
+-package ejercicio1;
+-
+-public interface Deposito extends Transaccion{
+-    void HacerDeposito();
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Main.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Main.java b/2. java/clasesabtractasyinterfacesvivo/Main.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Main.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,14 +0,0 @@
+-package ejercicio1;
+-
+-public class Main {
+-    public static void main(String[] args) {
+-        Basic basic = new Basic();
+-        Cobrador cobrador = new Cobrador();
+-        Ejecutivo ejecutivo = new Ejecutivo();
+-
+-        basic.consultarPago();
+-        cobrador.consultarPago();
+-        ejecutivo.HacerDeposito();
+-
+-    }
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/ConsultaDeSaldo.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/ConsultaDeSaldo.java b/2. java/clasesabtractasyinterfacesvivo/ConsultaDeSaldo.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/ConsultaDeSaldo.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,6 +0,0 @@
+-package ejercicio1;
+-
+-public interface ConsultaDeSaldo extends Transaccion{
+-
+-    void consultarPago();
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Transferencia.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Transferencia.java b/2. java/clasesabtractasyinterfacesvivo/Transferencia.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Transferencia.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,5 +0,0 @@
+-package ejercicio1;
+-
+-public interface Transferencia extends Transaccion{
+-    void hacerTransferencia();
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Ejecutivo.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Ejecutivo.java b/2. java/clasesabtractasyinterfacesvivo/Ejecutivo.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Ejecutivo.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,23 +0,0 @@
+-package ejercicio1;
+-
+-public class Ejecutivo implements Deposito, Transferencia {
+-    @Override
+-    public void HacerDeposito() {
+-        System.out.println("Ejecutivo realizo deposito");
+-    }
+-
+-    @Override
+-    public void transaccionOk() {
+-        System.out.println("Ejecutivo transaccion OK");
+-    }
+-
+-    @Override
+-    public void transaccionNoOk() {
+-        System.out.println("Ejecutivo transaccion no OK");
+-    }
+-
+-    @Override
+-    public void hacerTransferencia() {
+-        System.out.println("Ejecutivo realizo una transferencia");
+-    }
+-}
+Index: 2. java/clasesabtractasyinterfacesvivo/Transaccion.java
+===================================================================
+diff --git a/2. java/clasesabtractasyinterfacesvivo/Transaccion.java b/2. java/clasesabtractasyinterfacesvivo/Transaccion.java
+deleted file mode 100644
+--- a/2. java/clasesabtractasyinterfacesvivo/Transaccion.java	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
++++ /dev/null	(revision bf03a4bc78a9b7f92addabc83fc6bcc1acf4e3c7)
+@@ -1,7 +0,0 @@
+-package ejercicio1;
+-
+-public interface Transaccion {
+-
+-    void transaccionOk();
+-    void transaccionNoOk();
+-}
