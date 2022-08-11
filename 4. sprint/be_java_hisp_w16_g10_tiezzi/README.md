@@ -15,11 +15,41 @@
 
 ## Parte Individual - Bonus
 
-Para esta parte realicé 2 requerimientos extras:
+Para esta parte realicé 3 requerimientos extras:
+
+US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor.
+- Devuelve todos los post en promoción del usuario especificado.
+- Es un GET al endpoint `/products/promo-post/list?user_id=1`.
+- Ejemplo de respuesta:
+```json
+{
+    "user_id": 1,
+    "user_name": "user1",
+    "posts": [
+        {
+            "user_id": 1,
+            "post_id": 3,
+            "date": "08-08-2022",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": 100,
+            "price": 1500.5,
+            "has_promo": true,
+            "discount": 0.25
+        }
+    ]
+}
+```
 
 US 0013: Obtener un listado con todos los productos en promocion por vendedor.
 - Devuelve un listado con todos los productos en promoción agrupados por usuario.
-- Es un GET al endpoint "_/products/promo-post/list/all_".
+- Es un GET al endpoint `/products/promo-post/list/all`.
 - Ejemplo de respuesta:
 ```json
 [
@@ -92,7 +122,7 @@ US 0013: Obtener un listado con todos los productos en promocion por vendedor.
   
 US 0014: Obtener el usuario con más productos en promocion y su cantidad.
 - Devuelve el usuario con mas productos en promoción.
-- Es un GET al endpoint "_/products/promo-post/user/max_".
+- Es un GET al endpoint `/products/promo-post/user/max`.
 - Ejemplo de respuesta:
 ```json
 {
