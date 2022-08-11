@@ -1,0 +1,44 @@
+package com.bootcamp.be_java_hisp_w16_g01.repository;
+
+import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Repository
+public class PostRepository implements IPostRepository{
+    private List<Post> postList;
+
+    public PostRepository() {
+        this.postList = new ArrayList<>();
+    }
+    @Override
+    public int createPost(Post post) {
+        int id = postList.size()+1;
+        post.setPostId(id);
+        postList.add(post);
+        return post.getPostId();
+    }
+
+    @Override
+    public List<Post> getPostsByUserId(int userId) {
+        LocalDate dateWeek = LocalDate.now().minusWeeks(2);
+        return postList.stream().filter(x ->x.getUserId()==userId && x.getDate().isAfter(dateWeek)).collect(Collectors.toList());
+    }
+
+    public List<Post> getPromoPostsByUserId(int userID){
+        return postList.stream().filter(p -> p.getUserId() == userID && p.isHasPromo()).collect(Collectors.toList());
+    }
+
+    @Override
+    public Post getPost(int postId) {
+        return this.postList.stream().filter(p -> p.getPostId() == postId).findFirst().orElse(null);
+    }
+
+    public void deletePost(int postId){
+        postList.removeIf(p -> p.getPostId()==postId);
+    }
+}
