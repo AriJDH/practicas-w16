@@ -48,22 +48,7 @@ public class User {
         return this.posts;
     }
 
-    public void addPostToUser(PostDTO request) {
-        Post post = Post.builder()
-                .userId(request.getUserId())
-                .date(request.getDate())
-                .price(request.getPrice())
-                .product(Product.builder().
-                        productId(request.getProduct().getProductId())
-                        .brand(request.getProduct().getBrand())
-                        .color(request.getProduct().getColor())
-                        .type(request.getProduct().getType())
-                        .notes(request.getProduct().getNotes())
-                        .productName(request.getProduct().getProductName())
-                        .build())
-                .category(request.getCategory())
-                .price(request.getPrice()).build();
-        //Se asigna un Id autoincremental al Post
+    public void addPostToUser(Post post) {
         post.increaseId();
         this.getterPosts().add(post);
     }

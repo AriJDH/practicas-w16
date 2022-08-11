@@ -1,14 +1,16 @@
 package com.example.be_java_hisp_w16_g03.service;
 
-import com.example.be_java_hisp_w16_g03.dto.PostDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
-import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
+import com.example.be_java_hisp_w16_g03.dto.*;
 import com.example.be_java_hisp_w16_g03.entity.Post;
+import com.example.be_java_hisp_w16_g03.entity.Product;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidPostRequest;
+import com.example.be_java_hisp_w16_g03.exception.NotPromoPostException;
 import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
+import com.example.be_java_hisp_w16_g03.utils.Mapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +31,8 @@ public class PostService implements IPostService {
         if (!request.validate())
             throw new InvalidPostRequest();
         User requestUser = repository.getUserById(request.getUserId()).orElseThrow(() -> new UserNotExistException(request.getUserId()));
-        if (requestUser != null) {
-            requestUser.addPostToUser(request);
-        } else {
-            throw new InvalidPostRequest();
-        }
-
+        requestUser.addPostToUser(Mapper.postDtoToEntity(request));
+        System.out.println(requestUser.getPosts());
     }
 
     @Override
@@ -61,15 +59,32 @@ public class PostService implements IPostService {
     }
 
     public PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order) {
-
         if (order == null || order.equals(DATE_DESC))
             return getLatestPostsByUserId(userId);
         else if (order.equals(DATE_ASC)) {
             List<PostWithIdDTO> postsWithIdDtos = getLatestPostsByUserId(userId).getPosts().stream().sorted(Comparator.comparing(PostWithIdDTO::getDate)).collect(Collectors.toList());
             return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
         }
-
         return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
+    }
+
+    @Override
+    public PromoPostDTO addPromoPost(PromoPostDTO promoDto) {
+        if (!validatePromo(promoDto))
+            throw new InvalidPostRequest();
+        if (!promoDto.isHasPromo()) {
+            throw new NotPromoPostException();
+        }
+        User user = repository.getUserById(promoDto.getUserId()).orElseThrow(() -> new UserNotExistException(promoDto.getUserId()));
+        user.addPostToUser(Mapper.promoPostDtoToEntity(promoDto));
+        System.out.println(user.getPosts());
+        return null;
+    }
+
+    private boolean validatePromo(PromoPostDTO promoDto) {
+        return promoDto.getUserId() != null && promoDto.getDate() != null && promoDto.getProduct().validate() &&
+                promoDto.getCategory() != null && promoDto.getPrice() != null
+                && promoDto.getDiscount() != 0;
     }
 
     private List<Post> getFilterPosts(List<User> vendors) {

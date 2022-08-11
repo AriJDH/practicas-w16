@@ -17,9 +17,24 @@ public class Post {
     private Product product;
     private Integer category;
     private Double price;
+    private boolean hasPromo;
+    private double discount;
 
     public void increaseId() {
         this.postId = lastId++;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "userId=" + userId +
+                ", postId=" + postId +
+                ", date=" + date +
+                ", product=" + product +
+                ", category=" + category +
+                ", price=" + price +
+                ", hasPromo=" + hasPromo +
+                ", discount=" + discount +
+                '}';
+    }
 }

@@ -17,7 +17,6 @@ public class UserRepository implements IUserRepository {
         this.listUser.addAll(initData());
     }
 
-
     @Override
     public List<User> postData(List<User> users) {
         listUser.addAll(users);
