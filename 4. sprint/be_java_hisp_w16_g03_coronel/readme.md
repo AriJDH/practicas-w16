@@ -305,6 +305,67 @@ user_id = Número que identifica a cada usuario.
 
 ````
 
+## Obtener los usuarios que son vendedores.
+
+#### Endpoint (GET)
+```
+/users/seller/list
+```
+#### Request Param
+```
+No posee
+```
+#### Response
+````
+
+[
+    {
+        "user_id": 3,
+        "user_name": "seller1"
+    },
+    {
+        "user_id": 5,
+        "user_name": "seller2"
+    }
+]
+}
+
+````
+
+## Obtener la promo con mayor descuento de un vendedor.
+
+
+#### Endpoint (GET)
+```
+products/biggest-discount?user_id={userId}
+
+```
+#### Request Param
+```
+userId = Número que identifica a cada usuario.
+```
+#### Response
+````
+
+{
+    "user_id": 3,
+    "date": "05-08-2022",
+    "product": {
+        "product_id": 1,
+        "product_name": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 1500.5,
+    "has_promo": true,
+    "discount": 0.8
+}
+
+````
+
 
 
 
