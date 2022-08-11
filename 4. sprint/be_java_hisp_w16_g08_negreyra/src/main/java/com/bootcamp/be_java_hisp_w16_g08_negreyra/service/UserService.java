@@ -1,14 +1,17 @@
 package com.bootcamp.be_java_hisp_w16_g08_negreyra.service;
 
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g08_negreyra.entiry.PromoProductPost;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.entiry.User;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.exception.*;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g08_negreyra.repository.UserRepostirory;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.util.MapperProduct;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.time.LocalDate;
 import java.util.List;
@@ -96,7 +99,9 @@ public class UserService implements IUserService {
         List<ResponseUserInformationDto> followed = user.getFollowedList().stream().map(user1 ->
                 new ResponseUserInformationDto(user1.getUserId(), user1.getName())).collect(Collectors.toList());
 
-        return new UserDto(user.getUserId(), user.getName(), followres, followed);
+        List<PostDto> postList = user.getPostMade().stream().map(x->(x instanceof PromoProductPost)?mapper.map(x,PromoProductPostDto.class):mapper.map(x,PostDto.class)).collect(Collectors.toList());
+
+        return new UserDto(user.getUserId(), user.getName(), followres, followed,postList);
 
 
     }
@@ -180,5 +185,15 @@ public class UserService implements IUserService {
         return postList;
 
     }
+
+    public void addNewUser(UserBasicInfoDto newUser) {
+        if(iUserRepository.isPresent(newUser.getUserId())){
+            throw new UserAlreadyExistsException();
+        }
+        User newBasicUser = new User(newUser.getUserId(), newUser.getUserName(), new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+
+        iUserRepository.addUser(newBasicUser);
+    }
 }
+
 

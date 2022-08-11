@@ -42,5 +42,9 @@ public class GlobalHandler {
         return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
     }
 
-
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public  ResponseEntity<ResponseApiDto> catchOrderNotPossibleException(UserAlreadyExistsException e){
+        ResponseApiDto exceptionApiDto = new ResponseApiDto("User id already in use");
+        return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
+    }
 }

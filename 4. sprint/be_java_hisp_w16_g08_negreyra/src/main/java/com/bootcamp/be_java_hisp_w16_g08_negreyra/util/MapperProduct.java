@@ -2,18 +2,22 @@ package com.bootcamp.be_java_hisp_w16_g08_negreyra.util;
 
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.dto.response.ResponsePostDto;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.dto.response.ResponseProductDto;
+import com.bootcamp.be_java_hisp_w16_g08_negreyra.entiry.PromoProductPost;
 import com.bootcamp.be_java_hisp_w16_g08_negreyra.entiry.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MapperProduct {
     public List<ResponsePostDto> mapUserPostDto(List<User> users) {
         List<ResponsePostDto> response = new ArrayList<>();
         users.forEach(user -> {
-            user.getPostMade().forEach(x -> {
+            user.getPostMade()
+                    .stream().filter(x->!(x instanceof PromoProductPost)).collect(Collectors.toList()).
+                    forEach(x -> {
                 ResponseProductDto productDto = new ResponseProductDto(
                         x.getProduct().getId(),
                         x.getProduct().getName(),

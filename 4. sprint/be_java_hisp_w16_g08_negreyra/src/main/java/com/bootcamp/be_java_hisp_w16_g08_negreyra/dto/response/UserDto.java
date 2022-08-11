@@ -19,4 +19,5 @@ public class UserDto {
     private String userName;
     private List<ResponseUserInformationDto> followerList;
     private List<ResponseUserInformationDto>  followedList;
+    private List<PostDto> postList;
 }

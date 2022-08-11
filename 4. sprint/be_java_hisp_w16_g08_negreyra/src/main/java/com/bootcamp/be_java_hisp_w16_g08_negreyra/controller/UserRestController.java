@@ -19,12 +19,6 @@ public class UserRestController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //METODO PARA PROBAR
-    @GetMapping("/users/{idUser}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable int idUser) {
-        return new ResponseEntity<>(userService.getUserById(idUser), HttpStatus.OK);
-    }
-
     @GetMapping("/users/{userId}/followers/count")
     public ResponseEntity<UserFollowersCountDto> getUserFollowersCount(@PathVariable int userId) {
         return new ResponseEntity<>(userService.getUserFollowerCount(userId), HttpStatus.OK);
@@ -52,6 +46,17 @@ public class UserRestController {
     public ResponseEntity<ResponsePostFromFollowedDto> requestPostFromFollowed(@PathVariable int userId,
                                                                                @RequestParam(required = false) String order) {
         return new ResponseEntity<>(userService.getPostFromFollowed(userId, order), HttpStatus.OK);
+    }
+
+    @PostMapping("/user/new")
+    public void createNewUser(@RequestBody UserBasicInfoDto newUser){
+        userService.addNewUser(newUser);
+    }
+
+
+    @GetMapping("/user/{idUser}")
+    public ResponseEntity<UserDto> getFullUserInformationById(@PathVariable int idUser) {
+        return new ResponseEntity<>(userService.getUserById(idUser), HttpStatus.OK);
     }
 
 }
