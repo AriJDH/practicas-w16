@@ -22,32 +22,29 @@ public class LinkController {
 
     @PostMapping("/link")
     public ResponseEntity<ResponseLinkDTO> createLink(@RequestBody RequestLinkDTO req) {
-        System.out.println(req.getPassword());
         return new ResponseEntity<>(service.createLink(req), HttpStatus.CREATED);
     }
 
     @GetMapping("/link/{id}")
     public RedirectView redirect(@PathVariable int id, @RequestParam(required = false) String pwd) {
-        System.out.println(pwd);
         return new RedirectView(service.redirect(id, pwd));
     }
 
     @GetMapping("/metrics/{id}")
     public ResponseEntity<ResponseLinkMetricsDTO> getLinkMetrics(@PathVariable int id,
                                                                  @RequestParam(required = false) String pwd) {
-        System.out.println("llega?");
         return new ResponseEntity<>(service.getLinkMetrics(id, pwd), HttpStatus.OK);
     }
 
-    @PostMapping("/deactivate/{id}")
-    public ResponseEntity<ResponseActiveDTO> deactivateLink(@PathVariable int id,
+    @PostMapping("/disable/{id}")
+    public ResponseEntity<ResponseActiveDTO> disableLink(@PathVariable int id,
                                                             @RequestParam(required = false) String pwd) {
-        return new ResponseEntity<>(service.deactivateLink(id, pwd), HttpStatus.OK);
+        return new ResponseEntity<>(service.disableLink(id, pwd), HttpStatus.OK);
     }
 
-    @PostMapping("/activate/{id}")
-    public ResponseEntity<ResponseActiveDTO> activateLink(@PathVariable int id,
+    @PostMapping("/enable/{id}")
+    public ResponseEntity<ResponseActiveDTO> enableLink(@PathVariable int id,
                                                           @RequestParam(required = false) String pwd) {
-        return new ResponseEntity<>(service.activateLink(id, pwd), HttpStatus.OK);
+        return new ResponseEntity<>(service.enableLink(id, pwd), HttpStatus.OK);
     }
 }

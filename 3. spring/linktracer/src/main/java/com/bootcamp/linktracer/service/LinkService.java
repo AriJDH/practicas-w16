@@ -4,6 +4,9 @@ import com.bootcamp.linktracer.dto.RequestLinkDTO;
 import com.bootcamp.linktracer.dto.ResponseActiveDTO;
 import com.bootcamp.linktracer.dto.ResponseLinkDTO;
 import com.bootcamp.linktracer.dto.ResponseLinkMetricsDTO;
+import com.bootcamp.linktracer.exception.IncorrectPasswordException;
+import com.bootcamp.linktracer.exception.InvalidUrlException;
+import com.bootcamp.linktracer.exception.LinkNotFoundException;
 import com.bootcamp.linktracer.model.Link;
 import com.bootcamp.linktracer.model.LinkFactory;
 import com.bootcamp.linktracer.repository.ILinkRepository;
@@ -25,7 +28,7 @@ public class LinkService implements ILinkService {
     @Override
     public ResponseLinkDTO createLink(RequestLinkDTO link) {
         if(!validator.isValid(link.getUrl()))
-            throw new RuntimeException("Bad request");
+            throw new InvalidUrlException(link.getUrl());
         Link entity = factory.make(link.getUrl(), link.getPassword());
         entity = repository.createLink(entity);
         return new ResponseLinkDTO(entity.getId(), entity.getUrl());
@@ -34,6 +37,8 @@ public class LinkService implements ILinkService {
     @Override
     public String redirect(int id, String password) {
         Link link = validateAuthentication(id, password);
+        if(!link.isActive())
+            throw new LinkNotFoundException(id);
         link.incrementNumRedirects();
         return link.getUrl();
     }
@@ -45,14 +50,14 @@ public class LinkService implements ILinkService {
     }
 
     @Override
-    public ResponseActiveDTO deactivateLink(int id, String password) {
+    public ResponseActiveDTO disableLink(int id, String password) {
         Link link = validateAuthentication(id, password);
         link.setActive(false);
         return mapper.map(link, ResponseActiveDTO.class);
     }
 
     @Override
-    public ResponseActiveDTO activateLink(int id, String password) {
+    public ResponseActiveDTO enableLink(int id, String password) {
         Link link = validateAuthentication(id, password);
         link.setActive(true);
         return mapper.map(link, ResponseActiveDTO.class);
@@ -61,9 +66,9 @@ public class LinkService implements ILinkService {
     private Link validateAuthentication(int id, String password) {
         Link link = repository.getLink(id);
         if(link == null)
-            throw new RuntimeException("Not found");
+            throw new LinkNotFoundException(id);
         if(link.getPassword() != null && !link.getPassword().equals(password))
-            throw new RuntimeException("Unauthorized");
+            throw new IncorrectPasswordException(id);
         return link;
     }
 }

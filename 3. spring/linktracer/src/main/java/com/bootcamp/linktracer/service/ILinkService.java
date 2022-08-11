@@ -12,7 +12,7 @@ public interface ILinkService {
 
     ResponseLinkMetricsDTO getLinkMetrics(int id, String password);
 
-    ResponseActiveDTO deactivateLink(int id, String password);
+    ResponseActiveDTO disableLink(int id, String password);
 
-    ResponseActiveDTO activateLink(int id, String password);
+    ResponseActiveDTO enableLink(int id, String password);
 }
