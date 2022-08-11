@@ -35,7 +35,7 @@ public class UserController {
       return new ResponseEntity<>(this.userService.countFollowers(userId),HttpStatus.OK);
     }
     
-      //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
+    //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<FollowersListResDTO> US003(@PathVariable Integer userId, @RequestParam Optional<String> order){
         return new ResponseEntity<>(this.userService.listFollowers(userId, order.orElse(null)),HttpStatus.OK);
