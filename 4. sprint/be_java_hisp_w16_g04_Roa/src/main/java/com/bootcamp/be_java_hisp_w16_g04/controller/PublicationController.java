@@ -1,9 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g04.controller;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseApiDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
+import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.service.IPublicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +33,9 @@ public class PublicationController {
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
-
+  @GetMapping("/promo-post/count")
+  public ResponseEntity<PromoPotsDTO> getPromoProductPost(@RequestParam Integer user_id){
+    return new ResponseEntity<>(iPublicationService.getListPromoProduct(user_id), HttpStatus.OK);
+  }
 
 }

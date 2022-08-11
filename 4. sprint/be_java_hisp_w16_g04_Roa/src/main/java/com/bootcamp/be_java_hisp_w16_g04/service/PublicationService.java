@@ -1,13 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.PublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,9 +24,10 @@ public class PublicationService implements IPublicationService {
   IPublicationRepository iPublicationRepository;
   @Autowired
   IUserService iUserService;
-
   @Autowired
   IProductService iProductService;
+  @Autowired
+  IUserRepository iUserRepository;
 
   /**
    * Method that returns the publications of the people I follow in date order.
@@ -98,6 +98,16 @@ public class PublicationService implements IPublicationService {
     Publication publication = iPublicationRepository.createPublication(publicationDTO);
 
     return publication != null;
+  }
+
+  @Override
+  public PromoPotsDTO getListPromoProduct(Integer userId) {
+
+    Integer publications = Math.toIntExact(iPublicationRepository.getListPublicationsById(userId)
+            .stream().filter(x -> x.getHasPromo()).count());
+    String nameId = iUserRepository.getByIdUser(userId).getUserName();
+
+    return new PromoPotsDTO(userId, nameId, publications);
   }
 
 
