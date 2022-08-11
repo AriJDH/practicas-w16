@@ -63,9 +63,7 @@ public class User {
                         .productName(request.getProduct().getProductName())
                         .build())
                 .category(request.getCategory())
-                .price(request.getPrice())
-                .hasPromo(false)
-                .discount(0.0).build();
+                .price(request.getPrice()).build();
         //Se asigna un Id autoincremental al Post
         post.increaseId();
         this.getterPosts().add(post);
@@ -96,7 +94,7 @@ public class User {
                 .category(request.getCategory())
                 .price(request.getPrice()).build();
         //seteo los dos atributos nuevos al post
-        post.setHasPromo(request.getHasPromo());
+        post.setHasPromo(request.isHasPromo());
         post.setDiscount(request.getDiscount());
         //Se asigna un Id autoincremental al Post
         post.increaseId();

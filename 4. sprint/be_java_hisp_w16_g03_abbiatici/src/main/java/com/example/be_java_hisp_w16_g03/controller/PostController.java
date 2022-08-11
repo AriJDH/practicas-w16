@@ -2,6 +2,7 @@ package com.example.be_java_hisp_w16_g03.controller;
 
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
+import com.example.be_java_hisp_w16_g03.dto.PromoPostCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.PromoPostDTO;
 import com.example.be_java_hisp_w16_g03.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class PostController {
     public ResponseEntity<PromoPostDTO> addPromoPost(@RequestBody PromoPostDTO request){
         service.addPromoPost(request);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<PromoPostCountDTO> getPromoPostCount(@RequestParam Integer user_id){
+        return new ResponseEntity<>(service.getPromoPostCount(user_id), HttpStatus.OK);
     }
 
 }

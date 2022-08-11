@@ -72,6 +72,16 @@ public class PostService implements IPostService {
         requestUser.addPromoPostToUser(request);
     }
 
+    @Override
+    public PromoPostCountDTO getPromoPostCount(Integer user_id) {
+        User vendor = repository.getUserById(user_id).orElseThrow(() -> new UserNotExistException(user_id));
+
+        List<Post> promoPosts = vendor.getterPosts().stream().filter(Post::isHasPromo).collect(Collectors.toList());
+
+        return PromoPostCountDTO.builder().userId(vendor.getUserId()).userName(vendor.getUserName())
+                .promoProductsCount(promoPosts.size()).build();
+    }
+
     private List<Post> getFilterPosts(List<User> vendors) {
         List<Post> filterPosts = new ArrayList<>();
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));

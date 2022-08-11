@@ -24,14 +24,13 @@ public class PromoPostDTO {
     private ProductDTO product;
     private Integer category;
     private Double price;
-    private Boolean hasPromo;
+    private boolean hasPromo;
     private Double discount;
 
     public boolean validate() {
         return this.userId != null && this.date != null
                 && this.product.validate() && this.category != null &&
-                this.price != null && this.hasPromo != null
-                && this.discount != null;
+                this.price != null && this.discount != null;
     }
 
 }
