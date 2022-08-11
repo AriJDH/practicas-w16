@@ -1,7 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g10.controller;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqPromoDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostPromoCountResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostPromoListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,17 +31,20 @@ public class PostController {
     }
 
     @PostMapping("/promo-post")
-    public void US0010(){
-
+    public ResponseEntity<HttpStatus>  US0010(@RequestBody PostReqPromoDTO postReqPromoDTO){
+        this.postService.saveWithPromo(postReqPromoDTO);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping("/promo-post/count?user_id={userId}")
-    public void US0011(){
-
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PostPromoCountResDTO> US0011(@RequestParam("userId") Integer userId){
+        PostPromoCountResDTO productsWithPromo = this.postService.countPostsWithPromo(userId);
+        return new ResponseEntity<>(productsWithPromo, HttpStatus.OK);
     }
 
-    @GetMapping("/promo-post/list?user_id={userId}")
-    public void US0012(){
-
+    @GetMapping("/promo-post/list")
+    public ResponseEntity<PostPromoListResDTO> US0012(@RequestParam("userId") Integer userId){
+        PostPromoListResDTO productsWithPromo = this.postService.listPostsWithPromo(userId);
+        return new ResponseEntity<>(productsWithPromo, HttpStatus.OK);
     }
 }

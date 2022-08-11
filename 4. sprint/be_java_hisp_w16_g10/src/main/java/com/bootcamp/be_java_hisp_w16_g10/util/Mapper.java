@@ -3,11 +3,13 @@ package com.bootcamp.be_java_hisp_w16_g10.util;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g10.entity.Discount;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Mapper {
@@ -48,7 +50,29 @@ public class Mapper {
                 .product(Mapper.parseToProductResDTO(post.getProduct()))
                 .build();
     }
-
+    public static PostPromoListResDTO parsePostPromoResDTO(List<Post> posts, Map<Integer, Discount> discounts, User user) {
+         return PostPromoListResDTO
+                .builder()
+                .userId(user.getId())
+                 .userName(user.getUserName())
+                .posts(posts
+                                .stream().map(post-> {
+                            return Mapper.parsePostPromoResDTO(post, discounts.get(post.getId()));
+                        }).collect(Collectors.toList()))
+                .build();
+    }
+    public static PostPromoResDTO parsePostPromoResDTO(Post post, Discount discount) {
+        return PostPromoResDTO.builder()
+                .userId(post.getUserId())
+                .category(post.getCategory())
+                .postId(post.getId())
+                .date(post.getDate())
+                .price(post.getPrice())
+                .product(Mapper.parseToProductResDTO(post.getProduct()))
+                .discount(discount.getDiscount())
+                .hasPromo(discount.getHasPromo())
+                .build();
+    }
     public static ProductResDTO parseToProductResDTO(Product product) {
         return ProductResDTO.builder()
                 .productId(product.getId())
@@ -95,4 +119,5 @@ public class Mapper {
                 .price(postReqDTO.getPrice())
                 .build();
     }
+
 }

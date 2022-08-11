@@ -1,8 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g10.service;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqPromoDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g10.entity.Discount;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 import com.bootcamp.be_java_hisp_w16_g10.exception.ConstraintViolationException;
@@ -14,9 +15,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,13 +46,22 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public void save(PostReqDTO postReqDTO){
+    public Post save(PostReqDTO postReqDTO){
         this.userService.findById(postReqDTO.getUserId());
         if(postReqDTO.getDate().isAfter(LocalDate.now()))
             throw new ConstraintViolationException("The date of the post is in the future.");
-        this.postRepository.save(Mapper.parseToPost(postReqDTO));
+        return this.postRepository.save(Mapper.parseToPost(postReqDTO));
     }
-
+    @Override
+    public void saveWithPromo(PostReqPromoDTO postReqPromoDTO) {
+        Post post = this.save(postReqPromoDTO);
+        this.postRepository.savePromo(post.getId(), Discount
+                .builder()
+                .discount(postReqPromoDTO.getDiscount())
+                .hasPromo(postReqPromoDTO.getHasPromo())
+                .build()
+        );
+    }
     @Override
     public PostListResDTO listFollowersPosts(Integer userId, String order) {
         User user = this.userService.findById(userId);
@@ -79,5 +87,21 @@ public class PostService implements IPostService {
             throw new NotFoundException(String.format("The post with id: %s don't exists.", postID));
         return post;
     }
-
+    @Override
+    public PostPromoCountResDTO countPostsWithPromo(Integer userId) {
+        User user = this.userService.findById(userId);
+        List<Post> posts = this.postRepository.findByUserIdWithPromo(userId);
+        return PostPromoCountResDTO
+                .builder()
+                .userName(user.getUserName())
+                .userId(user.getId())
+                .promoProductsCount(posts.size())
+                .build();
+    }
+    public PostPromoListResDTO listPostsWithPromo(Integer userId) {
+        User user = this.userService.findById(userId);
+        List<Post> posts = this.postRepository.findByUserIdWithPromo(userId);
+        Map<Integer, Discount> discounts = this.postRepository.getDiscountsByPosts(posts);
+        return Mapper.parsePostPromoResDTO(posts, discounts, user);
+    }
 }
