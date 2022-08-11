@@ -13,5 +13,5 @@ public interface IPostService {
 
     PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order);
 
-    PostsHasPromoDTO getPostWithPromoById(Integer id);
+    PostsHasPromoDTO getPostWithPromoById(Integer id,String order);
 }

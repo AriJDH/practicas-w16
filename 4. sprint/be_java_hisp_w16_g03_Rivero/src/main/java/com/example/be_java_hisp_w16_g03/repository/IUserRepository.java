@@ -11,7 +11,10 @@ public interface IUserRepository {
     List<User> initData();
 
     List<User> getAllUserWithoutPromo();
-    public List<User> getAllUserWithPromo();
+     List<User> getAllUserWithPromo();
+
+     List<User> getAllUsers();
+
 
     Optional<User> getUserById(Integer id);
 

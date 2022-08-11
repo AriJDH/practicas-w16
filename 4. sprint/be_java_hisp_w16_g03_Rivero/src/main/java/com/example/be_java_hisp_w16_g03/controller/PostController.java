@@ -32,8 +32,8 @@ public class PostController {
         }
 
     @GetMapping ("/products/promo-post/list")
-    public ResponseEntity<PostsHasPromoDTO> getProductPromoList(@RequestParam(required = false) Integer user_id){
-        return new ResponseEntity<>(service.getPostWithPromoById(user_id), HttpStatus.OK);
+    public ResponseEntity<PostsHasPromoDTO> getProductPromoList(@RequestParam(required = false) Integer user_id, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(service.getPostWithPromoById(user_id,order), HttpStatus.OK);
     }
 
 }

@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
     @Autowired
@@ -38,5 +40,10 @@ public class UserController {
     @GetMapping("/users/{userId}/followers/list")
     public ResponseEntity<FollowersDTO> getMeFollowers(@PathVariable Integer userId, @RequestParam(required = false) String order) {
         return new ResponseEntity(service.getFollowers(userId, order), HttpStatus.OK);
+    }
+
+    @GetMapping("/users/list")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return new ResponseEntity(service.getAllUsers(), HttpStatus.OK);
     }
 }

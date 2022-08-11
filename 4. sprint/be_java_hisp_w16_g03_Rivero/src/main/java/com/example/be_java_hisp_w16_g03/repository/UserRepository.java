@@ -73,6 +73,11 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+    public List<User> getAllUsers() {
+        return listUser;
+    }
+
+    @Override
     public Optional<User> getUserById(Integer id) {
         return listUser.stream().filter(user -> user.getUserId().equals(id)).findFirst();
     }

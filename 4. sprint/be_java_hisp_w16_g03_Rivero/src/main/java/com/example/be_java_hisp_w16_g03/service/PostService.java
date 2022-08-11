@@ -29,7 +29,6 @@ public class PostService implements IPostService {
 
         requestUser.addPostToUser(request);
 
-
     }
 
     @Override
@@ -86,21 +85,35 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostsHasPromoDTO getPostWithPromoById(Integer id) {
+    public PostsHasPromoDTO getPostWithPromoById(Integer id, String order) {
         User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
-        List<Post> posts = user.getPosts();
+        if (user.getPosts() == null) {
+            return new PostsHasPromoDTO(user.getUserId(), user.getUserName(), new ArrayList<>());
+        }
+        return new PostsHasPromoDTO(user.getUserId(), user.getUserName(), mapperPostsHasPromoWithId(user.getPosts(), order));
+    }
+
+    private List<PostsHasPromoWIthIdDTO> mapperPostsHasPromoWithId(List<Post> posts, String order) {
         List<PostsHasPromoWIthIdDTO> postsPromo = posts.stream().filter(postWithPromo -> postWithPromo.isHasPromo()).map(post ->
-                        PostsHasPromoWIthIdDTO.builder().userId(post.getUserId()).postId(post.getPostId()).date(post.getDate())
-                                .category(post.getCategory()).price(post.getPrice()).hasPromo(post.isHasPromo()).discount(post.getDiscount())
-                                .product(ProductDTO.builder().productId(post.getProduct().getProductId())
-                                        .productName(post.getProduct().getProductName())
-                                        .type(post.getProduct().getType())
-                                        .color(post.getProduct().getColor())
-                                        .brand(post.getProduct().getBrand())
-                                        .notes(post.getProduct().getNotes()).build()).build())
-                .collect(Collectors.toList());
-        PostsHasPromoDTO postsHasPromoDTO = new PostsHasPromoDTO(user.getUserId(), user.getUserName(), postsPromo);
-        return postsHasPromoDTO;
+                PostsHasPromoWIthIdDTO.builder().userId(post.getUserId()).postId(post.getPostId()).date(post.getDate())
+                        .category(post.getCategory()).price(post.getPrice()).hasPromo(post.isHasPromo()).discount(post.getDiscount())
+                        .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                                .productName(post.getProduct().getProductName())
+                                .type(post.getProduct().getType())
+                                .color(post.getProduct().getColor())
+                                .brand(post.getProduct().getBrand())
+                                .notes(post.getProduct().getNotes()).build()).build()).collect(Collectors.toList());
+        if (order != null) {
+
+            if (order.equals(DATE_DESC)) {
+                return postsPromo.stream().sorted(Comparator.comparing(PostsHasPromoWIthIdDTO::getDate)).collect(Collectors.toList());
+            }
+            if (order.equals(DATE_ASC)) {
+                return postsPromo.stream().sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
+            }
+        }
+        return postsPromo;
+
     }
 
     private List<Post> getFilterPosts(List<User> vendors) {

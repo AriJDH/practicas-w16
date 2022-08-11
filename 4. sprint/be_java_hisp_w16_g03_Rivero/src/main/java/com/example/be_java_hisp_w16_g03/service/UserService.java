@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService {
     public static final String NAME_ASC = "name_asc";
     public static final String NAME_DESC = "name_desc";
-    public static final String NAME_ASC1 = "name_asc";
     @Autowired
     IUserRepository repository;
 
@@ -132,4 +131,14 @@ public class UserService implements IUserService {
 
         return null;
     }
+
+    @Override
+    public List<UserDTO> getAllUsers() {
+        List<User> user= repository.getAllUsers();
+        List<UserDTO> userDTOList=user.stream().map(user1 -> {
+            return new UserDTO(user1.getUserId(), user1.getUserName());
+        }).collect(Collectors.toList());
+        return userDTOList;
+    }
+
 }
