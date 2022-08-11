@@ -179,3 +179,75 @@ userId= Número que identifica a cada usuario
 /products/followed/{userId}/list?order=date_desc
 
 ```
+
+## Dar de alta una nueva publicacion en promoción
+
+```
+POST /products/promo-post
+body
+{
+    "user_id": 123,
+    "date": "29-04-2021",
+    "product": {
+        "product_id": 1,
+        "product_name": "Silla Gamer",
+        "type": "Gamer",
+        "brand": "Racer",
+        "color": "Red & Black",
+        "notes": "Special Edition"
+    },
+    "category": 100,
+    "price": 1500.50,
+    "has_promo":"true",
+    "discount": 0.25
+}
+Response
+Status Code 200 (todo OK)
+Status Code 400 (Bad Request)
+
+```
+
+## Obtener el resultado de la cantidad de publicaciones en promocion que tiene un usuario
+
+```
+GET /products/promo-post/count?user_id={userId}
+userId = Número que identifica a cada usuario
+Response
+{
+    "user_id" : 234,
+   "user_name": "vendedor1",
+   "promo_products_count": 23
+}
+```
+
+## Obtener un listado de todos los productos en promoción de un determinado vendedor
+
+```
+GET /products/promo-post/list?user_id={userId}
+userId= Número que identifica a cada usuario
+Response
+{
+    "user_id": 234,
+    "user_name": "vendedor1",
+    "posts": [
+        {
+            “user_id”: 234
+            "post_id": 18,
+            "date": "29-04-2021",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": "100",
+            "price": 15000.50,
+            "has_promo": true,
+            "discount": 0.25
+        }
+    ]
+}
+
+```
