@@ -169,7 +169,7 @@ userId - number
 }
 ```
 #### Notas
-Formato Date: "01-05-2022"
+Formato Date: "20-05-2022"
 #### Response (OK - 200)
 ```
 ```
@@ -190,7 +190,7 @@ userId - number
 #### Response (OK - 200)
 ```
 {
-    "user_id": 1,
+    "user_id": number,
     "posts": [
         {
             userId = number,
@@ -206,6 +206,97 @@ userId - number
             },
             category = number,
             price = double
+        }
+    ]
+}
+```
+### Llevar a cabo la publicación de un nuevo producto en promoción
+#### Endpoint (POST)
+```
+{host}/products/promo-post
+```
+#### Request Param
+```
+```
+#### Request Body
+```
+{
+    "user_id": number,
+    "date": "Date",
+    "product": {
+        "product_id": number,
+        "product_name": "String",
+        "type": "String",
+        "brand": "String",
+        "color": "String",
+        "notes": "String"
+    },
+    "category": number,
+    "price": double,
+    "has_promo": boolean,
+    "discount": double
+}
+```
+#### Notas
+Formato Date: "20-05-2022"
+#### Response (OK - 200)
+```
+```
+### Obtener la cantidad de productos en promoción de un determinado vendedor
+#### Endpoint (GET)
+```
+{host}/products/promo-post/count?user_id={userId}
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+{
+    "user_id": number,
+    "user_name": "String",
+    "promo_products_count": number
+}
+```
+
+### Obtener un listado de todos los productos en promoción de un determinado vendedor
+#### Endpoint (GET)
+```
+{host}/products/promo-post/list?user_id={userId}
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+{
+    "user_id": number,
+    "user_name": "String",
+    "posts": [
+        {
+            userId = number,
+            postId = number,
+            date = Date,
+            "product": {
+                "product_id": number,
+                "product_name": "String",
+                "type": "String",
+                "brand": "String",
+                "color": "String",
+                "notes": "String"
+            },
+            category = number,
+            price = double,
+            "has_promo": boolean,
+            "discount": double
         }
     ]
 }
