@@ -17,6 +17,8 @@ public class Post {
     private Product product;
     private int categoryId;
     private double price;
+    private boolean hasPromo = false;
+    private double discount = 0;
 
     public boolean wasPublishedAfter(LocalDate aDate) {
         return date.isAfter(aDate);

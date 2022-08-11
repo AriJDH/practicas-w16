@@ -1,5 +1,10 @@
 package com.example.be_java_hisp_w16_g09_bariani.utility;
 
+import com.example.be_java_hisp_w16_g09_bariani.dto.PostDto;
+import com.example.be_java_hisp_w16_g09_bariani.dto.PromoPostDtoRequest;
+import com.example.be_java_hisp_w16_g09_bariani.model.Post;
+import com.example.be_java_hisp_w16_g09_bariani.model.Product;
+import com.example.be_java_hisp_w16_g09_bariani.model.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +26,9 @@ public class DTOMapperUtil {
                 .map(element -> modelMapper.map(element, targetClass))
                 .collect(Collectors.toList());
     }
+
     public <T> T map(Object anObject, Class<T> targetClass) {
         return modelMapper.map(anObject, targetClass);
     }
+
 }

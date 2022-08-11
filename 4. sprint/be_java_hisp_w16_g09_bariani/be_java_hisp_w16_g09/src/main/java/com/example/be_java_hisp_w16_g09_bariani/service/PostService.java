@@ -1,8 +1,8 @@
 package com.example.be_java_hisp_w16_g09_bariani.service;
 
-import com.example.be_java_hisp_w16_g09_bariani.dto.PostDto;
-import com.example.be_java_hisp_w16_g09_bariani.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09_bariani.dto.*;
 import com.example.be_java_hisp_w16_g09_bariani.exception.InvalidDateException;
+import com.example.be_java_hisp_w16_g09_bariani.exception.UserIsNotSellerException;
 import com.example.be_java_hisp_w16_g09_bariani.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09_bariani.model.Post;
 import com.example.be_java_hisp_w16_g09_bariani.model.User;
@@ -19,40 +19,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PostService implements IPostService{
+public class PostService implements IPostService {
     @Autowired
     IPostRepository postRepository;
 
     @Autowired
     IUserRepository userRepository;
 
-    private DTOMapperUtil dtoMapperUtil;
+    @Autowired
+    DTOMapperUtil dtoMapperUtil;
 
     //Javi
 
 
     //Martin
-    public void createPost(PostDto postDto){
-        int userId = postDto.getUserId();
-        User user = userRepository.searchById(userId);
-        if (user == null){
-            throw new UserNotFoundException(userId);
-        }
-        if(LocalDate.now().isBefore(postDto.getDate())){
-            throw new InvalidDateException(String.valueOf(postDto.getDate()));
-        }
+    public void createPost(PostDto postDto) {
         Post post = dtoMapperUtil.map(postDto, Post.class);
-        post.setUser(user);
-        postRepository.createElement(post);
+        createValidatedPost(post, postDto.getUserId());
     }
 
     //MaxiM
 
 
     //MaxiN
-    public RecentPostsDTO orderByDate(int id, String order){
+    public RecentPostsDTO orderByDate(int id, String order) {
         RecentPostsDTO posts = getRecentPostsOfSellersFollowedByUserWith(id);
-        List<PostDto> listOrder =  posts.getPosts().stream()
+        List<PostDto> listOrder = posts.getPosts().stream()
                 .sorted(Comparator.comparing(PostDto::getDate))
                 .collect(Collectors.toList());
         if (order.equals("date_desc"))
@@ -61,22 +53,72 @@ public class PostService implements IPostService{
         return posts;
     }
 
-
     //Guille
-
-
-    //Nico
-    //Constructor hecho para poder testear - inicializar dependencias
-    public PostService(IPostRepository postRepository, IUserRepository userRepository,DTOMapperUtil dtoMapperUtil) {
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-        this.dtoMapperUtil = dtoMapperUtil;
+    @Override
+    public void createPromoPost(PromoPostDtoRequest promoPostDtoRequest) {
+        Post post = dtoMapperUtil.map(promoPostDtoRequest, Post.class);
+        createValidatedPost(post, promoPostDtoRequest.getUserId());
     }
 
     @Override
+    public PromoPostCountDtoResponse countSellerPromoProducts(int anUserId) {
+        User seller = getValidatedUser(anUserId);
+        validateUserIsSeller(seller);
+        int countPromos = getPromoPostOfSeller(anUserId).size();
+        return new PromoPostCountDtoResponse(seller.getUserId(), seller.getUserName(), countPromos);
+    }
+
+    @Override
+    public PromoPostListDtoResponse getAllPromoPostOfSeller(int user_id, String order) {
+        User seller = getValidatedUser(user_id);
+        validateUserIsSeller(seller);
+        List<Post> promoPostList = getPromoPostOfSeller(seller.getUserId());
+        if (order != null){
+            promoPostList = orderPostListByDate(promoPostList, order);
+        }
+        List<PostDto> promosDtoList = dtoMapperUtil.mapList(promoPostList, PostDto.class);
+        return new PromoPostListDtoResponse(seller.getUserId(), seller.getUserName(), promosDtoList);
+    }
+
+    private List<Post> getPromoPostOfSeller(int userId){
+        return postRepository.searchById(userId).stream().filter(Post::isHasPromo).collect(Collectors.toList());
+    }
+
+    private void validateUserIsSeller(User user){
+        if (postRepository.searchById(user.getUserId()) == null){
+            throw new UserIsNotSellerException(user.getUserId());
+        }
+    }
+    private void createValidatedPost(Post post, int userId) {
+        User user = getValidatedUser(userId);
+        if (LocalDate.now().isBefore(post.getDate())) {
+            throw new InvalidDateException(String.valueOf(post.getDate()));
+        }
+        post.setUser(user);
+        postRepository.createElement(post);
+    }
+
+    private User getValidatedUser(int userId) {
+        User user = userRepository.searchById(userId);
+        if (user == null) {
+            throw new UserNotFoundException(userId);
+        }
+        return user;
+    }
+
+    public List<Post> orderPostListByDate(List<Post> list, String order) {
+        List<Post> listOrder = list.stream()
+                .sorted(Comparator.comparing(Post::getDate))
+                .collect(Collectors.toList());
+        if (order.equals("date_desc"))
+            listOrder.sort(Comparator.comparing(Post::getDate).reversed());
+        return listOrder;
+    }
+
+    //Nico
+    @Override
     public RecentPostsDTO getRecentPostsOfSellersFollowedByUserWith(int anUserId) {
-        User user = userRepository.searchById(anUserId);
-        if (user == null) throw new UserNotFoundException(anUserId);
+        User user = getValidatedUser(anUserId);
         List<Post> postsOfSellers = postsOfSellersFollowedBy(user);
         postsOfSellers = Filter
                 .apply(postsOfSellers, (post -> post.wasPublishedAfter(LocalDate.now().minusWeeks(2))));
@@ -88,8 +130,7 @@ public class PostService implements IPostService{
     private List<Post> postsOfSellersFollowedBy(User user) {
         List<User> sellers = user.getFollowing();
         List<Integer> sellersIds = sellers.stream().map(User::getUserId).collect(Collectors.toList());
-        List<Post> postsOfSellers = postRepository.getPostsByUserIds(sellersIds);
-        return postsOfSellers;
+        return postRepository.getPostsByUserIds(sellersIds);
     }
 }
 

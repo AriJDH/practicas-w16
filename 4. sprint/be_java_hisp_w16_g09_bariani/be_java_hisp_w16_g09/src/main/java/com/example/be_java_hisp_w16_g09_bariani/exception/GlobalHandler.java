@@ -16,7 +16,7 @@ public class GlobalHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<MessageDto> catchUserIsNotSellerException(UserToFollowIsNotSellerException exception) {
+    public ResponseEntity<MessageDto> catchUserIsNotSellerException(UserIsNotSellerException exception) {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
@@ -30,6 +30,12 @@ public class GlobalHandler {
 
     @ExceptionHandler(UserHasNoFollowersException.class)
     public ResponseEntity<MessageDto> UserHasNoFollowersException(UserHasNoFollowersException exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserNameAlreadyExistsException.class)
+    public ResponseEntity<MessageDto> UserNameAlreadyExistsException(UserNameAlreadyExistsException exception) {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
