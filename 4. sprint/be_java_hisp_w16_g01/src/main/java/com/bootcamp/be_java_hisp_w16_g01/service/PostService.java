@@ -7,6 +7,7 @@ import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g01.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
@@ -37,11 +38,7 @@ public class PostService implements IPostService {
                 productDto.getBrand(),
                 productDto.getColor(),
                 productDto.getNotes());
-        Post post = new Post(0, postDto.getUserId(),
-                postDto.getDate(),
-                product,
-                postDto.getCategory(),
-                postDto.getPrice());
+        Post post = this.getPost(postDto, product);
 
         int id = postRepository.createPost(post);
         post.setPostId(id);
@@ -50,25 +47,45 @@ public class PostService implements IPostService {
         return new MessageDto("Publicacion creada correctamente, id: " + id);
     }
 
-    public void validatePostDto(PostDto postDto){
+    protected Post getPost(PostDto postDto, Product product) {
+        if (postDto instanceof PromoPostDTO) {
+            return new Post(
+                    0, postDto.getUserId(),
+                    postDto.getDate(),
+                    product,
+                    postDto.getCategory(),
+                    postDto.getPrice(),
+                    ((PromoPostDTO) postDto).isHasPromo(),
+                    ((PromoPostDTO) postDto).getDiscount()
+            );
+        }
+
+        return new Post(0, postDto.getUserId(),
+                postDto.getDate(),
+                product,
+                postDto.getCategory(),
+                postDto.getPrice());
+    }
+
+    public void validatePostDto(PostDto postDto) {
         if (postDto.getDate() == null)
             throw new BadRequestException("La fecha es un campo obligatorio");
 
         if (postDto.getDate().isAfter(LocalDate.now()))
             throw new BadRequestException("La fecha es posterior a la fecha actual");
 
-        if(!userRepository.userExists(postDto.getUserId()))
+        if (!userRepository.userExists(postDto.getUserId()))
             throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
     }
 
-    private List<ResponsePostDto> getPosts(User user){
+    private List<ResponsePostDto> getPosts(User user) {
         List<Post> post = new ArrayList<>();
         for (User u : user.getFollowed()) {
             post.addAll(postRepository.getPostsByUserId(u.getUserId()));
         }
 
         return post.stream().map(
-                x-> new ResponsePostDto(x.getUserId(),x.getPostId(),x.getDate(),new ProductDto(
+                x -> new ResponsePostDto(x.getUserId(), x.getPostId(), x.getDate(), new ProductDto(
                         x.getProduct().getProductId(),
                         x.getProduct().getProductName(),
                         x.getProduct().getType(),
@@ -85,10 +102,10 @@ public class PostService implements IPostService {
     public FollowedPostsDto getFollowedPosts(int userId, String order) {
         User user = userRepository.getUser(userId);
 
-        if(user == null)
+        if (user == null)
             throw new BadRequestException("No existe el usuario con Id: " + userId);
 
-        if (order!= null){
+        if (order != null) {
             if (order.equalsIgnoreCase("date_desc")) {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate).reversed())
@@ -97,9 +114,22 @@ public class PostService implements IPostService {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate))
                         .collect(Collectors.toList()));
-        }
-        else
+        } else
             return new FollowedPostsDto(userId, getPosts(user));
+    }
+
+    public ResponsePromoPostDTO getPromoPostsQty(int userId) {
+        UserRepository userRepository = new UserRepository();
+        if (!userRepository.userExists(userId)) {
+            throw new BadRequestException("El usuario con el id: " + userId + " no existe.");
+        }
+        return new ResponsePromoPostDTO(userId, userRepository.getUser(userId).getUserName(), this.getPromoPostsQtyByUser(userId));
+    }
+
+    protected long getPromoPostsQtyByUser(int userId) {
+        return this.postRepository.getPostsByUserId(userId)
+                .stream()
+                .filter(Post::isHasPromo).count();
     }
 
 
