@@ -73,7 +73,7 @@ public class PostController {
         return new ResponseEntity<>(postService.getPromoPostsList(user_id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "US 0013 :Eliminar publicación", notes = "Permite eliminar una publicación")
+    @ApiOperation(value = "US 0013 :Eliminar publicación", notes = "Permite eliminar una publicación ya sea promocionada o no")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "BAD REQUEST")
