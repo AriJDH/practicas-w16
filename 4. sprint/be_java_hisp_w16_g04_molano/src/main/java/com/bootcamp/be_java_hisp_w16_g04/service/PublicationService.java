@@ -125,4 +125,26 @@ public class PublicationService implements IPublicationService {
 
     return new ProductsUserPromotionsDTO(userId, currentUser.getUserName(), publicationList);
   }
+
+  /**
+   * Method in charge of obtaining all the products that are on discount at the moment
+   * (You can send a param query to sort).
+   * @param order Order in which the discounted products will be displayed
+   * @return DTO with all the information of the products in discount
+   */
+  @Override
+  public AllPromoPublicationDTO allPromoPublications(String order) {
+    Comparator<PostDTO> newOrder = Comparator.comparing(PostDTO::getDiscount);
+    if(order.equals("desc")) newOrder = Comparator.comparing(PostDTO::getDiscount).reversed();
+    List<PostDTO> post = iPublicationRepository.getPublications()
+        .stream()
+        .filter(Publication::getHasPromo)
+        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(), p.getDate(),
+            iProductService.getProductById(p.getProductId()), p.getCategory(),
+            p.getPrice(), p.getHasPromo(), p.getDiscount()))
+        .sorted(newOrder)
+        .collect(Collectors.toList());
+
+    return new AllPromoPublicationDTO(post);
+  }
 }

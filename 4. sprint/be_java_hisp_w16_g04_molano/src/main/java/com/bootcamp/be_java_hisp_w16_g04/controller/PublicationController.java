@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.controller;
 
+import com.bootcamp.be_java_hisp_w16_g04.dto.AllPromoPublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ProductsUserPromotionsDTO;
 import com.bootcamp.be_java_hisp_w16_g04.service.IPublicationService;
@@ -41,6 +42,16 @@ public class PublicationController {
   @GetMapping("/promo-post/list")
   public ResponseEntity<ProductsUserPromotionsDTO> promoProductsByUserId(@RequestParam Integer user_id){
     return new ResponseEntity<>(iPublicationService.promoProductsByUserId(user_id), HttpStatus.OK);
+  }
+
+  /**
+   * Metodo encargado de obtener todos los articulos en promocion ordenados por descuento
+   * @param order Order in which promotional products will be delivered
+   * @return ResponseEntity with a DTO to give information to the user
+   */
+  @GetMapping("/all-promo")
+  public ResponseEntity<AllPromoPublicationDTO> AllPromoPublication(@RequestParam Optional<String> order){
+    return new ResponseEntity<>(iPublicationService.allPromoPublications(order.orElse("")), HttpStatus.OK);
   }
 
 }
