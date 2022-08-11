@@ -110,5 +110,18 @@ public class PublicationService implements IPublicationService {
     return new PromoPotsDTO(userId, nameId, publications);
   }
 
+  @Override
+  public ListProductByHasPromo getListAllPromoProduct(Integer userId) {
+    String nameId = iUserRepository.getByIdUser(userId).getUserName();
+    List<PostDTO> publications =  iPublicationRepository.getListPublicationsById(userId)
+            .stream().filter(x -> x.getHasPromo())
+            .map(p -> new PostDTO(p.getPublicationId(), p.getUserId(),
+                    p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice(), p.getHasPromo(), p.getDiscount()))
+            .collect(Collectors.toList());
+
+
+    return new ListProductByHasPromo(userId,nameId, publications);
+  }
+
 
 }

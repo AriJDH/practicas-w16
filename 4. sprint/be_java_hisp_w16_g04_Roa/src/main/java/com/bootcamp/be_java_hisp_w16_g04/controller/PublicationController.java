@@ -38,4 +38,9 @@ public class PublicationController {
     return new ResponseEntity<>(iPublicationService.getListPromoProduct(user_id), HttpStatus.OK);
   }
 
+  @GetMapping("/promo-post/list")
+  public ResponseEntity<ListProductByHasPromo> getAllPromoProductPost(@RequestParam Integer user_id){
+    return  new ResponseEntity<>(iPublicationService.getListAllPromoProduct(user_id), HttpStatus.OK);
+  }
+
 }
