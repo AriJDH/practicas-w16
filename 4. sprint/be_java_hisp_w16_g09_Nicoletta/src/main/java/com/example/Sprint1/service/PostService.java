@@ -80,9 +80,7 @@ public class PostService implements IPostService{
     }
     public PostPromoResponseDTO calculatePromoCount(int id){
         User user = userRepository.searchById(id);
-        if (user == null){
-            throw new UserNotFoundException(id);
-        }
+        if (user == null)throw new UserNotFoundException(id);
         PostPromoResponseDTO res = new PostPromoResponseDTO();
         res.setUser_id(id);
         res.setUser_name(user.getUserName());
@@ -104,14 +102,10 @@ public class PostService implements IPostService{
         res.setUser_id(id);
         res.setUser_name(user.getUserName());
         if (postRepository.searchById(id) != null) {
-            List<Post> list = postRepository.searchById(id).stream()
+            List<PostPromoOfSimpleUserDTO> listDTO = postRepository.searchById(id).stream()
                     .filter(x -> x.getClass() == PostPromo.class)
+                    .map(post-> dtoMapperUtil.map(post, PostPromoOfSimpleUserDTO.class))
                     .collect(Collectors.toList());
-            List<PostPromoOfSimpleUserDTO> listDTO = new ArrayList<>();
-            for(Post post : list){
-                PostPromoOfSimpleUserDTO postDto = dtoMapperUtil.map(post, PostPromoOfSimpleUserDTO.class);
-                listDTO.add(postDto);
-            }
             res.setPosts(listDTO);
         }
         return res;
