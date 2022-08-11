@@ -5,24 +5,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class User {
     private Integer id;
     private String userName;
     private List<User> followers;
     private List<User> followed;
-    private List<Post> posts;
-
-    public User() {
-        followers = new ArrayList<>();
-        followed = new ArrayList<>();
-        posts = new ArrayList<>();
-    }
 
     public Integer countFollowers(){
         return this.followers.size();
