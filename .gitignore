@@ -29,6 +29,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 .DS_Store
+/4. sprint/.Ds_Store
 
 ### VS Code ###
 .vscode/
