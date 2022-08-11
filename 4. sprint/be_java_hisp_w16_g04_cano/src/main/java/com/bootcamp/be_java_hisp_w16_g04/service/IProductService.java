@@ -5,7 +5,11 @@ import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 public interface IProductService {
   ProductDTO getProductById(Integer idProduct);
 
-  ResponseApiDTO CreateProduct(RequestCreatePublicationDTO publicationDTO);
+  ResponseApiDTO createProduct(RequestCreatePublicationDTO publicationDTO);
 
-  PublicationDTO createProductWithDiscount(RequestCreatePublicationDiscountDTO publicationDiscountDTO);
+  ResponseApiDTO createProduct(RequestCreatePublicationDiscountDTO publicationDiscountDTO);
+
+  ResponseCountDiscountDTO countProductsDiscountByUserId(Integer userId);
+
+  ResponseListDiscountDTO listProductsDiscountByUserId(Integer userId);
 }

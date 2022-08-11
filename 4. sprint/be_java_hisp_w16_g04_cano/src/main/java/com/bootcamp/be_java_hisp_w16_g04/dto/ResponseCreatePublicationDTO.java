@@ -13,11 +13,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class RequestCreatePublicationDTO {
-  private Integer userId;
-  @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
-  private LocalDate date;
-  private ProductDTO product;
-  private Integer category;
-  private double price;
+public class ResponseCreatePublicationDTO {
+    private Integer userId;
+    @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
+    private LocalDate date;
+    private ProductDTO product;
+    private Integer category;
+    private Double price;
+    private Boolean hasPromo;
+    private Double discount;
 }

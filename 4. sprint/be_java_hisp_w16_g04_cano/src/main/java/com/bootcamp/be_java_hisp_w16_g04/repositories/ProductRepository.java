@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.repositories;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ProductCreateDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import org.springframework.stereotype.Repository;
 
@@ -26,24 +26,17 @@ public class ProductRepository implements IProductRepository {
   }
 
   @Override
-  public Product createProduct(ProductCreateDTO productDTO) {
+  public Product createProduct(Product product) {
 
-    Boolean SuccessValidate = validateFields(productDTO);
+    Boolean SuccessValidate = validateFields(product);
     if (!SuccessValidate) return null;
-
-    Product product = new Product(productDTO.getProductId(),
-        productDTO.getProductName(),
-        productDTO.getType(),
-        productDTO.getBrand(),
-        productDTO.getColor(),
-        productDTO.getNotes());
 
     products.add(product);
     return product;
 
   }
 
-  private Boolean validateFields(ProductCreateDTO productDTO) {
+  private Boolean validateFields(Product productDTO) {
     return productDTO.getProductId() != null &&
         productDTO.getProductName() != null &&
         productDTO.getType() != null &&

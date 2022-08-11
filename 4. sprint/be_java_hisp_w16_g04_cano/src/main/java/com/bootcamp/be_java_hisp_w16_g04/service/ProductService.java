@@ -1,13 +1,19 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.*;
+import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
+import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.bootcamp.be_java_hisp_w16_g04.exception.FailedToCreateResource;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This service takes care of all matters related to products
@@ -19,6 +25,9 @@ public class ProductService implements IProductService {
   IProductRepository iProductRepository;
   @Autowired
   IPublicationRepository iPublicationRepository;
+  @Autowired
+  IUserRepository iUserRepository;
+
 
   private final ModelMapper mapper;
 
@@ -44,15 +53,10 @@ public class ProductService implements IProductService {
    * @return DTO with a response for the user
    */
   @Override
-  public ResponseApiDTO CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
-    //Create product
-    Product product = iProductRepository.createProduct(productCreateDTO.getProduct());
+  public ResponseApiDTO createProduct(RequestCreatePublicationDTO productCreateDTO) {
 
-    if (product == null) {
-      throw new FailedToCreateResource("Bad request");
-    }
+    createProduct(productCreateDTO.getProduct());
 
-    //Create publication
     PublicationDTO publicationDTO = new PublicationDTO(productCreateDTO.getUserId(),
             productCreateDTO.getDate(),
             productCreateDTO.getCategory(),
@@ -61,23 +65,16 @@ public class ProductService implements IProductService {
             false,
             0.0);
 
-    var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
+    createPublication(publicationDTO);
 
-    if (isCreatedPublication == null) {
-      throw new FailedToCreateResource("Bad request");
-    }
-    return new ResponseApiDTO("Success", "All ok");
+    return new ResponseApiDTO("Ok", "Post created");
   }
 
   @Override
-  public PublicationDTO createProductWithDiscount(RequestCreatePublicationDiscountDTO publicationDiscountDTO) {
-    Product product = iProductRepository.createProduct(publicationDiscountDTO.getProduct());
+  public ResponseApiDTO createProduct(RequestCreatePublicationDiscountDTO publicationDiscountDTO) {
 
-    if (product == null) {
-      throw new FailedToCreateResource("Bad request");
-    }
+    createProduct(publicationDiscountDTO.getProduct());
 
-    //Create publication
     PublicationDTO publicationDTO = new PublicationDTO(publicationDiscountDTO.getUserId(),
             publicationDiscountDTO.getDate(),
             publicationDiscountDTO.getCategory(),
@@ -86,11 +83,67 @@ public class ProductService implements IProductService {
             publicationDiscountDTO.getHasPromo(),
             publicationDiscountDTO.getDiscount());
 
-    var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
+    createPublication(publicationDTO);
 
-    if (isCreatedPublication == null) {
-      throw new FailedToCreateResource("Bad request");
-    }
-    return publicationDTO;
+    return new ResponseApiDTO("Ok", "Post created with discount");
   }
+
+  @Override
+  public ResponseCountDiscountDTO countProductsDiscountByUserId(Integer userId) {
+
+    String nameUser = iUserRepository.getByIdUser(userId).getUserName();
+
+    if (nameUser == null) {
+      throw new UserNotFoundException("User not found: " + userId);
+    }
+
+    Integer countPublications = (int) iPublicationRepository.getListPublicationsById(userId)
+            .stream().filter(Publication::getHasPromo).count();
+
+    return new ResponseCountDiscountDTO(userId, nameUser, countPublications);
+  }
+
+  @Override
+  public ResponseListDiscountDTO listProductsDiscountByUserId(Integer userId) {
+    String nameUser = iUserRepository.getByIdUser(userId).getUserName();
+
+    if (nameUser == null) {
+      throw new UserNotFoundException("User not found: " + userId);
+    }
+
+    List<PostDTO> publications = iPublicationRepository.getListPublicationsById(userId)
+            .stream().filter(Publication::getHasPromo)
+            .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(),
+                    p.getDate(), mapper.map(iProductRepository.getProductById(p.getProductId()), ProductDTO.class),
+                    p.getCategory(), p.getPrice(), p.getHasPromo(), p.getDiscount())).collect(Collectors.toList());
+
+    return new ResponseListDiscountDTO(userId, nameUser, publications);
+  }
+
+  private void createProduct(ProductDTO product) {
+    if (product == null) {
+      throw new FailedToCreateResource("Not Found Data");
+    }
+
+    Product result = iProductRepository.createProduct(mapper.map(product, Product.class));
+
+    if (result == null)  {
+      throw new FailedToCreateResource("The product was not created");
+    }
+  }
+
+
+  public void createPublication(PublicationDTO publication) {
+
+    if (publication == null) {
+      throw new FailedToCreateResource("Not Found Data");
+    }
+
+    Publication result = iPublicationRepository.createPublication(publication);
+
+    if (result == null) {
+      throw new FailedToCreateResource("The publication was not created");
+    }
+  }
+
 }

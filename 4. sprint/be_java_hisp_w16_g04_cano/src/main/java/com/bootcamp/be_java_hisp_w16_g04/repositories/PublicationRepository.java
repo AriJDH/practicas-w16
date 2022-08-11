@@ -43,6 +43,14 @@ public class PublicationRepository implements IPublicationRepository {
     Boolean successValidate = validateFields(publicationDTO);
     if (!successValidate) return null;
 
+    if (publicationDTO.getHasPromo() == null) {
+      publicationDTO.setHasPromo(false);
+    }
+
+    if (publicationDTO.getDiscount() == null) {
+      publicationDTO.setDiscount(0.0);
+    }
+
     Publication publication = new Publication(publications.size() + 1,
             publicationDTO.getUserId(),
             publicationDTO.getDate(),
