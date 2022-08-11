@@ -68,13 +68,13 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/products/promo-post/count{userId}")
-    public ResponseEntity<PromoProductCountResDTO> US0011(@RequestParam Integer userId){
-        return new ResponseEntity<>(userService.promoProductCount(userId),HttpStatus.OK);
+    @GetMapping("/products/promo-post/count{user_id}")
+    public ResponseEntity<PromoProductCountResDTO> US0011(@RequestParam Integer user_id){
+        return new ResponseEntity<>(userService.promoProductCount(user_id),HttpStatus.OK);
     }
 
-    @GetMapping("/products/promo-post/list{userId}")
-    public ResponseEntity<List<PostPromoResDTO>> US0012(@RequestParam Integer userId){
-        return new ResponseEntity<>(userService.listPostPromo(userId),HttpStatus.OK);
+    @GetMapping("/products/promo-post/list{user_id}")
+    public ResponseEntity<List<PostPromoResDTO>> US0012(@RequestParam Integer user_id){
+        return new ResponseEntity<>(userService.listPostPromo(user_id),HttpStatus.OK);
     }
 }

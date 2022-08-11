@@ -200,7 +200,7 @@ public class UserService implements IService {
       if (user == null) throw new NotFoundException(String.format("User with that id: %s not found",userId));
       if (user.getPosts().isEmpty()) throw new BadRequestException(String.format("User does't have promo product",userId));
       List<PostPromoResDTO> promoPosts = new ArrayList<>();
-      if (user.getPosts().isEmpty()) throw new BadRequestException("This is not a seller");  
+      if (user.getPosts().isEmpty()) throw new BadRequestException("This is not a seller");
       for (Post post: user.getPosts()) {
          if (post instanceof PromoPost) promoPosts.add(this.parseToPostPromoDTOFromPromoPost(user,(PromoPost) post));
       }
