@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g06.service;
 
-import com.bootcamp.be_java_hisp_w16_g06.dto.RequestPostDTO;
-import com.bootcamp.be_java_hisp_w16_g06.dto.RequestPostPromoDTO;
-import com.bootcamp.be_java_hisp_w16_g06.dto.ResponsePostDTO;
-import com.bootcamp.be_java_hisp_w16_g06.dto.ResponsePostPromoDTO;
+import com.bootcamp.be_java_hisp_w16_g06.dto.*;
 
 public interface ISocialMeliServiceE3 {
 
@@ -16,5 +13,7 @@ public interface ISocialMeliServiceE3 {
     ResponsePostDTO getAllPost(int userId, String Order);
 
     ResponsePostPromoDTO countAllPostPromo(int userId);
+
+   /* ResponseDTO deletedPostPromo(int userId);*/
 
 }

@@ -29,6 +29,8 @@ public class SocialMeliServiceE3 implements ISocialMeliServiceE3 {
     @Autowired
     ISocialMeliServiceE2 socialMeliServiceE2;
 
+    static final String DELETED_POST = "Post deleted";
+
     @Override
     public void createPost(RequestPostDTO requestPostDTO) {
         if (socialMeliServiceE1.findById(requestPostDTO.getUser_id())) {
@@ -77,11 +79,23 @@ public class SocialMeliServiceE3 implements ISocialMeliServiceE3 {
         ResponsePostPromoDTO dtoPromo = new ResponsePostPromoDTO();
         if (socialMeliServiceE1.findById(userId)) {
             List<Post> post = postRepository.getPosts().stream().filter(Post->Post.isHasPromo()).collect(Collectors.toList());
+            List<Post> postUser = post.stream().filter(Post->Post.getUserId().equals(userId)).collect(Collectors.toList());
             List<UserDTO> user = socialMeliServiceE2.findById(userId);
-            dtoPromo = new ResponsePostPromoDTO(userId, user.stream().findFirst().get().getUserName(), post.size());
+            dtoPromo = new ResponsePostPromoDTO(userId, user.stream().findFirst().get().getUserName(), postUser.size());
         }
         return dtoPromo;
     }
+
+  /*  @Override
+    public ResponseDTO deletedPostPromo(int userId) {
+        ResponseDTO dto = new ResponseDTO(DELETED_POST, 200);
+        if (socialMeliServiceE1.findById(userId)) {
+            List<Post> post = postRepository.getPosts().stream().filter(Post->Post.getPostId().equals(userId)).collect(Collectors.toList());
+            List<UserDTO> user = socialMeliServiceE2.findById(userId);
+            dto = new ResponsePostPromoDTO(userId, user.stream().findFirst().get().getUserName(), post.size());
+        }
+        return dtoPromo;
+    }*/
 
 
     @Override
