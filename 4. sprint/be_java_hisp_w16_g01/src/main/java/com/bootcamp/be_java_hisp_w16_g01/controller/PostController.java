@@ -35,13 +35,13 @@ public class PostController {
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<FollowedPostsDto> getFollowedPostsOrder(
             @PathVariable @ApiParam(value = "Usuario que sigue a los vendedores de los que se devolveran las publicaciones") int userId,
-            @RequestParam @ApiParam(value = "Orden de la lista (valores aceptados: date_desc, date_asc)") String order) {
+            @RequestParam(required = false) @ApiParam(value = "Orden de la lista (valores aceptados: date_desc, date_asc)") String order) {
         return new ResponseEntity<>(postService.getFollowedPosts(userId, order), HttpStatus.OK);
     }
 
     @ApiOperation(value = "US 10 - Publicacion de un nuevo producto en promocion")
     @PostMapping("/promo-post")
-    public ResponseEntity<?> createPromoPost(
+    public ResponseEntity<MessageDto> createPromoPost(
             @RequestBody @ApiParam(value = "Datos de la publicacion y del producto en promocion a publicar por el vendedor") PromoPostDTO promoPostDTO) {
         return ResponseEntity.ok(postService.createPost(promoPostDTO));
     }
