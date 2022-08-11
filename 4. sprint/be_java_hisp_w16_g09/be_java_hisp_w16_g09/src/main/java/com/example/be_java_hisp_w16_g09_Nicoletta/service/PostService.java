@@ -70,6 +70,8 @@ public class PostService implements IPostService{
         if (user == null){
             throw new UserNotFoundException(userId);
         }
+        if(LocalDate.now().isBefore(promoDto.getDate()))
+            throw new InvalidDateException(String.valueOf(promoDto.getDate()));
         PostPromo post = dtoMapperUtil.map(promoDto, PostPromo.class);
         post.setUser(user);
         post.setHas_promo(true);
