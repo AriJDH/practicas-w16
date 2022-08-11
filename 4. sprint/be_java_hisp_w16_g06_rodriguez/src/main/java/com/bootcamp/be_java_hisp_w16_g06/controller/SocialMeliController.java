@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g06.controller;
 
 
 import com.bootcamp.be_java_hisp_w16_g06.dto.*;
+import com.bootcamp.be_java_hisp_w16_g06.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g06.service.IServiceIndividual;
 import com.bootcamp.be_java_hisp_w16_g06.service.ISocialMeliServiceE3;
 import com.bootcamp.be_java_hisp_w16_g06.service.SocialMeliServiceE1;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class SocialMeliController {
@@ -107,9 +110,9 @@ public class SocialMeliController {
     }
 
     /* C_Ejemplo_Requerimiento_Bonus */
-    @GetMapping("/products/promo-post/list?user_id={userId}")
-    public void US0012() {
-
+    @GetMapping("/products/filter/category/{idCategory}")
+    public ResponseEntity<ProductDTO> US0012(@PathVariable int idCategory) {
+        return new ResponseEntity(serviceIndividual.getProductByCategory(idCategory), HttpStatus.OK);
     }
 
 }

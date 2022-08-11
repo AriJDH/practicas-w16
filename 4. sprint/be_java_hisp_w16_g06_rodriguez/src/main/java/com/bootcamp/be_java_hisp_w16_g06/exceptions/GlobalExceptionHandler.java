@@ -34,4 +34,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(CategoryException.class)
+    public ResponseEntity<ResponseDTO> catchFollowException(CategoryException e) {
+        ResponseDTO exceptionResponse = new ResponseDTO(e.getMessage(), 404);
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
+    }
+
 }
