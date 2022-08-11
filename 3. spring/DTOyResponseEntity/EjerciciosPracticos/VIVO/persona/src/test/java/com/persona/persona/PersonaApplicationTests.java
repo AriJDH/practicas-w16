@@ -1,10 +1,10 @@
-package com.deportistas.deportistas;
+package com.persona.persona;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeportistasApplicationTests {
+class PersonaApplicationTests {
 
 	@Test
 	void contextLoads() {

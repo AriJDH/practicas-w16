@@ -32,10 +32,6 @@ public class DeportistasController {
     @GetMapping("/findSport/{name}")
     public ResponseEntity<Deporte> findSport(@PathVariable String name) {
         Deporte sport = deportistaService.findByName(name);
-        
-        if(sport == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
 
         return new ResponseEntity<>(sport, HttpStatus.OK);
     }

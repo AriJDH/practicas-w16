@@ -36,13 +36,12 @@ public class SportRepository implements Repository<Deporte> {
     }
 
     public Deporte findByName(String name) {
-        for (Deporte sport : sports) {
-            if (sport.getNombre().equals(name)) {
-                return sport;
-            }
-        }
-
-        return null;
+        
+        return sports.stream().filter( sport -> {
+            return sport.getNombre().equals(name);
+        })
+        .findFirst()
+        .orElse(null);
     }
     
 }

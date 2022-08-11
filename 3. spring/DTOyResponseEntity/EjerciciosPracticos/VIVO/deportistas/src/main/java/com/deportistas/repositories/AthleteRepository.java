@@ -18,15 +18,16 @@ public class AthleteRepository {
     }
 
     public List<DeportistaDTO> findSportsPersons() {
-        List<DeportistaDTO> deportistasDTO = new ArrayList<DeportistaDTO>();
-        for (Persona deportista : deportistas) {
-            DeportistaDTO deportistaDTO = new DeportistaDTO();
-            deportistaDTO.setNombre(deportista.getNombre());
-            deportistaDTO.setApellido(deportista.getApellido());
-            deportistaDTO.setDeporte(((Deportista) deportista).getDeporte().getNombre());
-            deportistasDTO.add(deportistaDTO);
-        }
-        return deportistasDTO;
+        
+        return deportistas.stream().map(
+                deportista -> {
+                    DeportistaDTO deportistaDTO = new DeportistaDTO();
+                    deportistaDTO.setNombre(deportista.getNombre());
+                    deportistaDTO.setApellido(deportista.getApellido());
+                    deportistaDTO.setDeporte(((Deportista) deportista).getDeporte().getNombre());
+                    return deportistaDTO;
+                }
+        ).collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
 
 }

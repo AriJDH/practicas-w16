@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PersonaApplication<persona>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.persona.persona.PersonaApplication",
+            "projectName": "persona",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DeportistasApplication<deportistas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.demo.DeportistasApplication",
+            "projectName": "persona",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DeportistasApplication<deportistas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.deportistas.deportistas.DeportistasApplication",
+            "projectName": "deportistas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
