@@ -1,11 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g7_cardenas.controller;
 
-import com.bootcamp.be_java_hisp_w16_g7_cardenas.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7_cardenas.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7_cardenas.dto.PostDiscountDTO;
-import com.bootcamp.be_java_hisp_w16_g7_cardenas.dto.RecentPostsDTO;
+import com.bootcamp.be_java_hisp_w16_g7_cardenas.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.service.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -54,5 +52,17 @@ public class ProductController {
     @PostMapping("/promo-post")
     public ResponseEntity<ApiResponseDto> createPostWithDiscount(@RequestBody PostDiscountDTO postDto) {
         return new ResponseEntity<>(iProductService.createPostWithDiscount(postDto), HttpStatus.CREATED);
+    }
+
+    @Operation(summary = "Count products with discount for given seller")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Post created"),
+            @ApiResponse(responseCode = "404", description = "User not found", content = @Content),
+            @ApiResponse(responseCode = "400", description = "User is not seller", content = @Content),
+    })
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<DiscountCountDTO> getDiscountCount(
+            @Parameter(description = "User id") @RequestParam("user_id") int userId) {
+        return new ResponseEntity<>(iProductService.getDiscountCount(userId), HttpStatus.OK);
     }
 }

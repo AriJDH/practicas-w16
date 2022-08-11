@@ -15,4 +15,5 @@ public interface IProductService {
 
     ApiResponseDto createPostWithDiscount(PostDiscountDTO postDto);
 
+    DiscountCountDTO getDiscountCount(int userId);
 }

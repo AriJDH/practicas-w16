@@ -6,6 +6,7 @@ import com.bootcamp.be_java_hisp_w16_g7_cardenas.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.exception.BadDiscountException;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.exception.InvalidQueryException;
+import com.bootcamp.be_java_hisp_w16_g7_cardenas.exception.UserIsNotSellerException;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w16_g7_cardenas.util.PostMapper;
@@ -110,5 +111,25 @@ public class ProductService implements IProductService {
 
         return new ApiResponseDto("Post created successfully", "Post with id " + post.getPostId() +
                 " was created successfully");
+    }
+
+    @Override
+    public DiscountCountDTO getDiscountCount(int userId) {
+        User user = getUserOrNotFound(userId);
+
+        if(!user.isSeller())
+            throw new UserIsNotSellerException(userId);
+
+        long counter = user.getPosts().stream()
+                .filter(Post::isHasPromo)
+                .count();
+        return new DiscountCountDTO(userId, user.getName(), counter);
+    }
+
+    private User getUserOrNotFound(int userId) {
+        User user = userRepository.findUserById(userId);
+        if(user == null)
+            throw new UserNotFoundException(userId);
+        return user;
     }
 }
