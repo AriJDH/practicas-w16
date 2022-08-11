@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BeJavaHispW16G5Application<be_java_hisp_w16_g5>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.meli.be_java_hisp_w16_g5.BeJavaHispW16G5Application",
+            "projectName": "be_java_hisp_w16_g5",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
