@@ -33,4 +33,10 @@ public class GlobalExceptionHandler {
         ExceptionApiDto exceptionApiDTO = new ExceptionApiDto("Input not valid.", e.getMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler({DateIncorrectException.class})
+    public ResponseEntity<ExceptionApiDto> catchException(DateIncorrectException e) {
+        ExceptionApiDto exceptionApiDTO = new ExceptionApiDto("Input not valid.", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
 }

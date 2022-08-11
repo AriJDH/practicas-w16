@@ -3,6 +3,7 @@ package com.example.socialmeli.service;
 import com.example.socialmeli.dto.PostDto;
 import com.example.socialmeli.dto.PostDtoWithPromo;
 import com.example.socialmeli.dto.PostListLastTwoWeeksDto;
+import com.example.socialmeli.exception.DateIncorrectException;
 import com.example.socialmeli.exception.PostWhitoutPromoException;
 import com.example.socialmeli.exception.UserNotFoundException;
 import com.example.socialmeli.model.Post;
@@ -65,9 +66,13 @@ public class PostService implements IPostService {
 
     @Override
     public void addPostWithPromo(PostDtoWithPromo newPost) {
+        LocalDate today = LocalDate.now();
         User user = userRepository.getById(newPost.getUserId());
         if (user == null) {
             throw new UserNotFoundException("El usuario con codigo " + newPost.getUserId() + " no existe.");
+        }
+        if (today.isBefore(newPost.getDate())){
+            throw new DateIncorrectException("El post que quiere agregar tiene una fecha incorrecta");
         }
         if (!newPost.isHasPromo()){
             throw new PostWhitoutPromoException("El post que quiere agregar no tiene promoción");
