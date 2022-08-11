@@ -8,6 +8,7 @@ import com.bootcamp.be_java_hisp_w16_g06.entity.User;
 import com.bootcamp.be_java_hisp_w16_g06.exceptions.FollowException;
 import com.bootcamp.be_java_hisp_w16_g06.exceptions.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g06.repository.UserFollowersRepository;
+import com.bootcamp.be_java_hisp_w16_g06.service.iservice.ISocialMeliServiceE1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
     Map<Integer, String> followMap = new HashMap<Integer, String>();
     List<UserDTO> listUser = new ArrayList<>();
 
-    ResponseDTO responseSpected ;
+    ResponseDTO responseSpected;
 
     @Override
     public ResponseDTO followUser(FollowIdDto followIdDto) {
@@ -91,10 +92,8 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
                     responseSpected = new ResponseDTO(FOLLOW_SUCCESSFUL, 200);
                 }
             }
-
             newListUser.add(userDTO);
         }
-
         userFollowersRepository.setUsersList(listUserEntity(newListUser));
         listUserDTO(userFollowersRepository.getUsersList());
 
@@ -136,12 +135,9 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
                     responseSpected = new ResponseDTO(UNFOLLOW_SUCCESSFUL, 200);
                 }
             }
-
             newListUser.add(userDTO);
-
         }
         listUserDTO(userFollowersRepository.getUsersList());
-
         return responseSpected;
     }
 
@@ -156,10 +152,8 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
         if (users.isEmpty()) {
             throw new UserNotFoundException("User Not Found");
         } else {
-
             return true;
         }
-
     }
 
     private List<UserDTO> listUserDTO(List<User> Users) {
@@ -172,7 +166,6 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
             userDto.setFollowed(user.getFollowed());
             return userDto;
         }).collect(Collectors.toList());
-
     }
 
     private List<User> listUserEntity(List<UserDTO> userDTO) {
@@ -185,7 +178,5 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
             userEntity.setFollowed(user.getFollowed());
             return userEntity;
         }).collect(Collectors.toList());
-
     }
-
 }

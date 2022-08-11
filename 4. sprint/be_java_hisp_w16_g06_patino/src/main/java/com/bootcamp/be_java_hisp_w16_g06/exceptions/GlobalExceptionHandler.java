@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-
     public ResponseEntity<ResponseDTO> catchUserNotFound(UserNotFoundException e) {
         ResponseDTO exceptionResponse = new ResponseDTO(e.getMessage(), 404);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
@@ -33,5 +32,4 @@ public class GlobalExceptionHandler {
         ResponseDTO exceptionResponse = new ResponseDTO(e.getMessage(), 400);
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
-
 }

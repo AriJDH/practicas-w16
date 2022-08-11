@@ -6,6 +6,7 @@ import com.bootcamp.be_java_hisp_w16_g06.entity.User;
 import com.bootcamp.be_java_hisp_w16_g06.exceptions.FollowedNotFounException;
 import com.bootcamp.be_java_hisp_w16_g06.exceptions.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g06.repository.UserFollowersRepository;
+import com.bootcamp.be_java_hisp_w16_g06.service.iservice.ISocialMeliServiceE2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,6 @@ public class SocialMeliServiceE2 implements ISocialMeliServiceE2 {
 
     @Autowired
     UserFollowersRepository repository;
-
 
     @Override
     public FollowersCountDTO userFollowers(Integer userId) {
@@ -49,9 +49,13 @@ public class SocialMeliServiceE2 implements ISocialMeliServiceE2 {
         List<ListFollowedDTO> followed;
 
         if (order == null || order.equalsIgnoreCase("name_asc")) {
-            followed = dto.getFollowed().stream().sorted((x, y) -> x.getUser_name().compareTo(y.getUser_name())).collect(Collectors.toList());
+            followed = dto.getFollowed().stream()
+                    .sorted((x, y) -> x.getUser_name().compareTo(y.getUser_name()))
+                    .collect(Collectors.toList());
         } else if (order.equalsIgnoreCase("name_desc")) {
-            followed = dto.getFollowed().stream().sorted((x, y) -> y.getUser_name().compareTo(x.getUser_name())).collect(Collectors.toList());
+            followed = dto.getFollowed().stream().
+                    sorted((x, y) -> y.getUser_name().compareTo(x.getUser_name()))
+                    .collect(Collectors.toList());
         } else {
             throw new FollowedNotFounException("La forma de ordenado no existe");
         }
@@ -60,7 +64,8 @@ public class SocialMeliServiceE2 implements ISocialMeliServiceE2 {
         return dto;
     }
 
-    // Recibe un userDTO y obtiene la lista de seguidores, y si no es null, devuelve una lista de FollowedDTO con el id y el nombre de la lista de seguidores
+    // Recibe un userDTO y obtiene la lista de seguidores, y si no es null,
+    // devuelve una lista de FollowedDTO con el id y el nombre de la lista de seguidores
     private List<ListFollowedDTO> userFollowedDTO(UserDTO userDTO) {
 
         List<ListFollowedDTO> followedsDTO = new ArrayList<>();
@@ -75,7 +80,6 @@ public class SocialMeliServiceE2 implements ISocialMeliServiceE2 {
         return followedsDTO;
     }
 
-
     public FollowersDTO listFollowers(Integer userId) {
         Optional<UserDTO> user = findById(userId).stream().findFirst();
         if (user.isPresent()) {
@@ -85,15 +89,18 @@ public class SocialMeliServiceE2 implements ISocialMeliServiceE2 {
         }
     }
 
-
     public FollowersDTO userFollowersOrder(int userId, String order) {
         FollowersDTO dto = listFollowers(userId);
         List<ListFollowersDTO> followersOrder;
 
         if (order == null || order.equalsIgnoreCase("name_asc")) {
-            followersOrder = dto.getFollowers().stream().sorted((x, y) -> x.getUser_name().compareTo(y.getUser_name())).collect(Collectors.toList());
+            followersOrder = dto.getFollowers().stream()
+                    .sorted((x, y) -> x.getUser_name().compareTo(y.getUser_name()))
+                    .collect(Collectors.toList());
         } else if (order.equalsIgnoreCase("name_desc")) {
-            followersOrder = dto.getFollowers().stream().sorted((x, y) -> y.getUser_name().compareTo(x.getUser_name())).collect(Collectors.toList());
+            followersOrder = dto.getFollowers().stream()
+                    .sorted((x, y) -> y.getUser_name().compareTo(x.getUser_name()))
+                    .collect(Collectors.toList());
         } else {
             throw new FollowedNotFounException("La forma de ordenado no existe");
         }
@@ -101,7 +108,6 @@ public class SocialMeliServiceE2 implements ISocialMeliServiceE2 {
 
         return dto;
     }
-
 
     private List<ListFollowersDTO> userListFollowersDTO(UserDTO userDTO) {
 

@@ -11,11 +11,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Post {
-    private Product product;
     private Integer userId;
     private Integer postId;
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;
+    private Product product;
     private int category;
     private Double price;
     private boolean hasPromo;

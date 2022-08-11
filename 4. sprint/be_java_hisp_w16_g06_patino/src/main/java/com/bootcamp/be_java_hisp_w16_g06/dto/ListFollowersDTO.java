@@ -11,6 +11,4 @@ public class ListFollowersDTO {
 
     private int user_id;
     private String user_name;
-
-
 }

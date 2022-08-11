@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ResponsePostPromoDto {
-    private  int user_id;
+    private int user_id;
     private String user_name;
     private int promo_products_count;
 }

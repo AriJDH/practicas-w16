@@ -24,7 +24,6 @@ public class UserFollowersRepository {
     }
 
     private List<User> loadUser() {
-
         File file = null;
         try {
             file = ResourceUtils.getFile("classpath:createUser.json");
@@ -32,10 +31,9 @@ public class UserFollowersRepository {
             e.printStackTrace();
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<User>> typeRef = new TypeReference<>() {
-        };
-        List<User> users = null;
+        TypeReference<List<User>> typeRef = new TypeReference<>() {};
 
+        List<User> users = null;
         try {
             users = objectMapper.readValue(file, typeRef);
         } catch (IOException e) {
@@ -43,5 +41,4 @@ public class UserFollowersRepository {
         }
         return users;
     }
-
 }

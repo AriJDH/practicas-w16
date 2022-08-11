@@ -5,9 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class RequestPostPromoDTO extends  RequestPostDTO{
+@AllArgsConstructor
+public class RequestPostPromoDTO extends RequestPostDTO {
     private boolean hasPromo;
     private double discount;
 }

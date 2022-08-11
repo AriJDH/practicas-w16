@@ -19,11 +19,12 @@ public class PostRepository {
     }
 
     public int getCorrelativo() {
-        Optional<Post> correlativo = posts.stream().sorted((p, x) -> x.getPostId().compareTo(p.getPostId())).findFirst();
+        Optional<Post> correlativo = posts.stream()
+                .sorted((p, x) -> x.getPostId().compareTo(p.getPostId()))
+                .findFirst();
         if (correlativo.isPresent())
             return correlativo.get().getPostId() + 1;
         else
             return 1;
     }
-
 }

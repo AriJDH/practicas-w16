@@ -2,9 +2,9 @@ package com.bootcamp.be_java_hisp_w16_g06.controller;
 
 
 import com.bootcamp.be_java_hisp_w16_g06.dto.*;
-import com.bootcamp.be_java_hisp_w16_g06.service.ISocialMeliServiceE3;
 import com.bootcamp.be_java_hisp_w16_g06.service.SocialMeliServiceE1;
 import com.bootcamp.be_java_hisp_w16_g06.service.SocialMeliServiceE2;
+import com.bootcamp.be_java_hisp_w16_g06.service.iservice.ISocialMeliServiceE3;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +20,11 @@ public class SocialMeliController {
     @Autowired
     SocialMeliServiceE2 service2;
 
-    @GetMapping
-    public ResponseEntity<ResponseDTO> test() {
-        return new ResponseEntity<>(new ResponseDTO("Message Accepted", 200), HttpStatus.valueOf(200));
+    @GetMapping("{statusCode}")
+    public ResponseEntity<ResponseDTO> postmanStatus(@PathVariable int statusCode) {
+        String message = " message: " + HttpStatus.valueOf(statusCode).getReasonPhrase() + " | Status Code: " + HttpStatus.valueOf(statusCode);
+        ResponseDTO response = new ResponseDTO(message, statusCode);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatusCode()));
     }
 
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
@@ -37,7 +39,6 @@ public class SocialMeliController {
     public ResponseEntity<FollowersCountDTO> US002(@PathVariable int userId) {
         return new ResponseEntity<>(service2.userFollowers(userId), HttpStatus.OK);
     }
-
 
     //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
     @GetMapping("/users/{userId}/followers/list")
@@ -90,20 +91,21 @@ public class SocialMeliController {
     @PostMapping("/products/promo-post")
     public ResponseEntity<ResponseDTO> US0010(@RequestBody RequestPostPromoDTO dto) {
         socialMaMeliServiceE3.createPostPromo(dto);
-        return new ResponseEntity<>(new ResponseDTO("", 200), HttpStatus.valueOf(200));
+        ResponseDTO response = new ResponseDTO("Post Prom Product Successful", 200);
+        return new ResponseEntity<>(response, HttpStatus.valueOf(response.getStatusCode()));
     }
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
     @GetMapping("/products/promo-post/count")
     public ResponseEntity<ResponsePostPromoDto> US0011(@RequestParam int userId) {
-        return new ResponseEntity<>(socialMaMeliServiceE3.getAllPostPromo(userId), HttpStatus.OK);
+        return new ResponseEntity<>(socialMaMeliServiceE3.getSizePostPromo(userId), HttpStatus.OK);
     }
 
     /* C_Ejemplo_Requerimiento_Bonus */
     //US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
-    @GetMapping("/products/promo-post/list?user_id={userId}")
-    public void US0012() {
-
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<ResponsePostAllPromoDto> US0012(@RequestParam int userId) {
+        return new ResponseEntity<>(socialMaMeliServiceE3.getAllPostPromo(userId), HttpStatus.OK);
     }
 
 }
