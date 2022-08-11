@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,7 @@ public class PostService implements IPostService {
 
     private Utils utils;
 
-    public PostService(){
+    public PostService() {
         this.utils = new Utils();
     }
 
@@ -77,18 +78,21 @@ public class PostService implements IPostService {
     public FollowedPostsDTO getFollowedPosts(int userId, String order) {
         User user = validateUser(userId);
 
-        if (order!= null){
+        if (order == null || order.isEmpty()) {
+            return new FollowedPostsDTO(userId, getPosts(user));
+        }
+        else {
+            validateOrder(order.toLowerCase());
             if (order.equalsIgnoreCase("date_desc")) {
                 return new FollowedPostsDTO(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDTO::getDate).reversed())
                         .collect(Collectors.toList()));
-            } else
+            } else {
                 return new FollowedPostsDTO(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDTO::getDate))
                         .collect(Collectors.toList()));
+            }
         }
-        else
-            return new FollowedPostsDTO(userId, getPosts(user));
     }
 
     @Override
@@ -117,30 +121,53 @@ public class PostService implements IPostService {
         );
     }
 
-    private User validateUser(int userId){
+    @Override
+    public List<PromoPostDTO> getFilteredPosts(int category,
+                                               String type,
+                                               String brand,
+                                               double minPrice,
+                                               double maxPrice,
+                                               boolean hasPromo,
+                                               String search) {
+
+        double maxP = maxPrice == 0 ? Integer.MAX_VALUE : maxPrice;
+
+        List<Post> filteredPosts = postRepository.getFilteredPosts(category, type, brand, minPrice, maxP, hasPromo, search);
+
+        return filteredPosts.stream()
+                .map(x -> utils.mapPromoPost(x))
+                .collect(Collectors.toList());
+    }
+
+    private User validateUser(int userId) {
         User user = userRepository.getUser(userId);
 
-        if(user == null)
+        if (user == null)
             throw new BadRequestException("No existe el usuario con Id: " + userId);
 
         return user;
     }
 
-    private int addPostToRepo(Post post){
+    private int addPostToRepo(Post post) {
         int id = postRepository.createPost(post);
         post.setPostId(id);
         userRepository.getUser(post.getUserId()).addPost(post);
         return id;
     }
 
-    private List<ResponsePostDTO> getPosts(User user){
+    private List<ResponsePostDTO> getPosts(User user) {
         List<Post> post = new ArrayList<>();
         for (User u : user.getFollowed()) {
             post.addAll(postRepository.getPostsByUserId(u.getUserId()));
         }
 
         return post.stream()
-                .map(x-> utils.mapPost(x))
+                .map(x -> utils.mapPost(x))
                 .collect(Collectors.toList());
+    }
+
+    private void validateOrder(String order) {
+        if (order.equals("date_desc") && order.equals("date_asc"))
+            throw new BadRequestException("El orden solicitado no es valido");
     }
 }

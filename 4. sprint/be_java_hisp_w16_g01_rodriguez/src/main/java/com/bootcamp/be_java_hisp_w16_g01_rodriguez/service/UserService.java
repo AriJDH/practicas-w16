@@ -38,9 +38,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserFollowerDTO getFollowers(int userId, Optional<String> order) {
+    public UserFollowerDTO getFollowers(int userId, String order) {
 
-        String ord = order.isEmpty() ? "name_asc" : order.get();
+        String ord = order == null || order.isEmpty() ? "name_asc" : order;
         validateOrder(ord);
 
         validateUser(userId);
@@ -60,9 +60,9 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserFollowedDTO getFollowed(int userId, Optional<String> order) {
+    public UserFollowedDTO getFollowed(int userId, String order) {
 
-        String ord = order.isEmpty() ? "name_asc" : order.get();
+        String ord = order == null || order.isEmpty() ? "name_asc" : order;
         validateOrder(ord);
 
         validateUser(userId);
