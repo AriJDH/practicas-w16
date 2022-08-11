@@ -48,6 +48,12 @@ public class ProductService implements IProductService {
    */
   @Override
   public ResponseApiDTO CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
+    Boolean hasPromo = false;
+    Double discount = 0.0;
+    if (productCreateDTO.getHasPromo() != null) {
+      hasPromo = true;
+      discount = productCreateDTO.getDiscount();
+    }
     //Create product
     Product product = iProductRepository.createProduct(productCreateDTO.getProduct());
 
@@ -60,7 +66,7 @@ public class ProductService implements IProductService {
         productCreateDTO.getDate(),
         productCreateDTO.getCategory(),
         productCreateDTO.getPrice(),
-        productCreateDTO.getProduct().getProductId());
+        productCreateDTO.getProduct().getProductId(), hasPromo, discount);
 
     var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
 

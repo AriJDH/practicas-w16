@@ -72,8 +72,8 @@ public class PublicationService implements IPublicationService {
     LocalDate date = LocalDate.now().minusDays(15);
     List<PostDTO> result = publications.stream()
         .filter(x -> x.getDate().isAfter(date))
-        .map(p -> new PostDTO(p.getPublicationId(), p.getUserId(),
-            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice()))
+        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(),
+            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice(),p.getHasPromo(), p.getDiscount()))
         .sorted(Comparator.comparing(PostDTO::getDate).reversed())
         .collect(Collectors.toList());
 
@@ -88,12 +88,17 @@ public class PublicationService implements IPublicationService {
    */
   @Override
   public Boolean createPublication(RequestCreatePublicationDTO requestCreatePublicationDTO) {
-
+    Boolean hasPromo = false;
+    Double discount = 0.0;
+    if (requestCreatePublicationDTO.getHasPromo()) {
+      hasPromo = true;
+      discount = requestCreatePublicationDTO.getDiscount();
+    }
     PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDTO.getUserId(),
         requestCreatePublicationDTO.getDate(),
         requestCreatePublicationDTO.getCategory(),
         requestCreatePublicationDTO.getPrice(),
-        requestCreatePublicationDTO.getProduct().getProductId());
+        requestCreatePublicationDTO.getProduct().getProductId(), hasPromo, discount);
 
     Publication publication = iPublicationRepository.createPublication(publicationDTO);
 

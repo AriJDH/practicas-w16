@@ -20,4 +20,6 @@ public class RequestCreatePublicationDTO {
   private ProductCreateDTO product;
   private Integer category;
   private double price;
+  private Boolean hasPromo;
+  private Double discount;
 }

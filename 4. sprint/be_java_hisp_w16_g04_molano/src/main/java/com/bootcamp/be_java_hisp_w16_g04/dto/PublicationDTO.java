@@ -18,4 +18,6 @@ public class PublicationDTO {
   private Integer category;
   private Double price;
   private Integer productId;
+  private Boolean hasPromo;
+  private Double discount;
 }

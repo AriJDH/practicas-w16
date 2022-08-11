@@ -30,4 +30,9 @@ public class ProductController {
   public ResponseEntity<ResponseApiDTO> createPublicacion(@RequestBody RequestCreatePublicationDTO publicationDTO) {
     return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO), HttpStatus.OK);
   }
+
+  @PostMapping("/promo-post")
+  public ResponseEntity<ResponseApiDTO> createPromoPublication(@RequestBody RequestCreatePublicationDTO publicationDTO){
+    return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO), HttpStatus.OK);
+  }
 }
