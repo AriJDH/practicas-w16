@@ -9,11 +9,9 @@ import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -51,7 +49,7 @@ public class UserService implements IUserService{
 
     private void validateUserToFollowIsSeller(User anUser) {
         if (postRepository.searchById(anUser.getUserId()) == null)
-            throw new UserToFollowIsNotSellerException(anUser.getUserId());
+            throw new UserIsNotSellerException(anUser.getUserId());
     }
 
     private User getValidatedUser(int userId) {

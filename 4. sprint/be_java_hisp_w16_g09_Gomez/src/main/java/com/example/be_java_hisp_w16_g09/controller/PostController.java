@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
+import com.example.be_java_hisp_w16_g09.dto.PromoPostCounterDto;
+import com.example.be_java_hisp_w16_g09.dto.PromoPostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +28,15 @@ public class PostController {
             return new ResponseEntity<>(postService.orderByDate(userId,order),HttpStatus.OK);
         else
             return ResponseEntity.ok(postService.getRecentPostsOfSellersFollowedByUserWith(userId));
+    }
+
+    @PostMapping("/products/promo-post")
+    public void createPromoPost(@RequestBody PromoPostDto promoPost){
+        postService.createPromoPost(promoPost);
+    }
+    @GetMapping ("/products/promo-post/count")
+    public ResponseEntity<PromoPostCounterDto> getPromoPostcounter(@RequestParam int user_id){
+        PromoPostCounterDto count = postService.countPromoPosts(user_id);
+        return new ResponseEntity<>(count,HttpStatus.OK);
     }
 }

@@ -16,7 +16,7 @@ public class GlobalHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<MessageDto> catchUserIsNotSellerException(UserToFollowIsNotSellerException exception) {
+    public ResponseEntity<MessageDto> catchUserIsNotSellerException(UserIsNotSellerException exception) {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

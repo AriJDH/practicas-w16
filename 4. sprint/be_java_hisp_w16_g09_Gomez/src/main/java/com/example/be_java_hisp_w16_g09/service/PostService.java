@@ -1,8 +1,11 @@
 package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
+import com.example.be_java_hisp_w16_g09.dto.PromoPostCounterDto;
+import com.example.be_java_hisp_w16_g09.dto.PromoPostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.InvalidDateException;
+import com.example.be_java_hisp_w16_g09.exception.UserIsNotSellerException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.User;
@@ -19,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class PostService implements IPostService{
+public class PostService implements IPostService {
     @Autowired
     IPostRepository postRepository;
 
@@ -29,30 +32,53 @@ public class PostService implements IPostService{
     private DTOMapperUtil dtoMapperUtil;
 
     //Javi
+    public void createPromoPost(PromoPostDto promoPostDto) {
+        Post post = dtoMapperUtil.map(promoPostDto, Post.class);
+        Post validatedPost = validatedPost(post, promoPostDto.getUserId());
+        postRepository.createElement(validatedPost);
+    }
 
-
-    //Martin
-    public void createPost(PostDto postDto){
-        int userId = postDto.getUserId();
+    @Override
+    public PromoPostCounterDto countPromoPosts(int userId) {
         User user = userRepository.searchById(userId);
-        if (user == null){
+        if (user == null) {
             throw new UserNotFoundException(userId);
         }
-        if(LocalDate.now().isBefore(postDto.getDate())){
-            throw new InvalidDateException(String.valueOf(postDto.getDate()));
-        }
+        List<Post> posts = postRepository.searchById(userId);
+        if (posts == null)
+            throw new UserIsNotSellerException(userId);
+
+        int promoCount = Filter.apply(posts,(post -> post.isHasPromo())).size();
+
+        return new PromoPostCounterDto(userId,user.getUserName(),promoCount);
+    }
+
+    //Martin
+    public void createPost(PostDto postDto) {
         Post post = dtoMapperUtil.map(postDto, Post.class);
-        post.setUser(user);
-        postRepository.createElement(post);
+        Post validatedPost = validatedPost(post, postDto.getUserId());
+        postRepository.createElement(validatedPost);
+    }
+
+    private Post validatedPost(Post postToValidate, int userId) {
+        User user = userRepository.searchById(userId);
+        if (user == null) {
+            throw new UserNotFoundException(userId);
+        }
+        if (LocalDate.now().isBefore(postToValidate.getDate())) {
+            throw new InvalidDateException(String.valueOf(postToValidate.getDate()));
+        }
+        postToValidate.setUser(user);
+        return postToValidate;
     }
 
     //MaxiM
 
 
     //MaxiN
-    public RecentPostsDTO orderByDate(int id, String order){
+    public RecentPostsDTO orderByDate(int id, String order) {
         RecentPostsDTO posts = getRecentPostsOfSellersFollowedByUserWith(id);
-        List<PostDto> listOrder =  posts.getPosts().stream()
+        List<PostDto> listOrder = posts.getPosts().stream()
                 .sorted(Comparator.comparing(PostDto::getDate))
                 .collect(Collectors.toList());
         if (order.equals("date_desc"))
@@ -67,7 +93,7 @@ public class PostService implements IPostService{
 
     //Nico
     //Constructor hecho para poder testear - inicializar dependencias
-    public PostService(IPostRepository postRepository, IUserRepository userRepository,DTOMapperUtil dtoMapperUtil) {
+    public PostService(IPostRepository postRepository, IUserRepository userRepository, DTOMapperUtil dtoMapperUtil) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
         this.dtoMapperUtil = dtoMapperUtil;
