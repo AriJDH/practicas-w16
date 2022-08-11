@@ -17,14 +17,18 @@ public class Post {
     private Product product;
     private Integer category;
     private Double price;
-    private Boolean HasPromo;
+    private Boolean hasPromo;
     private double discount;
+
+
+
 
 
 
 
     public void increaseId() {
         this.postId = lastId++;
+
     }
 
 }

@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.service;
 
-import com.example.be_java_hisp_w16_g03.dto.PostDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
-import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
+import com.example.be_java_hisp_w16_g03.dto.*;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidPostRequest;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,6 +31,24 @@ public class PostService implements IPostService {
         requestUser.addPostToUser(request);
 
 
+    }
+
+    @Override
+    public PostHasPromoCountDTO countPostHasPromoDTO(Integer id) {
+        User user=repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
+        List<Post> total=user.getterPosts().stream().filter(userWithPromo-> userWithPromo.getHasPromo()!=false).collect(Collectors.toList());
+        PostHasPromoCountDTO postHasPromoCountDTO=new PostHasPromoCountDTO(user.getUserId(), user.getUserName(), total.size());
+        return postHasPromoCountDTO;
+    }
+
+    @Override
+    public PostHasPromoDTO addPostHasPromo(PostHasPromoDTO postHasPromoDTO) {
+        if (!postHasPromoDTO.validate())
+            throw new InvalidPostRequest();
+        User requestUser = repository.getUserById(postHasPromoDTO.getUserId()).orElseThrow(() -> new UserNotExistException(postHasPromoDTO.getUserId()));
+
+        requestUser.addPostHasPromoToUser(postHasPromoDTO);
+        return postHasPromoDTO;
     }
 
     @Override
@@ -75,6 +91,8 @@ public class PostService implements IPostService {
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
         return filterPosts;
     }
+
+
 
 
 }

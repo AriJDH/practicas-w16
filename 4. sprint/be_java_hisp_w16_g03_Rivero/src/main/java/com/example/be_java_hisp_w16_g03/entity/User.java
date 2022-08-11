@@ -1,6 +1,7 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import com.example.be_java_hisp_w16_g03.dto.PostHasPromoDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,6 +64,27 @@ public class User {
                         .build())
                 .category(request.getCategory())
                 .price(request.getPrice()).build();
+        //Se asigna un Id autoincremental al Post
+        post.increaseId();
+        this.getterPosts().add(post);
+    }
+
+    public void addPostHasPromoToUser(PostHasPromoDTO request) {
+        Post post = Post.builder()
+                .userId(request.getUserId())
+                .date(request.getDate())
+                .price(request.getPrice())
+                .product(Product.builder().
+                        productId(request.getProduct().getProductId())
+                        .brand(request.getProduct().getBrand())
+                        .color(request.getProduct().getColor())
+                        .type(request.getProduct().getType())
+                        .notes(request.getProduct().getNotes())
+                        .productName(request.getProduct().getProductName())
+                        .build())
+                .category(request.getCategory())
+                .price(request.getPrice()).hasPromo(request.getHasPromo()).discount(request.getDiscount()).build();
+
         //Se asigna un Id autoincremental al Post
         post.increaseId();
         this.getterPosts().add(post);

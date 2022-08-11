@@ -1,6 +1,8 @@
 package com.example.be_java_hisp_w16_g03.controller;
 
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import com.example.be_java_hisp_w16_g03.dto.PostHasPromoCountDTO;
+import com.example.be_java_hisp_w16_g03.dto.PostHasPromoDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
 import com.example.be_java_hisp_w16_g03.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,14 @@ public class PostController {
     public ResponseEntity<PostsDTO> getLatestPostsOrderedByUserId(@PathVariable Integer userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(service.getLatestPostsOrderedByUserId(userId, order), HttpStatus.OK);
     }
-    @GetMapping("/products/promo-post")
-    public ResponseEntity<PostsDTO> postProducPromo(@RequestBody String pepe) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    @PostMapping("/products/promo-post")
+    public ResponseEntity<PostHasPromoDTO> postProducPromo(@RequestBody PostHasPromoDTO postHasPromoDTO) {
+        return new ResponseEntity<>(service.addPostHasPromo(postHasPromoDTO), HttpStatus.OK);
     }
-
+    @GetMapping ("/products/promo-post/count")
+    public ResponseEntity<PostHasPromoCountDTO> getCountPostWithPromo(@RequestParam(required = false) Integer user_id){
+            return new ResponseEntity<>(service.countPostHasPromoDTO(user_id), HttpStatus.OK);
+        }
 
 }
+
