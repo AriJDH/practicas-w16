@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.service;
 
-import com.example.be_java_hisp_w16_g03.dto.PostDTO;
-import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
-import com.example.be_java_hisp_w16_g03.dto.PromoPostCountDTO;
-import com.example.be_java_hisp_w16_g03.dto.PromoPostDTO;
+import com.example.be_java_hisp_w16_g03.dto.*;
 
 public interface IPostService {
     void addPost(PostDTO request);
@@ -13,4 +10,5 @@ public interface IPostService {
     PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order);
     void addPromoPost(PromoPostDTO request);
     PromoPostCountDTO getPromoPostCount(Integer user_id);
+    PromoPostsDTO getPromoPostsByUserId(Integer userId);
 }

@@ -82,6 +82,31 @@ public class PostService implements IPostService {
                 .promoProductsCount(promoPosts.size()).build();
     }
 
+    @Override
+    public PromoPostsDTO getPromoPostsByUserId(Integer userId) {
+        User vendor = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+
+        List<PromoPostWithIdDTO> promoPostsWithIdDtos = vendor.getterPosts().stream()
+                .filter(Post::isHasPromo) //filtro para mostrar solo los posts con promo
+                .map(post -> PromoPostWithIdDTO.builder().postId(post.getPostId())
+                .userId(post.getUserId())
+                .price(post.getPrice())
+                .date(post.getDate())
+                .category(post.getCategory())
+                .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                        .productName(post.getProduct().getProductName())
+                        .type(post.getProduct().getType())
+                        .color(post.getProduct().getColor())
+                        .brand(post.getProduct().getBrand())
+                        .notes(post.getProduct().getNotes()).build())
+                        .hasPromo(post.isHasPromo())
+                        .discount(post.getDiscount()).build())
+                .sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
+
+        return PromoPostsDTO.builder().userId(userId).userName(vendor.getUserName()).posts(promoPostsWithIdDtos).build();
+
+    }
+
     private List<Post> getFilterPosts(List<User> vendors) {
         List<Post> filterPosts = new ArrayList<>();
         vendors.forEach(user -> filterPosts.addAll(user.getPostBetweenDate()));
