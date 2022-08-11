@@ -38,6 +38,9 @@ public class PostService implements IPostService {
         if (postDto.isHasPromo() && postDto.getDiscount()<=0)
             throw new BadRequestException("Debe colocar un porcentaje de descuento");
 
+        if (!postDto.isHasPromo() && postDto.getDiscount()>0)
+            throw new BadRequestException("Si la publicacion no esta en promocion no debe enviar porcentaje de descuento");
+
         if (!userRepository.userExists(postDto.getUserId()))
             throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
 
