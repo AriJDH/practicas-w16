@@ -38,17 +38,17 @@ public class PostService implements IPostService {
         if (vendors != null) {
             List<Post> filterPostWithOutPromos = getFilterPosts(vendors);
 
-            List<PostWithIdDTO> postsWithIdDtos = filterPostWithOutPromos.stream().map(postWithOutPromo -> PostWithIdDTO.builder().postId(postWithOutPromo.getPostId())
-                    .userId(postWithOutPromo.getUserId())
-                    .price(postWithOutPromo.getPrice())
-                    .date(postWithOutPromo.getDate())
-                    .category(postWithOutPromo.getCategory())
-                    .product(ProductDTO.builder().productId(postWithOutPromo.getProduct().getProductId())
-                            .productName(postWithOutPromo.getProduct().getProductName())
-                            .type(postWithOutPromo.getProduct().getType())
-                            .color(postWithOutPromo.getProduct().getColor())
-                            .brand(postWithOutPromo.getProduct().getBrand())
-                            .notes(postWithOutPromo.getProduct().getNotes()).build()).build()).sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
+            List<PostWithIdDTO> postsWithIdDtos = filterPostWithOutPromos.stream().map(post -> PostWithIdDTO.builder().postId(post.getPostId())
+                    .userId(post.getUserId())
+                    .price(post.getPrice())
+                    .date(post.getDate())
+                    .category(post.getCategory())
+                    .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                            .productName(post.getProduct().getProductName())
+                            .type(post.getProduct().getType())
+                            .color(post.getProduct().getColor())
+                            .brand(post.getProduct().getBrand())
+                            .notes(post.getProduct().getNotes()).build()).build()).sorted((x, y) -> y.getDate().compareTo(x.getDate())).collect(Collectors.toList());
 
             return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
         }
