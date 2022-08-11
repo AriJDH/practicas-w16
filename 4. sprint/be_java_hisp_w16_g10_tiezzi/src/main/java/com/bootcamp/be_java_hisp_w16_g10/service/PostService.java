@@ -107,7 +107,12 @@ public class PostService implements IPostService {
         if(userId == null)
             throw new BadRequestException("Param userId can't be null.");
         User user = this.userService.findById(userId);
-        List<Post> posts = this.postRepository.findByUserId(userId).stream()
+
+        List<Post> posts = this.postRepository.findByUserId(userId);
+        if(posts.size() == 0) //valida que sea un vendendor
+            throw new BadRequestException(String.format("The user with the id %s is not a seller.", userId));
+
+        posts = posts.stream()
                 .filter(post -> post.getHasPromo())
                 .collect(Collectors.toList());
         return Mapper.parseToPostPromoListResDTO(user, posts);
@@ -135,7 +140,7 @@ public class PostService implements IPostService {
                 .findFirst()
                 .orElse(null);
         if(maxCountUserPostPromo == null)
-            throw new NotFoundException("No existe ningún post con promoción aún.");
+            throw new NotFoundException("There is no post with promotion yet.");
         return Mapper.parseToPostPromoCountResDTO(
                 this.userService.findById(maxCountUserPostPromo.getKey()),
                 maxCountUserPostPromo.getValue().intValue()
