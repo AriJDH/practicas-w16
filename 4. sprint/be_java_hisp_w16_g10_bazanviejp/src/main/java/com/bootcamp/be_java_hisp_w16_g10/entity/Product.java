@@ -5,19 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Product {
     private Integer id;
-    private String userName;
-    private List<User> followers;
-    private List<User> followed;
-
-    public Integer countFollowers(){
-        return this.followers.size();
-    }
+    private String name;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
 }
