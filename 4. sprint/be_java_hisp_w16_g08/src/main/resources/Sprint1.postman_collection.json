@@ -1,259 +1,190 @@
 {
-   "info": {
-      "_postman_id": "5bd71376-7422-4c26-95b9-acd59e9249e2",
-      "name": "Sprint1",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-      "_exporter_id": "22562815"
-   },
-   "item": [
-      {
-         "name": "US0001",
-         "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/users/1/follow/3",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "users",
-                  "1",
-                  "follow",
-                  "3"
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0002",
-         "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/users/3/followers/count",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "users",
-                  "3",
-                  "followers",
-                  "count"
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0003 & US0008",
-         "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/users/3/followers/list",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "users",
-                  "3",
-                  "followers",
-                  "list"
-               ],
-               "query": [
-                  {
-                     "key": "order",
-                     "value": "name_desc",
-                     "disabled": true
-                  },
-                  {
-                     "key": "order",
-                     "value": "name_asc",
-                     "disabled": true
-                  }
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0004 & US0008",
-         "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/users/1/followed/list",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "users",
-                  "1",
-                  "followed",
-                  "list"
-               ],
-               "query": [
-                  {
-                     "key": "order",
-                     "value": "name_desc",
-                     "disabled": true
-                  },
-                  {
-                     "key": "order",
-                     "value": "name_asc",
-                     "disabled": true
-                  }
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0005",
-         "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-               "mode": "raw",
-               "raw": "{\n    \"user_id\": 3,\n    \"date\": \"04-08-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}\n",
-               "options": {
-                  "raw": {
-                     "language": "json"
-                  }
-               }
-            },
-            "url": {
-               "raw": "localhost:8080/products/post",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "products",
-                  "post"
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0006 & US0009",
-         "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/products/followed/1/list",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "products",
-                  "followed",
-                  "1",
-                  "list"
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0007",
-         "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/users/1/unfollow/3",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "users",
-                  "1",
-                  "unfollow",
-                  "3"
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0010 (I)",
-         "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/products/promo-post",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "products",
-                  "promo-post"
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0011 (I)",
-         "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/products/promo-post/count?user_id={userId}",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "products",
-                  "promo-post",
-                  "count"
-               ],
-               "query": [
-                  {
-                     "key": "user_id",
-                     "value": "{userId}"
-                  }
-               ]
-            }
-         },
-         "response": []
-      },
-      {
-         "name": "US0012 (I) (B)",
-         "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-               "raw": "localhost:8080/products/promo-post/list?user_id={userId}",
-               "host": [
-                  "localhost"
-               ],
-               "port": "8080",
-               "path": [
-                  "products",
-                  "promo-post",
-                  "list"
-               ],
-               "query": [
-                  {
-                     "key": "user_id",
-                     "value": "{userId}"
-                  }
-               ]
-            }
-         },
-         "response": []
-      }
-   ]
+	"info": {
+		"_postman_id": "b95e60d6-2ad9-45f1-aabc-33b7d9eea3d7",
+		"name": "Sprint1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22593257"
+	},
+	"item": [
+		{
+			"name": "US0001",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "localhost:8080/users/{userId}/follow/{userIdToFollow}"
+			},
+			"response": []
+		},
+		{
+			"name": "US0002",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/users/{userId}/followers/count"
+			},
+			"response": []
+		},
+		{
+			"name": "US0003 & US0008",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/followers/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"followers",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_desc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US0004 & US0009",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/users/{userId}/followed/list",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"{userId}",
+						"followed",
+						"list"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "name_desc",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US0005",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 5,\n    \"date\": \"10-08-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla\",\n        \"type\": \"Office\",\n        \"brand\": \"Imperial\",\n        \"color\": \"Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 150,\n    \"price\": 1399\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/products/post"
+			},
+			"response": []
+		},
+		{
+			"name": "US0006 & US0009",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/products/followed/{userId}/list"
+			},
+			"response": []
+		},
+		{
+			"name": "US0007",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "localhost:8080/users/{userId}/unfollow/{userIdToUnfollow}"
+			},
+			"response": []
+		},
+		{
+			"name": "US0010 (I)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 1,\n    \"date\": \"29-07-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"MacBook\",\n        \"type\": \"Notebook\",\n        \"brand\": \"Apple\",\n        \"color\": \"Silver\",\n        \"notes\": \"M2 pro\"\n    },\n    \"category\": 50,\n    \"price\": 400.000,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/products/promo-post"
+			},
+			"response": []
+		},
+		{
+			"name": "US0011 (I)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/count?user_id=",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"count"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "US0012 (I) (B)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/products/promo-post/list?user_id={userId}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"promo-post",
+						"list"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "{userId}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
 }
