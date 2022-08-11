@@ -18,4 +18,5 @@ public interface IUserService {
     UserFollowers getAllVendorFollowers(int id,String order);
 
     ResponsePostFromFollowedDto getPostFromFollowed(int userId, String order);
+
 }

@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g08_gonzalez.exception;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.ResponseApiDto;
+import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.ResponseProductPromoDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -42,5 +43,10 @@ public class GlobalHandler {
         return  new ResponseEntity<>(exceptionApiDto,HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NotPromoPostException.class)
+    public ResponseEntity<ResponseProductPromoDTO> catchOrderNotPossibleException(NotPromoPostException e){
+        ResponseProductPromoDTO exceptionPostPromos = new ResponseProductPromoDTO();
+        return new ResponseEntity<>(exceptionPostPromos,HttpStatus.OK);
+    }
 
 }

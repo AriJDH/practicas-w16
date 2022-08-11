@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g08_gonzalez.service;
 
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g08_gonzalez.entity.PostPromo;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.entity.User;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.exception.*;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.repository.IPostRepository;
@@ -163,6 +164,7 @@ public class UserService implements IUserService {
         return new ResponsePostFromFollowedDto(userId, orderPostList(orderedList, order));
     }
 
+
     public List<ResponsePostDto> orderPostList(List<ResponsePostDto> postList, String order) {
         if (order != null) {
             if (order.equalsIgnoreCase("date_asc")) {
@@ -178,7 +180,7 @@ public class UserService implements IUserService {
             }
         }
         return postList;
-
     }
+
 }
 

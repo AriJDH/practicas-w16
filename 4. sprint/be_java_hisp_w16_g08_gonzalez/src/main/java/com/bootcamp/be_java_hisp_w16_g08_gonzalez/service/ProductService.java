@@ -1,19 +1,21 @@
 package com.bootcamp.be_java_hisp_w16_g08_gonzalez.service;
 
-import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.PostDto;
-import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.PostPromoCounterDTO;
-import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.PostPromoDTO;
-import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.ProductDto;
+import com.bootcamp.be_java_hisp_w16_g08_gonzalez.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.entity.PostPromo;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.entity.User;
+import com.bootcamp.be_java_hisp_w16_g08_gonzalez.exception.NotPromoPostException;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g08_gonzalez.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g08_gonzalez.util.MapperProduct;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService implements IProductService{
@@ -22,6 +24,8 @@ public class ProductService implements IProductService{
     IPostRepository postRepository;
     final
     IUserRepository userRepository;
+    final
+    ModelMapper utilMapper;
 
     private int postIdCount = 0;
     private int postPromoIdCount = 0;
@@ -41,6 +45,7 @@ public class ProductService implements IProductService{
 
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.utilMapper = new ModelMapper();
     }
     @Override
     public void publishPost(PostDto post){
@@ -79,4 +84,20 @@ public class ProductService implements IProductService{
         User usuario = getUserIfExist(id);
         return new PostPromoCounterDTO(usuario.getUserId(), usuario.getName(), usuario.getPostPromoMade().size());
     }
+
+    @Override
+    public ResponseProductPromoDTO getAllProductsInPromo (int id){
+
+        User usuario = getUserIfExist(id);
+        if(usuario.getPostPromoMade().size()<1){
+            throw new NotPromoPostException();
+        }
+
+        List<PostPromoDTO> promoPosts = usuario.getPostPromoMade().stream()
+                .map(x->utilMapper.map(x,PostPromoDTO.class))
+                .collect(Collectors.toList());
+
+        return new ResponseProductPromoDTO(usuario.getUserId(), usuario.getName(), promoPosts);
+    }
+
 }
