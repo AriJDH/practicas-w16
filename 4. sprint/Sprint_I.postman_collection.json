@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4df273dd-5335-48f6-95fd-5437759fe1f8",
+		"_postman_id": "949906a3-1fbe-42fa-bcf1-57b3db9fa50c",
 		"name": "Sprint I",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17400033"
+		"_exporter_id": "22234430"
 	},
 	"item": [
 		{
@@ -35,15 +35,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/users/{{client_id}}/follow/{{seller_id}}",
+							"raw": "{{url}}/users/2/follow/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{client_id}}",
+								"2",
 								"follow",
-								"{{seller_id}}"
+								"1"
 							]
 						}
 					},
@@ -106,13 +106,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/list?order=name_desc",
+							"raw": "{{url}}/users/1/followers/list?order=name_desc",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{seller_id}}",
+								"1",
 								"followers",
 								"list"
 							],
@@ -153,13 +153,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{client_id}}/followed/list?order=name_desc",
+							"raw": "{{url}}/users/2/followed/list?order=name_desc",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{client_id}}",
+								"2",
 								"followed",
 								"list"
 							],
@@ -246,14 +246,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/products/followed/{{client_id}}/list?order=date_asc",
+							"raw": "{{url}}/products/followed/2/list?order=date_asc",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"products",
 								"followed",
-								"{{client_id}}",
+								"2",
 								"list"
 							],
 							"query": [
@@ -365,7 +365,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/products/promo-post/count?user_id={{seller_id}}",
+							"raw": "{{url}}/products/promo-post/count?userId=1",
 							"host": [
 								"{{url}}"
 							],
@@ -376,8 +376,8 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "{{seller_id}}"
+									"key": "userId",
+									"value": "1"
 								}
 							]
 						}

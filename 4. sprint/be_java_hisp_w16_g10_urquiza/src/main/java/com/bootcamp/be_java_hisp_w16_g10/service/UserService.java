@@ -55,6 +55,7 @@ public class UserService implements IService {
    public void unfollow(Integer userId, Integer userIdToUnfollow) {
       if(userId.equals(userIdToUnfollow))
          throw new BadRequestException("Can't unfollow oneself.");
+
       User user = this.userRepository.findById(userId);
       if (user == null)
          throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userId));
