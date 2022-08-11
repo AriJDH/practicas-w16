@@ -1,7 +1,8 @@
 package com.bootcamp.be_java_hisp_w16_g7.controller;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.PromoProductsCountDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
 import com.bootcamp.be_java_hisp_w16_g7.service.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +18,6 @@ public class ProductController {
 
     private final IProductService iProductService;
 
-
     public ProductController(IProductService iProductService) {
         this.iProductService = iProductService;
     }
@@ -27,7 +27,7 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Post created"),
             @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/post")
-    public ResponseEntity<ApiResponseDto> createPost(@RequestBody PostDTO postDto) {
+    public ResponseEntity<ApiResponseDTO> createPost(@RequestBody PostDTO postDto) {
         return new ResponseEntity<>(iProductService.createPost(postDto), HttpStatus.OK);
     }
 
@@ -47,7 +47,17 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Post created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")})
     @PostMapping("/promo-post")
-    public ResponseEntity<ApiResponseDto> postOfProductWithDiscount(@RequestBody PostDTO postDto) {
+    public ResponseEntity<ApiResponseDTO> postOfProductWithDiscount(@RequestBody PostDTO postDto) {
         return new ResponseEntity<>(iProductService.postOfProductWithDiscount(postDto), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get the amount of products with discount of a specific seller")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Object given"),
+            @ApiResponse(responseCode = "400", description = "User is not a seller"),
+            @ApiResponse(responseCode = "404", description = "User not found")})
+    @GetMapping("/promo-post/count")
+    public ResponseEntity<PromoProductsCountDTO> getCountProductsWithDiscount(@RequestParam("user_id") int userId) {
+        return new ResponseEntity<>(iProductService.getCountProductsWithDiscount(userId), HttpStatus.OK);
     }
 }

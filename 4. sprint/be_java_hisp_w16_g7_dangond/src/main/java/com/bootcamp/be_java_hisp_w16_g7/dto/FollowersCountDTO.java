@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class FollowersCountDto {
+public class FollowersCountDTO {
 
     @JsonProperty("user_id")
     private int id;

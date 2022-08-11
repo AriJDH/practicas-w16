@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApiResponseDto {
+public class ApiResponseDTO {
     private String title;
     private String message;
 }

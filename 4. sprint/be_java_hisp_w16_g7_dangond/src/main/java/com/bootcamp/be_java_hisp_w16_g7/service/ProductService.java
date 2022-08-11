@@ -1,14 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidDiscountException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductService implements IProductService {
-
 
     private final IUserRepository userRepository;
     private final ModelMapper mapper;
@@ -75,7 +72,7 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ApiResponseDto createPost(PostDTO postDto) {
+    public ApiResponseDTO createPost(PostDTO postDto) {
 
         Post post = mapper.map(postDto, Post.class);
 
@@ -93,11 +90,11 @@ public class ProductService implements IProductService {
         count++;
         System.out.println(user);
 
-        return new ApiResponseDto("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
+        return new ApiResponseDTO("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
     }
 
     @Override
-    public ApiResponseDto postOfProductWithDiscount(PostDTO postDto) {
+    public ApiResponseDTO postOfProductWithDiscount(PostDTO postDto) {
 
         Post postWithDiscount = mapper.map(postDto, Post.class);
 
@@ -117,6 +114,31 @@ public class ProductService implements IProductService {
         count++;
         System.out.println(userWhoDiscounts);
 
-        return new ApiResponseDto("Post created successfully", "Post with discount of user with id: " + postWithDiscount.getId() + " was created successfully");
+        return new ApiResponseDTO("Post created successfully", "Post with discount of user with id: " + postWithDiscount.getId() + " was created successfully");
     }
+
+    @Override
+    public PromoProductsCountDTO getCountProductsWithDiscount(int userId) {
+        System.out.println("Holaaaaaa");
+        int promoProductsCount = 0;
+
+        User user = userRepository.findUserById(userId);
+
+        if (user == null) {
+            throw new UserNotFoundException(userId);
+        }
+
+        if (!user.isSeller()) {
+            throw new UserIsNotSellerException(userId);
+        }
+
+        List<Post> postList = user.getPosts();
+        for (Post post : postList){
+            if (post.getHasPromo() == true)
+                promoProductsCount++;
+        }
+
+        return new PromoProductsCountDTO(userId, user.getName(), promoProductsCount);
+    }
+
 }

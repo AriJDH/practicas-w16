@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.exception;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalHandler {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ApiResponseDto> onUserNotFoundException(UserNotFoundException e) {
-        return new ResponseEntity<>(new ApiResponseDto("User Not Found", e.getMessage()), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ApiResponseDTO> onUserNotFoundException(UserNotFoundException e) {
+        return new ResponseEntity<>(new ApiResponseDTO("User Not Found", e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidQueryException.class)
@@ -21,39 +21,39 @@ public class GlobalHandler {
 
 
     @ExceptionHandler({FollowsNotFoundException.class})
-    public ResponseEntity<ApiResponseDto> catchException(FollowsNotFoundException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Not Found", e.getMessage());
+    public ResponseEntity<ApiResponseDTO> catchException(FollowsNotFoundException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Not Found", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.NOT_FOUND);
 
     }
 
     @ExceptionHandler(UserIsNotSellerException.class)
-    public ResponseEntity<ApiResponseDto> catchException(UserIsNotSellerException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Bad Request", e.getMessage());
+    public ResponseEntity<ApiResponseDTO> catchException(UserIsNotSellerException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Bad Request", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(AlreadyFollowingException.class)
-    public ResponseEntity<ApiResponseDto> catchException(AlreadyFollowingException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Already following", e.getMessage());
+    public ResponseEntity<ApiResponseDTO> catchException(AlreadyFollowingException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Already following", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(NotFollowingException.class)
-    public ResponseEntity<ApiResponseDto> catchException(NotFollowingException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Not following", e.getMessage());
+    public ResponseEntity<ApiResponseDTO> catchException(NotFollowingException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Not following", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({SameUserException.class})
-    public ResponseEntity<ApiResponseDto> catchException(SameUserException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Same user", e.getMessage());
+    public ResponseEntity<ApiResponseDTO> catchException(SameUserException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Same user", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidDiscountException.class)
-    public ResponseEntity<ApiResponseDto> catchException(InvalidDiscountException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Invalid Discount", e.getMessage());
+    public ResponseEntity<ApiResponseDTO> catchException(InvalidDiscountException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Invalid Discount", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 }

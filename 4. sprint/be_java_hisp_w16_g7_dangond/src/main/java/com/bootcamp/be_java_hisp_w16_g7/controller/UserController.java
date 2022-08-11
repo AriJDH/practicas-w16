@@ -1,7 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7.controller;
 
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g7.service.IUserService;
@@ -79,7 +79,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")
     })
     @GetMapping("/{userId}/followers/count")
-    public ResponseEntity<FollowersCountDto> getFollowersCount(@PathVariable int userId) {
+    public ResponseEntity<FollowersCountDTO> getFollowersCount(@PathVariable int userId) {
         return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
 
     }

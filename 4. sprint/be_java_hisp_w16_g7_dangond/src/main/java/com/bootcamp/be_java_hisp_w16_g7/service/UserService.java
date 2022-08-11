@@ -101,7 +101,7 @@ public class UserService implements IUserService {
         throw new UserIsNotSellerException(id);
     }
 
-    public FollowersCountDto getFollowersCount(int id) {
+    public FollowersCountDTO getFollowersCount(int id) {
         int countFollowers = 0;
         User userFound = userRepository.findUserById(id);
         if (userFound == null) {
@@ -112,6 +112,6 @@ public class UserService implements IUserService {
         } else {
             throw new UserIsNotSellerException(id);
         }
-        return new FollowersCountDto(userFound.getId(), userFound.getName(), countFollowers);
+        return new FollowersCountDTO(userFound.getId(), userFound.getName(), countFollowers);
     }
 }

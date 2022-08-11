@@ -25,7 +25,6 @@ public class UserRepository implements IUserRepository {
         user.add(u3);
         user.add(u4);
 
-
     }
 
     @Override
@@ -46,7 +45,6 @@ public class UserRepository implements IUserRepository {
                 .orElse(null);
     }
 
-
     @Override
     public void addToUserFollowers(User userToAdd, User user) {
         user.getFollowers().add(userToAdd);
@@ -66,6 +64,5 @@ public class UserRepository implements IUserRepository {
     public void removeFromUserFollows(User userToRemove, User user) {
         user.getFollows().remove(userToRemove);
     }
-
 
 }
