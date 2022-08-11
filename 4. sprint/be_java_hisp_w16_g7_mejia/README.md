@@ -18,6 +18,9 @@
 - Un usuario se puede seguir si es "vendedor" es decir, si tiene 1 o más post publicados.
 - Y los seguidores se podrán listar sólo para los usuarios que son considerados "vendedores".
 
+
+- ***_Nota: La colección de Postman se encuentra en la carpeta resources del proyecto_**
+
 ## Parte Individual - Bonus
 
 - Para esta parte realicé un requerimiento nuevo el cual lista todo los posts que tengan un tipo de producto específico.
