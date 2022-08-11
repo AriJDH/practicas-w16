@@ -1,231 +1,284 @@
+
+​
 # ---------Meli Social----------
-
-Meli Social es una plataforma en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de
-todas las novedades que los mismos posteen.
-
+​
+Meli Social es una plataforma en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de todas las novedades que los mismos posteen.
+​
 ## Endopoints disponibles en Beta
-
-{url} url a definir...
-
-## Creación de usuarios recibe una lista de users
-
+​
+### Creacion de usuarios
+#### Endpoint (POST)
 ```
-POST /createUser
-body[
-       {
-            "user_id": 7,
-            "user_name": "vendedor1"
-       }      
+{host}/createUser
+```
+#### Request Param
+```
+```
+#### Request Body
+```
+[
+    {
+        "user_id": number,
+        "user_name": "String"
+    }
 ]
-Return listaCompleta de users cargados.
 ```
-
-## Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
-
+#### Response (OK - 201)
 ```
-GET /users/{userId}/followers/count
-userId= Número que identifica a cada usuario
-Response
+[
+    {
+        "user_id": number,
+        "user_name": "String"
+    }
+]
+```
+​
+​
+### Agregar seguidor a usuario
+#### Endpoint (POST)
+```
+{host}/users/{userId}/follow/{userIdToFollow}
+```
+#### Request Param
+```
+userId - number
+userIdToFollow - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+```
+​
+### Quitar seguidor de usuario
+#### Endpoint (POST)
+```
+{host}/users/{userId}/follow/{userIdToFollow}
+```
+#### Request Param
+```
+userId - number
+userIdToFollow - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
+```
+​
+### Obtener cantidad de seguidores de usuario
+#### Endpoint (GET)
+```
+{host}/users/{userId}/followers/count
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
-    "user_id": 234,
-    "user_name": "vendedor1",
-    "followers_count": 35
+    "user_id": number,
+    "user_name": "String",
+    "followers_count": number
 }
 ```
-
-## Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
-
+​
+### Obtener listado de usuarios que siguen a un vendedor
+#### Endpoint (GET)
 ```
-GET /users/{userId}/followers/list
-userId= Número que identifica a cada usuario
-Response
+{host}/users/{userId}/followers/list?order={order}
+```
+#### Request Param
+```
+userId - number
+(Optional) order - "name_asc" or "name_desc"
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
-    "user_id": 234,
-    "user_name": "vendedor1",
+    "user_id": number,
+    "user_name": "String",
     "followers": [
         {
-            "user_id": 4698,
-            "user_name": "usuario1"
-        },
-        {
-            "user_id": 1536,
-            "user_name": "usuario2"
-        },
-        {
-            "user_id": 2236,
-            "user_name": "usuario3"
+            "user_id": number,
+            "user_name": "String"
         }
     ]
 }
-
 ```
-
-## Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
-
+​
+### Obtener listado de vendedores que sigue un usuario
+#### Endpoint (GET)
 ```
-GET /users/{userId}/followers/list
-userId= Número que identifica a cada usuario
-Response
+{host}/users/{userId}/followed/list?order={order}
+```
+#### Request Param
+```
+userId - number
+(Optional) order - "name_asc" or "name_desc"
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
-    "user_id": 4698,
-    "user_name": "usuario1",
+    "user_id": number,
+    "user_name": "String",
     "followed": [
         {
-            "user_id": 234,
-            "user_name": "vendedor1"
-        },
-        {
-            "user_id": 6932,
-            "user_name": "vendedor2"
-        },
-        {
-            "user_id": 6631,
-            "user_name": "vendedor3"
+            "user_id": number,
+            "user_name": "String"
         }
     ]
 }
 ```
-
-## Dar de alta una nueva publicación
-
+​
+### Alta de publicacion
+#### Endpoint (POST)
 ```
-POST /products/post
-body
+{host}/products/post
+```
+#### Request Param
+```
+```
+#### Request Body
+```
 {
-    "user_id": 123,
-    "date": "29-04-2021",
+    "user_id": number,
+    "date": "Date",
     "product": {
-        "product_id": 1,
-        "product_name": "Silla Gamer",
-        "type": "Gamer",
-        "brand": "Racer",
-        "color": "Red & Black",
-        "notes": "Special Edition"
+        "product_id": number,
+        "product_name": "String",
+        "type": "String",
+        "brand": "String",
+        "color": "String",
+        "notes": "String"
     },
-    "category": 100,
-    "price": 1500.50
+    "category": number,
+    "price": double
 }
-Response
-Status Code 200 (todo OK)
-Status Code 400 (Bad Request)
-
 ```
-
-## Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero
-
+#### Notas
+Formato Date: "01-05-2022"
+#### Response (OK - 200)
 ```
-GET /products/followed/{userId}/list
-userId= Número que identifica a cada usuario
-Response
+```
+​
+### Obtener listado de publicaciones de vendedor que usuario sigue de las ultimas dos semanas
+#### Endpoint (GET)
+```
+{host}/products/followed/{userId}/list?order={order}
+```
+#### Request Param
+```
+userId - number
+(Optional) order - "name_asc" or "name_desc"
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
-    "user_id": 4698,
-    "posts": [ {
-            “user_id”: 123,
-            "post_id": 32,
-            "date": "01-05-2021",
-            "product": {
-                "product_id": 62,
-                "product_name": "Headset RGB Inalámbrico",
-                "type": "Gamer",
-                "brand": "Razer",
-                "color": "Green with RGB",
-                "notes": "Sin Batería"
-            },
-            "category": 120,
-            "price": 2800.69
-        },
+    "user_id": 1,
+    "posts": [
         {
-            “user_id”: 234,
-            "post_id": 18,
-            "date": "29-04-2021",
+            userId = number,
+            postId = number,
+            date = Date,
             "product": {
-                "product_id": 1,
-                "productName": "Silla Gamer",
-                "type": "Gamer",
-                "brand": "Racer",
-                "color": "Red & Black",
-                "notes": "Special Edition"
+                "product_id": number,
+                "product_name": "String",
+                "type": "String",
+                "brand": "String",
+                "color": "String",
+                "notes": "String"
             },
-            "category": 100,
-            "price": 15000.50
+            category = number,
+            price = double
         }
-   ]
+    ]
 }
-
 ```
-
-## Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
-
+​
+### Alta de nueva publicacion con promoción
+#### Endpoint (POST)
 ```
-POST /users/{userId}/unfollow/{userIdToUnfollow}
-userId= Número que identifica a cada usuario
-userIdToUnfollow=Número que identifica al usuario a dejar de seguir
+{host}/products/promo-post
 ```
-
-## Endpoints de ordenamiento
-
+#### Request Param
 ```
-userId= Número que identifica a cada usuario
-
------alfabético ascendente y descendente
-/users/{UserID}/followers/list?order=name_asc
-/users/{UserID}/followers/list?order=name_desc
-/users/{UserID}/followed/list?order=name_asc
-/users/{UserID}/followed/list?order=name_desc
-
-------Ordenamiento por fecha ascendente y descendente
-
-/products/followed/{userId}/list?order=date_asc
-/products/followed/{userId}/list?order=date_desc
-
 ```
-
-## Dar de alta una nueva publicacion en promoción
-
+#### Request Body
 ```
-POST /products/promo-post
-body
 {
-    "user_id": 123,
-    "date": "29-04-2021",
+    "user_id": number,
+    "date": "Date",
     "product": {
-        "product_id": 1,
-        "product_name": "Silla Gamer",
-        "type": "Gamer",
-        "brand": "Racer",
-        "color": "Red & Black",
-        "notes": "Special Edition"
+        "product_id": number,
+        "product_name": "String",
+        "type": "String",
+        "brand": "String",
+        "color": "String",
+        "notes": "String"
     },
-    "category": 100,
-    "price": 1500.50,
+    "category": number,
+    "price": double,
     "has_promo":"true",
     "discount": 0.25
 }
-Response
-Status Code 200 (todo OK)
-Status Code 400 (Bad Request)
-
 ```
-
-## Obtener el resultado de la cantidad de publicaciones en promocion que tiene un usuario
-
+#### Notas
+Formato Date: "01-05-2022"
+#### Response (OK - 200)
 ```
-GET /products/promo-post/count?user_id={userId}
-userId = Número que identifica a cada usuario
-Response
+```
+​
+### Obtener cantidad de publicaciones con promoción de un usuario
+#### Endpoint (GET)
+```
+{host}/products/promo-post/count?user_id={userId}
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
-    "user_id" : 234,
+   "user_id" : 234,
    "user_name": "vendedor1",
    "promo_products_count": 23
 }
 ```
-
-## Obtener un listado de todos los productos en promoción de un determinado vendedor
-
+​
+### Obtener un listado de todos los productos en promoción de un determinado vendedor
+#### Endpoint (GET)
 ```
-GET /products/promo-post/list?user_id={userId}
-userId= Número que identifica a cada usuario
-Response
+/products/promo-post/list?user_id={userId}
+```
+#### Request Param
+```
+userId - number
+```
+#### Request Body
+```
+```
+#### Response (OK - 200)
+```
 {
     "user_id": 234,
     "user_name": "vendedor1",
@@ -249,5 +302,4 @@ Response
         }
     ]
 }
-
 ```
