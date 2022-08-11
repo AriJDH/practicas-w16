@@ -20,6 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements IUserService {
 
+  public static final String NAME_ASC = "name_asc";
+  public static final String NAME_DESC = "name_desc";
   @Autowired
   IUserRepository iUserRepository;
 
@@ -101,17 +103,16 @@ public class UserService implements IUserService {
         .map(id -> iUserRepository.getByIdUser(id))
         .collect(Collectors.toList());
 
-    if (order.equals("name_asc")) {
+    if (order.equals(NAME_ASC)) {
       users = users.stream().sorted(Comparator.comparing(User::getUserName))
           .collect(Collectors.toList());
-    } else if (order.equals("name_desc")) {
+    } else if (order.equals(NAME_DESC)) {
       users = users.stream().sorted(Comparator.comparing(User::getUserName)
               .reversed())
               .collect(Collectors.toList());
     }
 
     user.setFollowed(users);
-
     user.setUser_id(userId);
     user.setUser_name(user1.getUserName());
 
