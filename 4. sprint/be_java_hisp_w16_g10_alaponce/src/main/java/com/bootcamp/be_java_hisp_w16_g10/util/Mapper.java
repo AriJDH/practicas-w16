@@ -1,10 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g10.util;
 
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostPromoReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
+import com.bootcamp.be_java_hisp_w16_g10.entity.PromoPost;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 
 import java.util.List;
@@ -93,6 +95,40 @@ public class Mapper {
                 .product(parseToProduct(postReqDTO.getProduct()))
                 .category(postReqDTO.getCategory())
                 .price(postReqDTO.getPrice())
+                .build();
+    }
+
+    public static PromoPost parseToPromoPost(PostPromoReqDTO postPromoReqDTO) {
+        return PromoPost.builder()
+                .date(postPromoReqDTO.getDate())
+                .userId(postPromoReqDTO.getUserId())
+                .product(parseToProduct(postPromoReqDTO.getProduct()))
+                .category(postPromoReqDTO.getCategory())
+                .price(postPromoReqDTO.getPrice())
+                .discount(postPromoReqDTO.getDiscount())
+                .hasPromo(postPromoReqDTO.isHasPromo())
+                .build();
+    }
+
+    public static PromoProductCountResDTO parseToPromoCount(User user, List<PromoPost> post) {
+        return PromoProductCountResDTO.builder()
+                .userId(user.getId())
+                .userName(user.getUserName())
+                .promoProductCount(post.size())
+                .build();
+    }
+
+    public static PostPromoResDTO parseToPromoResDTO(PromoPost promoPost, User user) {
+        return PostPromoResDTO.builder()
+                .userId(promoPost.getUserId())
+                .price(promoPost.getPrice())
+                .hasPromo(promoPost.isHasPromo())
+                .date(promoPost.getDate())
+                .category(promoPost.getCategory())
+                .userName(user.getUserName())
+                .product(parseToProductResDTO(promoPost.getProduct()))
+                .discount(promoPost.getDiscount())
+                .postId(promoPost.getId())
                 .build();
     }
 }

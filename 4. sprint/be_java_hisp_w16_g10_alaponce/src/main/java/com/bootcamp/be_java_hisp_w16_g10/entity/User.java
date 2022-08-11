@@ -5,17 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class User {
     private Integer id;
-    private Integer userId;
-    private Product product;
-    private LocalDate date;
-    private Double price;
-    private Integer category;
+    private String userName;
+    private List<User> followers;
+    private List<User> followed;
+
+    public Integer countFollowers(){
+        return this.followers.size();
+    }
 }

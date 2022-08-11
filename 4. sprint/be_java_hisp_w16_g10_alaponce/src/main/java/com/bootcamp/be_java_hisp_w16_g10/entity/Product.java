@@ -5,17 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Post {
+public class Product {
     private Integer id;
-    private Integer userId;
-    private Product product;
-    private LocalDate date;
-    private Double price;
-    private Integer category;
+    private String name;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
 }

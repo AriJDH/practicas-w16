@@ -21,13 +21,11 @@ public class UserService implements IUserService {
     @Autowired
     private PostService postService;
 
-    //Recibe un id como parámetro y devuelve el User si es que existe, de lo contrario lanza un NotFoundException.
     @Override
     public User findById(Integer id) {
         return this.validateUser(id);
     }
 
-    //Devuelve todos los Users
     @Override
     public List<UserResDTO> findAll() {
         return this.userRepository.findAll().stream()
@@ -35,9 +33,6 @@ public class UserService implements IUserService {
                 .collect(Collectors.toList());
     }
 
-    //Recibe un userID y un userIdToFollow, realiza validaciones y en caso de que esté correcto
-    //se añade al user2 a la lista de seguidos por el user1 y se agrega el user1 a la
-    //lista de seguidores del user2
     @Override
     public void follow(Integer userId, Integer userIdToFollow) {
         if (userId.equals(userIdToFollow)) //revisa que los dos id sean iguales
@@ -61,9 +56,6 @@ public class UserService implements IUserService {
         this.userRepository.update(userToFollow);
     }
 
-    //Recibe un userID y un userIdToFollow, realiza validaciones y en caso de que esté correcto
-    //se quita al user2 de la lista de seguidos por el user1 y se quita el user1 de la
-    //lista de seguidores del user2
     @Override
     public void unfollow(Integer userId, Integer userIdToUnfollow) {
         if (userId.equals(userIdToUnfollow)) //revisa que los dos id sean iguales
@@ -84,8 +76,6 @@ public class UserService implements IUserService {
         this.userRepository.update(userToDelete);
     }
 
-    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowesCountResDTO con
-    //la cantidad de seguidores del user.
     @Override
     public FollowersCountResDTO countFollowers(Integer userId) {
         User user = this.validateUser(userId); //valida que exista el usuario1
@@ -94,8 +84,6 @@ public class UserService implements IUserService {
         return Mapper.parseToFollowersCountResDTO(user);
     }
 
-    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowersListResDTO con
-    //la todos los users que sigue el user.
     @Override
     public FollowersListResDTO listFollowers(Integer userId, String order) {
         User user = this.validateUser(userId);
@@ -112,8 +100,6 @@ public class UserService implements IUserService {
         return Mapper.parseToFollowersListResDTO(user, followers.collect(Collectors.toList()));
     }
 
-    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowedListResDTO con
-    //la todos los users que siguen al user.
     @Override
     public FollowedListResDTO listFollowed(Integer userId, String order) {
         User user = this.validateUser(userId); //valida que exista el usuario
@@ -127,7 +113,6 @@ public class UserService implements IUserService {
         return Mapper.parseToFollowedListResDTO(user, followeds.collect(Collectors.toList()));
     }
 
-    //Recibe un userID y aplica el control para verificar que el User exista.
     private User validateUser(Integer userID) {
         User user = this.userRepository.findById(userID);
         if (user == null) //valida si existe un usuario, sino devuelve un error
