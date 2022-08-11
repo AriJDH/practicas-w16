@@ -13,13 +13,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorHandlerDTO> NotFoundException(Exception e){
-        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().message(e.getMessage()).build();
+        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.NOT_FOUND.value()).message(e.getMessage()).build();
         return new ResponseEntity<>(errorHandlerDTO, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(FoundException.class)
     public ResponseEntity<ErrorHandlerDTO> FoundException(Exception e){
-        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().message(e.getMessage()).build();
+        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.CONFLICT.value()).message(e.getMessage()).build();
         return new ResponseEntity<>(errorHandlerDTO, HttpStatus.CONFLICT);
     }
 
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
             BadRequestException.class
         })
     public ResponseEntity<ErrorHandlerDTO> UrlNotValidException(Exception e){
-        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().message(e.getMessage()).build();
+        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build();
         return new ResponseEntity<>(errorHandlerDTO, HttpStatus.BAD_REQUEST);
     }
 }
