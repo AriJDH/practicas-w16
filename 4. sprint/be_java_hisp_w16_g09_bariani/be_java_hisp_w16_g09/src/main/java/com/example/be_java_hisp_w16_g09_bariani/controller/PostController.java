@@ -1,7 +1,6 @@
 package com.example.be_java_hisp_w16_g09_bariani.controller;
 
-import com.example.be_java_hisp_w16_g09_bariani.dto.PostDto;
-import com.example.be_java_hisp_w16_g09_bariani.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09_bariani.dto.*;
 import com.example.be_java_hisp_w16_g09_bariani.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,5 +25,23 @@ public class PostController {
             return new ResponseEntity<>(postService.orderByDate(userId,order),HttpStatus.OK);
         else
             return ResponseEntity.ok(postService.getRecentPostsOfSellersFollowedByUserWith(userId));
+    }
+
+    //US 0010 Dar de alta una publicacion promo
+    @PostMapping("/products/promo-post")
+    public void createPromoPost(@RequestBody PromoPostDtoRequest promoPostDtoRequest){
+        postService.createPromoPost(promoPostDtoRequest);
+    }
+
+    //US 0011 Obtener cantidad de productos en promo de un seller
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<PromoPostCountDtoResponse> getPostPromoCount(@RequestParam Integer user_id ){
+        return new ResponseEntity<>(postService.countSellerPromoProducts(user_id), HttpStatus.OK);
+    }
+
+    //US 0012 Obtener los post promo de un vendedor
+    @GetMapping("/products/promo-post/list")
+    public ResponseEntity<PromoPostListDtoResponse> getAllPromoPostOfSeller(@RequestParam Integer user_id, @RequestParam(required = false) String order){
+        return new ResponseEntity<>(postService.getAllPromoPostOfSeller(user_id, order), HttpStatus.OK);
     }
 }
