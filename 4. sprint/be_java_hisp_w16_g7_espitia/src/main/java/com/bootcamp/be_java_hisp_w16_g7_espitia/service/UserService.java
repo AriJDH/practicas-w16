@@ -31,6 +31,7 @@ public class UserService implements IUserService {
         User target = userRepository.findUserById(userIdToFollow);
 
         if (user == null) throw new UserNotFoundException(userId);
+        if (userId != userIdToFollow) throw new UserNotFoundException(userId);
         if (target == null) throw new UserNotFoundException(userIdToFollow);
         if (!target.isSeller()) throw new UserIsNotSellerException(userIdToFollow);
         if (target.getFollowers().contains(user)) throw new AlreadyFollowingException(userIdToFollow, userId);
@@ -111,5 +112,21 @@ public class UserService implements IUserService {
             throw new UserIsNotSellerException(id);
         }
         return new FollowersCountDto(userFound.getId(), userFound.getName(), countFollowers);
+    }
+
+    @Override
+    public ApiResponseDto createUser(CreateUserDTO createUserDTO) {
+        User user = mapper.map(createUserDTO, User.class);
+        user.setFollowers(new ArrayList<>());
+        user.setFollows(new ArrayList<>());
+        user.setPosts(new ArrayList<>());
+
+        if(!userRepository.existsUser(user.getId())){
+            userRepository.addUser(user);
+            return new ApiResponseDto("User add","User whit id "+ user.getId()+" is created");
+        }else {
+            throw new UserExistsException(user.getId());
+        }
+
     }
 }

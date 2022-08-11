@@ -44,4 +44,10 @@ public class GlobalHandler {
         ApiResponseDto apiResponseDto = new ApiResponseDto("Not following", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(UserExistsException.class)
+    public ResponseEntity<ApiResponseDto> catchException(UserExistsException e){
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Not Created", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
 }

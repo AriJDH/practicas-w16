@@ -39,6 +39,11 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+    public void addUser(User userToAdd) {
+        user.add(userToAdd);
+    }
+
+    @Override
     public User findUserById(int id) {
         return user.stream()
                 .filter(user -> user.getId() == id)

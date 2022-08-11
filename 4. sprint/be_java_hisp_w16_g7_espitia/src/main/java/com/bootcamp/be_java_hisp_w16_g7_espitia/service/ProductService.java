@@ -121,7 +121,7 @@ public class ProductService implements IProductService {
         if(userRepository.existsUser(userId)){
             User user = userRepository.findUserById(userId);
             int promoPost = (int) user.getPosts().stream()
-                    .filter(post-> post.isHasPromo()).count();
+                    .filter(Post::isHasPromo).count();
             return new ResponsePromoPostCountDTO(user.getId(),user.getName(),promoPost);
         }else{
             throw new UserNotFoundException(userId);
@@ -131,15 +131,13 @@ public class ProductService implements IProductService {
 
     @Override
     public ResponsePomoPostListDTO listPromoPostByUser(int userId) {
-        List<ResponsePromoPostDTO> promoPostDTOS = new ArrayList<>();
+        List<ResponsePromoPostDTO> promoPostDTOS ;
         if(userRepository.existsUser(userId)){
             User user = userRepository.findUserById(userId);
-            List<Post> posts = user.getPosts().stream()
-                    .filter(post -> post.isHasPromo())
+             promoPostDTOS = user.getPosts().stream()
+                    .filter(Post::isHasPromo)
+                    .map(u->mapper.map(u, ResponsePromoPostDTO.class))
                     .collect(Collectors.toList());
-            for (Post post: posts) {
-                promoPostDTOS.add(mapper.map(post,ResponsePromoPostDTO.class));
-            }
             return new ResponsePomoPostListDTO(user.getId(),user.getName(),promoPostDTOS);
         }else{
             throw new UserNotFoundException(userId);

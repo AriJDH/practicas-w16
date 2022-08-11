@@ -18,3 +18,15 @@
 - Un usuario se puede seguir si es "vendedor" es decir, si tiene 1 o más post publicados.
 - Y los seguidores se podrán listar sólo para los usuarios que son considerados "vendedores".
 
+## Requerimiento US 0013
+
+-US 0013 - Crear un Usuario nuevo
+  - Post: /users/create
+  - Payload: 
+    - { "user_id": 1111, "user_name": "Camilo"}
+  - Response:
+    - Status code 200 (todo OK)
+    - Status code 400 (Bad Request)
+  - Parametros
+    - user_id  (int) numero que identifica a cada usuario
+    - user_name (String) cadena de caracteres que representan el nombre del usuario

@@ -14,5 +14,7 @@ public interface IUserRepository {
     void removeFromUserFollows(User userToRemove, User target);
 
     boolean existsUser(int idUser);
+
+    void addUser(User userToAdd);
 }
 

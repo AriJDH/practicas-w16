@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "70b2cdd1-ff47-4f24-8198-d07e1fe6b72f",
+		"_postman_id": "d19617c7-decd-44af-a6a4-886b3e0d708c",
 		"name": "Sprint 1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "22559945"
+		"_exporter_id": "22234685"
 	},
 	"item": [
 		{
@@ -275,6 +275,38 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "US 0010 - Agregar Post Con Descuento",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "US 0011 - Contar cuantos post con descuento tiene un usuario",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "US 0012 - Listar los post con descuento que tiene un usuario",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "US 0013  - Crear usuario",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}

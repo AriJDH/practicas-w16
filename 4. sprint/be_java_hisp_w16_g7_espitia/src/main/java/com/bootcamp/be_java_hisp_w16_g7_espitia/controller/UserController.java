@@ -1,9 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7_espitia.controller;
 
 
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.FollowersCountDto;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.FollowersSellersDTO;
-import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.ResponseUserFollowedDTO;
+import com.bootcamp.be_java_hisp_w16_g7_espitia.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7_espitia.service.IUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -83,4 +81,16 @@ public class UserController {
         return new ResponseEntity<>(userService.getFollowersCount(userId), HttpStatus.OK);
 
     }
+
+    @Operation(summary = "Create User")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User Create"),
+            @ApiResponse(responseCode = "400", description = "User Exists")
+    })
+    @PostMapping("/create")
+    public ResponseEntity<ApiResponseDto> createUser (@RequestBody CreateUserDTO createUserDTO) {
+        return new ResponseEntity<>(userService.createUser(createUserDTO),HttpStatus.OK);
+    }
+
+
 }
