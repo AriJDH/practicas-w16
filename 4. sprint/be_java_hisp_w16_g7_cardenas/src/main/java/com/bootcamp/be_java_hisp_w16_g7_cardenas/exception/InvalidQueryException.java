@@ -4,8 +4,8 @@ public class InvalidQueryException extends RuntimeException {
     public InvalidQueryException() {
     }
 
-    public InvalidQueryException(String message) {
-        super(message);
+    public InvalidQueryException(String query, String param) {
+        super("Unknown query: " + query + "=" + param);
     }
 }
 

@@ -49,7 +49,7 @@ public class ProductService implements IProductService {
             } else if ("date_desc".equals(order) || order == null) {
                 return new RecentPostsDTO(idUser, orderByDateDes(responsePostDTOS));
             } else {
-                throw new InvalidQueryException("Unknown query");
+                throw new InvalidQueryException("order", order);
             }
 
         } else {
@@ -124,6 +124,41 @@ public class ProductService implements IProductService {
                 .filter(Post::isHasPromo)
                 .count();
         return new DiscountCountDTO(userId, user.getName(), counter);
+    }
+
+    public List<ResponsePostDTO> getSellerPosts(int userId, String order, String promo) {
+        User user = getUserOrNotFound(userId);
+
+        if(!user.isSeller())
+            throw new UserIsNotSellerException(userId);
+
+        if (order != null && !order.equals("date_asc") && !order.equals("date_desc")) {
+            throw new InvalidQueryException("order", order);
+        }
+
+        if (promo != null && !promo.equals("yes") && !promo.equals("no")) {
+            throw new InvalidQueryException("promo", promo);
+        }
+
+        // comparator for sorting, date_desc is default order
+        Comparator<Post> comparator = Comparator.comparing(Post::getCreationDate).reversed();
+        if("date_asc".equals(order))
+            comparator = comparator.reversed();
+
+        return user.getPosts().stream()
+                // promo=yes -> only posts with a promotion
+                // promo=false -> only posts without a promotion
+                // default -> all posts
+                .filter(post -> {
+                    if("yes".equals(promo))
+                        return post.isHasPromo();
+                    else if("no".equals(promo))
+                        return !post.isHasPromo();
+                    return true;
+                })
+                .sorted(comparator)
+                .map(PostMapper::mapPostToDto)
+                .collect(Collectors.toList());
     }
 
     private User getUserOrNotFound(int userId) {

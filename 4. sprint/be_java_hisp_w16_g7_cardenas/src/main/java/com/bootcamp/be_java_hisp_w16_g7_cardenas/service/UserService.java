@@ -65,7 +65,7 @@ public class UserService implements IUserService {
         Comparator<ResponseUserDTO> userComp = Comparator.comparing(ResponseUserDTO::getUserName);
 
         if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
-            throw new InvalidQueryException("unknown query");
+            throw new InvalidQueryException("order", order);
         }
         if ("name_desc".equals(order))
             userComp = userComp.reversed();
@@ -83,9 +83,9 @@ public class UserService implements IUserService {
         if (response == null) {
             throw new UserNotFoundException(id);
         }
-        //Verifica si la query es correcta
+        // Check if query is valid
         if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
-            throw new InvalidQueryException("unknown query");
+            throw new InvalidQueryException("order", order);
         }
         Comparator<FollowersDTO> comparator = Comparator.comparing(FollowersDTO::getName);
         if ("name_desc".equals(order)) {

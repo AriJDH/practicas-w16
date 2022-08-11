@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -43,7 +45,7 @@ public class ProductController {
         return new ResponseEntity<>(iProductService.recentPost(userId, order), HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Create post to specific user")
+    @Operation(summary = "Create post with discount")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Post created"),
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content),
@@ -64,5 +66,19 @@ public class ProductController {
     public ResponseEntity<DiscountCountDTO> getDiscountCount(
             @Parameter(description = "User id") @RequestParam("user_id") int userId) {
         return new ResponseEntity<>(iProductService.getDiscountCount(userId), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get all posts of a seller")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Post created"),
+            @ApiResponse(responseCode = "404", description = "User not found", content = @Content),
+            @ApiResponse(responseCode = "400", description = "User is not seller", content = @Content),
+    })
+    @GetMapping("/post/list")
+    public ResponseEntity<List<ResponsePostDTO>> getSellerPosts(
+            @Parameter(description = "User id") @RequestParam("user_id") int userId,
+            @Parameter(description = "Optional. Order query (date_asc, date_desc)") @RequestParam(required = false) String order,
+            @Parameter(description = "Filter by promo (yes, no)") @RequestParam(required = false) String promo) {
+        return new ResponseEntity<>(iProductService.getSellerPosts(userId, order, promo), HttpStatus.OK);
     }
 }

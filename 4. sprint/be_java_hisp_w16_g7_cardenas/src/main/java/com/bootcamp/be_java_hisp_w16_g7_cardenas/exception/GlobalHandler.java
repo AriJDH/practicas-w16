@@ -15,8 +15,8 @@ public class GlobalHandler {
     }
 
     @ExceptionHandler(InvalidQueryException.class)
-    public ResponseEntity<?> InvalidQueryException(Exception e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    public ResponseEntity<ApiResponseDto> InvalidQueryException(Exception e) {
+        return new ResponseEntity<>(new ApiResponseDto("Bad request", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
 
