@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping("/{userId}/followers/list")
     public ResponseEntity<UserFollowerDTO> getFollowers(
             @PathVariable @ApiParam(value = "Id del vendedor del que se desea obtener los seguidores") int userId,
-            @RequestParam @ApiParam(value = "Orden de la lista (valores aceptados: name_desc, name_asc)") String order) {
+            @RequestParam(required = false) @ApiParam(value = "Orden de la lista (valores aceptados: name_desc, name_asc)") String order) {
         return new ResponseEntity<>(userService.getFollowers(userId, order), HttpStatus.OK);
     }
 
@@ -66,7 +66,7 @@ public class UserController {
     @GetMapping("/{userId}/followed/list")
     public ResponseEntity<UserFollowedDTO> getFollowed(
             @PathVariable @ApiParam(value = "Id del usuario del que se desea obtener los vendedores que sigue") int userId,
-            @RequestParam @ApiParam(value = "Orden de la lista (valores aceptados: name_desc, name_asc)") String order){
+            @RequestParam (required = false)@ApiParam(value = "Orden de la lista (valores aceptados: name_desc, name_asc)") String order){
         return new ResponseEntity<>(userService.getFollowed(userId, order), HttpStatus.OK);
     }
 

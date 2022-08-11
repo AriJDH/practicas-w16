@@ -29,7 +29,7 @@ public class PostController {
             "(para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero)")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad request")})
     @GetMapping("/followed/{userId}/list")
-    public ResponseEntity<FollowedPostsDto> getFollowedPostsOrder(@PathVariable int userId, @RequestParam String order) {
+    public ResponseEntity<FollowedPostsDto> getFollowedPostsOrder(@PathVariable int userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(postService.getFollowedPosts(userId, order), HttpStatus.OK);
     }
 

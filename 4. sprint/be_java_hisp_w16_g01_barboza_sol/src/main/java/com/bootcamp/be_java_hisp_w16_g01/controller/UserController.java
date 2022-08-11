@@ -36,7 +36,7 @@ public class UserController {
             " ¿Quién me sigue? y Ordenamiento alfabético ascendente y descendente")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad request")})
     @GetMapping("/{userId}/followers/list")
-    public ResponseEntity<UserFollowerDto> getFollowers(@PathVariable int userId, @RequestParam String order) {
+    public ResponseEntity<UserFollowerDto> getFollowers(@PathVariable int userId, @RequestParam(required = false) String order) {
         return new ResponseEntity<>(userService.getFollowers(userId, order), HttpStatus.OK);
     }
 
@@ -45,7 +45,7 @@ public class UserController {
             "usuario ¿A quién sigo? y Ordenamiento alfabético ascendente y descendente")
     @ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Bad request")})
     @GetMapping("/{userId}/followed/list")
-    public ResponseEntity<UserFollowedDto> getFollowed(@PathVariable int userId, @RequestParam String order){
+    public ResponseEntity<UserFollowedDto> getFollowed(@PathVariable int userId, @RequestParam(required = false) String order){
         return new ResponseEntity<>(userService.getFollowed(userId, order), HttpStatus.OK);
     }
 
