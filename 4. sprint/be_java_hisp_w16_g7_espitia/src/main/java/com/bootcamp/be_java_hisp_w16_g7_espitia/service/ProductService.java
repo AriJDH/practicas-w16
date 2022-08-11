@@ -57,7 +57,6 @@ public class ProductService implements IProductService {
         }
     }
 
-
     @Override
     public List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList) {
         return postList.stream()
@@ -128,6 +127,23 @@ public class ProductService implements IProductService {
             throw new UserNotFoundException(userId);
         }
 
+    }
+
+    @Override
+    public ResponsePomoPostListDTO listPromoPostByUser(int userId) {
+        List<ResponsePromoPostDTO> promoPostDTOS = new ArrayList<>();
+        if(userRepository.existsUser(userId)){
+            User user = userRepository.findUserById(userId);
+            List<Post> posts = user.getPosts().stream()
+                    .filter(post -> post.isHasPromo())
+                    .collect(Collectors.toList());
+            for (Post post: posts) {
+                promoPostDTOS.add(mapper.map(post,ResponsePromoPostDTO.class));
+            }
+            return new ResponsePomoPostListDTO(user.getId(),user.getName(),promoPostDTOS);
+        }else{
+            throw new UserNotFoundException(userId);
+        }
     }
 
 

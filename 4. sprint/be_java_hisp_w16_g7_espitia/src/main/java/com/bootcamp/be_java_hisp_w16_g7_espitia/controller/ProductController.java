@@ -62,5 +62,13 @@ public class ProductController {
         return new ResponseEntity<>(iProductService.countPromoPostByUser(userId),HttpStatus.OK);
     }
 
+    @Operation(summary = "List promo post to specific user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Promo Post list"),
+            @ApiResponse(responseCode = "404", description = "User not found")})
+    @GetMapping("promo-post/list")
+    public ResponseEntity<ResponsePomoPostListDTO> listPromoPost (@RequestParam(name="user_id") int userId){
+        return new ResponseEntity<>(iProductService.listPromoPostByUser(userId),HttpStatus.OK);
+    }
 
 }

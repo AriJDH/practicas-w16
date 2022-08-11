@@ -17,4 +17,6 @@ public interface IProductService {
 
     ResponsePromoPostCountDTO countPromoPostByUser(int userId);
 
+    ResponsePomoPostListDTO listPromoPostByUser(int userId);
+
 }

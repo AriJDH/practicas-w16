@@ -7,17 +7,19 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
-
-public class PromoPostDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class ResponsePromoPostDTO {
 
     @JsonProperty("user_id")
     private int id;
 
+    @JsonProperty("post_id")
+    private int postId;
+
     @JsonProperty("date")
-    private LocalDate creationDate;
+    private LocalDate date;
 
     @JsonProperty("product")
     private ProductDTO product;
