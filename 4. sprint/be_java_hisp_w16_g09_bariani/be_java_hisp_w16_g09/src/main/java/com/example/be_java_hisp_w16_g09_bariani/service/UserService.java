@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g09_bariani.service;
 
-import com.example.be_java_hisp_w16_g09_bariani.dto.FollowersCountDTO;
-import com.example.be_java_hisp_w16_g09_bariani.dto.FollowersDtoResponse;
-import com.example.be_java_hisp_w16_g09_bariani.dto.SimpleUserDto;
-import com.example.be_java_hisp_w16_g09_bariani.dto.UserFollowedDto;
+import com.example.be_java_hisp_w16_g09_bariani.dto.*;
 import com.example.be_java_hisp_w16_g09_bariani.exception.*;
 import com.example.be_java_hisp_w16_g09_bariani.model.User;
 import com.example.be_java_hisp_w16_g09_bariani.repository.IPostRepository;
@@ -17,18 +14,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     @Autowired
     IUserRepository userRepository;
     @Autowired
     IPostRepository postRepository;
 
-   @Autowired
+    @Autowired
     private DTOMapperUtil dtoMapperUtil;
 
     //Javi
     public void followUser(int userId, int userIdToFollow) {
-        if (userId == userIdToFollow){
+        if (userId == userIdToFollow) {
             throw new UserNotAllowedToFollowException(userId);
         }
         User userFollower = getValidatedUser(userId);
@@ -36,7 +33,7 @@ public class UserService implements IUserService{
 
         validateUserToFollowIsSeller(userToFollow);
 
-        if(userFollower.isFollowing(userToFollow)){
+        if (userFollower.isFollowing(userToFollow)) {
             throw new UserAlreadyFollowedException(userIdToFollow);
         }
 
@@ -49,7 +46,7 @@ public class UserService implements IUserService{
 
     private void validateUserToFollowIsSeller(User anUser) {
         if (postRepository.searchById(anUser.getUserId()) == null)
-            throw new UserToFollowIsNotSellerException(anUser.getUserId());
+            throw new UserIsNotSellerException(anUser.getUserId());
     }
 
     private User getValidatedUser(int userId) {
@@ -66,42 +63,70 @@ public class UserService implements IUserService{
     //MaxiM
     public UserFollowedDto getUsersFollowedBySellers(int userId) {
         User user = getValidatedUser(userId);
-        if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
+        if (user.getFollowing().isEmpty()) {
+            throw new UserDoesNotFollowedAnyone(userId);
+        }
         List<SimpleUserDto> followed = dtoMapperUtil.mapList(user.getFollowing(), SimpleUserDto.class);
         return new UserFollowedDto(user.getUserId(), user.getUserName(), followed);
     }
 
+    @Override
+    public List<SimpleUserInfoDto> getAllUsers() {
+        List<User> users = userRepository.getAllUsers();
+        List<SimpleUserInfoDto> usersWithInfo = dtoMapperUtil.mapList(users, SimpleUserInfoDto.class);
+        usersWithInfo.forEach(user -> user.setSeller(validateUserIsSeller(user.getUserId())));
+        return usersWithInfo;
+    }
+
+    @Override
+    public UserDtoResponse createUser(UserDtoRequest userDtoRequest) {
+        User newUser = dtoMapperUtil.map(userDtoRequest, User.class);
+        validateUsername(newUser.getUserName());
+        return dtoMapperUtil.map(userRepository.createElement(newUser), UserDtoResponse.class);
+    }
+
+    private boolean validateUserIsSeller(int userId){
+        return postRepository.searchById(userId) != null;
+    }
+
+    private void validateUsername(String username){
+        boolean noExiste = userRepository.getAllUsers().stream().noneMatch(user -> user.getUserName().equals(username));
+        if (!noExiste){
+            throw new UserNameAlreadyExistsException(username);
+        }
+    }
+
     //MaxiN
-    public FollowersCountDTO followerCount(int id){
+    public FollowersCountDTO followerCount(int id) {
         FollowersCountDTO followersCountDTO = new FollowersCountDTO();
         followersCountDTO.setUser_id(id);
 
-        User user = getValidatedUser (id);
+        User user = getValidatedUser(id);
 
         followersCountDTO.setUser_name(user.getUserName());
         int followersCount = 0;
-        if(postRepository.searchById(id)!=null)
+        if (postRepository.searchById(id) != null)
             followersCount = user.getFollowers().size();
 
         followersCountDTO.setFollowers_count(followersCount);
         return followersCountDTO;
     }
 
-    public void unfollow(int userId, int userIdToUfollow){
+    public void unfollow(int userId, int userIdToUfollow) {
         User unfollow = getValidatedUser(userIdToUfollow);
         User unfollow2 = getValidatedUser(userId);
 
         if (!userRepository.searchById(userId).isFollowing(unfollow))
-            throw new UserNotFollowing(userId,userIdToUfollow);
-        else{
+            throw new UserNotFollowing(userId, userIdToUfollow);
+        else {
             userRepository.searchById(userId).getFollowing().remove(unfollow);
             userRepository.searchById(userIdToUfollow).getFollowers().remove(unfollow2);
         }
     }
 
-    public FollowersDtoResponse orderByName(int id, String order){
+    public FollowersDtoResponse orderByName(int id, String order) {
         FollowersDtoResponse followers = getAllFollowers(id);
-        List<SimpleUserDto> listOrder =  followers.getFollowers().stream()
+        List<SimpleUserDto> listOrder = followers.getFollowers().stream()
                 .sorted(Comparator.comparing(SimpleUserDto::getUserName))
                 .collect(Collectors.toList());
         if (order.equals("name_desc"))
@@ -110,9 +135,9 @@ public class UserService implements IUserService{
         return followers;
     }
 
-    public UserFollowedDto orderByNameFollowed(int id, String order){
+    public UserFollowedDto orderByNameFollowed(int id, String order) {
         UserFollowedDto followers = getUsersFollowedBySellers(id);
-        List<SimpleUserDto> listOrder =  followers.getFollowing().stream()
+        List<SimpleUserDto> listOrder = followers.getFollowing().stream()
                 .sorted(Comparator.comparing(SimpleUserDto::getUserName))
                 .collect(Collectors.toList());
         if (order.equals("name_desc"))
@@ -122,15 +147,17 @@ public class UserService implements IUserService{
     }
 
     //Guille
-    public FollowersDtoResponse getAllFollowers(int id){
+    public FollowersDtoResponse getAllFollowers(int id) {
         User user = getValidatedUser(id);
-        if (user.getFollowers().isEmpty()){
+        if (user.getFollowers().isEmpty()) {
             throw new UserHasNoFollowersException(id);
-        }else{
+        } else {
             List<SimpleUserDto> followers = dtoMapperUtil.mapList(user.getFollowers(), SimpleUserDto.class);
             return new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
         }
     }
+
+
     //Nico
 }
 

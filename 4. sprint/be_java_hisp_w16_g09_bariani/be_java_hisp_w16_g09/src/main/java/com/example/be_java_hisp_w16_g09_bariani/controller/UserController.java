@@ -1,14 +1,13 @@
 package com.example.be_java_hisp_w16_g09_bariani.controller;
 
-import com.example.be_java_hisp_w16_g09_bariani.dto.FollowersCountDTO;
-import com.example.be_java_hisp_w16_g09_bariani.dto.FollowersDtoResponse;
-import com.example.be_java_hisp_w16_g09_bariani.dto.MessageDto;
-import com.example.be_java_hisp_w16_g09_bariani.dto.UserFollowedDto;
+import com.example.be_java_hisp_w16_g09_bariani.dto.*;
 import com.example.be_java_hisp_w16_g09_bariani.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -48,5 +47,16 @@ public class UserController {
     public ResponseEntity<MessageDto> US007(@PathVariable int userId,@PathVariable int userIdToUnfollow){
         userService.unfollow(userId,userIdToUnfollow);
         return new ResponseEntity<>(new MessageDto("User "+userId+" unfollow "+userIdToUnfollow),HttpStatus.OK );
+    }
+
+    //US 0013
+    @GetMapping("/users/list")
+    public ResponseEntity<List<SimpleUserInfoDto>> getAllUsers(){
+        return new ResponseEntity<>(userService.getAllUsers(),HttpStatus.OK);
+    }
+
+    @PostMapping("/users/create")
+    public ResponseEntity<UserDtoResponse> createNewUser(@RequestBody UserDtoRequest userDtoRequest){
+        return new ResponseEntity<>(userService.createUser(userDtoRequest),HttpStatus.OK );
     }
 }

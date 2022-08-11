@@ -3,6 +3,7 @@ package com.example.be_java_hisp_w16_g09_bariani.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     private int userId;
+    @NonNull
     private String userName;
     private List<User> followers = new ArrayList<>();
     private List<User> following = new ArrayList<>();

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -39,5 +41,9 @@ public class UserRepository implements IUserRepository {
         users.put(3,userC);
         users.put(4,userD);
         users.put(5,userE);
+    }
+
+    public List<User> getAllUsers(){
+        return new ArrayList<>(users.values());
     }
 }
