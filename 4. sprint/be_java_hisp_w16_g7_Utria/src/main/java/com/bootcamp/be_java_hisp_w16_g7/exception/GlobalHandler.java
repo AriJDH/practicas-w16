@@ -19,6 +19,11 @@ public class GlobalHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
+    @ExceptionHandler(NoDiscountException.class)
+    public ResponseEntity<?> NoDiscountException(Exception e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
 
     @ExceptionHandler({FollowsNotFoundException.class})
     public ResponseEntity<ApiResponseDto> catchException(FollowsNotFoundException e) {

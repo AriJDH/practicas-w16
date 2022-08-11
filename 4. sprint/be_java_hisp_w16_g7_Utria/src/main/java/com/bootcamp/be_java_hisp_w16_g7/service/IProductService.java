@@ -15,7 +15,7 @@ public interface IProductService {
 
     PromotionProductDTO getPromotionProducts(int id);
 
-    ApiResponseDto createPromotionPost(PostDTO postDto);
+    ApiResponseDto createPromotionPost(PromoDTO postDto);
 
 
 }

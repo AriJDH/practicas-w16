@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.controller;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PromotionProductDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.service.IProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -51,7 +48,7 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Post created"),
             @ApiResponse(responseCode = "400", description = "User not found")})
     @PostMapping("/promo-post")
-    public ResponseEntity<ApiResponseDto> createPromotionPost(@RequestBody PostDTO postDto) {
+    public ResponseEntity<ApiResponseDto> createPromotionPost(@RequestBody PromoDTO postDto) {
         return new ResponseEntity<>(iProductService.createPromotionPost(postDto), HttpStatus.OK);
     }
     @Operation(summary = "Get total products with promotion")

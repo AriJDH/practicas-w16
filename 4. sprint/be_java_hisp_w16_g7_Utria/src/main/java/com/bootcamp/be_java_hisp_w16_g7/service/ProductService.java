@@ -5,6 +5,7 @@ import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.NoDiscountException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
@@ -94,14 +95,29 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public ApiResponseDto createPromotionPost(PostDTO postDto) {
-        Post post = mapper.map(postDto, Post.class);
+    public ApiResponseDto createPromotionPost(PromoDTO promoDto) {
+        Post post = mapper.map(promoDto, Post.class);
+        if(post.getDiscount() <= 0){
+            throw new NoDiscountException();
+        }
 
         post.setPostId(count);
         post.setHasPromo(true);
         post.setDiscount(post.getDiscount());
 
-        return getUser(postDto, post);
+        User user = userRepository.findUserById(post.getId());
+
+        if (user == null) {
+            throw new UserNotFoundException(promoDto.getId());
+        }
+
+
+        user.getPosts().add(post);
+
+        count++;
+        System.out.println(user);
+
+        return new ApiResponseDto("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
     }
 
     private ApiResponseDto getUser(PostDTO postDto, Post post) {
