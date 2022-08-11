@@ -16,7 +16,7 @@
 							"script": {
 								"exec": [
 									"pm.collectionVariables.set(\"client_id\", 1);",
-									"pm.collectionVariables.set(\"seller_id\", 3);",
+									"pm.collectionVariables.set(\"seller_id\", 4);",
 									""
 								],
 								"type": "text/javascript"
@@ -95,7 +95,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
+									"pm.collectionVariables.set(\"seller_id\", 1);"
 								],
 								"type": "text/javascript"
 							}
@@ -179,7 +179,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
+									"pm.collectionVariables.set(\"seller_id\", 4);"
 								],
 								"type": "text/javascript"
 							}
@@ -190,7 +190,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-08-2022\",\n    \"product\": {\n        \"product_id\": 99,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"03-08-2022\",\n    \"product\": {\n        \"product_id\": 111,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -234,7 +234,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/products/followed/{{client_id}}/list?order=date_asc",
+							"raw": "{{url}}/products/followed/{{client_id}}/list?order=date_desc",
 							"host": [
 								"{{url}}"
 							],
@@ -247,12 +247,12 @@
 							"query": [
 								{
 									"key": "order",
-									"value": "date_desc",
-									"disabled": true
+									"value": "date_desc"
 								},
 								{
 									"key": "order",
-									"value": "date_asc"
+									"value": "date_asc",
+									"disabled": true
 								}
 							]
 						}
@@ -292,6 +292,153 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Bonus",
+			"item": [
+				{
+					"name": "US 10 - New Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 4);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-08-2022\",\n    \"product\": {\n        \"product_id\": 898,\n        \"product_name\": \"Silla\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\":true,\n    \"discount\":0.25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/products/promo-post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 11 - Count seller PromoPost",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/count?user_id=4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 12 - List seller PromoPost + Order by date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/list?user_id=4&order=date_desc",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"list"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "4"
+								},
+								{
+									"key": "order",
+									"value": "date_asc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "date_desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 13 - Get All Users info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/list",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 14 - Create New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_name\":\"Joselito\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -325,7 +472,7 @@
 		},
 		{
 			"key": "seller_id",
-			"value": 3
+			"value": 4
 		}
 	]
 }
