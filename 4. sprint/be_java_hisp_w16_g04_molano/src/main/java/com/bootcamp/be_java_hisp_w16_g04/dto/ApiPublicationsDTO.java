@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class AllPromoPublicationDTO {
+public class ApiPublicationsDTO {
   private List<PostDTO> products;
 }

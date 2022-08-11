@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.controller;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.AllPromoPublicationDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.ApiPublicationsDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ProductsUserPromotionsDTO;
 import com.bootcamp.be_java_hisp_w16_g04.service.IPublicationService;
@@ -45,13 +45,23 @@ public class PublicationController {
   }
 
   /**
-   * Metodo encargado de obtener todos los articulos en promocion ordenados por descuento
+   * Method in charge of obtaining all the items on promotion sorted by discount
    * @param order Order in which promotional products will be delivered
    * @return ResponseEntity with a DTO to give information to the user
    */
   @GetMapping("/all-promo")
-  public ResponseEntity<AllPromoPublicationDTO> AllPromoPublication(@RequestParam Optional<String> order){
+  public ResponseEntity<ApiPublicationsDTO> AllPromoPublication(@RequestParam Optional<String> order){
     return new ResponseEntity<>(iPublicationService.allPromoPublications(order.orElse("")), HttpStatus.OK);
+  }
+
+  /**
+   * Method to obtain all the publications of the same category.
+   * @param category Category by which you want to filter the publications
+   * @return ResponseEntity with a DTO to give information to the user
+   */
+  @GetMapping("/category")
+  public ResponseEntity<ApiPublicationsDTO> getPublicationsByCategory(@RequestParam Optional<Integer> category){
+    return new ResponseEntity<>(iPublicationService.getPublicationsByCategory(category.orElse(0)), HttpStatus.OK);
   }
 
 }

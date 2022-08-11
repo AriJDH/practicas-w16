@@ -3,7 +3,6 @@ package com.bootcamp.be_java_hisp_w16_g04.service;
 import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ public class PublicationService implements IPublicationService {
     List<Publication> sellers = getListSeller(users);
     List<PostDTO> listDTO = listOrderByWeekend(sellers);
     if (order.equals("date_desc")) {
-      listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).collect(Collectors.toList());
+      listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).collect(Collectors.toList());
     }
     return new ListProductByDateDTO(userId, listDTO);
   }
@@ -74,9 +73,8 @@ public class PublicationService implements IPublicationService {
     LocalDate date = LocalDate.now().minusDays(15);
     List<PostDTO> result = publications.stream()
         .filter(x -> x.getDate().isAfter(date))
-        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(),
-            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice(),p.getHasPromo(), p.getDiscount()))
-        .sorted(Comparator.comparing(PostDTO::getDate).reversed())
+        .map(this::mapperPostDto)
+        .sorted(Comparator.comparing(PostDTO::getDate))
         .collect(Collectors.toList());
 
     return result;
@@ -118,9 +116,7 @@ public class PublicationService implements IPublicationService {
     List<PostDTO> publicationList = iPublicationRepository.getListPublicationsById(userId)
         .stream()
         .filter(Publication::getHasPromo)
-        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(), p.getDate(),
-            iProductService.getProductById(p.getProductId()), p.getCategory(),
-            p.getPrice(), p.getHasPromo(), p.getDiscount()))
+        .map(this::mapperPostDto)
         .collect(Collectors.toList());
 
     return new ProductsUserPromotionsDTO(userId, currentUser.getUserName(), publicationList);
@@ -133,18 +129,42 @@ public class PublicationService implements IPublicationService {
    * @return DTO with all the information of the products in discount
    */
   @Override
-  public AllPromoPublicationDTO allPromoPublications(String order) {
+  public ApiPublicationsDTO allPromoPublications(String order) {
     Comparator<PostDTO> newOrder = Comparator.comparing(PostDTO::getDiscount);
     if(order.equals("desc")) newOrder = Comparator.comparing(PostDTO::getDiscount).reversed();
     List<PostDTO> post = iPublicationRepository.getPublications()
         .stream()
         .filter(Publication::getHasPromo)
-        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(), p.getDate(),
-            iProductService.getProductById(p.getProductId()), p.getCategory(),
-            p.getPrice(), p.getHasPromo(), p.getDiscount()))
+        .map(this::mapperPostDto)
         .sorted(newOrder)
         .collect(Collectors.toList());
 
-    return new AllPromoPublicationDTO(post);
+    return new ApiPublicationsDTO(post);
+  }
+
+  /**
+   * Method to obtain all the publications of the same category.
+   * @param category Category to be filtered by
+   * @return DTO with the information of all filtered products
+   */
+  @Override
+  public ApiPublicationsDTO getPublicationsByCategory(Integer category) {
+    List<PostDTO> postByCatagory = iPublicationRepository.getPublications()
+        .stream()
+        .filter(x -> x.getCategory().equals(category))
+        .map(this::mapperPostDto)
+        .collect(Collectors.toList());
+    return new ApiPublicationsDTO(postByCatagory);
+  }
+
+  /**
+   * Method to map a publication to a PostDTO
+   * @param p Publication
+   * @return PostDTO with publication information
+   */
+  public PostDTO mapperPostDto(Publication p){
+    return new PostDTO(p.getUserId(), p.getPublicationId(), p.getDate(),
+        iProductService.getProductById(p.getProductId()), p.getCategory(),
+        p.getPrice(), p.getHasPromo(), p.getDiscount());
   }
 }

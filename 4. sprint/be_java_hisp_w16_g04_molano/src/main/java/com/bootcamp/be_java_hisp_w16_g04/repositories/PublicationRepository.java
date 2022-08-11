@@ -24,7 +24,7 @@ public class PublicationRepository implements IPublicationRepository {
 
     publications.add(new Publication(1, 104, date1, 100, 100, 150.0, false, 0.0));
     publications.add(new Publication(2, 104, date2, 200, 200, 350.0, false, 0.0));
-    publications.add(new Publication(2, 104, date3, 300, 200, 350.0, false, 0.0));
+    publications.add(new Publication(2, 104, date3, 300, 200, 350.0, true, 0.99));
   }
 
   @Override
