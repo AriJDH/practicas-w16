@@ -6,8 +6,8 @@ public class NoPromoPostException extends RuntimeException{
     private final HttpStatus htttpStatus;
     private final String exception;
     public NoPromoPostException() {
-        super("User without promoPost");
-        this.htttpStatus=HttpStatus.BAD_REQUEST;
-        this.exception="Not found";
+        super("User without promo post");
+        this.htttpStatus=HttpStatus.OK;
+        this.exception="User without promo post";
     }
 }

@@ -92,7 +92,6 @@ public class ProductService implements IProductService {
                 .map(x->mapper.map(x,ResponsePromoPostDto.class))
                 .collect(Collectors.toList());
 
-
         return new ResponsePromoPostFromUserDto(userId, list);
     }
 
