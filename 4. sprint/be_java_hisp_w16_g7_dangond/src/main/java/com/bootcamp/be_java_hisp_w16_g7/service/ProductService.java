@@ -7,6 +7,7 @@ import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
+import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidDiscountException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
@@ -93,5 +94,29 @@ public class ProductService implements IProductService {
         System.out.println(user);
 
         return new ApiResponseDto("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
+    }
+
+    @Override
+    public ApiResponseDto postOfProductWithDiscount(PostDTO postDto) {
+
+        Post postWithDiscount = mapper.map(postDto, Post.class);
+
+        if(postWithDiscount.getDiscount() <= 0){
+            throw new InvalidDiscountException(postWithDiscount.getDiscount());
+        }
+
+        postWithDiscount.setPostId(count);
+
+        User userWhoDiscounts = userRepository.findUserById(postDto.getId());
+        if (userWhoDiscounts == null) {
+            throw new UserNotFoundException(postDto.getId());
+        }
+
+        userWhoDiscounts.getPosts().add(postWithDiscount);
+
+        count++;
+        System.out.println(userWhoDiscounts);
+
+        return new ApiResponseDto("Post created successfully", "Post with discount of user with id: " + postWithDiscount.getId() + " was created successfully");
     }
 }

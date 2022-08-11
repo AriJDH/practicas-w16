@@ -22,7 +22,6 @@ public class ProductController {
         this.iProductService = iProductService;
     }
 
-
     @Operation(summary = "Create post to specific user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Post created"),
@@ -41,5 +40,14 @@ public class ProductController {
     public ResponseEntity<RecentPostsDTO> recentPost(@PathVariable int userId,
                                                      @RequestParam(required = false) String order) {
         return new ResponseEntity<>(iProductService.recentPost(userId, order), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Create post of a new product with discount")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Post created"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")})
+    @PostMapping("/promo-post")
+    public ResponseEntity<ApiResponseDto> postOfProductWithDiscount(@RequestBody PostDTO postDto) {
+        return new ResponseEntity<>(iProductService.postOfProductWithDiscount(postDto), HttpStatus.OK);
     }
 }

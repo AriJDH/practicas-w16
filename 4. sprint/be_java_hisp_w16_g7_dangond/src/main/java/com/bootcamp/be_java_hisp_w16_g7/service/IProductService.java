@@ -15,5 +15,6 @@ public interface IProductService {
     List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList);
 
     ApiResponseDto createPost(PostDTO postDto);
+    ApiResponseDto postOfProductWithDiscount(PostDTO postDto);
 
 }

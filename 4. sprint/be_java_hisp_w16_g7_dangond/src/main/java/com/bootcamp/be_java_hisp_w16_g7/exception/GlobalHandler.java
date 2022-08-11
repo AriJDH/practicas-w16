@@ -49,6 +49,11 @@ public class GlobalHandler {
     public ResponseEntity<ApiResponseDto> catchException(SameUserException e) {
         ApiResponseDto apiResponseDto = new ApiResponseDto("Same user", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
 
+    @ExceptionHandler(InvalidDiscountException.class)
+    public ResponseEntity<ApiResponseDto> catchException(InvalidDiscountException e) {
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Invalid Discount", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
 }
