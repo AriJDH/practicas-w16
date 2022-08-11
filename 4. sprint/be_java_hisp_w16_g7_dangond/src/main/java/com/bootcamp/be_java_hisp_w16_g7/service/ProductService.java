@@ -4,10 +4,7 @@ package com.bootcamp.be_java_hisp_w16_g7.service;
 import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidDiscountException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.*;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -98,8 +95,16 @@ public class ProductService implements IProductService {
 
         Post postWithDiscount = mapper.map(postDto, Post.class);
 
-        if(postWithDiscount.getDiscount() <= 0){
+        if (postWithDiscount.getDiscount() <= 0) {
             throw new InvalidDiscountException(postWithDiscount.getDiscount());
+        }
+
+        if (!postWithDiscount.getHasPromo()) {
+            throw new ProductWithPromoFalseException("Discount not applied, verify the promotion");
+        }
+
+        if (!postWithDiscount.getCreationDate().isAfter(LocalDate.now())) {
+            throw new ProductWithPromoWithPastDateException("Enter current date or release date");
         }
 
         postWithDiscount.setPostId(count);
@@ -112,15 +117,36 @@ public class ProductService implements IProductService {
         userWhoDiscounts.getPosts().add(postWithDiscount);
 
         count++;
-        System.out.println(userWhoDiscounts);
 
         return new ApiResponseDTO("Post created successfully", "Post with discount of user with id: " + postWithDiscount.getId() + " was created successfully");
     }
 
     @Override
     public PromoProductsCountDTO getCountProductsWithDiscount(int userId) {
-        System.out.println("Holaaaaaa");
+
         int promoProductsCount = 0;
+
+        User user = userRepository.findUserById(userId);
+
+        if (user == null) {
+            throw new UserNotFoundException(userId);
+        }
+
+        if (!user.isSeller()){
+            throw new UserIsNotSellerException(userId);
+        }
+
+        List<Post> postList = user.getPosts();
+        for (Post post : postList) {
+            if (post.getHasPromo())
+                promoProductsCount++;
+        }
+
+        return new PromoProductsCountDTO(userId, user.getName(), promoProductsCount);
+    }
+
+    @Override
+    public List<ProductDTO> getListProductsWithDiscount(int userId) {
 
         User user = userRepository.findUserById(userId);
 
@@ -132,13 +158,14 @@ public class ProductService implements IProductService {
             throw new UserIsNotSellerException(userId);
         }
 
+        List<ProductDTO> productListDTO = new ArrayList<>();
         List<Post> postList = user.getPosts();
-        for (Post post : postList){
-            if (post.getHasPromo() == true)
-                promoProductsCount++;
+
+        for (Post post : postList) {
+            if (post.getHasPromo()) {
+                productListDTO.add(mapper.map(post.getProduct(), ProductDTO.class));
+            }
         }
-
-        return new PromoProductsCountDTO(userId, user.getName(), promoProductsCount);
+        return productListDTO;
     }
-
 }

@@ -27,7 +27,7 @@ public class UserService implements IUserService {
 
     @Override
     public HttpStatus follow(int userId, int userIdToFollow) {
-        if(userId == userIdToFollow) throw new SameUserException(userId);
+        if (userId == userIdToFollow) throw new SameUserException(userId);
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToFollow);
 
@@ -44,7 +44,7 @@ public class UserService implements IUserService {
 
     @Override
     public HttpStatus unfollow(int userId, int userIdToUnfollow) {
-        if(userId == userIdToUnfollow) throw new SameUserException(userId);
+        if (userId == userIdToUnfollow) throw new SameUserException(userId);
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToUnfollow);
 
@@ -83,7 +83,6 @@ public class UserService implements IUserService {
         if (response == null) {
             throw new UserNotFoundException(id);
         }
-        //Verifica si la query es correcta
         if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
             throw new InvalidQueryException("unknown query");
         }

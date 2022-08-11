@@ -56,4 +56,16 @@ public class GlobalHandler {
         ApiResponseDTO apiResponseDto = new ApiResponseDTO("Invalid Discount", e.getMessage());
         return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ProductWithPromoFalseException.class)
+    public ResponseEntity<ApiResponseDTO> catchException(ProductWithPromoFalseException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Invalid Discount", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ProductWithPromoWithPastDateException.class)
+    public ResponseEntity<ApiResponseDTO> catchException(ProductWithPromoWithPastDateException e) {
+        ApiResponseDTO apiResponseDto = new ApiResponseDTO("Invalid Date", e.getMessage());
+        return new ResponseEntity<>(apiResponseDto, HttpStatus.BAD_REQUEST);
+    }
 }
