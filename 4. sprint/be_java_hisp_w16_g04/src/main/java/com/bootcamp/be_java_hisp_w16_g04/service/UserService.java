@@ -113,8 +113,8 @@ public class UserService implements IUserService {
     }
 
     user.setFollowed(users);
-    user.setUser_id(userId);
-    user.setUser_name(user1.getUserName());
+    user.setUserId(userId);
+    user.setUserName(user1.getUserName());
 
     return user;
   }

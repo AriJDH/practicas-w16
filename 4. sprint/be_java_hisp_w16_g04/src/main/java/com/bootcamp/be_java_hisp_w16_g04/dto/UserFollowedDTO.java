@@ -1,10 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g04.dto;
 
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.*;
 
 import java.util.List;
 
@@ -12,8 +11,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserFollowedDTO {
-  Integer user_id;
-  String user_name;
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@EqualsAndHashCode(callSuper = true)
+public class UserFollowedDTO extends UserDTO {
   List<User> followed;
 }

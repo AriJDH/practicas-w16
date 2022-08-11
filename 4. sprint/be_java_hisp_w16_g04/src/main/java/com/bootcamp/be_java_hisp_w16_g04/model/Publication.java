@@ -15,5 +15,7 @@ public class Publication {
   private LocalDate date;
   private Integer productId;
   private Integer category;
+  private Double discount;
   private Double price;
+  private Boolean hasPromo;
 }

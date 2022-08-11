@@ -49,6 +49,7 @@ public class ProductRepository implements IProductRepository {
         productDTO.getType() != null &&
         productDTO.getBrand() != null &&
         productDTO.getColor() != null &&
+        productDTO.getColor() != null &&
         productDTO.getNotes() != null;
   }
 }

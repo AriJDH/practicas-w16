@@ -1,6 +1,5 @@
 package com.bootcamp.be_java_hisp_w16_g04.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -10,14 +9,16 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class RequestCreatePublicationDTO {
+public class PublicationCreateDTO {
   private Integer userId;
-  @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
   private LocalDate date;
-  private ProductCreateDTO product;
   private Integer category;
+  private Double discount;
   private Double price;
+  private Integer productId;
+  private Boolean hasPromo;
+
 }

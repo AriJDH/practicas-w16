@@ -1,13 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
+import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,8 +23,9 @@ public class PublicationService implements IPublicationService {
   @Autowired
   IPublicationRepository iPublicationRepository;
   @Autowired
+  IUserRepository iUserRepository;
+  @Autowired
   IUserService iUserService;
-
   @Autowired
   IProductService iProductService;
 
@@ -45,6 +45,37 @@ public class PublicationService implements IPublicationService {
       listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).collect(Collectors.toList());
     }
     return new ListProductByDateDTO(userId, listDTO);
+  }
+
+  /**
+   * Method that returns the list promo publication by user
+   * @param userId user identification
+   * @return DTO of a list og promo publication
+   */
+  @Override
+  public ResponseListPromoPublicationDTO getListPromoPublication(Integer userId) {
+    //Get User
+    User user = iUserRepository.getByIdUser(userId);
+    if (user == null) throw new UserNotFoundException("User Not Found with User Id: " + userId);
+
+    //Get list of publication with promo.
+   List<PromoPublicationDTO> listPublications = iPublicationRepository.getListPromoPublicationById(userId);
+    return new ResponseListPromoPublicationDTO(user.getUserId(),user.getUserName(),listPublications);
+  }
+  /**
+   * Method that returns number promo publication by user
+   * @param userId user identification
+   * @return DTO of a count of promo publication
+   */
+  @Override
+  public ResponseNumberPromoProductsDTO getNumberPromoPublicationById(Integer userId) {
+    //Get User
+    User user = iUserRepository.getByIdUser(userId);
+    if (user == null) throw new UserNotFoundException("User Not Found with User Id: " + userId);
+
+    //Get list of publication with promo.
+    List<PromoPublicationDTO> listPublications = iPublicationRepository.getListPromoPublicationById(userId);
+    return new ResponseNumberPromoProductsDTO(user.getUserId(),user.getUserName(),listPublications.size());
   }
 
   /**
@@ -70,33 +101,14 @@ public class PublicationService implements IPublicationService {
    */
   private List<PostDTO> listOrderByWeekend(List<Publication> publications) {
     LocalDate date = LocalDate.now().minusDays(15);
-    List<PostDTO> result = publications.stream()
+
+    return publications.stream()
         .filter(x -> x.getDate().isAfter(date))
         .map(p -> new PostDTO(p.getPublicationId(), p.getUserId(),
             p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice()))
         .sorted(Comparator.comparing(PostDTO::getDate).reversed())
         .collect(Collectors.toList());
-
-    return result;
   }
 
 
-  /**
-   * Method for creating a publication
-   * @param requestCreatePublicationDTO DTO of a publication that is sent from request
-   * @return Boolean that checks if the publication was created
-   */
-  @Override
-  public Boolean createPublication(RequestCreatePublicationDTO requestCreatePublicationDTO) {
-
-    PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDTO.getUserId(),
-        requestCreatePublicationDTO.getDate(),
-        requestCreatePublicationDTO.getCategory(),
-        requestCreatePublicationDTO.getPrice(),
-        requestCreatePublicationDTO.getProduct().getProductId());
-
-    Publication publication = iPublicationRepository.createPublication(publicationDTO);
-
-    return publication != null;
-  }
 }
