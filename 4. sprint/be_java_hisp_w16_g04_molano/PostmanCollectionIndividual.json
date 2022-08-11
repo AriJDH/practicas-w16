@@ -43,7 +43,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8080/users/103/follow/104",
+							"raw": "http://localhost:8080/users/102/follow/100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -51,9 +51,9 @@
 							"port": "8080",
 							"path": [
 								"users",
-								"103",
+								"102",
 								"follow",
-								"104"
+								"100"
 							]
 						}
 					},
@@ -65,7 +65,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/users/106/unfollow/100",
+							"raw": "http://localhost:8080/users/106/follow/100",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -74,7 +74,7 @@
 							"path": [
 								"users",
 								"106",
-								"unfollow",
+								"follow",
 								"100"
 							]
 						}
@@ -335,7 +335,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": 100,\n    \"date\": \"29-04-2021\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}\n",
+							"raw": "{\n    \"user_id\": 100,\n    \"date\": \"10-08-2022\",\n    \"product\": {\n        \"product_id\": 80,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -520,14 +520,21 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 100,\n    \"date\": \"11-08-2022\",\n    \"product\": {\n        \"product_id\": 230,\n        \"product_name\": \"Escoba\",\n        \"type\": \"Aseo\",\n        \"brand\": \"Acer\",\n        \"color\": \"White\",\n        \"notes\": \"Special Functions\"\n    },\n    \"category\": 109,\n    \"price\": 15000.50,\n    \"has_promo\": true,\n    \"discount\": 0.35\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "{{url}}/products/promo-post",
+							"raw": "http://localhost:8080/products/promo-post",
+							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"promo-post"
@@ -554,10 +561,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/products/promo-post/count?user_id={{seller_id}}",
+							"raw": "http://localhost:8080/products/promo-post/count?user_id=100\n",
+							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"promo-post",
@@ -566,7 +575,7 @@
 							"query": [
 								{
 									"key": "user_id",
-									"value": "{{seller_id}}"
+									"value": "100\n"
 								}
 							]
 						}
@@ -591,10 +600,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/products/promo-post/list?user_id={{seller_id}}",
+							"raw": "http://localhost:8080/products/promo-post/list?user_id=100",
+							"protocol": "http",
 							"host": [
-								"{{url}}"
+								"localhost"
 							],
+							"port": "8080",
 							"path": [
 								"products",
 								"promo-post",
@@ -602,13 +613,65 @@
 							],
 							"query": [
 								{
-									"key": "user_id",
-									"value": "{{seller_id}}"
-								},
-								{
 									"key": "order",
 									"value": "producName_asc",
 									"disabled": true
+								},
+								{
+									"key": "user_id",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 12.01 - All Promo post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/all-promo?order=desc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"all-promo"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 12.02 - Post by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/products/category?category=109",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"products",
+								"category"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "109"
 								}
 							]
 						}
