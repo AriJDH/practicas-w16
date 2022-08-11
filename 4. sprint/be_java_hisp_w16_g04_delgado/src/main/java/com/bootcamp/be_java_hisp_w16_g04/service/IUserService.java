@@ -11,4 +11,6 @@ public interface IUserService {
   UserFollowersCountDTO followersCount(Integer userId);
 
   UserFollowedDTO orderListUserFollowed(Integer userId, String order);
+
+
 }

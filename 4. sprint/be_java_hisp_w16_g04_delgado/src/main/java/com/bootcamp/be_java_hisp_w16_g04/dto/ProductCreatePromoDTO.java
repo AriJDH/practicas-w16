@@ -6,18 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class PublicationDTO {
-  private Integer userId;
-  private LocalDate date;
-  private Integer category;
-  private Double price;
-  private Integer productId;
-  private Boolean hasPromo;
-  private Double discount;
+public class ProductCreatePromoDTO {
+    private Integer productId;
+    private String productName;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
 }

@@ -79,7 +79,6 @@ public class UserService implements IUserService {
     return new UserFollowersCountDTO(user.getUserId(), user.getUserName(), followerList.size());
   }
 
-
   /**
    * Method that sorts the list of followers of a person
    * @param userId Current user id
@@ -117,6 +116,8 @@ public class UserService implements IUserService {
 
     return user;
   }
+
+
 
 
 }

@@ -13,4 +13,6 @@ public interface IPublicationRepository {
 
   Publication createPublication(PublicationDTO publicationDTO);
 
+  List<Publication> getListPublicationsPromoById(Integer userId);
+
 }

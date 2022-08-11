@@ -1,13 +1,14 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
+import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,11 +24,21 @@ public class PublicationService implements IPublicationService {
 
   @Autowired
   IPublicationRepository iPublicationRepository;
+
+  @Autowired
+  IUserRepository iUserRepository;
+  @Autowired
+  IProductRepository iProductRepository;
   @Autowired
   IUserService iUserService;
 
   @Autowired
   IProductService iProductService;
+
+  private final ModelMapper mapper;
+  public PublicationService() {
+    mapper = new ModelMapper();
+  }
 
   /**
    * Method that returns the publications of the people I follow in date order.
@@ -79,8 +90,6 @@ public class PublicationService implements IPublicationService {
 
     return result;
   }
-
-
   /**
    * Method for creating a publication
    * @param requestCreatePublicationDTO DTO of a publication that is sent from request
@@ -93,10 +102,34 @@ public class PublicationService implements IPublicationService {
         requestCreatePublicationDTO.getDate(),
         requestCreatePublicationDTO.getCategory(),
         requestCreatePublicationDTO.getPrice(),
-        requestCreatePublicationDTO.getProduct().getProductId());
+        requestCreatePublicationDTO.getProduct().getProductId(),
+            requestCreatePublicationDTO.getHasPromo(),
+            requestCreatePublicationDTO.getDiscount());
 
     Publication publication = iPublicationRepository.createPublication(publicationDTO);
 
     return publication != null;
   }
+
+  @Override
+  public PostPromoCountDTO ProductPromoCount(Integer userId) {
+
+    User user = iUserRepository.getByIdUser(userId);
+    List<Publication> publicationsPromoList = iPublicationRepository.getListPublicationsPromoById(userId);
+    if (user == null)
+      throw new UserNotFoundException("User Not Found with User Id: " + userId);
+
+    return new PostPromoCountDTO(user.getUserId(), user.getUserName(), publicationsPromoList.size());
+  }
+
+  @Override
+  public ProductPromoDTO getListPostByUserId(Integer userId) {
+    User user = iUserRepository.getByIdUser(userId);
+    List<Publication> publicationsPromoList = iPublicationRepository.getListPublicationsPromoById(userId);
+    List<PostDTO> listPost = publicationsPromoList.stream().map(p -> new PostDTO(p.getPublicationId(), p.getUserId(),
+            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice())).collect(Collectors.toList());
+    return new ProductPromoDTO(userId, user.getUserName(), listPost);
+  }
+
+
 }

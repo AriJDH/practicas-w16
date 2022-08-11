@@ -53,4 +53,7 @@ public class UserController {
   public ResponseEntity<UserFollowedDTO> orderListUserFollowed(@PathVariable Integer userId, @RequestParam Optional<String> order) {
     return new ResponseEntity<>(iUserService.orderListUserFollowed(userId, order.orElse("")), HttpStatus.OK);
   }
+
+
+
 }

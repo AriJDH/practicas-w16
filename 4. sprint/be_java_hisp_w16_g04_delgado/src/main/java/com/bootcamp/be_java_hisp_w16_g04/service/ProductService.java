@@ -1,13 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseApiDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.FailedToCreateResource;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import org.springframework.stereotype.Service;
@@ -60,7 +57,8 @@ public class ProductService implements IProductService {
         productCreateDTO.getDate(),
         productCreateDTO.getCategory(),
         productCreateDTO.getPrice(),
-        productCreateDTO.getProduct().getProductId());
+        productCreateDTO.getProduct().getProductId(), productCreateDTO.getHasPromo(), productCreateDTO.getDiscount()
+    );
 
     var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
 
@@ -69,4 +67,46 @@ public class ProductService implements IProductService {
     }
     return new ResponseApiDTO("Success", "All ok");
   }
+
+  @Override
+  public ResponseApiDTO createProductPromo(RequestCreatePublicationPromoDTO requestCreatePublicationPromoDTO) {
+    System.out.println(requestCreatePublicationPromoDTO);
+    //Create product
+    Product productPromo = iProductRepository.createProductPromo(requestCreatePublicationPromoDTO.getProduct());
+
+     Boolean hasPromo = false;
+     Double discount = 0.0;
+
+     if (requestCreatePublicationPromoDTO.getHasPromo()!= null){
+       hasPromo = true;
+       discount = requestCreatePublicationPromoDTO.getDiscount();
+     }
+    //Create publication
+    PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationPromoDTO.getUserId(),
+            requestCreatePublicationPromoDTO.getDate(),
+            requestCreatePublicationPromoDTO.getCategory(),
+            requestCreatePublicationPromoDTO.getPrice(),
+            requestCreatePublicationPromoDTO.getProduct().getProductId(),
+            hasPromo,
+            discount);
+
+    if (productPromo == null) {
+      throw new FailedToCreateResource("Bad request");
+    }
+
+    var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
+
+    if (isCreatedPublication == null) {
+      throw new FailedToCreateResource("Bad request");
+    }
+    return new ResponseApiDTO("Success", "All ok");
+  }
+
+
+
+
+
+
+
+
 }

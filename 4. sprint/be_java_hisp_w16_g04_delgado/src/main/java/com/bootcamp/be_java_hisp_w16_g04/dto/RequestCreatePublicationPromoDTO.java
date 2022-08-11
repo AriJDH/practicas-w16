@@ -8,18 +8,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class RequestCreatePublicationDTO {
-  private Integer userId;
-  @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
-  private LocalDate date;
-  private ProductCreateDTO product;
-  private Integer category;
-  private Double price;
-  private Boolean hasPromo;
-  private Double discount;
+public class RequestCreatePublicationPromoDTO {
+    private Integer userId;
+    @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
+    private LocalDate date;
+    private ProductCreatePromoDTO product;
+    private Integer category;
+    private Double price;
+    private Boolean hasPromo;
+    private Double discount;
 }
