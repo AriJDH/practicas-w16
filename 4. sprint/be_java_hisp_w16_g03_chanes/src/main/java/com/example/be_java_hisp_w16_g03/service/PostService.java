@@ -78,7 +78,7 @@ public class PostService implements IPostService {
 
     @Override
     public void addPromoPost(PromoPostDTO request) {
-        if (!request.validate())
+        if (!request.validate() || !request.getHasPromo())
             throw new InvalidPostRequest();
         User requestUser = repository.getUserById(request.getUserId()).orElseThrow(() -> new UserNotExistException(request.getUserId()));
         if (requestUser != null) {
@@ -95,7 +95,10 @@ public class PostService implements IPostService {
         if (user.getPosts() == null) {
             return new PromoPostCountDTO(user.getUserId(), user.getUserName(), 0);
         }
-        Integer promoCount = (int) user.getterPosts().stream().filter(Post::isHasPromo).count();
+        Integer promoCount = (int) user.getterPosts()
+                .stream()
+                .filter(Post::isHasPromo)
+                .count();
         PromoPostCountDTO promoPostCountDTO = new PromoPostCountDTO(user.getUserId(), user.getUserName(), promoCount);
 
         return promoPostCountDTO;
@@ -106,20 +109,28 @@ public class PostService implements IPostService {
 
         User user = repository.getUserById(id).orElseThrow(() -> new UserNotExistException(id));
 
-        List<Post> promoList = user.getterPosts().stream().filter(x -> x.isHasPromo()).collect(Collectors.toList());
-        List<PromoPostDTO> promoPostDTOList = promoList.stream().map(post -> PromoPostDTO.builder().userId(post.getUserId())
-                .postId(post.getPostId())
-                .date(post.getDate())
-                .product(ProductDTO.builder().productId(post.getProduct().getProductId())
-                        .productName(post.getProduct().getProductName())
-                        .type(post.getProduct().getType())
-                        .color(post.getProduct().getColor())
-                        .brand(post.getProduct().getBrand())
-                        .notes(post.getProduct().getNotes()).build())
-                .category(post.getCategory())
-                .price(post.getPrice())
-                .hasPromo(post.isHasPromo())
-                .discount(post.getDiscount()).build()).collect(Collectors.toList());
+        List<Post> promoList = user.getterPosts().stream()
+                .filter(x -> x.isHasPromo())
+                .collect(Collectors.toList());
+
+        List<PromoPostDTO> promoPostDTOList = promoList
+                .stream()
+                .map(post -> PromoPostDTO.builder()
+                        .userId(post.getUserId())
+                        .postId(post.getPostId())
+                        .date(post.getDate())
+                        .product(ProductDTO.builder().productId(post.getProduct().getProductId())
+                                .productName(post.getProduct().getProductName())
+                                .type(post.getProduct().getType())
+                                .color(post.getProduct().getColor())
+                                .brand(post.getProduct().getBrand())
+                                .notes(post.getProduct().getNotes()).build())
+                        .category(post.getCategory())
+                        .price(post.getPrice())
+                        .hasPromo(post.isHasPromo())
+                        .discount(post.getDiscount())
+                        .build())
+                .collect(Collectors.toList());
 
         PromoPostsDTO promoPostsDTO = new PromoPostsDTO(user.getUserId(), user.getUserName(), promoPostDTOList);
 

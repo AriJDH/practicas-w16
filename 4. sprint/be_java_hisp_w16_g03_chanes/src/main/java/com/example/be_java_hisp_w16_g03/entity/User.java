@@ -63,7 +63,8 @@ public class User {
                         .productName(request.getProduct().getProductName())
                         .build())
                 .category(request.getCategory())
-                .price(request.getPrice()).build();
+                .price(request.getPrice())
+                .build();
 
 
         //Se asigna un Id autoincremental al Post
@@ -87,7 +88,8 @@ public class User {
                 .category(request.getCategory())
                 .price(request.getPrice())
                 .hasPromo(request.getHasPromo())
-                .discount(request.getDiscount()).build();
+                .discount(request.getDiscount())
+                .build();
 
         //Se asigna un Id autoincremental al Post
         post.increaseId();
