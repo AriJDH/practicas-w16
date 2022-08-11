@@ -220,7 +220,7 @@ public class UserService implements IUserService {
             listaPromo.add(nuevo);
         });
 
-        x.getPostPromotionsMade().stream().forEach(e -> {
+        x.getPostMade().stream().forEach(e -> {
             Product prod = e.getProduct();
             ProductDto prodDto = new ProductDto(prod.getId(), prod.getName(), prod.getType(), prod.getBrand(), prod.getColor(), prod.getNotes());
             PostDto nuevo = new PostDto(e.getUser().getUserId(), e.getDate(), prodDto, e.getCategory(), e.getPrice());
