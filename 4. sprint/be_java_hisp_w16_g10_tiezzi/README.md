@@ -12,6 +12,7 @@
 - Solo se considera vendedor si el usuario tiene al menos un post.
 - Solo se puede seguir a vendedores.
 - Solo se puede listar seguidores de un vendedor.
+- Si los parametros de filtro no se corresponden con los especificados, simplemente son ignorados y se utiliza la ordenación por defecto.
 
 ## Parte Individual - Bonus
 
