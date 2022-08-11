@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PromoPostDto extends PostDto{
-    private boolean hasPromo;
+    private Boolean hasPromo;
     private double discount;
 
     public PromoPostDto(int userId, LocalDate date, ProductDto product, int category, double price, boolean hasPromo, double discount) {

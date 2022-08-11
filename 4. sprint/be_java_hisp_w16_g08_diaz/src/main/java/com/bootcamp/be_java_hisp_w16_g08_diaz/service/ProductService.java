@@ -65,12 +65,13 @@ public class ProductService implements IProductService {
     @Override
     public void publishPromoPost(PromoPostDto promoPost) {
         User postUser = getUserIfExist(promoPost.getUserId());
+        //cambiar a size
         postIdCount++;
         ProductDto pDto = promoPost.getProduct();
         Product promoProduct = new Product(pDto.getProductId(), pDto.getProductName(),
                 pDto.getType(), pDto.getBrand(), pDto.getColor(), pDto.getNotes());
 
-        PromoPost newPromoPost = new PromoPost(postIdCount, postUser, promoPost.getDate(), promoPost.getCategory(), promoPost.getDiscount(), promoProduct, promoPost.isHasPromo(), promoPost.getDiscount());
+        PromoPost newPromoPost = new PromoPost(postIdCount, postUser, promoPost.getDate(), promoPost.getCategory(), promoPost.getDiscount(), promoProduct, promoPost.getHasPromo(), promoPost.getDiscount());
         postUser.getPromoPost().add(newPromoPost);
         postRepository.addPromoPost(newPromoPost);
     }
@@ -91,7 +92,7 @@ public class ProductService implements IProductService {
                 .map(x->mapper.map(x,ResponsePromoPostDto.class))
                 .collect(Collectors.toList());
 
-        return new ResponsePromoPostFromUserDto(userId, list);
+        return new ResponsePromoPostFromUserDto(userId,user.getName(), list);
     }
 
     private User getUserIfExist(int idUser) {

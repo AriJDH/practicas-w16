@@ -23,6 +23,6 @@ public class ResponsePromoPostDto {
     private ResponseProductDto product;
     private double price;
     private int category;
-    private double hasPromo;
+    private Boolean hasPromo;
     private double discount;
 }
