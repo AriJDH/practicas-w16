@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bootcamp</groupId>
-    <artifactId>be_java_hisp_w16_g7</artifactId>
+    <artifactId>be_java_hisp_w16_g7_cardenas</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>be_java_hisp_w16_g7</name>
-    <description>be_java_hisp_w16_g7</description>
+    <name>be_java_hisp_w16_g7_cardenas</name>
+    <description>be_java_hisp_w16_g7_cardenas</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>
-            <version>3.0.0</version>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>
@@ -43,11 +43,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.springdoc</groupId>
