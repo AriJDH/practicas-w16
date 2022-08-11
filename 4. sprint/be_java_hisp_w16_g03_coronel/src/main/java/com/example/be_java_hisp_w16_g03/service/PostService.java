@@ -2,15 +2,13 @@ package com.example.be_java_hisp_w16_g03.service;
 
 import com.example.be_java_hisp_w16_g03.dto.*;
 import com.example.be_java_hisp_w16_g03.entity.Post;
-import com.example.be_java_hisp_w16_g03.entity.Product;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidPostRequest;
 import com.example.be_java_hisp_w16_g03.exception.NotPromoPostException;
+import com.example.be_java_hisp_w16_g03.exception.NotSellerException;
 import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g03.utils.Mapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -77,6 +75,17 @@ public class PostService implements IPostService {
         User user = repository.getUserById(promoDto.getUserId()).orElseThrow(() -> new UserNotExistException(promoDto.getUserId()));
         user.addPostToUser(Mapper.promoPostDtoToEntity(promoDto));
         return null;
+    }
+
+    @Override
+    public ProductCountDTO getProductCountByUserId(Integer userId) {
+        User user = repository.getUserById(userId).orElseThrow(() -> new UserNotExistException(userId));
+        if (user.getterPosts().size() == 0) {
+            throw new NotSellerException(userId);
+        }
+        Long count = user.getterPosts().stream().filter(post -> post.isHasPromo()).count();
+        return new ProductCountDTO((Integer.valueOf(count.intValue())));
+
     }
 
     private boolean validatePromo(PromoPostDTO promoDto) {
