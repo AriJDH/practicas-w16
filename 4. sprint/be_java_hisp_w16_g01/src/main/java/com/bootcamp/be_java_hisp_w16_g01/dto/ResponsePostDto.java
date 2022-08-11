@@ -21,6 +21,4 @@ public class ResponsePostDto {
     private ProductDto product;
     private int category;
     private double price;
-    private boolean hasPromo;
-    private double discount;
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserUnfollowDto {
+public class UserUnfollowDTO {
     protected String status;
     protected String message;
 }

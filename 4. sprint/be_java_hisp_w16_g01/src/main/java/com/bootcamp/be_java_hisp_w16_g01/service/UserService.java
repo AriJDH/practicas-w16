@@ -21,7 +21,7 @@ public class UserService implements IUserService {
     private UserMapper userMapper = new UserMapper();
 
     @Override
-    public UserUnfollowDto unfollowUser(int userId, int userIdToUnfollow) {
+    public UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow) {
 
         User userUnfollowing = this.userRepository.getUser(userId);
         User userToUnfollow = this.userRepository.getUser(userIdToUnfollow);
@@ -40,11 +40,11 @@ public class UserService implements IUserService {
         userToUnfollow.getFollowers().remove(userUnfollowing);
         userUnfollowing.getFollowed().remove(userToUnfollow);
 
-        return new UserUnfollowDto("Ok", "Usuario dejado de seguir correctamente");
+        return new UserUnfollowDTO("Ok", "Usuario dejado de seguir correctamente");
     }
 
     @Override
-    public UserFollowerDto getFollowers(int userId, String order) {
+    public UserFollowerDTO getFollowers(int userId, String order) {
         User user = userRepository.getUser(userId);
         if(user != null){
             if (order!= null) {
@@ -67,7 +67,7 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserFollowedDto getFollowed(int userId, String order) {
+    public UserFollowedDTO getFollowed(int userId, String order) {
         User user = userRepository.getUser(userId);
         if(user != null){
             if (order != null) {
@@ -89,10 +89,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public FollowersCountDto getCantFollowers(int userId) {
+    public FollowersCountDTO getCantFollowers(int userId) {
         if (userRepository.userExists(userId)) {
             User usr = userRepository.getUser(userId);
-            return new FollowersCountDto(userId, usr.getUserName(), usr.getFollowers().size());
+            return new FollowersCountDTO(userId, usr.getUserName(), usr.getFollowers().size());
         }
         else throw new BadRequestException("Usuario con id: " + userId + " no existe");
     }

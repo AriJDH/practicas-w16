@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g01.exception;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.ApiExceptionDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.ApiExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalHandlerException {
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<ApiExceptionDto> badRequestException(BadRequestException e){
-        return new ResponseEntity<>(new ApiExceptionDto("Bad request", e.getMessage()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ApiExceptionDTO> badRequestException(BadRequestException e){
+        return new ResponseEntity<>(new ApiExceptionDTO("Bad request", e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResponseEntity<ApiExceptionDto> missingParamException(){
-        return new ResponseEntity<>(new ApiExceptionDto("Bad request", "No hay un orden indicado"), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ApiExceptionDTO> missingParamException(){
+        return new ResponseEntity<>(new ApiExceptionDTO("Bad request", "No hay un orden indicado"), HttpStatus.BAD_REQUEST);
     }
 }

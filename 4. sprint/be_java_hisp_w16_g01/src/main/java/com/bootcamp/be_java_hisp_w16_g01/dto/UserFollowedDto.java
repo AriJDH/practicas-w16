@@ -12,10 +12,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class UserFollowedDto {
+public class UserFollowedDTO {
 
     private int userId;
     private String userName;
-    private List<UserDto> followed;
+    private List<UserDTO> followed;
 
 }

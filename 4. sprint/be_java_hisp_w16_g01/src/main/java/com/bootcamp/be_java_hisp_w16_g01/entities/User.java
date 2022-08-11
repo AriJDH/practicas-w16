@@ -37,14 +37,4 @@ public class User {
         this.posts.add(p);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", followersCount=" + followers.size() +
-                ", followedCount=" + followed.size() +
-                ", postsCount=" + posts.size() + "}";
-    }
-
 }

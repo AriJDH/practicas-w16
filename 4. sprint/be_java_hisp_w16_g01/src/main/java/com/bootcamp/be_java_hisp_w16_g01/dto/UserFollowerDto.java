@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g01.dto;
 
+import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -12,10 +13,10 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class UserFollowerDto {
+public class UserFollowerDTO {
 
     private int userId;
     private String userName;
-    private List<UserDto> followers;
+    private List<UserDTO> followers;
 
 }

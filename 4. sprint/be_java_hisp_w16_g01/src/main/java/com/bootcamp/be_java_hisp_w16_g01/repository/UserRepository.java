@@ -4,30 +4,47 @@ import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+
+import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
+import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
+import com.bootcamp.be_java_hisp_w16_g01.entities.User;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Repository
+@Getter
 public class UserRepository implements IUserRepository {
+
     protected List<User> users = new ArrayList<>();
 
-    public UserRepository() {
+    public UserRepository(){
         LoadData();
     }
-    private void LoadData() {
 
-        User user1 = new User(1, "user1", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(2, "user2", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user3 = new User(3, "user3", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user4 = new User(4, "user4", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user5 = new User(5, "user5", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user6 = new User(6, "user6", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    private void LoadData(){
 
+        // las listas se inicializan sin valores ya que al crearse un usuario no
+        // posee seguidos, seguidores o posts
 
-        users = List.of(user1, user2, user3, user4, user5,user6);
+        User user1= new User(1, "Vendedor1", new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+        User user2= new User(2, "Vendedor2", new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+        User user3= new User(3, "Usuario3", new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+        User user4= new User(4, "Usuario4", new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+        User user5= new User(5, "Vendedor5", new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+
+        users = List.of(user1,user2,user3,user4,user5);
+
+        //Agrego los followers
+        user1.addFollower(user3);
+
+        //Agrego los followed
+        user1.addFollowed(user3);
+        user1.addFollowed(user4);
     }
-
-    public void addFollower(int idUser, int userIdToFollow) {
+    public void addFollower(int idUser, int userIdToFollow){
         User userToFollow = users.stream().filter(user -> user.getUserId() == userIdToFollow).findFirst().get();
         User userFollows = users.stream().filter(u -> u.getUserId() == idUser).findFirst().get();
 
@@ -37,6 +54,7 @@ public class UserRepository implements IUserRepository {
     public void addFollowed(int idUser, int userIdToFollow) {
         User userFollowed = users.stream().filter(user -> user.getUserId() == userIdToFollow).findFirst().get();
         User userFollows = users.stream().filter(u -> u.getUserId() == idUser).findFirst().get();
+
         userFollows.addFollowed(userFollowed);
     }
 

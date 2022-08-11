@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ApiExceptionDto {
+public class ApiExceptionDTO {
     private String title;
     private String message;
 }
