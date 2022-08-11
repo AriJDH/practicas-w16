@@ -18,3 +18,11 @@
 - Un usuario se puede seguir si es "vendedor" es decir, si tiene 1 o más post publicados.
 - Y los seguidores se podrán listar sólo para los usuarios que son considerados "vendedores".
 
+## BONUS
+
+- Realicé el "reto" propuesto de añadir un endpoint bonus, este hace un resumen de los posts de un determinado vendedor, mostrando:
+   - Id del usuario, Id de todos sus posts.
+   - Cantidad total de posts, Cantidad total de promo posts. 
+   - El valor monetario total de sus posts. 
+   - La fecha del post más viejo y el más nuevo.
+   - Y su post con el precio mas alto.

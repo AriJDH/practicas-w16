@@ -333,6 +333,14 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "US BONUS - Posts summary de un vendedor",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }

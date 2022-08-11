@@ -7,6 +7,7 @@ import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserIsNotSellerException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.repository.IProductRepository;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,10 +23,12 @@ public class ProductService implements IProductService {
 
 
     private final IUserRepository userRepository;
+    private final IProductRepository productRepository;
     private final ModelMapper mapper;
     private int count = 1;
 
-    public ProductService(IUserRepository userRepository) {
+    public ProductService(IUserRepository userRepository, IProductRepository productRepository) {
+        this.productRepository = productRepository;
         this.userRepository = userRepository;
         this.mapper = new ModelMapper();
     }
@@ -105,12 +108,35 @@ public class ProductService implements IProductService {
     }
 
     public PromoPostCountDTO getPromoPostCount(int id) {
+        User user = getVerifiedSeller(id);
+        return new PromoPostCountDTO(user.getId(), user.getName(), productRepository.getPromoPostsCount(user.getPosts()));
+    }
+
+    public PostsSummaryDTO getPostsSummary(int id){
+        User user = getVerifiedSeller(id);
+        List<Post> userPosts = user.getPosts();
+        PostsSummaryDTO postsSummaryDTO = new PostsSummaryDTO();
+
+        postsSummaryDTO.setUserId(user.getId());
+        postsSummaryDTO.setPostsId(productRepository.getPostsId(userPosts));
+        postsSummaryDTO.setTotalPostsAmount(userPosts.size());
+        postsSummaryDTO.setPromoPostsAmount(productRepository.getPromoPostsCount(userPosts));
+        postsSummaryDTO.setPostsTotalValue(productRepository.getPostsTotalValue(userPosts));
+        postsSummaryDTO.setOldestPostDate(productRepository.getOldestPostDate(userPosts));
+        postsSummaryDTO.setNewestPostDate(productRepository.getNewestPostDate(userPosts));
+
+        Post highestPricePost = productRepository.getHighestPricePost(userPosts);
+        if(highestPricePost.isHasPromo()) postsSummaryDTO.setHighestPricePost(mapper.map(highestPricePost,PostDTO.class));
+        else postsSummaryDTO.setHighestPricePost(highestPricePost);
+        return postsSummaryDTO;
+    }
+
+
+
+    private User getVerifiedSeller(int id){
         User user = userRepository.findUserById(id);
         if (user == null)  throw new UserNotFoundException(id);
         if (!user.isSeller()) throw new UserIsNotSellerException(id);
-
-        int promoPostCount = (int) user.getPosts().stream().filter(Post::isHasPromo).count();
-
-        return new PromoPostCountDTO(user.getId(), user.getName(), promoPostCount);
+        return user;
     }
 }

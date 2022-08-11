@@ -61,4 +61,14 @@ public class ProductController {
                                                      @RequestParam(required = false) String order) {
         return new ResponseEntity<>(iProductService.recentPost(userId, order), HttpStatus.OK);
     }
+
+    @Operation(summary = "Get a summary of all the posts from a seller")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Posts summary"),
+            @ApiResponse(responseCode = "400", description = "User is not a seller"),
+            @ApiResponse(responseCode = "404", description = "User not found"),})
+    @GetMapping("/posts/{userId}/summary")
+    public ResponseEntity<PostsSummaryDTO> postsSummary(@PathVariable int userId) {
+        return new ResponseEntity<>(iProductService.getPostsSummary(userId), HttpStatus.OK);
+    }
 }

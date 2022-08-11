@@ -33,4 +33,5 @@ public class PromoPostDTO {
     @JsonProperty("discount")
     private double discount;
 
+
 }

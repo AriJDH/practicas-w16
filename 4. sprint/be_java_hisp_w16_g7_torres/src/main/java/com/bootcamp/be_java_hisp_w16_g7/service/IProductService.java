@@ -17,4 +17,6 @@ public interface IProductService {
 
     PromoPostCountDTO getPromoPostCount(int userId);
 
+    PostsSummaryDTO getPostsSummary(int userId);
+
 }
