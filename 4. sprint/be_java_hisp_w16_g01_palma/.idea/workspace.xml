@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a8667ca-82ca-4e60-9311-89ba21aee7c6" name="Changes" comment="" />
+    <list default="true" id="1a8667ca-82ca-4e60-9311-89ba21aee7c6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +21,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../../../../.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -47,7 +49,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/capalma/Desktop/BootCamp Java W16/15/be_java_hisp_w16_g01_palma",
+    "last_opened_file_path": "/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01_palma",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,6 +82,7 @@
       <workItem from="1660146455009" duration="978000" />
       <workItem from="1660156347123" duration="21622000" />
       <workItem from="1660231427287" duration="375000" />
+      <workItem from="1660232226544" duration="127000" />
     </task>
     <servers />
   </component>
