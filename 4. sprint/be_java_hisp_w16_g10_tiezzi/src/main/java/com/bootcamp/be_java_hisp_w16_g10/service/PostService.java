@@ -26,11 +26,13 @@ public class PostService implements IPostService {
     @Autowired
     private UserService userService;
 
+    //Recibe un id como parámetro y devuelve el Post si es que existe, de lo contrario lanza un NotFoundException.
     @Override
     public PostResDTO findById(Integer id) {
         return Mapper.parseToPostResDTO(this.validatePost(id));
     }
 
+    //Devuelve todos los posts
     @Override
     public List<PostResDTO> findAll() {
         return this.postRepository.findAll().stream()
@@ -38,6 +40,7 @@ public class PostService implements IPostService {
                 .collect(Collectors.toList());
     }
 
+    //Recibe un id como parámetro y devuelve todos los Posts que corresponden a ese usuario.
     @Override
     public List<PostResDTO> findByUserId(Integer userID){
         return this.postRepository.findByUserId(userID).stream()
@@ -45,6 +48,7 @@ public class PostService implements IPostService {
                 .collect(Collectors.toList());
     }
 
+    //Recibe un PostReqDTO, aplica validaciones y finalemente guarda el post.
     @Override
     public void save(PostReqDTO postReqDTO){
         this.userService.findById(postReqDTO.getUserId());
@@ -53,6 +57,7 @@ public class PostService implements IPostService {
         this.postRepository.save(Mapper.parseToPost(postReqDTO));
     }
 
+    //Recibe un PostPromoReqDTO, aplica validaciones y finalemente guarda el post.
     public void save(PostPromoReqDTO postPromoReqDTO) {
         this.userService.findById(postPromoReqDTO.getUserId());
         if(postPromoReqDTO.getDate().isAfter(LocalDate.now()))
@@ -60,6 +65,8 @@ public class PostService implements IPostService {
         this.postRepository.save(Mapper.parseToPost(postPromoReqDTO));
     }
 
+    //Recibe un userID y una String(que puede ser null) para aplicar un formato de ordenamiento
+    //devolviendo un PostListResDTO de los post que fueron publicados dentro de los ultimos 14 días.
     @Override
     public PostListResDTO listFollowersPosts(Integer userId, String order) {
         User user = this.userService.findById(userId);
@@ -80,6 +87,8 @@ public class PostService implements IPostService {
         return Mapper.parseToPostListResDTO(user, postResDTOS.collect(Collectors.toList()));
     }
 
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un PostPromoCountResDTO con
+    //la cantidad de Posts con promo del user.
     @Override
     public PostPromoCountResDTO countPromoPost(Integer userId) {
         if(userId == null)
@@ -91,6 +100,8 @@ public class PostService implements IPostService {
         return Mapper.parseToPostPromoCountResDTO(user, posts);
     }
 
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un PostPromoListResDTO con
+    //con todos los Posts con promo del user.
     @Override
     public PostPromoListResDTO listPromoPost(Integer userId) {
         if(userId == null)
@@ -102,6 +113,7 @@ public class PostService implements IPostService {
         return Mapper.parseToPostPromoListResDTO(user, posts);
     }
 
+    //Devuelve una lista de PostPromoListResDTO agrupado por cada usuario.
     @Override
     public List<PostPromoListResDTO> listPromoPost() {
         return this.postRepository.findAll().stream()
@@ -112,6 +124,7 @@ public class PostService implements IPostService {
                 .collect(Collectors.toList());
     }
 
+    //Devuelve una PostPromoCountResDTO con el usuario con mas Post con promoción y la cantidad.
     @Override
     public PostPromoCountResDTO maxCountUserPromoPost() {
         var maxCountUserPostPromo = this.postRepository.findAll().stream()
@@ -129,6 +142,7 @@ public class PostService implements IPostService {
         );
     }
 
+    //Recibe un postID y aplica el control para verificar que el Post exista.
     private Post validatePost(Integer postID) {
         Post post = this.postRepository.findById(postID);
         if (post == null) //valida si existe el post, sino devuelve un error
