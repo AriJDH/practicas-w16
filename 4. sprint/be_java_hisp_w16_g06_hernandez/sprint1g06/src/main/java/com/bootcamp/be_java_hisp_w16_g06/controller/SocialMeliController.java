@@ -101,9 +101,9 @@ public class SocialMeliController {
     }
 
     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
-    @GetMapping("/products/promo-post/count?user_id={userId}")
-    public ResponseEntity<ResponsePostPromoDTO> US0011(@RequestParam int userId) {
-        return new ResponseEntity<>(socialMaMeliServiceE3.getAllPostPromo(userId), HttpStatus.OK);
+    @GetMapping("/products/promo-post/count")
+    public ResponseEntity<ResponsePostPromoDTO> US0011(@RequestParam int user_id) {
+        return new ResponseEntity<>(socialMaMeliServiceE3.getAllPostPromo(user_id), HttpStatus.OK);
     }
 
     /* C_Ejemplo_Requerimiento_Bonus */
