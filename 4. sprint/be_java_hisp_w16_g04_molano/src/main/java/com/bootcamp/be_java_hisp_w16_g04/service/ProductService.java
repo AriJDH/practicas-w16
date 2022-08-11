@@ -1,16 +1,18 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseApiDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
+import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
+import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.FailedToCreateResource;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * This service takes care of all matters related to products
@@ -22,6 +24,8 @@ public class ProductService implements IProductService {
   IProductRepository iProductRepository;
   @Autowired
   IPublicationRepository iPublicationRepository;
+  @Autowired
+  IUserRepository iUserRepository;
 
   private final ModelMapper mapper;
 
@@ -74,5 +78,18 @@ public class ProductService implements IProductService {
       throw new FailedToCreateResource("Bad request");
     }
     return new ResponseApiDTO("Success", "All ok");
+  }
+
+  /**
+   * Method to obtain the amount of promotional products from a user.
+   * @param userId Current user id
+   * @return DTO with information for user and quantity of promotional products
+   */
+  @Override
+  public DiscountedProductSellerDTO discountedProducts(Integer userId) {
+    List<Publication> publicationList = iPublicationRepository.getListPublicationsById(userId);
+    Integer promotionalProducts = Math.toIntExact(publicationList.stream().filter(Publication::getHasPromo).count());
+    User currentUset = iUserRepository.getByIdUser(userId);
+    return new DiscountedProductSellerDTO(userId, currentUset.getUserName(), promotionalProducts);
   }
 }
