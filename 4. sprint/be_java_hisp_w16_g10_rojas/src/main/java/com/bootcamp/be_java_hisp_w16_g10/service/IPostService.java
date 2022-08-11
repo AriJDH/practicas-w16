@@ -8,6 +8,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.ProductsPromoCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.SellerPromoProductsListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.SellerPromoProductsResDTO;
 
 public interface IPostService {
    PostResDTO findById(Integer id);
@@ -26,6 +27,6 @@ public interface IPostService {
 
    SellerPromoProductsListResDTO listSellerPromoProducts(Integer userId);
 
-   List<SellerPromoProductsListResDTO> listSellerProductsPromoAll();
+   List<SellerPromoProductsResDTO> listSellerProductsPromoAll();
 
 }

@@ -5,6 +5,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqPromoDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.ProductsPromoCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.SellerPromoProductsListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.SellerPromoProductsResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,8 +49,8 @@ public class PostController {
    }
 
    @GetMapping("/promo-post/all24hs")
-   public ResponseEntity<List<SellerPromoProductsListResDTO>> US0013() {
-      return new ResponseEntity<>(this.postService.listSellerProductsPromoAll(), HttpStatus.OK);
+   public ResponseEntity<List<SellerPromoProductsResDTO>> US0013() {
+      return new ResponseEntity<>(this.postService.listSellerProductsPromoAll(),HttpStatus.OK);
    }
 
 }

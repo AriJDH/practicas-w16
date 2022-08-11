@@ -6,6 +6,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.ProductsPromoCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.SellerPromoProductsListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.SellerPromoProductsResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
@@ -34,7 +35,6 @@ public class PostService implements IPostService {
    private IUserService userService;
    @Autowired
    private UserRepository userRepository;
-
 
    @Override
    public PostResDTO findById(Integer id) {
@@ -88,7 +88,8 @@ public class PostService implements IPostService {
 
       Product product = Mapper.parseToProduct(post.getProduct());
 
-      postRepository.save(new Post((Integer) 0, user.getId(), product,post.getDate(), post.getPrice(), post.getCategory(),post.getHasPromo(), post.getDiscount()));
+      postRepository.save(new Post((Integer) 0, user.getId(), product, post.getDate(), post.getPrice(),
+            post.getCategory(), post.getHasPromo(), post.getDiscount()));
 
    }
 
@@ -99,12 +100,12 @@ public class PostService implements IPostService {
    }
 
    @Override
-   public List<SellerPromoProductsListResDTO> listSellerProductsPromoAll() {
-      List<SellerPromoProductsListResDTO> promoProductList = new ArrayList<>();
+   public List<SellerPromoProductsResDTO> listSellerProductsPromoAll() {
+      List<SellerPromoProductsResDTO> promoProductList = new ArrayList<>();
       postRepository.findAll().stream()
             .filter(post -> post.getHasPromo())
             .filter(post -> post.getDate().compareTo(LocalDate.now().minusDays(1)) > 0)
-            .forEach(post -> promoProductList.add(sellerPromoProductsListWhitDaysFilterDTOMapper(userService.findById(post.getUserId()),post)));
+            .forEach(post -> promoProductList.add(sellerPromoProductsListWhitDaysFilterDTOMapper(userService.findById(post.getUserId()), post)));
       return promoProductList;
    }
 
@@ -115,12 +116,13 @@ public class PostService implements IPostService {
       return ProductsPromoCountResDTO.builder()
             .userId(user.getId())
             .userName(user.getUserName())
-            .promoProductsCount((Integer)(int) postRepository.findByUserId(userId).stream().filter(hasPromo -> hasPromo.getHasPromo()).count())
+            .promoProductsCount((Integer) (int) postRepository.findByUserId(userId).stream()
+                  .filter(hasPromo -> hasPromo.getHasPromo()).count())
             .build();
    }
 
-   private SellerPromoProductsListResDTO sellerPromoProductsListWhitDaysFilterDTOMapper(User user,Post post) {
-      return SellerPromoProductsListResDTO.builder()
+   private SellerPromoProductsResDTO sellerPromoProductsListWhitDaysFilterDTOMapper(User user, Post post) {
+      return SellerPromoProductsResDTO.builder()
             .userId(user.getId())
             .userName(user.getUserName())
             .posts(findPromoPostAndRetriveListWithDaysFilter(post))
