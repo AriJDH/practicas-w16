@@ -35,6 +35,9 @@ public class PostService implements IPostService {
         if (postDto.getDate().isAfter(LocalDate.now()))
             throw new BadRequestException("La fecha es posterior a la fecha actual");
 
+        if (postDto.isHasPromo() && postDto.getDiscount()<=0)
+            throw new BadRequestException("Debe colocar un porcentaje de descuento");
+
         if (!userRepository.userExists(postDto.getUserId()))
             throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
 
