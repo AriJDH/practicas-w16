@@ -2,13 +2,14 @@ package com.bootcamp.be_java_hisp_w16_g04.service;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseFollowersListDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.IFollowerRepository;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
 import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowedDTO;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.FollowerRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IFollowerRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
@@ -20,11 +21,14 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements IUserService {
 
-  @Autowired
-  IUserRepository iUserRepository;
+  private final IUserRepository iUserRepository;
 
-  @Autowired
-  IFollowerRepository iFollowerRepository;
+  private final IFollowerRepository iFollowerRepository;
+
+  public UserService(FollowerRepository followerRepository, UserRepository userRepository) {
+    this.iUserRepository = userRepository;
+    this.iFollowerRepository = followerRepository;
+  }
 
   /**
    * Method to obtain a DTO with all the information of the followers of a user
@@ -35,10 +39,11 @@ public class UserService implements IUserService {
   @Override
   public ResponseFollowersListDTO getListFollowersById(Integer userId, String order) {
 
+    isValidUser(userId);
     User user = iUserRepository.getByIdUser(userId);
 
-    List<User> FollowerList = iFollowerRepository.getFollewersListById(userId).stream()
-        .map(id -> iUserRepository.getByIdUser(id))
+    List<User> FollowerList = iFollowerRepository.getFollowersListById(userId).stream()
+        .map(iUserRepository::getByIdUser)
         .collect(Collectors.toList());
 
     if (order.equals("name_asc")) {
@@ -70,11 +75,9 @@ public class UserService implements IUserService {
   @Override
   public UserFollowersCountDTO followersCount(Integer userId) {
 
+    isValidUser(userId);
     User user = iUserRepository.getByIdUser(userId);
     List<Follower> followerList = iFollowerRepository.getFollowersByUserId(userId);
-
-    if (user == null)
-      throw new UserNotFoundException("User Not Found with User Id: " + userId);
 
     return new UserFollowersCountDTO(user.getUserId(), user.getUserName(), followerList.size());
   }
@@ -90,11 +93,8 @@ public class UserService implements IUserService {
   public UserFollowedDTO orderListUserFollowed(Integer userId, String order) {
 
     UserFollowedDTO user = new UserFollowedDTO();
+    isValidUser(userId);
     User user1 = iUserRepository.getByIdUser(userId);
-
-    if (user1 == null) {
-      throw new UserNotFoundException("User Not Found with User Id: " + userId);
-    }
 
     List<User> users = iFollowerRepository
         .returnIds(userId).stream()
@@ -118,5 +118,12 @@ public class UserService implements IUserService {
     return user;
   }
 
+  @Override
+  public void isValidUser(Integer userId) {
+    boolean result = iUserRepository.isValidUser(userId);
+
+    if(!result)
+      throw new UserNotFoundException("User Not Found with User Id: " + userId);
+  }
 
 }

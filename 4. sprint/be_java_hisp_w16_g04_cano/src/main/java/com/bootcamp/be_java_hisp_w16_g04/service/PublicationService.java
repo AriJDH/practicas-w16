@@ -4,7 +4,8 @@ import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bootcamp.be_java_hisp_w16_g04.repositories.PublicationRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,13 +19,20 @@ import java.util.stream.Collectors;
 @Service
 public class PublicationService implements IPublicationService {
 
-  @Autowired
-  IPublicationRepository iPublicationRepository;
-  @Autowired
-  IUserService iUserService;
+  private final IPublicationRepository iPublicationRepository;
 
-  @Autowired
-  IProductService iProductService;
+  private final IUserService iUserService;
+
+  private final IProductService iProductService;
+
+  private final ModelMapper mapper;
+
+  public PublicationService(PublicationRepository publicationRepository, UserService userService, ProductService productService) {
+    mapper = new ModelMapper();
+    this.iProductService =productService;
+    this.iPublicationRepository = publicationRepository;
+    this.iUserService = userService;
+  }
 
   /**
    * Method that returns the publications of the people I follow in date order.
@@ -35,6 +43,7 @@ public class PublicationService implements IPublicationService {
   @Override
   public ListProductByDateDTO getListProductByDate(Integer userId, String order) {
 
+    iUserService.isValidUser(userId);
     List<User> users = iUserService.orderListUserFollowed(userId, "").getFollowed();
     List<Publication> sellers = getListSeller(users);
     List<PostDTO> listDTO = listOrderByWeekend(sellers);
@@ -85,6 +94,7 @@ public class PublicationService implements IPublicationService {
   @Override
   public Boolean createPublication(RequestCreatePublicationDTO requestCreatePublicationDTO) {
 
+    iUserService.isValidUser(requestCreatePublicationDTO.getUserId());
     PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDTO.getUserId(),
             requestCreatePublicationDTO.getDate(),
             requestCreatePublicationDTO.getCategory(),
@@ -93,7 +103,7 @@ public class PublicationService implements IPublicationService {
             false,
             0.0);
 
-    Publication publication = iPublicationRepository.createPublication(publicationDTO);
+    Publication publication = iPublicationRepository.createPublication(mapper.map(publicationDTO, Publication.class));
 
     return publication != null;
   }
@@ -106,6 +116,7 @@ public class PublicationService implements IPublicationService {
   @Override
   public Boolean createPublication(RequestCreatePublicationDiscountDTO requestCreatePublicationDiscountDTO) {
 
+    iUserService.isValidUser(requestCreatePublicationDiscountDTO.getUserId());
     PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDiscountDTO.getUserId(),
             requestCreatePublicationDiscountDTO.getDate(),
             requestCreatePublicationDiscountDTO.getCategory(),
@@ -114,7 +125,7 @@ public class PublicationService implements IPublicationService {
             requestCreatePublicationDiscountDTO.getHasPromo(),
             requestCreatePublicationDiscountDTO.getDiscount());
 
-    Publication publication = iPublicationRepository.createPublication(publicationDTO);
+    Publication publication = iPublicationRepository.createPublication(mapper.map(publicationDTO, Publication.class));
 
     return publication != null;
   }

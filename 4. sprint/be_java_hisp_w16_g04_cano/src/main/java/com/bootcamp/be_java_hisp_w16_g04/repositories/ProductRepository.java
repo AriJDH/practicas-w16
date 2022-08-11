@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class ProductRepository implements IProductRepository {
 
-  List<Product> products = new ArrayList<Product>();
+  List<Product> products = new ArrayList<>();
 
   @PostConstruct
   private void loadData() {

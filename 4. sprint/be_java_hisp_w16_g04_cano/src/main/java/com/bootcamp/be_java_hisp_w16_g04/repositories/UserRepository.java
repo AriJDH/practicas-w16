@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public class UserRepository implements IUserRepository {
 
-  List<User> users = new ArrayList<User>();
+  List<User> users = new ArrayList<>();
 
   @PostConstruct
   private void loadData() {
@@ -32,5 +32,12 @@ public class UserRepository implements IUserRepository {
         .findFirst()
         .orElse(null);
   }
+
+  @Override
+  public boolean isValidUser(Integer userId) {
+    User user = getByIdUser(userId);
+    return user != null;
+  }
+
 
 }

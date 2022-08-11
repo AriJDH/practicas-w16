@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Repository
 public class PublicationRepository implements IPublicationRepository {
-  List<Publication> publications = new ArrayList<Publication>();
+  List<Publication> publications = new ArrayList<>();
 
   @PostConstruct
   private void loadData() {
@@ -38,40 +38,35 @@ public class PublicationRepository implements IPublicationRepository {
   }
 
   @Override
-  public Publication createPublication(PublicationDTO publicationDTO) {
+  public Publication createPublication(Publication publication) {
 
-    Boolean successValidate = validateFields(publicationDTO);
+    System.out.println(publication);
+
+    Boolean successValidate = validateFields(publication);
     if (!successValidate) return null;
 
-    if (publicationDTO.getHasPromo() == null) {
-      publicationDTO.setHasPromo(false);
+    if (publication.getHasPromo() == null) {
+      publication.setHasPromo(false);
     }
 
-    if (publicationDTO.getDiscount() == null) {
-      publicationDTO.setDiscount(0.0);
+    if (publication.getDiscount() == null) {
+      publication.setDiscount(0.0);
     }
 
-    Publication publication = new Publication(publications.size() + 1,
-            publicationDTO.getUserId(),
-            publicationDTO.getDate(),
-            publicationDTO.getProductId(),
-            publicationDTO.getCategory(),
-            publicationDTO.getPrice(),
-            publicationDTO.getHasPromo(),
-            publicationDTO.getDiscount());
+    publication.setPublicationId(publications.size() + 1);
 
     publications.add(publication);
     return publication;
 
   }
 
-  private Boolean validateFields(PublicationDTO publicationDTO) {
+  private Boolean validateFields(Publication publication) {
 
-    return publicationDTO.getUserId() != null &&
-        publicationDTO.getDate() != null &&
-        publicationDTO.getCategory() != null &&
-        publicationDTO.getPrice() != null &&
-        publicationDTO.getProductId() != null;
+    return publication.getUserId() != null &&
+        publication.getDate() != null &&
+        publication.getCategory() != null &&
+        publication.getPrice() != null &&
+        publication.getProductId() != null;
   }
 
 }

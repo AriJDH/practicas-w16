@@ -5,7 +5,7 @@ import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
 import java.util.List;
 
 public interface IFollowerRepository {
-  List<Integer> getFollewersListById(Integer userId);
+  List<Integer> getFollowersListById(Integer userId);
 
   void followUser(Integer userId, Integer userIdToFollow);
 

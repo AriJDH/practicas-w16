@@ -23,7 +23,7 @@ public class FollowerRepository implements IFollowerRepository {
   }
 
   @Override
-  public List<Integer> getFollewersListById(Integer userId) {
+  public List<Integer> getFollowersListById(Integer userId) {
     return followers.stream().filter(follower -> follower.getIdUser().equals(userId))
         .map(Follower::getIdFollower)
         .collect(Collectors.toList());
@@ -36,7 +36,7 @@ public class FollowerRepository implements IFollowerRepository {
 
   @Override
   public Boolean verifyFollower(Integer userIdToFollow, Integer userId) {
-    Long countFollow = followers.stream()
+    long countFollow = followers.stream()
         .filter(follower -> follower.getIdUser().equals(userIdToFollow) && follower.getIdFollower().equals(userId))
         .count();
 

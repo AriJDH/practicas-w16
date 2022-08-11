@@ -1,9 +1,12 @@
 package com.bootcamp.be_java_hisp_w16_g04.controller;
 
+import com.bootcamp.be_java_hisp_w16_g04.dto.FollowUserDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseFollowersListDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowedDTO;
+import com.bootcamp.be_java_hisp_w16_g04.service.FollowerService;
+import com.bootcamp.be_java_hisp_w16_g04.service.IFollowerService;
 import com.bootcamp.be_java_hisp_w16_g04.service.IUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bootcamp.be_java_hisp_w16_g04.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +21,13 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-  @Autowired
-  IUserService iUserService;
+  private final IUserService iUserService;
+  private final IFollowerService ifollowerService;
+
+  public UserController(UserService userService, FollowerService followerService) {
+    this.iUserService = userService;
+    this.ifollowerService = followerService;
+  }
 
   /**
    * Method to get the list of my followers
@@ -27,7 +35,7 @@ public class UserController {
    * @param order Order in which the list will be submitted
    * @return ResponseEntity with a DTO to give information to the user
    */
-  @GetMapping("{userId}/followers/list")
+  @GetMapping("/{userId}/followers/list")
   public ResponseEntity<ResponseFollowersListDTO> Followerslist(@PathVariable int userId, @RequestParam Optional<String> order) {
     return new ResponseEntity<>(iUserService.getListFollowersById(userId, order.orElse("")), HttpStatus.OK);
   }
@@ -52,5 +60,27 @@ public class UserController {
   @GetMapping("/{userId}/followed/list")
   public ResponseEntity<UserFollowedDTO> orderListUserFollowed(@PathVariable Integer userId, @RequestParam Optional<String> order) {
     return new ResponseEntity<>(iUserService.orderListUserFollowed(userId, order.orElse("")), HttpStatus.OK);
+  }
+
+  /**
+   * Service that is responsible for receiving the id of the current user and the id of the user id to follow
+   * @param userId Current user id
+   * @param userIdToFollow Id of the user to follow
+   * @return ResponseEntity with a DTO to give information to the user
+   */
+  @PostMapping("/{userId}/follow/{userIdToFollow}")
+  public ResponseEntity<FollowUserDTO> followUser(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+    return new ResponseEntity<>(ifollowerService.followUser(userId, userIdToFollow), HttpStatus.OK);
+  }
+
+  /**
+   * Service that is responsible for receiving the id of the current user and the id of the user id to un follow
+   * @param userId Current user id
+   * @param userIdToUnfollow Id of the user to un follow
+   * @return ResponseEntity with a DTO to give information to the user
+   */
+  @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+  public ResponseEntity<FollowUserDTO> unFollowUser(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow) {
+    return new ResponseEntity<>(ifollowerService.unFollowUser(userId, userIdToUnfollow), HttpStatus.OK);
   }
 }
