@@ -1,13 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -42,7 +39,7 @@ public class PublicationService implements IPublicationService {
     List<Publication> sellers = getListSeller(users);
     List<PostDTO> listDTO = listOrderByWeekend(sellers);
     if (order.equals("date_desc")) {
-      listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).collect(Collectors.toList());
+      listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).collect(Collectors.toList());
     }
     return new ListProductByDateDTO(userId, listDTO);
   }
@@ -70,14 +67,13 @@ public class PublicationService implements IPublicationService {
    */
   private List<PostDTO> listOrderByWeekend(List<Publication> publications) {
     LocalDate date = LocalDate.now().minusDays(15);
-    List<PostDTO> result = publications.stream()
-        .filter(x -> x.getDate().isAfter(date))
-        .map(p -> new PostDTO(p.getPublicationId(), p.getUserId(),
-            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice()))
-        .sorted(Comparator.comparing(PostDTO::getDate).reversed())
-        .collect(Collectors.toList());
 
-    return result;
+    return publications.stream()
+        .filter(x -> x.getDate().isAfter(date))
+        .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(),
+            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice(), p.getHasPromo(), p.getDiscount()))
+        .sorted(Comparator.comparing(PostDTO::getDate))
+        .collect(Collectors.toList());
   }
 
 
@@ -90,10 +86,33 @@ public class PublicationService implements IPublicationService {
   public Boolean createPublication(RequestCreatePublicationDTO requestCreatePublicationDTO) {
 
     PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDTO.getUserId(),
-        requestCreatePublicationDTO.getDate(),
-        requestCreatePublicationDTO.getCategory(),
-        requestCreatePublicationDTO.getPrice(),
-        requestCreatePublicationDTO.getProduct().getProductId());
+            requestCreatePublicationDTO.getDate(),
+            requestCreatePublicationDTO.getCategory(),
+            requestCreatePublicationDTO.getPrice(),
+            requestCreatePublicationDTO.getProduct().getProductId(),
+            false,
+            0.0);
+
+    Publication publication = iPublicationRepository.createPublication(publicationDTO);
+
+    return publication != null;
+  }
+
+  /**
+   * Method for creating a publication
+   * @param requestCreatePublicationDiscountDTO DTO of a publication that is sent from request
+   * @return Boolean that checks if the publication was created
+   */
+  @Override
+  public Boolean createPublication(RequestCreatePublicationDiscountDTO requestCreatePublicationDiscountDTO) {
+
+    PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDiscountDTO.getUserId(),
+            requestCreatePublicationDiscountDTO.getDate(),
+            requestCreatePublicationDiscountDTO.getCategory(),
+            requestCreatePublicationDiscountDTO.getPrice(),
+            requestCreatePublicationDiscountDTO.getProduct().getProductId(),
+            requestCreatePublicationDiscountDTO.getHasPromo(),
+            requestCreatePublicationDiscountDTO.getDiscount());
 
     Publication publication = iPublicationRepository.createPublication(publicationDTO);
 

@@ -1,13 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseApiDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.FailedToCreateResource;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
 import org.springframework.stereotype.Service;
@@ -57,10 +54,12 @@ public class ProductService implements IProductService {
 
     //Create publication
     PublicationDTO publicationDTO = new PublicationDTO(productCreateDTO.getUserId(),
-        productCreateDTO.getDate(),
-        productCreateDTO.getCategory(),
-        productCreateDTO.getPrice(),
-        productCreateDTO.getProduct().getProductId());
+            productCreateDTO.getDate(),
+            productCreateDTO.getCategory(),
+            productCreateDTO.getPrice(),
+            productCreateDTO.getProduct().getProductId(),
+            false,
+            0.0);
 
     var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
 
@@ -68,5 +67,30 @@ public class ProductService implements IProductService {
       throw new FailedToCreateResource("Bad request");
     }
     return new ResponseApiDTO("Success", "All ok");
+  }
+
+  @Override
+  public PublicationDTO createProductWithDiscount(RequestCreatePublicationDiscountDTO publicationDiscountDTO) {
+    Product product = iProductRepository.createProduct(publicationDiscountDTO.getProduct());
+
+    if (product == null) {
+      throw new FailedToCreateResource("Bad request");
+    }
+
+    //Create publication
+    PublicationDTO publicationDTO = new PublicationDTO(publicationDiscountDTO.getUserId(),
+            publicationDiscountDTO.getDate(),
+            publicationDiscountDTO.getCategory(),
+            publicationDiscountDTO.getPrice(),
+            publicationDiscountDTO.getProduct().getProductId(),
+            publicationDiscountDTO.getHasPromo(),
+            publicationDiscountDTO.getDiscount());
+
+    var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
+
+    if (isCreatedPublication == null) {
+      throw new FailedToCreateResource("Bad request");
+    }
+    return publicationDTO;
   }
 }

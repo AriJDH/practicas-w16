@@ -21,4 +21,6 @@ public class PostDTO {
   private ProductDTO product;
   private Integer category;
   private Double price;
+  private Boolean hasPromo;
+  private Double discount;
 }
