@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "cf27afd1-6485-4567-8440-e7bbc9931abb",
-		"name": "Sprint I",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "2604b06a-e52d-4694-b135-26f1f297831c",
+		"name": "Sprint I Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22562902"
 	},
 	"item": [
 		{
@@ -16,7 +17,7 @@
 							"script": {
 								"exec": [
 									"pm.collectionVariables.set(\"client_id\", 1);",
-									"pm.collectionVariables.set(\"seller_id\", 3);",
+									"pm.collectionVariables.set(\"seller_id\", 2);",
 									""
 								],
 								"type": "text/javascript"
@@ -105,7 +106,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/list?order=name_asc",
+							"raw": "{{url}}/users/{{seller_id}}/followers/list?order=name_desc",
 							"host": [
 								"{{url}}"
 							],
@@ -117,12 +118,17 @@
 							],
 							"query": [
 								{
-									"key": "order",
-									"value": "name_asc"
+									"key": "oder",
+									"value": "name_asc",
+									"disabled": true
 								},
 								{
 									"key": "order",
-									"value": "name_desc",
+									"value": "name_desc"
+								},
+								{
+									"key": "oder",
+									"value": "invalid",
 									"disabled": true
 								}
 							]
@@ -147,7 +153,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{client_id}}/followed/list?order=name_asc",
+							"raw": "{{url}}/users/{{client_id}}/followed/list?order=name_desc",
 							"host": [
 								"{{url}}"
 							],
@@ -160,11 +166,16 @@
 							"query": [
 								{
 									"key": "order",
-									"value": "name_asc"
+									"value": "name_asc",
+									"disabled": true
 								},
 								{
 									"key": "order",
-									"value": "name_desc",
+									"value": "name_desc"
+								},
+								{
+									"key": "order",
+									"value": "invalid",
 									"disabled": true
 								}
 							]
@@ -179,7 +190,8 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
 								],
 								"type": "text/javascript"
 							}
@@ -190,7 +202,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-08-2022\",\n    \"product\": {\n        \"product_id\": 99,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,6 +265,11 @@
 								{
 									"key": "order",
 									"value": "date_asc"
+								},
+								{
+									"key": "order",
+									"value": "invalid",
+									"disabled": true
 								}
 							]
 						}
@@ -292,6 +309,132 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Bonus",
+			"item": [
+				{
+					"name": "US 10 - New Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{url}}/products/promo-post",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 11 - Count Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/count?user_id={{seller_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"count"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{seller_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 12 - Seller's Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/list?user_id={{seller_id}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"list"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "{{seller_id}}"
+								},
+								{
+									"key": "order",
+									"value": "producName_asc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US Bonus - Users",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -321,11 +464,11 @@
 		},
 		{
 			"key": "client_id",
-			"value": 1
+			"value": "Client id"
 		},
 		{
 			"key": "seller_id",
-			"value": 3
+			"value": "Seller id"
 		}
 	]
 }
