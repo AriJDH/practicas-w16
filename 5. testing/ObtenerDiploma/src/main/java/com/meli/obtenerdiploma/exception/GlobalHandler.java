@@ -8,12 +8,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.Objects;
+
 @ControllerAdvice
 public class GlobalHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ExceptionApiDTO> handleValidationExceptions(MethodArgumentNotValidException e){
-        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Error", e.getFieldError().getDefaultMessage());
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Error", Objects.requireNonNull(e.getFieldError()).getDefaultMessage());
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
     }
 
