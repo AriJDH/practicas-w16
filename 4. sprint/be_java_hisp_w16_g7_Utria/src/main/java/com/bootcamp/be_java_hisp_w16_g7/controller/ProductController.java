@@ -57,7 +57,7 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "User isn't a seller", content = @Content),
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content)})
     @GetMapping("/promo-post/count")
-    public ResponseEntity<PromotionProductDTO> getPromotionProducts(@RequestParam int userId){
-        return new ResponseEntity<>(iProductService.getPromotionProducts(userId), HttpStatus.OK);
+    public ResponseEntity<PromotionProductDTO> getPromotionProducts(@RequestParam int user_id){
+        return new ResponseEntity<>(iProductService.getPromotionProducts(user_id), HttpStatus.OK);
     }
 }
