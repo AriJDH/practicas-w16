@@ -29,9 +29,11 @@ class StudentDAOTest {
 
     @Test
     void delete() {
-        repository.delete(180L);
+        StudentDTO student = repository.findById(35L);
+        repository.delete(35L);
         //Assert
-        assertFalse(repository.exists(nuevo2));
+        assertFalse(repository.exists(student));
+        repository.save(student);
     }
 
     @Test
