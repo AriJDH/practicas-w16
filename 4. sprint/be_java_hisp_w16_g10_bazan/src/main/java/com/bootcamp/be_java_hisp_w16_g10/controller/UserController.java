@@ -24,7 +24,7 @@ public class UserController {
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity US001(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         this.userService.follow(userId, userIdToFollow);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity("{ followed correctly }",HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/followers/count")
@@ -45,6 +45,6 @@ public class UserController {
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity US007(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         this.userService.unfollow(userId, userIdToUnfollow);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity("{ unfollowed correctly }",HttpStatus.OK);
     }
 }

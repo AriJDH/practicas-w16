@@ -22,7 +22,7 @@ public class PostController {
     @PostMapping("/post")
     public ResponseEntity<?> US005(@RequestBody PostReqDTO postReqDTO){
         this.postService.save(postReqDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("{ post successfully created }",HttpStatus.OK);
     }
 
     @GetMapping("/followed/{userId}/list")
@@ -33,7 +33,7 @@ public class PostController {
     @PostMapping("/promo-post")
     public ResponseEntity<?> US0010(@RequestBody PostReqDTO postReqDTO){
         postService.save(postReqDTO);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>("{ post successfully created }",HttpStatus.OK);
     }
 
     @GetMapping("/promo-post/count")

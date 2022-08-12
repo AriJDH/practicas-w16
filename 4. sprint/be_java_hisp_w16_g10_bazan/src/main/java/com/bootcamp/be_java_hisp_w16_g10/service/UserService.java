@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UserService implements IUserService {
     @Autowired
     private IUserRepository userRepository;
-    @Lazy
+    @Lazy// con esto se soluciona el problema de circular dependecy por los autowired
     @Autowired
     private PostService postService;
 
@@ -92,10 +92,12 @@ public class UserService implements IUserService {
             throw new BadRequestException(String.format("The user with the id %s is not a seller.", userId));
 
         var followers = user.getFollowers().stream();
-        if (order == null || !order.equals("name_desc")) //por defecto ascendente
+        if (order == null || order.equals("name_desc")) //por defecto ascendente
             followers = followers.sorted(Comparator.comparing(User::getUserName));
-        else
+        else if(order.equals("name_asc")) //ordenar por nombre ascendente
             followers = followers.sorted(Comparator.comparing(User::getUserName).reversed());
+        else if(!order.equals("name_desc") || !order.equals("name_asc")) //valido q no pasen cualqiur cosa por paramtero
+            throw new BadRequestException("Invalid order parameter.");
 
         return Mapper.parseToFollowersListResDTO(user, followers.collect(Collectors.toList()));
     }
@@ -107,8 +109,10 @@ public class UserService implements IUserService {
         var followeds = user.getFollowed().stream();
         if (order == null || !order.equals("name_desc")) //por defecto ascendente
             followeds = followeds.sorted(Comparator.comparing(User::getUserName));
-        else
+        else if(order.equals("name_asc"))
             followeds = followeds.sorted(Comparator.comparing(User::getUserName).reversed());
+        else if(!order.equals("name_desc") || !order.equals("name_asc")) //valido q no pasen cualqiur cosa por paramtero
+            throw new BadRequestException("Invalid order parameter.");
 
         return Mapper.parseToFollowedListResDTO(user, followeds.collect(Collectors.toList()));
     }

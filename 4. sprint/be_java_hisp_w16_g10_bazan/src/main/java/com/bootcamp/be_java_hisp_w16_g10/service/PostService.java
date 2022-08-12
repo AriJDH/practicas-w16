@@ -7,6 +7,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostPromoResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.ConstraintViolationException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
 import com.bootcamp.be_java_hisp_w16_g10.repository.IPostRepository;
@@ -74,8 +75,10 @@ public class PostService implements IPostService {
 
         if (order != null && order.equals("date_asc")) //por defecto orden descendente
             posts = posts.sorted(Comparator.comparing(Post::getDate));
-        else
+        else if((order != null && order.equals("date_desc")) )
             posts = posts.sorted(Comparator.comparing(Post::getDate).reversed());
+        else if(!order.equals("name_desc") || !order.equals("name_asc")) //valido q no pasen cualqiur cosa por paramtero
+            throw new BadRequestException("Invalid order parameter.");
 
         return Mapper.parseToPostListResDTO(user, posts.collect(Collectors.toList()));
     }
