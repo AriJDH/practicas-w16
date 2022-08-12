@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bde5501c-46b6-45ac-9f87-54848690262b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Sprint I.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/config/SwaggerConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/BeJavaHispW16G01Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/config/SwaggerConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/controller/PostController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/ApiExceptionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/FollowedPostsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/FollowersCountDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/MessageDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/PostDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/ProductDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/PromoPostCountDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/PromoPostDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/ResponsePostDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/UserFollowedDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/UserFollowerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/UserPromoPostsDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/dto/UserUnfollowDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/entities/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/entities/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/entities/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/exception/BadRequestException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/exception/GlobalHandlerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/repository/IPostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/repository/IUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/repository/PostRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/service/IPostService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/service/IUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/service/PostService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../be_java_hisp_w16_g01_rodriguez/src/test/java/com/bootcamp/be_java_hisp_w16_g01_rodriguez/BeJavaHispW16G01ApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/bootcamp/be_java_hisp_w16_g01/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/../readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2DGokjjSfD78c1pHzkLWIS3c61f" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="BeJavaHispW16G01Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="be_java_hisp_w16_g01" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bootcamp.be_java_hisp_w16_g01.BeJavaHispW16G01Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bde5501c-46b6-45ac-9f87-54848690262b" name="Changes" comment="" />
+      <created>1660334927511</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660334927511</updated>
+      <workItem from="1660334928645" duration="690000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

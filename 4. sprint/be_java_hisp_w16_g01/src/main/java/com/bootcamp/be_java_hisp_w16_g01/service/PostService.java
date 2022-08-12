@@ -27,14 +27,8 @@ public class PostService implements IPostService {
 
     @Override
     public MessageDto createPost(PostDto postDto) {
-        if (postDto.getDate() == null)
-            throw new BadRequestException("La fecha es un campo obligatorio");
 
-        if (postDto.getDate().isAfter(LocalDate.now()))
-            throw new BadRequestException("La fecha es posterior a la fecha actual");
-
-        if(!userRepository.userExists(postDto.getUserId()))
-            throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
+        validatePostDto(postDto);
 
         ProductDto productDto = postDto.getProduct();
         Product product = new Product(productDto.getProductId(),
@@ -54,6 +48,17 @@ public class PostService implements IPostService {
         userRepository.getUser(postDto.getUserId()).addPost(post);
 
         return new MessageDto("Publicacion creada correctamente, id: " + id);
+    }
+
+    public void validatePostDto(PostDto postDto){
+        if (postDto.getDate() == null)
+            throw new BadRequestException("La fecha es un campo obligatorio");
+
+        if (postDto.getDate().isAfter(LocalDate.now()))
+            throw new BadRequestException("La fecha es posterior a la fecha actual");
+
+        if(!userRepository.userExists(postDto.getUserId()))
+            throw new BadRequestException("No existe el usuario con Id: " + postDto.getUserId());
     }
 
     private List<ResponsePostDto> getPosts(User user){
