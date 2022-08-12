@@ -95,8 +95,6 @@ public class ProductService implements IProductService {
         Post post = mapper.map(promoPostDTO, Post.class);
 
         post.setPostId(count);
-        post.setHasPromo(true);
-        post.setDiscount(post.getDiscount());
         post.setPrice(post.getPrice()-post.getPrice()*post.getDiscount());
 
         User user = userRepository.findUserById(promoPostDTO.getId());

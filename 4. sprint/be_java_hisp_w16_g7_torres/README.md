@@ -2,7 +2,7 @@
 
 ## Documentación Swagger
 
-- La documentación de cada unos de los endopoints se puede observar ingresando a la siguiente URL, una vez la aplicación este corriendo: http://localhost:8080/swagger-ui/index.html#/
+- La documentación de cada unos de los endpoints se puede observar ingresando a la siguiente URL, una vez la aplicación este corriendo: http://localhost:8080/swagger-ui/index.html#/
 - En la anterior URL cada uno de los endpoints tiene su descripción, y explicación de cada posible status code que pueda arrojar
 
 ## Test de Postman
