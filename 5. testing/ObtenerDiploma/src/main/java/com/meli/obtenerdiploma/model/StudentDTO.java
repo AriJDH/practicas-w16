@@ -1,29 +1,34 @@
 package com.meli.obtenerdiploma.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.List;
+import java.util.Objects;
 
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class StudentDTO {
 
-    @NotEmpty(message = "El nombre del alumno no puede estar vacío.")
-    @Pattern(regexp = "([A-Z]|[0-9])[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El nombre del alumno debe comenzar con mayúscula.")
-    @Size(max = 50, message = "La longitud del nombre no puede superar los 50 caracteres.")
-    private String studentName;
+    Long id;
 
-    private String message;
+    @NotBlank(message = "El nombre del estudiante no puede estar vacío.")
+    @Pattern(regexp="([A-Z]|[0-9])[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El nombre del estudiante debe comenzar con mayúscula.")
+    @Size(max = 50, message = "La longitud del nombre del estudiante no puede superar los 50 caracteres.")
+    String studentName;
 
-    private Double averageScore;
+    String message;
+    Double averageScore;
 
-    @NotEmpty(message = "La lista no puede ser vacía.")
-    @Valid
-    private List<@Valid SubjectDTO> subjects;
+    @NotEmpty(message = "La lista de materias no puede estar vacía.")
+    List<@Valid SubjectDTO> subjects;
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

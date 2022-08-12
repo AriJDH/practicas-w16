@@ -1,23 +1,26 @@
 package com.meli.obtenerdiploma.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
-
-@Getter @Setter @AllArgsConstructor @NoArgsConstructor
+@Getter @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class SubjectDTO {
+    @NotBlank(message = "El nombre de la materia no puede estar vacío.")
+    @Pattern(regexp="([A-Z]|[0-9])[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El nombre de la materia debe comenzar con mayúscula.")
+    @Size(max = 30, message = "La longitud del nombre de la materia no puede superar los 30 caracteres.")
+    String name;
 
-    @Pattern(regexp = "([A-Z]|[0-9])[\\s|[0-9]|A-Z|a-z|ñ|ó|í|á|é|ú|Á|Ó|É|Í|Ú]*$", message = "El nombre de la materia debe comenzar con mayúscula.")
-    @NotEmpty(message = "El nombre de la materia no puede estar vacío.")
-    @Size(max = 30, message = "La longitud del nombre no puede superar los 30 caracteres.")
-    private String name;
+    @NotNull(message = "La nota de la materia no puede estar vacía.")
+    @DecimalMax(value = "10.0", message = "La nota máxima de la materia es de 10 pts.")
+    @DecimalMin(value = "0.0", message = "La nota mínima de la materia es de 0 pts.")
+    Double score;
 
-    @NotNull(message = "La nota no puede estar vacía.")
-    @Min(value = 0, message = "La mínima nota es 0.0.")
-    @Max(value = 10, message = "La máxima nota es 10.0.")
-    private Double score;
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
