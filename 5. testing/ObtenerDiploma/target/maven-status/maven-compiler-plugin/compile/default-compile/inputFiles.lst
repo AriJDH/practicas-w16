@@ -1,0 +1,9 @@
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/service/IObtenerDiplomaService.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/exception/ErrorDto.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/service/ObtenerDiplomaService.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/exception/GlobalHandler.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/ObtenerDiplomaApplication.java
+/Users/rbazan/IdeaProjects/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/exception/MethodArgumentNotValidException.java

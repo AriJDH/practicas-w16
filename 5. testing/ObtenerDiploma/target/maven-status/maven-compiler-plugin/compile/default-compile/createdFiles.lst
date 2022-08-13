@@ -1,0 +1,6 @@
+com/meli/obtenerdiploma/exception/MethodArgumentNotValidException.class
+com/meli/obtenerdiploma/model/ExceptionFieldsDTO$ExceptionFieldsDTOBuilder.class
+com/meli/obtenerdiploma/model/ExceptionFieldsDTO.class
+com/meli/obtenerdiploma/model/FieldErrorDTO$FieldErrorDTOBuilder.class
+com/meli/obtenerdiploma/exception/GlobalHandler.class
+com/meli/obtenerdiploma/model/FieldErrorDTO.class
