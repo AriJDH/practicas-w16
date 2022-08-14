@@ -1,4 +1,4 @@
-package main;
+package ClaseEnVivo;
 
 public class Circulo extends FiguraGeometrica implements Rotable{
     private float radio;
@@ -8,15 +8,7 @@ public class Circulo extends FiguraGeometrica implements Rotable{
         this.radio = radio;
     }
 
-    public Circulo() {
-
-    }
-
-    @Override
-    public double calcularArea() {
-        double v = Math.PI * (Math.pow(radio, 2));
-        return v;
-    }
+    public Circulo() {}
 
     public float getRadio() {
         return radio;
@@ -27,12 +19,17 @@ public class Circulo extends FiguraGeometrica implements Rotable{
     }
 
     @Override
-    public void graficarFigura() {
-        System.out.println("Ciculo graficable");
+    public double calcularArea() {
+        return (Math.PI*(Math.pow(radio,2)));
     }
 
     @Override
-    public void rotar() {
-        System.out.println("circulo rotando");
+    public void graficarFigura() {
+        System.out.println("El circulo es graficable");
+    }
+
+    @Override
+    public void rotable() {
+        System.out.println("El círculo es rotable");
     }
 }
