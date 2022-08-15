@@ -100,16 +100,16 @@ public class StudentDAO implements IStudentDAO {
     }
 
     private void saveData() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            File file = ResourceUtils.getFile("./src/" + SCOPE + "/resources/users.json");
-            objectMapper.writeValue(file, this.students);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Failed while writing to DB, check your resources files");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Failed while writing to DB, check your JSON formatting.");
-        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            File file = ResourceUtils.getFile("./src/" + SCOPE + "/resources/users.json");
+//            objectMapper.writeValue(file, this.students);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            System.out.println("Failed while writing to DB, check your resources files");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            System.out.println("Failed while writing to DB, check your JSON formatting.");
+//        }
     }
 }
