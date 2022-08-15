@@ -33,7 +33,7 @@ public class PublicationRepository implements IPublicationRepository {
   }
 
   @Override
-  public List<Publication> getListPublicationsById(Integer userId) {
+    public List<Publication> getListPublicationsById(Integer userId) {
     return publications.stream().filter(x -> x.getUserId().equals(userId)).collect(Collectors.toList());
   }
 

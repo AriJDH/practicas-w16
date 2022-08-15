@@ -19,7 +19,7 @@ public class RequestCreatePublicationDTO {
   private LocalDate date;
   private ProductCreateDTO product;
   private Integer category;
-  private double price;
+  private Double price;
   private Boolean hasPromo;
   private Double discount;
 }
