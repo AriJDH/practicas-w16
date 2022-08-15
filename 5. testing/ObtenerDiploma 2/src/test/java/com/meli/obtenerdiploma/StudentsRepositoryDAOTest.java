@@ -2,7 +2,8 @@ package com.meli.obtenerdiploma;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
-import com.meli.obtenerdiploma.service.IStudentService;
+import com.meli.obtenerdiploma.repository.IStudentDAO;
+import com.meli.obtenerdiploma.repository.IStudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +15,12 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class StudentsTest {
+public class StudentsRepositoryDAOTest {
 
     @Autowired
-   private IStudentService istudentService;
+    private IStudentDAO iStudentDAO;
+    @Autowired
+    private IStudentRepository iStudentRepository;
 
     @Test
     public void createStudent() {
@@ -26,7 +29,7 @@ public class StudentsTest {
 
         StudentDTO studentCreate = new StudentDTO(
                 23L, "Mariana", "Nota", 5.0, new ArrayList<>(Arrays.asList(subject1, subject2)));
-        istudentService.create(studentCreate);
+        iStudentDAO.save(studentCreate);
 
         findStudentById();
     }
@@ -35,7 +38,7 @@ public class StudentsTest {
     @Test
     public void findStudentById() {
         long id = 1;
-        StudentDTO student = istudentService.getAll().stream().filter(x -> x.getId().equals(id)).findFirst().orElse(null);
+        StudentDTO student = iStudentRepository.findAll().stream().filter(x -> x.getId().equals(id)).findFirst().orElse(null);
 
         assertNotNull(student);
     }
@@ -51,11 +54,11 @@ public class StudentsTest {
         StudentDTO studentUpdate = new StudentDTO(
                 23L, "Ruth", "Nota", 5.0, new ArrayList<>(Arrays.asList(subject1, subject2)));
 
-        StudentDTO studentBefore = istudentService.getAll().stream().filter(x -> x.getId().equals(23L)).findFirst().orElse(null);
+        StudentDTO studentBefore = iStudentRepository.findAll().stream().filter(x -> x.getId().equals(23L)).findFirst().orElse(null);
 
-        istudentService.update(studentUpdate);
+        iStudentDAO.save(studentUpdate);
 
-        StudentDTO studentAfter = istudentService.getAll().stream().filter(x -> x.getId().equals(23L)).findFirst().orElse(null);
+        StudentDTO studentAfter = iStudentRepository.findAll().stream().filter(x -> x.getId().equals(23L)).findFirst().orElse(null);
 
         assertEquals(studentAfter, studentBefore);
     }
@@ -65,9 +68,9 @@ public class StudentsTest {
 
         createStudent();
 
-        istudentService.delete(23L);
+        iStudentDAO.delete(23L);
 
-        StudentDTO studentDelete = istudentService.getAll().stream().filter(x -> x.getId().equals(23L)).findFirst().orElse(null);
+        StudentDTO studentDelete = iStudentRepository.findAll().stream().filter(x -> x.getId().equals(23L)).findFirst().orElse(null);
 
         assertNull(studentDelete);
     }
@@ -77,7 +80,7 @@ public class StudentsTest {
 
         createStudent();
 
-        Set<StudentDTO> list = istudentService.getAll();
+        Set<StudentDTO> list = iStudentRepository.findAll();
 
         assertNotNull(list);
     }
