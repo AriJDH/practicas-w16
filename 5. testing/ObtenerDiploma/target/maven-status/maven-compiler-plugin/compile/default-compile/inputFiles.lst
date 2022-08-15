@@ -1,0 +1,8 @@
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/ObtenerDiplomaApplication.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/controller/ObtenerDiplomaController.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/service/IObtenerDiplomaService.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/exception/GlobalHandler.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/model/ExceptionDto.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java
+/Users/facundodiaz/Downloads/ObtenerDiploma/src/main/java/com/meli/obtenerdiploma/service/ObtenerDiplomaService.java
