@@ -75,6 +75,7 @@ public class StudentDAO implements IStudentDAO {
 
     @Override
     public StudentDTO findById(Long id) {
+        loadData();
         return students.stream()
                 .filter(stu -> stu.getId().equals(id))
                 .findFirst().orElseThrow(() -> new StudentNotFoundException(id));
@@ -86,7 +87,7 @@ public class StudentDAO implements IStudentDAO {
         ObjectMapper objectMapper = new ObjectMapper();
         File file;
         try {
-            file = ResourceUtils.getFile("./src/main/resources/users.json");
+            file = ResourceUtils.getFile("./src/" + SCOPE + "/resources/users.json");
             loadedData = objectMapper.readValue(file, new TypeReference<Set<StudentDTO>>(){});
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -102,7 +103,7 @@ public class StudentDAO implements IStudentDAO {
     private void saveData() {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            File file = ResourceUtils.getFile("./src/main/resources/users.json");
+            File file = ResourceUtils.getFile("./src/" + SCOPE + "/resources/users.json");
             objectMapper.writeValue(file, this.students);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

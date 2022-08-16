@@ -3,7 +3,9 @@ package com.meli.obtenerdiploma.service;
 import com.meli.obtenerdiploma.model.StudentDTO;
 import com.meli.obtenerdiploma.model.SubjectDTO;
 import com.meli.obtenerdiploma.repository.IStudentDAO;
-import com.meli.obtenerdiploma.repository.StudentDAO;
+import com.meli.obtenerdiploma.util.TestUtilsGenerator;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.SerializationUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class ObtenerDiplomaServiceTests {
@@ -23,24 +26,78 @@ public class ObtenerDiplomaServiceTests {
     IStudentDAO studentDAO;
 
     @InjectMocks
-    private ObtenerDiplomaService service;
+    ObtenerDiplomaService service;
 
     @Test
-    public void analyzeScoresTest(){
-        //Arrange
-        List<SubjectDTO> scores = new ArrayList<>(List.of(new SubjectDTO("Matemática", 9D), new SubjectDTO("Física", 7D), new SubjectDTO("Química", 6D)));
-        StudentDTO expectedFind = new StudentDTO(1L, "Juan", null, null, scores);
+    public void averageScoreWellCalculated() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        when(studentDAO.findById(stu.getId())).thenReturn(stu);
 
-        when(studentDAO.findById(expectedFind.getId())).thenReturn(expectedFind);
+        // act
+        service.analyzeScores(stu.getId());
 
-        expectedFind.setAverageScore(7.333333333333333);
-        expectedFind.setMessage("El alumno Juan ha obtenido un promedio de 7.33. Puedes mejorar.");
-
-        //Act
-        StudentDTO result = service.analyzeScores(1L);
-
-        //Assert
-        assertEquals(expectedFind, result);
+        // assert
+        verify(studentDAO, atLeastOnce()).findById(stu.getId());
+        assertEquals(6.0, stu.getAverageScore());
     }
 
+    @Test
+    public void averageScoreOver9MessageWellWritten() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3SubjectsAverageOver9("Marco");
+        when(studentDAO.findById(stu.getId())).thenReturn(stu);
+
+        // act
+        service.analyzeScores(stu.getId());
+
+        // assert
+        verify(studentDAO, atLeastOnce()).findById(stu.getId());
+        assertEquals("El alumno Marco ha obtenido un promedio de 9.00. Felicitaciones!", stu.getMessage());
+    }
+
+    @Test
+    public void averageScoreBelow9MessageWellWritten() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        when(studentDAO.findById(stu.getId())).thenReturn(stu);
+
+        // act
+        service.analyzeScores(stu.getId());
+
+        // assert
+        verify(studentDAO, atLeastOnce()).findById(stu.getId());
+        assertEquals("El alumno Marco ha obtenido un promedio de 6.00. Puedes mejorar.", stu.getMessage());
+    }
+
+    @Test
+    public void RequestStudentNameMatchesResponseStudentName() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        when(studentDAO.findById(stu.getId())).thenReturn(stu);
+
+        // act
+        service.analyzeScores(stu.getId());
+
+        // assert
+        verify(studentDAO, atLeastOnce()).findById(stu.getId());
+        assertEquals("Marco", stu.getStudentName());
+    }
+
+    @Test
+    public void RequestStudentSubjectListMatchesResponseSubjectList() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        List<SubjectDTO> initalList = new ArrayList<>();
+        stu.getSubjects().stream().forEach((s) -> initalList.add(SerializationUtils.clone(s)));
+
+        when(studentDAO.findById(stu.getId())).thenReturn(stu);
+
+        // act
+        service.analyzeScores(stu.getId());
+
+        // assert
+        verify(studentDAO, atLeastOnce()).findById(stu.getId());
+        assertTrue(CollectionUtils.isEqualCollection(initalList, stu.getSubjects()));
+    }
 }

@@ -2,62 +2,144 @@ package com.meli.obtenerdiploma.repository;
 
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
-import com.meli.obtenerdiploma.model.SubjectDTO;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import com.meli.obtenerdiploma.util.TestUtilsGenerator;
+import org.junit.jupiter.api.*;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.ResourceUtils;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Properties;
 
-import java.util.ArrayList;
-import java.util.List;
 
-@TestInstance(PER_CLASS)
 public class StudentDAOTests {
 
-    private StudentDAO studentDAO;
+    IStudentDAO studentDAO;
 
-    @BeforeEach
-    public void initStudentDAO(){
-        this.studentDAO = new StudentDAO();
-    }
-
-    @AfterAll
-    public void removeTestStudents(){ this.studentDAO.delete(3L); }
-
-    @Test
-    public void addFindByIdStudentTest(){
-        //Arrange
-        SubjectDTO sub1 = new SubjectDTO("Geografía", 7.5);
-        SubjectDTO sub2 = new SubjectDTO("Biología", 4.0);
-        SubjectDTO sub3 = new SubjectDTO("Inglés", 9.0);
-        List<SubjectDTO> subList = new ArrayList<>(List.of(sub1, sub2, sub3));
-        StudentDTO expected = new StudentDTO(3L, "Student 1", "Message 1", 8.0, subList);
-
-        //Act
-        studentDAO.save(expected);
-        StudentDTO result = studentDAO.findById(3L);
-
-        //Assert
-        assertEquals(expected, result);
+    @BeforeEach @AfterEach
+    private void setUp() {
+       TestUtilsGenerator.emptyUsersFile();
+       this.studentDAO = new StudentDAO();
     }
 
     @Test
-    public void notFoundByIdStudentTest(){ assertThrows(StudentNotFoundException.class,()->studentDAO.findById(30L)); }
+    public void createNonExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+
+        // act
+        studentDAO.save(stu);
+
+        // assert
+        Assertions.assertTrue(studentDAO.exists(stu));
+        Assertions.assertEquals(1L, stu.getId());
+        Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
+    }
 
     @Test
-    public void testDelete(){
-        //Arrange
-        StudentDTO testStudent = new StudentDTO(4L,"","",2D,new ArrayList<>());
+    public void createExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
-        //Act
-        studentDAO.save(testStudent);
-        studentDAO.delete(4L);
+        // act
+        studentDAO.save(stu);
 
-        //Assert
-        assertThrows(StudentNotFoundException.class,()->studentDAO.findById(4L));
+        // assert
+        Assertions.assertTrue(studentDAO.exists(stu));
+        Assertions.assertEquals(1L, stu.getId());
+        Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
     }
+
+    @Test
+    public void modifyNonExistentStudent() {
+        // arrange
+        StudentDTO stu1 = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+
+        StudentDTO stu2 = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        stu2.setId(999L);
+        stu2.setStudentName("Marco Polo");
+
+        studentDAO.save(stu1);
+
+        // act
+        studentDAO.save(stu2);
+
+        // assert
+        Assertions.assertTrue(studentDAO.exists(stu1));
+        Assertions.assertEquals(1L, stu1.getId());
+        Assertions.assertEquals(studentDAO.findById(stu1.getId()), stu1);
+
+        Assertions.assertTrue(studentDAO.exists(stu2));
+        Assertions.assertEquals(2L, stu2.getId());
+        Assertions.assertEquals(studentDAO.findById(stu2.getId()), stu2);
+
+    }
+
+    @Test
+    public void modifyExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        studentDAO.save(stu);
+
+        // act
+        stu.setStudentName("Marco Polo");
+        studentDAO.save(stu);
+
+        // assert
+        Assertions.assertTrue(studentDAO.exists(stu));
+        Assertions.assertEquals(1L, stu.getId());
+        Assertions.assertEquals(studentDAO.findById(stu.getId()), stu);
+    }
+
+    @Test
+    public void findExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        studentDAO.save(stu);
+
+        // act
+        StudentDTO found = studentDAO.findById(stu.getId());
+
+        // assert
+        Assertions.assertEquals(found, stu);
+    }
+
+    @Test
+    public void findNonExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+
+        // act & assert
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
+    }
+
+    @Test
+    public void deleteExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+        studentDAO.save(stu);
+
+        // act
+        studentDAO.delete(stu.getId());
+
+        // assert
+        Assertions.assertFalse(studentDAO.exists(stu));
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
+    }
+
+    @Test
+    public void deleteNonExistentStudent() {
+        // arrange
+        StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
+
+        // act
+        studentDAO.delete(stu.getId());
+
+        // assert
+        Assertions.assertFalse(studentDAO.exists(stu));
+        Assertions.assertThrows(StudentNotFoundException.class,() -> studentDAO.findById(stu.getId()));
+    }
+
+
 
 }

@@ -1,8 +1,7 @@
-package com.meli.obtenerdiploma.service;
+package com.meli.obtenerdiploma.controller;
 
 import com.meli.obtenerdiploma.model.StudentDTO;
-import com.meli.obtenerdiploma.repository.IStudentDAO;
-import com.meli.obtenerdiploma.repository.IStudentRepository;
+import com.meli.obtenerdiploma.service.IStudentService;
 import com.meli.obtenerdiploma.util.TestUtilsGenerator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.junit.jupiter.api.Test;
@@ -18,77 +17,75 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class StudentServiceTests {
+public class StudentControllerTests {
 
     @Mock
-    IStudentDAO studentDAO;
-    @Mock
-    IStudentRepository studentRepo;
+    IStudentService service;
 
     @InjectMocks
-    StudentService service;
+    StudentController controller;
 
     @Test
-    public void createStudent() {
+    public void registerStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
         // act
-        service.create(stu);
+        controller.registerStudent(stu);
 
         // assert
-        verify(studentDAO, atLeastOnce()).save(stu);
+        verify(service, atLeastOnce()).create(stu);
     }
 
     @Test
-    public void readStudent() {
+    public void getStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
-        when(studentDAO.findById(stu.getId())).thenReturn(stu);
+        when(service.read(stu.getId())).thenReturn(stu);
 
         // act
-        StudentDTO readStu = service.read(stu.getId());
+        StudentDTO readStu = controller.getStudent(stu.getId());
 
         // assert
-        verify(studentDAO, atLeastOnce()).findById(stu.getId());
+        verify(service, atLeastOnce()).read(stu.getId());
         assertEquals(stu, readStu);
     }
 
     @Test
-    public void updateStudent() {
+    public void modifyStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
         // act
-        service.update(stu);
+        controller.modifyStudent(stu);
 
         // assert
-        verify(studentDAO, atLeastOnce()).save(stu);
+        verify(service, atLeastOnce()).update(stu);
     }
 
     @Test
-    public void deleteStudent() {
+    public void removeStudent() {
         // arrange
         StudentDTO stu = TestUtilsGenerator.getStudentWith3Subjects("Marco");
 
         // act
-        service.delete(stu.getId());
+        controller.removeStudent(stu.getId());
 
         // assert
-        verify(studentDAO, atLeastOnce()).delete(stu.getId());
+        verify(service, atLeastOnce()).delete(stu.getId());
     }
 
     @Test
-    public void getAllStudents() {
+    public void listStudents() {
         // arrange
         Set<StudentDTO> students = TestUtilsGenerator.getStudentSet();
-        when(studentRepo.findAll()).thenReturn(students);
+        when(service.getAll()).thenReturn(students);
 
         // act
-        Set<StudentDTO> readStudents = service.getAll();
+        Set<StudentDTO> readStudents = controller.listStudents();
 
         // assert
-        verify(studentRepo, atLeastOnce()).findAll();
+        verify(service, atLeastOnce()).getAll();
         assertTrue(CollectionUtils.isEqualCollection(students, readStudents));
     }
 }

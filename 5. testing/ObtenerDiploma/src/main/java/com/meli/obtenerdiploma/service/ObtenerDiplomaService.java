@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,8 +27,8 @@ public class ObtenerDiplomaService implements IObtenerDiplomaService {
     }
 
     private String getGreetingMessage(String studentName, Double average) {
-        return "El alumno " + studentName + " ha obtenido un promedio de " + new DecimalFormat("#.##").format(average)
-                + ((average > 9) ? ". Felicitaciones!" : ". Puedes mejorar.");
+        return "El alumno " + studentName + " ha obtenido un promedio de " + ((average == null) ? "null" : new DecimalFormat("#0.00").format(average))
+                + ((average == null) ? "" : ((average >= 9) ? ". Felicitaciones!" : ". Puedes mejorar."));
     }
 
     private Double calculateAverage(List<SubjectDTO> scores) {
