@@ -10,4 +10,5 @@ public interface IStudentService {
     void update(StudentDTO stu);
     void delete(Long id);
     Set<StudentDTO> getAll();
+
 }
