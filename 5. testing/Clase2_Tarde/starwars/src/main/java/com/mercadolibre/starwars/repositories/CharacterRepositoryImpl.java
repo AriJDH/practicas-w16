@@ -35,17 +35,13 @@ public class CharacterRepositoryImpl implements CharacterRepository {
   private List<CharacterDTO> loadDataBase() {
     File file = null;
     try {
-      file = ResourceUtils.getFile("classpath:starwars_characters.json");
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
+      file = ResourceUtils.getFile("classpath:starwars_characters.json");} catch (FileNotFoundException e) {e.printStackTrace();
     }
     ObjectMapper objectMapper = new ObjectMapper();
     TypeReference<List<CharacterDTO>> typeRef = new TypeReference<>() {};
     List<CharacterDTO> characters = null;
     try {
-      characters = objectMapper.readValue(file, typeRef);
-    } catch (IOException e) {
-      e.printStackTrace();
+      characters = objectMapper.readValue(file, typeRef);} catch (IOException e) {e.printStackTrace();
     }
     return characters;
   }
