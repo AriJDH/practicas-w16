@@ -40,8 +40,8 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
     @Override
     public ResponseDTO followUser(FollowIdDto followIdDto) {
 
-        idFollower = followIdDto.getUserId(); //  Seguidor
-        idFollowed = followIdDto.getUserIdToFollow();//  Seguido
+        idFollower = followIdDto.getUserId();           //  Seguidor
+        idFollowed = followIdDto.getUserIdToFollow();   //  Seguido
 
         findById(idFollower);
         findById(idFollowed);
@@ -148,7 +148,6 @@ public class SocialMeliServiceE1 implements ISocialMeliServiceE1 {
                 .stream()
                 .filter(userDTO -> userDTO.getUserId() == userId)
                 .collect(Collectors.toList());
-
         if (users.isEmpty()) {
             throw new UserNotFoundException("User Not Found");
         } else {
