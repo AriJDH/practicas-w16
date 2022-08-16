@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meli.obtenerdiploma.exception.StudentNotFoundException;
 import com.meli.obtenerdiploma.model.StudentDTO;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -19,7 +18,6 @@ import java.util.Set;
 @Repository
 public class StudentDAO implements IStudentDAO {
 
-    @Value("${api.scope}")
     private String SCOPE;
 
     private Set<StudentDTO> students;
@@ -28,7 +26,13 @@ public class StudentDAO implements IStudentDAO {
     public StudentDAO() {
         Properties properties =  new Properties();
 
-        this.loadData();
+        try {
+            properties.load(new ClassPathResource("application.properties").getInputStream());
+            this.SCOPE = properties.getProperty("api.scope");
+            this.loadData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -59,14 +63,14 @@ public class StudentDAO implements IStudentDAO {
     }
 
     public boolean exists(StudentDTO stu) {
-       boolean ret = false;
+        boolean ret = false;
 
-       try {
-           ret  = this.findById(stu.getId()) != null;
-       }
-       catch (StudentNotFoundException e) {}
+        try {
+            ret  = this.findById(stu.getId()) != null;
+        }
+        catch (StudentNotFoundException e) {}
 
-       return ret;
+        return ret;
     }
 
     @Override
