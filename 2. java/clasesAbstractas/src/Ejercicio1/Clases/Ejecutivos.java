@@ -1,7 +1,7 @@
 package Ejercicio1.Clases;
 
-import Ejercicio1.Clases.Interfaces.Depósito;
-import Ejercicio1.Clases.Interfaces.Transferencia;
+import Ejercicio1.Interfaces.Depósito;
+import Ejercicio1.Interfaces.Transferencia;
 
 public class Ejecutivos implements Depósito, Transferencia {
 

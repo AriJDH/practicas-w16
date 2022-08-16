@@ -16,8 +16,5 @@ public class Main {
         basic1.consultarSaldo();
         basic1.retirarEfectivo(500);
         basic1.consultarSaldo();
-
-
-
     }
 }

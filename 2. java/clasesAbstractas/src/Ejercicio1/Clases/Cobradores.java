@@ -1,7 +1,7 @@
 package Ejercicio1.Clases;
 
-import Ejercicio1.Clases.Interfaces.ConsultaSaldo;
-import Ejercicio1.Clases.Interfaces.Retiro;
+import Ejercicio1.Interfaces.ConsultaSaldo;
+import Ejercicio1.Interfaces.Retiro;
 
 public class Cobradores implements Retiro, ConsultaSaldo {
 

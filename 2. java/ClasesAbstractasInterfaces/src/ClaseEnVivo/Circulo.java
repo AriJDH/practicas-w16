@@ -20,7 +20,7 @@ public class Circulo extends FiguraGeometrica implements Rotable{
 
     @Override
     public double calcularArea() {
-        return (Math.PI*(Math.pow(radio,2)));
+        return (PI *(Math.pow(radio,2)));
     }
 
     @Override
