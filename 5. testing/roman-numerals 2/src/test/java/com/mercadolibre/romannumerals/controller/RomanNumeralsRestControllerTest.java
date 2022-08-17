@@ -64,4 +64,10 @@ public class RomanNumeralsRestControllerTest {
         String result = restController.toRoman(fifty);
         Assertions.assertEquals(result,resultExpected);
     }
+
+    @Test
+    void nullNumberShouldThrowAnError() {
+        Integer number = null;
+        Assertions.assertThrows(NullPointerException.class,()->restController.toRoman(number));
+    }
 }
