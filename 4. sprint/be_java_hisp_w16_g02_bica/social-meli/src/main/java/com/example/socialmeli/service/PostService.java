@@ -51,16 +51,16 @@ public class PostService implements IPostService {
             throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
         }
 
-        List userPosts = postRepository.getAll().stream().filter(post -> post.getUserId()== userId).collect(Collectors.toList());
-        List userPromoPosts = new ArrayList<PromoPost>();
+        List<Post> userPosts = postRepository.getAll().stream().filter(post -> post.getUserId()== userId).collect(Collectors.toList());
+        List<PromoPost> userPromoPosts = new ArrayList<>();
 
         userPosts.stream()
         .filter(p-> p instanceof PromoPost)
                 .forEach(p-> userPromoPosts.add(((PromoPost) p)));
 
-        Long count = userPromoPosts.stream().filter(promoPost -> ((PromoPost) promoPost).getHasPromo()).count();
+        long count = userPromoPosts.stream().filter(promoPost -> ((PromoPost) promoPost).getHasPromo()).count();
 
-        return Mapper.mapperToPromoPost(user, count.intValue());
+        return Mapper.mapperToPromoPost(user, (int) count);
 
     }//US0011
 
@@ -71,8 +71,8 @@ public class PostService implements IPostService {
             throw new UserNotFoundException("El usuario con codigo " + userId + " no existe.");
         }
 
-        List userPosts = postRepository.getAll().stream().filter(post -> post.getUserId()== userId).collect(Collectors.toList());
-        List userPromoPosts = new ArrayList<PromoPost>();
+        List<Post> userPosts = postRepository.getAll().stream().filter(post -> post.getUserId()== userId).collect(Collectors.toList());
+        List<PromoPost> userPromoPosts = new ArrayList<>();
 
         userPosts.stream()
                 .filter(p-> p instanceof PromoPost)
