@@ -1,5 +1,8 @@
 package com.mercadolibre.calculadorametroscuadrados.dto;
 
+import lombok.Data;
+
+@Data
 public class HouseResponseDTO extends HouseDTO {
   private Integer squareFeet;
   private Integer price;

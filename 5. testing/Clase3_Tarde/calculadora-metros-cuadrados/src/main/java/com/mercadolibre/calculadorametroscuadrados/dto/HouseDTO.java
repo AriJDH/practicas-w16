@@ -1,7 +1,9 @@
 package com.mercadolibre.calculadorametroscuadrados.dto;
 
-import java.util.List;
+import lombok.Data;
 
+import java.util.List;
+@Data
 public class HouseDTO {
   private String name;
   private String address;
