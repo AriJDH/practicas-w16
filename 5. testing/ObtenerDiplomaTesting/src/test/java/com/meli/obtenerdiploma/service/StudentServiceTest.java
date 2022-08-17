@@ -97,7 +97,7 @@ class StudentServiceTest {
 
     @Test
     void getAll() {
-        // arrange
+        //Arrange
         StudentDTO s1 = TestUtils.generateStudentNoSubjects("John", 1L);
         StudentDTO s2 = TestUtils.generateStudentNoSubjects("Doe", 2L);
         StudentDTO s3 = TestUtils.generateStudentNoSubjects("JD", 3L);
@@ -108,10 +108,10 @@ class StudentServiceTest {
         }};
         when(studentRepository.findAll()).thenReturn(students);
 
-        // act
+        //Act
         Set<StudentDTO> response = service.getAll();
 
-        // assert
+        //Assert
         assertTrue(CollectionUtils.isEqualCollection(students, response));
         verify(studentRepository, atLeastOnce()).findAll();
     }
