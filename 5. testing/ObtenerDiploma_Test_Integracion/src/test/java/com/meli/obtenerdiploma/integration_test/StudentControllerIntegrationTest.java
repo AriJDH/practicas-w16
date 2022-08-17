@@ -120,4 +120,25 @@ public class StudentControllerIntegrationTest {
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.*", hasSize(2)));
     }
+
+    @Test
+    public void registerStudentWithWrongName() throws Exception {
+
+        StudentDTO studentDTO = new StudentDTO(3L, "gab", "No message", null,
+                List.of(new SubjectDTO("Math", 4.5)));
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer().withDefaultPrettyPrinter();
+
+        String payloadJson = writer.writeValueAsString(studentDTO);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/student/registerStudent")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payloadJson))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.name").value("MethodArgumentNotValidException"))
+                .andExpect(jsonPath("$.description").value("El nombre del estudiante debe comenzar con mayúscula."));
+    }
 }
