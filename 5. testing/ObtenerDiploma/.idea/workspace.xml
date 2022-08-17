@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma" />
+    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma">
+      <change afterPath="$PROJECT_DIR$/../starwars 2/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/java/com/mercadolibre/starwars/StarWarsApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/java/com/mercadolibre/starwars/controller/FindController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/java/com/mercadolibre/starwars/dto/CharacterDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/java/com/mercadolibre/starwars/repositories/CharacterRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/java/com/mercadolibre/starwars/repositories/CharacterRepositoryImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/java/com/mercadolibre/starwars/service/FindService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/main/resources/starwars_characters.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/test/java/com/mercadolibre/starwars/unitTests/CharacterRepositoryImplTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../starwars 2/src/test/java/com/mercadolibre/starwars/unitTests/FindControllerTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,19 +80,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/sopetrides/Desktop/Bootcamp/practicas-w16/5. testing/ObtenerDiploma",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "b36e5c601021deef548f272a0fa63917"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/sopetrides/Desktop/Bootcamp/practicas-w16/5. testing/ObtenerDiploma&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;b36e5c601021deef548f272a0fa63917&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/test/java/com/meli/obtenerdiploma" />
@@ -185,6 +203,7 @@
       <option name="presentableId" value="Default" />
       <updated>1619721005383</updated>
       <workItem from="1660594218583" duration="501000" />
+      <workItem from="1660742649751" duration="36000" />
     </task>
     <task id="LOCAL-00001" summary="Spring 2 - Practica TT - Obetener Diploma">
       <created>1619721212242</created>
