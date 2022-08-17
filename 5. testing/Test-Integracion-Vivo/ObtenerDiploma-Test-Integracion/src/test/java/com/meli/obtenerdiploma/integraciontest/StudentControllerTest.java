@@ -118,6 +118,24 @@ public class StudentControllerTest {
     }
 
 
+    @Test
+    public void registerStudentExceptionNotReadeableTest() throws Exception {
+
+
+        String studentDTOJson = "";
+
+        this.mockMvc.perform(post("/student/registerStudent")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(studentDTOJson))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.name").value("HttpMessageNotReadableException"));;
+
+
+    }
+
+
 
 
 }
