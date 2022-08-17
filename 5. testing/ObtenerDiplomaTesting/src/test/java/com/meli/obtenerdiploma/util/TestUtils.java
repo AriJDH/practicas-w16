@@ -53,9 +53,41 @@ public class TestUtils {
         return student;
     }
 
+    public static StudentDTO generateNormalStudent(String name, long id) {
+        StudentDTO student = new StudentDTO();
+        student.setStudentName(name);
+        List<SubjectDTO> subjects = List.of(generateSubjectLowScore("Matemáticas"),
+                generateSubjectLowScore("Física"));
+        student.setSubjects(subjects);
+        student.setId(id);
+        return student;
+    }
+
+    public static StudentDTO generateHonoredStudent(String name, long id) {
+        StudentDTO student = new StudentDTO();
+        student.setStudentName(name);
+        List<SubjectDTO> subjects = List.of(generateSubjectHighScore("Matemáticas"),
+                generateSubjectHighScore("Física"));
+        student.setSubjects(subjects);
+        student.setId(id);
+        return student;
+    }
+
     private static SubjectDTO generateSubject(String name) {
         Random r = new Random();
         double randomScore = 10 * r.nextDouble();
+        return new SubjectDTO(name, randomScore);
+    }
+
+    private static SubjectDTO generateSubjectHighScore(String name) {
+        Random r = new Random();
+        double randomScore = 9 + r.nextDouble();
+        return new SubjectDTO(name, randomScore);
+    }
+
+    private static SubjectDTO generateSubjectLowScore(String name) {
+        Random r = new Random();
+        double randomScore = 9 * r.nextDouble();
         return new SubjectDTO(name, randomScore);
     }
 

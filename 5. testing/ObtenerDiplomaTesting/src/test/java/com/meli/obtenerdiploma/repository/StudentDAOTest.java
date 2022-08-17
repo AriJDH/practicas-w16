@@ -107,10 +107,7 @@ class StudentDAOTest {
         StudentDTO student1 = TestUtils.generateStudentNoSubjects("Stu1", 99L);
         dao.save(student1);
 
-        //Act
-        Executable f = () -> dao.findById(2L);
-
-        //Assert
-        Assertions.assertThrows(StudentNotFoundException.class, f);
+        //Act & Assert
+        Assertions.assertThrows(StudentNotFoundException.class, () -> dao.findById(2L));
     }
 }
