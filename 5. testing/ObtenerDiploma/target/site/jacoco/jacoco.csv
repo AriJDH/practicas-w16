@@ -1,0 +1,6 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+obtenerDiploma,com.meli.obtenerdiploma.model,StudentDTO,31,0,0,0,6,0,9,0,9,0
+obtenerDiploma,com.meli.obtenerdiploma.model,SubjectDTO,17,0,0,0,4,0,5,0,5,0
+obtenerDiploma,com.meli.obtenerdiploma.controller,ObtenerDiplomaController,5,3,0,0,1,1,1,1,1,1
+obtenerDiploma,com.meli.obtenerdiploma,ObtenerDiplomaApplication,5,3,0,0,2,1,1,1,1,1
+obtenerDiploma,com.meli.obtenerdiploma.service,ObtenerDiplomaService,56,3,2,0,8,1,5,1,4,1

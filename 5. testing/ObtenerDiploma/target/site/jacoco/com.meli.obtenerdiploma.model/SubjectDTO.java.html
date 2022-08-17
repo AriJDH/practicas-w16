@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SubjectDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">obtenerDiploma</a> &gt; <a href="index.source.html" class="el_package">com.meli.obtenerdiploma.model</a> &gt; <span class="el_source">SubjectDTO.java</span></div><h1>SubjectDTO.java</h1><pre class="source lang-java linenums">package com.meli.obtenerdiploma.model;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import lombok.Getter;
+import lombok.Setter;
+
+<span class="nc" id="L13">@Getter @Setter</span>
+<span class="nc" id="L14">public class SubjectDTO {</span>
+    @NotEmpty(message = &quot;El nombre de la materia no puede estar vacio&quot;)
+    @Size(max = 30, message=&quot;La longitud del nombre no puede superar los 30 caracteres.&quot;)
+    @Pattern(regexp = &quot;[A-Z][a-zA-Z]*&quot;, message=&quot;El nombre de la materia debe comenzar con mayúscula.&quot;)
+<span class="nc" id="L18">    String name;</span>
+    @NotNull(message=&quot;La nota no puede estar vacía.&quot;)
+    @Min(value = 0, message=&quot;La mínima nota es 0.0.&quot;)
+    @Max(value = 10, message = &quot;La máxima nota es 10.0.&quot;)
+<span class="nc" id="L22">    Double score;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

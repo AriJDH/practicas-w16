@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ObtenerDiplomaApplication<obtenerdiploma>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.meli.obtenerdiploma.ObtenerDiplomaApplication",
+            "projectName": "obtenerdiploma",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
