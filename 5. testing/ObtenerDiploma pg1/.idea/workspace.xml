@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma">
-      <change afterPath="$PROJECT_DIR$/../ObtenerDiploma - test vivo/src/test/java/com/meli/obtenerdiploma/StudentDaoTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -186,7 +184,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1619721005383</updated>
-      <workItem from="1660676239456" duration="1784000" />
+      <workItem from="1660676239456" duration="1840000" />
     </task>
     <task id="LOCAL-00001" summary="Spring 2 - Practica TT - Obetener Diploma">
       <created>1619721212242</created>
@@ -278,6 +276,17 @@
     <MESSAGE value="Spring 2 - Practica TT - Obetener Diploma (again)" />
     <MESSAGE value="Spring 2 - Practica TT - Obetener Diploma" />
     <option name="LAST_COMMIT_MESSAGE" value="Spring 2 - Practica TT - Obetener Diploma" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/PracticaTT$ObtenerDiplomaServiceTest_testAverageWithEmptySubjectList.ic" NAME="ObtenerDiplomaServiceTest.testAverageWithEmptySubjectList Coverage Results" MODIFIED="1620739844261" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
