@@ -99,9 +99,9 @@ public class UserService implements IUserService {
         List<ResponseUserInformationDto> followed = user.getFollowedList().stream().map(user1 ->
                 new ResponseUserInformationDto(user1.getUserId(), user1.getName())).collect(Collectors.toList());
 
-        List<PostDto> postList = user.getPostMade().stream().map(x->(x instanceof PromoProductPost)?mapper.map(x,PromoProductPostDto.class):mapper.map(x,PostDto.class)).collect(Collectors.toList());
+        List<PostDto> postList = user.getPostMade().stream().map(x -> (x instanceof PromoProductPost) ? mapper.map(x, PromoProductPostDto.class) : mapper.map(x, PostDto.class)).collect(Collectors.toList());
 
-        return new UserDto(user.getUserId(), user.getName(), followres, followed,postList);
+        return new UserDto(user.getUserId(), user.getName(), followres, followed, postList);
 
 
     }
@@ -187,10 +187,10 @@ public class UserService implements IUserService {
     }
 
     public void addNewUser(UserBasicInfoDto newUser) {
-        if(iUserRepository.isPresent(newUser.getUserId())){
+        if (iUserRepository.isPresent(newUser.getUserId())) {
             throw new UserAlreadyExistsException();
         }
-        User newBasicUser = new User(newUser.getUserId(), newUser.getUserName(), new ArrayList<>(),new ArrayList<>(),new ArrayList<>());
+        User newBasicUser = new User(newUser.getUserId(), newUser.getUserName(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         iUserRepository.addUser(newBasicUser);
     }
