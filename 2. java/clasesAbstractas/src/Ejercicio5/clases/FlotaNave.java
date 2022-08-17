@@ -1,34 +1,31 @@
 package Ejercicio5.clases;
 
-import Ejercicio5.interfaces.INaveDistancia;
 
 import java.util.List;
 
-public class FlotaNave implements INaveDistancia {
-    private List<NaveSimple> flotaNaves;
+public class FlotaNave extends Composite {
+    private List<Composite> flotaNaves;
 
-    public FlotaNave(List<NaveSimple> flotaNave) {
-        this.flotaNaves = flotaNave;
+    public FlotaNave(List<Composite> flotaNaves) {
+        this.flotaNaves = flotaNaves;
     }
 
-    public List<NaveSimple> getFlotaNaves() {
+    public List<Composite> getFlotaNaves() {
         return flotaNaves;
     }
 
-    public void setFlotaNaves(List<NaveSimple> flotaNaves) {
+    public void setFlotaNaves(List<Composite> flotaNaves) {
         this.flotaNaves = flotaNaves;
     }
 
     @Override
-    public double calcularDistancia(Double x, Double y) {
-        double resultado = 0;
-        double distancia = 0;
-        int cantNaves = this.flotaNaves.size();
-        for (int i = 0; i < cantNaves; i++) {
-            NaveSimple naveSimple = this.flotaNaves.get(i);
-            distancia += naveSimple.calcularDistancia(x, y);
+    public double calcularDistancia(Coordenada coordenadaObjetivo) {
+        double sumaDeDistancias = 0;
+        for(Composite nave: this.flotaNaves){
+            sumaDeDistancias += nave.calcularDistancia(coordenadaObjetivo);
         }
-        resultado = distancia/cantNaves;
-        return resultado;
+        double distanciaPromedio = sumaDeDistancias / this.flotaNaves.size();
+
+        return distanciaPromedio;
     }
 }
