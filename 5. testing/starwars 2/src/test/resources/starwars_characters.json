@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Luke Skywalker",
+    "height": 172,
+    "mass": 77,
+    "hair_color": "blond",
+    "skin_color": "fair",
+    "eye_color": "blue",
+    "birth_year": "19BBY",
+    "gender": "male",
+    "homeworld": "Tatooine",
+    "species": "Human"
+  },
+  {
+    "name": "C-3PO",
+    "height": 167,
+    "mass": 75,
+    "hair_color": "NA",
+    "skin_color": "gold",
+    "eye_color": "yellow",
+    "birth_year": "112BBY",
+    "gender": "NA",
+    "homeworld": "Tatooine",
+    "species": "Droid"
+  },
+  {
+    "name": "R2-D2",
+    "height": 96,
+    "mass": 32,
+    "hair_color": "NA",
+    "skin_color": "white, blue",
+    "eye_color": "red",
+    "birth_year": "33BBY",
+    "gender": "NA",
+    "homeworld": "Naboo",
+    "species": "Droid"
+  },
+  {
+    "name": "Darth Vader",
+    "height": 202,
+    "mass": 136,
+    "hair_color": "none",
+    "skin_color": "white",
+    "eye_color": "yellow",
+    "birth_year": "41.9BBY",
+    "gender": "male",
+    "homeworld": "Tatooine",
+    "species": "Human"
+  },
+  {
+    "name": "Darth Maul",
+    "height": 175,
+    "mass": 80,
+    "hair_color": "none",
+    "skin_color": "red",
+    "eye_color": "yellow",
+    "birth_year": "54BBY",
+    "gender": "male",
+    "homeworld": "Dathomir",
+    "species": "Zabrak"
+  }
+]
