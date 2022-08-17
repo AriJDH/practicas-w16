@@ -1,5 +1,10 @@
 package com.mercadolibre.calculadorametroscuadrados.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@AllArgsConstructor
+@Data
 public class RoomDTO {
   private String name;
   private Integer width;
