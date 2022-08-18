@@ -5,7 +5,6 @@ import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
 import com.example.be_java_hisp_w16_g03.dto.UserDTO;
 import com.example.be_java_hisp_w16_g03.entity.User;
-import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
 
 
 public interface IUserService {

@@ -90,7 +90,7 @@ public class UserService implements IUserService {
         User user = getUser(userId);
         User userToFollow = getUser(userToFollowId);
 
-        Boolean isSeller = userToFollow.getPosts().size() > 0;
+        boolean isSeller = userToFollow.getPosts().size() > 0;
         Boolean follows = user.getFolloweds().contains(userToFollow);
         Boolean isFollowed = userToFollow.getFollowers().contains(user);
 

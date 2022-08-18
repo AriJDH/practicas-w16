@@ -3,7 +3,6 @@ package com.example.be_java_hisp_w16_g03.service;
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
-import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;

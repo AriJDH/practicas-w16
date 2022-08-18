@@ -32,7 +32,7 @@ public class GlobalHandler {
                             String field = e.getField();
                             String msg = e.getDefaultMessage();
                             List<String> errorFields = new ArrayList<>();
-                            if (errors.containsKey(field)){
+                            if (errors.containsKey(field)) {
                                 errorFields = errors.get(field);
                             }
                             errorFields.add(msg);
@@ -44,7 +44,7 @@ public class GlobalHandler {
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    ResponseEntity<ExceptionApiDTO> recipeNotFoundException3(HttpMessageNotReadableException ex){
+    ResponseEntity<ExceptionApiDTO> recipeNotFoundException3(HttpMessageNotReadableException ex) {
         ExceptionApiDTO exceptionDTO = new ExceptionApiDTO();
         exceptionDTO.setMessage("");
         return new ResponseEntity<>(exceptionDTO, HttpStatus.BAD_REQUEST);
