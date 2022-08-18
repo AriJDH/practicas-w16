@@ -2,11 +2,15 @@ package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
+import com.example.be_java_hisp_w16_g09.model.User;
+import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
+import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
+import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.exception.*;
 import com.example.be_java_hisp_w16_g09.model.Post;
-import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
+import com.example.be_java_hisp_w16_g09.util.MapperUtil;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,16 +18,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.Mockito;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static com.example.be_java_hisp_w16_g09.util.UsersUtility.getUserWith5Followers;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import java.util.Arrays;
 
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
     @Mock
@@ -176,6 +183,45 @@ class UserServiceTest {
         Assertions.assertThrows(UserHasNoFollowersException.class, () -> userService.orderByName(2, "name_desc"));
     }
 
+
+    @Test
+    @DisplayName("Verificar el correcto ordenamiento ascendente y descendente por nombre ASCENDENTE. (US-0008)")
+    void T0004asc() {
+        MapperUtil mapperUtil = new MapperUtil();
+        User mockUser = getUserWith5Followers();
+
+        List<SimpleUserDto> mockOrderFollowers = mapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class).stream()
+                .sorted(Comparator.comparing(SimpleUserDto::getUserName))
+                .collect(Collectors.toList());
+        FollowersDtoResponse mockFollowersDtoResponse = new FollowersDtoResponse(mockUser.getUserId(), mockUser.getUserName(), mockOrderFollowers);
+
+        when(userRepository.searchById(mockUser.getUserId())).thenReturn(mockUser);
+        when(dtoMapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class)).thenReturn(mapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class));
+
+        FollowersDtoResponse response = userService.orderByName(1, "name_asc");
+
+        Assertions.assertEquals(mockFollowersDtoResponse.getFollowers(), response.getFollowers());
+    }
+
+    @Test
+    @DisplayName("Verificar el correcto ordenamiento ascendente y descendente por nombre DESCENDENTE. (US-0008)")
+    void T0004desc() {
+        MapperUtil mapperUtil = new MapperUtil();
+        User mockUser = getUserWith5Followers();
+
+        List<SimpleUserDto> mockOrderFollowers = mapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class).stream()
+                .sorted(Comparator.comparing(SimpleUserDto::getUserName))
+                .collect(Collectors.toList());
+        mockOrderFollowers.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
+        FollowersDtoResponse mockFollowersDtoResponse = new FollowersDtoResponse(mockUser.getUserId(), mockUser.getUserName(), mockOrderFollowers);
+
+        when(userRepository.searchById(mockUser.getUserId())).thenReturn(mockUser);
+        when(dtoMapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class)).thenReturn(mapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class));
+
+        FollowersDtoResponse response = userService.orderByName(1, "name_desc");
+
+        Assertions.assertEquals(mockFollowersDtoResponse.getFollowers(), response.getFollowers());
+    }
 
     @Test
     void orderByNameFollowed() {
