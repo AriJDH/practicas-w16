@@ -10,10 +10,6 @@ import java.util.List;
 public interface IProductService {
     RecentPostsDTO recentPost(int idUser, String order);
 
-    List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList);
-
-    List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList);
-
     ApiResponseDto createPost(PostDTO postDto);
 
 }
