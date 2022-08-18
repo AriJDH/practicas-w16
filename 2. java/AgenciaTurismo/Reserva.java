@@ -1,44 +1,27 @@
 package AgenciaTurismo;
 
-public class Reserva implements IReserva, IProduct {
+public class Reserva implements IReserva {
     private double precio;
-    private float porcentajeDescuento;
-    private IProduct product;
-    public Reserva(double precio, IProduct product) {
+    private IProducto producto;
+    public Reserva() {}
+    public Reserva(double precio, IProducto producto) {
         this.precio = precio;
-        this.porcentajeDescuento = 0;
-        this.product = product;
+        this.producto = producto;
     }
-@Override
+    @Override
     public double getPrecio() {
         return this.precio;
-    }
-    @Override
-    public double getPrecioConDescuentos() {
-        return this.precio - this.getCantidadDescuento();
-    }
-    @Override
-    public double getCantidadDescuento() {
-        return this.precio * this.porcentajeDescuento;
     }
     @Override
     public void setPrecio(double precio) {
         this.precio = precio;
     }
     @Override
-    public float setAgregarDescuento(float porcentaje) {
-        //TODO validaciones
-        return this.porcentajeDescuento + porcentaje;
+    public IProducto getProduct() {
+        return producto;
     }
-
-
     @Override
-    public void setName(String name) {
-        this.product.setName(name);
-    }
-
-    @Override
-    public String getName() {
-        return this.product.getName();
+    public void setProduct(IProducto product) {
+        this.producto = product;
     }
 }

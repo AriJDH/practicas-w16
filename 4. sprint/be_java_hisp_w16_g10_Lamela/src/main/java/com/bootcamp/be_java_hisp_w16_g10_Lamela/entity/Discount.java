@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class Discount {
     private Boolean hasPromo;
     private Double discount;
-    private Post post;
+    private Post post; //TODO sacarlo
 }

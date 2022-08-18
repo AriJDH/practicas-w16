@@ -1,9 +1,13 @@
 package integrador;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cliente implements ICliente {
     private String nombre;
     private String apellido;
-    int dni;
+    private Integer dni;
+    private final List<IFactura> facturas = new ArrayList<>();
     public Cliente(String nombre, String apellido, int dni) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -28,11 +32,11 @@ public class Cliente implements ICliente {
     }
 
     @Override
-    public int getDni() {
+    public Integer getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(Integer dni) {
         this.dni = dni;
     }
 
@@ -44,5 +48,31 @@ public class Cliente implements ICliente {
                 ", dni=" + dni +
                 '}';
     }
+    @Override
+    public void agregarItemFacturaById(Integer facturaId, IItemFactura itemFactura) {
+        IFactura factura = this.obtenerFacturaById(facturaId);
+        if(factura ==  null) {
+            System.out.println("La factura no existe!");
+            return;
+        }
+        factura.getItems().add(itemFactura);
+    }
+    @Override
+    public IFactura obtenerFacturaById(Integer facturaId) {
+        return this.facturas.stream()
+                .filter(user -> user.getId().equals(facturaId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void borrarItemByFacturaIdCodigo(Integer facturaId, Integer codigo) {
+        IFactura factura = this.obtenerFacturaById(facturaId);
+        if(factura ==  null) {
+            System.out.println("La factura no existe!");
+            return;
+        }
+        factura.getItems().removeIf(facturaItem -> codigo == facturaItem.getItem().getCodigo());
+    }
+
 
 }

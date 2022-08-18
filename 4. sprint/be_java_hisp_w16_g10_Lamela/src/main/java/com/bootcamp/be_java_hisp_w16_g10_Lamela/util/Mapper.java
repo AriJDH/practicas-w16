@@ -56,10 +56,10 @@ public class Mapper {
                 .userId(user.getId())
                  .userName(user.getUserName())
                 .posts(posts
-                                .stream().map(post-> {
-                            return Mapper.parsePostPromoResDTO(post, discounts.get(post.getId()));
-                        }).collect(Collectors.toList()))
-                .build();
+                    .stream()
+                    .map(post-> Mapper.parsePostPromoResDTO(post, discounts.get(post.getId())))
+                    .collect(Collectors.toList()))
+                 .build();
     }
     public static PostPromoResDTO parsePostPromoResDTO(Post post, Discount discount) {
         return PostPromoResDTO.builder()

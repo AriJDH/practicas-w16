@@ -5,7 +5,7 @@ import java.util.Date;
 public class ReservaBoletosViaje extends  Reserva implements IReservaBoletosViaje {
     private Date horarioSalida;
     private Date horarioEntrada;
-        public ReservaBoletosViaje(double precio, Date horarioSalida, Date horarioEntrada, IProduct product) {
+        public ReservaBoletosViaje(double precio, Date horarioSalida, Date horarioEntrada, IProducto product) {
         super(precio, product);
         this.horarioSalida = horarioSalida;
         this.horarioEntrada = horarioEntrada;

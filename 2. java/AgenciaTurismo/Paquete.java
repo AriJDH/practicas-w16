@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Paquete extends Reserva implements IPaquete {
     List<IReserva> reservas;
-    public Paquete(List<IReserva> reservas, IProduct product ) {
+    public Paquete(List<IReserva> reservas, IProducto product ) {
         super(reservas
                 .stream()
                 .map(IReserva::getPrecio)
@@ -12,7 +12,6 @@ public class Paquete extends Reserva implements IPaquete {
                 product
                 );
         this.reservas = reservas;
-        this.setAgregarDescuento(0.1f);
     }
 
     public List<IReserva> getReservas() {

@@ -7,7 +7,7 @@ public class ReservaHotel extends Reserva implements IReservaHotel {
     private Date horarioCheckOut;
     private String nombre;
 
-    public ReservaHotel(Date horarioCheckIn, Date horarioCheckOut, String nombre, double precio, IProduct product) {
+    public ReservaHotel(Date horarioCheckIn, Date horarioCheckOut, String nombre, double precio, IProducto product) {
         super(precio, product);
         this.horarioCheckIn = horarioCheckIn;
         this.horarioCheckOut = horarioCheckOut;

@@ -9,7 +9,7 @@ import java.time.Period;
 
 @RestController
 public class AgePersonController {
-    @GetMapping("/{dia}/mes/ano")
+    @GetMapping("/{dia}/{mes}/{ano}")
     public Integer getPersonAge(@PathVariable int dia, @PathVariable int mes, @PathVariable int ano) {
         LocalDate fecha = LocalDate.of(ano,mes, dia);
         LocalDate ahora = LocalDate.now();

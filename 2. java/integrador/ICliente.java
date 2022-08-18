@@ -1,11 +1,14 @@
 package integrador;
 
 public interface ICliente {
-    public String toString();
-    public String getNombre();
-    public void setNombre(String nombre);
-    public String getApellido();
-    public void setApellido(String apellido);
-    public int getDni();
-    public void setDni(int dni);
+    String toString();
+    String getNombre();
+    void setNombre(String nombre);
+    String getApellido();
+    void setApellido(String apellido);
+    Integer getDni();
+    void setDni(Integer dni);
+    void agregarItemFacturaById(Integer facturaId, IItemFactura itemFactura);
+    IFactura obtenerFacturaById(Integer id);
+    void borrarItemByFacturaIdCodigo(Integer facturaId, Integer codigo);
 }

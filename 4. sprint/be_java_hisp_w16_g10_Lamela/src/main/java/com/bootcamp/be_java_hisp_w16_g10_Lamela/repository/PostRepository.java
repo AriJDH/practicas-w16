@@ -60,13 +60,13 @@ public class PostRepository implements IPostRepository {
     public List<Post> findByUserIdWithPromo(Integer userID) {
         return this.posts.stream()
                 .filter(post -> post.getUserId().equals(userID) &&
-                        this.discountRepository.findByPostId(post.getId()) != null)
+                    this.discountRepository.findByPostId(post.getId()) != null)
                 .collect(Collectors.toList());
     }
     @Override
     public Map<Integer, Discount> getDiscountsByPosts(List<Post> posts) {
         Map<Integer, Discount> discounts = new HashMap<>();
-        posts
+            posts
                 .stream()
                 .forEach(post -> discounts.put(post.getId(), this.discountRepository.findByPostId(post.getId())));
         return discounts;

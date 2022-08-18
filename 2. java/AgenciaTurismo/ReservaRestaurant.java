@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class ReservaRestaurant extends Reserva implements IReservaRestaurant{
     Date horario;
-    public ReservaRestaurant(double precio, Date horario, IProduct product) {
+    public ReservaRestaurant(double precio, Date horario, IProducto product) {
         super(precio, product);
         this.horario = horario;
     }
