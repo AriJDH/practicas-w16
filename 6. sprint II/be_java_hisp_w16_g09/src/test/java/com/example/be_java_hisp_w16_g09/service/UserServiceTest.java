@@ -41,14 +41,16 @@ class UserServiceTest {
     @Test
     @DisplayName("Verificar que si el usuario a seguir existe se agrega en la lista")
     void followUser() {
-        User userFollower = new User(1, "Javier", new ArrayList<>(), new ArrayList<>());
-        User userToFollow = new User(2, "Ricardito", new ArrayList<>(), new ArrayList<>());
+        int followerId = 1;
+        int toFollowId = 2;
+        User userFollower = new User(followerId, "Javier", new ArrayList<>(), new ArrayList<>());
+        User userToFollow = new User(toFollowId, "Ricardito", new ArrayList<>(), new ArrayList<>());
 
-        Mockito.when(userRepository.searchById(1)).thenReturn(userFollower);
-        Mockito.when(userRepository.searchById(2)).thenReturn(userToFollow);
-        Mockito.when(postRepository.searchById(2)).thenReturn(Arrays.asList(new Post()));
+        Mockito.when(userRepository.searchById(followerId)).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(toFollowId)).thenReturn(userToFollow);
+        Mockito.when(postRepository.searchById(toFollowId)).thenReturn(Arrays.asList(new Post()));
 
-        userService.followUser(1,2);
+        userService.followUser(followerId,toFollowId);
 
 
         Assertions.assertTrue(userFollower.isFollowing(userToFollow));
