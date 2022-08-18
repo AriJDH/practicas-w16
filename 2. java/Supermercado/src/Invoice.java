@@ -3,12 +3,12 @@ import java.util.List;
 public class Invoice {
     private Client client;
     private List<Item> items;
-    private Integer total;
+    private Double total;
 
     public Invoice() {
     }
 
-    public Invoice(Client client, List<Item> items, Integer total) {
+    public Invoice(Client client, List<Item> items, Double total) {
         this.client = client;
         this.items = items;
         this.total = total;
@@ -30,11 +30,11 @@ public class Invoice {
         this.items = items;
     }
 
-    public Integer getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 }
