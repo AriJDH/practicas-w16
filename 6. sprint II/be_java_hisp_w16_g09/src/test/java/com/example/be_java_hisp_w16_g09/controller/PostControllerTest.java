@@ -3,6 +3,9 @@ package com.example.be_java_hisp_w16_g09.controller;
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
 import com.example.be_java_hisp_w16_g09.dto.ProductDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
+import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.service.IPostService;
 import com.example.be_java_hisp_w16_g09.service.IUserService;
@@ -15,11 +18,12 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PostControllerTest {
@@ -49,7 +53,7 @@ class PostControllerTest {
 
         RecentPostsDTO response = postController.getRecentPostsOfSellersFollowedByUserWith(1, order).getBody();
 
-        Mockito.verify(postService, Mockito.atMostOnce()).orderByDate(1, order);
+        verify(postService, Mockito.atMostOnce()).orderByDate(1, order);
         assertThat(
                 response.getPosts().get(0).getDate()
                         .isBefore(response.getPosts().get(1).getDate())).isTrue();
@@ -67,9 +71,21 @@ class PostControllerTest {
 
         RecentPostsDTO response = postController.getRecentPostsOfSellersFollowedByUserWith(1, order).getBody();
 
-        Mockito.verify(postService, Mockito.atMostOnce()).orderByDate(1, order);
+        verify(postService, Mockito.atMostOnce()).orderByDate(1, order);
         assertThat(
                 response.getPosts().get(0).getDate()
                         .isAfter(response.getPosts().get(1).getDate())).isTrue();
+    }
+
+    @Test
+    public void shouldReturnPostsOrderedByDateOrderNotExistException() {
+        int id = 1;
+        String order = "date_asc";
+
+        doThrow(new OrderNotExist()).when(postService).orderByDate(id, order);
+
+        assertThrows(OrderNotExist.class, () -> postController.getRecentPostsOfSellersFollowedByUserWith(id, order));
+
+        verify(postService, Mockito.atMostOnce()).orderByDate(id, order);
     }
 }

@@ -2,7 +2,9 @@ package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
+import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.exception.UserToFollowIsNotSellerException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.Product;
 import com.example.be_java_hisp_w16_g09.model.User;
@@ -18,6 +20,8 @@ import java.util.Comparator;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 public class PostServiceTest {
@@ -131,5 +135,37 @@ public class PostServiceTest {
 
         //Assert
         assertThat(response.getPosts()).isSortedAccordingTo(Comparator.comparing(PostDto::getDate).reversed());
+    }
+
+    @Test
+    public void shouldReturnPostsOrderedByDateExist() {
+        int id = 1;
+        String order = "date_desc";
+        LocalDate publicationDate = LocalDate.now();
+        User user = new User(1, "Ricardo", new ArrayList<>(), new ArrayList<>());
+        User seller = new User(2, "Nicolas", new ArrayList<>(), new ArrayList<>());
+        user.setFollowing(List.of(seller));
+        Post outOfRangePost = new Post(1, seller, publicationDate.minusWeeks(3), new Product(), 2, 100);
+        Post newestPost = new Post(2, seller, publicationDate, new Product(), 1, 78);
+        Post oldestPost = new Post(3, seller, publicationDate.minusWeeks(1), new Product(), 1, 120);
+
+        when(userRepository.searchById(id)).thenReturn(user);
+        when(postRepository.getPostsByUserIds(List.of(seller.getUserId()))).thenReturn(List.of(oldestPost, outOfRangePost, newestPost));
+
+        RecentPostsDTO response = postService.orderByDate(id, order);
+
+        assertEquals(publicationDate, response.getPosts().get(0).getDate());
+    }
+    @Test
+    public void shouldReturnPostsOrderedByDateOrderNotExistException() {
+        int id = 1;
+        String order = "fecha_desc";
+        User user = new User(1, "Ricardo", new ArrayList<>(), new ArrayList<>());
+        User seller = new User(2, "Nicolas", new ArrayList<>(), new ArrayList<>());
+        user.setFollowing(List.of(seller));
+
+        when(userRepository.searchById(id)).thenReturn(user);
+
+        assertThrows(OrderNotExist.class, () -> postService.orderByDate(id, order));
     }
 }
