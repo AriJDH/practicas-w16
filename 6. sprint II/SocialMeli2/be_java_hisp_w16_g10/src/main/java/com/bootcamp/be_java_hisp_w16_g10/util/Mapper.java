@@ -93,6 +93,7 @@ public class Mapper {
                 .product(parseToProduct(postReqDTO.getProduct()))
                 .category(postReqDTO.getCategory())
                 .price(postReqDTO.getPrice())
+                .id(postReqDTO.getIdPost())
                 .build();
     }
 }

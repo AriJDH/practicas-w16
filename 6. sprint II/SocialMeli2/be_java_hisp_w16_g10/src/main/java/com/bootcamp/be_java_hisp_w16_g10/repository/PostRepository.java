@@ -10,11 +10,9 @@ import java.util.stream.Collectors;
 @Repository
 public class PostRepository implements IPostRepository {
     private List<Post> posts;
-    private Integer id;
 
     public PostRepository() {
         this.posts = new ArrayList<>();
-        this.id = 1;
     }
 
     @Override
@@ -32,9 +30,10 @@ public class PostRepository implements IPostRepository {
 
     @Override
     public Post save(Post post){
-        post.setId(this.id++);
-        this.posts.add(post);
-        return post;
+        Post foundPost = this.findById(post.getId());
+        if(foundPost == null) this.posts.add(post);
+        else foundPost = post;
+        return foundPost;
     }
 
     @Override
