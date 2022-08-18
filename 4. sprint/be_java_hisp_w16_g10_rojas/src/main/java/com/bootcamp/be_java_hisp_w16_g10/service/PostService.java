@@ -157,4 +157,5 @@ public class PostService implements IPostService {
          throw new NotFoundException(String.format("The post with id: %s don't exists.", postID));
       return post;
    }
+   private void validateThisSHit (Integ)
 }
