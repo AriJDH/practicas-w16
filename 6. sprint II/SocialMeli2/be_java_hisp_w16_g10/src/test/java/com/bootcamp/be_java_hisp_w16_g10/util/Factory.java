@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g10.util;
 
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -65,4 +66,27 @@ public class Factory {
         return Factory
                 .generateProduct(1, "Mati", "Programdor", "Bootcamper", "Amarillo", "a");
     }
+
+    static public User generateUser(Integer id, String userName, List<User> followers, List<User> followed) {
+        return User.builder()
+                .id(id)
+                .userName(userName)
+                .followers(followers)
+                .followed(followed)
+                .build();
+    }
+
+    static public List<User> generateUserList (Integer amount, Integer firstId) {
+        List<User> users = new ArrayList<>();
+        for (Integer i = 0; i < amount; i++) {
+            String indexString = Integer.toString(i);
+            users.add(Factory.generateUser(firstId+i,
+                            "User ".concat(indexString),
+                            null, null));
+        }
+        return users;
+    }
+
+
 }
+
