@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -18,7 +19,7 @@ public class PostController {
     
     //US 0005: Dar de alta una nueva publicación
     @PostMapping("/post")
-    public ResponseEntity<?> US005(@RequestBody PostReqDTO postReqDTO){
+    public ResponseEntity<?> US005(@Valid @RequestBody PostReqDTO postReqDTO){
         this.postService.save(postReqDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }

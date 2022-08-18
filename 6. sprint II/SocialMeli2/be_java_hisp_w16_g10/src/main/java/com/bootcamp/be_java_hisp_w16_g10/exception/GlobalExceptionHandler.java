@@ -1,12 +1,22 @@
 package com.bootcamp.be_java_hisp_w16_g10.exception;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.ErrorHandlerDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.ExceptionFieldsDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.FieldErrorDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -32,5 +42,24 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorHandlerDTO> UrlNotValidException(Exception e){
         ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build();
         return new ResponseEntity<>(errorHandlerDTO, HttpStatus.BAD_REQUEST);
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ExceptionFieldsDTO methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        BindingResult result = ex.getBindingResult();
+        List<FieldError> fieldErrors = result.getFieldErrors();
+        return processFieldErrors(fieldErrors);
+    }
+
+    private ExceptionFieldsDTO processFieldErrors(List<FieldError> fieldErrors) {
+        return ExceptionFieldsDTO.builder()
+                .error(HttpStatus.BAD_REQUEST.value())
+                .message("Error de validación.")
+                .fields(fieldErrors.stream()
+                        .map(error -> new FieldErrorDTO(error.getField(), error.getDefaultMessage()))
+                        .collect(Collectors.toList())
+                )
+                .build();
     }
 }
