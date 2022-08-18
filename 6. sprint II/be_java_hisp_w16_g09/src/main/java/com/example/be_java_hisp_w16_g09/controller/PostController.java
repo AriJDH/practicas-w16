@@ -24,9 +24,6 @@ public class PostController {
     // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
     @GetMapping("/products/followed/{userId}/list")
     public ResponseEntity<RecentPostsDTO> getRecentPostsOfSellersFollowedByUserWith(@PathVariable int userId, @RequestParam(required = false) String order){
-        if (order != null)
-            return new ResponseEntity<>(postService.orderByDate(userId,order),HttpStatus.OK);
-        else
-            return ResponseEntity.ok(postService.getRecentPostsOfSellersFollowedByUserWith(userId));
+        return ResponseEntity.ok(postService.getRecentPostsOfSellersFollowedByUserWith(userId, order));
     }
 }
