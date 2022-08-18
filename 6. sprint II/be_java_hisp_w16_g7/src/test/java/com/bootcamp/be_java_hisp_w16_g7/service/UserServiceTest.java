@@ -345,5 +345,6 @@ class UserServiceTest {
 
         //assert
         assertEquals(followersList.size(), countFollowers.getCountFollowers());
+        verify(userRepository, atLeastOnce()).findUserById(user.getId());
     }
 }
