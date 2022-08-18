@@ -89,6 +89,7 @@ public class PostServiceTest {
         RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
 
         assertThat(response.getPosts().size()).isEqualTo(2);
+        assertThat(response.getPosts().contains(outOfRangePost)).isFalse();
         assertThat(response.getUserId()).isEqualTo(anUserId);
     }
 
