@@ -9,11 +9,10 @@ import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
-import org.modelmapper.ModelMapper;
+import com.example.be_java_hisp_w16_g09.utility.sort.Sort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -66,10 +65,13 @@ public class UserService implements IUserService{
 
 
     //MaxiM
-    public UserFollowedDto getUsersFollowedBySellers(int userId) {
+    public UserFollowedDto getUsersFollowedBySellers(int userId, String order) {
         User user = getValidatedUser(userId);
         if (user.getFollowing().isEmpty()) {throw new UserDoesNotFollowedAnyone(userId);}
         List<SimpleUserDto> followed = dtoMapperUtil.mapList(user.getFollowing(), SimpleUserDto.class);
+
+        followed = Sort.orderSequenceBasedOn(order, "name").sortingBy(SimpleUserDto::getUserName, followed);
+
         return new UserFollowedDto(user.getUserId(), user.getUserName(), followed);
     }
 
@@ -101,41 +103,17 @@ public class UserService implements IUserService{
         }
     }
 
-    public FollowersDtoResponse orderByName(int id, String order){
-        FollowersDtoResponse followers = getAllFollowers(id);
-        if (!(order.equals("name_asc")) && !(order.equals("name_desc")))
-            throw new OrderNotExist();
-        List<SimpleUserDto> listOrder = followers.getFollowers().stream()
-                .sorted(Comparator.comparing(SimpleUserDto::getUserName))
-                .collect(Collectors.toList());
-        if (order.equals("name_desc"))
-            listOrder.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
-        followers.setFollowers(listOrder);
-        return followers;
-    }
-
-    public UserFollowedDto orderByNameFollowed(int id, String order){
-        UserFollowedDto followers = getUsersFollowedBySellers(id);
-        if (!(order.equals("name_asc")) && !(order.equals("name_desc")))
-            throw new OrderNotExist();
-        List<SimpleUserDto> listOrder= followers.getFollowing().stream()
-                    .sorted(Comparator.comparing(SimpleUserDto::getUserName))
-                    .collect(Collectors.toList());
-        if (order.equals("name_desc"))
-            listOrder.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
-        followers.setFollowing(listOrder);
-        return followers;
-    }
-
     //Guille
-    public FollowersDtoResponse getAllFollowers(int id){
+    public FollowersDtoResponse getAllFollowers(int id, String order){
         User user = getValidatedUser(id);
         if (user.getFollowers().isEmpty()){
             throw new UserHasNoFollowersException(id);
-        }else{
-            List<SimpleUserDto> followers = dtoMapperUtil.mapList(user.getFollowers(), SimpleUserDto.class);
-            return new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
         }
+
+        List<SimpleUserDto> followers = dtoMapperUtil.mapList(user.getFollowers(), SimpleUserDto.class);
+        followers = Sort.orderSequenceBasedOn(order, "name").sortingBy(SimpleUserDto::getUserName, followers);
+        return new FollowersDtoResponse(user.getUserId(), user.getUserName(), followers);
+
     }
     //Nico
 }

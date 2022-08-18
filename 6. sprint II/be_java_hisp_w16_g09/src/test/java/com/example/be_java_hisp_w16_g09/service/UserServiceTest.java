@@ -152,6 +152,22 @@ class UserServiceTest {
     }
 
     @Test
+    @DisplayName("Verificar que el usuario no puede dejar de seguir a un usuario que no sigue")
+    public void unfollow2() {
+        //Arrange
+
+        User userFollower = new User(1,"Jaimito",new ArrayList<>(),new ArrayList<>());
+        User userToUnfolow = new User(2,"Horacio",new ArrayList<>(),new ArrayList<>());
+
+        Mockito.when(userRepository.searchById(userFollower.getUserId())).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(userToUnfolow.getUserId())).thenReturn(userToUnfolow);
+
+        //Assert
+        var exception = assertThrows(UserNotFollowing.class, () -> userService.unfollow(userFollower.getUserId(), userToUnfolow.getUserId()));
+        assertEquals(exception.getMessage(), (String.format("User with id: %d not follow user with id: %d",userFollower.getUserId(),userToUnfolow.getUserId())));
+    }
+
+    @Test
     @DisplayName("Si el usuario a dejar de seguir no existe lanza una excepcion")
     public void unfollowNotExist() {
         //Arrange
@@ -173,9 +189,9 @@ class UserServiceTest {
         User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
-        list = List.of(new SimpleUserDto(3, "Mateo"), new SimpleUserDto(4, "Agustin"));
+        list = Arrays.asList(new SimpleUserDto(3, "Mateo"), new SimpleUserDto(4, "Agustin"));
         when(dtoMapperUtil.mapList(userMock.getFollowers(), SimpleUserDto.class)).thenReturn(list);
-        FollowersDtoResponse user = userService.orderByName(2, "name_asc");
+        FollowersDtoResponse user = userService.getAllFollowers(2, "name_asc");
         String userName1 = user.getFollowers().get(0).getUserName();
         String userName2 = user.getFollowers().get(1).getUserName();
         Assertions.assertTrue(userName1.compareTo(userName2) < 0);
@@ -188,9 +204,9 @@ class UserServiceTest {
         User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
-        list = List.of(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
+        list = Arrays.asList(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
         when(dtoMapperUtil.mapList(userMock.getFollowers(), SimpleUserDto.class)).thenReturn(list);
-        FollowersDtoResponse user = userService.orderByName(2, "name_desc");
+        FollowersDtoResponse user = userService.getAllFollowers(2, "name_desc");
         String userName1 = user.getFollowers().get(0).getUserName();
         String userName2 = user.getFollowers().get(1).getUserName();
         Assertions.assertTrue(userName1.compareTo(userName2) > 0);
@@ -205,19 +221,19 @@ class UserServiceTest {
         List<SimpleUserDto> list = new ArrayList<>();
         list = List.of(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
         when(dtoMapperUtil.mapList(userMock.getFollowers(), SimpleUserDto.class)).thenReturn(list);
-        Assertions.assertThrows(OrderNotExist.class, () -> userService.orderByName(2, "fdgdfg"));
+        Assertions.assertThrows(OrderNotExist.class, () -> userService.getAllFollowers(2, "fdgdfg"));
     }
 
     @Test
     void orderByUserNotExistTest() {
-        Assertions.assertThrows(UserNotFoundException.class, () -> userService.orderByName(2435, "name_desc"));
+        Assertions.assertThrows(UserNotFoundException.class, () -> userService.getAllFollowers(2435, "name_desc"));
     }
 
     @Test
     void orderByUserHasNoFollowersTest() {
         User userMock = new User(2, "Marcos", new ArrayList<>(), new ArrayList<>());
         when(userRepository.searchById(2)).thenReturn(userMock);
-        Assertions.assertThrows(UserHasNoFollowersException.class, () -> userService.orderByName(2, "name_desc"));
+        Assertions.assertThrows(UserHasNoFollowersException.class, () -> userService.getAllFollowers(2, "name_desc"));
     }
 
 
@@ -235,7 +251,7 @@ class UserServiceTest {
         when(userRepository.searchById(mockUser.getUserId())).thenReturn(mockUser);
         when(dtoMapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class)).thenReturn(mapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class));
 
-        FollowersDtoResponse response = userService.orderByName(1, "name_asc");
+        FollowersDtoResponse response = userService.getAllFollowers(1, "name_asc");
 
         Assertions.assertEquals(mockFollowersDtoResponse.getFollowers(), response.getFollowers());
     }
@@ -255,7 +271,7 @@ class UserServiceTest {
         when(userRepository.searchById(mockUser.getUserId())).thenReturn(mockUser);
         when(dtoMapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class)).thenReturn(mapperUtil.mapList(mockUser.getFollowers(), SimpleUserDto.class));
 
-        FollowersDtoResponse response = userService.orderByName(1, "name_desc");
+        FollowersDtoResponse response = userService.getAllFollowers(1, "name_desc");
 
         Assertions.assertEquals(mockFollowersDtoResponse.getFollowers(), response.getFollowers());
     }

@@ -6,10 +6,8 @@ import com.example.be_java_hisp_w16_g09.dto.UserFollowedDto;
 
 public interface IUserService {
     void followUser(int userId, int userIdToFollow);
-    FollowersDtoResponse getAllFollowers(int id);
+    FollowersDtoResponse getAllFollowers(int id, String order);
      FollowersCountDTO followerCount(int id);
     void unfollow(int userId, int userIdToUfollow);
-     FollowersDtoResponse orderByName(int id, String order);
-    UserFollowedDto orderByNameFollowed(int id, String order);
-     UserFollowedDto getUsersFollowedBySellers(int userId);
+     UserFollowedDto getUsersFollowedBySellers(int userId, String order);
 }
