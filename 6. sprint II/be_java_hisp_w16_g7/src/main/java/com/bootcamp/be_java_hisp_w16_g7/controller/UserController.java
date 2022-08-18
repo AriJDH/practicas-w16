@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7.controller;
 
 
+import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
@@ -33,8 +34,8 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "User to follow is not a seller or User is already being followed"),
             @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity<Void> follow(@PathVariable int userId, @PathVariable int userIdToFollow) {
-        return new ResponseEntity(userService.follow(userId, userIdToFollow));
+    public ResponseEntity<ApiResponseDto> follow(@PathVariable int userId, @PathVariable int userIdToFollow) {
+        return new ResponseEntity(userService.follow(userId, userIdToFollow), HttpStatus.OK);
     }
 
     @Operation(summary = "Unfollow an user")
@@ -45,8 +46,8 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "User is not being followed"),
             @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity<Void> unfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
-        return new ResponseEntity(userService.unfollow(userId, userIdToUnfollow));
+    public ResponseEntity<ApiResponseDto> unfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
+        return new ResponseEntity(userService.unfollow(userId, userIdToUnfollow), HttpStatus.OK);
     }
 
     @Operation(summary = "Get list of followed by given user")

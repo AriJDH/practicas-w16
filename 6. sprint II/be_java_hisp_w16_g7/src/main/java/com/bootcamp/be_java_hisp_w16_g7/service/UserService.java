@@ -26,36 +26,41 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public HttpStatus follow(int userId, int userIdToFollow) {
-        if(userId == userIdToFollow) throw new SameUserException(userId);
+    public ApiResponseDto follow(int userId, int userIdToFollow) {
+
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToFollow);
-
-        if (user == null) throw new UserNotFoundException(userId);
-        if (target == null) throw new UserNotFoundException(userIdToFollow);
+        validateUserExceptions(user, target, userId, userIdToFollow);
         if (!target.isSeller()) throw new UserIsNotSellerException(userIdToFollow);
         if (target.getFollowers().contains(user)) throw new AlreadyFollowingException(userIdToFollow, userId);
 
         userRepository.addToUserFollows(target, user);
         userRepository.addToUserFollowers(user, target);
 
-        return HttpStatus.OK;
+        return new ApiResponseDto("Follow user", "User with id " + userId + " has followed user with id " + userIdToFollow);
     }
 
     @Override
-    public HttpStatus unfollow(int userId, int userIdToUnfollow) {
-        if(userId == userIdToUnfollow) throw new SameUserException(userId);
+    public ApiResponseDto unfollow(int userId, int userIdToUnfollow) {
+
         User user = userRepository.findUserById(userId);
         User target = userRepository.findUserById(userIdToUnfollow);
-
-        if (user == null) throw new UserNotFoundException(userId);
-        if (target == null) throw new UserNotFoundException(userIdToUnfollow);
+        validateUserExceptions(user, target, userId, userIdToUnfollow);
         if (!target.getFollowers().contains(user)) throw new NotFollowingException(userIdToUnfollow, userId);
 
         userRepository.removeFromUserFollows(target, user);
         userRepository.removeFromUserFollowers(user, target);
 
-        return HttpStatus.OK;
+        return new ApiResponseDto("Unfollow user", "User with id " + userId + " has unfollowed user with id " + userIdToUnfollow);
+    }
+
+    private void validateUserExceptions(User user, User target, int userId, int targetId){
+
+        if(userId == targetId) throw new SameUserException(userId);
+        if (user == null) throw new UserNotFoundException(userId);
+        if (target == null) throw new UserNotFoundException(targetId);
+
+
     }
 
     @Override
@@ -64,9 +69,9 @@ public class UserService implements IUserService {
         if (user == null) throw new UserNotFoundException(id);
         Comparator<ResponseUserDTO> userComp = Comparator.comparing(ResponseUserDTO::getUserName);
 
-        if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
-            throw new InvalidQueryException("unknown query");
-        }
+        //Verifica si la query es correcta
+        validateQuery(order);
+
         if ("name_desc".equals(order))
             userComp = userComp.reversed();
         List<ResponseUserDTO> followed = user.getFollows().stream()
@@ -84,9 +89,8 @@ public class UserService implements IUserService {
             throw new UserNotFoundException(id);
         }
         //Verifica si la query es correcta
-        if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
-            throw new InvalidQueryException("unknown query");
-        }
+        validateQuery(order);
+
         Comparator<FollowersDTO> comparator = Comparator.comparing(FollowersDTO::getName);
         if ("name_desc".equals(order)) {
             comparator = comparator.reversed();
@@ -99,6 +103,12 @@ public class UserService implements IUserService {
         }
 
         throw new UserIsNotSellerException(id);
+    }
+
+    private void validateQuery(String order){
+        if (order != null && !order.equals("name_asc") && !order.equals("name_desc")) {
+            throw new InvalidQueryException("unknown query");
+        }
     }
 
     public FollowersCountDto getFollowersCount(int id) {

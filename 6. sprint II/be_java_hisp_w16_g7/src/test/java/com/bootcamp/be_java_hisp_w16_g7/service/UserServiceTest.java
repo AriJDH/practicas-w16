@@ -1,13 +1,9 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.*;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
@@ -112,10 +108,10 @@ class UserServiceTest {
         when(userRepository.findUserById(target.getId())).thenReturn(target);
 
         //act
-        HttpStatus response = userService.follow(user.getId(), target.getId());
+        ApiResponseDto response = userService.follow(user.getId(), target.getId());
 
         //assert
-        assertEquals(response, HttpStatus.OK);
+        assertEquals(response.getTitle(), "Follow user");
     }
 
     @Test
@@ -172,10 +168,10 @@ class UserServiceTest {
         when(userRepository.findUserById(target.getId())).thenReturn(target);
 
         //act
-        HttpStatus response = userService.unfollow(user.getId(), target.getId());
+        ApiResponseDto response = userService.unfollow(user.getId(), target.getId());
 
         //assert
-        assertEquals(response, HttpStatus.OK);
+        assertEquals(response.getTitle(), "Unfollow user");
     }
 
     @Test
