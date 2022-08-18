@@ -15,6 +15,7 @@ import java.time.LocalDate;
 
 import static com.bootcamp.be_java_hisp_w16_g10.util.Factory.generateProductReqDTO;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class PostControllerTest {
@@ -32,10 +33,10 @@ class PostControllerTest {
 
         //act
         var response = postController.US005(postReqDTO);
+        verify(postService).save(postReqDTO);
 
         //assert
         assertEquals(200, response.getStatusCodeValue());
-
     }
 
     @Test
