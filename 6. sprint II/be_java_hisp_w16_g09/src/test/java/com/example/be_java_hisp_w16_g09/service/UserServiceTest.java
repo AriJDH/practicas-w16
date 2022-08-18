@@ -2,9 +2,7 @@ package com.example.be_java_hisp_w16_g09.service;
 
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
-import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
-import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
-import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.exception.*;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
@@ -50,20 +48,65 @@ class UserServiceTest {
         Mockito.when(userRepository.searchById(toFollowId)).thenReturn(userToFollow);
         Mockito.when(postRepository.searchById(toFollowId)).thenReturn(Arrays.asList(new Post()));
 
-        userService.followUser(followerId,toFollowId);
+        userService.followUser(followerId, toFollowId);
 
 
         Assertions.assertTrue(userFollower.isFollowing(userToFollow));
     }
+
     @Test
     @DisplayName("Verificar que si el usuario a seguir no existe se da una exepcion")
     void followUserException() {
-        User userFollower = new User(1, "Javier", new ArrayList<>(), new ArrayList<>());
+        int followerId = 1;
+        int toFollowId = 2;
+        User userFollower = new User(followerId, "Javier", new ArrayList<>(), new ArrayList<>());
 
-        Mockito.when(userRepository.searchById(1)).thenReturn(userFollower);
-        Mockito.when(userRepository.searchById(2)).thenReturn(null);
+        Mockito.when(userRepository.searchById(followerId)).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(toFollowId)).thenReturn(null);
 
-        assertThrows(UserNotFoundException.class, () -> userService.followUser(1,2));
+        assertThrows(UserNotFoundException.class, () -> userService.followUser(followerId, toFollowId));
+    }
+
+    @Test
+    @DisplayName("Verificar que si el usuario a seguir es el mismo que el seguidor se da exception")
+    void followUserHimselfException() {
+        int followerId = 1;
+
+        assertThrows(UserNotAllowedToFollowException.class, () -> userService.followUser(followerId, followerId));
+    }
+
+    @Test
+    @DisplayName("Verificar que si el usuario a seguir no es vendedor se da exeption")
+    void followUserNotSeller() {
+        int followerId = 1;
+        int toFollowId = 2;
+        User userFollower = new User(followerId, "Javier", new ArrayList<>(), new ArrayList<>());
+        User userToFollow = new User(toFollowId, "Ricardito", new ArrayList<>(), new ArrayList<>());
+
+        Mockito.when(userRepository.searchById(followerId)).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(toFollowId)).thenReturn(userToFollow);
+        Mockito.when(postRepository.searchById(toFollowId)).thenReturn(null);
+
+        assertThrows(UserToFollowIsNotSellerException.class, () -> userService.followUser(followerId, toFollowId));
+
+
+    }
+
+    @Test
+    @DisplayName("Verificar que si el ya esta seguido se da una exepcion")
+    void alreadyFollowedUserException() {
+        int followerId = 1;
+        int toFollowId = 2;
+        User userFollower = new User(followerId, "Javier", new ArrayList<>(), new ArrayList<>());
+        User userToFollow = new User(toFollowId, "Ricardito", new ArrayList<>(), new ArrayList<>());
+
+        Mockito.when(userRepository.searchById(followerId)).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(toFollowId)).thenReturn(userToFollow);
+
+        userFollower.addFollowed(userToFollow);
+        userToFollow.addFollower(userFollower);
+
+        assertThrows(UserAlreadyFollowedException.class, () -> userService.followUser(followerId, toFollowId));
     }
 
 
@@ -81,52 +124,56 @@ class UserServiceTest {
 
     @Test
     void orderByNameAscTest() {
-        User userMock1= new User(3,"Mateo",null,null);
-        User userMock2= new User(4,"Agustin",null,null);
-        User userMock = new User(2,"Marcos", List.of(userMock1,userMock2),null);
+        User userMock1 = new User(3, "Mateo", null, null);
+        User userMock2 = new User(4, "Agustin", null, null);
+        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
-        list = List.of(new SimpleUserDto(3,"Mateo"),new SimpleUserDto(4,"Agustin"));
-        when(dtoMapperUtil.mapList(userMock.getFollowers(),SimpleUserDto.class)).thenReturn(list);
-        FollowersDtoResponse user = userService.orderByName(2,"name_asc");
+        list = List.of(new SimpleUserDto(3, "Mateo"), new SimpleUserDto(4, "Agustin"));
+        when(dtoMapperUtil.mapList(userMock.getFollowers(), SimpleUserDto.class)).thenReturn(list);
+        FollowersDtoResponse user = userService.orderByName(2, "name_asc");
         String userName1 = user.getFollowers().get(0).getUserName();
-        String userName2= user.getFollowers().get(1).getUserName();
-        Assertions.assertTrue(userName1.compareTo(userName2)<0);
+        String userName2 = user.getFollowers().get(1).getUserName();
+        Assertions.assertTrue(userName1.compareTo(userName2) < 0);
     }
+
     @Test
     void orderByNameDescTest() {
-        User userMock1= new User(3,"Agustin",null,null);
-        User userMock2= new User(4,"Mateo",null,null);
-        User userMock = new User(2,"Marcos", List.of(userMock1,userMock2),null);
+        User userMock1 = new User(3, "Agustin", null, null);
+        User userMock2 = new User(4, "Mateo", null, null);
+        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
-        list = List.of(new SimpleUserDto(3,"Agustin"),new SimpleUserDto(4,"Mateo"));
-        when(dtoMapperUtil.mapList(userMock.getFollowers(),SimpleUserDto.class)).thenReturn(list);
-        FollowersDtoResponse user = userService.orderByName(2,"name_desc");
+        list = List.of(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
+        when(dtoMapperUtil.mapList(userMock.getFollowers(), SimpleUserDto.class)).thenReturn(list);
+        FollowersDtoResponse user = userService.orderByName(2, "name_desc");
         String userName1 = user.getFollowers().get(0).getUserName();
-        String userName2= user.getFollowers().get(1).getUserName();
-        Assertions.assertTrue(userName1.compareTo(userName2)>0);
+        String userName2 = user.getFollowers().get(1).getUserName();
+        Assertions.assertTrue(userName1.compareTo(userName2) > 0);
     }
+
     @Test
     void orderByNameNotExistTest() {
-        User userMock1= new User(3,"Agustin",null,null);
-        User userMock2= new User(4,"Mateo",null,null);
-        User userMock = new User(2,"Marcos", List.of(userMock1,userMock2),null);
+        User userMock1 = new User(3, "Agustin", null, null);
+        User userMock2 = new User(4, "Mateo", null, null);
+        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
-        list = List.of(new SimpleUserDto(3,"Agustin"),new SimpleUserDto(4,"Mateo"));
-        when(dtoMapperUtil.mapList(userMock.getFollowers(),SimpleUserDto.class)).thenReturn(list);
-        Assertions.assertThrows(OrderNotExist.class,() -> userService.orderByName(2,"fdgdfg"));
+        list = List.of(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
+        when(dtoMapperUtil.mapList(userMock.getFollowers(), SimpleUserDto.class)).thenReturn(list);
+        Assertions.assertThrows(OrderNotExist.class, () -> userService.orderByName(2, "fdgdfg"));
     }
+
     @Test
     void orderByUserNotExistTest() {
-        Assertions.assertThrows(UserNotFoundException.class,() -> userService.orderByName(2435,"name_desc"));
+        Assertions.assertThrows(UserNotFoundException.class, () -> userService.orderByName(2435, "name_desc"));
     }
+
     @Test
     void orderByUserHasNoFollowersTest() {
-        User userMock = new User(2,"Marcos", new ArrayList<>(),new ArrayList<>());
+        User userMock = new User(2, "Marcos", new ArrayList<>(), new ArrayList<>());
         when(userRepository.searchById(2)).thenReturn(userMock);
-        Assertions.assertThrows(UserHasNoFollowersException.class,() -> userService.orderByName(2,"name_desc"));
+        Assertions.assertThrows(UserHasNoFollowersException.class, () -> userService.orderByName(2, "name_desc"));
     }
 
 
