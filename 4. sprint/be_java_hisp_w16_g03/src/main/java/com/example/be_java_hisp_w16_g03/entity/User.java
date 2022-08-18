@@ -74,7 +74,8 @@ public class User {
 
     public List<Post> getPostBetweenDate() {
 
-        return this.getterPosts().stream().filter(p -> p.getDate().isBefore(LocalDate.now())
+        return this.getterPosts()
+                .stream().filter(p -> p.getDate().isBefore(LocalDate.now())
                 && p.getDate().isAfter(LocalDate.now().minusWeeks(2))).collect(Collectors.toList());
     }
 
