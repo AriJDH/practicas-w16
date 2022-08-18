@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -28,7 +30,7 @@ public class ProductController {
             @ApiResponse(responseCode = "200", description = "Post created"),
             @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/post")
-    public ResponseEntity<ApiResponseDto> createPost(@RequestBody PostDTO postDto) {
+    public ResponseEntity<ApiResponseDto> createPost(@RequestBody @Valid PostDTO postDto) {
         return new ResponseEntity<>(iProductService.createPost(postDto), HttpStatus.OK);
     }
 

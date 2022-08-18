@@ -1,12 +1,17 @@
 package com.bootcamp.be_java_hisp_w16_g7.exception;
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.DataTypeExceptionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @ControllerAdvice
 public class GlobalHandler {
@@ -54,10 +59,38 @@ public class GlobalHandler {
 
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+   /* @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ApiResponseDto> handleValidationExceptions(MethodArgumentNotValidException e) {
         ApiResponseDto error = new ApiResponseDto("MethodArgumentNotValidException", e.getBindingResult().getFieldError().getDefaultMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }*/
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    ResponseEntity<DataTypeExceptionDTO> validatingDataTypes(
+            MethodArgumentNotValidException exception
+    ) {
+        DataTypeExceptionDTO errorDTO = new DataTypeExceptionDTO();
+        errorDTO.setTitle("HttpMessageNotReadableException");
+        errorDTO.setStatus(HttpStatus.BAD_REQUEST);
+
+        HashMap<String, List<String>> errors = new HashMap<>();
+
+        exception
+                .getFieldErrors()
+                .forEach(
+                        e -> {
+                            String field = e.getField();
+                            String msg = e.getDefaultMessage();
+                            List<String> errorFields = new ArrayList<>();
+                            if (errors.containsKey(field)){
+                                errorFields = errors.get(field);
+                            }
+                            errorFields.add(msg);
+                            errors.put(field, errorFields);
+                        }
+                );
+        errorDTO.setErrors(errors);
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
