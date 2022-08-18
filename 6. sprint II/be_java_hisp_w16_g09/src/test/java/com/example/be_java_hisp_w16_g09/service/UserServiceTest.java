@@ -3,6 +3,8 @@ package com.example.be_java_hisp_w16_g09.service;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
 import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
+import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
+import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
@@ -89,6 +91,16 @@ class UserServiceTest {
         list = List.of(new SimpleUserDto(3,"Agustin"),new SimpleUserDto(4,"Mateo"));
         when(dtoMapperUtil.mapList(userMock.getFollowers(),SimpleUserDto.class)).thenReturn(list);
         Assertions.assertThrows(OrderNotExist.class,() -> userService.orderByName(2,"fdgdfg"));
+    }
+    @Test
+    void orderByUserNotExistTest() {
+        Assertions.assertThrows(UserNotFoundException.class,() -> userService.orderByName(2435,"name_desc"));
+    }
+    @Test
+    void orderByUserHasNoFollowersTest() {
+        User userMock = new User(2,"Marcos", new ArrayList<>(),new ArrayList<>());
+        when(userRepository.searchById(2)).thenReturn(userMock);
+        Assertions.assertThrows(UserHasNoFollowersException.class,() -> userService.orderByName(2,"name_desc"));
     }
 
 
