@@ -1,8 +1,10 @@
 package com.example.be_java_hisp_w16_g09.controller;
 
+import com.example.be_java_hisp_w16_g09.dto.FollowersCountDTO;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.service.IUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -54,6 +56,9 @@ class UserControllerTest {
 
     @Test
     void US002() {
+        FollowersCountDTO res = new FollowersCountDTO(2,"Marcos",2);
+        when(userService.followerCount(2)).thenReturn(res);
+        Assertions.assertTrue(2==userService.followerCount(2).getFollowers_count());
     }
 
     @Test
