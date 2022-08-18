@@ -1,14 +1,18 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
+
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersSellersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
-import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
-import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g7.exception.*;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,10 +23,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,14 +42,72 @@ class UserServiceTest {
     @InjectMocks
     UserService userService;
 
+    private User expected;
+    private List<FollowersDTO> asc, desc;
+
+    @BeforeEach
+    public void setUp(){
+        User follower1 = new User(88, "Juan", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User follower2 = new User(99, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        expected = new User(9999, "Pepito", Arrays.asList(follower1, follower2), new ArrayList<>(), Arrays.asList(new Post()));
+
+        //DTOs
+        FollowersDTO juan = new FollowersDTO(follower1.getId(), follower1.getName());
+        FollowersDTO pedro = new FollowersDTO(follower2.getId(), follower2.getName());
+
+        //Sorted list
+        asc = new ArrayList<>();
+        asc.add(juan);
+        asc.add(pedro);
+
+        desc = new ArrayList<>();
+        desc.add(pedro);
+        desc.add(juan);
+    }
+
 
     //Test
+    @DisplayName("Verificar que el tipo de ordenamiento alfabético exista (asc)")
     @Test
-    public void followUserExists(){
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post());
+    public void getUserFollowersListSortedAsc(){
+        //Arrange
+        int id = 9999;
+        String order = "name_asc";
+
+        when(userRepository.findUserById(id)).thenReturn(expected);
+
+        //Act
+        FollowersSellersDTO result = userService.getSellersFollowers(id, order);
+
+        //Assert
+        System.out.println("Expected: " + asc);
+        System.out.println("Result: " + result.getFollowers());
+        Assertions.assertEquals(asc, result.getFollowers());
+    }
+
+    @DisplayName("Verificar que el tipo de ordenamiento alfabético exista (desc)")
+    @Test
+    public void getUserFollowersListSortedDesc(){
+        //Arrange
+        int id = 9999;
+        String order = "name_desc";
+
+        when(userRepository.findUserById(id)).thenReturn(expected);
+
+        //Act
+        FollowersSellersDTO result = userService.getSellersFollowers(id, order);
+
+        //Assert
+        System.out.println("Expected: " + desc);
+        System.out.println("Result: " + result.getFollowers());
+        Assertions.assertEquals(desc, result.getFollowers());
+    }
+
+    @Test
+    public void followUser(){
+        //arrange
         User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), posts);
+        User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);
 
@@ -59,34 +119,55 @@ class UserServiceTest {
     }
 
     @Test
-    public void followUserNotExists(){
+    public void followUserNotExist(){
         //arrange
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post());
-
         User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), posts);
-
+        User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(null);
-        //act
-        try{
-            HttpStatus response = userService.follow(user.getId(), target.getId());
-        } catch (Exception e){
-            //Assert
-            assertEquals(e.getClass(), UserNotFoundException.class);
-        }
+
+        //assert
+        assertThrows(UserNotFoundException.class, () -> userService.follow(user.getId(), target.getId()));
     }
 
     @Test
-    public void unfollowUserExists(){
+    public void followUserNotSeller(){
         //arrange
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post());
-
         User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), posts);
+        User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), List.of());
+        when(userRepository.findUserById(user.getId())).thenReturn(user);
+        when(userRepository.findUserById(target.getId())).thenReturn(target);
 
+        //assert
+        assertThrows(UserIsNotSellerException.class, ()->userService.follow(user.getId(), target.getId()));
+    }
+
+    @Test
+    public void followUserAlreadyFollowing(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), List.of(new Post()));
+        when(userRepository.findUserById(user.getId())).thenReturn(user);
+        when(userRepository.findUserById(target.getId())).thenReturn(target);
+
+        //assert
+        assertThrows(AlreadyFollowingException.class, ()->userService.follow(user.getId(), target.getId()));
+    }
+
+    @Test
+    public void followSameUser(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        //assert
+        assertThrows(SameUserException.class, ()->userService.follow(user.getId(), user.getId()));
+    }
+
+    @Test
+    public void unfollowUser(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);
 
@@ -98,23 +179,36 @@ class UserServiceTest {
     }
 
     @Test
-    public void unfollowUserNotExists(){
+    public void unfollowUserNotExist(){
         //arrange
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post());
-
         User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), posts);
-
+        User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(null);
-        //act
-        try{
-            HttpStatus response = userService.unfollow(user.getId(), target.getId());
-        } catch (Exception e){
-            //Assert
-            assertEquals(e.getClass(), UserNotFoundException.class);
-        }
+
+        //assert
+        assertThrows(UserNotFoundException.class, ()->userService.unfollow(user.getId(), target.getId()));
+    }
+
+    @Test
+    public void unfollowUserSameUser(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        //assert
+        assertThrows(SameUserException.class, ()->userService.unfollow(user.getId(), user.getId()));
+    }
+
+    @Test
+    public void unfollowUserNotFollowing(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User target = new User(2222, "Alexander The Great", List.of(), new ArrayList<>(), List.of(new Post()));
+        when(userRepository.findUserById(user.getId())).thenReturn(user);
+        when(userRepository.findUserById(target.getId())).thenReturn(target);
+
+        //assert
+        assertThrows(NotFollowingException.class, ()->userService.unfollow(user.getId(), target.getId()));
     }
 
     @Test
