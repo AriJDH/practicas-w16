@@ -74,4 +74,15 @@ public class TestUtil {
                 new FollowersDTO(follower1.getId(), follower1.getName())
         );
     }
+
+    public static User createUserFollowersTest(){
+        List<Post> post1 = new ArrayList<>();
+        post1.add(new Post());
+        User user1 = new User(1111, "Seguidor uno", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(2222, "Seguidor Dos", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        List<User> followersList = new ArrayList<>();
+        followersList.add(user1);
+        followersList.add(user2);
+        return new User(3333, "Vendedor", followersList, new ArrayList<>(), post1);
+    }
 }

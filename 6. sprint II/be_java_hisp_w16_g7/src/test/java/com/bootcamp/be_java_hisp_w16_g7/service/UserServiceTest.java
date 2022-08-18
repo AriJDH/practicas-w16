@@ -294,14 +294,7 @@ class UserServiceTest {
     @Test
     public void getCountFollowersByIdUser(){
         //arrange
-        List<Post> post1 = new ArrayList<>();
-        post1.add(new Post());
-        User user1 = new User(1111, "Seguidor uno", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User user2 = new User(2222, "Seguidor Dos", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        List<User> followersList = new ArrayList<>();
-        followersList.add(user1);
-        followersList.add(user2);
-        User user = new User(3333, "Vendedor", followersList, new ArrayList<>(), post1);
+        User user = TestUtil.createUserFollowersTest();
 
         //Mock
         when(userRepository.findUserById(user.getId())).thenReturn(user);
@@ -310,7 +303,7 @@ class UserServiceTest {
         FollowersCountDto countFollowers = userService.getFollowersCount(user.getId());
 
         //assert
-        assertEquals(followersList.size(), countFollowers.getCountFollowers());
+        assertEquals(user.getFollowers().size(), countFollowers.getCountFollowers());
         verify(userRepository, atLeastOnce()).findUserById(user.getId());
     }
 }
