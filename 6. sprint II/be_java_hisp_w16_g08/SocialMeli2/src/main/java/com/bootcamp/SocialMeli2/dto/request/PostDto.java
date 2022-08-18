@@ -36,4 +36,6 @@ public class PostDto {
     @NotNull(message = "El campo no puede estar vacío")
     @Max(value = 10000000,message = "El precio máximo por producto es de 10.000.000")
     private double price;
+
+
 }
