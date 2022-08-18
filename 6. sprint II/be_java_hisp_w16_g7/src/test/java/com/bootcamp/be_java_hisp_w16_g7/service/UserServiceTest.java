@@ -63,7 +63,7 @@ class UserServiceTest {
         when(userRepository.findUserById(target.getId())).thenReturn(null);
 
         //assert
-        assertThrows(UserNotFoundException.class, ()->userService.follow(user.getId(), target.getId()));
+        assertThrows(UserNotFoundException.class, () -> userService.follow(user.getId(), target.getId()));
     }
 
     @Test
