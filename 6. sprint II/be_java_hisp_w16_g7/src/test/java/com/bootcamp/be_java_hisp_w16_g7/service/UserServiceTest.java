@@ -220,7 +220,7 @@ class UserServiceTest {
     @Test
     public void getUserFollowedListNonexistentUser() {
         // Arrange
-        int id = 1;
+        int id = 5;
         when(userRepository.findUserById(id)).thenReturn(null);
 
         // Act & Assert
