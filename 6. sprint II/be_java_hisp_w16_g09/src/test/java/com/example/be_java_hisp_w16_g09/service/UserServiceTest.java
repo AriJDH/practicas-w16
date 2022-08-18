@@ -5,24 +5,25 @@ import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
 import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
 import com.example.be_java_hisp_w16_g09.exception.UserHasNoFollowersException;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
+import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.User;
 import com.example.be_java_hisp_w16_g09.repository.IPostRepository;
 import com.example.be_java_hisp_w16_g09.repository.IUserRepository;
-import com.example.be_java_hisp_w16_g09.repository.UserRepository;
 import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,8 +39,31 @@ class UserServiceTest {
     UserService userService;
 
     @Test
+    @DisplayName("Verificar que si el usuario a seguir existe se agrega en la lista")
     void followUser() {
+        User userFollower = new User(1, "Javier", new ArrayList<>(), new ArrayList<>());
+        User userToFollow = new User(2, "Ricardito", new ArrayList<>(), new ArrayList<>());
+
+        Mockito.when(userRepository.searchById(1)).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(2)).thenReturn(userToFollow);
+        Mockito.when(postRepository.searchById(2)).thenReturn(Arrays.asList(new Post()));
+
+        userService.followUser(1,2);
+
+
+        Assertions.assertTrue(userFollower.isFollowing(userToFollow));
     }
+    @Test
+    @DisplayName("Verificar que si el usuario a seguir no existe se da una exepcion")
+    void followUserException() {
+        User userFollower = new User(1, "Javier", new ArrayList<>(), new ArrayList<>());
+
+        Mockito.when(userRepository.searchById(1)).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(2)).thenReturn(null);
+
+        assertThrows(UserNotFoundException.class, () -> userService.followUser(1,2));
+    }
+
 
     @Test
     void getUsersFollowedBySellers() {
