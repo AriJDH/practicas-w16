@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class PostController {
 
@@ -15,7 +17,7 @@ public class PostController {
     IPostService postService;
     //US 0005: Dar de alta una nueva publicación
     @PostMapping("/products/post")
-    public void createPost(@RequestBody PostDto postDto){
+    public void createPost(@RequestBody @Valid PostDto postDto){
         postService.createPost(postDto);
     }
     //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las

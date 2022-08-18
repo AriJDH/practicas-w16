@@ -6,10 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MessageDto {
     String message;
+    HashMap<String, List<String>> ErrorFields;
+    public MessageDto(String message) {
+        this.message = message;
+    }
 }
+
