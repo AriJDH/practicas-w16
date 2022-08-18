@@ -1,5 +1,6 @@
 package com.example.be_java_hisp_w16_g09.service;
 
+import com.example.be_java_hisp_w16_g09.dto.PostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
@@ -11,11 +12,10 @@ import com.example.be_java_hisp_w16_g09.utility.DTOMapperUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
@@ -90,5 +90,45 @@ public class PostServiceTest {
 
         assertThat(response.getPosts().size()).isEqualTo(2);
         assertThat(response.getUserId()).isEqualTo(anUserId);
+    }
+
+    // T0006
+    @Test
+    void getRecentPostsSortedByDateAsc() {
+        //Arrange
+        var followedSeller = new User(2, "vendedorUser", new ArrayList(), new ArrayList());
+        var oldestPostOfSeller = new Post(2, followedSeller, LocalDate.now().minusDays(1), new Product(), 1, 1);
+        var newestPostOfSeller = new Post(2, followedSeller, LocalDate.now(), new Product(), 1, 1);
+        User user = new User(1, "nicotest", new ArrayList(), List.of(followedSeller));
+        List<Post> posts = List.of(oldestPostOfSeller, newestPostOfSeller);
+
+        when(userRepository.searchById(user.getUserId())).thenReturn(user);
+        when(postRepository.getPostsByUserIds(List.of(followedSeller.getUserId()))).thenReturn(posts);
+
+        //Act
+        RecentPostsDTO response = postService.orderByDate(1, "date_asc");
+
+        //Assert
+        assertThat(response.getPosts()).isSortedAccordingTo(Comparator.comparing(PostDto::getDate));
+    }
+
+    // T0006
+    @Test
+    void getRecentPostsSortedByDateDesc() {
+        //Arrange
+        var followedSeller = new User(2, "vendedorUser", new ArrayList(), new ArrayList());
+        var oldestPostOfSeller = new Post(2, followedSeller, LocalDate.now().minusDays(1), new Product(), 1, 1);
+        var newestPostOfSeller = new Post(2, followedSeller, LocalDate.now(), new Product(), 1, 1);
+        User user = new User(1, "nicotest", new ArrayList(), List.of(followedSeller));
+        List<Post> posts = List.of(oldestPostOfSeller, newestPostOfSeller);
+
+        when(userRepository.searchById(user.getUserId())).thenReturn(user);
+        when(postRepository.getPostsByUserIds(List.of(followedSeller.getUserId()))).thenReturn(posts);
+
+        //Act
+        RecentPostsDTO response = postService.orderByDate(1, "date_desc");
+
+        //Assert
+        assertThat(response.getPosts()).isSortedAccordingTo(Comparator.comparing(PostDto::getDate).reversed());
     }
 }
