@@ -73,7 +73,7 @@ class ProductServiceTest {
         ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
         ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
 
-        List<ResponsePostDTO> expected = List.of(postDTO1,postDTO2);
+        List<ResponsePostDTO> expected = List.of(postDTO2,postDTO1);
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
