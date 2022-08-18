@@ -123,6 +123,11 @@ class UserServiceTest {
 
     @Test
     void followerCount() {
+        User userMock1 = new User(3, "Mateo", null, null);
+        User userMock2 = new User(4, "Agustin", null, null);
+        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
+        when(userRepository.searchById(2)).thenReturn(userMock);
+        Assertions.assertTrue(2==userService.followerCount(2).getFollowers_count());
     }
 
     @Test
