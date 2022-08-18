@@ -62,17 +62,10 @@ class ProductServiceTest {
     @Test
     void orderByDateAscTest(){
         //Arrange
-        Product product = new Product(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
-        Post post1 = new Post(2222,1,LocalDate.parse("2022-08-12"), product,11,12300,false,0);
-        Post post2 = new Post(2222,2,LocalDate.parse("2022-08-11"), product,11,11300,false,0);
-        User user2 = new User(2222,"Camilo",new ArrayList<>(),new ArrayList<>(),List.of(post1,post2));
+        User user2 = TestUtil.userSell();
         User user1 = new User(1111,"Juan",new ArrayList<>(),List.of(user2),new ArrayList<>());
 
-        ProductDTO productDTO= new ProductDTO(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
-        ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
-        ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
-
-        List<ResponsePostDTO> expected = List.of(postDTO2,postDTO1);
+        List<ResponsePostDTO> expected = TestUtil.responsePostAscDTOS();
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
@@ -87,17 +80,11 @@ class ProductServiceTest {
     @Test
     void orderByDateDesTest(){
         //Arrange
-        Product product = new Product(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
-        Post post1 = new Post(2222,1,LocalDate.parse("2022-08-12"), product,11,12300,false,0);
-        Post post2 = new Post(2222,2,LocalDate.parse("2022-08-11"), product,11,11300,false,0);
-        User user2 = new User(2222,"Camilo",new ArrayList<>(),new ArrayList<>(),List.of(post1,post2));
+
+        User user2 = TestUtil.userSell();
         User user1 = new User(1111,"Juan",new ArrayList<>(),List.of(user2),new ArrayList<>());
 
-        ProductDTO productDTO= new ProductDTO(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
-        ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
-        ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
-
-        List<ResponsePostDTO> expected = List.of(postDTO1,postDTO2);
+        List<ResponsePostDTO> expected = TestUtil.responsePostDTOS();
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
@@ -112,17 +99,10 @@ class ProductServiceTest {
     @Test
     void orderByDateNullTest(){
         //Arrange
-        Product product = new Product(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
-        Post post1 = new Post(2222,1,LocalDate.parse("2022-08-12"), product,11,12300,false,0);
-        Post post2 = new Post(2222,2,LocalDate.parse("2022-08-11"), product,11,11300,false,0);
-        User user2 = new User(2222,"Camilo",new ArrayList<>(),new ArrayList<>(),List.of(post1,post2));
+        User user2 = TestUtil.userSell();
         User user1 = new User(1111,"Juan",new ArrayList<>(),List.of(user2),new ArrayList<>());
 
-        ProductDTO productDTO= new ProductDTO(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
-        ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
-        ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
-
-        List<ResponsePostDTO> expected = List.of(postDTO1,postDTO2);
+        List<ResponsePostDTO> expected = TestUtil.responsePostDTOS();
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
