@@ -1,0 +1,61 @@
+
+Us0012
+implementado igual al propuesto en los casos de uso
+
+
+US0013
+POST
+path (/user/new)
+ej Json:
+{
+    "user_id": 133,
+    "user_name": "vendedor133"
+}
+Este enpoint permite crear un nuevo usuario a partir de su informacion basica, debido a que el resto de los atributos (seguir, postear)
+pueden ser realizadas mediante enpoints que ya existen.
+
+Us0014
+GET
+path (/user/{user_id}})
+
+Este enpoint permite obtener la informacion completa de el usuario, los usuarios que sigue, y los post realizado, en caso de ser un post
+con descuento,se lista esta informacion tambén.
+Ej:
+{
+    "user_id": 133,
+    "user_name": "vendedor133",
+    "follower_list": [],
+    "followed_list": [],
+    "post_list": [
+        {
+            "user_id": 133,
+            "date": "29-04-2021",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": 100,
+            "price": 1500.5,
+            "has_promo": true,
+            "discount": 0.25
+        },
+        {
+            "user_id": 133,
+            "date": "29-04-2021",
+            "product": {
+                "product_id": 1,
+                "product_name": "Silla Gamer",
+                "type": "Gamer",
+                "brand": "Racer",
+                "color": "Red & Black",
+                "notes": "Special Edition"
+            },
+            "category": 100,
+            "price": 1500.5
+        }
+    ]
+}
