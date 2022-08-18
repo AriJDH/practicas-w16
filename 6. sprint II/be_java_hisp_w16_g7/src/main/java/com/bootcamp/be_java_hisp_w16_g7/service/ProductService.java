@@ -46,28 +46,19 @@ public class ProductService implements IProductService {
                     responsePostDTOS.add(mapper.map(post, ResponsePostDTO.class));
                 }
             }
-            if ("date_asc".equals(order)) {
-                return new RecentPostsDTO(idUser, orderByDateAsc(responsePostDTOS));
-            } else if ("date_desc".equals(order) || order == null) {
-                return new RecentPostsDTO(idUser, orderByDateDes(responsePostDTOS));
-            } else {
-                throw new InvalidQueryException("Unknown query");
-            }
-
+            if ("date_asc".equals(order)) return new RecentPostsDTO(idUser, orderByDateAsc(responsePostDTOS));
+            else if ("date_desc".equals(order) || order == null) return new RecentPostsDTO(idUser, orderByDateDes(responsePostDTOS));
+            else throw new InvalidQueryException("Unknown query");
         } else {
             throw new UserNotFoundException(idUser);
         }
     }
-
-
 
     private List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList) {
         return postList.stream()
                 .sorted(Comparator.comparing(ResponsePostDTO::getDate))
                 .collect(Collectors.toList());
     }
-
-
     private List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList) {
         return postList.stream()
                 .sorted(Comparator.comparing(ResponsePostDTO::getDate).reversed())
@@ -84,14 +75,10 @@ public class ProductService implements IProductService {
         post.setDiscount(0.0);
 
         User user = userRepository.findUserById(postDto.getId());
-        if (user == null) {
-            throw new UserNotFoundException(postDto.getId());
-        }
+        if (user == null) throw new UserNotFoundException(postDto.getId());
 
         user.getPosts().add(post);
-
         count++;
-        System.out.println(user);
 
         return new ApiResponseDto("Post created successfully", "Post of user with id: " + post.getId() + " was created successfully");
     }
