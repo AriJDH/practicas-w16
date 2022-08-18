@@ -1,5 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g10.util;
 
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 
@@ -64,5 +66,11 @@ public class Factory {
     static public Product generateProduct() {
         return Factory
                 .generateProduct(1, "Mati", "Programdor", "Bootcamper", "Amarillo", "a");
+    }
+
+    static public PostReqDTO generateProductReqDTO() {
+        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris","nada");
+        PostReqDTO postReqDTO = new PostReqDTO(1,1, LocalDate.now(),productReqDTO,10,1500.0);
+        return postReqDTO;
     }
 }
