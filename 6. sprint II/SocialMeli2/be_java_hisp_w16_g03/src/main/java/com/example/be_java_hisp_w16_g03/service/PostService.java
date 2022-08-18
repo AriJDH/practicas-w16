@@ -33,8 +33,8 @@ public class PostService implements IPostService {
         requestUser.addPostToUser(Mapper.postDtoToEntity(request));
     }
 
-    @Override
-    public PostsDTO getLatestPostsByUserId(Integer userId) {
+
+    private PostsDTO getLatestPostsByUserId(Integer userId) {
         List<User> sellers = repository.getFollowedsByUserId(userId);
         if (sellers != null) {
             List<Post> filterPosts = getFilterPosts(sellers);

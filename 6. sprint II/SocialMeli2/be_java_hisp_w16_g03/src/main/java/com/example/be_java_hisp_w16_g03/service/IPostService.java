@@ -5,8 +5,5 @@ import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
 
 public interface IPostService {
     void addPost(PostDTO request);
-
-    PostsDTO getLatestPostsByUserId(Integer userId);
-
     PostsDTO getLatestPostsOrderedByUserId(Integer userId, String order);
 }
