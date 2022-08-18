@@ -13,7 +13,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 
+import static com.bootcamp.be_java_hisp_w16_g10.util.Factory.generateProductReqDTO;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class PostControllerTest {
@@ -26,13 +28,15 @@ class PostControllerTest {
     @Test
     @DisplayName("shouldSavePostReqDTO")
     void US005() {
-        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris","nada");
-        PostReqDTO postReqDTO = new PostReqDTO(1,1, LocalDate.now(),productReqDTO,10,1500.0);
+        //arrange
+        PostReqDTO postReqDTO = generateProductReqDTO();
 
+        //act
         var response = postController.US005(postReqDTO);
+        verify(postService).save(postReqDTO);
 
+        //assert
         assertEquals(200, response.getStatusCodeValue());
-
     }
 
     @Test
