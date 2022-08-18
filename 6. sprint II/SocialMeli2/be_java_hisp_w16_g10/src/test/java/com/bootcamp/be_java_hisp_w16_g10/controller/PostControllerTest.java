@@ -26,15 +26,4 @@ class PostControllerTest {
     void US006() {
     }
 
-    @Test
-    void US0010() {
-    }
-
-    @Test
-    void US0011() {
-    }
-
-    @Test
-    void US0012() {
-    }
 }
