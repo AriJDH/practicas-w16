@@ -60,15 +60,15 @@ public class ProductService implements IProductService {
     }
 
 
-    @Override
-    public List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList) {
+
+    private List<ResponsePostDTO> orderByDateAsc(List<ResponsePostDTO> postList) {
         return postList.stream()
                 .sorted(Comparator.comparing(ResponsePostDTO::getDate))
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList) {
+
+    private List<ResponsePostDTO> orderByDateDes(List<ResponsePostDTO> postList) {
         return postList.stream()
                 .sorted(Comparator.comparing(ResponsePostDTO::getDate).reversed())
                 .collect(Collectors.toList());
