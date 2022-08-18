@@ -131,8 +131,40 @@ class UserServiceTest {
     }
 
     @Test
-    void unfollow() {
+    @DisplayName("Verificar que el usuario a dejar de seguir existe")
+    public void unfollow() {
+        //Arrange
+         
+        User userFollower = new User(1,"Jaimito",new ArrayList<>(),new ArrayList<>());
+        User userToUnfolow = new User(2,"Horacio",new ArrayList<>(),new ArrayList<>());
+        userToUnfolow.addFollower(userFollower);
+        userFollower.addFollowed(userToUnfolow);
+
+        Mockito.when(userRepository.searchById(userFollower.getUserId())).thenReturn(userFollower);
+        Mockito.when(userRepository.searchById(userToUnfolow.getUserId())).thenReturn(userToUnfolow);
+
+        //Act
+        userService.unfollow(userFollower.getUserId(), userToUnfolow.getUserId());
+
+        //Assert
+        Assertions.assertFalse(userFollower.isFollowing(userToUnfolow));
+
     }
+
+    @Test
+    @DisplayName("Si el usuario a dejar de seguir no existe lanza una excepcion")
+    public void unfollowNotExist() {
+        //Arrange
+        User userFollower = new User(1,"Jaimito",new ArrayList<>(),new ArrayList<>());
+
+        Mockito.when(userRepository.searchById(77)).thenReturn(null);
+        //Act
+
+        //Assert
+        assertThrows(UserNotFoundException.class, () -> userService.unfollow(1,77));
+
+    }
+
 
     @Test
     void orderByNameAscTest() {
