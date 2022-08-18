@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
+import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponseUserDTO;
@@ -8,6 +9,7 @@ import com.bootcamp.be_java_hisp_w16_g7.entity.User;
 import com.bootcamp.be_java_hisp_w16_g7.exception.InvalidQueryException;
 import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g7.repository.IUserRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -227,5 +229,27 @@ class UserServiceTest {
         assertThrows(UserNotFoundException.class, () -> userService.getUserFollowedList(id, null));
         // Verify call to repo method
         verify(userRepository, atLeastOnce()).findUserById(id);
+    }
+
+    @Test
+    public void getCountFollowersByIdUser(){
+        //arrange
+        List<Post> post1 = new ArrayList<>();
+        post1.add(new Post());
+        User user1 = new User(1111, "Seguidor uno", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user2 = new User(2222, "Seguidor Dos", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        List<User> followersList = new ArrayList<>();
+        followersList.add(user1);
+        followersList.add(user2);
+        User user = new User(3333, "Vendedor", followersList, new ArrayList<>(), post1);
+
+        //Mock
+        when(userRepository.findUserById(user.getId())).thenReturn(user);
+
+        //act
+        FollowersCountDto countFollowers = userService.getFollowersCount(user.getId());
+
+        //assert
+        assertEquals(followersList.size(), countFollowers.getCountFollowers());
     }
 }
