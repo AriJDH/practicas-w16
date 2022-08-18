@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
+import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
@@ -72,7 +73,7 @@ class ProductServiceTest {
         ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
         ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
 
-        RecentPostsDTO expected = new RecentPostsDTO(1111,List.of(postDTO2,postDTO1));
+        List<ResponsePostDTO> expected = List.of(postDTO1,postDTO2);
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
@@ -81,7 +82,7 @@ class ProductServiceTest {
         RecentPostsDTO response = productService.recentPost(1111,"date_asc");
         //Assert
 
-        Assertions.assertEquals(expected,response);
+        Assertions.assertEquals(expected,response.getResponsePostDTOS());
     }
 
     @Test
@@ -97,7 +98,7 @@ class ProductServiceTest {
         ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
         ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
 
-        RecentPostsDTO expected = new RecentPostsDTO(1111,List.of(postDTO1,postDTO2));
+        List<ResponsePostDTO> expected = List.of(postDTO1,postDTO2);
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
@@ -106,7 +107,7 @@ class ProductServiceTest {
         RecentPostsDTO response = productService.recentPost(1111,"date_desc");
         //Assert
 
-        Assertions.assertEquals(expected,response);
+        Assertions.assertEquals(expected,response.getResponsePostDTOS());
     }
 
     @Test
@@ -122,7 +123,7 @@ class ProductServiceTest {
         ResponsePostDTO postDTO1 = new ResponsePostDTO(2222,1,LocalDate.parse("2022-08-12"), productDTO,11,12300);
         ResponsePostDTO postDTO2 = new ResponsePostDTO(2222,2,LocalDate.parse("2022-08-11"), productDTO,11,11300);
 
-        RecentPostsDTO expected = new RecentPostsDTO(1111,List.of(postDTO1,postDTO2));
+        List<ResponsePostDTO> expected = List.of(postDTO1,postDTO2);
 
         //Act
         when(userRepository.existsUser(1111)).thenReturn(true);
@@ -131,7 +132,7 @@ class ProductServiceTest {
         RecentPostsDTO response = productService.recentPost(1111,null);
         //Assert
 
-        Assertions.assertEquals(expected,response);
+        Assertions.assertEquals(expected,response.getResponsePostDTOS());
     }
 
     @Test
