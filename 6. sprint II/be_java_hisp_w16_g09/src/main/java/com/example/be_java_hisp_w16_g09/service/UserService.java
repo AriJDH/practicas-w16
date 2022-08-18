@@ -103,7 +103,9 @@ public class UserService implements IUserService{
 
     public FollowersDtoResponse orderByName(int id, String order){
         FollowersDtoResponse followers = getAllFollowers(id);
-        List<SimpleUserDto> listOrder =  followers.getFollowers().stream()
+        if (!(order.equals("name_asc")) && !(order.equals("name_desc")))
+            throw new OrderNotExist();
+        List<SimpleUserDto> listOrder = followers.getFollowers().stream()
                 .sorted(Comparator.comparing(SimpleUserDto::getUserName))
                 .collect(Collectors.toList());
         if (order.equals("name_desc"))
@@ -114,9 +116,11 @@ public class UserService implements IUserService{
 
     public UserFollowedDto orderByNameFollowed(int id, String order){
         UserFollowedDto followers = getUsersFollowedBySellers(id);
-        List<SimpleUserDto> listOrder =  followers.getFollowing().stream()
-                .sorted(Comparator.comparing(SimpleUserDto::getUserName))
-                .collect(Collectors.toList());
+        if (!(order.equals("name_asc")) && !(order.equals("name_desc")))
+            throw new OrderNotExist();
+        List<SimpleUserDto> listOrder= followers.getFollowing().stream()
+                    .sorted(Comparator.comparing(SimpleUserDto::getUserName))
+                    .collect(Collectors.toList());
         if (order.equals("name_desc"))
             listOrder.sort(Comparator.comparing(SimpleUserDto::getUserName).reversed());
         followers.setFollowing(listOrder);

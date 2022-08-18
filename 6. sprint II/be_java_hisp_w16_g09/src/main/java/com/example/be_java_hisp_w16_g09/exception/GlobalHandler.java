@@ -62,6 +62,11 @@ public class GlobalHandler {
         MessageDto response = new MessageDto(exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(OrderNotExist.class)
+    public ResponseEntity<MessageDto> OrderNotExist(OrderNotExist exception) {
+        MessageDto response = new MessageDto(exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<MessageDto> validatingDataTypes(
             MethodArgumentNotValidException exception

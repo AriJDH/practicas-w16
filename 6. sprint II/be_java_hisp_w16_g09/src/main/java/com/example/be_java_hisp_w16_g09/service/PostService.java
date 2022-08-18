@@ -3,6 +3,7 @@ package com.example.be_java_hisp_w16_g09.service;
 import com.example.be_java_hisp_w16_g09.dto.PostDto;
 import com.example.be_java_hisp_w16_g09.dto.RecentPostsDTO;
 import com.example.be_java_hisp_w16_g09.exception.InvalidDateException;
+import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.model.Post;
 import com.example.be_java_hisp_w16_g09.model.User;
@@ -52,9 +53,11 @@ public class PostService implements IPostService{
     //MaxiN
     public RecentPostsDTO orderByDate(int id, String order){
         RecentPostsDTO posts = getRecentPostsOfSellersFollowedByUserWith(id);
-        List<PostDto> listOrder =  posts.getPosts().stream()
-                .sorted(Comparator.comparing(PostDto::getDate))
-                .collect(Collectors.toList());
+        if (!(order.equals("date_asc")) && !(order.equals("date_desc")))
+            throw new OrderNotExist();
+            List<PostDto> listOrder = posts.getPosts().stream()
+                    .sorted(Comparator.comparing(PostDto::getDate))
+                    .collect(Collectors.toList());
         if (order.equals("date_desc"))
             listOrder.sort(Comparator.comparing(PostDto::getDate).reversed());
         posts.setPosts(listOrder);
