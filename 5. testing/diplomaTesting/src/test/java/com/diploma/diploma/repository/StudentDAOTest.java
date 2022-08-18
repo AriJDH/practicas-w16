@@ -20,6 +20,7 @@ public class StudentDAOTest{
 
     @BeforeEach @AfterEach
     public void setUp(){
+        UtilTestTools.emptyUsersFile();
         studentDAO = new StudentDAO();
     }
 
@@ -94,7 +95,6 @@ public class StudentDAOTest{
     public void findNotExistingStudent(){
         //Arrange
         StudentDTO student = UtilTestTools.generateStudent("Jhon");
-        studentDAO.save(student);
         
         //Act & Assert
         assertThrows(StudentNotFoundException.class, () -> studentDAO.findById(student.getId() + 1));

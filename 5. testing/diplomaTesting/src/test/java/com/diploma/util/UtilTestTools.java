@@ -4,25 +4,55 @@ import com.diploma.diploma.model.StudentDTO;
 import com.diploma.diploma.model.SubjectDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
+
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.ResourceUtils;
 
 public class UtilTestTools {
 
   private static Long id = 0L;
 
+  private static String SCOPE;
+
+  public static void emptyUsersFile() {
+      Properties properties = new Properties();
+
+      try {
+          properties.load(new ClassPathResource("application.properties").getInputStream());
+          SCOPE = properties.getProperty("api.scope");
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+
+      PrintWriter writer = null;
+
+      try {
+          writer = new PrintWriter(ResourceUtils.getFile("./src/" + SCOPE + "/resources/users.json"));
+      } catch (
+              IOException e) {
+          e.printStackTrace();
+      }
+
+      writer.print("[]");
+      writer.close();
+  }
+
   public static List<SubjectDTO> getSubjects() {
     List<SubjectDTO> subjects = new ArrayList<>();
     for (int i = 0; i < 3; i++) {
       SubjectDTO subject = new SubjectDTO();
-      subject.setName("Subject " + id);
+      subject.setName("Subject " + (i+1));
       subject.setScore(Math.abs(Math.random() * 10));
       subjects.add(subject);
     }
@@ -65,8 +95,6 @@ public class UtilTestTools {
 
     return true;
   }
-
-  private static String SCOPE = "main";
 
   public static Set<StudentDTO> findAll() {
     Set<StudentDTO> loadedData = new HashSet<>();

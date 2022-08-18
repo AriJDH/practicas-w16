@@ -23,6 +23,7 @@ public class StudentRepositoryTest {
 
     @BeforeEach @AfterEach
     public void setUp() {
+        UtilTestTools.emptyUsersFile();
         studentRepository = new StudentRepository();
         studentDAO = new StudentDAO();
     }
