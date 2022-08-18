@@ -49,11 +49,11 @@ class PostControllerTest {
         var newestPost = new PostDto(1, 2, LocalDate.now(), new ProductDto(), 1, 1);
         List<PostDto> postsDtos =List.of(oldestPost, newestPost);
 
-        when(postService.orderByDate(1, order)).thenReturn(new RecentPostsDTO(1, postsDtos));
+        when(postService.getRecentPostsOfSellersFollowedByUserWith(1, order)).thenReturn(new RecentPostsDTO(1, postsDtos));
 
         RecentPostsDTO response = postController.getRecentPostsOfSellersFollowedByUserWith(1, order).getBody();
 
-        verify(postService, Mockito.atMostOnce()).orderByDate(1, order);
+        verify(postService, Mockito.atMostOnce()).getRecentPostsOfSellersFollowedByUserWith(1, order);
         assertThat(
                 response.getPosts().get(0).getDate()
                         .isBefore(response.getPosts().get(1).getDate())).isTrue();
@@ -67,11 +67,11 @@ class PostControllerTest {
         var newestPost = new PostDto(1, 2, LocalDate.now(), new ProductDto(), 1, 1);
         List<PostDto> postsDtos =List.of(newestPost, oldestPost);
 
-        when(postService.orderByDate(1, order)).thenReturn(new RecentPostsDTO(1, postsDtos));
+        when(postService.getRecentPostsOfSellersFollowedByUserWith(1, order)).thenReturn(new RecentPostsDTO(1, postsDtos));
 
         RecentPostsDTO response = postController.getRecentPostsOfSellersFollowedByUserWith(1, order).getBody();
 
-        verify(postService, Mockito.atMostOnce()).orderByDate(1, order);
+        verify(postService, Mockito.atMostOnce()).getRecentPostsOfSellersFollowedByUserWith(1, order);
         assertThat(
                 response.getPosts().get(0).getDate()
                         .isAfter(response.getPosts().get(1).getDate())).isTrue();
@@ -82,10 +82,10 @@ class PostControllerTest {
         int id = 1;
         String order = "date_asc";
 
-        doThrow(new OrderNotExist()).when(postService).orderByDate(id, order);
+        doThrow(new OrderNotExist()).when(postService).getRecentPostsOfSellersFollowedByUserWith(id, order);
 
         assertThrows(OrderNotExist.class, () -> postController.getRecentPostsOfSellersFollowedByUserWith(id, order));
 
-        verify(postService, Mockito.atMostOnce()).orderByDate(id, order);
+        verify(postService, Mockito.atMostOnce()).getRecentPostsOfSellersFollowedByUserWith(id, order);
     }
 }

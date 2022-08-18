@@ -42,7 +42,7 @@ public class PostServiceTest {
         int nonExistentUserId = 1;
         when(userRepository.searchById(nonExistentUserId)).thenReturn(null);
 
-        assertThatThrownBy(() -> postService.getRecentPostsOfSellersFollowedByUserWith(nonExistentUserId))
+        assertThatThrownBy(() -> postService.getRecentPostsOfSellersFollowedByUserWith(nonExistentUserId, null))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessage(String.format("User with id: %d not found", nonExistentUserId));
     }
@@ -50,7 +50,7 @@ public class PostServiceTest {
     public void shouldReturnEmptyPostList_whenGetPostsOfSellersForUserWithZeroFollowings() {
         int anUserId = 1;
         when(userRepository.searchById(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), new ArrayList()));
-        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
+        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId, null);
 
         assertThat(response.getPosts().isEmpty()).isTrue();
         assertThat(response.getUserId()).isEqualTo(anUserId);
@@ -65,7 +65,7 @@ public class PostServiceTest {
         when(userRepository.searchById(anUserId)).thenReturn(new User(anUserId, "pedrotest", new ArrayList(), List.of(seller)));
         when(postRepository.getPostsByUserIds(List.of(seller.getUserId()))).thenReturn(List.of(new Post(1, seller, LocalDate.now(), new Product(), 1, 100)));
 
-        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
+        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId, "date_asc");
 
         assertThat(response.getPosts().size()).isEqualTo(1);
         assertThat(response.getUserId()).isEqualTo(anUserId);
@@ -90,11 +90,15 @@ public class PostServiceTest {
                         outOfRangePost,
                         newestPost));
 
-        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId);
+        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(anUserId, null);
 
         assertThat(response.getPosts().size()).isEqualTo(2);
         assertThat(response.getPosts().contains(outOfRangePost)).isFalse();
         assertThat(response.getUserId()).isEqualTo(anUserId);
+
+        response.getPosts().forEach(postDto ->
+                assertThat(postDto.getDate().isAfter(publicationDate.minusWeeks(2))).isTrue()
+        );
     }
 
     // T0006
@@ -111,7 +115,7 @@ public class PostServiceTest {
         when(postRepository.getPostsByUserIds(List.of(followedSeller.getUserId()))).thenReturn(posts);
 
         //Act
-        RecentPostsDTO response = postService.orderByDate(1, "date_asc");
+        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(1, "date_asc");
 
         //Assert
         assertThat(response.getPosts()).isSortedAccordingTo(Comparator.comparing(PostDto::getDate));
@@ -131,7 +135,7 @@ public class PostServiceTest {
         when(postRepository.getPostsByUserIds(List.of(followedSeller.getUserId()))).thenReturn(posts);
 
         //Act
-        RecentPostsDTO response = postService.orderByDate(1, "date_desc");
+        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(1, "date_desc");
 
         //Assert
         assertThat(response.getPosts()).isSortedAccordingTo(Comparator.comparing(PostDto::getDate).reversed());
@@ -152,7 +156,7 @@ public class PostServiceTest {
         when(userRepository.searchById(id)).thenReturn(user);
         when(postRepository.getPostsByUserIds(List.of(seller.getUserId()))).thenReturn(List.of(oldestPost, outOfRangePost, newestPost));
 
-        RecentPostsDTO response = postService.orderByDate(id, order);
+        RecentPostsDTO response = postService.getRecentPostsOfSellersFollowedByUserWith(id, order);
 
         assertEquals(publicationDate, response.getPosts().get(0).getDate());
     }
@@ -166,6 +170,6 @@ public class PostServiceTest {
 
         when(userRepository.searchById(id)).thenReturn(user);
 
-        assertThrows(OrderNotExist.class, () -> postService.orderByDate(id, order));
+        assertThrows(OrderNotExist.class, () -> postService.getRecentPostsOfSellersFollowedByUserWith(id, order));
     }
 }
