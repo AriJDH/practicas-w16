@@ -1,0 +1,116 @@
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"CompilerConfiguration\">\n    <annotationProcessing>\n      <profile name=\"Maven default annotation processors profile\" enabled=\"true\">\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\n        <outputRelativeToContentRoot value=\"true\" />\n        <module name=\"be_java_hisp_w16_g01\" />\n      </profile>\n    </annotationProcessing>\n    <bytecodeTargetLevel>\n      <module name=\"be_java_hisp_w16_g01\" target=\"11\" />\n    </bytecodeTargetLevel>\n  </component>\n  <component name=\"JavacSettings\">\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\n      <module name=\"be_java_hisp_w16_g01\" options=\"-parameters\" />\n    </option>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 9dc08ff2e7a0ee83a3b4b02c33ac627efa73cc9f)
++++ b/.idea/compiler.xml	(date 1660335998031)
+@@ -11,11 +11,13 @@
+     </annotationProcessing>
+     <bytecodeTargetLevel>
+       <module name="be_java_hisp_w16_g01" target="11" />
++      <module name="be_java_hisp_w16_g01_palma" target="11" />
+     </bytecodeTargetLevel>
+   </component>
+   <component name="JavacSettings">
+     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+       <module name="be_java_hisp_w16_g01" options="-parameters" />
++      <module name="be_java_hisp_w16_g01_palma" options="-parameters" />
+     </option>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"1a8667ca-82ca-4e60-9311-89ba21aee7c6\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/target/classes/com/bootcamp/be_java_hisp_w16_g01/dto/PostDto.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/classes/com/bootcamp/be_java_hisp_w16_g01/dto/PostDto.class\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"AnnotationType\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/../..\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"MavenImportPreferences\">\n    <option name=\"generalSettings\">\n      <MavenGeneralSettings>\n        <option name=\"mavenHome\" value=\"Use Maven wrapper\" />\n        <option name=\"useMavenConfig\" value=\"true\" />\n      </MavenGeneralSettings>\n    </option>\n  </component>\n  <component name=\"ProjectId\" id=\"2DAejm1uLA7kp6mzUFtu9ozCFis\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"RequestMappingsPanelOrder0\": \"0\",\n    \"RequestMappingsPanelOrder1\": \"1\",\n    \"RequestMappingsPanelWidth0\": \"75\",\n    \"RequestMappingsPanelWidth1\": \"75\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"WebServerToolWindowFactoryState\": \"false\",\n    \"last_opened_file_path\": \"/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01_palma\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"spring.configuration.checksum\": \"ddf9ba1453b4349c9d95344cafd4489e\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CreateClassDialog.RecentsKey\">\n      <recent name=\"com.bootcamp.be_java_hisp_w16_g01.controller\" />\n    </key>\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"BeJavaHispW16G01Application\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\n      <module name=\"be_java_hisp_w16_g01\" />\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.bootcamp.be_java_hisp_w16_g01.BeJavaHispW16G01Application\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"1a8667ca-82ca-4e60-9311-89ba21aee7c6\" name=\"Changes\" comment=\"\" />\n      <created>1660146453929</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1660146453929</updated>\n      <workItem from=\"1660146455009\" duration=\"978000\" />\n      <workItem from=\"1660156347123\" duration=\"21622000\" />\n      <workItem from=\"1660231427287\" duration=\"375000\" />\n      <workItem from=\"1660232226544\" duration=\"6100000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9dc08ff2e7a0ee83a3b4b02c33ac627efa73cc9f)
++++ b/.idea/workspace.xml	(date 1660335998030)
+@@ -4,10 +4,7 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="1a8667ca-82ca-4e60-9311-89ba21aee7c6" name="Changes" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/classes/com/bootcamp/be_java_hisp_w16_g01/dto/PostDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bootcamp/be_java_hisp_w16_g01/dto/PostDto.class" afterDir="false" />
+-    </list>
++    <list default="true" id="1a8667ca-82ca-4e60-9311-89ba21aee7c6" name="Changes" comment="" />
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -41,29 +38,43 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RequestMappingsPanelOrder0": "0",
+-    "RequestMappingsPanelOrder1": "1",
+-    "RequestMappingsPanelWidth0": "75",
+-    "RequestMappingsPanelWidth1": "75",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false",
+-    "last_opened_file_path": "/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01_palma",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "spring.configuration.checksum": "ddf9ba1453b4349c9d95344cafd4489e"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
++    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
++    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
++    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01_palma&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;spring.configuration.checksum&quot;: &quot;ddf9ba1453b4349c9d95344cafd4489e&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CreateClassDialog.RecentsKey">
+       <recent name="com.bootcamp.be_java_hisp_w16_g01.controller" />
+     </key>
+   </component>
+-  <component name="RunManager">
++  <component name="RunDashboard">
++    <option name="configurationTypes">
++      <set>
++        <option value="SpringBootApplicationConfigurationType" />
++      </set>
++    </option>
++  </component>
++  <component name="RunManager" selected="Spring Boot.BeJavaHispW16G01Application">
++    <configuration name="BeJavaHispW16G01Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
++      <module name="be_java_hisp_w16_g01_palma" />
++      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bootcamp.be_java_hisp_w16_g01.BeJavaHispW16G01Application" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="BeJavaHispW16G01Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+       <module name="be_java_hisp_w16_g01" />
+       <option name="SPRING_BOOT_MAIN_CLASS" value="com.bootcamp.be_java_hisp_w16_g01.BeJavaHispW16G01Application" />
+@@ -84,6 +95,7 @@
+       <workItem from="1660156347123" duration="21622000" />
+       <workItem from="1660231427287" duration="375000" />
+       <workItem from="1660232226544" duration="6100000" />
++      <workItem from="1660335971665" duration="27000" />
+     </task>
+     <servers />
+   </component>

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1a8667ca-82ca-4e60-9311-89ba21aee7c6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/bootcamp/be_java_hisp_w16_g01/dto/PostDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/bootcamp/be_java_hisp_w16_g01/dto/PostDto.class" afterDir="false" />
-    </list>
+    <list default="true" id="1a8667ca-82ca-4e60-9311-89ba21aee7c6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,29 +38,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01_palma",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "spring.configuration.checksum": "ddf9ba1453b4349c9d95344cafd4489e"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/capalma/Desktop/BootCamp Java W16/Proyectos/practicas-w16/4. sprint/be_java_hisp_w16_g01_palma&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;ddf9ba1453b4349c9d95344cafd4489e&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.bootcamp.be_java_hisp_w16_g01.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BeJavaHispW16G01Application">
+    <configuration name="BeJavaHispW16G01Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="be_java_hisp_w16_g01_palma" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bootcamp.be_java_hisp_w16_g01.BeJavaHispW16G01Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BeJavaHispW16G01Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="be_java_hisp_w16_g01" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.bootcamp.be_java_hisp_w16_g01.BeJavaHispW16G01Application" />
@@ -84,6 +95,7 @@
       <workItem from="1660156347123" duration="21622000" />
       <workItem from="1660231427287" duration="375000" />
       <workItem from="1660232226544" duration="6100000" />
+      <workItem from="1660335971665" duration="27000" />
     </task>
     <servers />
   </component>
