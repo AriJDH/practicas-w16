@@ -86,4 +86,10 @@ public class GlobalHandler {
         return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(InvalidOrderException.class)
+    public ResponseEntity<ExceptionApiDTO> catchException(InvalidOrderException e) {
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO("Error", e.getMessage());
+        return new ResponseEntity<>(exceptionApiDTO, HttpStatus.BAD_REQUEST);
+    }
+
 }
