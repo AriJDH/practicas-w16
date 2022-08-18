@@ -58,7 +58,7 @@ class UserControllerTest {
     void US002() {
         FollowersCountDTO res = new FollowersCountDTO(2,"Marcos",2);
         when(userService.followerCount(2)).thenReturn(res);
-        Assertions.assertTrue(2==userService.followerCount(2).getFollowers_count());
+        Assertions.assertTrue(2==userController.US002(2).getBody().getFollowers_count());
     }
 
     @Test
