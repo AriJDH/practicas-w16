@@ -91,6 +91,15 @@ class UserServiceTest {
     }
 
     @Test
+    public void followSameUser(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        //assert
+        assertThrows(SameUserException.class, ()->userService.follow(user.getId(), user.getId()));
+    }
+
+    @Test
     public void unfollowUser(){
         //arrange
         User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
@@ -115,6 +124,15 @@ class UserServiceTest {
 
         //assert
         assertThrows(UserNotFoundException.class, ()->userService.unfollow(user.getId(), target.getId()));
+    }
+
+    @Test
+    public void unfollowUserSameUser(){
+        //arrange
+        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+
+        //assert
+        assertThrows(SameUserException.class, ()->userService.unfollow(user.getId(), user.getId()));
     }
 
     @Test
