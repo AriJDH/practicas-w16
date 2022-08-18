@@ -68,12 +68,7 @@ class UserServiceTest {
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(null);
         //act
-        try{
-            HttpStatus response = userService.follow(user.getId(), target.getId());
-        } catch (Exception e){
-            //Assert
-            assertEquals(e.getClass(), UserNotFoundException.class);
-        }
+        assertThrows(UserNotFoundException.class, () -> userService.follow(user.getId(), target.getId()));
     }
 
     @Test
