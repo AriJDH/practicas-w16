@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseFollowersListDTO;
+import com.bootcamp.be_java_hisp_w16_g04.exception.OrderNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IFollowerRepository;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
@@ -20,8 +21,6 @@ import java.util.stream.Collectors;
 @Service
 public class UserService implements IUserService {
 
-  public static final String NAME_ASC = "name_asc";
-  public static final String NAME_DESC = "name_desc";
   @Autowired
   IUserRepository iUserRepository;
 
@@ -37,21 +36,28 @@ public class UserService implements IUserService {
   @Override
   public ResponseFollowersListDTO getListFollowersById(Integer userId, String order) {
 
-    User user = iUserRepository.getByIdUser(userId);
-    if (user == null) throw new UserNotFoundException("User Not Found with User Id: " + userId);
+    if (order.isEmpty()) {
+      throw new OrderNotFoundException("No se encontro un orden asignado");
+    }
 
-    List<User> FollowerList = iFollowerRepository.getFollewersListById(userId).stream()
-        .map(id -> iUserRepository.getByIdUser(id))
-        .collect(Collectors.toList());
+    isValidUser(userId);
+
+    User user = iUserRepository.getByIdUser(userId);
+
+    List<Integer> listFollowerIds = iFollowerRepository.getFollewersListById(userId);
+
+    List<User> followerList = listFollowerIds.stream()
+            .map(id -> iUserRepository.getByIdUser(id))
+            .collect(Collectors.toList());
 
     if (order.equals("name_asc")) {
-      FollowerList = FollowerList.stream()
-          .sorted(Comparator.comparing(User::getUserName))
-          .collect(Collectors.toList());
+      followerList = followerList.stream()
+              .sorted(Comparator.comparing(User::getUserName))
+              .collect(Collectors.toList());
     } else if (order.equals("name_desc")) {
-      FollowerList = FollowerList.stream()
-          .sorted(Comparator.comparing(User::getUserName)
-              .reversed())
+      followerList = followerList.stream()
+              .sorted(Comparator.comparing(User::getUserName)
+                      .reversed())
               .collect(Collectors.toList());
     }
 
@@ -59,7 +65,7 @@ public class UserService implements IUserService {
     ResponseFollowersListDTO responseFollowersListDTO = new ResponseFollowersListDTO();
     responseFollowersListDTO.setUserId(user.getUserId());
     responseFollowersListDTO.setUserName(user.getUserName());
-    responseFollowersListDTO.setFollowers(FollowerList);
+    responseFollowersListDTO.setFollowers(followerList);
 
     return responseFollowersListDTO;
   }
@@ -73,11 +79,10 @@ public class UserService implements IUserService {
   @Override
   public UserFollowersCountDTO followersCount(Integer userId) {
 
+    isValidUser(userId);
+
     User user = iUserRepository.getByIdUser(userId);
     List<Follower> followerList = iFollowerRepository.getFollowersByUserId(userId);
-
-    if (user == null)
-      throw new UserNotFoundException("User Not Found with User Id: " + userId);
 
     return new UserFollowersCountDTO(user.getUserId(), user.getUserName(), followerList.size());
   }
@@ -92,33 +97,38 @@ public class UserService implements IUserService {
   @Override
   public UserFollowedDTO orderListUserFollowed(Integer userId, String order) {
 
+    isValidUser(userId); // validacion de user
+
     UserFollowedDTO user = new UserFollowedDTO();
     User user1 = iUserRepository.getByIdUser(userId);
-
-    if (user1 == null) {
-      throw new UserNotFoundException("User Not Found with User Id: " + userId);
-    }
 
     List<User> users = iFollowerRepository
         .returnIds(userId).stream()
         .map(id -> iUserRepository.getByIdUser(id))
         .collect(Collectors.toList());
 
-    if (order.equals(NAME_ASC)) {
+    if (order.equals("name_asc")) {
       users = users.stream().sorted(Comparator.comparing(User::getUserName))
           .collect(Collectors.toList());
-    } else if (order.equals(NAME_DESC)) {
+    } else if (order.equals("name_desc")) {
       users = users.stream().sorted(Comparator.comparing(User::getUserName)
               .reversed())
               .collect(Collectors.toList());
     }
 
     user.setFollowed(users);
-    user.setUserId(userId);
-    user.setUserName(user1.getUserName());
+
+    user.setUser_id(userId);
+    user.setUser_name(user1.getUserName());
 
     return user;
   }
 
+  @Override
+  public void isValidUser(Integer userId) {
+    boolean result = iUserRepository.isValidUser(userId);
 
+    if(!result)
+      throw new UserNotFoundException("User Not Found with User Id: " + userId);
+  }
 }

@@ -1,13 +1,16 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.*;
-import com.bootcamp.be_java_hisp_w16_g04.exception.UserNotFoundException;
+import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
+import com.bootcamp.be_java_hisp_w16_g04.exception.OrderNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IPublicationRepository;
-import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,64 +26,41 @@ public class PublicationService implements IPublicationService {
   @Autowired
   IPublicationRepository iPublicationRepository;
   @Autowired
-  IUserRepository iUserRepository;
-  @Autowired
   IUserService iUserService;
   @Autowired
   IProductService iProductService;
 
+  private final static String DATE_DESC = "date_desc";
+  private final static String DATE_ASC = "date_asc";
+
   /**
    * Method that returns the publications of the people I follow in date order.
+   *
    * @param userId Current user id
-   * @param order Order of the list (ascending or descending)
+   * @param order  Order of the list (ascending or descending)
    * @return DTO of a list of publications
    */
   @Override
   public ListProductByDateDTO getListProductByDate(Integer userId, String order) {
 
+    if(!order.equals(DATE_ASC) && !order.equals(DATE_DESC)){
+      throw new OrderNotFoundException("Order does not exist");
+    }
+
+    iUserService.isValidUser(userId);
+
     List<User> users = iUserService.orderListUserFollowed(userId, "").getFollowed();
     List<Publication> sellers = getListSeller(users);
     List<PostDTO> listDTO = listOrderByWeekend(sellers);
-
-    if (order.equals("date_desc")) {
-      listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate)).collect(Collectors.toList());
+    if (order.equals(DATE_DESC)) {
+      listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).collect(Collectors.toList());
     }
     return new ListProductByDateDTO(userId, listDTO);
   }
 
   /**
-   * Method that returns the list promo publication by user
-   * @param userId user identification
-   * @return DTO of a list og promo publication
-   */
-  @Override
-  public ResponseListPromoPublicationDTO getListPromoPublication(Integer userId) {
-    //Get User
-    User user = iUserRepository.getByIdUser(userId);
-    if (user == null) throw new UserNotFoundException("User Not Found with User Id: " + userId);
-
-    //Get list of publication with promo.
-   List<PromoPublicationDTO> listPublications = iPublicationRepository.getListPromoPublicationById(userId);
-    return new ResponseListPromoPublicationDTO(user.getUserId(),user.getUserName(),listPublications);
-  }
-  /**
-   * Method that returns number promo publication by user
-   * @param userId user identification
-   * @return DTO of a count of promo publication
-   */
-  @Override
-  public ResponseNumberPromoProductsDTO getNumberPromoPublicationById(Integer userId) {
-    //Get User
-    User user = iUserRepository.getByIdUser(userId);
-    if (user == null) throw new UserNotFoundException("User Not Found with User Id: " + userId);
-
-    //Get list of publication with promo.
-    List<PromoPublicationDTO> listPublications = iPublicationRepository.getListPromoPublicationById(userId);
-    return new ResponseNumberPromoProductsDTO(user.getUserId(),user.getUserName(),listPublications.size());
-  }
-
-  /**
    * Method to obtain the list of publications of the people I follow.
+   *
    * @param users List of users followed by the current user
    * @return List with the publications of the users I follow
    */
@@ -97,19 +77,43 @@ public class PublicationService implements IPublicationService {
 
   /**
    * Method that filters the list of products and obtains the products of the last two weeks.
+   *
    * @param publications List of publications of people followed by the current user
    * @return List of publications for the last two weeks
    */
   private List<PostDTO> listOrderByWeekend(List<Publication> publications) {
     LocalDate date = LocalDate.now().minusDays(15);
 
-    return publications.stream()
-        .filter(x -> x.getDate().isAfter(date))
-        .map(p -> new PostDTO(p.getPublicationId(), p.getUserId(),
-            p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice()))
-        .sorted(Comparator.comparing(PostDTO::getDate).reversed())
-        .collect(Collectors.toList());
+    List<PostDTO> result = publications.stream()
+            .filter(x -> x.getDate().isAfter(date))
+            .map(p -> new PostDTO(p.getUserId(), p.getPublicationId(),
+                    p.getDate(), iProductService.getProductById(p.getProductId()), p.getCategory(), p.getPrice()))
+            .sorted(Comparator.comparing(PostDTO::getDate))
+            .collect(Collectors.toList());
+
+    return result;
   }
 
 
+  /**
+   * Method for creating a publication
+   *
+   * @param requestCreatePublicationDTO DTO of a publication that is sent from request
+   * @return Boolean that checks if the publication was created
+   */
+  @Override
+  public Boolean createPublication(RequestCreatePublicationDTO requestCreatePublicationDTO) {
+
+    iUserService.isValidUser(requestCreatePublicationDTO.getUserId());
+
+    PublicationDTO publicationDTO = new PublicationDTO(requestCreatePublicationDTO.getUserId(),
+            requestCreatePublicationDTO.getDate(),
+            requestCreatePublicationDTO.getCategory(),
+            requestCreatePublicationDTO.getPrice(),
+            requestCreatePublicationDTO.getProduct().getProductId());
+
+    Publication publication = iPublicationRepository.createPublication(publicationDTO);
+
+    return publication != null;
+  }
 }
