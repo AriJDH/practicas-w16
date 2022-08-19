@@ -25,7 +25,7 @@ public class UserController {
     protected IUserService userService;
 
     @ApiOperation(value = "US 01 - Seguir a un vendedor",
-            notes = "Un comprador se registyra como seguidor de un vendedor.")
+            notes = "Un comprador se registra como seguidor de un vendedor.")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
             @ApiResponse(code = 400, message = "BAD REQUEST")
