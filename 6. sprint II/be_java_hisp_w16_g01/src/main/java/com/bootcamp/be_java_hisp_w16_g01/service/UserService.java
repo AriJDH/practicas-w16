@@ -21,7 +21,7 @@ public class UserService implements IUserService {
     private UserMapper userMapper = new UserMapper();
 
     @Override
-    public UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow) {
+    public UserUnfollowDTO unfollowUser(Integer userId, Integer userIdToUnfollow) {
 
         User userUnfollowing = this.userRepository.getUser(userId);
         User userToUnfollow = this.userRepository.getUser(userIdToUnfollow);
