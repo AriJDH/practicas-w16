@@ -148,13 +148,10 @@ class UserServiceTest {
 
    @Test
    void shouldRiseNotFoundException_whenFindByIdReturnsNull(){
-
       //act
-      
-      when(userRepository.findById(Mockito.anyInt())).thenReturn(null);   
-
-      assertThrows(NotFoundException.class, ()-> {
-         when(userService.validateUser(Mockito.anyInt())).thenReturn(Mockito.any());   
+      when(userRepository.findById(Mockito.anyInt())).thenReturn(null);
+       assertThrows(NotFoundException.class, ()-> {
+           userService.validateUser(Mockito.anyInt());
       });   
    }
 
@@ -210,9 +207,10 @@ class UserServiceTest {
 
    @Test
    void validateUserNotFoundCountFollowers() {
+       when(this.userRepository.findById(1)).thenReturn(null);
       //assert
       assertThrows(NotFoundException.class, () -> {
-         when(userService.countFollowers(anyInt())).thenReturn(null);
+         this.userService.countFollowers(1);
       });
    }
 

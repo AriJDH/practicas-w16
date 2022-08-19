@@ -33,7 +33,7 @@ public class Factory {
                                 "color ".concat(indexString),
                                 "notes ".concat(indexString)
                             ),
-                            LocalDate.now(),
+                            LocalDate.now().minusDays(i + userId),
                             i + 100D,
                             i
                     )
@@ -109,7 +109,7 @@ public class Factory {
 
     static public List<User> generateUserList (Integer amount, Integer firstId) {
         List<User> users = new ArrayList<>();
-        for (Integer i = 0; i < amount; i++) {
+        for (Integer i = firstId; i < firstId + amount; i++) {
             String indexString = Integer.toString(i);
             users.add(Factory.generateUser(firstId+i,
                             "User ".concat(indexString),

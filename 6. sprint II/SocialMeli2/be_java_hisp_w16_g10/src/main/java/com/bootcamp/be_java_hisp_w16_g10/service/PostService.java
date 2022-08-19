@@ -66,8 +66,8 @@ public class PostService implements IPostService {
         User user = this.userService.findById(userId);
         LocalDate localDate = LocalDate.now().minusDays(14);
 
-        if(!List.of("date_asc", "date_desc").contains(order))throw new BadRequestException("Invalid order parameter");
-
+        if(!List.of("date_asc", "date_desc")
+                .contains(order))throw new BadRequestException("Invalid order parameter");
         var posts = user.getFollowed().stream()
                 .map(seller -> this.postRepository.findByUserId(seller.getId()))
                 .filter(sellerPosts -> sellerPosts.size() > 0)

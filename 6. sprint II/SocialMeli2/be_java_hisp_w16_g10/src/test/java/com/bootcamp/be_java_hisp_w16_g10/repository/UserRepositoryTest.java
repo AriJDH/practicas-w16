@@ -19,10 +19,10 @@ class UserRepositoryTest {
     }
     @Test
     void givenAValidIdShouldReturnTheCorrectUserWhenCalled() {
-        User user = this.userRepository.findById(101);
+        User user = this.userRepository.findById(1);
         assertNotNull(user);
         assertInstanceOf(User.class,user);
-        assertEquals(101,user.getId());
+        assertEquals(1,user.getId());
     }
 
     @Test
