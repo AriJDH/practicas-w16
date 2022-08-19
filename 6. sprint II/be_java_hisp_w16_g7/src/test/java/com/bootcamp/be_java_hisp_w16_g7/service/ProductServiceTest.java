@@ -129,10 +129,7 @@ class ProductServiceTest {
     public void recentPostWithWrongOrder(){
 
         //Arrange
-        List<Post> posts = List.of(new Post(2222, 1234, LocalDate.of(2022, 8, 10), new Product(), 99, 1000.0, false, 0.0),
-                new Post(2222, 1234, LocalDate.of(2022, 7, 10), new Product(), 99, 1000.0, false, 0.0));
-        List<User> followers = List.of(new User(2222, "User2", List.of(), List.of(), posts ));
-        User userToMock = new User(1111, "User1", List.of(), followers, List.of());
+        User userToMock = TestUtil.createUser();
 
         when(userRepository.existsUser(1111)).thenReturn(true);
         when(userRepository.findUserById(1111)).thenReturn(userToMock);

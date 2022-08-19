@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.service.IProductService;
+import com.bootcamp.be_java_hisp_w16_g7.util.TestUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -35,8 +36,7 @@ class ProductControllerTest {
 
         //Arrange
 
-        ResponsePostDTO expectedPost = new ResponsePostDTO(2222, 1234, LocalDate.of(2022, 8, 10), new ProductDTO(), 99, 1000.0);
-        RecentPostsDTO expected = new RecentPostsDTO(1111, List.of(expectedPost) );
+        RecentPostsDTO expected = TestUtil.createRecentPostsDTO();
 
         when(productService.recentPost(1111, "date_asc")).thenReturn(expected);
 

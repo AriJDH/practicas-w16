@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g7.util;
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
 import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
@@ -84,5 +85,10 @@ public class TestUtil {
         followersList.add(user1);
         followersList.add(user2);
         return new User(3333, "Vendedor", followersList, new ArrayList<>(), post1);
+    }
+
+    public static RecentPostsDTO createRecentPostsDTO(){
+        ResponsePostDTO expectedPost = new ResponsePostDTO(2222, 1234, LocalDate.of(2022, 8, 10), new ProductDTO(), 99, 1000.0);
+        return new RecentPostsDTO(1111, List.of(expectedPost) );
     }
 }
