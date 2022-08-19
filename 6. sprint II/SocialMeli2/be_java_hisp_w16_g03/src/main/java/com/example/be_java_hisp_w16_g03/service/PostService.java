@@ -5,6 +5,7 @@ import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostsDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
+import com.example.be_java_hisp_w16_g03.exception.InvalidOrderTypeException;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g03.utils.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class PostService implements IPostService {
             return PostsDTO.builder().userId(userId).posts(postsWithIdDtos).build();
         }
 
-        return PostsDTO.builder().userId(userId).posts(new ArrayList<>()).build();
+        throw new InvalidOrderTypeException(order);
     }
 
     private List<Post> getFilterPosts(List<User> sellers) {

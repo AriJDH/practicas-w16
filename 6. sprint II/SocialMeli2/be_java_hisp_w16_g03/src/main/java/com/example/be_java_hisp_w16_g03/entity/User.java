@@ -58,12 +58,12 @@ public class User {
         this.getPosts().add(post);
     }
 
-
     public List<Post> getPostLastTwoWeeks() {
 
         return this.getPosts()
                 .stream()
-                .filter(p -> p.getDate().isBefore(LocalDate.now()) && p.getDate().isAfter(LocalDate.now().minusWeeks(2)))
+                .filter(p -> p.getDate().isBefore(LocalDate.now().plusDays(1))
+                        && p.getDate().isAfter(LocalDate.now().minusWeeks(2).minusDays(1)))
                 .collect(Collectors.toList());
     }
 

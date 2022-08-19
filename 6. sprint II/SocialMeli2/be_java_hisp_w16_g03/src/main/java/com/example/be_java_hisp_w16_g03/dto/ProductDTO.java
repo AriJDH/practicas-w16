@@ -41,5 +41,4 @@ public class ProductDTO {
     @Pattern(regexp = "[A-Za-z\\s0-9]+", message = "El campo no puede poseer caracteres especiales")
     private String notes;
 
-
 }
