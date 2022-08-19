@@ -3,8 +3,6 @@ package com.example.be_java_hisp_w16_g03.service;
 import com.example.be_java_hisp_w16_g03.dto.FollowedsDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
-import com.example.be_java_hisp_w16_g03.dto.UserDTO;
-import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 import com.example.be_java_hisp_w16_g03.exception.InvalidOrderException;
 import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
@@ -19,7 +17,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 import static com.example.be_java_hisp_w16_g03.utils.MocksUser.*;
 import static org.junit.jupiter.api.Assertions.*;

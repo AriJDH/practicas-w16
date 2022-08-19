@@ -54,25 +54,25 @@ public class Mapper {
 
     }
 
-    public static List<PostWithIdDTO> postToPostWithIdDtoList(List<Post> posts){
+    public static List<PostWithIdDTO> postToPostWithIdDtoList(List<Post> posts) {
 
-        return  posts
+        return posts
                 .stream()
                 .map(Mapper::postToPostWithIdDto)
                 .collect(Collectors.toList());
 
     }
 
-    public static List<UserDTO> userToUserDtoList(List<User> users){
+    public static List<UserDTO> userToUserDtoList(List<User> users) {
 
-        return  users
+        return users
                 .stream()
-                .map(user -> new UserDTO(user.getUserId(),user.getUserName()))
+                .map(user -> new UserDTO(user.getUserId(), user.getUserName()))
                 .collect(Collectors.toList());
 
     }
 
-    public static List<User> userDtoToUser(List<UserDTO> user){
+    public static List<User> userDtoToUser(List<UserDTO> user) {
         return user
                 .stream()
                 .map(users -> new User(users.getUserId(), users.getUserName()))

@@ -1,6 +1,5 @@
 package com.example.be_java_hisp_w16_g03.utils;
 
-import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
 
 import java.util.ArrayList;
