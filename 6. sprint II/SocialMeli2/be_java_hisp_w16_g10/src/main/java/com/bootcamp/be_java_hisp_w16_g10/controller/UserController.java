@@ -19,14 +19,14 @@ public class UserController {
     //US BONUS: traer todos los users
     @GetMapping("/")
     public ResponseEntity<List<UserResDTO>> findAll() {
-        return new ResponseEntity(this.userService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(this.userService.findAll(), HttpStatus.OK);
     }
     
     //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
     @PostMapping("/{userId}/follow/{userIdToFollow}")
-    public ResponseEntity US001(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+    public <T> ResponseEntity<T> US001(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
         this.userService.follow(userId, userIdToFollow);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     
      //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
@@ -49,8 +49,8 @@ public class UserController {
     
      //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
-    public ResponseEntity US007(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+    public <T> ResponseEntity<T> US007(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
         this.userService.unfollow(userId, userIdToUnfollow);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
