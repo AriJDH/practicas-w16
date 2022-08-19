@@ -107,6 +107,12 @@ public class Factory {
         return postReqDTO;
     }
 
+    static public PostReqDTO generateProductReqDTOWithBadDate() {
+        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris","nada");
+        LocalDate today = LocalDate.now();
+        return new PostReqDTO(1,1, LocalDate.of(today.plusYears(1).getYear(),today.plusMonths(1).getMonth(),today.getDayOfMonth()),productReqDTO,10,1500.0);
+    }
+
     static public List<PostResDTO> generateListPostResDTO(int amount, int userId) {
         var lista = generateListOfPosts(amount, userId);
 
