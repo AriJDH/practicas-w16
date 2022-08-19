@@ -103,7 +103,7 @@ public class UserService implements IUserService {
             throw new AlreadyFollowException(userId, userToFollowId);
         }
         if (!isSeller) {
-            throw new NotSellerException(userToFollowId);
+            throw new NotSellerException(userToFollow.getUserId());
         }
         userToFollow.getFollowers().add(user);
         user.getFolloweds().add(userToFollow);
