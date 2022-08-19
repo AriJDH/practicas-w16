@@ -19,7 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class PostServiceTest {
@@ -32,7 +32,33 @@ public class PostServiceTest {
 
 
     @Test
-    public void verifyDateOrderType() {
+    public void verifyDateOrderDesc() {
+
+
+        //arrange
+        String DATE_DESC = "date_desc";
+        Post post1 = Post.builder().date(LocalDate.of(2022, 8, 16)).product(new Product()).build();
+        Post post2 = Post.builder().date(LocalDate.of(2022, 8, 15)).product(new Product()).build();
+
+        List<PostWithIdDTO> expectedResult = List.of(Mapper.postToPostWithIdDto(post1), Mapper.postToPostWithIdDto(post2));
+
+        User userSeller = User.builder().userId(1).posts(new ArrayList<>(List.of(post1, post2))).build();
+        User userFollower = User.builder().userId(2).followeds(new ArrayList<>(List.of(userSeller))).build();
+        when(repository.getFollowedsByUserId(Mockito.anyInt())).thenReturn(List.of(userSeller));
+
+
+        //act
+
+        PostsDTO result = postService.getLatestPostsOrderedByUserId(userFollower.getUserId(), DATE_DESC);
+
+
+        //assert
+        verify(repository, times(1)).getFollowedsByUserId(Mockito.anyInt());
+        Assertions.assertEquals(expectedResult, result.getPosts());
+    }
+
+    @Test
+    public void verifyDateOrderAsc() {
 
 
         //arrange
@@ -48,13 +74,40 @@ public class PostServiceTest {
 
 
         //act
+
         PostsDTO result = postService.getLatestPostsOrderedByUserId(userFollower.getUserId(), DATE_ASC);
 
 
         //assert
+        verify(repository, times(1)).getFollowedsByUserId(Mockito.anyInt());
         Assertions.assertEquals(expectedResult, result.getPosts());
+    }
+
+
+    @Test
+    public void verifyCorrectOrderType(){
+
+        //arrange
+        String Param = "date_asc";
+        Post post1 = Post.builder().date(LocalDate.of(2022, 8, 16)).product(new Product()).build();
+        Post post2 = Post.builder().date(LocalDate.of(2022, 8, 15)).product(new Product()).build();
+
+        User userSeller = User.builder().userId(1).posts(new ArrayList<>(List.of(post1, post2))).build();
+        User userFollower = User.builder().userId(2).followeds(new ArrayList<>(List.of(userSeller))).build();
+        when(repository.getFollowedsByUserId(Mockito.anyInt())).thenReturn(List.of(userSeller));
+
+        //act
+        PostsDTO result = postService.getLatestPostsOrderedByUserId(userFollower.getUserId(), Param);
+
+        //assert
+        verify(repository, times(1)).getFollowedsByUserId(Mockito.anyInt());
+        Assertions.assertEquals(result.getPosts().size(), 2);
 
     }
+
+    
+
+
 
 
 }
