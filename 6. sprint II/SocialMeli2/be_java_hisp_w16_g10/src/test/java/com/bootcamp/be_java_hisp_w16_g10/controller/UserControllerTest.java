@@ -30,7 +30,7 @@ class UserControllerTest {
     UserController userController;
 
     @Test
-    void findAll() {
+    void shouldReturnAllUsers() {
         //act
         when(userService.findAll()).thenReturn(List.of(new UserResDTO()));
         var response = userController.findAll();
@@ -42,8 +42,7 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("shouldFollowUser")
-    void US001() {
+    void shouldFollowUser() {
         //arrange
 
         //act
@@ -58,8 +57,7 @@ class UserControllerTest {
 
 
     @Test
-    @DisplayName("shouldReturnFollowersCountResDTO")
-    void US002() {
+    void shouldReturnFollowersCountResDTO() {
         var dato = generateProductReqDTO();
         //arrange
         postController.US005(dato);

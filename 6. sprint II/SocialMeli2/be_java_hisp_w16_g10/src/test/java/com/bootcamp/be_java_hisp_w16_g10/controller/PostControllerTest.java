@@ -26,8 +26,7 @@ class PostControllerTest {
     private PostController postController;
 
     @Test
-    @DisplayName("shouldSavePostReqDTO")
-    void US005() {
+    void shouldSavePostReqDTO() {
         //arrange
         PostReqDTO postReqDTO = generateProductReqDTO();
 
