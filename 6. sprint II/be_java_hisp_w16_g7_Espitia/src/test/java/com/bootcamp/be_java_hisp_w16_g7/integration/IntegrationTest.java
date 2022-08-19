@@ -66,7 +66,7 @@ public class IntegrationTest {
     @Test
     void followersCountIntegrationTest() throws Exception{
         //Arrange
-        FollowersCountDto responseDTO = new FollowersCountDto(4444,"Bob",0);
+        FollowersCountDto responseDTO = new FollowersCountDto(4444,"Bob",1);
 
         String responseJson = writer.writeValueAsString(responseDTO);
 
@@ -95,6 +95,27 @@ public class IntegrationTest {
                 .andReturn();
 
         //Assert
+        Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void unfollowIntegrationTest()throws Exception{
+        //Arrange
+        ApiResponseDto responseDTO = new ApiResponseDto("Unfollow user", "User with id 1111 has unfollowed user with id 4444");
+
+        String responseJson = writer.writeValueAsString(responseDTO);
+
+        //act
+
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/users/1111/unfollow/4444"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+
+        //Assert
+
         Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
 
     }

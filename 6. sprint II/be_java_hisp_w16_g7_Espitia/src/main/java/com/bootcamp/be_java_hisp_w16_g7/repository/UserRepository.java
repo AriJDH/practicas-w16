@@ -19,7 +19,11 @@ public class UserRepository implements IUserRepository {
         User u1 = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User u2 = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User u3 = new User(3333, "Me", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User u4 = new User(4444, "Bob", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
+        List<User> follows = new ArrayList<>();
+        List<Post> posts = new ArrayList<>();
+        posts.add(new Post());
+        follows.add(u1);
+        User u4 = new User(4444, "Bob", follows, follows, posts);
 
         user.add(u1);
         user.add(u2);
