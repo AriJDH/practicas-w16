@@ -436,10 +436,10 @@ public class UserServiceTest {
 
 
     @Test
-    void addFollowerUserExists() {
+    void addFollowerUserOkTest() {
         // Arrange
-        User user = new User(1, "Juan");
-        User userToFollow = new User(2, "Jose");
+        User user = usersTestList.get(3);
+        User userToFollow = usersTestList.get(4);
 
         MessageDto expected = new MessageDto("Usuario seguido correctamente");
 
@@ -475,8 +475,8 @@ public class UserServiceTest {
     @Test
     void addFollowerUserDoesNotExist() {
         // Arrange
-        User user = new User(1, "Juan");
-        User userToFollow = new User(2, "Jose");
+        User user = new User(10, "Juan");
+        User userToFollow = usersTestList.get(3);
 
         when(userRepository.userExists(user.getUserId()))
                 .thenReturn(false);
@@ -490,8 +490,8 @@ public class UserServiceTest {
     @Test
     void addFollowerUserToFollowDoesNotExist() {
         // Arrange
-        User user = new User(1, "Juan");
-        User userToFollow = new User(2, "Jose");
+        User user = usersTestList.get(3);
+        User userToFollow = new User(10, "Jose");
 
         when(userRepository.userExists(user.getUserId()))
                 .thenReturn(true);
@@ -508,8 +508,8 @@ public class UserServiceTest {
     @Test
     void addFollowerUserToFollowIsNotASeller() {
         // Arrange
-        User user = new User(1, "Juan");
-        User userToFollow = new User(2, "Jose");
+        User user = usersTestList.get(3);
+        User userToFollow = usersTestList.get(4);
 
         when(userRepository.userExists(user.getUserId()))
                 .thenReturn(true);
@@ -529,8 +529,8 @@ public class UserServiceTest {
     @Test
     void addFollowerUserAlreadyFollowsUserToFollow() {
         // Arrange
-        User user = new User(1, "Juan");
-        User userToFollow = new User(2, "Jose");
+        User userToFollow = usersTestList.get(0);
+        User user = usersTestList.get(1);
         user.getFollowed().add(userToFollow);
         userToFollow.getFollowers().add(user);
 
