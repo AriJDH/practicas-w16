@@ -59,7 +59,6 @@ public class UserServiceTest {
     //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
     @Test
     public void correctOrderAscFollowedsTest(){
-        //Valida que se ordene bien la lista para ambos casos.
         Integer userId = 1;
         String order = "name_asc";
         User user1 = new User(userId, "userName");
@@ -82,7 +81,6 @@ public class UserServiceTest {
     //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
     @Test
     public void correctOrderDescFollowedsTest(){
-        //Valida que se ordene bien la lista para ambos casos.
         Integer userId = 1;
         String order = "name_desc";
         User user1 = new User(userId, "userName");
@@ -105,7 +103,6 @@ public class UserServiceTest {
     //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
     @Test
     public void correctOrderAscFollowersTest(){
-        //Valida que se ordene bien la lista para ambos casos.
         Integer userId = 1;
         String order = "name_asc";
         User user1 = new User(userId, "userName");
@@ -128,7 +125,6 @@ public class UserServiceTest {
     //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
     @Test
     public void correctOrderDescFollowersTest(){
-        //Valida que se ordene bien la lista para ambos casos.
         Integer userId = 1;
         String order = "name_desc";
         User user1 = new User(userId, "userName");
