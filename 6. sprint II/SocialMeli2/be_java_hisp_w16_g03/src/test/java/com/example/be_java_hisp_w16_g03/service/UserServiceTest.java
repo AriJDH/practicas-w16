@@ -31,7 +31,6 @@ public class UserServiceTest {
     @InjectMocks
     UserService userService;
 
-
     //T-0003
     @Test
     public void correctOrderValueFollowedsTest(){
