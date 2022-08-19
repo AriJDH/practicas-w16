@@ -50,6 +50,59 @@ class UserServiceTest {
     }
 
     @Test
+    void shouldRaiseBadRequestExceptionWhenTwoIdsAreEquals() {
+        assertThrows(
+                BadRequestException.class,
+                () -> this.userService.follow(1, 1)
+        );
+    }
+    @Test
+    void shouldRaiseAnExceptionWhenTheUserDoesNotExists() {
+        when(this.userRepository.findById(1)).thenReturn(null);
+        assertThrows(NotFoundException.class,
+                () ->this.userService.follow(1, 2)
+        );
+    }
+    @Test
+    void shouldRaiseAnExceptionWhenTheUserToFollowDoesNotExists() {
+        when(this.userRepository.findById(1)).thenReturn(Factory.generateUser(1));
+        when(this.userRepository.findById(2)).thenReturn(null);
+        assertThrows(NotFoundException.class,
+                () ->this.userService.follow(1, 2)
+        );
+    }
+    @Test
+    void shouldRaiseAnExceptionWhenTheUserAlreadyFollowTheUser() {
+        User user = Factory.generateUserWithFollowers(1);
+        when(this.userRepository.findById(1)).thenReturn(user);
+        when(this.userRepository.findById(2)).thenReturn(Factory.generateUser(2));
+        assertThrows(BadRequestException.class,
+                () -> this.userService.follow(2, 1)
+        );
+    }
+    @Test
+    void shouldRaiseAnExceptionWhenTheUserToFollowIsNotASeller() {
+        User user = Factory.generateUser(1);
+        when(this.userRepository.findById(1)).thenReturn(user);
+        when(this.userRepository.findById(2)).thenReturn(Factory.generateUser(2));
+        assertThrows(BadRequestException.class,
+                () -> this.userService.follow(2, 1)
+        );
+    }
+    @Test
+    void shouldFollowTheUser() {
+        User user = Factory.generateUserWithFollowers(1);
+        when(this.userRepository.findById(1)).thenReturn(user);
+        User userToFollow = Factory.generateUser(2);
+        when(this.userRepository.findById(2)).thenReturn(userToFollow);
+        when(this.postService.findByUserId(1)).thenReturn(Factory.generateListPostResDTO(3, 1));
+        this.userService.follow(2, 1);
+        verify(this.userRepository, atMostOnce()).update(user);
+        verify(this.userRepository, atMostOnce()).update(userToFollow);
+    }
+
+
+    @Test
     @DisplayName("Throw not found exception when User not found")
     void shouldThrowNotFoundException_whenUserNotFound() {
         //Arrange
