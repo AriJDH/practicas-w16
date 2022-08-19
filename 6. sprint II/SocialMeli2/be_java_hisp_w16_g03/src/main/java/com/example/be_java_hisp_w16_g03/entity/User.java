@@ -1,9 +1,6 @@
 package com.example.be_java_hisp_w16_g03.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,6 +11,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
+@NoArgsConstructor
 public class User {
     private Integer userId;
     private String userName;

@@ -3,8 +3,13 @@ package com.example.be_java_hisp_w16_g03.utils;
 import com.example.be_java_hisp_w16_g03.dto.PostDTO;
 import com.example.be_java_hisp_w16_g03.dto.PostWithIdDTO;
 import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
+import com.example.be_java_hisp_w16_g03.dto.UserDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.Product;
+import com.example.be_java_hisp_w16_g03.entity.User;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Mapper {
 
@@ -47,6 +52,31 @@ public class Mapper {
                 .brand(product.getBrand())
                 .notes(product.getNotes()).build();
 
+    }
+
+    public static List<PostWithIdDTO> postToPostWithIdDtoList(List<Post> posts){
+
+        return  posts
+                .stream()
+                .map(Mapper::postToPostWithIdDto)
+                .collect(Collectors.toList());
+
+    }
+
+    public static List<UserDTO> userToUserDtoList(List<User> users){
+
+        return  users
+                .stream()
+                .map(user -> new UserDTO(user.getUserId(),user.getUserName()))
+                .collect(Collectors.toList());
+
+    }
+
+    public static List<User> userDtoToUser(List<UserDTO> user){
+        return user
+                .stream()
+                .map(users -> new User(users.getUserId(), users.getUserName()))
+                .collect(Collectors.toList());
     }
 
 }

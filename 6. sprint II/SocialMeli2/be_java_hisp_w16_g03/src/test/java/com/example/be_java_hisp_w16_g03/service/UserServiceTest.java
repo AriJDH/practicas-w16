@@ -1,30 +1,15 @@
 package com.example.be_java_hisp_w16_g03.service;
 
 import com.example.be_java_hisp_w16_g03.dto.FollowedsDTO;
+import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
-import com.example.be_java_hisp_w16_g03.entity.User;
-import com.example.be_java_hisp_w16_g03.exception.InvalidOrderException;
-import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.when;
-
+import com.example.be_java_hisp_w16_g03.dto.UserDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.User;
+import com.example.be_java_hisp_w16_g03.exception.InvalidOrderException;
 import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
+import com.example.be_java_hisp_w16_g03.utils.Mapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,9 +19,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
+import java.util.*;
 
-import static org.mockito.Mockito.when;
+import static com.example.be_java_hisp_w16_g03.utils.MocksUser.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -47,155 +34,123 @@ public class UserServiceTest {
     @InjectMocks
     UserService userService;
 
-    //T-0003
+    @DisplayName("Verifica que el tipo de ordenamiento alfabético de los seguidos exista")//T-0003
     @Test
-    public void correctOrderValueFollowedsTest(){
-        Integer userId = 1;
-        String incorrectOrder = "name_asc";
-        User user = new User(userId, "userName");
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user));
+    public void correctOrderValueFollowedsTest() {
 
-        assertDoesNotThrow(() -> userService.getFollowedUsers(userId, incorrectOrder));
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        User user = createUser();
+        when(repository.getUserById(user.getUserId())).thenReturn(Optional.of(user));
+
+        assertDoesNotThrow(() -> userService.getFollowedUsers(user.getUserId(), NAME_ASC));
+        verify(repository, times(1)).getUserById(user.getUserId());
     }
 
-    //T-0003
+    @DisplayName("Notifica la no existencia del tipo de ordenamiento de los seguidos mediante una excepción")//T-0003
     @Test
-    public void incorrectOrderValueFollowedsTest(){
-        Integer userId = 1;
+    public void incorrectOrderValueFollowedsTest() {
         String incorrectOrder = "WRONG";
-        User user = new User(userId, "userName");
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user));
+        User user = createUser();
+        when(repository.getUserById(user.getUserId())).thenReturn(Optional.of(user));
 
-        assertThrows(InvalidOrderException.class, () -> userService.getFollowedUsers(userId, incorrectOrder));
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        assertThrows(InvalidOrderException.class, () -> userService.getFollowedUsers(user.getUserId(), incorrectOrder));
+        verify(repository, Mockito.times(1)).getUserById(user.getUserId());
     }
 
-    //T-0003
+    @DisplayName("Verifica que el tipo ordenamiento alfabético de los seguidores exista")//T-0003
     @Test
-    public void correctOrderValueFollowersTest(){
-        Integer userId = 1;
-        String incorrectOrder = "name_asc";
-        User user = new User(userId, "userName");
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user));
+    public void correctOrderValueFollowersTest() {
 
-        assertDoesNotThrow(() -> userService.getFollowers(userId, incorrectOrder));
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        User user = createUser();
+        when(repository.getUserById(user.getUserId())).thenReturn(Optional.of(user));
+
+        assertDoesNotThrow(() -> userService.getFollowers(user.getUserId(), NAME_ASC));
+        verify(repository, Mockito.times(1)).getUserById(user.getUserId());
     }
 
-    //T-0003
+    @DisplayName("Notifica la no existencia del tipo de ordenamiento de los seguidores mediante una excepción")//T-0003
     @Test
-    public void incorrectOrderValueFollowersTest(){
-        Integer userId = 1;
+    public void incorrectOrderValueFollowersTest() {
         String incorrectOrder = "WRONG";
-        User user = new User(userId, "userName");
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user));
+        User user = createUser();
+        when(repository.getUserById(user.getUserId())).thenReturn(Optional.of(user));
 
-        assertThrows(InvalidOrderException.class, () -> userService.getFollowers(userId, incorrectOrder));
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        assertThrows(InvalidOrderException.class, () -> userService.getFollowers(user.getUserId(), incorrectOrder));
+        verify(repository, Mockito.times(1)).getUserById(user.getUserId());
     }
 
 
-    //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
+    @DisplayName("Verifica el correcto ordenamiento ascendente por nombre de los seguidos")//T-0004
     @Test
-    public void correctOrderAscFollowedsTest(){
-        Integer userId = 1;
-        String order = "name_asc";
-        User user1 = new User(userId, "userName");
-        User user2 = new User(2, "Alberto");
-        User user3 = new User(3, "Briant");
-        User user4 = new User(4, "Carlos");
-        List<User> followeds = new ArrayList<>();
-        followeds.add(user4);
-        followeds.add(user3);
-        followeds.add(user2);
-        user1.setFolloweds(followeds);
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user1));
+    public void correctOrderAscFollowedsTest() {
 
-        FollowedsDTO followedsDTO = userService.getFollowedUsers(userId, order);
+        User user1 = createUser();
+        user1.setFolloweds(createUserList());
 
-        Assertions.assertEquals("Alberto", followedsDTO.getFollowed().get(0).getUserName());
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        when(repository.getUserById(user1.getUserId())).thenReturn(Optional.of(user1));
+
+        FollowedsDTO result = userService.getFollowedUsers(user1.getUserId(), NAME_ASC);
+        List<User> expected = user1.getFolloweds();
+        Collections.reverse(expected);
+
+        assertArrayEquals(Mapper.userToUserDtoList(expected).toArray(), result.getFollowed().toArray());
+        verify(repository, Mockito.times(1)).getUserById(user1.getUserId());
     }
 
-    //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
+    @DisplayName("Verifica el correcto ordenamiento descendente por nombre de los seguidos")//T-0004
     @Test
-    public void correctOrderDescFollowedsTest(){
-        Integer userId = 1;
-        String order = "name_desc";
-        User user1 = new User(userId, "userName");
-        User user2 = new User(2, "Alberto");
-        User user3 = new User(3, "Briant");
-        User user4 = new User(4, "Carlos");
-        List<User> followeds = new ArrayList<>();
-        followeds.add(user2);
-        followeds.add(user3);
-        followeds.add(user4);
-        user1.setFolloweds(followeds);
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user1));
+    public void correctOrderDescFollowedsTest() {
 
-        FollowedsDTO followedsDTO = userService.getFollowedUsers(userId, order);
+        User user1 = createUser();
+        user1.setFolloweds(createUserList());
 
-        Assertions.assertEquals("Carlos", followedsDTO.getFollowed().get(0).getUserName());
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        when(repository.getUserById(user1.getUserId())).thenReturn(Optional.of(user1));
+
+        FollowedsDTO result = userService.getFollowedUsers(user1.getUserId(), NAME_DESC);
+        List<User> expected = user1.getFolloweds();
+
+        assertArrayEquals(Mapper.userToUserDtoList(expected).toArray(), result.getFollowed().toArray());
+        verify(repository, Mockito.times(1)).getUserById(user1.getUserId());
     }
 
-    //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
+    @DisplayName("Verifica el correcto ordenamiento ascendente por nombre de los seguidores")//T-0004
     @Test
-    public void correctOrderAscFollowersTest(){
-        Integer userId = 1;
-        String order = "name_asc";
-        User user1 = new User(userId, "userName");
-        User user2 = new User(2, "Alberto");
-        User user3 = new User(3, "Briant");
-        User user4 = new User(4, "Carlos");
-        List<User> followeds = new ArrayList<>();
-        followeds.add(user4);
-        followeds.add(user3);
-        followeds.add(user2);
-        user1.setFollowers(followeds);
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user1));
+    public void correctOrderAscFollowersTest() {
 
-        FollowersDTO followersDTO = userService.getFollowers(userId, order);
+        User user1 = createUser();
+        user1.setFollowers(createUserList());
+        when(repository.getUserById(user1.getUserId())).thenReturn(Optional.of(user1));
 
-        Assertions.assertEquals("Alberto", followersDTO.getFollowers().get(0).getUserName());
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        FollowersDTO result = userService.getFollowers(user1.getUserId(), NAME_ASC);
+        List<User> expected = user1.getFollowers();
+        Collections.reverse(expected);
+
+        assertArrayEquals(Mapper.userToUserDtoList(expected).toArray(), result.getFollowers().toArray());
+        verify(repository, Mockito.times(1)).getUserById(user1.getUserId());
     }
 
-    //T-0004 Verificar el correcto ordenamiento ascendente y descendente por nombre. (US-0008)
+    @DisplayName("Verifica el correcto ordenamiento descendente por nombre de los seguidores")//T-0004
     @Test
-    public void correctOrderDescFollowersTest(){
-        Integer userId = 1;
-        String order = "name_desc";
-        User user1 = new User(userId, "userName");
-        User user2 = new User(2, "Alberto");
-        User user3 = new User(3, "Briant");
-        User user4 = new User(4, "Carlos");
-        List<User> followeds = new ArrayList<>();
-        followeds.add(user2);
-        followeds.add(user3);
-        followeds.add(user4);
-        user1.setFollowers(followeds);
-        when(repository.getUserById(userId)).thenReturn(Optional.of(user1));
+    public void correctOrderDescFollowersTest() {
+        User user1 = createUser();
+        user1.setFollowers(createUserList());
+        when(repository.getUserById(user1.getUserId())).thenReturn(Optional.of(user1));
 
-        FollowersDTO followersDTO = userService.getFollowers(userId, order);
+        FollowersDTO result = userService.getFollowers(user1.getUserId(), NAME_DESC);
+        List<User> expected = user1.getFollowers();
 
-        Assertions.assertEquals("Carlos", followersDTO.getFollowers().get(0).getUserName());
-        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+        assertArrayEquals(Mapper.userToUserDtoList(expected).toArray(), result.getFollowers().toArray());
+        verify(repository, Mockito.times(1)).getUserById(user1.getUserId());
     }
 
-    @DisplayName("Users exist when following")
+    @DisplayName("Verifica que el usuario a seguir exista")//T-0001
     @Test
-    void test1() {
+    void followingUserExistTest() {
 
         //arrange
-        User user1 = new User(1, "Pablo");
-        User user2 = new User(2, "Lucas");
-        user2.getPosts().add(new Post());
-        Optional<User> user1Optional = Optional.of(user1);
-        Optional<User> user2Optional = Optional.of(user2);
+        User user1 = createUser();
+        User user2 = createSeller();
 
-        when(repository.getUserById(Mockito.anyInt())).thenReturn(user1Optional, user2Optional);
+        when(repository.getUserById(Mockito.anyInt())).thenReturn(Optional.of(user1), Optional.of(user2));
 
         //act
         userService.followUser(user1.getUserId(), user2.getUserId());
@@ -204,36 +159,32 @@ public class UserServiceTest {
         Assertions.assertTrue(user2.getFollowers().contains(user1) && user1.getFolloweds().contains(user2));
     }
 
-    @DisplayName("FollowUser throws exception when users dont exist")
+    @DisplayName("Notifica la no existencia del usuario a seguir mediante una excepción.")//T-0001
     @Test
-    void test2() {
+    void followExceptionWhenUserNotExist() {
 
         //arrange
-        User user1 = new User(1, "Pablo");
-        User user2 = new User(2, "Lucas");
-        Optional<User> user1Optional = Optional.of(user1);
+        User user1 = createUser();
+        User user2 = createSeller();
 
-        when(repository.getUserById(1)).thenReturn(user1Optional);
+        when(repository.getUserById(1)).thenReturn(Optional.of(user1));
 
         //act
         //assert
         Assertions.assertThrows(UserNotExistException.class, () -> userService.followUser(user1.getUserId(), user2.getUserId()));
     }
 
-    @DisplayName("Users exist when unfollowing")
+    @DisplayName("Verifica que el usuario a dejar de seguir exista")//T-0002
     @Test
-    void test3() {
+    void unfollowingUserExistTest() {
 
         //arrange
-        User user1 = new User(1, "Pablo");
-        User user2 = new User(2, "Lucas");
-        user2.getPosts().add(new Post());
+        User user1 = createUser();
+        User user2 = createSeller();
         user1.getFolloweds().add(user2);
         user2.getFollowers().add(user1);
-        Optional<User> user1Optional = Optional.of(user1);
-        Optional<User> user2Optional = Optional.of(user2);
 
-        when(repository.getUserById(Mockito.anyInt())).thenReturn(user1Optional, user2Optional);
+        when(repository.getUserById(Mockito.anyInt())).thenReturn(Optional.of(user1), Optional.of(user2));
 
         //act
         userService.unfollowUser(user1.getUserId(), user2.getUserId());
@@ -242,21 +193,39 @@ public class UserServiceTest {
         Assertions.assertTrue(!user2.getFollowers().contains(user1) && !user1.getFolloweds().contains(user2));
     }
 
-    @DisplayName("UnfollowUser throws exception when users dont exist")
+    @DisplayName("Notifica la no existencia del usuario a seguir mediante una excepción.")//T-0002
     @Test
-    void test4() {
+    void unfollowExceptionWhenUserNotExist() {
 
         //arrange
-        User user1 = new User(1, "Pablo");
-        User user2 = new User(2, "Lucas");
-        Optional<User> user1Optional = Optional.of(user1);
-        Optional<User> user2Optional = Optional.of(user2);
+        User user1 = createUser();
+        User user2 = createSeller();
 
-        when(repository.getUserById(1)).thenReturn(user1Optional);
+        when(repository.getUserById(1)).thenReturn(Optional.of(user1));
 
         //act
         //assert
         Assertions.assertThrows(UserNotExistException.class, () -> userService.unfollowUser(user1.getUserId(), user2.getUserId()));
+    }
+
+    @DisplayName("Verifica que la cantidad de seguidores de un determinado usuario sea correcta")//T-0007
+    @Test
+    public void getcountFollowersTest() {
+
+        User user = createUser();
+        User userFollower = createSeller();
+        user.setFollowers(List.of(userFollower));
+
+        when(repository.getUserById(1)).thenReturn(Optional.of(user));
+
+
+        FollowerCountDTO followerCountDTO = userService.getCountFollowers(1);
+        Assertions.assertAll(
+                () -> assertEquals(user.getFollowers().size(), followerCountDTO.getFollowersCount(), "Assert 1: Followers iguales "),
+                () -> assertEquals(user.getUserName(), followerCountDTO.getUserName(), "Assert 2: UserName igual"),
+                () -> assertEquals(user.getUserId(), followerCountDTO.getUserId(), "Assert 3: UserId igual")
+        );
+
     }
 
 
