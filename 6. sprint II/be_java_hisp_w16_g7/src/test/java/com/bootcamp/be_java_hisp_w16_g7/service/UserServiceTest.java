@@ -72,7 +72,7 @@ class UserServiceTest {
     @Test
     public void followUser(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);
@@ -87,7 +87,7 @@ class UserServiceTest {
     @Test
     public void followUserNotExist(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(null);
@@ -99,7 +99,7 @@ class UserServiceTest {
     @Test
     public void followUserNotSeller(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), List.of());
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);
@@ -111,7 +111,7 @@ class UserServiceTest {
     @Test
     public void followUserAlreadyFollowing(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);
@@ -123,7 +123,7 @@ class UserServiceTest {
     @Test
     public void followSameUser(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
 
         //assert
         assertThrows(SameUserException.class, ()->userService.follow(user.getId(), user.getId()));
@@ -132,7 +132,7 @@ class UserServiceTest {
     @Test
     public void unfollowUser(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);
@@ -147,7 +147,7 @@ class UserServiceTest {
     @Test
     public void unfollowUserNotExist(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", List.of(user), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(null);
@@ -159,7 +159,7 @@ class UserServiceTest {
     @Test
     public void unfollowUserSameUser(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
 
         //assert
         assertThrows(SameUserException.class, ()->userService.unfollow(user.getId(), user.getId()));
@@ -168,7 +168,7 @@ class UserServiceTest {
     @Test
     public void unfollowUserNotFollowing(){
         //arrange
-        User user = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User user = TestUtil.userFollow();
         User target = new User(2222, "Alexander The Great", List.of(), new ArrayList<>(), List.of(new Post()));
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         when(userRepository.findUserById(target.getId())).thenReturn(target);

@@ -15,7 +15,9 @@ import java.util.List;
 
 public class TestUtil {
 
-
+    public static User userFollow(){
+        return new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    }
     public static User userSell(){
         Product product = new Product(1,"Moto","Vehiculo","WWW","Rojo","Nuevo");
         Post post1 = new Post(2222,1,LocalDate.parse("2022-08-12"), product,11,12300,false,0);
