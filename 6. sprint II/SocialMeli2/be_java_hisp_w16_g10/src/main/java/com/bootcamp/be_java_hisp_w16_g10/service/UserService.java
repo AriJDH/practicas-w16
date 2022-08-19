@@ -134,7 +134,7 @@ public class UserService implements IUserService {
     }
 
     //Recibe un userID y aplica el control para verificar que el User exista.
-    private User validateUser(Integer userID) {
+    public User validateUser(Integer userID) {
         User user = this.userRepository.findById(userID);
         if (user == null) //valida si existe un usuario, sino devuelve un error
             throw new NotFoundException(String.format("The user with id: %s don't exists.", userID));
