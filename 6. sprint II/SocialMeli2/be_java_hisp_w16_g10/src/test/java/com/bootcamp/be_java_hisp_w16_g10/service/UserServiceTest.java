@@ -51,7 +51,7 @@ class UserServiceTest {
 
     @Test
     void shouldRaiseBadRequestExceptionWhenTwoIdsAreEquals() {
-        assertThrows(
+        assertThrows( //TODO los nombres de las excepciones
                 BadRequestException.class,
                 () -> this.userService.follow(1, 1)
         );
@@ -73,9 +73,11 @@ class UserServiceTest {
     }
     @Test
     void shouldRaiseAnExceptionWhenTheUserAlreadyFollowTheUser() {
-        User user = Factory.generateUserWithFollowers(1);
+        User user = Factory.generateUserWithFollowed(1);
+
         when(this.userRepository.findById(1)).thenReturn(user);
         when(this.userRepository.findById(2)).thenReturn(Factory.generateUser(2));
+        //TODO matchear los mensajes correctos
         assertThrows(BadRequestException.class,
                 () -> this.userService.follow(2, 1)
         );
@@ -274,7 +276,11 @@ class UserServiceTest {
       //arrange
       var user = generateUserWithFollowers(1);
 
-      var expected = Mapper.parseToFollowersListResDTO(user,user.getFollowers().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList()));
+      var expected = Mapper
+              .parseToFollowersListResDTO(user,user.getFollowers()
+              .stream()
+              .sorted(Comparator.comparing(User::getUserName))
+              .collect(Collectors.toList()));
 
       //act
       when(userRepository.findById(1)).thenReturn(user);
@@ -290,7 +296,12 @@ class UserServiceTest {
       //arrange
       var user = generateUserWithFollowers(1);
 
-      var expected = Mapper.parseToFollowersListResDTO(user,user.getFollowers().stream().sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList()));
+      var expected = Mapper
+              .parseToFollowersListResDTO(user,user.getFollowers()
+                      .stream()
+                      .sorted(Comparator.comparing(User::getUserName)
+                              .reversed())
+                      .collect(Collectors.toList()));
 
       //act
       when(userRepository.findById(1)).thenReturn(user);

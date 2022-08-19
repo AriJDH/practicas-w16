@@ -156,6 +156,35 @@ class PostServiceTest {
                 this.postService.listFollowersPosts(1, "date_asc")
         );
     }
+    @Test
+    void shouldReturnOrderedByDateAscAndFilteredWithMinus14Days() {
+        User user = Factory.generateUserWithFollowed(1);
+        //id uno es el usuario, 2, 3, 4 que tienen que tener posts
+
+        List<Post> postsUser2 = Factory.generateListOfPosts(2, 2);
+        List<Post> postsUser3 = Factory.generateListOfPosts(2, 3);
+        List<Post> postsUser4 = Factory.generateListOfPosts(2, 4);
+        postsUser4.stream().forEach(post -> post.setDate(LocalDate.now().minusDays(30)));
+
+        when(this.userService.findById(1)).thenReturn(user);
+        when(this.postRepository.findByUserId(2)).thenReturn(postsUser2);
+        when(this.postRepository.findByUserId(3)).thenReturn(postsUser3);
+        when(this.postRepository.findByUserId(4)).thenReturn(postsUser4);
+
+        List<Post> posts = new ArrayList<>();
+        posts.addAll(postsUser2);
+        posts.addAll(postsUser3);
+        posts.addAll(postsUser4);
+        LocalDate localDate = LocalDate.now().minusDays(14);
+        posts = posts.stream()
+                .filter(post -> post.getDate().compareTo(localDate) > 0)
+                .sorted(Comparator.comparing(Post::getDate))
+                .collect(Collectors.toList());
+        assertEquals(
+                Mapper.parseToPostListResDTO(user, posts),
+                this.postService.listFollowersPosts(1, "date_asc")
+        );
+    }
 
     @Test
     void shouldReturnOrdererdByDateDescWhenIsCalledWithDateDescParam() {
@@ -254,9 +283,7 @@ class PostServiceTest {
       //};
 
       when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
-
       List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());
-
       verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
       Assertions.assertTrue(resPostService.equals(listPostResDTO));
 

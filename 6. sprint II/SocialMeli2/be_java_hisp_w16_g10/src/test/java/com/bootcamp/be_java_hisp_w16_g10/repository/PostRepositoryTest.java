@@ -24,7 +24,6 @@ class PostRepositoryTest {
     @Test
     void shouldReturnAllPosts() {
         var posts = this.postRepository.findAll();
-
         assertNotNull(posts);
         assertEquals(3, posts.size());
     }
