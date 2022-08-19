@@ -25,7 +25,7 @@ import org.mockito.Mockito;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.be_java_hisp_w16_g09.util.UsersUtility.getUserWith5Followers;
+import static com.example.be_java_hisp_w16_g09.util.UsersUtility.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import java.util.Arrays;
@@ -123,9 +123,7 @@ class UserServiceTest {
 
     @Test
     void followerCount() {
-        User userMock1 = new User(3, "Mateo", null, null);
-        User userMock2 = new User(4, "Agustin", null, null);
-        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
+        User userMock = getUserWith2Followers();
         when(userRepository.searchById(2)).thenReturn(userMock);
         Assertions.assertTrue(2==userService.followerCount(2).getFollowers_count());
     }
@@ -184,9 +182,7 @@ class UserServiceTest {
 
     @Test
     void orderByNameAscTest() {
-        User userMock1 = new User(3, "Mateo", null, null);
-        User userMock2 = new User(4, "Agustin", null, null);
-        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
+        User userMock = getUserWith2Followers();
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
         list = Arrays.asList(new SimpleUserDto(3, "Mateo"), new SimpleUserDto(4, "Agustin"));
@@ -199,9 +195,7 @@ class UserServiceTest {
 
     @Test
     void orderByNameDescTest() {
-        User userMock1 = new User(3, "Agustin", null, null);
-        User userMock2 = new User(4, "Mateo", null, null);
-        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
+        User userMock = getUserWith2Followers();
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
         list = Arrays.asList(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
@@ -214,9 +208,8 @@ class UserServiceTest {
 
     @Test
     void orderByNameNotExistTest() {
-        User userMock1 = new User(3, "Agustin", null, null);
-        User userMock2 = new User(4, "Mateo", null, null);
-        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
+        User userMock = getUserWith2Followers();
+
         when(userRepository.searchById(2)).thenReturn(userMock);
         List<SimpleUserDto> list = new ArrayList<>();
         list = List.of(new SimpleUserDto(3, "Agustin"), new SimpleUserDto(4, "Mateo"));
@@ -231,7 +224,7 @@ class UserServiceTest {
 
     @Test
     void orderByUserHasNoFollowersTest() {
-        User userMock = new User(2, "Marcos", new ArrayList<>(), new ArrayList<>());
+        User userMock = getUserWithNoFollowers();
         when(userRepository.searchById(2)).thenReturn(userMock);
         Assertions.assertThrows(UserHasNoFollowersException.class, () -> userService.getAllFollowers(2, "name_desc"));
     }
@@ -276,11 +269,4 @@ class UserServiceTest {
         Assertions.assertEquals(mockFollowersDtoResponse.getFollowers(), response.getFollowers());
     }
 
-    @Test
-    void orderByNameFollowed() {
-    }
-
-    @Test
-    void getAllFollowers() {
-    }
 }

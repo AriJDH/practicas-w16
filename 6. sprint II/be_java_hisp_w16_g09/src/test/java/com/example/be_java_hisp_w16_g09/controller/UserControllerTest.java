@@ -3,6 +3,7 @@ package com.example.be_java_hisp_w16_g09.controller;
 import com.example.be_java_hisp_w16_g09.dto.FollowersCountDTO;
 import com.example.be_java_hisp_w16_g09.dto.FollowersDtoResponse;
 import com.example.be_java_hisp_w16_g09.dto.SimpleUserDto;
+import com.example.be_java_hisp_w16_g09.exception.OrderNotExist;
 import com.example.be_java_hisp_w16_g09.exception.UserNotFoundException;
 import com.example.be_java_hisp_w16_g09.service.IUserService;
 import org.junit.jupiter.api.Assertions;
@@ -18,7 +19,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
@@ -61,7 +63,7 @@ class UserControllerTest {
     }
 
     @Test
-    void US003DescTest() {
+    void US004DescTest() {
         List<SimpleUserDto> list = List.of(new SimpleUserDto(3,"Mateo"),new SimpleUserDto(4,"Agustin"));
         FollowersDtoResponse userMockResponse = new FollowersDtoResponse(2,"Marcos",list);
         when(userService.getAllFollowers(2,"name_desc")).thenReturn(userMockResponse);
@@ -71,7 +73,7 @@ class UserControllerTest {
         Assertions.assertTrue(userName1.compareTo(userName2)>0);
     }
     @Test
-    void US003AscTest() {
+    void US004AscTest() {
         List<SimpleUserDto> list = List.of(new SimpleUserDto(4,"Agustin"),new SimpleUserDto(3,"Mateo"));
         FollowersDtoResponse userMockResponse = new FollowersDtoResponse(2,"Marcos",list);
         when(userService.getAllFollowers(2,"name_asc")).thenReturn(userMockResponse);
@@ -81,21 +83,15 @@ class UserControllerTest {
         Assertions.assertTrue(userName1.compareTo(userName2)<0);
     }
     @Test
-    void US003Test() {
-        List<SimpleUserDto> list = List.of(new SimpleUserDto(4,"Agustin"),new SimpleUserDto(3,"Mateo"));
-        FollowersDtoResponse userMockResponse = new FollowersDtoResponse(2,"Marcos",list);
-        when(userService.getAllFollowers(2, "name_asc")).thenReturn(userMockResponse);
-        ResponseEntity<FollowersDtoResponse> user = userController.US003(2,"name_asc");
-        String userName1 = user.getBody().getFollowers().get(0).getUserName();
-        String userName2= user.getBody().getFollowers().get(1).getUserName();
-        Assertions.assertTrue(userName1.compareTo(userName2)<0);
+    public void shouldReturnUsersOrderedByDateOrderNotExistException() {
+        int id = 1;
+        String order = "noname_asc";
+
+        doThrow(new OrderNotExist()).when(userService).getAllFollowers(id, order);
+
+        assertThrows(OrderNotExist.class, () -> userController.US003(id, order));
+
+        verify(userService, Mockito.atMostOnce()).getAllFollowers(id, order);
     }
 
-    @Test
-    void US004() {
-    }
-
-    @Test
-    void US007() {
-    }
 }

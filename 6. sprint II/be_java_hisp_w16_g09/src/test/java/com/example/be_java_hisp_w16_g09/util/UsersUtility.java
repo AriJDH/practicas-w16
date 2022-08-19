@@ -47,4 +47,15 @@ public class UsersUtility {
         mockUser.setFollowers(Arrays.asList(mockFollower1,mockFollower2,mockFollower3,mockFollower4,mockFollower5));
         return mockUser;
     }
+
+    public static User getUserWith2Followers(){
+        User userMock1 = new User(3, "Agustin", null, null);
+        User userMock2 = new User(4, "Mateo", null, null);
+        User userMock = new User(2, "Marcos", List.of(userMock1, userMock2), null);
+        return userMock;
+    }
+
+    public static User getUserWithNoFollowers(){
+        return new User(2, "Marcos", new ArrayList<>(), new ArrayList<>());
+    }
 }
