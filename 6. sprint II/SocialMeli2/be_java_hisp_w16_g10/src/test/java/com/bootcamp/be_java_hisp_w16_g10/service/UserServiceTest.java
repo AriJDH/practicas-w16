@@ -1,20 +1,25 @@
 package com.bootcamp.be_java_hisp_w16_g10.service;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.UserResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
 import com.bootcamp.be_java_hisp_w16_g10.repository.PostRepository;
 import com.bootcamp.be_java_hisp_w16_g10.repository.UserRepository;
+import com.bootcamp.be_java_hisp_w16_g10.util.Factory;
 import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.servlet.function.AsyncServerResponse;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,7 +27,7 @@ import static com.bootcamp.be_java_hisp_w16_g10.util.Factory.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -33,11 +38,42 @@ class UserServiceTest {
     @InjectMocks
     UserService userService;
     @Test
-    void findById() {
+    @DisplayName("Testing find user by id")
+    void shouldFindById() {
+        //Arrange
+        int id = 1;
+        User user = Factory.generateUser(id);
+        //Act
+        when(userRepository.findById(id)).thenReturn(user);
+        User result = userService.findById(id);
+        //Assert
+        assertEquals(result.getUserName(),user.getUserName());
+        verify(userRepository, atLeastOnce()).findById(id);
     }
 
     @Test
+    @DisplayName("Throw not found exception when User not found")
+    void shouldThrowNotFoundException_whenUserNotFound() {
+        //Arrange
+        int id = anyInt();
+        //Act
+        when(userRepository.findById(id)).thenReturn(null);
+        //Assert
+        assertThrows(NotFoundException.class, () -> userService.findById(id));
+        verify(userRepository, atLeastOnce()).findById(id);
+    }
+
+    @Test
+    @DisplayName("Testing find all users")
     void findAll() {
+        //Arrange
+        List<User> userMocks = new ArrayList<>();
+        //Act
+        when(userRepository.findAll()).thenReturn(userMocks);
+        List<UserResDTO> result = userService.findAll();
+        //Assert
+        assertEquals(userMocks.size(), result.size());
+        verify(userRepository, atLeastOnce()).findAll();
     }
 
     @Test

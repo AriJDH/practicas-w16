@@ -12,6 +12,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.ProductResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -42,6 +43,7 @@ class PostServiceTest {
     PostService postService;
 
     @Test
+    @DisplayName("Testing find post by id")
     void ShouldFndById() {
         //Arrange
         int id = 1;
@@ -55,6 +57,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("Throw Not found exception when Post by id not found")
     void shouldThrowNotFoundException_whenPostNotFound() {
         //Arrange
         int id = anyInt();
@@ -67,6 +70,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("Testing find all post")
     void shouldFindAll() {
         //Arrange
         List<Post> postsMocks = new ArrayList<>();
@@ -80,6 +84,7 @@ class PostServiceTest {
 
 
     @Test
+    @DisplayName("Testing save post")
     void shouldSavePost() {
         //Arrange
         PostReqDTO postReqDTO = Factory.generateProductReqDTO();
@@ -91,6 +96,7 @@ class PostServiceTest {
     }
 
     @Test
+    @DisplayName("Testing throw ConstraintViolationException when Date is in the future of post")
     void shouldThrowConstraintViolationException_whenDateIsNext() {
         //Arrange
         PostReqDTO postReqDTO = Factory.generateProductReqDTOWithBadDate();
