@@ -27,13 +27,6 @@ public class GlobalHandler {
     }
 
 
-    @ExceptionHandler({FollowsNotFoundException.class})
-    public ResponseEntity<ApiResponseDto> catchException(FollowsNotFoundException e) {
-        ApiResponseDto apiResponseDto = new ApiResponseDto("Not Found", e.getMessage());
-        return new ResponseEntity<>(apiResponseDto, HttpStatus.NOT_FOUND);
-
-    }
-
     @ExceptionHandler(UserIsNotSellerException.class)
     public ResponseEntity<ApiResponseDto> catchException(UserIsNotSellerException e) {
         ApiResponseDto apiResponseDto = new ApiResponseDto("Bad Request", e.getMessage());

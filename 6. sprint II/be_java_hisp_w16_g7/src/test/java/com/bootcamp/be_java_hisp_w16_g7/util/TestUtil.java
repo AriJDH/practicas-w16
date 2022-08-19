@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.util;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
@@ -99,5 +96,16 @@ public class TestUtil {
         User followed2 = new User(33, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User followed3 = new User(44, "Andrés", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         return new User(11, "John", List.of(), List.of(followed1, followed2, followed3), List.of());
+    }
+
+    public static User userToCreatePostTest(){
+        List<Post> posts = new ArrayList<>();
+        posts.add( new Post(1111, 1, LocalDate.of(2022, 8, 10), new Product(), 99, 1000.0, false, 0.0));
+
+        return new User(1111, "User1", List.of(), List.of(), posts);
+    }
+
+    public static PostDTO createPostDto(){
+        return new PostDTO(1111,LocalDate.of(2022, 8, 10), new ProductDTO(), 99, 1000.0 );
     }
 }
