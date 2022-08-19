@@ -35,12 +35,8 @@ public class PostService implements IPostService{
     public void createPost(PostDto postDto){
         int userId = postDto.getUserId();
         User user = userRepository.searchById(userId);
-        if (user == null){
-            throw new UserNotFoundException(userId);
-        }
-        if(LocalDate.now().isBefore(postDto.getDate())){
-            throw new InvalidDateException(String.valueOf(postDto.getDate()));
-        }
+        if (user == null){throw new UserNotFoundException(userId);}
+        if(LocalDate.now().isBefore(postDto.getDate())){throw new InvalidDateException(String.valueOf(postDto.getDate()));}
         Post post = dtoMapperUtil.map(postDto, Post.class);
         post.setUser(user);
         postRepository.createElement(post);
@@ -66,9 +62,7 @@ public class PostService implements IPostService{
         User user = getValidatedUser(anUserId);
         List<Post> postsOfSellers = postsOfSellersFollowedBy(user);
         postsOfSellers = Filter.apply(postsOfSellers, (post -> post.wasPublishedAfter(LocalDate.now().minusWeeks(2))));
-
         postsOfSellers = Sort.orderSequenceBasedOn(anOrder, "date").sortingBy(Post::getDate, postsOfSellers);
-
         List<PostDto> postDtos = dtoMapperUtil.mapList(postsOfSellers, PostDto.class);
         return new RecentPostsDTO(user.getUserId(), postDtos);
     }
@@ -82,9 +76,7 @@ public class PostService implements IPostService{
 
     private User getValidatedUser(int userId) {
         User user = userRepository.searchById(userId);
-        if (user == null) {
-            throw new UserNotFoundException(userId);
-        }
+        if (user == null) {throw new UserNotFoundException(userId);}
         return user;
     }
 }
