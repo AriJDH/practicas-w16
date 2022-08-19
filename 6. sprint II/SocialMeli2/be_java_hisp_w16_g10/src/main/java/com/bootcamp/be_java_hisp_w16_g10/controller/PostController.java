@@ -28,7 +28,7 @@ public class PostController {
     // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
     @GetMapping("/followed/{userId}/list")
     public ResponseEntity<PostListResDTO> US006(@PathVariable Integer userId, @RequestParam Optional<String> order){
-        return new ResponseEntity<>(this.postService.listFollowersPosts(userId, order.orElse(null)), HttpStatus.OK);
+        return new ResponseEntity<>(this.postService.listFollowersPosts(userId, order.orElse("date_desc")), HttpStatus.OK);
     }
     
     //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
