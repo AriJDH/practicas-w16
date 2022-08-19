@@ -1,11 +1,16 @@
 package com.bootcamp.be_java_hisp_w16_g10.util;
 
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Factory {
     static public Post generatePost() {
@@ -65,4 +70,47 @@ public class Factory {
         return Factory
                 .generateProduct(1, "Mati", "Programdor", "Bootcamper", "Amarillo", "a");
     }
+
+    static public User generateUser(Integer id, String userName, List<User> followers, List<User> followed) {
+        return User.builder()
+                .id(id)
+                .userName(userName)
+                .followers(followers)
+                .followed(followed)
+                .build();
+    }
+
+    static public User generateUser(Integer id) {
+        return User.builder()
+                .id(id)
+                .userName("user" + id)
+                .followers(new ArrayList<>())
+                .followed(new ArrayList<>())
+                .build();
+    }
+
+    static public List<User> generateUserList (Integer amount, Integer firstId) {
+        List<User> users = new ArrayList<>();
+        for (Integer i = 0; i < amount; i++) {
+            String indexString = Integer.toString(i);
+            users.add(Factory.generateUser(firstId+i,
+                            "User ".concat(indexString),
+                            null, null));
+        }
+        return users;
+    }
+
+
+    static public PostReqDTO generateProductReqDTO() {
+        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris","nada");
+        PostReqDTO postReqDTO = new PostReqDTO(1,1, LocalDate.now(),productReqDTO,10,1500.0);
+        return postReqDTO;
+    }
+
+    static public List<PostResDTO> generateListPostResDTO(int amount, int userId) {
+        var lista = generateListOfPosts(amount, userId);
+
+        return lista.stream().map(Mapper::parseToPostResDTO).collect(Collectors.toList());
+    }
 }
+

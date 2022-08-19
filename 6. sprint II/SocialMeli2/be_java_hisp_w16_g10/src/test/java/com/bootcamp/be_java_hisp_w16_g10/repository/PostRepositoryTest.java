@@ -22,7 +22,11 @@ class PostRepositoryTest {
         this.posts.forEach(post -> this.postRepository.save(post));
     }
     @Test
-    void findAll() {
+    void shouldReturnAllPosts() {
+        var posts = this.postRepository.findAll();
+
+        assertNotNull(posts);
+        assertEquals(3, posts.size());
     }
     @Test
     void givenAnIdShouldReturnAPostWhenIsCalled() {
@@ -36,10 +40,26 @@ class PostRepositoryTest {
         assertNull(post);
     }
     @Test
-    void save() {
+
+    void shouldSavePost() {
+        var post = Factory.generatePost();
+
+        this.postRepository.save(post);
+        assertNotNull(this.postRepository.findById(1));
     }
 
     @Test
-    void findByUserId() {
+    void shloudFindUserById() {
+        var posts = this.postRepository.findByUserId(1);
+
+        assertNotNull(posts);
+        assertEquals(3, posts.size());
+    }
+
+    @Test
+    void shouldnotFoundUserById() {
+        var posts = this.postRepository.findByUserId(1000);
+
+        assertEquals("[]",posts.toString());
     }
 }
