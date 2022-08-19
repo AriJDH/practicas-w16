@@ -5,10 +5,7 @@ import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
 import com.example.be_java_hisp_w16_g03.dto.UserDTO;
 import com.example.be_java_hisp_w16_g03.entity.User;
-import com.example.be_java_hisp_w16_g03.exception.AlreadyFollowException;
-import com.example.be_java_hisp_w16_g03.exception.NotFollowersException;
-import com.example.be_java_hisp_w16_g03.exception.NotSellerException;
-import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
+import com.example.be_java_hisp_w16_g03.exception.*;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +44,8 @@ public class UserService implements IUserService {
                 usersDTO.sort(Comparator.comparing(UserDTO::getUserName));
             } else if (order.equals(NAME_DESC)) {
                 usersDTO.sort(Comparator.comparing(UserDTO::getUserName).reversed());
+            } else {
+                throw new InvalidOrderException(order);
             }
         }
 
@@ -71,6 +70,8 @@ public class UserService implements IUserService {
                 followersDto.sort(Comparator.comparing(UserDTO::getUserName));
             } else if (order.equals(NAME_DESC)) {
                 followersDto.sort(Comparator.comparing(UserDTO::getUserName).reversed());
+            } else {
+                throw new InvalidOrderException(order);
             }
         }
         followedsDTO.setFollowed(followersDto);
