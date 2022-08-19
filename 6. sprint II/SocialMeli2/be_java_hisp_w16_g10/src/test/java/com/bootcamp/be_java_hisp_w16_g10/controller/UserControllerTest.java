@@ -1,7 +1,20 @@
 package com.bootcamp.be_java_hisp_w16_g10.controller;
 
+import static com.bootcamp.be_java_hisp_w16_g10.util.Factory.generateProductReqDTO;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowedListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.UserResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.UserService;
 
 import org.junit.jupiter.api.Assertions;
@@ -14,15 +27,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-import java.util.Optional;
-
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
 
@@ -30,18 +34,20 @@ class UserControllerTest {
    UserService userService;
    @InjectMocks
    UserController userController;
+   @Mock
+    PostController postController;
 
-   @Test
-   void findAll() {
-   }
+   //@Test
+   //void findAll() {
+   //}
 
-   @Test
-   void US001() {
-   }
+   //@Test
+   //void US001() {
+   //}
 
-   @Test
-   void US002() {
-   }
+   //@Test
+   //void US002() {
+   //}
 
    @Test
    void shouldReturnListFollowers() {
@@ -95,7 +101,6 @@ class UserControllerTest {
       //act
 
       doNothing().when(userService).unfollow(Mockito.anyInt(), Mockito.anyInt());   
-
       ResponseEntity<T> resController = userController.US007(Mockito.anyInt(),Mockito.anyInt());   
 
       // assert
@@ -104,4 +109,52 @@ class UserControllerTest {
       Assertions.assertTrue(resController.getStatusCodeValue() == 200);
 
    }
+
+    @Test
+    void shouldReturnAllUsers() {
+        //act
+        when(userService.findAll()).thenReturn(List.of(new UserResDTO()));
+        var response = userController.findAll();
+
+        //assert
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(1, response.getBody().size());
+    }
+
+    @Test
+    void shouldFollowUser() {
+        //arrange
+
+        //act
+        doNothing().when(userService).follow(2,1);
+        var response = userController.US001(2,1);
+
+        //assert
+        verify(userService, atLeastOnce()).follow(2,1);
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
+    }
+
+
+    @Test
+    void shouldReturnFollowersCountResDTO() {
+        var dato = generateProductReqDTO();
+        //arrange
+        postController.US005(dato);
+        userController.US001(2,1);
+        userController.US001(3,1);
+
+        //act
+        var response = userController.US002(1);
+
+        when(userService.countFollowers(1)).thenReturn(new FollowersCountResDTO(1,"user1",2));
+        var res = userService.countFollowers(1);
+
+        //assert
+        assertNotNull(res);
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(2, res.getFollowersCount());
+    }
+
 }
