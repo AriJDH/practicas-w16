@@ -1,8 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.controller;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.service.IProductService;
 import com.bootcamp.be_java_hisp_w16_g7.util.TestUtil;
 import org.junit.jupiter.api.Test;
@@ -47,6 +45,23 @@ class ProductControllerTest {
         //Assert
         assertEquals(response.getStatusCode(), HttpStatus.OK);
         assertEquals(response.getBody(), expected);
+    }
+
+    @Test
+    public void testCreatePost(){
+
+        //Arrange
+        PostDTO postDTO = TestUtil.createPostDto();
+        ApiResponseDto apiResponseDto = new ApiResponseDto("Post created successfully", "Post of user with id: 111 was created successfully");
+        when(productService.createPost(postDTO)).thenReturn(apiResponseDto);
+
+        //Act
+        var response = productController.createPost(postDTO);
+
+        //Assert
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+        assertEquals(response.getBody(), apiResponseDto);
+
     }
 
 }
