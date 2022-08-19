@@ -61,13 +61,13 @@ class UserControllerTest {
 
       // act
 
-      when(userService.listFollowers(1, null)).thenReturn(followersListResDTO);
+      when(userService.listFollowers(1, "name_asc")).thenReturn(followersListResDTO);
 
       ResponseEntity<FollowersListResDTO> resController = userController.US003(1, opt);
 
       // assert
 
-      verify(userService, atLeastOnce()).listFollowers(followersListResDTO.getUserId(), null);
+      verify(userService, atLeastOnce()).listFollowers(followersListResDTO.getUserId(), "name_asc");
       Assertions.assertTrue(resController.equals(new ResponseEntity<>(followersListResDTO, HttpStatus.OK)));
 
    }
@@ -84,13 +84,13 @@ class UserControllerTest {
 
       // act
 
-      when(userService.listFollowed(1, null)).thenReturn(followedListResDTO);
+      when(userService.listFollowed(1, "name_asc")).thenReturn(followedListResDTO);
 
       ResponseEntity<FollowedListResDTO> resController = userController.US004(1, opt);
 
       // assert
 
-      verify(userService, atLeastOnce()).listFollowed(followedListResDTO.getUserId(), null);
+      verify(userService, atLeastOnce()).listFollowed(followedListResDTO.getUserId(), "name_asc");
       Assertions.assertTrue(resController.equals(new ResponseEntity<>(followedListResDTO, HttpStatus.OK)));
 
    }
