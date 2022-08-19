@@ -73,13 +73,14 @@ class UserServiceTest {
     }
     @Test
     void shouldRaiseAnExceptionWhenTheUserAlreadyFollowTheUser() {
-        User user = Factory.generateUserWithFollowed(1);
-
+        User user = new User(1,"Ale",new ArrayList<>(),new ArrayList<>());
+        User user2 = new User(2,"Mati",null,null);   
+        user.getFollowed().add(user2);   
         when(this.userRepository.findById(1)).thenReturn(user);
-        when(this.userRepository.findById(2)).thenReturn(Factory.generateUser(2));
+        when(this.userRepository.findById(2)).thenReturn(user2);
         //TODO matchear los mensajes correctos
         assertThrows(BadRequestException.class,
-                () -> this.userService.follow(2, 1)
+                () -> this.userService.follow(1, 2)
         );
     }
     @Test
