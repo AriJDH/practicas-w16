@@ -21,8 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -55,8 +54,10 @@ public class IntegrationTest {
         MvcResult response = this.mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(payloadJson))
-                .andDo(print()).andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Post created successfully"))
+                .andExpect(jsonPath("$.message").value("Post of user with id: 2222 was created successfully"))
                 .andReturn();
 
         //Assert
