@@ -91,19 +91,19 @@ public class PostService implements IPostService {
         if(user == null)
             throw new BadRequestException("No existe el usuario con Id: " + userId);
 
-        if (order!= null){
+        if (order != null) {
             if (order.equalsIgnoreCase("date_desc")) {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate).reversed())
                         .collect(Collectors.toList()));
-            } else
+            } else if (order.equalsIgnoreCase("date_asc")) {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate))
                         .collect(Collectors.toList()));
+            }
         }
-        else
-            throw new BadRequestException("El orden indicado no es correcto.");
-            //return new FollowedPostsDto(userId, getPosts(user));
+
+        throw new BadRequestException("El orden indicado no es correcto.");
     }
 
 

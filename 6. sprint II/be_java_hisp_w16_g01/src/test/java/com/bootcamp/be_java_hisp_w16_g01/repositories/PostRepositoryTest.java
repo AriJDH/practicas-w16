@@ -2,7 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g01.repositories;
 
 import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
 import com.bootcamp.be_java_hisp_w16_g01.repository.PostRepository;
-import com.bootcamp.be_java_hisp_w16_g01.utils.DataFactory;
+import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryPost;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,16 +19,16 @@ public class PostRepositoryTest {
 
     @BeforeEach
     public void emptyRepo(){
-        this.repository = new PostRepository(DataFactory.loadRepoData());
+        this.repository = new PostRepository(FactoryPost.loadRepoData());
     }
 
     @Test
     @DisplayName("getPostsByUserId - Devuelve los Post de las ultimas dos semanas por usuarioId")
-    public void getPostsByUserId() {
+    public void getPostsByUserIdTest() {
 
         //Arrange
         int userId = 2;
-        List<Post> posts = DataFactory.generateGetPostsByUserId(userId);
+        List<Post> posts = FactoryPost.generateGetPostsByUserId(userId);
 
         //Act
         //Assert
@@ -37,11 +37,11 @@ public class PostRepositoryTest {
 
     @Test
     @DisplayName("getPostsByUserId - Devuelve la lista vacia, el usuario no tiene posts")
-    public void getPostsByUserWithNoPosts() {
+    public void getPostsByUserWithNoPostsTest() {
 
         //Arrange
         int userId = 0;
-        List<Post> posts = DataFactory.generateGetPostsByUserId(userId);
+        List<Post> posts = FactoryPost.generateGetPostsByUserId(userId);
 
         //Act
         //Assert

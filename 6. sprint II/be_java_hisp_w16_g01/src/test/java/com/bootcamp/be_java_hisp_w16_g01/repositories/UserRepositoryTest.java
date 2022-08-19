@@ -2,42 +2,22 @@ package com.bootcamp.be_java_hisp_w16_g01.repositories;
 
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
-import com.bootcamp.be_java_hisp_w16_g01.entities.User;
-import com.bootcamp.be_java_hisp_w16_g01.repository.PostRepository;
-
 import com.bootcamp.be_java_hisp_w16_g01.repository.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryUser;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-
-import com.bootcamp.be_java_hisp_w16_g01.repository.PostRepository;
-import com.bootcamp.be_java_hisp_w16_g01.repository.UserRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-
 
 import java.util.List;
 import java.util.ArrayList;
 
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-
 @SpringBootTest
-@ExtendWith(MockitoExtension.class)
 public class UserRepositoryTest {
 
     UserRepository repository;
-
 
     private List<User> userList = FactoryUser.getMockedUsers();
 
@@ -50,15 +30,15 @@ public class UserRepositoryTest {
     public void getUserTest() {
         Integer idUser = 1;
         User usr1 = repository.getUser(idUser);
-        Assertions.assertNotNull(usr1);
-        Assertions.assertEquals(idUser, usr1.getUserId());
+        assertNotNull(usr1);
+        assertEquals(idUser, usr1.getUserId());
     }
 
     @Test
     public void getUserNullTest() {
         Integer idUser = null;
         User usr1 = repository.getUser(idUser);
-        Assertions.assertNull(usr1);
+        assertNull(usr1);
     }
 
     @Test
@@ -68,7 +48,7 @@ public class UserRepositoryTest {
         User usr1 = repository.getUser(idUser1);
         User usr2 = repository.getUser(idUser2);
         boolean isFollowed = repository.userIsFollowed(usr1, usr2);
-        Assertions.assertTrue(isFollowed);
+        assertTrue(isFollowed);
     }
 
     @Test
@@ -78,7 +58,7 @@ public class UserRepositoryTest {
         User usr1 = repository.getUser(idUser1);
         User usr2 = repository.getUser(idUser2);
         boolean isFollowed = repository.userIsFollowed(usr2, usr1);
-        Assertions.assertFalse(isFollowed);
+        assertFalse(isFollowed);
     }
 
     @Test
@@ -87,8 +67,8 @@ public class UserRepositoryTest {
         Integer idUser2 = 2;
         User usr1 = repository.getUser(idUser1);
         User usr2 = repository.getUser(idUser2);
-        boolean isFollowed = repository.userIsFollower(usr1, usr2);
-        Assertions.assertFalse(isFollowed);
+        boolean isFollower = repository.userIsFollower(usr1, usr2);
+        assertFalse(isFollower);
     }
 
     @Test
@@ -97,8 +77,8 @@ public class UserRepositoryTest {
         Integer idUser2 = 2;
         User usr1 = repository.getUser(idUser1);
         User usr2 = repository.getUser(idUser2);
-        boolean isFollowed = repository.userIsFollower(usr2, usr1);
-        Assertions.assertTrue(isFollowed);
+        boolean isFollower = repository.userIsFollower(usr2, usr1);
+        assertTrue(isFollower);
     }
 
     @Test
@@ -106,24 +86,24 @@ public class UserRepositoryTest {
         User user10 = new User(10, "Usuario10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         // assert
-        Assertions.assertNull(repository.getUser(user10.getUserId()));
+        assertNull(repository.getUser(user10.getUserId()));
 
     }
 
     @Test
     @DisplayName("El usuario existe")
-    void userExists() {
+    public void userExistsTest() {
         //Arrange
         Integer userId = 1;
         //Act
         boolean result = repository.userExists(userId);
         //Assert
-        Assertions.assertTrue(result);
+        assertTrue(result);
     }
 
     @Test
     @DisplayName("El usuario no existe")
-    void userNotExists() {
+    public void userNotExistsTest() {
         //Arrange
         Integer userId = 999;
         //Act
@@ -133,7 +113,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void userIsSeller() {
+    public void userIsSellerTest() {
         // Arrange
         User user = repository.getUser(1);
         user.addPost(new Post());
@@ -142,11 +122,11 @@ public class UserRepositoryTest {
         // Act
         boolean result = repository.userIsSeller(user.getUserId());
         // Assert
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
-    void userIsNotSeller() {
+    public void userIsNotSellerTest() {
         // Arrange
         User user = repository.getUser(1);
 
@@ -155,11 +135,11 @@ public class UserRepositoryTest {
         // Act
         boolean result = repository.userIsSeller(user.getUserId());
         // Assert
-        Assertions.assertEquals(expected, result);
+        assertEquals(expected, result);
     }
 
     @Test
-    void addFollowed() {
+    public void addFollowedTest() {
         //Arrange
         User userFollows = repository.getUser(4);
         User userToFollow = repository.getUser(5);
@@ -168,11 +148,11 @@ public class UserRepositoryTest {
         repository.addFollowed(userFollows.getUserId(), userToFollow.getUserId());
 
         // Assert
-        Assertions.assertTrue(userFollows.getFollowed().contains(userToFollow));
+        assertTrue(userFollows.getFollowed().contains(userToFollow));
     }
 
     @Test
-    void addFollower() {
+    public void addFollowerTest() {
         //Arrange
         User userFollows = repository.getUser(4);
         User userToFollow = repository.getUser(5);
@@ -181,6 +161,6 @@ public class UserRepositoryTest {
         repository.addFollower(userFollows.getUserId(), userToFollow.getUserId());
 
         // Assert
-        Assertions.assertTrue(userToFollow.getFollowers().contains(userFollows));
+        assertTrue(userToFollow.getFollowers().contains(userFollows));
     }
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DataFactory {
+public class FactoryPost {
 
     public static FollowedPostsDto generateGetFollowedPostsControllerTestResponse(int userId) {
         return new FollowedPostsDto(

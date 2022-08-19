@@ -3,58 +3,30 @@ package com.bootcamp.be_java_hisp_w16_g01.services;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.MessageDto;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
-
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowerDTO;
-import com.bootcamp.be_java_hisp_w16_g01.entities.User;
-import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserUnfollowDTO;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w16_g01.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Test;
 import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryUser;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.FollowersCountDTO;
-import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
-import com.bootcamp.be_java_hisp_w16_g01.entities.User;
-import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
-import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
-import com.bootcamp.be_java_hisp_w16_g01.service.UserService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.http.HttpStatus;
-
 import java.util.List;
-import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.atLeastOnce;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.Mockito.*;
-
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
@@ -166,13 +138,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void nameAscOrderFollowersOk(){
-        List<User> followers = new ArrayList<>();
-        followers.add(new User(3, "alberto"));
-        followers.add(new User(1, "juan"));
-        followers.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followers);
+    public void nameAscOrderFollowersTest(){
+
+        User user = FactoryUser.getUserWithFollowersAsc();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
@@ -182,13 +150,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void nameDescOrderFollowersOk(){
-        List<User> followers = new ArrayList<>();
-        followers.add(new User(3, "alberto"));
-        followers.add(new User(1, "juan"));
-        followers.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followers);
+    public void nameDescOrderFollowersTest(){
+
+        User user = FactoryUser.getUserWithFollowersDesc();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
@@ -198,13 +162,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void invalidOrderFollowers(){
-        List<User> followers = new ArrayList<>();
-        followers.add(new User(3, "alberto"));
-        followers.add(new User(1, "juan"));
-        followers.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followers);
+    public void invalidOrderFollowersTest(){
+
+        User user = FactoryUser.getUserWithFollowers();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
@@ -213,26 +173,22 @@ public class UserServiceTest {
     }
 
     @Test
-    public void nullOrderFollowers(){
-        List<User> followers = new ArrayList<>();
-        followers.add(new User(3, "alberto"));
-        followers.add(new User(1, "juan"));
-        followers.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followers);
+    public void nullOrderFollowersTest(){
+
+        User user = FactoryUser.getUserWithFollowers();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
         UserFollowerDTO response = userService.getFollowers(user.getUserId(), null);
 
         verify(userRepository, atLeastOnce()).getUser(user.getUserId());
-        followers.forEach(follower -> {
+        user.getFollowers().forEach(follower -> {
             assertTrue(response.getFollowers().stream().anyMatch(u -> u.getUserId() == follower.getUserId() &&
                     u.getUserName().equals(follower.getUserName())));
         });
     }
     @Test
-    public void invalidUserFollowers(){
+    public void invalidUserFollowersTest(){
         User user = new User(44, "user 44");
 
         //arrange
@@ -244,51 +200,41 @@ public class UserServiceTest {
     }
 
     @Test
-    public void verifyNameAscOrderFollowers(){
-        List<User> followers = new ArrayList<>();
-        followers.add(new User(3, "alberto"));
-        followers.add(new User(1, "juan"));
-        followers.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followers);
+    public void verifyNameAscOrderFollowersTest(){
+
+        User user = FactoryUser.getUserWithFollowersAsc();
+
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
         UserFollowerDTO response = userService.getFollowers(user.getUserId(), "name_asc");
 
         verify(userRepository, atLeastOnce()).getUser(user.getUserId());
         for (int i = 0 ; i< response.getFollowers().size() ; i++){
-            assertEquals(response.getFollowers().get(i).getUserName(), followers.get(i).getUserName());
-            assertEquals(response.getFollowers().get(i).getUserId(), followers.get(i).getUserId());
+            assertEquals(response.getFollowers().get(i).getUserName(), user.getFollowers().get(i).getUserName());
+            assertEquals(response.getFollowers().get(i).getUserId(), user.getFollowers().get(i).getUserId());
         }
 
     }
     @Test
-    public void verifyNameDescOrderFollowers(){
-        List<User> followers = new ArrayList<>();
-        followers.add(new User(2, "sofia"));
-        followers.add(new User(1, "juan"));
-        followers.add(new User(3, "alberto"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followers);
+    public void verifyNameDescOrderFollowersTest(){
+
+        User user = FactoryUser.getUserWithFollowersDesc();
+
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
         UserFollowerDTO response = userService.getFollowers(user.getUserId(), "name_desc");
 
         verify(userRepository, atLeastOnce()).getUser(user.getUserId());
         for (int i = 0 ; i< response.getFollowers().size() ; i++){
-            assertEquals(response.getFollowers().get(i).getUserName(), followers.get(i).getUserName());
-            assertEquals(response.getFollowers().get(i).getUserId(), followers.get(i).getUserId());
+            assertEquals(response.getFollowers().get(i).getUserName(), user.getFollowers().get(i).getUserName());
+            assertEquals(response.getFollowers().get(i).getUserId(), user.getFollowers().get(i).getUserId());
         }
     }
 
     @Test
-    public void nameAscOrderFollowedOk(){
-        List<User> followed = new ArrayList<>();
-        followed.add(new User(3, "alberto"));
-        followed.add(new User(1, "juan"));
-        followed.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followed);
+    public void nameAscOrderFollowedTest(){
+
+        User user = FactoryUser.getUserWithFollowedAsc();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
@@ -298,13 +244,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void nameDescOrderFollowedOk(){
-        List<User> followed = new ArrayList<>();
-        followed.add(new User(3, "alberto"));
-        followed.add(new User(1, "juan"));
-        followed.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowers(followed);
+    public void nameDescOrderFollowedTest(){
+
+        User user = FactoryUser.getUserWithFollowedDesc();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
@@ -314,13 +256,9 @@ public class UserServiceTest {
     }
 
     @Test
-    public void invalidOrderFollowed(){
-        List<User> followed = new ArrayList<>();
-        followed.add(new User(3, "alberto"));
-        followed.add(new User(1, "juan"));
-        followed.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowed(followed);
+    public void invalidOrderFollowedTest(){
+
+        User user = FactoryUser.getUserWithFollowed();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
@@ -329,27 +267,22 @@ public class UserServiceTest {
     }
 
     @Test
-    public void nullOrderFollowed(){
-        List<User> followed= new ArrayList<>();
-        followed.add(new User(3, "alberto"));
-        followed.add(new User(1, "juan"));
-        followed.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowed(followed);
+    public void nullOrderFollowedTest(){
+        User user = FactoryUser.getUserWithFollowed();
 
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
         UserFollowedDTO response = userService.getFollowed(user.getUserId(), null);
 
         verify(userRepository, atLeastOnce()).getUser(user.getUserId());
-        followed.forEach(follow -> {
+        user.getFollowed().forEach(follow -> {
             assertTrue(response.getFollowed().stream().anyMatch(u -> u.getUserId() == follow.getUserId() &&
                     u.getUserName().equals(follow.getUserName())));
         });
     }
 
     @Test
-    public void invalidUserFollowed(){
+    public void invalidUserFollowedTest(){
         User user = new User(44, "user 44");
 
         //arrange
@@ -361,45 +294,40 @@ public class UserServiceTest {
     }
 
     @Test
-    public void verifyNameAscOrderFollowed(){
-        List<User> followed = new ArrayList<>();
-        followed.add(new User(3, "alberto"));
-        followed.add(new User(1, "juan"));
-        followed.add(new User(2, "sofia"));
-        User user = new User(4, "user 4");
-        user.setFollowed(followed);
+    public void verifyNameAscOrderFollowedTest(){
+
+        User user = FactoryUser.getUserWithFollowedAsc();
+
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
         UserFollowedDTO response = userService.getFollowed(user.getUserId(), "name_asc");
 
         verify(userRepository, atLeastOnce()).getUser(user.getUserId());
         for (int i = 0 ; i< response.getFollowed().size() ; i++){
-            assertEquals(response.getFollowed().get(i).getUserName(), followed.get(i).getUserName());
-            assertEquals(response.getFollowed().get(i).getUserId(), followed.get(i).getUserId());
+            assertEquals(response.getFollowed().get(i).getUserName(), user.getFollowed().get(i).getUserName());
+            assertEquals(response.getFollowed().get(i).getUserId(), user.getFollowed().get(i).getUserId());
         }
     }
+
     @Test
-    public void verifyNameDescOrderFollowed(){
-        List<User> followed = new ArrayList<>();
-        followed.add(new User(2, "sofia"));
-        followed.add(new User(1, "juan"));
-        followed.add(new User(3, "alberto"));
-        User user = new User(4, "user 4");
-        user.setFollowed(followed);
+    public void verifyNameDescOrderFollowedTest(){
+
+        User user = FactoryUser.getUserWithFollowedDesc();
+
         when(userRepository.getUser(user.getUserId())).thenReturn(user);
 
         UserFollowedDTO response = userService.getFollowed(user.getUserId(), "name_desc");
 
         verify(userRepository, atLeastOnce()).getUser(user.getUserId());
         for (int i = 0 ; i< response.getFollowed().size() ; i++){
-            assertEquals(response.getFollowed().get(i).getUserName(), followed.get(i).getUserName());
-            assertEquals(response.getFollowed().get(i).getUserId(), followed.get(i).getUserId());
+            assertEquals(response.getFollowed().get(i).getUserName(), user.getFollowed().get(i).getUserName());
+            assertEquals(response.getFollowed().get(i).getUserId(), user.getFollowed().get(i).getUserId());
         }
     }
 
     @Test
     @DisplayName("El usuario no existe")
-    void userNotExist() {
+    public void userNotExistTest() {
         //Arrange
         Integer userId = 1;
         when(userRepository.userExists(userId)).thenReturn(false);
@@ -409,19 +337,12 @@ public class UserServiceTest {
 
     @Test
     @DisplayName("El usuario existe")
-    void userExist() {
+    public void userExistTest() {
         //Arrange
         Integer userId = 1;
 
-        User userFollower1 = new User();
-        User userFollower2 = new User();
-
-        List<User> followers = new ArrayList<>();
-
-        followers.add(userFollower1);
-        followers.add(userFollower2);
-        User userFollowed = new User(userId, "Jhon Doe", followers, new ArrayList<>(), new ArrayList<>());
-        FollowersCountDTO expectedUser = new FollowersCountDTO(userId, userFollowed.getUserName(), userFollowed.getFollowers().size());
+        User userFollowed = new User(userId, "user 4");
+        FollowersCountDTO expectedUser = FactoryUser.getFollowersCountDTO(userFollowed);
 
         when(userRepository.userExists(userId)).thenReturn(true);
         when(userRepository.getUser(userId)).thenReturn(userFollowed);
@@ -433,10 +354,8 @@ public class UserServiceTest {
         verify(userRepository, atLeastOnce()).getUser(userId);
     }
 
-
-
     @Test
-    void addFollowerUserExists() {
+    public void addFollowerUserExistsTest() {
         // Arrange
         User user = new User(1, "Juan");
         User userToFollow = new User(2, "Jose");
@@ -456,7 +375,6 @@ public class UserServiceTest {
         when(userRepository.getUser(userToFollow.getUserId()))
                 .thenReturn(userToFollow);
 
-
         // Act
         MessageDto result = userService.addFollower(user.getUserId(), userToFollow.getUserId());
 
@@ -473,7 +391,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void addFollowerUserDoesNotExist() {
+    public void addFollowerUserDoesNotExistTest() {
         // Arrange
         User user = new User(1, "Juan");
         User userToFollow = new User(2, "Jose");
@@ -488,7 +406,7 @@ public class UserServiceTest {
 
 
     @Test
-    void addFollowerUserToFollowDoesNotExist() {
+    public void addFollowerUserToFollowDoesNotExistTest() {
         // Arrange
         User user = new User(1, "Juan");
         User userToFollow = new User(2, "Jose");
@@ -506,7 +424,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void addFollowerUserToFollowIsNotASeller() {
+    public void addFollowerUserToFollowIsNotASellerTest() {
         // Arrange
         User user = new User(1, "Juan");
         User userToFollow = new User(2, "Jose");
@@ -527,7 +445,7 @@ public class UserServiceTest {
         verify(userRepository, atLeastOnce()).userIsSeller(userToFollow.getUserId());
     }
     @Test
-    void addFollowerUserAlreadyFollowsUserToFollow() {
+    public void addFollowerUserAlreadyFollowsUserToFollowTest() {
         // Arrange
         User user = new User(1, "Juan");
         User userToFollow = new User(2, "Jose");

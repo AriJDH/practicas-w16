@@ -7,7 +7,7 @@ import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import com.bootcamp.be_java_hisp_w16_g01.service.PostService;
-import com.bootcamp.be_java_hisp_w16_g01.utils.DataFactory;
+import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryPost;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,10 +44,10 @@ public class PostServiceTest {
         Integer userId = 1;
         String order = "date_desc";
 
-        FollowedPostsDto response = DataFactory.generateGetFollowedPostsServiceTestResponse(userId, order);
-        List<Post> repositoryResponseVendedor1 = DataFactory.generateGetPostsByUserIdTestResponse(userId + 1, 5);
-        List<Post> repositoryResponseVendedor2 = DataFactory.generateGetPostsByUserIdTestResponse(userId + 2, 8);
-        User follower = DataFactory.generateFollower(userId);
+        FollowedPostsDto response = FactoryPost.generateGetFollowedPostsServiceTestResponse(userId, order);
+        List<Post> repositoryResponseVendedor1 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 1, 5);
+        List<Post> repositoryResponseVendedor2 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 2, 8);
+        User follower = FactoryPost.generateFollower(userId);
 
         when(userRepository.getUser(userId)).thenReturn(follower);
         when(postRepository.getPostsByUserId(userId + 1)).thenReturn(repositoryResponseVendedor1);
@@ -70,10 +69,10 @@ public class PostServiceTest {
         Integer userId = 1;
         String order = "date_asc";
 
-        FollowedPostsDto response = DataFactory.generateGetFollowedPostsServiceTestResponse(userId, order);
-        List<Post> repositoryResponseVendedor1 = DataFactory.generateGetPostsByUserIdTestResponse(userId + 1, 5);
-        List<Post> repositoryResponseVendedor2 = DataFactory.generateGetPostsByUserIdTestResponse(userId + 2, 8);
-        User follower = DataFactory.generateFollower(userId);
+        FollowedPostsDto response = FactoryPost.generateGetFollowedPostsServiceTestResponse(userId, order);
+        List<Post> repositoryResponseVendedor1 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 1, 5);
+        List<Post> repositoryResponseVendedor2 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 2, 8);
+        User follower = FactoryPost.generateFollower(userId);
 
         when(userRepository.getUser(userId)).thenReturn(follower);
         when(postRepository.getPostsByUserId(userId + 1)).thenReturn(repositoryResponseVendedor1);
@@ -88,17 +87,38 @@ public class PostServiceTest {
     }
 
     @Test
-    @DisplayName("getFollowedPosts - Publicaciones de las ultimas dos semanas (orden null, toma el defecto)")
+    @DisplayName("getFollowedPosts - Publicaciones de las ultimas dos semanas (orden null)")
     public void getFollowedPostsNullOrderTest(){
 
         //Arrange
         Integer userId = 1;
         String order = null;
 
-        FollowedPostsDto response = DataFactory.generateGetFollowedPostsServiceTestResponse(userId, order);
-        List<Post> repositoryResponseVendedor1 = DataFactory.generateGetPostsByUserIdTestResponse(userId + 1, 5);
-        List<Post> repositoryResponseVendedor2 = DataFactory.generateGetPostsByUserIdTestResponse(userId + 2, 8);
-        User follower = DataFactory.generateFollower(userId);
+        FollowedPostsDto response = FactoryPost.generateGetFollowedPostsServiceTestResponse(userId, order);
+        List<Post> repositoryResponseVendedor1 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 1, 5);
+        List<Post> repositoryResponseVendedor2 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 2, 8);
+        User follower = FactoryPost.generateFollower(userId);
+
+        when(userRepository.getUser(userId)).thenReturn(follower);
+
+        //Act
+        //Assert
+        assertThrows(BadRequestException.class, () -> postService.getFollowedPosts(userId, order));
+        verify(userRepository, Mockito.atLeastOnce()).getUser(userId);
+    }
+
+    @Test
+    @DisplayName("getFollowedPosts - Publicaciones de las ultimas dos semanas (orden no valido)")
+    public void getFollowedPostsNotValidOrderTest(){
+
+        //Arrange
+        Integer userId = 1;
+        String order = "Charly";
+
+        FollowedPostsDto response = FactoryPost.generateGetFollowedPostsServiceTestResponse(userId, order);
+        List<Post> repositoryResponseVendedor1 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 1, 5);
+        List<Post> repositoryResponseVendedor2 = FactoryPost.generateGetPostsByUserIdTestResponse(userId + 2, 8);
+        User follower = FactoryPost.generateFollower(userId);
 
         when(userRepository.getUser(userId)).thenReturn(follower);
 
