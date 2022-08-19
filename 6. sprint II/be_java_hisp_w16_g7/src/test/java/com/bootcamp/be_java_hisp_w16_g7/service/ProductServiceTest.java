@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.service;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
@@ -137,6 +134,24 @@ class ProductServiceTest {
 
         //Act & Assert
         assertThrows(InvalidQueryException.class, () -> productService.recentPost(1111, "desc" ));
+
+    }
+
+    @Test
+    public void testCreatePost(){
+
+        //Arrange
+        PostDTO postDTO= TestUtil.createPostDto();
+
+        User userToMock = TestUtil.userToCreatePostTest();
+        when(userRepository.findUserById(1111)).thenReturn(userToMock);
+
+        //Act
+        ApiResponseDto response = productService.createPost(postDTO);
+
+
+        //Assert
+        assertEquals( "Post of user with id: 1111 was created successfully", response.getMessage());
 
     }
 

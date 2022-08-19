@@ -193,7 +193,6 @@ class UserServiceTest {
                         .sorted(nameComparator)
                         .collect(Collectors.toList()),
                 response.getFollowed());
-        System.out.println(response.getFollowed());
         // Verify call to repo method
         verify(userRepository, atLeastOnce()).findUserById(user.getId());
     }
@@ -219,7 +218,6 @@ class UserServiceTest {
                         .sorted(nameComparator)
                         .collect(Collectors.toList()),
                 response.getFollowed());
-        System.out.println(response.getFollowed());
         // Verify call to repo method
         verify(userRepository, atLeastOnce()).findUserById(user.getId());
     }
@@ -245,7 +243,7 @@ class UserServiceTest {
                         .sorted(nameComparator)
                         .collect(Collectors.toList()),
                 response.getFollowed());
-        System.out.println(response.getFollowed());
+
         // Verify call to repo method
         verify(userRepository, atLeastOnce()).findUserById(user.getId());
     }

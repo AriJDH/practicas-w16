@@ -104,4 +104,15 @@ public class TestUtil {
         ResponseUserDTO u3 = new ResponseUserDTO(44, "Andrés");
         return new ResponseUserFollowedDTO(11, "John", List.of(u1, u2, u3));
     }
+
+    public static User userToCreatePostTest(){
+        List<Post> posts = new ArrayList<>();
+        posts.add( new Post(1111, 1, LocalDate.of(2022, 8, 10), new Product(), 99, 1000.0, false, 0.0));
+
+        return new User(1111, "User1", List.of(), List.of(), posts);
+    }
+
+    public static PostDTO createPostDto(){
+        return new PostDTO(1111,LocalDate.of(2022, 8, 10), new ProductDTO(), 99, 1000.0 );
+    }
 }
