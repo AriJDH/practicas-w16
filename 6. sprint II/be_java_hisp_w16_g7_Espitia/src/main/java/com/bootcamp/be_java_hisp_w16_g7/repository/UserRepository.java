@@ -16,10 +16,10 @@ public class UserRepository implements IUserRepository {
     public UserRepository() {
         user = new ArrayList<>();
 
-        User u1 = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
+        User u1 = new User(1111, "John Doe", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User u2 = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User u3 = new User(3333, "Me", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User u4 = new User(4444, "Bob", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User u4 = new User(4444, "Bob", new ArrayList<>(), new ArrayList<>(), List.of(new Post()));
 
         user.add(u1);
         user.add(u2);

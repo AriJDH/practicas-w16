@@ -1,10 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g7.integration;
 
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.ApiResponseDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersCountDto;
-import com.bootcamp.be_java_hisp_w16_g7.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -21,6 +18,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -68,18 +66,36 @@ public class IntegrationTest {
     @Test
     void followersCountIntegrationTest() throws Exception{
         //Arrange
-        FollowersCountDto responseDTO = new FollowersCountDto(1111,"John Doe",0);
+        FollowersCountDto responseDTO = new FollowersCountDto(4444,"Bob",0);
 
         String responseJson = writer.writeValueAsString(responseDTO);
 
         //Act
-        MvcResult response =  mockMvc.perform(MockMvcRequestBuilders.get("/users/{userID}/followers/count","1111"))
+        MvcResult response =  mockMvc.perform(MockMvcRequestBuilders.get("/users/{userID}/followers/count","4444"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
 
         //Assert
         Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
-        
+    }
+
+    @Test
+    void recentPostIntegrationTest() throws Exception{
+        //Arrange
+        RecentPostsDTO responseDTO= new RecentPostsDTO(1111,new ArrayList<>());
+
+        String responseJson = writer.writeValueAsString(responseDTO);
+
+        //Act
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list","1111")
+                        .param("order","date_desc"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        //Assert
+        Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
+
     }
 }
