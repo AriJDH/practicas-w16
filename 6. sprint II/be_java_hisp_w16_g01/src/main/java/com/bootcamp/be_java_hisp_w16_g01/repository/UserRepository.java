@@ -2,6 +2,8 @@ package com.bootcamp.be_java_hisp_w16_g01.repository;
 
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import lombok.AllArgsConstructor;
+
+
 import lombok.Getter;
 import org.springframework.stereotype.Repository;
 
@@ -40,9 +42,16 @@ public class UserRepository implements IUserRepository {
         users = List.of(user1,user2,user3,user4,user5);
 
         //Agrego los followers
+
         user1.addFollower(user2);
         user2.addFollower(user3);
         user3.addFollower(user2);
+
+        user1.addFollower(user3);
+
+        //Agrego los followed
+        user1.addFollowed(user3);
+        user1.addFollowed(user4);
 
     }
     public void addFollower(int idUser, int userIdToFollow){
@@ -68,8 +77,10 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+
     public User getUser(Integer userId) {
         return this.users.stream().filter(user -> user.getUserId().equals(userId) ).findFirst().orElse(null);
+
     }
 
     public boolean userIsFollowed(User userFollowed, User userFollowingId) {

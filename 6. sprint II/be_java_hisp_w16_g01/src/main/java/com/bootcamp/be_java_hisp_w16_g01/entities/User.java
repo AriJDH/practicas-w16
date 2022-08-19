@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,8 +29,6 @@ public class User {
     public void addFollower(User user){
         this.followers.add(user);
     }
-
-
 
     public void addFollowed(User user) {
         this.followed.add(user);

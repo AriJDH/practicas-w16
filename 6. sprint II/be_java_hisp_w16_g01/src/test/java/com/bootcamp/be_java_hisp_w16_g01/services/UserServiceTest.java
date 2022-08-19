@@ -3,6 +3,7 @@ package com.bootcamp.be_java_hisp_w16_g01.services;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.MessageDto;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
+
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowerDTO;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
@@ -16,11 +17,23 @@ import org.junit.jupiter.api.Test;
 import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.FollowersCountDTO;
+import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
+import com.bootcamp.be_java_hisp_w16_g01.entities.User;
+import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
+import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g01.service.UserService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
@@ -35,6 +48,15 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
+
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -44,6 +66,7 @@ public class UserServiceTest {
 
     @InjectMocks
     UserService userService;
+
 
     private static List<User> usersTestList;
 
@@ -373,6 +396,44 @@ public class UserServiceTest {
             assertEquals(response.getFollowed().get(i).getUserId(), followed.get(i).getUserId());
         }
     }
+
+    @Test
+    @DisplayName("El usuario no existe")
+    void userNotExist() {
+        //Arrange
+        Integer userId = 1;
+        when(userRepository.userExists(userId)).thenReturn(false);
+        //Assert & Act
+        assertThrows(BadRequestException.class, () -> userService.getCantFollowers(userId));
+    }
+
+    @Test
+    @DisplayName("El usuario existe")
+    void userExist() {
+        //Arrange
+        Integer userId = 1;
+
+        User userFollower1 = new User();
+        User userFollower2 = new User();
+
+        List<User> followers = new ArrayList<>();
+
+        followers.add(userFollower1);
+        followers.add(userFollower2);
+        User userFollowed = new User(userId, "Jhon Doe", followers, new ArrayList<>(), new ArrayList<>());
+        FollowersCountDTO expectedUser = new FollowersCountDTO(userId, userFollowed.getUserName(), userFollowed.getFollowers().size());
+
+        when(userRepository.userExists(userId)).thenReturn(true);
+        when(userRepository.getUser(userId)).thenReturn(userFollowed);
+        //Act
+        FollowersCountDTO result = userService.getCantFollowers(userId);
+        //Assert
+        assertEquals(expectedUser.getFollowersCount(), result.getFollowersCount());
+        verify(userRepository, atLeastOnce()).userExists(userId);
+        verify(userRepository, atLeastOnce()).getUser(userId);
+    }
+
+
 
     @Test
     void addFollowerUserExists() {

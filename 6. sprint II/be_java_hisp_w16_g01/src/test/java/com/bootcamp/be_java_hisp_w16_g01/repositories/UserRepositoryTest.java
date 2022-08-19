@@ -4,24 +4,40 @@ import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.repository.PostRepository;
+
 import com.bootcamp.be_java_hisp_w16_g01.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
 import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+
+import com.bootcamp.be_java_hisp_w16_g01.repository.PostRepository;
+import com.bootcamp.be_java_hisp_w16_g01.repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
+
 import java.util.List;
 import java.util.ArrayList;
+
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class UserRepositoryTest {
 
     UserRepository repository;
+
 
     private List<User> userList = FactoryUser.getMockedUsers();
 
@@ -91,6 +107,29 @@ public class UserRepositoryTest {
 
         // assert
         Assertions.assertNull(repository.getUser(user10.getUserId()));
+
+    }
+
+    @Test
+    @DisplayName("El usuario existe")
+    void userExists() {
+        //Arrange
+        Integer userId = 1;
+        //Act
+        boolean result = repository.userExists(userId);
+        //Assert
+        Assertions.assertTrue(result);
+    }
+
+    @Test
+    @DisplayName("El usuario no existe")
+    void userNotExists() {
+        //Arrange
+        Integer userId = 999;
+        //Act
+        boolean result = repository.userExists(userId);
+        //Assert
+        assertFalse(result);
     }
 
     @Test
