@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -35,6 +36,18 @@ public class UserServiceTest {
     @Test
     public void correctOrderValueFollowedsTest(){
         Integer userId = 1;
+        String incorrectOrder = "name_asc";
+        User user = new User(userId, "userName");
+        when(repository.getUserById(userId)).thenReturn(Optional.of(user));
+
+        assertDoesNotThrow(() -> userService.getFollowedUsers(userId, incorrectOrder));
+        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+    }
+
+    //T-0003
+    @Test
+    public void incorrectOrderValueFollowedsTest(){
+        Integer userId = 1;
         String incorrectOrder = "WRONG";
         User user = new User(userId, "userName");
         when(repository.getUserById(userId)).thenReturn(Optional.of(user));
@@ -46,6 +59,18 @@ public class UserServiceTest {
     //T-0003
     @Test
     public void correctOrderValueFollowersTest(){
+        Integer userId = 1;
+        String incorrectOrder = "name_asc";
+        User user = new User(userId, "userName");
+        when(repository.getUserById(userId)).thenReturn(Optional.of(user));
+
+        assertDoesNotThrow(() -> userService.getFollowers(userId, incorrectOrder));
+        Mockito.verify(repository, Mockito.times(1)).getUserById(userId);
+    }
+
+    //T-0003
+    @Test
+    public void incorrectOrderValueFollowersTest(){
         Integer userId = 1;
         String incorrectOrder = "WRONG";
         User user = new User(userId, "userName");
