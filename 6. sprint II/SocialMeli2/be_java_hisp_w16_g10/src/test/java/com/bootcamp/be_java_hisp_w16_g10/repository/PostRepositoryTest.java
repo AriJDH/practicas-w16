@@ -21,6 +21,10 @@ class PostRepositoryTest {
     }
     @Test
     void findAll() {
+        var posts = this.postRepository.findAll();
+
+        assertNotNull(posts);
+        assertEquals(3, posts.size());
     }
 
     @Test
@@ -30,9 +34,24 @@ class PostRepositoryTest {
 
     @Test
     void save() {
+        var post = Factory.generatePost();
+
+        this.postRepository.save(post);
+        assertNotNull(this.postRepository.findById(1));
     }
 
     @Test
     void findByUserId() {
+        var posts = this.postRepository.findByUserId(1);
+
+        assertNotNull(posts);
+        assertEquals(3, posts.size());
+    }
+
+    @Test
+    void notFoundByUserId() {
+        var posts = this.postRepository.findByUserId(1000);
+
+        assertEquals("[]",posts.toString());
     }
 }
