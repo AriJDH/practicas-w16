@@ -119,4 +119,25 @@ public class IntegrationTest {
         Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
 
     }
+
+    @Test
+    void followIntegrationTest()throws Exception{
+        //Arrange
+        ApiResponseDto responseDTO = new ApiResponseDto("Follow user", "User with id " + 2222 + " has followed user with id " + 4444);
+
+        String responseJson = writer.writeValueAsString(responseDTO);
+
+        //act
+
+        MvcResult response = mockMvc.perform(MockMvcRequestBuilders.post("/users/2222/follow/4444"))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+
+        //Assert
+
+        Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
+
+    }
 }
