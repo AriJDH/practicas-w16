@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g7.util;
 
-import com.bootcamp.be_java_hisp_w16_g7.dto.FollowersDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.RecentPostsDTO;
-import com.bootcamp.be_java_hisp_w16_g7.dto.ResponsePostDTO;
+import com.bootcamp.be_java_hisp_w16_g7.dto.*;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g7.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g7.entity.User;
@@ -99,5 +96,12 @@ public class TestUtil {
         User followed2 = new User(33, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User followed3 = new User(44, "Andrés", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         return new User(11, "John", List.of(), List.of(followed1, followed2, followed3), List.of());
+    }
+
+    public static ResponseUserFollowedDTO createUserDTOFollowedTest() {
+        ResponseUserDTO u1 = new ResponseUserDTO(22, "Juan");
+        ResponseUserDTO u2 = new ResponseUserDTO(33, "Pedro");
+        ResponseUserDTO u3 = new ResponseUserDTO(44, "Andrés");
+        return new ResponseUserFollowedDTO(11, "John", List.of(u1, u2, u3));
     }
 }

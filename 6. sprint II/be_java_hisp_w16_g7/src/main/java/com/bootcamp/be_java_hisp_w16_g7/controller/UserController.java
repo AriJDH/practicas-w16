@@ -35,7 +35,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/{userId}/follow/{userIdToFollow}")
     public ResponseEntity<ApiResponseDto> follow(@PathVariable int userId, @PathVariable int userIdToFollow) {
-        return new ResponseEntity(userService.follow(userId, userIdToFollow), HttpStatus.OK);
+        return new ResponseEntity<>(userService.follow(userId, userIdToFollow), HttpStatus.OK);
     }
 
     @Operation(summary = "Unfollow an user")
@@ -47,7 +47,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")})
     @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
     public ResponseEntity<ApiResponseDto> unfollow(@PathVariable int userId, @PathVariable int userIdToUnfollow) {
-        return new ResponseEntity(userService.unfollow(userId, userIdToUnfollow), HttpStatus.OK);
+        return new ResponseEntity<>(userService.unfollow(userId, userIdToUnfollow), HttpStatus.OK);
     }
 
     @Operation(summary = "Get list of followed by given user")
