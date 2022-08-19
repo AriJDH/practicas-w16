@@ -4,7 +4,7 @@ import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 
 public interface IUserRepository {
 
-    User getUser(int userId);
+    User getUser(Integer userId);
 
     void addFollower(int idUser, int userIdToFollow);
 
