@@ -115,4 +115,8 @@ public class TestUtil {
     public static PostDTO createPostDto(){
         return new PostDTO(1111,LocalDate.of(2022, 8, 10), new ProductDTO(), 99, 1000.0 );
     }
+
+    public static ProductDTO CreateProductDto() {
+        return new ProductDTO(1, "Mouse", "Accesory", "Logitech", "Black", "");
+    }
 }
