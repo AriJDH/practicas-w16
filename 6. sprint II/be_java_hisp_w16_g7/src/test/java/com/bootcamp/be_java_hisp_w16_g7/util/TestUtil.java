@@ -93,4 +93,11 @@ public class TestUtil {
         ResponsePostDTO expectedPost = new ResponsePostDTO(2222, 1234, LocalDate.of(2022, 8, 10), new ProductDTO(), 99, 1000.0);
         return new RecentPostsDTO(1111, List.of(expectedPost) );
     }
+
+    public static User createUserFollowedTest() {
+        User followed1 = new User(22, "Juan", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User followed2 = new User(33, "Pedro", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        User followed3 = new User(44, "Andrés", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        return new User(11, "John", List.of(), List.of(followed1, followed2, followed3), List.of());
+    }
 }

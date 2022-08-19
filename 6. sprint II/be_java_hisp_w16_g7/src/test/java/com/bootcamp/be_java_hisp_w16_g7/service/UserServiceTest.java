@@ -176,10 +176,7 @@ class UserServiceTest {
     @Test
     public void getUserFollowedListDefaultNameOrder() {
         // Arrange
-        User user1 = new User(2, "Someone", List.of(), List.of(), List.of());
-        User user2 = new User(3, "Andrés", List.of(), List.of(), List.of());
-        User user3 = new User(4, "Zzz", List.of(), List.of(), List.of());
-        User user = new User(1, "A user", List.of(), List.of(user1, user2, user3), List.of());
+        User user = TestUtil.createUserFollowedTest();
         when(userRepository.findUserById(user.getId())).thenReturn(user);
 
         // Act
@@ -204,10 +201,7 @@ class UserServiceTest {
     @Test
     public void getUserFollowedListAscendingNameOrder() {
         // Arrange
-        User user1 = new User(2, "Someone", List.of(), List.of(), List.of());
-        User user2 = new User(3, "Andrés", List.of(), List.of(), List.of());
-        User user3 = new User(4, "Zzz", List.of(), List.of(), List.of());
-        User user = new User(1, "A user", List.of(), List.of(user1, user2, user3), List.of());
+        User user = TestUtil.createUserFollowedTest();
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         String order = "name_asc";
 
@@ -233,10 +227,7 @@ class UserServiceTest {
     @Test
     public void getUserFollowedListDescendingNameOrder() {
         // Arrange
-        User user1 = new User(2, "Someone", List.of(), List.of(), List.of());
-        User user2 = new User(3, "Andrés", List.of(), List.of(), List.of());
-        User user3 = new User(4, "Zzz", List.of(), List.of(), List.of());
-        User user = new User(1, "A user", List.of(), List.of(user1, user2, user3), List.of());
+        User user = TestUtil.createUserFollowedTest();
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         String order = "name_desc";
 
@@ -262,10 +253,7 @@ class UserServiceTest {
     @Test
     public void getUserFollowedListInvalidNameOrder() {
         // Arrange
-        User user1 = new User(2, "Someone", List.of(), List.of(), List.of());
-        User user2 = new User(3, "Andrés", List.of(), List.of(), List.of());
-        User user3 = new User(4, "Zzz", List.of(), List.of(), List.of());
-        User user = new User(1, "A user", List.of(), List.of(user1, user2, user3), List.of());
+        User user = TestUtil.createUserFollowedTest();
         when(userRepository.findUserById(user.getId())).thenReturn(user);
         String order = "invalid";
 
