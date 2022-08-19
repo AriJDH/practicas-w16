@@ -102,7 +102,8 @@ public class PostService implements IPostService {
                         .collect(Collectors.toList()));
         }
         else
-            return new FollowedPostsDto(userId, getPosts(user));
+            throw new BadRequestException("El orden indicado no es correcto.");
+            //return new FollowedPostsDto(userId, getPosts(user));
     }
 
 
