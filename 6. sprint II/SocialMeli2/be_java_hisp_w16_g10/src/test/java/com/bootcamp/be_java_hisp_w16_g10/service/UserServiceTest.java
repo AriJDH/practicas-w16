@@ -33,6 +33,26 @@ class UserServiceTest {
    UserService userService;
 
    @Test
+   void shouldReturnAUser_whenValidateUser(){
+
+      //arrange
+
+      User user = User.builder()
+      .id(1)
+      .userName("Ale")
+      .build();   
+
+      //act
+      
+      when(userRepository.findById(Mockito.anyInt())).thenReturn(user);   
+
+      //assert
+
+      Assertions.assertThat(userService.validateUser(1).equals(user)).isTrue();
+
+   }
+
+   @Test
    void shouldRiseNotFoundException_whenFindByIdReturnsNull(){
 
       //act
