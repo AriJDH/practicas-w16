@@ -5,6 +5,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.ConstraintViolationException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
 import com.bootcamp.be_java_hisp_w16_g10.repository.IPostRepository;
@@ -65,13 +66,15 @@ public class PostService implements IPostService {
         User user = this.userService.findById(userId);
         LocalDate localDate = LocalDate.now().minusDays(14);
 
+        if(!List.of("date_asc", "date_desc").contains(order))throw new BadRequestException("Invalid order parameter");
+
         var posts = user.getFollowed().stream()
                 .map(seller -> this.postRepository.findByUserId(seller.getId()))
                 .filter(sellerPosts -> sellerPosts.size() > 0)
                 .flatMap(Collection::stream)
                 .filter(post -> post.getDate().compareTo(localDate) > 0);
 
-        if (order != null && order.equals("date_asc")) //por defecto orden descendente
+        if (order.equals("date_asc"))
             posts = posts.sorted(Comparator.comparing(Post::getDate));
         else
             posts = posts.sorted(Comparator.comparing(Post::getDate).reversed());
