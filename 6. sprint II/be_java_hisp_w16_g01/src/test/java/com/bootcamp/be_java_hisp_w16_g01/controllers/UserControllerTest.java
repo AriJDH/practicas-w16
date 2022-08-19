@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g01.controllers;
 
 import com.bootcamp.be_java_hisp_w16_g01.controller.UserController;
+
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserDTO;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowerDTO;
@@ -10,11 +11,19 @@ import com.bootcamp.be_java_hisp_w16_g01.service.IUserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.collections4.CollectionUtils;
+
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.FollowersCountDTO;
+import com.bootcamp.be_java_hisp_w16_g01.service.IUserService;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import javax.validation.ConstraintViolationException;
@@ -25,6 +34,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -37,6 +54,7 @@ public class UserControllerTest {
     UserController userController;
 
     @Test
+
     void unfollowUserTest() {
 
         Integer userId = 1;
@@ -329,6 +347,20 @@ public class UserControllerTest {
         // assert
         verify(userService, atLeastOnce()).getFollowed(user.getUserId(), "name_desc");
         assertEquals(response, user);
+    }
+
+
+    @DisplayName("Cálculo correcto cantidad total de seguidores que posee un usuario")
+    void rightCantFollowers() {
+        //Arrange
+        Integer userId = 1;
+        FollowersCountDTO mockFollowersCount = new FollowersCountDTO(userId, "German", 5);
+        when(userService.getCantFollowers(userId)).thenReturn(mockFollowersCount);
+        //Act
+        ResponseEntity<FollowersCountDTO> result = userController.getFollowersCount(userId);
+        //Assert
+        assertEquals(mockFollowersCount.getFollowersCount(),result.getBody().getFollowersCount());
+        verify(userService, atLeastOnce()).getCantFollowers(userId);
     }
 
 }

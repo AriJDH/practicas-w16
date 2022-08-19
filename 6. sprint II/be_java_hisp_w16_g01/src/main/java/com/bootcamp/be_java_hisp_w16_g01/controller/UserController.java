@@ -87,4 +87,6 @@ public class UserController {
             @PathVariable @ApiParam(value = "Id del vendedor que dejara de ser seguido") @NotNull @Positive Integer userIdToUnfollow) {
         return ResponseEntity.ok(userService.unfollowUser(userId, userIdToUnfollow));
     }
+
 }
+
