@@ -138,13 +138,13 @@ class PostServiceTest {
 
 
       Post post =  Post.builder()
-      .id(5)
-      .userId(100)
+      .id(2)
+      .userId(1)
       .date(LocalDate.now())
-      .price(2088d)
-      .category(320)
+      .price(20d)
+      .category(100)
       .product(Product.builder()
-         .id(234) 
+         .id(235) 
          .name("Silla Gammer")
          .type("Gammer")
          .brand("Corsair")
@@ -160,19 +160,30 @@ class PostServiceTest {
 
 
       //act
-      try(MockedStatic<Mapper> mapper = Mockito.mockStatic(Mapper.class)){
 
-         mapper.when(()-> Mapper.parseToPostResDTO(Mockito.any())).thenReturn(postResDTO);   
+      //Este try es para probar realizar un mock sobre la clase Mapper metodo parseToPostResDTO
+      //Al hacer esto no importa que lista de post enviemos siempre nos devolvera el postResDTO
+      //Para probar su funcionamiento se deben cambiar los valores de los atributos de post que figura mas arriba.
 
-         lenient().when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
+      //try(MockedStatic<Mapper> mapper = Mockito.mockStatic(Mapper.class)){
 
-         List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());   
+      //   mapper.when(()-> Mapper.parseToPostResDTO(Mockito.any())).thenReturn(postResDTO);   
 
-         verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
-         Assertions.assertTrue(resPostService.equals(listPostResDTO));
+      //   lenient().when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
 
-      };
+      //   List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());   
 
+      //   verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
+      //   Assertions.assertTrue(resPostService.equals(listPostResDTO));
+
+      //};
+     
+      when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
+
+      List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());   
+
+      verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
+      Assertions.assertTrue(resPostService.equals(listPostResDTO));
 
    }
 

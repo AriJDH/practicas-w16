@@ -31,21 +31,21 @@ public class PostController {
         return new ResponseEntity<>(this.postService.listFollowersPosts(userId, order.orElse("date_desc")), HttpStatus.OK);
     }
     
-    //US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
-    @PostMapping("/promo-post")
-    public String US0010(){
-         return "asdfasdf";   
-    }
-    
-     //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
-    @GetMapping("/promo-post/count?user_id={userId}")
-    public void US0011(){
+    ////US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+    //@PostMapping("/promo-post")
+    //public String US0010(){
+    //     return "asdfasdf";
+    //}
+    //
+    // //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+    //@GetMapping("/promo-post/count?user_id={userId}")
+    //public void US0011(){
 
-    }
-    
-    //US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
-    @GetMapping("/promo-post/list?user_id={userId}")
-    public void US0012(){
+    //}
+    //
+    ////US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
+    //@GetMapping("/promo-post/list?user_id={userId}")
+    //public void US0012(){
 
-    }
+    //}
 }
