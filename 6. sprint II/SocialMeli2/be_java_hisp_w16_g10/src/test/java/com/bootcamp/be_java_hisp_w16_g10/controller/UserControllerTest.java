@@ -4,6 +4,7 @@ import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.UserResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.PostService;
 import com.bootcamp.be_java_hisp_w16_g10.service.UserService;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static com.bootcamp.be_java_hisp_w16_g10.util.Factory.generateProductReqDTO;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserControllerTest {
@@ -41,10 +42,23 @@ class UserControllerTest {
     }
 
     @Test
+    @DisplayName("shouldFollowUser")
     void US001() {
+        //arrange
+
+        //act
+        doNothing().when(userService).follow(2,1);
+        var response = userController.US001(2,1);
+
+        //assert
+        verify(userService, atLeastOnce()).follow(2,1);
+        assertNotNull(response);
+        assertEquals(200, response.getStatusCodeValue());
     }
 
+
     @Test
+    @DisplayName("shouldReturnFollowersCountResDTO")
     void US002() {
         var dato = generateProductReqDTO();
         //arrange
