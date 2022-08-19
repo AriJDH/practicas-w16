@@ -96,24 +96,24 @@ public class UserRepositoryTest {
     @Test
     void userIsSeller() {
         // Arrange
-        User user = this.repository.getUser(1);
+        User user = repository.getUser(1);
         user.addPost(new Post());
         boolean expected = true;
 
         // Act
-        boolean result = this.repository.userIsSeller(user.getUserId());
+        boolean result = repository.userIsSeller(user.getUserId());
         // Assert
         Assertions.assertEquals(expected, result);
     }
     @Test
     void userIsNotSeller() {
         // Arrange
-        User user = this.repository.getUser(1);
+        User user = repository.getUser(1);
 
         boolean expected = false;
 
         // Act
-        boolean result = this.repository.userIsSeller(user.getUserId());
+        boolean result = repository.userIsSeller(user.getUserId());
         // Assert
         Assertions.assertEquals(expected, result);
     }
@@ -121,11 +121,11 @@ public class UserRepositoryTest {
     @Test
     void userExists() {
         // Arrange
-        User user = this.repository.getUser(1);
+        User user = repository.getUser(1);
         boolean expected = true;
 
         // Act
-        boolean result = this.repository.userExists(user.getUserId());
+        boolean result = repository.userExists(user.getUserId());
 
         // Assert
         Assertions.assertEquals(expected, result);
@@ -138,7 +138,7 @@ public class UserRepositoryTest {
         boolean expected = false;
 
         // Act
-        boolean result = this.repository.userExists(user.getUserId());
+        boolean result = repository.userExists(user.getUserId());
 
         // Assert
         Assertions.assertEquals(expected, result);
@@ -147,11 +147,11 @@ public class UserRepositoryTest {
     @Test
     void addFollowed() {
         //Arrange
-        User userFollows = this.repository.getUser(1);
-        User userToFollow = this.repository.getUser(2);
+        User userFollows = repository.getUser(4);
+        User userToFollow = repository.getUser(5);
 
         // Act
-        this.repository.addFollowed(userFollows.getUserId(), userToFollow.getUserId());
+        repository.addFollowed(userFollows.getUserId(), userToFollow.getUserId());
 
         // Assert
         Assertions.assertTrue(userFollows.getFollowed().contains(userToFollow));
@@ -159,11 +159,11 @@ public class UserRepositoryTest {
     @Test
     void addFollower() {
         //Arrange
-        User userFollows = this.repository.getUser(1);
-        User userToFollow = this.repository.getUser(2);
+        User userFollows = repository.getUser(4);
+        User userToFollow = repository.getUser(5);
 
         // Act
-        this.repository.addFollower(userFollows.getUserId(), userToFollow.getUserId());
+        repository.addFollower(userFollows.getUserId(), userToFollow.getUserId());
 
         // Assert
         Assertions.assertTrue(userToFollow.getFollowers().contains(userFollows));

@@ -340,7 +340,7 @@ public class UserControllerTest {
 
 
     @Test
-    void addFollower() {
+    void addFollowerOk() {
         // Arrange
         Integer userId = 1;
         Integer userIdToFollow = 2;
@@ -356,6 +356,21 @@ public class UserControllerTest {
 
         // Assert
         Assertions.assertEquals(expectedResponse, response);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(userService, atLeastOnce()).addFollower(userId, userIdToFollow);
+    }
+
+    @Test
+    void addFollowerError() {
+        // Arrange
+        Integer userId = 1;
+        Integer userIdToFollow = 2;
+
+        when(userService.addFollower(userId, userIdToFollow))
+                .thenThrow(BadRequestException.class);
+
+        // Act & Assert
+        Assertions.assertThrows(BadRequestException.class, () -> userController.addFollower(userId, userIdToFollow));
         verify(userService, atLeastOnce()).addFollower(userId, userIdToFollow);
     }
 }
