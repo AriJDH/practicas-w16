@@ -46,8 +46,6 @@ class UserServiceTest {
         FollowersSellersDTO result = userService.getSellersFollowers(id, order);
 
         //Assert
-        System.out.println("Expected: " + TestUtil.followersSortedListAsc());
-        System.out.println("Result: " + result.getFollowers());
         Assertions.assertEquals(TestUtil.followersSortedListAsc(), result.getFollowers());
     }
 
@@ -64,8 +62,6 @@ class UserServiceTest {
         FollowersSellersDTO result = userService.getSellersFollowers(id, order);
 
         //Assert
-        System.out.println("Expected: " + TestUtil.followersSortedListDesc());
-        System.out.println("Result: " + result.getFollowers());
         Assertions.assertEquals(TestUtil.followersSortedListDesc(), result.getFollowers());
     }
 
