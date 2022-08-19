@@ -26,27 +26,27 @@ public class UserRepositoryTest {
     private List<User> userList = FactoryUser.getMockedUsers();
 
     @BeforeEach
-    public void emptyRepo(){
+    public void emptyRepo() {
         this.repository = new UserRepository(userList);
     }
 
     @Test
-    public void getUserTest(){
+    public void getUserTest() {
         Integer idUser = 1;
         User usr1 = repository.getUser(idUser);
         Assertions.assertNotNull(usr1);
-        Assertions.assertEquals(idUser,usr1.getUserId());
+        Assertions.assertEquals(idUser, usr1.getUserId());
     }
 
     @Test
-    public void getUserNullTest(){
-        Integer idUser=null;
+    public void getUserNullTest() {
+        Integer idUser = null;
         User usr1 = repository.getUser(idUser);
         Assertions.assertNull(usr1);
     }
 
     @Test
-    public void userIsFollowedTest(){
+    public void userIsFollowedTest() {
         Integer idUser1 = 1;
         Integer idUser2 = 2;
         User usr1 = repository.getUser(idUser1);
@@ -56,7 +56,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void userIsNotFollowedTest(){
+    public void userIsNotFollowedTest() {
         Integer idUser1 = 1;
         Integer idUser2 = 2;
         User usr1 = repository.getUser(idUser1);
@@ -66,7 +66,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void userIsNotFollowerTest(){
+    public void userIsNotFollowerTest() {
         Integer idUser1 = 1;
         Integer idUser2 = 2;
         User usr1 = repository.getUser(idUser1);
@@ -76,7 +76,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void userIsFollowerTest(){
+    public void userIsFollowerTest() {
         Integer idUser1 = 1;
         Integer idUser2 = 2;
         User usr1 = repository.getUser(idUser1);
@@ -86,8 +86,8 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void getUserInvalidTest(){
-        User user10= new User(10, "Usuario10", new ArrayList<>(), new ArrayList<>(),new ArrayList<>());
+    public void getUserInvalidTest() {
+        User user10 = new User(10, "Usuario10", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         // assert
         Assertions.assertNull(repository.getUser(user10.getUserId()));
@@ -105,6 +105,7 @@ public class UserRepositoryTest {
         // Assert
         Assertions.assertEquals(expected, result);
     }
+
     @Test
     void userIsNotSeller() {
         // Arrange
@@ -114,32 +115,6 @@ public class UserRepositoryTest {
 
         // Act
         boolean result = repository.userIsSeller(user.getUserId());
-        // Assert
-        Assertions.assertEquals(expected, result);
-    }
-
-    @Test
-    void userExists() {
-        // Arrange
-        User user = repository.getUser(1);
-        boolean expected = true;
-
-        // Act
-        boolean result = repository.userExists(user.getUserId());
-
-        // Assert
-        Assertions.assertEquals(expected, result);
-    }
-
-    @Test
-    void userDoesNotExists() {
-        // Arrange
-        User user = new User(10, "Jose");
-        boolean expected = false;
-
-        // Act
-        boolean result = repository.userExists(user.getUserId());
-
         // Assert
         Assertions.assertEquals(expected, result);
     }
@@ -156,6 +131,7 @@ public class UserRepositoryTest {
         // Assert
         Assertions.assertTrue(userFollows.getFollowed().contains(userToFollow));
     }
+
     @Test
     void addFollower() {
         //Arrange
