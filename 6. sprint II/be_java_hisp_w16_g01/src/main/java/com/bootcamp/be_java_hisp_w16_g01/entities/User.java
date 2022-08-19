@@ -1,23 +1,23 @@
 package com.bootcamp.be_java_hisp_w16_g01.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private int userId;
+    private Integer userId;
     private String userName;
     private List<User> followers;
     private List<User> followed;
     private List<Post> posts;
 
-    public User(int userId, String userName) {
+    public User(Integer userId, String userName) {
         this.userId = userId;
         this.userName = userName;
         this.followers = new ArrayList<>();
@@ -29,6 +29,8 @@ public class User {
         this.followers.add(user);
     }
 
+
+
     public void addFollowed(User user) {
         this.followed.add(user);
     }
@@ -37,4 +39,14 @@ public class User {
         this.posts.add(p);
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", followers=" + followers.stream().map(User::getUserId).collect(Collectors.toList()) +
+                ", followed=" + followed.stream().map(User::getUserId).collect(Collectors.toList()) +
+                ", posts=" + posts.stream().map(Post::getPostId).collect(Collectors.toList()) +
+                '}';
+    }
 }
