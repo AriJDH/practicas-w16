@@ -5,6 +5,7 @@ public interface IUserService {
 
     MessageDto addFollower(int idUser, int userIdToFollow);
 
+
     UserUnfollowDTO unfollowUser(Integer userId, Integer userIdToUnfollow);
 
     UserFollowerDTO getFollowers(Integer userId, String order);

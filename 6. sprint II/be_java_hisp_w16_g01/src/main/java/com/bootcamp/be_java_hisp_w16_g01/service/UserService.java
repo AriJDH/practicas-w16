@@ -21,6 +21,7 @@ public class UserService implements IUserService {
     private UserMapper userMapper = new UserMapper();
 
     @Override
+
     public UserUnfollowDTO unfollowUser(Integer userId, Integer userIdToUnfollow) {
 
         User userUnfollowing = this.userRepository.getUser(userId);
@@ -44,7 +45,9 @@ public class UserService implements IUserService {
     }
 
     @Override
+
     public UserFollowerDTO getFollowers(Integer userId, String order) {
+
         User user = userRepository.getUser(userId);
         if(user != null){
             if (order!= null) {
@@ -68,6 +71,7 @@ public class UserService implements IUserService {
 
     @Override
     public UserFollowedDTO getFollowed(Integer userId, String order) {
+
         User user = userRepository.getUser(userId);
         if(user != null){
             if (order != null) {

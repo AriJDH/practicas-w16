@@ -36,6 +36,7 @@ public class GlobalHandlerException {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<ApiExceptionDTO> methodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+
         return new ResponseEntity<>(new ApiExceptionDTO("Argument missmatch", ex.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
