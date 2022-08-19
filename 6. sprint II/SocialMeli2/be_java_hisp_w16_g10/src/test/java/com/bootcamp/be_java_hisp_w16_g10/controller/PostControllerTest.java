@@ -51,14 +51,14 @@ class PostControllerTest {
 
       // act
 
-      when(postService.listFollowersPosts(postListResDTO.getUserId(), null)).thenReturn(postListResDTO);
+      when(postService.listFollowersPosts(postListResDTO.getUserId(), "date_desc")).thenReturn(postListResDTO);
 
 
       ResponseEntity<PostListResDTO> resController = postController.US006(postListResDTO.getUserId(), opt);
 
       // assert
 
-      verify(postService, atLeastOnce()).listFollowersPosts(postListResDTO.getUserId(), null);
+      verify(postService, atLeastOnce()).listFollowersPosts(postListResDTO.getUserId(), "date_desc");
       Assertions.assertTrue(resController.equals(new ResponseEntity<>(postListResDTO,HttpStatus.OK)));   
 
    }

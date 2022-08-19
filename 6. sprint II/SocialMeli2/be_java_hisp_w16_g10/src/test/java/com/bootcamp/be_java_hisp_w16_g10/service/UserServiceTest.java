@@ -1,31 +1,29 @@
 package com.bootcamp.be_java_hisp_w16_g10.service;
 
-import com.bootcamp.be_java_hisp_w16_g10.dto.response.FollowersCountResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.UserResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
-import com.bootcamp.be_java_hisp_w16_g10.repository.PostRepository;
 import com.bootcamp.be_java_hisp_w16_g10.repository.UserRepository;
 import com.bootcamp.be_java_hisp_w16_g10.util.Factory;
 import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
 import org.junit.jupiter.api.DisplayName;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.web.servlet.function.AsyncServerResponse;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.bootcamp.be_java_hisp_w16_g10.util.Factory.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
@@ -75,148 +73,200 @@ class UserServiceTest {
         assertEquals(userMocks.size(), result.size());
         verify(userRepository, atLeastOnce()).findAll();
     }
+   @Test
+   void shouldRiseNotFoundException_whenFindByIdReturnsNull(){
 
-    @Test
-    void follow() {
+      //act
+      
+      when(userRepository.findById(Mockito.anyInt())).thenReturn(null);   
 
-    }
+      assertThrows(NotFoundException.class, ()-> {
+         when(userService.validateUser(Mockito.anyInt())).thenReturn(Mockito.any());   
+      });   
+   }
 
-    @Test
-    void unfollow() {
-    }
+   @Test
+   void shouldUnfollowASeller() {
 
-    @Test
-    void validateUserNotFoundCountFollowers() {
-        //assert
-        assertThrows(NotFoundException.class, () -> {
-            when(userService.countFollowers(anyInt())).thenReturn(null);
-        });
-    }
+      //arrange
 
-    @Test
-    void shouldReturnCountFollowers() {
-        //arrange
-        var user = generateUser(1);
-        //act
+      User userToUnfollow = new User(1,"Ale",new ArrayList<>(), new ArrayList<>());
+      User user = new User(2,"Giani",new ArrayList<>(),new ArrayList<>());   
 
-        when(userRepository.findById(1)).thenReturn(user);
-        when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(4,1));
+      userToUnfollow.getFollowers().add(user);   
+      user.getFollowed().add(userToUnfollow);   
 
-        var res = userService.countFollowers(1);
+      //act
 
-        //assert
-        assertEquals(0,res.getFollowersCount());
+      when(userRepository.findById(1)).thenReturn(user);   
+      when(userRepository.findById(2)).thenReturn(userToUnfollow);   
 
-    }
+      userService.unfollow(1, 2);
 
-    @Test
-    void shouldReturnBadRequestExceptionInCountFollowers() {
-        //arrange
-        var user = generateUser(1);
+      //assertions
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
-        when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
+      Assertions.assertThat(userToUnfollow.getFollowers().size() == 0).isTrue();
 
-        //assert
-        assertThrows(BadRequestException.class, () -> userService.countFollowers(1));
-    }
+   }
 
-    @Test
-    void shouldReturnBadRequestExceptionIsNotSellerInListFollowers() {
-        //arrange
-        var user = generateUser(1);
+   @Test
+   void shouldRiseBadRequestException_whenTryToUnfollowTheSameId(){
+      assertThrows(BadRequestException.class, ()-> {
+         userService.unfollow(1, 1);   
+      });   
+   }
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
-        when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
+   @Test
+   void shouldRiseBadRequestException_whenTheUserIsNotBeingFollowed(){
 
-        //assert
-        assertThrows(BadRequestException.class, () -> userService.listFollowers(1,""));
-    }
+      //arrange
 
-    @Test
-    void shouldReturnBadRequestExceptionInvalidOrderInListFollowers() {
-        //arrange
-        var user = generateUser(1);
+      User userToUnfollow = new User(1,"Ale",new ArrayList<>(), new ArrayList<>());
+      User user = new User(2,"Giani",new ArrayList<>(),new ArrayList<>());   
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
-        when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
-        //assert
-        assertThrows(BadRequestException.class, () -> userService.listFollowers(1,"papa"));
-    }
+      //act
 
-    @Test
-    void shouldReturnBadRequestExceptionOrderAscInListFollowers() {
-        //arrange
-        var user = generateUserWithFollowers(1);
+      when(userRepository.findById(1)).thenReturn(user);   
+      when(userRepository.findById(2)).thenReturn(userToUnfollow);
 
-        var expected = Mapper.parseToFollowersListResDTO(user,user.getFollowers().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList()));
+      assertThrows(BadRequestException.class, ()-> {
+         userService.unfollow(1, 2);
+      });   
+   }
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
+   @Test
+   void validateUserNotFoundCountFollowers() {
+      //assert
+      assertThrows(NotFoundException.class, () -> {
+         when(userService.countFollowers(anyInt())).thenReturn(null);
+      });
+   }
 
-        when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(4,1));
+   @Test
+   void shouldReturnCountFollowers() {
+      //arrange
+      var user = generateUser(1);
+      //act
 
-        //assert
-        assertEquals(expected,userService.listFollowers(1,"name_asc"));
-    }
+      when(userRepository.findById(1)).thenReturn(user);
+      when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(4,1));
 
-    @Test
-    void shouldReturnBadRequestExceptionOrderDescInListFollowers() {
-        //arrange
-        var user = generateUserWithFollowers(1);
+      var res = userService.countFollowers(1);
 
-        var expected = Mapper.parseToFollowersListResDTO(user,user.getFollowers().stream().sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList()));
+      //assert
+      assertEquals(0,res.getFollowersCount());
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
+   }
 
-        when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(4,1));
+   @Test
+   void shouldReturnBadRequestExceptionInCountFollowers() {
+      //arrange
+      var user = generateUser(1);
 
-        //assert
-        assertEquals(expected,userService.listFollowers(1,"name_desc"));
-    }
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+      when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
-    @Test
-    void shouldReturnBadRequestExceptionInvalidOrderInListFollowed() {
-        //arrange
-        var user = generateUser(1);
+      //assert
+      assertThrows(BadRequestException.class, () -> userService.countFollowers(1));
+   }
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
+   @Test
+   void shouldReturnBadRequestExceptionIsNotSellerInListFollowers() {
+      //arrange
+      var user = generateUser(1);
 
-        //assert
-        assertThrows(BadRequestException.class, () -> userService.listFollowed(1,"papa"));
-    }
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+      when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
-    @Test
-    void shouldReturnBadRequestExceptionOrderAscInListFollowed() {
-        //arrange
-        var user = generateUserWithFollowed(1);
+      //assert
+      assertThrows(BadRequestException.class, () -> userService.listFollowers(1,""));
+   }
 
-        var expected = Mapper.parseToFollowedListResDTO(user,user.getFollowed().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList()));
+   @Test
+   void shouldReturnBadRequestExceptionInvalidOrderInListFollowers() {
+      //arrange
+      var user = generateUser(1);
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+      when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
-        //assert
-        assertEquals(expected,userService.listFollowed(1,"name_asc"));
-    }
+      //assert
+      assertThrows(BadRequestException.class, () -> userService.listFollowers(1,"papa"));
+   }
 
-    @Test
-    void shouldReturnBadRequestExceptionOrderDescInListFollowed() {
-        //arrange
-        var user = generateUserWithFollowed(1);
+   @Test
+   void shouldReturnBadRequestExceptionOrderAscInListFollowers() {
+      //arrange
+      var user = generateUserWithFollowers(1);
 
-        var expected = Mapper.parseToFollowedListResDTO(user,user.getFollowed().stream().sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList()));
+      var expected = Mapper.parseToFollowersListResDTO(user,user.getFollowers().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList()));
 
-        //act
-        when(userRepository.findById(1)).thenReturn(user);
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
 
-        //assert
-        assertEquals(expected,userService.listFollowed(1,"name_desc"));
-    }
+      when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(4,1));
+
+      //assert
+      assertEquals(expected,userService.listFollowers(1,"name_asc"));
+   }
+
+   @Test
+   void shouldReturnBadRequestExceptionOrderDescInListFollowers() {
+      //arrange
+      var user = generateUserWithFollowers(1);
+
+      var expected = Mapper.parseToFollowersListResDTO(user,user.getFollowers().stream().sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList()));
+
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+
+      when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(4,1));
+
+      //assert
+      assertEquals(expected,userService.listFollowers(1,"name_desc"));
+   }
+
+   @Test
+   void shouldReturnBadRequestExceptionInvalidOrderInListFollowed() {
+      //arrange
+      var user = generateUser(1);
+
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+
+      //assert
+      assertThrows(BadRequestException.class, () -> userService.listFollowed(1,"papa"));
+   }
+
+   @Test
+   void shouldReturnBadRequestExceptionOrderAscInListFollowed() {
+      //arrange
+      var user = generateUserWithFollowed(1);
+
+      var expected = Mapper.parseToFollowedListResDTO(user,user.getFollowed().stream().sorted(Comparator.comparing(User::getUserName)).collect(Collectors.toList()));
+
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+
+      //assert
+      assertEquals(expected,userService.listFollowed(1,"name_asc"));
+   }
+
+   @Test
+   void shouldReturnBadRequestExceptionOrderDescInListFollowed() {
+      //arrange
+      var user = generateUserWithFollowed(1);
+
+      var expected = Mapper.parseToFollowedListResDTO(user,user.getFollowed().stream().sorted(Comparator.comparing(User::getUserName).reversed()).collect(Collectors.toList()));
+
+      //act
+      when(userRepository.findById(1)).thenReturn(user);
+
+      //assert
+      assertEquals(expected,userService.listFollowed(1,"name_desc"));
+   }
 }
