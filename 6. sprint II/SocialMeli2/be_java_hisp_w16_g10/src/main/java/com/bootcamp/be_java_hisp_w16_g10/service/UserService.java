@@ -104,7 +104,10 @@ public class UserService implements IUserService {
             throw new BadRequestException(String.format("The user with the id %s is not a seller.", userId));
 
         var followers = user.getFollowers().stream();
-        if (order == null || !order.equals("name_desc")) //por defecto ascendente
+
+        if(!List.of("name_asc", "name_desc").contains(order))throw new BadRequestException("Invalid order parameter");
+
+        if (order.equals("name_asc"))
             followers = followers.sorted(Comparator.comparing(User::getUserName));
         else
             followers = followers.sorted(Comparator.comparing(User::getUserName).reversed());
@@ -118,8 +121,11 @@ public class UserService implements IUserService {
     public FollowedListResDTO listFollowed(Integer userId, String order) {
         User user = this.validateUser(userId); //valida que exista el usuario
 
+        if(!List.of("name_asc", "name_desc").contains(order))throw new BadRequestException("Invalid order parameter");
+
         var followeds = user.getFollowed().stream();
-        if (order == null || !order.equals("name_desc")) //por defecto ascendente
+
+        if (order.equals("name_asc"))
             followeds = followeds.sorted(Comparator.comparing(User::getUserName));
         else
             followeds = followeds.sorted(Comparator.comparing(User::getUserName).reversed());

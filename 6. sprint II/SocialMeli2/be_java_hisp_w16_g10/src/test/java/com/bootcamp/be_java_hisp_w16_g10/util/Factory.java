@@ -89,6 +89,24 @@ public class Factory {
                 .build();
     }
 
+    static public User generateUserWithFollowers(Integer id) {
+        return User.builder()
+                .id(id)
+                .userName("user" + id)
+                .followers(Factory.generateUserList(3,1))
+                .followed(new ArrayList<>())
+                .build();
+    }
+
+    static public User generateUserWithFollowed(Integer id) {
+        return User.builder()
+                .id(id)
+                .userName("user" + id)
+                .followers(new ArrayList<>())
+                .followed(Factory.generateUserList(3,1))
+                .build();
+    }
+
     static public List<User> generateUserList (Integer amount, Integer firstId) {
         List<User> users = new ArrayList<>();
         for (Integer i = 0; i < amount; i++) {
