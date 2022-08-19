@@ -10,11 +10,13 @@ public class Main {
         Cliente cliente1 = new Cliente("123", "Carla", "Polo");
         Cliente cliente2 = new Cliente("456", "Gera", "Duran");
         Cliente cliente3 = new Cliente("789", "Samuel", "Zapata");
+        Cliente cliente4 = new Cliente("645", "Fabiola", "Ferreira");
 
         List<Cliente> listOfClients = new ArrayList<>();
         listOfClients.add(cliente1);
         listOfClients.add(cliente2);
         listOfClients.add(cliente3);
+        listOfClients.add(cliente4);
 
         listOfClients.stream().forEach(System.out::println);//referencia de metodos
 
@@ -48,8 +50,8 @@ public class Main {
         double totalCostCalculate = totalCostCalculate(listOfItems);
         System.out.println("***********COSTO TOTAL: \n" + totalCostCalculate);
 
-
-        Factura factura001 = new Factura(83638282, cliente2, listOfItems, totalCostCalculate);
+        Cliente clienteX = new Cliente("2222", "Fabio", "Ferreira");
+        Factura factura001 = new Factura(83638282, clienteX, listOfItems, totalCostCalculate);
         List<Factura> listOfFactura = new ArrayList<>();
 
         Cliente existingClient = listOfClients.stream().filter(x -> x.getDni().contains(factura001.getClient().getDni())).findFirst().orElse(null);
@@ -58,7 +60,8 @@ public class Main {
             System.out.println("Factura Agreagada a la lista: \n");
             listOfFactura.add(factura001);
         } else {
-            System.out.println(" ¡¡Este es un nuevo Cliente y debera ser registrado!!  \n");
+            System.out.println(factura001.getClient() + " ¡¡Este es un nuevo Cliente y sera agregado a la lista de clientes!!  \n");
+            listOfClients.add(factura001.getClient());
         }
         listOfFactura.stream().forEach(System.out::println);
         input.close();
