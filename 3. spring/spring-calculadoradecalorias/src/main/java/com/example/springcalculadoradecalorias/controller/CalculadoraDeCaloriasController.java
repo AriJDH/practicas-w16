@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/calculadoradecalorias")
 public class CalculadoraDeCaloriasController {
-
     @Autowired
     IngredienteService ingredienteService;
 
