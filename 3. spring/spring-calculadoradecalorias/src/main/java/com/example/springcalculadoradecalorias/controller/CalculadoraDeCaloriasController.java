@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 /*
  * Ejercicio > Modulo 8: Spring > EjerciciosPracticos-P2-VIVO
- * ESTADO: Pendiente.
+ * ESTADO: Finalizado (falta el BONUS).
  * @GonzaloNahuelDiPierro
  * */
 @RestController
