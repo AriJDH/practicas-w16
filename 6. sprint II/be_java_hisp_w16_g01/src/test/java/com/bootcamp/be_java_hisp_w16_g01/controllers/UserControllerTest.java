@@ -1,47 +1,30 @@
 package com.bootcamp.be_java_hisp_w16_g01.controllers;
 
 import com.bootcamp.be_java_hisp_w16_g01.controller.UserController;
-
-import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.MessageDto;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowerDTO;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserUnfollowDTO;
 import com.bootcamp.be_java_hisp_w16_g01.service.IUserService;
+import com.bootcamp.be_java_hisp_w16_g01.utils.FactoryUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.apache.commons.collections4.CollectionUtils;
-
 import com.bootcamp.be_java_hisp_w16_g01.dto.response.FollowersCountDTO;
-import com.bootcamp.be_java_hisp_w16_g01.service.IUserService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-
 import javax.validation.ConstraintViolationException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
-
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -54,7 +37,6 @@ public class UserControllerTest {
     UserController userController;
 
     @Test
-
     void unfollowUserTest() {
 
         Integer userId = 1;
@@ -94,13 +76,9 @@ public class UserControllerTest {
     }
 
     @Test
-    public void nameAscOrderFollowersOk(){
-        List<UserDTO> followers = new ArrayList<>();
-        followers.add(new UserDTO(3, "alberto"));
-        followers.add(new UserDTO(1, "juan"));
-        followers.add(new UserDTO(2, "sofia"));
+    public void nameAscOrderFollowersTest(){
 
-        UserFollowerDTO user = new UserFollowerDTO(4, "user 4", followers);
+        UserFollowerDTO user = FactoryUser.getUserFollowerAsc();
         when(userService.getFollowers(user.getUserId(), "name_asc")).thenReturn(user);
 
         userController.getFollowers(user.getUserId(), "name_asc");
@@ -110,13 +88,9 @@ public class UserControllerTest {
     }
 
     @Test
-    public void nameDescOrderFollowersOk(){
+    public void nameDescOrderFollowersTest(){
         //arrange
-        List<UserDTO> followers = new ArrayList<>();
-        followers.add(new UserDTO(2, "sofia"));
-        followers.add(new UserDTO(1, "juan"));
-        followers.add(new UserDTO(3, "alberto"));
-        UserFollowerDTO user = new UserFollowerDTO(4, "user 4", followers);
+        UserFollowerDTO user = FactoryUser.getUserFollowerDesc();
         when(userService.getFollowers(user.getUserId(), "name_desc")).thenReturn(user);
 
         //act
@@ -127,7 +101,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void invalidOrderFollowers(){
+    public void invalidOrderFollowersTest(){
         Integer userId = 4;
         //arrange
         when(userService.getFollowers(userId, "id_asc")).thenThrow(BadRequestException.class);
@@ -138,13 +112,9 @@ public class UserControllerTest {
     }
 
     @Test
-    public void nullOrderFollowers(){
-        List<UserDTO> followers= new ArrayList<>();
-        followers.add(new UserDTO(3, "alberto"));
-        followers.add(new UserDTO(2, "sofia"));
-        followers.add(new UserDTO(1, "juan"));
+    public void nullOrderFollowersTest(){
 
-        UserFollowerDTO user = new UserFollowerDTO(4, "user 4", followers);
+        UserFollowerDTO user = FactoryUser.getUserFollower();
         when(userService.getFollowers(user.getUserId(), null)).thenReturn(user);
 
         UserFollowerDTO response = userController.getFollowers(user.getUserId(), null).getBody();
@@ -155,7 +125,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void invalidUserFollowers(){
+    public void invalidUserFollowersTest(){
         Integer userId = 44;
         //arrange
         when(userService.getFollowers(userId, "name_asc")).thenThrow(BadRequestException.class);
@@ -166,18 +136,18 @@ public class UserControllerTest {
     }
 
     @Test
-    public void negativeIdFollowers(){
+    public void negativeIdFollowersTest(){
        Integer userId = -4;
         //arrange
         when(userService.getFollowers(userId, "name_desc")).thenThrow(ConstraintViolationException.class);
 
         // act & assert
         assertThrows(ConstraintViolationException.class , () -> userController.getFollowers(userId, "name_desc"));
-        verify(userService, atLeastOnce()).getFollowers(userId, "name_desc");
+        verify(userService, atLeastOnce()).getFollowers(userId,"name_desc");
     }
 
     @Test
-    public void nullIdFollowers(){
+    public void nullIdFollowersTest(){
         //arrange
         when(userService.getFollowers(null, "name_desc")).thenThrow(MethodArgumentTypeMismatchException.class);
 
@@ -187,30 +157,22 @@ public class UserControllerTest {
     }
 
     @Test
-    public void verifyNameAscOrderFollowers(){
-        List<UserDTO> followers = new ArrayList<>();
-        followers.add(new UserDTO(3, "alberto"));
-        followers.add(new UserDTO(1, "juan"));
-        followers.add(new UserDTO(2, "sofia"));
+    public void verifyNameAscOrderFollowersTest(){
 
-        UserFollowerDTO user = new UserFollowerDTO(4, "user 4", followers);
+        UserFollowerDTO user = FactoryUser.getUserFollowerAsc();
         when(userService.getFollowers(4, "name_asc")).thenReturn(user);
 
         UserFollowerDTO response = userController.getFollowers(4, "name_asc").getBody();
 
         // assert
         verify(userService, atLeastOnce()).getFollowers(4, "name_asc");
-        assertEquals(response, user);
+        assertEquals(user, response);
     }
 
     @Test
-    public void verifyNameDescOrderFollowers(){
+    public void verifyNameDescOrderFollowersTest(){
         //arrange
-        List<UserDTO> followers = new ArrayList<>();
-        followers.add(new UserDTO(2, "sofia"));
-        followers.add(new UserDTO(1, "juan"));
-        followers.add(new UserDTO(3, "alberto"));
-        UserFollowerDTO user = new UserFollowerDTO(4, "user 4", followers);
+        UserFollowerDTO user = FactoryUser.getUserFollowerDesc();
         when(userService.getFollowers(4, "name_desc")).thenReturn(user);
 
         //act
@@ -218,17 +180,13 @@ public class UserControllerTest {
 
         // assert
         verify(userService, atLeastOnce()).getFollowers(4, "name_desc");
-        assertEquals(response, user);
+        assertEquals(user, response);
     }
 
     @Test
-    public void nameAscOrderFollowedOk(){
-        List<UserDTO> followed= new ArrayList<>();
-        followed.add(new UserDTO(3, "alberto"));
-        followed.add(new UserDTO(1, "juan"));
-        followed.add(new UserDTO(2, "sofia"));
+    public void nameAscOrderFollowedTest(){
 
-        UserFollowedDTO user = new UserFollowedDTO(4, "user 4", followed);
+        UserFollowedDTO user = FactoryUser.getUserFollowedOrderAsc();
         when(userService.getFollowed(user.getUserId(), "name_asc")).thenReturn(user);
 
         userController.getFollowed(user.getUserId(), "name_asc");
@@ -238,13 +196,9 @@ public class UserControllerTest {
     }
 
     @Test
-    public void nameDescOrderFollowedOk(){
+    public void nameDescOrderFollowedTest(){
         //arrange
-        List<UserDTO> followed = new ArrayList<>();
-        followed.add(new UserDTO(2, "sofia"));
-        followed.add(new UserDTO(1, "juan"));
-        followed.add(new UserDTO(3, "alberto"));
-        UserFollowedDTO user = new UserFollowedDTO(4, "user 4", followed);
+        UserFollowedDTO user = FactoryUser.getUserFollowedOrderDesc();
         when(userService.getFollowed(user.getUserId(), "name_desc")).thenReturn(user);
 
         //act
@@ -255,7 +209,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void invalidOrderFollowed(){
+    public void invalidOrderFollowedTest(){
         Integer userId = 4;
         //arrange
         when(userService.getFollowed(userId, "id_asc")).thenThrow(BadRequestException.class);
@@ -266,13 +220,9 @@ public class UserControllerTest {
     }
 
     @Test
-    public void nullOrderFollowed(){
-        List<UserDTO> followed= new ArrayList<>();
-        followed.add(new UserDTO(3, "alberto"));
-        followed.add(new UserDTO(2, "sofia"));
-        followed.add(new UserDTO(1, "juan"));
+    public void nullOrderFollowedTest(){
 
-        UserFollowedDTO user = new UserFollowedDTO(4, "user 4", followed);
+        UserFollowedDTO user = FactoryUser.getUserFollowed();
         when(userService.getFollowed(user.getUserId(), null)).thenReturn(user);
 
         UserFollowedDTO response = userController.getFollowed(user.getUserId(), null).getBody();
@@ -283,7 +233,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void invalidUserFollowed(){
+    public void invalidUserFollowedTest(){
         Integer userId = 44;
         //arrange
         when(userService.getFollowed(userId, "name_asc")).thenThrow(BadRequestException.class);
@@ -294,7 +244,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void negativeIdFollowed(){
+    public void negativeIdFollowedTest(){
         Integer userId = -4;
         //arrange
         when(userService.getFollowed(userId, "name_desc")).thenThrow(ConstraintViolationException.class);
@@ -305,7 +255,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void nullIdFollowed(){
+    public void nullIdFollowedTest(){
         //arrange
         when(userService.getFollowed(null, "name_desc")).thenThrow(MethodArgumentTypeMismatchException.class);
 
@@ -315,30 +265,23 @@ public class UserControllerTest {
     }
 
     @Test
-    public void verifyNameAscOrderFollowed(){
-        List<UserDTO> followed= new ArrayList<>();
-        followed.add(new UserDTO(3, "alberto"));
-        followed.add(new UserDTO(1, "juan"));
-        followed.add(new UserDTO(2, "sofia"));
+    public void verifyNameAscOrderFollowedTest(){
 
-        UserFollowedDTO user = new UserFollowedDTO(4, "user 4", followed);
+        UserFollowedDTO user = FactoryUser.getUserFollowedOrderAsc();
         when(userService.getFollowed(user.getUserId(), "name_asc")).thenReturn(user);
 
         UserFollowedDTO response = userController.getFollowed(user.getUserId(), "name_asc").getBody();
 
         // assert
         verify(userService, atLeastOnce()).getFollowed(user.getUserId(), "name_asc");
-        assertEquals(response, user);
+        assertEquals(user, response);
     }
 
     @Test
-    public void verifyNameDescOrderFollowed(){
+    public void verifyNameDescOrderFollowedTest(){
         //arrange
-        List<UserDTO> followed = new ArrayList<>();
-        followed.add(new UserDTO(2, "sofia"));
-        followed.add(new UserDTO(1, "juan"));
-        followed.add(new UserDTO(3, "alberto"));
-        UserFollowedDTO user = new UserFollowedDTO(4, "user 4", followed);
+
+        UserFollowedDTO user = FactoryUser.getUserFollowedOrderDesc();
         when(userService.getFollowed(user.getUserId(), "name_desc")).thenReturn(user);
 
         //act
@@ -346,12 +289,13 @@ public class UserControllerTest {
 
         // assert
         verify(userService, atLeastOnce()).getFollowed(user.getUserId(), "name_desc");
-        assertEquals(response, user);
+        assertEquals(user, response);
     }
 
 
+    @Test
     @DisplayName("Cálculo correcto cantidad total de seguidores que posee un usuario")
-    void rightCantFollowers() {
+    public void rightCantFollowersTest() {
         //Arrange
         Integer userId = 1;
         FollowersCountDTO mockFollowersCount = new FollowersCountDTO(userId, "German", 5);
@@ -363,4 +307,39 @@ public class UserControllerTest {
         verify(userService, atLeastOnce()).getCantFollowers(userId);
     }
 
+
+    @Test
+    void addFollowerTest() {
+        // Arrange
+        Integer userId = 1;
+        Integer userIdToFollow = 2;
+        MessageDto expectedMessage = new MessageDto("Usuario seguido correctamente");
+
+        ResponseEntity<MessageDto> expectedResponse = new ResponseEntity<> (expectedMessage, HttpStatus.OK);
+
+        when(userService.addFollower(userId, userIdToFollow))
+                .thenReturn(expectedMessage);
+
+        // Act
+        ResponseEntity<MessageDto> response = this.userController.addFollower(userId, userIdToFollow);
+
+        // Assert
+        Assertions.assertEquals(expectedResponse, response);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        verify(userService, atLeastOnce()).addFollower(userId, userIdToFollow);
+    }
+
+    @Test
+    void addFollowerErrorTest() {
+        // Arrange
+        Integer userId = 1;
+        Integer userIdToFollow = 2;
+
+        when(userService.addFollower(userId, userIdToFollow))
+                .thenThrow(BadRequestException.class);
+
+        // Act & Assert
+        Assertions.assertThrows(BadRequestException.class, () -> userController.addFollower(userId, userIdToFollow));
+        verify(userService, atLeastOnce()).addFollower(userId, userIdToFollow);
+    }
 }
