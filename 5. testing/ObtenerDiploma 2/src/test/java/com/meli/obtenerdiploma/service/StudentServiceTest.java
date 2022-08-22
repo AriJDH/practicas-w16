@@ -12,9 +12,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.*;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -29,20 +31,54 @@ public class StudentServiceTest {
     StudentService service;
 
     @Test
-    public void createStudent(){
-        StudentDTO newStudent = new StudentDTO(null, "Nico", "No message", 4.5,
+    void readStudent(){
+        StudentDTO newStudent = new StudentDTO(111l, "Nico", "No message", 4.5,
                 List.of(new SubjectDTO("Science", 4.0)));
 
 
-        doNothing().when(studentDAO).save(newStudent);
-
-
+        when(service.read(111l)).thenReturn(newStudent);
         //Act
-        service.create(newStudent);
+        StudentDTO response = service.read(111l);
+
 
 
         //Assert
-        Assertions.assertTrue(studentDAO.exists(newStudent), "");
+        verify(studentDAO, atLeastOnce()).findById(111l);
+        Assertions.assertEquals(newStudent,response);
+
     }
+
+    @Test
+    void createStudent(){
+        StudentDTO newStudent = new StudentDTO(111l, "Nico", "No message", 4.5,
+                List.of(new SubjectDTO("Science", 4.0)));
+
+        when(studentDAO.exists(newStudent)).thenReturn(true);
+
+
+        Assertions.assertTrue(studentDAO.exists(newStudent));
+        verify(studentDAO, atLeastOnce()).exists(newStudent);
+
+    }
+
+    @Test
+    void findAll(){
+        StudentDTO newStudent = new StudentDTO(111l, "Nico", "No message", 4.5,
+                List.of(new SubjectDTO("Science", 4.0)));
+
+        Set<StudentDTO> expected = new HashSet<>();
+
+        expected.add(newStudent);
+
+        when(studentRepository.findAll()).thenReturn(expected);
+
+        Set<StudentDTO> response = service.getAll();
+
+        verify(studentRepository,atLeastOnce()).findAll();
+        Assertions.assertEquals(expected,response);
+    }
+
+
+
 
 }
