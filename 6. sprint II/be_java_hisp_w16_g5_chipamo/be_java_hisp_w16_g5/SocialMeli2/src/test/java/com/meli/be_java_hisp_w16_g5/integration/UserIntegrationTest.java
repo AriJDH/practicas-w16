@@ -1,5 +1,8 @@
 package com.meli.be_java_hisp_w16_g5.integration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.meli.be_java_hisp_w16_g5.controller.UserController;
 import com.meli.be_java_hisp_w16_g5.dto.UserDto;
 import com.meli.be_java_hisp_w16_g5.entity.User;
@@ -305,5 +308,24 @@ public class UserIntegrationTest {
 
     }
 
-    
+    @Test
+    public void setUserUnfollowSellerTestOutputOk() throws Exception {//YENNY CHIPAMO UnfollowSeller OK BONUS
+
+        UserFollowsDto payloadDto = new UserFollowsDto();
+
+        ObjectWriter writer = new ObjectMapper().
+                configure(SerializationFeature.WRAP_ROOT_VALUE, false).
+                writer().withDefaultPrettyPrinter();
+
+        String payloadJson = writer.writeValueAsString(payloadDto);
+
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/1/unfollow/2")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payloadJson))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mensaje").value("Todo ok"))
+        ;
+
+    }
 }
