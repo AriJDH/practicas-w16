@@ -1,23 +1,26 @@
 package com.bootcamp.SocialMeli2.testIntegration;
 
+import com.bootcamp.SocialMeli2.dto.FollowIdDto;
 import com.bootcamp.SocialMeli2.dto.FollowersCountDTO;
 import com.bootcamp.SocialMeli2.dto.ProductDTO;
 import com.bootcamp.SocialMeli2.dto.RequestPostDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.nio.charset.StandardCharsets;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -30,25 +33,93 @@ public class IntegrationTest {
     @Autowired
     private MockMvc mockMv;
 
+    ObjectWriter writer;
+    FollowIdDto followDTO;
+
+    @BeforeEach
+    public void start() {
+
+        followDTO = new FollowIdDto(1, 10);
+        writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+    }
+
+    @Test
+    @DisplayName("follow user - Test Integration")
+    public void followUser() throws Exception {
+        MvcResult mvcResult = mockMv.perform(post("/users/{userId}/follow/{userIdToFollow}",
+                        followDTO.getUserId(), followDTO.getUserIdToFollow()))
+                //.andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        HttpStatus responseStatusCode = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
+        assertEquals(HttpStatus.OK, responseStatusCode);
+    }
+
+    @Test
+    @DisplayName("follow user Fail - Test Integration")
+    public void followUserFail() throws Exception {
+        FollowIdDto followedDTO = new FollowIdDto(2, 2);
+
+        MvcResult mvcResult = mockMv.perform(post("/users/{userId}/follow/{userIdToFollow}",
+                        followDTO.getUserId(), followDTO.getUserId()))
+                .andDo(print())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        HttpStatus responseStatusCode = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
+        assertEquals(HttpStatus.NOT_FOUND, responseStatusCode);
+    }
+
+    @Test
+    @DisplayName("followers list - Test Integration")
+    public void followersList() throws Exception {
+        MvcResult mvcResult = mockMv.perform(get("/users/{userId}/followers/list", followDTO.getUserId()))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        HttpStatus responseStatusCode = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
+        assertEquals(HttpStatus.OK, responseStatusCode);
+    }
+
+    @Test
+    @DisplayName("followed list - Test Integration")
+    public void followedList() throws Exception {
+        MvcResult mvcResult = mockMv.perform(get("/users/{userId}/followed/list", followDTO.getUserId()))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        HttpStatus responseStatusCode = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
+        assertEquals(HttpStatus.OK, responseStatusCode);
+    }
+    @Test
+    @DisplayName("Product list - Test Integration")
+    public void productList() throws Exception {
+        MvcResult mvcResult = mockMv.perform(get("/products/followed/{userId}/list", followDTO.getUserId()))
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        HttpStatus responseStatusCode = HttpStatus.valueOf(mvcResult.getResponse().getStatus());
+        assertEquals(HttpStatus.OK, responseStatusCode);
+    }
+
     @Test
     @DisplayName("countFollowers - Test Integracion")
     public void countFollowers() throws Exception {
 
         FollowersCountDTO followersCountDTO = new FollowersCountDTO(1, "Andrés", 2);
 
-        ObjectWriter writer = new ObjectMapper()
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
-                .writer();
-
         String followersCounDTOJson = writer.writeValueAsString(followersCountDTO);
 
-        MvcResult mvcResult = this.mockMv.perform(get("/users/{userId}/followers/count", 1))
+        MvcResult mvcResult = mockMv.perform(get("/users/{userId}/followers/count", 1))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
 
-        Assertions.assertEquals(followersCounDTOJson, mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8));
+        assertEquals(followersCounDTOJson, mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8));
 
     }
 
@@ -60,13 +131,9 @@ public class IntegrationTest {
         ProductDTO product = new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red Black", "Special Edition");
         RequestPostDTO postDto = new RequestPostDTO(1, "11-08-2022", product, 100, 1500.50);
 
-        ObjectWriter writer = new ObjectMapper()
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
-                .writer();
-
         String postDTOJson = writer.writeValueAsString(postDto);
 
-        MvcResult mvcResult = this.mockMv.perform(post("/products/post")
+        MvcResult mvcResult = mockMv.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(postDTOJson))
                 .andDo(print())
@@ -74,7 +141,7 @@ public class IntegrationTest {
                 .andExpect(content().contentType("application/json"))
                 .andReturn();
 
-        Assertions.assertEquals(responseExpected, mvcResult.getResponse().getStatus());
+        assertEquals(responseExpected, mvcResult.getResponse().getStatus());
     }
 
 
@@ -85,14 +152,9 @@ public class IntegrationTest {
         ProductDTO product = new ProductDTO(1, "Silla Gamer", "Gamer", "Racer", "Red & Black", "Special Edition");
         RequestPostDTO postDto = new RequestPostDTO(1, "11-08-2022", product, 100, 1500.50);
 
-        ObjectWriter writer = new ObjectMapper()
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
-                .writer();
-
         String postDTOJson = writer.writeValueAsString(postDto);
 
-
-        this.mockMv.perform(post("/products/post")
+        mockMv.perform(post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(postDTOJson))
                 .andDo(print())
@@ -101,6 +163,4 @@ public class IntegrationTest {
                 .andExpect(jsonPath("$.statusCode").value(400));
 
     }
-
-
 }
