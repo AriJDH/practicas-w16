@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "3e2a75e4-c99b-4644-8cf6-5084519d811a",
+		"_postman_id": "0d23b205-f55a-4487-9874-039e57322aeb",
 		"name": "Sprint I",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22238626"
 	},
 	"item": [
 		{
@@ -34,13 +35,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/users/1/follow/2",
+							"raw": "{{url}}/users/3/follow/2",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"1",
+								"3",
 								"follow",
 								"2"
 							]
@@ -74,13 +75,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/count",
+							"raw": "{{url}}/users/2/followers/count",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{seller_id}}",
+								"2",
 								"followers",
 								"count"
 							]
@@ -105,25 +106,26 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/list?order=name_desc",
+							"raw": "{{url}}/users/2/followers/list",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{seller_id}}",
+								"2",
 								"followers",
 								"list"
 							],
 							"query": [
 								{
-									"key": "oder",
+									"key": "order",
 									"value": "name_asc",
 									"disabled": true
 								},
 								{
 									"key": "order",
-									"value": "name_desc"
+									"value": "name_desc",
+									"disabled": true
 								},
 								{
 									"key": "oder",
@@ -152,13 +154,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{client_id}}/followed/list?order=name_desc",
+							"raw": "{{url}}/users/3/followed/list",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{client_id}}",
+								"3",
 								"followed",
 								"list"
 							],
@@ -170,7 +172,8 @@
 								},
 								{
 									"key": "order",
-									"value": "name_desc"
+									"value": "name_desc",
+									"disabled": true
 								},
 								{
 									"key": "order",
@@ -201,7 +204,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"detail\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"raw": "{\n    \"user_id\": 2,\n    \"date\": \"10-08-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -245,25 +248,25 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/products/followed/{{client_id}}/list?order=date_asc",
+							"raw": "{{url}}/products/followed/3/list?order=date_desc",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"products",
 								"followed",
-								"{{client_id}}",
+								"3",
 								"list"
 							],
 							"query": [
 								{
 									"key": "order",
-									"value": "date_desc",
-									"disabled": true
+									"value": "date_desc"
 								},
 								{
 									"key": "order",
-									"value": "date_asc"
+									"value": "date_asc",
+									"disabled": true
 								},
 								{
 									"key": "order",
@@ -293,15 +296,15 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/users/{{client_id}}/unfollow/{{seller_id}}",
+							"raw": "{{url}}/users/1/unfollow/3",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"users",
-								"{{client_id}}",
+								"1",
 								"unfollow",
-								"{{seller_id}}"
+								"3"
 							]
 						}
 					},
@@ -313,87 +316,7 @@
 			"name": "Bonus",
 			"item": [
 				{
-					"name": "US 12 - List Promo Product",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/users/1/followers/count",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"1",
-								"followers",
-								"count"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 11 - Count Promo Products",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/users/1/followers/count",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"1",
-								"followers",
-								"count"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 10 - New Post with promo",
+					"name": "US 10 - New Promo Post",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -411,7 +334,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"detail\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+							"raw": "{\n    \"user_id\": 1,\n    \"date\": \"08-08-2022\",\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50,\n    \"has_promo\": true,\n    \"discount\": 0.25\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -419,20 +342,173 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/products/post",
+							"raw": "{{url}}/products/promo-post",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"products",
-								"post"
+								"promo-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 11 - Count Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/count?user_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"count"
 							],
 							"query": [
 								{
-									"key": "clientId",
-									"value": "5001",
-									"disabled": true
+									"key": "user_id",
+									"value": "1"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 12 - Seller's Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/list?user_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"list"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 13 - Get All Promo Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/list/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"list",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "US 14 - Get User With Most Promos Post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"seller_id\", 2);",
+									"pm.collectionVariables.set(\"client_id\", 3);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/products/promo-post/user/max",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"products",
+								"promo-post",
+								"user",
+								"max"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Other",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
 							]
 						}
 					},
@@ -464,15 +540,25 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "{{url}}/users/1/follow/2"
+			"value": "http://localhost:8080"
 		},
 		{
 			"key": "client_id",
-			"value": 3
+			"value": "1",
+			"disabled": true
 		},
 		{
 			"key": "seller_id",
-			"value": 2
+			"value": "Seller id",
+			"disabled": true
+		},
+		{
+			"key": "client_id",
+			"value": ""
+		},
+		{
+			"key": "seller_id",
+			"value": ""
 		}
 	]
 }

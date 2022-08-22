@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5eee5c68-dc8c-4fc5-94bc-194584a9b06f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../CerrandoJava/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CerrandoJava/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CerrandoJava/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CerrandoJava/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CerrandoJava/CerrandoJava.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../CerrandoJava/src/LiveCode/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../IntegradorVivoP1/src/Reservas/ReservaHotel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../IntegradorVivoP1/src/Reservas/ReservaInter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/Ejemplos.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/src/main/Circulo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/src/main/FiguraGeometrica.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/src/main/Graficable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/src/main/Rotable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejemplos/src/main/Triangulo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/Ejercicio1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Clientes/Basic.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Clientes/Cobrador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Clientes/Ejecutivo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Transacciones/Consulta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Transacciones/Deposito.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Transacciones/PagoServicios.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Transacciones/RetiroEfectivo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Transacciones/Transaccion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio1/src/Transacciones/Transferencia.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Ejercicio2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/Curriculum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/Documento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/Imprimible.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/Informe.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/LibroPDF.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main/Persona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/Ejercicio3.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Alimentacion/Carnivoro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Alimentacion/Herbivoro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Animales/Animal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Animales/Gato.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Animales/Perro.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Animales/Vaca.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Ejercicio3/src/Main/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2CaNG7VdxzFxsAL1krFupMBan2M" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="Main" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main.Main" />
+      <module name="Ejercicio2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5eee5c68-dc8c-4fc5-94bc-194584a9b06f" name="Changes" comment="" />
+      <created>1659036639318</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659036639318</updated>
+      <workItem from="1659036640417" duration="210000" />
+      <workItem from="1659098009033" duration="7793000" />
+      <workItem from="1659189451397" duration="1339000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
