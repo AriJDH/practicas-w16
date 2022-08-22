@@ -5,6 +5,21 @@
 ​ Meli Social es una plataforma en donde los compradores van a poder seguir a sus vendedores favoritos y enterarse de
 todas las novedades que los mismos posteen. ​
 
+# Campos Validados
+| Dato/Parametro | Obligatorio? | Validacion | Mensaje de error|
+| --- | --- | --- | --- |
+| `user_id `| Si | - Que el campo no esté vacío. & - Mayor 0 | El  id no puede estar vacío. & El id debe ser mayor a cero|
+| `id_post `| Si | - Que el campo no esté  | El id_post no puede estar vacío.|
+| `brand `| Si | - Que el campo no esté vací. & - Longitud máxima de 25 caracteres. & -Que no posea caracteres especiales (%, &, $, etc)| -El campo no puede estar vacío.La longitud no puede superar los 25 caracteres.& -El campo no puede poseer caracteres especiales.|
+| `date `| Si | - Que el campo no esté vacío. | -La fecha no puede estar vacia|
+| `product_id `| Si | - Que el campo no esté vacío. & - Mayor 0 | El  id no puede estar vacío. & El id debe ser mayor a cero|
+| `product_name `| Si | - Que el campo no esté vacío. & Longitud máxima de 40 caracteres. & -Que no posea caracteres especiales (%, &, $, etc), permite espacios. | El campo no puede estar vacío.La longitud no puede superar los 40 caracteres.El campo no puede poseer caracteres especiales.|
+| `type `| Si | -Que el campo no esté vacío.& -Longitud máxima de 15 caracteres.& -Que no posea caracteres especiales (%, &, $, etc)  | -El campo no puede estar vacío. & -La longitud no puede superar los 15 caracteres. & -El campo no puede poseer caracteres especiales.|
+| `color `| Si | - Que el campo no esté vacío.|El campo no puede estar vacío.|
+| `notes `| Si | -Longitud máxima de 80 caracteres.& -Que no posea caracteres especiales (%, &, $, etc), permite espacios. | -La longitud no puede superar los 80 caracteres.& -El campo no puede poseer caracteres especiales.|
+| `category `| Si | - Que el campo no esté vacío.| El campo no puede estar vacío.|
+| `price `| Si | - Que el campo no esté vacío. & -El precio máximo puede ser 10.000.000. | El campo no puede estar vacío. & -El precio máximo por producto es de 10.000.000|
+
 ## Endopoints disponibles en Beta
 
 ​

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7ca7e3c0-051f-4e7e-89ec-5cd7958ba907" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/be_java_hisp_w16_g03_Rivero/src/test/java/com/example/be_java_hisp_w16_g03/integration/UserControllerIntegrationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/be_java_hisp_w16_g03_Rivero/src/test/java/com/example/be_java_hisp_w16_g03/integration/UserControllerIntegrationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/be_java_hisp_w16_g03_Rivero/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/be_java_hisp_w16_g03_Rivero/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +72,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PostControllerIntegrationTest.getErrorForValidation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PostControllerIntegrationTest.addPost" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="be_java_hisp_w16_g03" />
       <extension name="coverage">
         <pattern>
@@ -82,7 +82,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.example.be_java_hisp_w16_g03.integration" />
       <option name="MAIN_CLASS_NAME" value="com.example.be_java_hisp_w16_g03.integration.PostControllerIntegrationTest" />
-      <option name="METHOD_NAME" value="getErrorForValidation" />
+      <option name="METHOD_NAME" value="addPost" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostControllerIntegrationTest.getLatestPostsOrderedASCByUserIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="be_java_hisp_w16_g03" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.be_java_hisp_w16_g03.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.example.be_java_hisp_w16_g03.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.example.be_java_hisp_w16_g03.integration.PostControllerIntegrationTest" />
+      <option name="METHOD_NAME" value="getLatestPostsOrderedASCByUserIdTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -118,20 +134,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.example.be_java_hisp_w16_g03.integration in be_java_hisp_w16_g03" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="be_java_hisp_w16_g03" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.be_java_hisp_w16_g03.integration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.example.be_java_hisp_w16_g03.integration" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BeJavaHispW16G03Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="be_java_hisp_w16_g03" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.be_java_hisp_w16_g03.BeJavaHispW16G03Application" />
@@ -142,10 +144,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.com.example.be_java_hisp_w16_g03 in be_java_hisp_w16_g03" />
-        <item itemvalue="JUnit.UserControllerIntegrationTests.createUserExistsErrorTest" />
-        <item itemvalue="JUnit.com.example.be_java_hisp_w16_g03.integration in be_java_hisp_w16_g03" />
-        <item itemvalue="JUnit.PostControllerIntegrationTest.getErrorForValidation" />
+        <item itemvalue="JUnit.PostControllerIntegrationTest.addPost" />
         <item itemvalue="JUnit.PostControllerIntegrationTest" />
+        <item itemvalue="JUnit.PostControllerIntegrationTest.getLatestPostsOrderedASCByUserIdTest" />
+        <item itemvalue="JUnit.UserControllerIntegrationTests.createUserExistsErrorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -160,7 +162,7 @@
       <workItem from="1660938102043" duration="21000" />
       <workItem from="1660938191667" duration="178000" />
       <workItem from="1660938476497" duration="3172000" />
-      <workItem from="1661171558825" duration="16770000" />
+      <workItem from="1661171558825" duration="19090000" />
     </task>
     <servers />
   </component>
@@ -186,11 +188,6 @@
           <line>110</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/be_java_hisp_w16_g03_Rivero/src/test/java/com/example/be_java_hisp_w16_g03/integration/PostControllerIntegrationTest.java</url>
-          <line>100</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/be_java_hisp_w16_g03_Rivero/src/test/java/com/example/be_java_hisp_w16_g03/integration/UserControllerIntegrationTests.java</url>
           <line>146</line>
@@ -204,7 +201,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/SocialMeli2$com_example_be_java_hisp_w16_g03_in_be_java_hisp_w16_g03.ic" NAME="com.example.be_java_hisp_w16_g03 in be_java_hisp_w16_g03 Coverage Results" MODIFIED="1661193749528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/SocialMeli2$com_example_be_java_hisp_w16_g03_in_be_java_hisp_w16_g03.ic" NAME="com.example.be_java_hisp_w16_g03 in be_java_hisp_w16_g03 Coverage Results" MODIFIED="1661200408570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.example.be_java_hisp_w16_g03.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/SocialMeli2$com_example_be_java_hisp_w16_g03_integration_in_be_java_hisp_w16_g03.ic" NAME="com.example.be_java_hisp_w16_g03.integration in be_java_hisp_w16_g03 Coverage Results" MODIFIED="1661191492880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
