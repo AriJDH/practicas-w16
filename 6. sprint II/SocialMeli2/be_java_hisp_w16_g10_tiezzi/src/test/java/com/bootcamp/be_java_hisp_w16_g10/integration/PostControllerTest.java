@@ -59,7 +59,7 @@ public class PostControllerTest {
     }
 
     @Test
-    public void shouldRaiceBadRequestWhenSavePostWithNoUserId() throws Exception {
+    public void shouldRaiseBadRequestWhenSavePostWithNoUserId() throws Exception {
         PostReqDTO postReqDTO = PostReqDTO.builder()
                 .idPost(1111)
                 .date(LocalDate.now())
@@ -91,7 +91,7 @@ public class PostControllerTest {
     }
 
     @Test
-    public void shouldRaiceBadRequestWhenTryingToFollowTheUserWithNoPosts() throws Exception {
+    public void shouldRaiseBadRequestWhenTryingToFollowTheUserWithNoPosts() throws Exception {
         Integer user1 = 1;
         Integer user2 = 2;
 

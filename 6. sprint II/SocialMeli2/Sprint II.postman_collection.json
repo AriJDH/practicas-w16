@@ -118,15 +118,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/users/3/follow/2",
+									"raw": "{{url}}/users/2/follow/3",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"users",
-										"3",
+										"2",
 										"follow",
-										"2"
+										"3"
 									]
 								}
 							},
@@ -1230,7 +1230,7 @@
 							"response": []
 						},
 						{
-							"name": "US 07 - Unfollow - User 1 cant follow user 2",
+							"name": "US 07 - Unfollow - User 1 dont follow user 2",
 							"event": [
 								{
 									"listen": "prerequest",
