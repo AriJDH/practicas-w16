@@ -987,7 +987,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{url}}/products/followed/100/list?order=date_desc",
+									"raw": "{{url}}/products/followed/100/list",
 									"host": [
 										"{{url}}"
 									],
@@ -1000,7 +1000,8 @@
 									"query": [
 										{
 											"key": "order",
-											"value": "date_desc"
+											"value": "date_desc",
+											"disabled": true
 										},
 										{
 											"key": "order",
