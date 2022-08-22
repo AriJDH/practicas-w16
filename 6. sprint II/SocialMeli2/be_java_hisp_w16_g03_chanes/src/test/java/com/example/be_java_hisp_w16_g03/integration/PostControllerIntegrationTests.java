@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,19 +28,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class PostControllerIntegrationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private IUserService userService;
-
     ObjectWriter writer = new ObjectMapper()
             .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
             .registerModule(new JavaTimeModule())
             .writer().withDefaultPrettyPrinter();
+    @Autowired
+    private MockMvc mockMvc;
+    @Autowired
+    private IUserService userService;
 
+    @DisplayName("Verifica que se lance una excepcion si el PostDTO no es valido")
     @Test
-    void addPostThrowsException() throws Exception {
+    void addInvalidPostTest() throws Exception {
 
         PostDTO payloadDTO = new PostDTO();
 
@@ -60,8 +60,9 @@ public class PostControllerIntegrationTests {
 
     }
 
+    @DisplayName("Verifica que se agregue un test al usuario en el endpoint")
     @Test
-    void addPost() throws Exception {
+    void addValidPostTest() throws Exception {
 
         PostDTO payloadDTO = PostDTO.builder()
                 .userId(1)
@@ -85,8 +86,7 @@ public class PostControllerIntegrationTests {
                 .andDo(print())
                 .andExpect(status().isOk());
 
-
-        Assertions.assertEquals(userService.getUser(payloadDTO.getUserId()).getPosts().size(), 1);
+        Assertions.assertTrue(userService.getUser(payloadDTO.getUserId()).getPosts().size() > 0);
     }
 
 }
