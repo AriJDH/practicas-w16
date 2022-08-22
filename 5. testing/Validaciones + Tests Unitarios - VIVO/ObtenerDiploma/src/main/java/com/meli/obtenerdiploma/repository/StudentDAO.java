@@ -35,6 +35,8 @@ public class StudentDAO implements IStudentDAO {
         }
     }
 
+
+
     @Override
     public void save(StudentDTO stu) {
         boolean removed = this.delete(stu.getId());
@@ -78,6 +80,12 @@ public class StudentDAO implements IStudentDAO {
         return students.stream()
                 .filter(stu -> stu.getId().equals(id))
                 .findFirst().orElseThrow(() -> new StudentNotFoundException(id));
+    }
+
+    @Override
+    public void clear() {
+        this.students.clear();
+        this.saveData();
     }
 
     private void loadData() {

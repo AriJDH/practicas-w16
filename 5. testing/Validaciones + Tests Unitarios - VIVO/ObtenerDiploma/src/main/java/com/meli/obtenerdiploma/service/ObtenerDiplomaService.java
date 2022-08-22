@@ -16,9 +16,7 @@ public class ObtenerDiplomaService implements IObtenerDiplomaService {
     IStudentDAO studentDAO;
 
     @Override
-    public StudentDTO
-
-    analyzeScores(Long studentId) {
+    public StudentDTO analyzeScores(Long studentId) {
         StudentDTO stu = studentDAO.findById(studentId);
 
         stu.setAverageScore(calculateAverage(stu.getSubjects()));
