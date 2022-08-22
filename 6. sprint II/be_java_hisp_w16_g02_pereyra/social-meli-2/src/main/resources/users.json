@@ -1,0 +1,38 @@
+{
+  "1" : {
+    "userId" : 1,
+    "userName" : "gonza",
+    "followers" : [ ],
+    "followed" : [ ]
+  },
+  "2" : {
+    "userId" : 2,
+    "userName" : "sabri",
+    "followers" : [ ],
+    "followed" : [ ]
+  },
+  "3" : {
+    "userId" : 3,
+    "userName" : "pame",
+    "followers" : [ ],
+    "followed" : [ ]
+  },
+  "4" : {
+    "userId" : 4,
+    "userName" : "mateo",
+    "followers" : [ ],
+    "followed" : [ ]
+  },
+  "5" : {
+    "userId" : 5,
+    "userName" : "erika",
+    "followers" : [ ],
+    "followed" : [ ]
+  },
+  "6" : {
+    "userId" : 6,
+    "userName" : "claudio",
+    "followers" : [ ],
+    "followed" : [ ]
+  }
+}
