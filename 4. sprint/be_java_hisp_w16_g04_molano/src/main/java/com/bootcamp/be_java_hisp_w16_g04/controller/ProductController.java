@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * Service in charge of product-related functionalities
  */
@@ -25,7 +27,7 @@ public class ProductController {
    * @return ResponseEntity with a DTO to give information to the user
    */
   @PostMapping("/post")
-  public ResponseEntity<ResponseApiDTO> createPublicacion(@RequestBody RequestCreatePublicationDTO publicationDTO) {
+  public ResponseEntity<ResponseApiDTO> createPublicacion(@RequestBody @Valid RequestCreatePublicationDTO publicationDTO) {
     return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO), HttpStatus.OK);
   }
 
