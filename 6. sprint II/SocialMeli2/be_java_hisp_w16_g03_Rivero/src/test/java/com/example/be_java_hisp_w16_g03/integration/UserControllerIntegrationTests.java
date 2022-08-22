@@ -64,13 +64,19 @@ public class UserControllerIntegrationTests {
         ObjectWriter writer = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false)
                 .writer().withDefaultPrettyPrinter();
         String payloadjson = writer.writeValueAsString(listUserDTO);
-        //String responseJson = writer.writeValueAsString(response);
+
+        ExceptionApiDTO exceptionApiDTO = new ExceptionApiDTO();
+        exceptionApiDTO.setMessage("Ya tenemos un usuario con el id : 1");
+        exceptionApiDTO.setTitle("Not Found");
+
+        String responseJson = writer.writeValueAsString(exceptionApiDTO);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/createUser")
                         .contentType(MediaType.APPLICATION_JSON).content(payloadjson))
                 .andDo(print()).andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json"))
-                .andExpect(result -> result.getResolvedException());
+                .andExpect(result -> result.getResolvedException())
+                .andExpect(content().json(responseJson));
 
     }
 
@@ -156,7 +162,7 @@ public class UserControllerIntegrationTests {
                 .writer().withDefaultPrettyPrinter();
         String responseJson = writer.writeValueAsString(followedsDTO);
 
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/" + 5 + "/followed/list?order=name_desc"))
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/users/" + 5 + "/followed/list?order=name_asc"))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(content().json(responseJson));
@@ -164,12 +170,13 @@ public class UserControllerIntegrationTests {
 
 
     @Test
-    public void getFollowersUserASCTest() throws Exception {
+    public void getFollowersUserDescTest() throws Exception {
 
         FollowersDTO followersDTO = new FollowersDTO();
         followersDTO.setFollowers(new ArrayList<>());
         followersDTO.setUserName("agustin");
         followersDTO.setUserId(5);
+
         ObjectWriter writer = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false)
                 .writer().withDefaultPrettyPrinter();
         String responseJson = writer.writeValueAsString(followersDTO);
