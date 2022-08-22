@@ -22,15 +22,26 @@ public class UserRepository implements IUserRepository {
         User u2 = new User(2222, "Alexander The Great", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User u3 = new User(3333, "Me", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         User u4 = new User(4444, "Bob", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        User u5 = new User(5555, "Seller", new ArrayList<>(), new ArrayList<>(), List.of(new Post(2222, 1234, LocalDate.of(2022, 8, 10), new Product(), 99, 1000.0, false, 0.0),
-                new Post(2222, 1234, LocalDate.of(2022, 7, 10), new Product(), 99, 1000.0, false, 0.0)));
+        User u5 = new User(5555, "Seller1", new ArrayList<>(), new ArrayList<>(),
+                List.of(
+                        new Post(2222, 1234, LocalDate.of(2022, 8, 10), new Product(), 99, 1000.0, false, 0.0),
+                        new Post(2222, 1234, LocalDate.of(2022, 7, 10), new Product(), 99, 1000.0, false, 0.0)
+                ));
+        User u6 = new User(6666, "Seller2", new ArrayList<>(), new ArrayList<>(),
+                List.of(
+                        new Post(2222, 1234, LocalDate.of(2022, 8, 10), new Product(), 99, 1000.0, false, 0.0),
+                        new Post(2222, 1234, LocalDate.of(2022, 7, 10), new Product(), 99, 1000.0, false, 0.0)
+                ));
 
+        User u7 = new User(7777, "Follower Duran", new ArrayList<>(), List.of(u5, u6), new ArrayList<>());
 
         user.add(u1);
         user.add(u2);
         user.add(u3);
         user.add(u4);
         user.add(u5);
+        user.add(u6);
+        user.add(u7);
 
 
 
