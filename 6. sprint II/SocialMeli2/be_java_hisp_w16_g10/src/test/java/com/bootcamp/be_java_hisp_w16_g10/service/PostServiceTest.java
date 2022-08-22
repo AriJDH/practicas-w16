@@ -72,9 +72,9 @@ class PostServiceTest {
         //Act
         when(postRepository.findById(id)).thenReturn(null);
         //Assert
-        assertThrows(NotFoundException.class, () -> postService.findById(id));
+         NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> postService.findById(id));
         verify(postRepository, atLeastOnce()).findById(id);
-
+        assertEquals(String.format("The post with id: %s don't exists.", id), notFoundException.getMessage());
     }
 
     @Test
@@ -111,7 +111,8 @@ class PostServiceTest {
         //Act
         //postService.save(postReqDTO);
         //Assert
-        assertThrows(ConstraintViolationException.class, () -> postService.save(postReqDTO));
+        ConstraintViolationException constraintViolationException = assertThrows(ConstraintViolationException.class, () -> postService.save(postReqDTO));
+        assertEquals("The date of the post is in the future.", constraintViolationException.getMessage());
     }
 
     //TODO check findById in the listFollowersPosts
@@ -124,9 +125,11 @@ class PostServiceTest {
     void shouldRaiseExceptionWhenOrderParamIsNotValid() {
         User user = Factory.generateUser(1);
         when(this.userService.findById(1)).thenReturn(user);
-        assertThrows(BadRequestException.class, () -> {
+
+        BadRequestException badRequestException = assertThrows(BadRequestException.class, () -> {
             this.postService.listFollowersPosts(1, "pato");
         });
+        assertEquals("Invalid order parameter", badRequestException.getMessage());
     }
 
     @Test
@@ -215,7 +218,7 @@ class PostServiceTest {
     }
 
    @Test
-   void findByUserId() {
+   void shouldReturnUserPostListWhenValidUserIdIsGiven() {
 
       //arrange
 

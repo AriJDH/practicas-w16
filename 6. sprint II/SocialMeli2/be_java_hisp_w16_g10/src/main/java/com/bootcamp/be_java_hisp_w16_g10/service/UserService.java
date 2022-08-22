@@ -121,7 +121,7 @@ public class UserService implements IUserService {
     public FollowedListResDTO listFollowed(Integer userId, String order) {
         User user = this.validateUser(userId); //valida que exista el usuario
 
-        if(!List.of("name_asc", "name_desc").contains(order))throw new BadRequestException("Invalid order parameter");
+        if(!List.of("name_asc", "name_desc").contains(order))throw new BadRequestException("Invalid order parameter.");
 
         var followeds = user.getFollowed().stream();
 

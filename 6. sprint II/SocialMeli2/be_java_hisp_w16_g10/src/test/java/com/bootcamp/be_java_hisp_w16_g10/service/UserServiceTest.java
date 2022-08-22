@@ -74,10 +74,14 @@ class UserServiceTest {
     void shouldRaiseAnExceptionWhenTheUserToFollowDoesNotExists() {
         when(this.userRepository.findById(1)).thenReturn(Factory.generateUser(1));
         when(this.userRepository.findById(2)).thenReturn(null);
-        assertThrows(NotFoundException.class,
+
+        NotFoundException notFoundException = assertThrows(NotFoundException.class,
                 () ->this.userService.follow(1, 2)
         );
+
+        assertEquals(String.format("The user with id: %s don't exists.", 2), notFoundException.getMessage());
     }
+
     @Test
     void shouldRaiseAnExceptionWhenTheUserAlreadyFollowTheUser() {
         User user = new User(1,"Ale",new ArrayList<>(),new ArrayList<>());
@@ -85,19 +89,24 @@ class UserServiceTest {
         user.getFollowed().add(user2);   
         when(this.userRepository.findById(1)).thenReturn(user);
         when(this.userRepository.findById(2)).thenReturn(user2);
-        //TODO matchear los mensajes correctos
-        assertThrows(BadRequestException.class,
+
+        BadRequestException badRequestException = assertThrows(BadRequestException.class,
                 () -> this.userService.follow(1, 2)
         );
+
+        assertEquals("Can't follow a user you already follow.", badRequestException.getMessage());
     }
     @Test
     void shouldRaiseAnExceptionWhenTheUserToFollowIsNotASeller() {
         User user = Factory.generateUser(1);
         when(this.userRepository.findById(1)).thenReturn(user);
         when(this.userRepository.findById(2)).thenReturn(Factory.generateUser(2));
-        assertThrows(BadRequestException.class,
+
+        BadRequestException badRequestException = assertThrows(BadRequestException.class,
                 () -> this.userService.follow(2, 1)
         );
+
+        assertEquals(String.format("The user with the id %s is not a seller.", 1), badRequestException.getMessage());
     }
     @Test
     void shouldFollowTheUser() {
@@ -120,8 +129,9 @@ class UserServiceTest {
         //Act
         when(userRepository.findById(id)).thenReturn(null);
         //Assert
-        assertThrows(NotFoundException.class, () -> userService.findById(id));
+        NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> userService.findById(id));
         verify(userRepository, atLeastOnce()).findById(id);
+        assertEquals(String.format("The user with id: %s don't exists.", id), notFoundException.getMessage());
     }
 
     @Test
@@ -158,11 +168,15 @@ class UserServiceTest {
 
    @Test
    void shouldRiseNotFoundException_whenFindByIdReturnsNull(){
+       var id = anyInt();
+
       //act
-      when(userRepository.findById(Mockito.anyInt())).thenReturn(null);
-       assertThrows(NotFoundException.class, ()-> {
-           userService.validateUser(Mockito.anyInt());
-      });   
+      when(userRepository.findById(id)).thenReturn(null);
+       NotFoundException notFoundException =  assertThrows(NotFoundException.class, ()-> {
+           userService.validateUser(id);
+      });
+
+       assertEquals(String.format("The user with id: %s don't exists.", id), notFoundException.getMessage());
    }
 
    @Test
@@ -191,9 +205,10 @@ class UserServiceTest {
 
    @Test
    void shouldRiseBadRequestException_whenTryToUnfollowTheSameId(){
-      assertThrows(BadRequestException.class, ()-> {
+      BadRequestException badRequestException =  assertThrows(BadRequestException.class, ()-> {
          userService.unfollow(1, 1);   
-      });   
+      });
+      assertEquals("Cannot unfollow yourself", badRequestException.getMessage());
    }
 
    @Test
@@ -210,18 +225,21 @@ class UserServiceTest {
       when(userRepository.findById(1)).thenReturn(user);   
       when(userRepository.findById(2)).thenReturn(userToUnfollow);
 
-      assertThrows(BadRequestException.class, ()-> {
+      BadRequestException badRequestException = assertThrows(BadRequestException.class, ()-> {
          userService.unfollow(1, 2);
-      });   
+      });
+
+      assertEquals("The user is not being followed.", badRequestException.getMessage());
    }
 
    @Test
    void validateUserNotFoundCountFollowers() {
        when(this.userRepository.findById(1)).thenReturn(null);
       //assert
-      assertThrows(NotFoundException.class, () -> {
+      NotFoundException notFoundException=  assertThrows(NotFoundException.class, () -> {
          this.userService.countFollowers(1);
       });
+      assertEquals(String.format("The user with id: %s don't exists.", 1), notFoundException.getMessage());
    }
 
    @Test
@@ -250,7 +268,8 @@ class UserServiceTest {
       when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
       //assert
-      assertThrows(BadRequestException.class, () -> userService.countFollowers(1));
+      BadRequestException badRequestException = assertThrows(BadRequestException.class, () -> userService.countFollowers(1));
+        assertEquals(String.format("The user with the id %s is not a seller.", 1), badRequestException.getMessage());
    }
 
    @Test
@@ -263,7 +282,8 @@ class UserServiceTest {
       when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
       //assert
-      assertThrows(BadRequestException.class, () -> userService.listFollowers(1,""));
+       BadRequestException badRequestException =  assertThrows(BadRequestException.class, () -> userService.listFollowers(1,""));
+      assertEquals(String.format("The user with the id %s is not a seller.", 1), badRequestException.getMessage());
    }
 
    @Test
@@ -276,11 +296,12 @@ class UserServiceTest {
       when(postService.findByUserId(anyInt())).thenReturn(generateListPostResDTO(0,1));
 
       //assert
-      assertThrows(BadRequestException.class, () -> userService.listFollowers(1,"papa"));
+      BadRequestException badRequestException = assertThrows(BadRequestException.class, () -> userService.listFollowers(1,"papa"));
+      assertEquals(String.format("The user with the id %s is not a seller.", 1), badRequestException.getMessage());//TODO deberia devolver otra excption
    }
 
    @Test
-   void shouldReturnBadRequestExceptionOrderAscInListFollowers() {
+   void shouldReturnOrderAscInListFollowers() {
       //arrange
       var user = generateUserWithFollowers(1);
 
@@ -300,7 +321,7 @@ class UserServiceTest {
    }
 
    @Test
-   void shouldReturnBadRequestExceptionOrderDescInListFollowers() {
+   void shouldReturnOrderDescInListFollowers() {
       //arrange
       var user = generateUserWithFollowers(1);
 
@@ -329,11 +350,12 @@ class UserServiceTest {
       when(userRepository.findById(1)).thenReturn(user);
 
       //assert
-      assertThrows(BadRequestException.class, () -> userService.listFollowed(1,"papa"));
+      BadRequestException badRequestException = assertThrows(BadRequestException.class, () -> userService.listFollowed(1,"papa"));
+       assertEquals(String.format("Invalid order parameter."), badRequestException.getMessage());
    }
 
    @Test
-   void shouldReturnBadRequestExceptionOrderAscInListFollowed() {
+   void shouldReturnOrderAscInListFollowed() {
       //arrange
       var user = generateUserWithFollowed(1);
 
@@ -347,7 +369,7 @@ class UserServiceTest {
    }
 
    @Test
-   void shouldReturnBadRequestExceptionOrderDescInListFollowed() {
+   void shouldReturnOrderDescInListFollowed() {
       //arrange
       var user = generateUserWithFollowed(1);
 
