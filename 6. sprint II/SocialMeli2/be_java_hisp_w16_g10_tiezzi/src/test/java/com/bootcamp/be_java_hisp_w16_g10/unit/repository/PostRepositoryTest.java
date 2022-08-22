@@ -20,25 +20,28 @@ class PostRepositoryTest {
         this.posts = Factory.generateListOfPosts(3, 1);
         this.posts.forEach(post -> this.postRepository.save(post));
     }
+
     @Test
     void shouldReturnAllPosts() {
         var posts = this.postRepository.findAll();
         assertNotNull(posts);
         assertEquals(3, posts.size());
     }
+
     @Test
-    void givenAnIdShouldReturnAPostWhenIsCalled() {
+    void givenAnIdShouldReturnAPost_whenIsCalled() {
         Post post = this.postRepository.findById(1);
         assertNotNull(post);
         assertInstanceOf(Post.class, post);
     }
+
     @Test
-    void givenANonExistentIdShouldReturnNullWhenIsCalled() {
+    void givenANonExistentIdShouldReturnNull_whenIsCalled() {
         Post post = this.postRepository.findById(321321);
         assertNull(post);
     }
-    @Test
 
+    @Test
     void shouldSavePost() {
         var post = Factory.generatePost();
 
@@ -47,7 +50,7 @@ class PostRepositoryTest {
     }
 
     @Test
-    void shloudFindUserById() {
+    void shouldFindPostsByValidUserIdWithPosts() {
         var posts = this.postRepository.findByUserId(1);
 
         assertNotNull(posts);
@@ -55,9 +58,9 @@ class PostRepositoryTest {
     }
 
     @Test
-    void shouldnotFoundUserById() {
+    void shouldNotFindPostsByValidUserIdWithoutPosts() {
         var posts = this.postRepository.findByUserId(1000);
 
-        assertEquals("[]",posts.toString());
+        assertEquals("[]", posts.toString());
     }
 }

@@ -15,7 +15,6 @@ import com.bootcamp.be_java_hisp_w16_g10.service.UserService;
 import com.bootcamp.be_java_hisp_w16_g10.util.Factory;
 import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -69,9 +68,9 @@ class PostServiceTest {
         //Act
         when(postRepository.findById(id)).thenReturn(null);
         //Assert
-        assertThrows(NotFoundException.class, () -> postService.findById(id));
+        NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> postService.findById(id));
         verify(postRepository, atLeastOnce()).findById(id);
-
+        assertEquals(String.format("The post with id: %s doesn't exist.", id), notFoundException.getMessage());
     }
 
     @Test
@@ -108,32 +107,48 @@ class PostServiceTest {
         //Act
         //postService.save(postReqDTO);
         //Assert
-        assertThrows(ConstraintViolationException.class, () -> postService.save(postReqDTO));
+        ConstraintViolationException constraintViolationException = assertThrows(ConstraintViolationException.class, () -> postService.save(postReqDTO));
+        assertEquals("The date of the post is in the future.", constraintViolationException.getMessage());
     }
 
-    //TODO check findById in the listFollowersPosts
+    //Este test no tiene mucho sentido, pero de la manera en la que creamos dependencia entre PostService y UserService
+    //no nos permite lograr que el user service actue de manera normal, así que tenemos que mockear el throw de la excepción
     @Test
     void listFollowersPosts() {
+        // Arrange
+        Integer userID = 100;
 
+        //Act
+        when(userService.findById(Mockito.anyInt())).
+                thenThrow(new NotFoundException(String.format("The user with id: %s doesn't exist.", userID)));
+
+        //Assert
+        assertThrows(NotFoundException.class, () -> postService.listFollowersPosts(userID, "name_asc"));
     }
 
     @Test
-    void shouldRaiseExceptionWhenOrderParamIsNotValid() {
+    void shouldRaiseException_whenOrderParamIsNotValid() {
+        // Arrange
         User user = Factory.generateUser(1);
+
+        //Act
         when(this.userService.findById(1)).thenReturn(user);
-        assertThrows(BadRequestException.class, () -> {
-            this.postService.listFollowersPosts(1, "pato");
-        });
+
+        //Assert
+        BadRequestException badRequestException = assertThrows(BadRequestException.class, () -> this.postService.listFollowersPosts(1, "pato"));
+        assertEquals("Invalid order parameter", badRequestException.getMessage());
     }
 
     @Test
-    void shouldReturnOrdererdByDateAscWhenIsCalledWithDateAscParam() {
+    void shouldReturnOrderedByDateAsc_whenIsCalledWithDateAscParam() {
+        // Arrange
         User user = Factory.generateUserWithFollowed(1);
         //id uno es el usuario, 2, 3, 4 que tienen que tener posts
         List<Post> postsUser2 = Factory.generateListOfPosts(2, 2);
         List<Post> postsUser3 = Factory.generateListOfPosts(2, 3);
         List<Post> postsUser4 = Factory.generateListOfPosts(2, 4);
 
+        //Act
         when(this.userService.findById(1)).thenReturn(user);
         when(this.postRepository.findByUserId(2)).thenReturn(postsUser2);
         when(this.postRepository.findByUserId(3)).thenReturn(postsUser3);
@@ -148,11 +163,14 @@ class PostServiceTest {
                 .filter(post -> post.getDate().compareTo(localDate) > 0)
                 .sorted(Comparator.comparing(Post::getDate))
                 .collect(Collectors.toList());
+
+        //Assert
         assertEquals(
                 Mapper.parseToPostListResDTO(user, posts),
                 this.postService.listFollowersPosts(1, "date_asc")
         );
     }
+
     @Test
     void shouldReturnOrderedByDateAscAndFilteredWithMinus14Days() {
         User user = Factory.generateUserWithFollowed(1);
@@ -161,7 +179,7 @@ class PostServiceTest {
         List<Post> postsUser2 = Factory.generateListOfPosts(2, 2);
         List<Post> postsUser3 = Factory.generateListOfPosts(2, 3);
         List<Post> postsUser4 = Factory.generateListOfPosts(2, 4);
-        postsUser4.stream().forEach(post -> post.setDate(LocalDate.now().minusDays(30)));
+        postsUser4.forEach(post -> post.setDate(LocalDate.now().minusDays(30)));
 
         when(this.userService.findById(1)).thenReturn(user);
         when(this.postRepository.findByUserId(2)).thenReturn(postsUser2);
@@ -184,7 +202,7 @@ class PostServiceTest {
     }
 
     @Test
-    void shouldReturnOrdererdByDateDescWhenIsCalledWithDateDescParam() {
+    void shouldReturnOrdererdByDateDesc_whenIsCalledWithDateDescParam() {
         User user = Factory.generateUserWithFollowed(1);
         //id uno es el usuario, 2, 3, 4 que tienen que tener posts
         List<Post> postsUser2 = Factory.generateListOfPosts(2, 2);
@@ -211,79 +229,79 @@ class PostServiceTest {
         );
     }
 
-   @Test
-   void findByUserId() {
+    @Test
+    void shouldReturnUserPostList_whenValidUserIdIsGiven() {
 
-      //arrange
+        //arrange
 
-      PostResDTO postResDTO = PostResDTO.builder()
-      .userId(1)
-      .postId(2)
-      .date(LocalDate.now())
-      .category(100)
-      .price(20d)
-      .product(ProductResDTO.builder()
-         .productId(235)
-         .productName("Silla Gammer")
-         .type("Gammer")
-         .brand("Corsair")
-         .color("Red")
-         .notes("")
-         .build()
-      )
-      .build();
+        PostResDTO postResDTO = PostResDTO.builder()
+                .userId(1)
+                .postId(2)
+                .date(LocalDate.now())
+                .category(100)
+                .price(20d)
+                .product(ProductResDTO.builder()
+                        .productId(235)
+                        .productName("Silla Gammer")
+                        .type("Gammer")
+                        .brand("Corsair")
+                        .color("Red")
+                        .notes("")
+                        .build()
+                )
+                .build();
 
-      List<PostResDTO> listPostResDTO = List.of(
-         postResDTO
-      );
-
-
-      Post post =  Post.builder()
-      .id(2)
-      .userId(1)
-      .date(LocalDate.now())
-      .price(20d)
-      .category(100)
-      .product(Product.builder()
-         .id(235)
-         .name("Silla Gammer")
-         .type("Gammer")
-         .brand("Corsair")
-         .color("Red")
-         .notes("")
-         .build()
-      )
-      .build();
-
-      List<Post> listPost = List.of(
-         post
-      );
+        List<PostResDTO> listPostResDTO = List.of(
+                postResDTO
+        );
 
 
-      //act
+        Post post = Post.builder()
+                .id(2)
+                .userId(1)
+                .date(LocalDate.now())
+                .price(20d)
+                .category(100)
+                .product(Product.builder()
+                        .id(235)
+                        .name("Silla Gammer")
+                        .type("Gammer")
+                        .brand("Corsair")
+                        .color("Red")
+                        .notes("")
+                        .build()
+                )
+                .build();
 
-      //Este try es para probar realizar un mock sobre la clase Mapper metodo parseToPostResDTO
-      //Al hacer esto no importa que lista de post enviemos siempre nos devolvera el postResDTO
-      //Para probar su funcionamiento se deben cambiar los valores de los atributos de post que figura mas arriba.
+        List<Post> listPost = List.of(
+                post
+        );
 
-      //try(MockedStatic<Mapper> mapper = Mockito.mockStatic(Mapper.class)){
 
-      //   mapper.when(()-> Mapper.parseToPostResDTO(Mockito.any())).thenReturn(postResDTO);
+        //act
 
-      //   lenient().when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
+        //Este try es para probar realizar un mock sobre la clase Mapper metodo parseToPostResDTO
+        //Al hacer esto no importa que lista de post enviemos siempre nos devolvera el postResDTO
+        //Para probar su funcionamiento se deben cambiar los valores de los atributos de post que figura mas arriba.
 
-      //   List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());
+        //try(MockedStatic<Mapper> mapper = Mockito.mockStatic(Mapper.class)){
 
-      //   verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
-      //   Assertions.assertTrue(resPostService.equals(listPostResDTO));
+        //   mapper.when(()-> Mapper.parseToPostResDTO(Mockito.any())).thenReturn(postResDTO);
 
-      //};
+        //   lenient().when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
 
-      when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
-      List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());
-      verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
-      Assertions.assertTrue(resPostService.equals(listPostResDTO));
+        //   List<PostResDTO> resPostService =  postService.findByUserId(Mockito.anyInt());
 
-   }
+        //   verify(postRepository,atMostOnce()).findByUserId(Mockito.anyInt());
+        //   Assertions.assertTrue(resPostService.equals(listPostResDTO));
+
+        //};
+
+        when(postRepository.findByUserId(Mockito.anyInt())).thenReturn(listPost);
+        List<PostResDTO> resPostService = postService.findByUserId(Mockito.anyInt());
+        verify(postRepository, atMostOnce()).findByUserId(Mockito.anyInt());
+        assertEquals(resPostService, listPostResDTO);
+
+    }
 
 }
