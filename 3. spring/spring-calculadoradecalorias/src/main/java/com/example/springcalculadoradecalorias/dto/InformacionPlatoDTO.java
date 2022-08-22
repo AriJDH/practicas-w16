@@ -9,7 +9,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RequestDTO {
-    private String nombre;
-    private List<IngredienteRequestDTO> ingredientes;
+public class InformacionPlatoDTO {
+    private int caloriasTotales;
+    private List<IngredienteDTO> ingredientes;
+    private IngredienteDTO ingredienteMayorCalorico;
 }

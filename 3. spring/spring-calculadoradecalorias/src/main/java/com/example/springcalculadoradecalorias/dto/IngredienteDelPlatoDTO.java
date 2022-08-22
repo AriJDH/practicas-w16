@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IngredienteRequestDTO {
+public class IngredienteDelPlatoDTO {
     private String nombre;
     private int peso;
 }

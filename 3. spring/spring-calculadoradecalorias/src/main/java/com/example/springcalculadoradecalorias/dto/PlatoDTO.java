@@ -5,11 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResponseDTO {
-    private int caloriasTotales;
-    private List<IngredienteDTO> ingredientes;
-    private IngredienteDTO ingredienteMayorCalorico;
+public class PlatoDTO {
+    private String nombre;
+    private List<IngredienteDelPlatoDTO> ingredientes;
 }
