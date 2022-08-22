@@ -84,7 +84,10 @@ public class UserControllerIntegrationTests {
     @Test
     public void getCountFollowers() throws Exception {
 
-        FollowerCountDTO response= new FollowerCountDTO(1,"pablo",0);
+        FollowerCountDTO response= new FollowerCountDTO();
+        response.setFollowersCount(0);
+        response.setUserId(1);
+        response.setUserName("pablo");
 
         ObjectWriter writer = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false).writer().withDefaultPrettyPrinter();
         String responseJson = writer.writeValueAsString(response);
@@ -101,6 +104,20 @@ public class UserControllerIntegrationTests {
                 .andDo(print()).andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(result -> result.getResolvedException());
+
+    }
+    @Test
+    public void followUserErrorAlreadyFollowersExceptionTest() throws Exception {
+        ExceptionApiDTO exceptionApiDTO=new ExceptionApiDTO();
+        exceptionApiDTO.setTitle("Error");
+        exceptionApiDTO.setMessage("El usuario con el id: 1 ya es seguidor de : 6");
+
+        ObjectWriter writer = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false).writer().withDefaultPrettyPrinter();
+        String responseJson = writer.writeValueAsString(exceptionApiDTO);
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/users/"+1+"/follow/"+6))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(content().json(responseJson));
 
     }
 
