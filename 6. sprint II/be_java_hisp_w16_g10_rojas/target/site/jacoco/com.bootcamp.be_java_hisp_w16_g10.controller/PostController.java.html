@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.controller</a> &gt; <span class="el_source">PostController.java</span></div><h1>PostController.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.controller;
+
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.service.IPostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/products&quot;)
+<span class="fc" id="L16">public class PostController {</span>
+    @Autowired
+    private IPostService postService;
+    
+    //US 0005: Dar de alta una nueva publicación
+    @PostMapping(&quot;/post&quot;)
+    public ResponseEntity&lt;?&gt; US005(@Valid @RequestBody PostReqDTO postReqDTO){
+<span class="fc" id="L23">        this.postService.save(postReqDTO);</span>
+<span class="fc" id="L24">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+    }
+    
+    //US 0006: Obtener un listado de las publicaciones realizadas por los vendedores que un usuario sigue en las
+    // últimas dos semanas (para esto tener en cuenta ordenamiento por fecha, publicaciones más recientes primero).
+    @GetMapping(&quot;/followed/{userId}/list&quot;)
+    public ResponseEntity&lt;PostListResDTO&gt; US006(@PathVariable Integer userId, @RequestParam Optional&lt;String&gt; order){
+<span class="fc" id="L31">        return new ResponseEntity&lt;&gt;(this.postService.listFollowersPosts(userId, order.orElse(&quot;date_desc&quot;)), HttpStatus.OK);</span>
+    }
+    
+    ////US 0010: Llevar a cabo la publicación de un nuevo producto en promoción
+    //@PostMapping(&quot;/promo-post&quot;)
+    //public String US0010(){
+    //     return &quot;asdfasdf&quot;;
+    //}
+    //
+    // //US 0011: Obtener la cantidad de productos en promoción de un determinado vendedor
+    //@GetMapping(&quot;/promo-post/count?user_id={userId}&quot;)
+    //public void US0011(){
+
+    //}
+    //
+    ////US 0012: Obtener un listado de todos los productos en promoción de un determinado vendedor
+    //@GetMapping(&quot;/promo-post/list?user_id={userId}&quot;)
+    //public void US0012(){
+
+    //}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

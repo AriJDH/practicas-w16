@@ -1,0 +1,9 @@
+com/bootcamp/be_java_hisp_w16_g10/integration/PostControllerIntegrationTest.class
+com/bootcamp/be_java_hisp_w16_g10/controller/UserControllerTest.class
+com/bootcamp/be_java_hisp_w16_g10/controller/PostControllerTest.class
+com/bootcamp/be_java_hisp_w16_g10/repository/PostRepositoryTest.class
+com/bootcamp/be_java_hisp_w16_g10/util/Factory.class
+com/bootcamp/be_java_hisp_w16_g10/service/UserServiceTest.class
+com/bootcamp/be_java_hisp_w16_g10/repository/UserRepositoryTest.class
+com/bootcamp/be_java_hisp_w16_g10/service/PostServiceTest.class
+com/bootcamp/be_java_hisp_w16_g10/BeJavaHispW16G10ApplicationTests.class

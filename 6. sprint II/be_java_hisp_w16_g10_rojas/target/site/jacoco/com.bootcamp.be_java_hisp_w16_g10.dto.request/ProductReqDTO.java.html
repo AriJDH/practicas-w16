@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductReqDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.dto.request</a> &gt; <span class="el_source">ProductReqDTO.java</span></div><h1>ProductReqDTO.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.dto.request;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.*;
+
+<span class="pc bnc" id="L12" title="All 54 branches missed.">@Data</span>
+<span class="nc" id="L13">@Builder</span>
+<span class="fc" id="L14">@NoArgsConstructor</span>
+<span class="fc" id="L15">@AllArgsConstructor</span>
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class ProductReqDTO {
+    @NotNull(message = &quot;El id no puede estar vacío.&quot;)
+    @Min(value = 1L, message = &quot;El id debe ser mayor a cero.&quot;)
+<span class="fc" id="L20">    private Integer productId;</span>
+    @NotBlank(message = &quot;El campo no puede estar vacio.&quot;)
+    @Size(max = 40, message = &quot;La longitud no puede superar los 40 caracteres.&quot;)
+    //El espacio es importante
+    @Pattern(regexp = &quot;[A-ZÀ-Úa-zà-ú\\d ]*&quot;, message = &quot;El nombre del producto no debe contener caracteres especiales.&quot;)
+<span class="fc" id="L25">    private String productName;</span>
+    @NotBlank(message = &quot;El campo no puede estar vacio.&quot;)
+    @Pattern(regexp = &quot;[A-ZÀ-Úa-zà-ú\\d ]*&quot;, message = &quot;El nombre del tipo no debe contener caracteres especiales.&quot;)
+    @Size(max = 15, message = &quot;La longitud no puede superar los 15 caracteres.&quot;)
+<span class="fc" id="L29">    private String type;</span>
+    @NotBlank(message = &quot;El campo no puede estar vacio.&quot;)
+    @Size(max = 25, message = &quot;La longitud no puede superar los 25 caracteres.&quot;)
+    @Pattern(regexp = &quot;[A-ZÀ-Úa-zà-ú\\d ]*&quot;, message = &quot;El nombre del tipo no debe contener caracteres especiales.&quot;)
+<span class="fc" id="L33">    private String brand;</span>
+    @NotBlank(message = &quot;El campo no puede estar vacio.&quot;)
+    @Size(max = 15, message = &quot;La longitud no puede superar los 15 caracteres.&quot;)
+    @Pattern(regexp = &quot;[A-ZÀ-Úa-zà-ú\\d ]*&quot;, message = &quot;El color no debe contener caracteres especiales.&quot;)
+<span class="fc" id="L37">    private String color;</span>
+    @NotBlank(message = &quot;El campo no puede estar vacio.&quot;)
+    @Size(max = 80, message = &quot;La longitud no puede superar los 80 caracteres.&quot;)
+    @Pattern(regexp = &quot;[A-ZÀ-Úa-zà-ú\\d ]*&quot;, message = &quot;El campo no debe contener caracteres especiales.&quot;)
+<span class="fc" id="L41">    private String notes;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

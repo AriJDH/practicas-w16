@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.service</a> &gt; <span class="el_source">PostService.java</span></div><h1>PostService.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.service;
+
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostResDTO;
+import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
+import com.bootcamp.be_java_hisp_w16_g10.exception.ConstraintViolationException;
+import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
+import com.bootcamp.be_java_hisp_w16_g10.repository.IPostRepository;
+import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+<span class="fc" id="L24">public class PostService implements IPostService {</span>
+    @Autowired
+    private IPostRepository postRepository;
+    @Lazy
+    @Autowired
+    private UserService userService;
+
+    //Recibe un id como parámetro y devuelve el Post si es que existe, de lo contrario lanza un NotFoundException.
+    @Override
+    public PostResDTO findById(Integer id) {
+<span class="fc" id="L34">        return Mapper.parseToPostResDTO(this.validatePost(id));</span>
+    }
+
+    //Devuelve todos los posts
+    @Override
+    public List&lt;PostResDTO&gt; findAll() {
+<span class="fc" id="L40">        return this.postRepository.findAll().stream()</span>
+<span class="fc" id="L41">                .map(Mapper::parseToPostResDTO)</span>
+<span class="fc" id="L42">                .collect(Collectors.toList());</span>
+    }
+
+    //Recibe un id como parámetro y devuelve todos los Posts que corresponden a ese usuario.
+    @Override
+    public List&lt;PostResDTO&gt; findByUserId(Integer userID){
+<span class="fc" id="L48">        return this.postRepository.findByUserId(userID).stream()</span>
+<span class="fc" id="L49">                .map(Mapper::parseToPostResDTO)</span>
+<span class="fc" id="L50">                .collect(Collectors.toList());</span>
+    }
+
+    //Recibe un PostReqDTO, aplica validaciones y finalemente guarda el post.
+    @Override
+    public void save(PostReqDTO postReqDTO){
+<span class="fc" id="L56">        this.userService.findById(postReqDTO.getUserId());</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        if(postReqDTO.getDate().isAfter(LocalDate.now()))</span>
+<span class="fc" id="L58">            throw new ConstraintViolationException(&quot;The date of the post is in the future.&quot;);</span>
+<span class="fc" id="L59">        this.postRepository.save(Mapper.parseToPost(postReqDTO));</span>
+<span class="fc" id="L60">    }</span>
+
+    //Recibe un userID y una String(que puede ser null) para aplicar un formato de ordenamiento
+    //devolviendo un PostListResDTO de los post que fueron publicados dentro de los ultimos 14 días.
+    @Override
+    public PostListResDTO listFollowersPosts(Integer userId, String order) {
+<span class="fc" id="L66">        User user = this.userService.findById(userId);</span>
+<span class="fc" id="L67">        LocalDate localDate = LocalDate.now().minusDays(14);</span>
+
+<span class="fc" id="L69">        if(!List.of(&quot;date_asc&quot;, &quot;date_desc&quot;)</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">                .contains(order))throw new BadRequestException(&quot;Invalid order parameter&quot;);</span>
+<span class="fc" id="L71">        var posts = user.getFollowed().stream()</span>
+<span class="fc" id="L72">                .map(seller -&gt; this.postRepository.findByUserId(seller.getId()))</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">                .filter(sellerPosts -&gt; sellerPosts.size() &gt; 0)</span>
+<span class="fc" id="L74">                .flatMap(Collection::stream)</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">                .filter(post -&gt; post.getDate().compareTo(localDate) &gt; 0);</span>
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (order.equals(&quot;date_asc&quot;))</span>
+<span class="fc" id="L78">            posts = posts.sorted(Comparator.comparing(Post::getDate));</span>
+        else
+<span class="fc" id="L80">            posts = posts.sorted(Comparator.comparing(Post::getDate).reversed());</span>
+
+<span class="fc" id="L82">        return Mapper.parseToPostListResDTO(user, posts.collect(Collectors.toList()));</span>
+    }
+
+    //Recibe un postID y aplica el control para verificar que el Post exista.
+    private Post validatePost(Integer postID) {
+<span class="fc" id="L87">        Post post = this.postRepository.findById(postID);</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (post == null) //valida si existe el post, sino devuelve un error</span>
+<span class="fc" id="L89">            throw new NotFoundException(String.format(&quot;The post with id: %s doesn't exist.&quot;, postID));</span>
+<span class="fc" id="L90">        return post;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

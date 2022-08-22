@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Mapper.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.util</a> &gt; <span class="el_source">Mapper.java</span></div><h1>Mapper.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.util;
+
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
+import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+<span class="nc" id="L13">public class Mapper {</span>
+    public static FollowedListResDTO parseToFollowedListResDTO(User user, List&lt;User&gt; followed) {
+<span class="fc" id="L15">        return FollowedListResDTO.builder()</span>
+<span class="fc" id="L16">                .userId(user.getId())</span>
+<span class="fc" id="L17">                .userName(user.getUserName())</span>
+<span class="fc" id="L18">                .followed(followed.stream()</span>
+<span class="fc" id="L19">                        .map(Mapper::parseToUserResDTO)</span>
+<span class="fc" id="L20">                        .collect(Collectors.toList()))</span>
+<span class="fc" id="L21">                .build();</span>
+    }
+
+    public static FollowersListResDTO parseToFollowersListResDTO(User user, List&lt;User&gt; followers) {
+<span class="fc" id="L25">        return FollowersListResDTO.builder()</span>
+<span class="fc" id="L26">                .userId(user.getId())</span>
+<span class="fc" id="L27">                .userName(user.getUserName())</span>
+<span class="fc" id="L28">                .followers(followers.stream()</span>
+<span class="fc" id="L29">                        .map(Mapper::parseToUserResDTO)</span>
+<span class="fc" id="L30">                        .collect(Collectors.toList()))</span>
+<span class="fc" id="L31">                .build();</span>
+    }
+
+    public static UserResDTO parseToUserResDTO(User user) {
+<span class="fc" id="L35">        return UserResDTO.builder()</span>
+<span class="fc" id="L36">                .userId(user.getId())</span>
+<span class="fc" id="L37">                .userName(user.getUserName())</span>
+<span class="fc" id="L38">                .build();</span>
+    }
+
+    public static PostResDTO parseToPostResDTO(Post post) {
+<span class="fc" id="L42">        return PostResDTO.builder()</span>
+<span class="fc" id="L43">                .userId(post.getUserId())</span>
+<span class="fc" id="L44">                .category(post.getCategory())</span>
+<span class="fc" id="L45">                .postId(post.getId())</span>
+<span class="fc" id="L46">                .date(post.getDate())</span>
+<span class="fc" id="L47">                .price(post.getPrice())</span>
+<span class="fc" id="L48">                .product(Mapper.parseToProductResDTO(post.getProduct()))</span>
+<span class="fc" id="L49">                .build();</span>
+    }
+
+    public static ProductResDTO parseToProductResDTO(Product product) {
+<span class="fc" id="L53">        return ProductResDTO.builder()</span>
+<span class="fc" id="L54">                .productId(product.getId())</span>
+<span class="fc" id="L55">                .brand(product.getBrand())</span>
+<span class="fc" id="L56">                .color(product.getColor())</span>
+<span class="fc" id="L57">                .notes(product.getNotes())</span>
+<span class="fc" id="L58">                .type(product.getType())</span>
+<span class="fc" id="L59">                .productName(product.getName())</span>
+<span class="fc" id="L60">                .build();</span>
+    }
+
+    public static Product parseToProduct(ProductReqDTO productReqDTO) {
+<span class="fc" id="L64">        return Product.builder()</span>
+<span class="fc" id="L65">                .id(productReqDTO.getProductId())</span>
+<span class="fc" id="L66">                .name(productReqDTO.getProductName())</span>
+<span class="fc" id="L67">                .type(productReqDTO.getType())</span>
+<span class="fc" id="L68">                .brand(productReqDTO.getBrand())</span>
+<span class="fc" id="L69">                .color(productReqDTO.getColor())</span>
+<span class="fc" id="L70">                .notes(productReqDTO.getNotes())</span>
+<span class="fc" id="L71">                .build();</span>
+    }
+
+    public static FollowersCountResDTO parseToFollowersCountResDTO(User user) {
+<span class="fc" id="L75">        return FollowersCountResDTO.builder()</span>
+<span class="fc" id="L76">                .followersCount(user.countFollowers())</span>
+<span class="fc" id="L77">                .userId(user.getId())</span>
+<span class="fc" id="L78">                .userName(user.getUserName())</span>
+<span class="fc" id="L79">                .build();</span>
+    }
+
+    public static PostListResDTO parseToPostListResDTO(User user, List&lt;Post&gt; posts){
+<span class="fc" id="L83">        return PostListResDTO.builder()</span>
+<span class="fc" id="L84">                .userId(user.getId())</span>
+<span class="fc" id="L85">                .posts(posts.stream().map(Mapper::parseToPostResDTO).collect(Collectors.toList()))</span>
+<span class="fc" id="L86">                .build();</span>
+    }
+
+    public static Post parseToPost(PostReqDTO postReqDTO){
+<span class="fc" id="L90">        return Post.builder()</span>
+<span class="fc" id="L91">                .date(postReqDTO.getDate())</span>
+<span class="fc" id="L92">                .userId(postReqDTO.getUserId())</span>
+<span class="fc" id="L93">                .product(parseToProduct(postReqDTO.getProduct()))</span>
+<span class="fc" id="L94">                .category(postReqDTO.getCategory())</span>
+<span class="fc" id="L95">                .price(postReqDTO.getPrice())</span>
+<span class="fc" id="L96">                .id(postReqDTO.getIdPost())</span>
+<span class="fc" id="L97">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

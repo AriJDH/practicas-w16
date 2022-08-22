@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.repository</a> &gt; <span class="el_source">UserRepository.java</span></div><h1>UserRepository.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.repository;
+
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
+
+@Repository
+public class UserRepository implements IUserRepository {
+    private List&lt;User&gt; users;
+
+<span class="fc" id="L14">    public UserRepository() {</span>
+<span class="fc" id="L15">        this.users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L16">        this.users.add(User.builder().id(1).userName(&quot;user1&quot;).followed(new ArrayList&lt;&gt;()).followers(new ArrayList&lt;&gt;()).build());</span>
+<span class="fc" id="L17">        this.users.add(User.builder().id(2).userName(&quot;user2&quot;).followed(new ArrayList&lt;&gt;()).followers(new ArrayList&lt;&gt;()).build());</span>
+<span class="fc" id="L18">        this.users.add(User.builder().id(3).userName(&quot;user3&quot;).followed(new ArrayList&lt;&gt;()).followers(new ArrayList&lt;&gt;()).build());</span>
+<span class="fc" id="L19">        this.users.add(User.builder().id(4).userName(&quot;user4&quot;).followed(new ArrayList&lt;&gt;()).followers(new ArrayList&lt;&gt;()).build());</span>
+<span class="fc" id="L20">        this.users.add(User.builder().id(5).userName(&quot;user5&quot;).followed(new ArrayList&lt;&gt;()).followers(new ArrayList&lt;&gt;()).build());</span>
+<span class="fc" id="L21">    }</span>
+
+    @Override
+    public User findById(Integer id) {
+<span class="fc" id="L25">        return this.users.stream()</span>
+<span class="fc" id="L26">                .filter(user -&gt; user.getId().equals(id))</span>
+<span class="fc" id="L27">                .findFirst()</span>
+<span class="fc" id="L28">                .orElse(null);</span>
+    }
+
+    @Override
+    public List&lt;User&gt; findAll() {
+<span class="fc" id="L33">        return this.users;</span>
+    }
+
+    @Override
+    public User save(User user) {
+<span class="fc" id="L38">        this.users.add(user);</span>
+<span class="fc" id="L39">        return user;</span>
+    }
+
+    @Override
+    public User update(User user) {
+<span class="fc" id="L44">        this.users.set(this.getIndexOfUser(user.getId()), user);</span>
+<span class="fc" id="L45">        return user;</span>
+    }
+
+    private Integer getIndexOfUser(Integer userId) {
+<span class="fc" id="L49">        return IntStream.range(0, users.size())</span>
+<span class="fc" id="L50">                .filter(userInd -&gt; users.get(userInd).getId().equals(userId))</span>
+<span class="fc" id="L51">                .findFirst()</span>
+<span class="fc" id="L52">                .orElse(-1);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

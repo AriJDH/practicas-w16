@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.service</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.service;
+
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
+import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
+import com.bootcamp.be_java_hisp_w16_g10.repository.IUserRepository;
+import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+@Service
+<span class="fc" id="L17">public class UserService implements IUserService {</span>
+    @Autowired
+    private IUserRepository userRepository;
+    @Lazy
+    @Autowired
+    private PostService postService;
+
+    //Recibe un id como parámetro y devuelve el User si es que existe, de lo contrario lanza un NotFoundException.
+    @Override
+    public User findById(Integer id) {
+<span class="fc" id="L27">        return this.validateUser(id);</span>
+    }
+
+    //Devuelve todos los Users
+    @Override
+    public List&lt;UserResDTO&gt; findAll() {
+<span class="fc" id="L33">        return this.userRepository.findAll().stream()</span>
+<span class="fc" id="L34">                .map(Mapper::parseToUserResDTO)</span>
+<span class="fc" id="L35">                .collect(Collectors.toList());</span>
+    }
+
+    //Recibe un userID y un userIdToFollow, realiza validaciones y en caso de que esté correcto
+    //se añade al user2 a la lista de seguidos por el user1 y se agrega el user1 a la
+    //lista de seguidores del user2
+    @Override
+    public void follow(Integer userId, Integer userIdToFollow) {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (userId.equals(userIdToFollow)) //revisa que los dos id sean iguales</span>
+<span class="fc" id="L44">            throw new BadRequestException(&quot;Cannot follow yourself&quot;);</span>
+
+<span class="fc" id="L46">        User user = this.validateUser(userId); //valida que exista el usuario1</span>
+<span class="fc" id="L47">        User userToFollow = this.validateUser(userIdToFollow); //valida que exista el usuario2</span>
+
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (user.getFollowed().contains(userToFollow)) //revisa si el usuario1 sigue al usuario2</span>
+<span class="fc" id="L50">            throw new BadRequestException(&quot;Can't follow a user you already follow.&quot;);</span>
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (this.postService.findByUserId(userIdToFollow).size() == 0) //valida que sea un vendendor</span>
+<span class="fc" id="L53">            throw new BadRequestException(String.format(&quot;The user with the id %s is not a seller.&quot;, userIdToFollow));</span>
+
+<span class="fc" id="L55">        user.getFollowed().add(userToFollow);</span>
+<span class="fc" id="L56">        userToFollow.getFollowers().add(user);</span>
+
+        //lineas redundantes, al ser una BD en memoria ya se encuentran actualizados
+        //simulamos el funcionamiento del repositorio
+<span class="fc" id="L60">        this.userRepository.update(user);</span>
+<span class="fc" id="L61">        this.userRepository.update(userToFollow);</span>
+<span class="fc" id="L62">    }</span>
+
+    //Recibe un userID y un userIdToFollow, realiza validaciones y en caso de que esté correcto
+    //se quita al user2 de la lista de seguidos por el user1 y se quita el user1 de la
+    //lista de seguidores del user2
+    @Override
+    public void unfollow(Integer userId, Integer userIdToUnfollow) {
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (userId.equals(userIdToUnfollow)) //revisa que los dos id sean iguales</span>
+<span class="fc" id="L70">            throw new BadRequestException(&quot;Cannot unfollow yourself&quot;);</span>
+
+<span class="fc" id="L72">        User user = this.validateUser(userId); //valida que exista el usuario1</span>
+<span class="fc" id="L73">        User userToDelete = this.validateUser(userIdToUnfollow); //valida que exista el usuario2</span>
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (!userToDelete.getFollowers().contains(user)) //revisa que el usuario1 no siga al usuario2</span>
+<span class="fc" id="L76">            throw new BadRequestException(&quot;The user is not being followed.&quot;);</span>
+
+<span class="fc" id="L78">        user.getFollowed().remove(userToDelete);</span>
+<span class="fc" id="L79">        userToDelete.getFollowers().remove(user);</span>
+
+        //lineas redundantes, al ser una BD en memoria ya se encuentran actualizados
+        //simulamos el funcionamiento del repositorio
+<span class="fc" id="L83">        this.userRepository.update(user);</span>
+<span class="fc" id="L84">        this.userRepository.update(userToDelete);</span>
+<span class="fc" id="L85">    }</span>
+
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowesCountResDTO con
+    //la cantidad de seguidores del user.
+    @Override
+    public FollowersCountResDTO countFollowers(Integer userId) {
+<span class="fc" id="L91">        User user = this.validateUser(userId); //valida que exista el usuario1</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (this.postService.findByUserId(userId).size() == 0) //valida que sea un vendendor</span>
+<span class="fc" id="L93">            throw new BadRequestException(String.format(&quot;The user with the id %s is not a seller.&quot;, userId));</span>
+<span class="fc" id="L94">        return Mapper.parseToFollowersCountResDTO(user);</span>
+    }
+
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowersListResDTO con
+    //la todos los users que sigue el user.
+    @Override
+    public FollowersListResDTO listFollowers(Integer userId, String order) {
+<span class="fc" id="L101">        User user = this.validateUser(userId);</span>
+
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if (this.postService.findByUserId(userId).size() == 0) //valida que sea un vendendor</span>
+<span class="fc" id="L104">            throw new BadRequestException(String.format(&quot;The user with the id %s is not a seller.&quot;, userId));</span>
+
+<span class="fc" id="L106">        var followers = user.getFollowers().stream();</span>
+
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">        if(!List.of(&quot;name_asc&quot;, &quot;name_desc&quot;).contains(order))throw new BadRequestException(&quot;Invalid order parameter&quot;);</span>
+
+<span class="fc bfc" id="L110" title="All 2 branches covered.">        if (order.equals(&quot;name_asc&quot;))</span>
+<span class="fc" id="L111">            followers = followers.sorted(Comparator.comparing(User::getUserName));</span>
+        else
+<span class="fc" id="L113">            followers = followers.sorted(Comparator.comparing(User::getUserName).reversed());</span>
+
+<span class="fc" id="L115">        return Mapper.parseToFollowersListResDTO(user, followers.collect(Collectors.toList()));</span>
+    }
+
+    //Recibe un userID, realiza validaciones y en caso de que esté correcto devuelve un FollowedListResDTO con
+    //la todos los users que siguen al user.
+    @Override
+    public FollowedListResDTO listFollowed(Integer userId, String order) {
+<span class="fc" id="L122">        User user = this.validateUser(userId); //valida que exista el usuario</span>
+
+<span class="fc bfc" id="L124" title="All 2 branches covered.">        if(!List.of(&quot;name_asc&quot;, &quot;name_desc&quot;).contains(order))throw new BadRequestException(&quot;Invalid order parameter.&quot;);</span>
+
+<span class="fc" id="L126">        var followeds = user.getFollowed().stream();</span>
+
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if (order.equals(&quot;name_asc&quot;))</span>
+<span class="fc" id="L129">            followeds = followeds.sorted(Comparator.comparing(User::getUserName));</span>
+        else
+<span class="fc" id="L131">            followeds = followeds.sorted(Comparator.comparing(User::getUserName).reversed());</span>
+
+<span class="fc" id="L133">        return Mapper.parseToFollowedListResDTO(user, followeds.collect(Collectors.toList()));</span>
+    }
+
+    //Recibe un userID y aplica el control para verificar que el User exista.
+    public User validateUser(Integer userID) {
+<span class="fc" id="L138">        User user = this.userRepository.findById(userID);</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">        if (user == null) //valida si existe un usuario, sino devuelve un error</span>
+<span class="fc" id="L140">            throw new NotFoundException(String.format(&quot;The user with id: %s doesn't exist.&quot;, userID));</span>
+<span class="fc" id="L141">        return user;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

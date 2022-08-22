@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.bootcamp.be_java_hisp_w16_g10.BeJavaHispW16G10ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.363 s - in com.bootcamp.be_java_hisp_w16_g10.BeJavaHispW16G10ApplicationTests

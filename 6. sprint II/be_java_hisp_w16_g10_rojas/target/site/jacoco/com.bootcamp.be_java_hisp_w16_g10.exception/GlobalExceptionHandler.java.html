@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.exception</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.exception;
+
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.ErrorHandlerDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.ExceptionFieldsDTO;
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.FieldErrorDTO;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@ControllerAdvice
+<span class="fc" id="L22">public class GlobalExceptionHandler {</span>
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity&lt;ErrorHandlerDTO&gt; NotFoundException(Exception e){
+<span class="fc" id="L26">        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.NOT_FOUND.value()).message(e.getMessage()).build();</span>
+<span class="fc" id="L27">        return new ResponseEntity&lt;&gt;(errorHandlerDTO, HttpStatus.NOT_FOUND);</span>
+    }
+
+    @ExceptionHandler(FoundException.class)
+    public ResponseEntity&lt;ErrorHandlerDTO&gt; FoundException(Exception e){
+<span class="nc" id="L32">        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.CONFLICT.value()).message(e.getMessage()).build();</span>
+<span class="nc" id="L33">        return new ResponseEntity&lt;&gt;(errorHandlerDTO, HttpStatus.CONFLICT);</span>
+    }
+
+    @ExceptionHandler({
+            UrlNotValidException.class,
+            ConstraintViolationException.class,
+            MissingServletRequestParameterException.class,
+            BadRequestException.class
+        })
+    public ResponseEntity&lt;ErrorHandlerDTO&gt; UrlNotValidException(Exception e){
+<span class="fc" id="L43">        ErrorHandlerDTO errorHandlerDTO = new ErrorHandlerDTO().builder().error(HttpStatus.BAD_REQUEST.value()).message(e.getMessage()).build();</span>
+<span class="fc" id="L44">        return new ResponseEntity&lt;&gt;(errorHandlerDTO, HttpStatus.BAD_REQUEST);</span>
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ExceptionFieldsDTO methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+<span class="nc" id="L50">        BindingResult result = ex.getBindingResult();</span>
+<span class="nc" id="L51">        List&lt;FieldError&gt; fieldErrors = result.getFieldErrors();</span>
+<span class="nc" id="L52">        return processFieldErrors(fieldErrors);</span>
+    }
+
+    private ExceptionFieldsDTO processFieldErrors(List&lt;FieldError&gt; fieldErrors) {
+<span class="nc" id="L56">        return ExceptionFieldsDTO.builder()</span>
+<span class="nc" id="L57">                .error(HttpStatus.BAD_REQUEST.value())</span>
+<span class="nc" id="L58">                .message(&quot;Error de validación.&quot;)</span>
+<span class="nc" id="L59">                .fields(fieldErrors.stream()</span>
+<span class="nc" id="L60">                        .map(error -&gt; new FieldErrorDTO(error.getField(), error.getDefaultMessage()))</span>
+<span class="nc" id="L61">                        .collect(Collectors.toList())</span>
+                )
+<span class="nc" id="L63">                .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PostReqDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.dto.request</a> &gt; <span class="el_source">PostReqDTO.java</span></div><h1>PostReqDTO.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.dto.request;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
+
+<span class="pc bnc" id="L14" title="All 54 branches missed.">@Data</span>
+<span class="fc" id="L15">@NoArgsConstructor</span>
+<span class="fc" id="L16">@AllArgsConstructor</span>
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public class PostReqDTO {
+    @NotNull(message = &quot;El id no puede estar vacío.&quot;)
+    @Min(value = 1L, message = &quot;El id debe ser mayor a cero.&quot;)
+<span class="fc" id="L21">    private Integer userId;</span>
+    @NotNull(message = &quot;El id no puede estar vacío.&quot;)
+    @Min(value = 1L, message = &quot;El id debe ser mayor a cero.&quot;)
+<span class="fc" id="L24">    private Integer idPost;</span>
+    @JsonFormat(pattern = &quot;dd-MM-yyyy&quot;)
+    @NotNull(message = &quot;La fecha no puede estar vacia&quot;)
+<span class="fc" id="L27">    private LocalDate date;</span>
+    @NotNull
+<span class="fc" id="L29">    private @Valid ProductReqDTO product;</span>
+    @NotNull(message = &quot;El campo no puede estar vacio&quot;)
+    @Min(value = 1L, message = &quot;El id debe ser mayor a cero.&quot;)
+<span class="fc" id="L32">    private Integer category;</span>
+    @NotNull(message = &quot;El campo no puede estar vacio.&quot;)
+    @DecimalMax(value = &quot;10000000&quot;, message = &quot;El precio máximo por producto es 10.000.000.&quot;)
+<span class="fc" id="L35">    private Double price;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">be_java_hisp_w16_g10</a> &gt; <a href="index.source.html" class="el_package">com.bootcamp.be_java_hisp_w16_g10.controller</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.bootcamp.be_java_hisp_w16_g10.controller;
+
+import com.bootcamp.be_java_hisp_w16_g10.dto.response.*;
+import com.bootcamp.be_java_hisp_w16_g10.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(&quot;/users&quot;)
+<span class="fc" id="L15">public class UserController {</span>
+    @Autowired
+    private IUserService userService;
+    
+    //US BONUS: traer todos los users
+    @GetMapping(&quot;/&quot;)
+    public ResponseEntity&lt;List&lt;UserResDTO&gt;&gt; findAll() {
+<span class="fc" id="L22">        return new ResponseEntity&lt;&gt;(this.userService.findAll(), HttpStatus.OK);</span>
+    }
+    
+    //US 0001: Poder realizar la acción de “Follow” (seguir) a un determinado vendedor
+    @PostMapping(&quot;/{userId}/follow/{userIdToFollow}&quot;)
+    public &lt;T&gt; ResponseEntity&lt;T&gt; US001(@PathVariable Integer userId, @PathVariable Integer userIdToFollow) {
+<span class="fc" id="L28">        this.userService.follow(userId, userIdToFollow);</span>
+<span class="fc" id="L29">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+    }
+    
+     //US 0002: Obtener el resultado de la cantidad de usuarios que siguen a un determinado vendedor
+    @GetMapping(&quot;/{userId}/followers/count&quot;)
+    public ResponseEntity&lt;FollowersCountResDTO&gt; US002(@PathVariable Integer userId){
+<span class="fc" id="L35">      return new ResponseEntity&lt;&gt;(this.userService.countFollowers(userId),HttpStatus.OK);</span>
+    }
+    
+    //US 0003: Obtener un listado de todos los usuarios que siguen a un determinado vendedor (¿Quién me sigue?)
+    @GetMapping(&quot;/{userId}/followers/list&quot;)
+    public ResponseEntity&lt;FollowersListResDTO&gt; US003(@PathVariable Integer userId, @RequestParam Optional&lt;String&gt; order){
+<span class="fc" id="L41">        return new ResponseEntity&lt;&gt;(this.userService.listFollowers(userId, order.orElse(&quot;name_asc&quot;)),HttpStatus.OK);</span>
+    }
+    
+    //US 0004: Obtener un listado de todos los vendedores a los cuales sigue un determinado usuario (¿A quién sigo?)
+    @GetMapping(&quot;/{userId}/followed/list&quot;)
+    public ResponseEntity&lt;FollowedListResDTO&gt; US004(@PathVariable Integer userId, @RequestParam Optional&lt;String&gt; order){
+<span class="fc" id="L47">        return new ResponseEntity&lt;&gt;(this.userService.listFollowed(userId, order.orElse(&quot;name_asc&quot;)), HttpStatus.OK);</span>
+    }
+    
+     //US 0007: Poder realizar la acción de “Unfollow” (dejar de seguir) a un determinado vendedor.
+    @PostMapping(&quot;/{userId}/unfollow/{userIdToUnfollow}&quot;)
+    public &lt;T&gt; ResponseEntity&lt;T&gt; US007(@PathVariable Integer userId, @PathVariable Integer userIdToUnfollow){
+<span class="fc" id="L53">        this.userService.unfollow(userId, userIdToUnfollow);</span>
+<span class="fc" id="L54">        return new ResponseEntity&lt;&gt;(HttpStatus.OK);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
