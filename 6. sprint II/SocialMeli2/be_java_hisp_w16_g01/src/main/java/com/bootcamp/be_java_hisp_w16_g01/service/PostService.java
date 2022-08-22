@@ -1,6 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g01.service;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.*;
+import com.bootcamp.be_java_hisp_w16_g01.dto.request.PostDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.request.ProductDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.FollowedPostsDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.MessageDto;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.ResponsePostDto;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Post;
 import com.bootcamp.be_java_hisp_w16_g01.entities.Product;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
@@ -8,7 +12,6 @@ import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IPostRepository;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -88,18 +91,19 @@ public class PostService implements IPostService {
         if(user == null)
             throw new BadRequestException("No existe el usuario con Id: " + userId);
 
-        if (order!= null){
+        if (order != null) {
             if (order.equalsIgnoreCase("date_desc")) {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate).reversed())
                         .collect(Collectors.toList()));
-            } else
+            } else if (order.equalsIgnoreCase("date_asc")) {
                 return new FollowedPostsDto(userId, getPosts(user).stream()
                         .sorted(Comparator.comparing(ResponsePostDto::getDate))
                         .collect(Collectors.toList()));
+            }
         }
-        else
-            return new FollowedPostsDto(userId, getPosts(user));
+
+        throw new BadRequestException("El orden indicado no es correcto.");
     }
 
 

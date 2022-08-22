@@ -1,6 +1,6 @@
-package com.bootcamp.be_java_hisp_w16_g01.dto;
+package com.bootcamp.be_java_hisp_w16_g01.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.bootcamp.be_java_hisp_w16_g01.dto.request.ProductDto;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -13,12 +13,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class PostDto {
-    private int userId;
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate date;
-    private ProductDto product;
-    private int category;
-    private double price;
+public class ResponsePostDto {
 
+    private int userId;
+
+    private int postId;
+
+    private LocalDate date;
+
+    private ProductDto product;
+
+    private int category;
+
+    private double price;
 }

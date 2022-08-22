@@ -1,12 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g01.mapper;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserDTO;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowedDTO;
-import com.bootcamp.be_java_hisp_w16_g01.dto.UserFollowerDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowedDTO;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.UserFollowerDTO;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
-import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

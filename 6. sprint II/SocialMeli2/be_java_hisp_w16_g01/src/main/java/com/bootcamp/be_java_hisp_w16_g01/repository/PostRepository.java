@@ -16,6 +16,11 @@ public class PostRepository implements IPostRepository{
     public PostRepository() {
         this.postList = new ArrayList<>();
     }
+
+    public PostRepository(List<Post> list) {
+        this.postList = list;
+    }
+
     @Override
     public int createPost(Post post) {
         int id = postList.size()+1;

@@ -3,8 +3,8 @@ package com.bootcamp.be_java_hisp_w16_g01.repository;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 
 public interface IUserRepository {
+    User getUser(Integer userId);
 
-    User getUser(int userId);
 
     void addFollower(int idUser, int userIdToFollow);
 

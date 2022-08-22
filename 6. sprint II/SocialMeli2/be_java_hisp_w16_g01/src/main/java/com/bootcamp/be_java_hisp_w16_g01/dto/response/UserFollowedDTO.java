@@ -1,4 +1,4 @@
-package com.bootcamp.be_java_hisp_w16_g01.dto;
+package com.bootcamp.be_java_hisp_w16_g01.dto.response;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -6,15 +6,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+import java.util.List;
+
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class ProductDto {
-    private int productId;
-    private String productName;
-    private String type;
-    private String brand;
-    private String color;
-    private String notes;
+public class UserFollowedDTO {
+
+    private int userId;
+
+    private String userName;
+
+    private List<UserDTO> followed;
+
 }

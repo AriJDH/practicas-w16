@@ -1,6 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g01.service;
 
-import com.bootcamp.be_java_hisp_w16_g01.dto.*;
+import com.bootcamp.be_java_hisp_w16_g01.dto.response.*;
 import com.bootcamp.be_java_hisp_w16_g01.entities.User;
 import com.bootcamp.be_java_hisp_w16_g01.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g01.repository.IUserRepository;
@@ -21,7 +21,8 @@ public class UserService implements IUserService {
     private UserMapper userMapper = new UserMapper();
 
     @Override
-    public UserUnfollowDTO unfollowUser(int userId, int userIdToUnfollow) {
+
+    public UserUnfollowDTO unfollowUser(Integer userId, Integer userIdToUnfollow) {
 
         User userUnfollowing = this.userRepository.getUser(userId);
         User userToUnfollow = this.userRepository.getUser(userIdToUnfollow);
@@ -44,7 +45,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserFollowerDTO getFollowers(int userId, String order) {
+
+    public UserFollowerDTO getFollowers(Integer userId, String order) {
+
         User user = userRepository.getUser(userId);
         if(user != null){
             if (order!= null) {
@@ -67,7 +70,8 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserFollowedDTO getFollowed(int userId, String order) {
+    public UserFollowedDTO getFollowed(Integer userId, String order) {
+
         User user = userRepository.getUser(userId);
         if(user != null){
             if (order != null) {
