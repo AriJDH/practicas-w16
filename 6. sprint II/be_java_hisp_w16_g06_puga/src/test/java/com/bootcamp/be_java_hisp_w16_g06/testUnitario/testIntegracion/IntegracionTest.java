@@ -103,4 +103,37 @@ public class IntegracionTest {
                 .andExpect(jsonPath("$.statusCode").value(400));
 
     }
+
+    @Test
+    @DisplayName("Follwers List")
+    public void followersList() throws Exception{
+
+        List<ListFollowersDTO> listFollowers = new ArrayList<>();
+
+        ListFollowersDTO user1 = new ListFollowersDTO(2, "Puga");
+        ListFollowersDTO user2 = new ListFollowersDTO(1, "Saul");
+        listFollowers.add(user1);
+        listFollowers.add(user2);
+
+        FollowersDTO followersDTO = new FollowersDTO();
+        followersDTO.setUser_id(1);
+        followersDTO.setUser_name("Andrés");
+        followersDTO.setFollowers(listFollowers);
+
+        ObjectWriter writer = new ObjectMapper()
+                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .writer();
+
+        String followersDTOString = writer.writeValueAsString(followersDTO);
+
+
+        MvcResult mvcResult = this.mockMv.perform(get("/users/{userId}/followers/list", 1))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json"))
+                .andReturn();
+
+        Assertions.assertEquals(followersDTOString, mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8));
+
+    }
 }

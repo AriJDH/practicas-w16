@@ -1,0 +1,42 @@
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T142226.500.json
+
+###
+
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T142128.200.json
+
+###
+
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T141730.200.json
+
+###
+
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T141509.200.json
+
+###
+
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T141217.200.json
+
+###
+
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T141147.200.json
+
+###
+
+POST http://localhost:8080/users/123/follow/234
+
+<> 2022-08-09T141102.200.json
+
+###
+

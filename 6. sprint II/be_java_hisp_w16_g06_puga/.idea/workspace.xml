@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5ee9774f-7892-4ebb-b92c-a6ee80dda1ad" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/bootcamp/be_java_hisp_w16_g06/testUnitario/service/FollowersAndFollowedServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/bootcamp/be_java_hisp_w16_g06/testUnitario/service/FollowersAndFollowedServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/bootcamp/be_java_hisp_w16_g06/testUnitario/testIntegracion/IntegracionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/bootcamp/be_java_hisp_w16_g06/testUnitario/testIntegracion/IntegracionTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DX9BVuVXDISM6pkvtwmXt7r71O" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/spuga/Documents/Git/sprint1g06",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "spring.configuration.checksum": "9cb44632793f957628d7dca45420b296"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.IntegracionTest.followersList">
+    <configuration name="All in sprint1g06" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sprint1g06" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FollowersAndFollowedServiceTest.NoExisteUsuario" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sprint1g06" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.service" />
+      <option name="MAIN_CLASS_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.service.FollowersAndFollowedServiceTest" />
+      <option name="METHOD_NAME" value="NoExisteUsuario" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IntegracionTest.countFollowers" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sprint1g06" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion" />
+      <option name="MAIN_CLASS_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion.IntegracionTest" />
+      <option name="METHOD_NAME" value="countFollowers" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IntegracionTest.followersList" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sprint1g06" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion" />
+      <option name="MAIN_CLASS_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion.IntegracionTest" />
+      <option name="METHOD_NAME" value="followersList" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IntegracionTest.listFollowedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="sprint1g06" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion" />
+      <option name="MAIN_CLASS_NAME" value="com.bootcamp.be_java_hisp_w16_g06.testUnitario.testIntegracion.IntegracionTest" />
+      <option name="METHOD_NAME" value="listFollowedTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BeJavaHispW16G06Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="sprint1g06" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.bootcamp.be_java_hisp_w16_g06.BeJavaHispW16G06Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.IntegracionTest.followersList" />
+        <item itemvalue="JUnit.IntegracionTest.listFollowedTest" />
+        <item itemvalue="JUnit.IntegracionTest.countFollowers" />
+        <item itemvalue="JUnit.All in sprint1g06" />
+        <item itemvalue="JUnit.FollowersAndFollowedServiceTest.NoExisteUsuario" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5ee9774f-7892-4ebb-b92c-a6ee80dda1ad" name="Changes" comment="" />
+      <created>1660834428969</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660834428969</updated>
+      <workItem from="1660834432475" duration="30762000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/sprint1g06$All_in_sprint1g06.ic" NAME="All in sprint1g06 Coverage Results" MODIFIED="1661193516478" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
