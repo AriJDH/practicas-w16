@@ -1,9 +1,13 @@
 package com.example.be_java_hisp_w16_g03.integration;
 
+import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import com.example.be_java_hisp_w16_g03.utils.MocksPost;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -11,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.nio.charset.StandardCharsets;
 import java.text.DecimalFormat;
@@ -28,30 +34,27 @@ public class PostControllerIntegrationTests {
     @Autowired
     private MockMvc mockMvc;
 
+    private ObjectWriter writer;
+
+    @BeforeEach
+    public void setUp(){
+        this.writer = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false)
+                .registerModule(new JavaTimeModule())
+                .writer().withDefaultPrettyPrinter();
+    }
+
     @Test
-    @Test
-    public void analizeScoreTest() throws Exception {
-        List<SubjectDTO> subjects = new ArrayList<>();
-        subjects.add(new SubjectDTO("Matemática", 9.0));
-        subjects.add(new SubjectDTO("Física", 7.0));
-        subjects.add(new SubjectDTO("Química", 6.0));
-        Double average = subjects.stream()
-                .reduce(0D, (partialSum, score)  -> partialSum + score.getScore(), Double::sum)
-                / subjects.size();
+    public void addPostTest() throws Exception {
+        PostDTO post = MocksPost.createPostDTO();
 
-        String message = "El alumno Juan ha obtenido un promedio de " + new DecimalFormat("#0.00").format(average) +". Puedes mejorar.";
-        StudentDTO studentExpect = new StudentDTO(1L, "Juan", message, average, subjects);
+        String body = this.writer.writeValueAsString(post);
 
-        ObjectWriter writer = new ObjectMapper().configure(SerializationFeature.WRAP_ROOT_VALUE, false).writer();
-        String expectJson = writer.writeValueAsString(studentExpect);
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+                        .contentType("application/json")
+                        .content(body))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
-        MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/analyzeScores/{studentId}", 1L))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json"))
-                .andReturn();
-
-        Assertions.assertEquals(expectJson,mvcResult.getResponse().getContentAsString(StandardCharsets.UTF_8));
     }
 
 

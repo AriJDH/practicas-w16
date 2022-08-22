@@ -4,8 +4,7 @@ import com.example.be_java_hisp_w16_g03.dto.FollowedsDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowerCountDTO;
 import com.example.be_java_hisp_w16_g03.dto.FollowersDTO;
 import com.example.be_java_hisp_w16_g03.entity.User;
-import com.example.be_java_hisp_w16_g03.exception.InvalidOrderException;
-import com.example.be_java_hisp_w16_g03.exception.UserNotExistException;
+import com.example.be_java_hisp_w16_g03.exception.*;
 import com.example.be_java_hisp_w16_g03.repository.IUserRepository;
 import com.example.be_java_hisp_w16_g03.utils.Mapper;
 import org.junit.jupiter.api.Assertions;
@@ -228,5 +227,47 @@ public class UserServiceTest {
 
     }
 
+
+
+    @DisplayName("El usuario al que desea seguir no es seguidor")//T-0002
+    @Test
+    void notSellerExceptionTest() {
+
+        //arrange
+        User user1 = createUser();
+        User user2 = createUser();
+
+        when(repository.getUserById(1)).thenReturn(Optional.of(user1));
+
+        //act
+        //assert
+        Assertions.assertThrows(NotSellerException.class, () -> userService.followUser(user1.getUserId(), user2.getUserId()));
+    }
+
+    @DisplayName("Ya sigue al usuario que desea seguir")//T-0002
+    @Test
+    void alFollowExceptionTest() {
+
+        User user1 = createUser();
+        User user2 = createSeller();
+        user1.getFolloweds().add(user2);
+        user2.getFollowers().add(user1);
+
+        when(repository.getUserById(Mockito.anyInt())).thenReturn(Optional.of(user1), Optional.of(user2));
+
+        Assertions.assertThrows(AlreadyFollowException.class, () -> userService.followUser(user1.getUserId(), user2.getUserId()));
+    }
+
+    @DisplayName("No sigue al usuario que desea dejar de seguir")//T-0002
+    @Test
+    void NotFollowersExceptionTest() {
+
+        User user1 = createUser();
+        User user2 = createSeller();
+
+        when(repository.getUserById(Mockito.anyInt())).thenReturn(Optional.of(user1), Optional.of(user2));
+
+        Assertions.assertThrows(NotFollowersException.class, () -> userService.unfollowUser(user1.getUserId(), user2.getUserId()));
+    }
 
 }

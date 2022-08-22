@@ -1,5 +1,7 @@
 package com.example.be_java_hisp_w16_g03.utils;
 
+import com.example.be_java_hisp_w16_g03.dto.PostDTO;
+import com.example.be_java_hisp_w16_g03.dto.ProductDTO;
 import com.example.be_java_hisp_w16_g03.entity.Post;
 import com.example.be_java_hisp_w16_g03.entity.Product;
 
@@ -22,5 +24,10 @@ public class MocksPost {
 
         return list;
 
+    }
+
+    public static PostDTO createPostDTO(){
+        ProductDTO product = new ProductDTO(1, "perfume", "perfumeria","givenchy","pink", "250ml");
+        return new PostDTO(1, LocalDate.now(), product, 1, 200.0);
     }
 }
