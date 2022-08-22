@@ -1,12 +1,10 @@
 package com.bootcamp.be_java_hisp_w16_g7.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
