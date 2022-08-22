@@ -4,7 +4,7 @@ public abstract class Prototipo<N extends Number> {
     protected N valorInicial;
     protected N valorActual;
 
-    public Prototipo(N valorInicial){
+    public Prototipo(N valorInicial) {
         this.valorInicial = valorInicial;
         this.valorActual = valorInicial;
     }
@@ -27,7 +27,7 @@ public abstract class Prototipo<N extends Number> {
 
     public abstract N siguiente();
 
-    public void reiniciar(){
+    public void reiniciar() {
         this.valorActual = this.valorInicial;
     }
 }
