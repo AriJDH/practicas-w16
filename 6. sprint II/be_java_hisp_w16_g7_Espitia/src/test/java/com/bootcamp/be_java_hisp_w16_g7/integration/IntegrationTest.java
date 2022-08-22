@@ -146,11 +146,39 @@ public class IntegrationTest {
     }
 
     @Test
-    void getSellersFollowersNoExists()throws Exception{
-       mockMvc.perform(MockMvcRequestBuilders.get("/{userId}/followers/list",12312))
-                .andDo(print()).andExpect(status().isNotFound());
-
-
+    void getSellersFollowersNotFound()throws Exception{
+       mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list",12312))
+                .andDo(print()).andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("User Not Found"));
 
     }
+
+    @Test
+    void getSellersFollowersIsNotSeller()throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list",1111))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Bad Request"));
+
+    }
+
+    @Test
+    void getFollowersCountNotFound()throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count",11111))
+                .andDo(print()).andExpect(status().isNotFound())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("User Not Found"));
+
+    }
+
+    @Test
+    void getFollowersCountIsNotSeller()throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count",1111))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Bad Request"));
+
+    }
+
 }
