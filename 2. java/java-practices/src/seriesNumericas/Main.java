@@ -16,7 +16,7 @@ public class Main {
         generarSerieNumericaDeTres();
     }
 
-    public static void generarSerieNumericaDeDos() {
+    private static void generarSerieNumericaDeDos() {
         System.out.println("> Inicia la serie númerica de 2 con valor inicial en 0.");
         Prototipo<Integer> serieDeDos = new SerieNumericaDeDos<Integer>(0);
         System.out.println(serieDeDos.siguiente());
@@ -48,7 +48,7 @@ public class Main {
         System.out.println(serieDeDos.siguiente());
     }
 
-    public static void generarSerieNumericaDeTres() {
+    private static void generarSerieNumericaDeTres() {
         System.out.println("> Inicia la serie númerica de 3 con valor inicial en 5.");
         Prototipo<Double> serieDeTres = new SerieNumericaDeTres<Double>(5.0);
         System.out.println(serieDeTres.siguiente());
