@@ -1,5 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.Repository;
 
+import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.IUserRepository;
 import com.bootcamp.be_java_hisp_w16_g04.repositories.UserRepository;
@@ -51,5 +52,7 @@ public class UserRepositoryTest {
 
     Assertions.assertEquals(andres, result);
   }
+
+
 
 }

@@ -15,7 +15,7 @@ import java.util.List;
 public class FollowerRepositoryTest {
 
   @Autowired
-  FollowerRepository FollowerRepository;
+  FollowerRepository followerRepository;
 
   @Autowired
   IFollowerRepository iFollowerRepository;
@@ -24,7 +24,7 @@ public class FollowerRepositoryTest {
   public void verifyFollowerTestFalse() {
     List<Follower> followers = TestUtilsGenerator.createListFollowers();
 
-    FollowerRepository.setFollowers(followers);
+    followerRepository.setFollowers(followers);
 
     Assertions.assertTrue(iFollowerRepository.verifyFollower(105, 102));
   }
@@ -33,7 +33,7 @@ public class FollowerRepositoryTest {
   public void verifyFollowerTestTrue() {
     List<Follower> followers = TestUtilsGenerator.createListFollowers();
 
-    FollowerRepository.setFollowers(followers);
+    followerRepository.setFollowers(followers);
 
     Assertions.assertFalse(iFollowerRepository.verifyFollower(101, 103));
   }
@@ -41,10 +41,31 @@ public class FollowerRepositoryTest {
   @Test
   public void getFollewersListByIdTest() {
     List<Follower> followers = TestUtilsGenerator.createListFollowers();
-    FollowerRepository.setFollowers(followers);
+    followerRepository.setFollowers(followers);
 
     List<Integer> result = iFollowerRepository.getFollewersListById(101);
 
     Assertions.assertNotNull(result, "La prueba fue exitosa");
+  }
+
+  @Test
+  void getReturnIdsFollowersTest(){
+    List<Follower> followers = TestUtilsGenerator.createListFollowers();
+    followerRepository.setFollowers(followers);
+
+List<Integer> result = followerRepository.returnIds(101);
+Assertions.assertEquals(2, result.size());
+
+  }
+
+  @Test
+  void unFollowUserTest(){
+    List<Follower> followers = TestUtilsGenerator.createListFollowers();
+    followerRepository.setFollowers(followers);
+    followerRepository.unFollowUser(105, 101);
+    List<Integer> result = followerRepository.returnIds(101);
+
+    Assertions.assertEquals(1, result.size());
+
   }
 }

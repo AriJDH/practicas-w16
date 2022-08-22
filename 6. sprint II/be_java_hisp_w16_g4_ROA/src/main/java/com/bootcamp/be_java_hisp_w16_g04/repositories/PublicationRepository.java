@@ -27,6 +27,9 @@ public class PublicationRepository implements IPublicationRepository {
     publications.add(new Publication(2, 104, date3, 300, 200, 350.0));
   }
 
+  public void setPublications(List<Publication> publications){
+    this.publications = publications;
+  }
   @Override
   public List<Publication> getPublications() {
     return publications;

@@ -3,6 +3,7 @@ package com.bootcamp.be_java_hisp_w16_g04.util;
 import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
+import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import java.time.LocalDate;
@@ -29,12 +30,53 @@ public class TestUtilsGenerator {
           "\"price\": 1500.50 \n" +
           "}";
 
+  public static final String TEST_INTEGRATION_STATUS_OK_BODY = "" +
+          "{" +
+          "\"user_id\": 1, \n" +
+          "\"date\": \"29-04-2021\",\n" +
+          "\"product\": {\n" +
+          "\"product_id\": 2," +
+          "\"product_name\": \"Carro\",\n" +
+          "\"type\": \"BX-100\",\n" +
+          "\"brand\": \"VMW\", \n" +
+          "\"color\": \"Red\",\n" +
+          "\"notes\": \"asdasd\" \n" +
+          "},\n" +
+          "\"category\": 100,\n" +
+          "\"price\": 1500.50 \n" +
+          "}";
+
+  public static final  String TEST_INTEGRATION_LIST = "" +
+          "{\n" +
+          "    \"user_id\": 100,\n" +
+          "    \"user_name\": \"Andres Roa\",\n" +
+          "    \"followers\": [\n" +
+          "        {\n" +
+          "            \"user_id\": 105,\n" +
+          "            \"user_name\": \"Ana Delgado\"\n" +
+          "        },\n" +
+          "        {\n" +
+          "            \"user_id\": 103,\n" +
+          "            \"user_name\": \"David Lozano\"\n" +
+          "        },\n" +
+          "        {\n" +
+          "            \"user_id\": 101,\n" +
+          "            \"user_name\": \"Javier Aguayo\"\n" +
+          "        },\n" +
+          "        {\n" +
+          "            \"user_id\": 106,\n" +
+          "            \"user_name\": \"Kevin Molano\"\n" +
+          "        }\n" +
+          "    ]\n" +
+          "}";
+
   public static final String TEST_INTEGRATION_STATUS_OK = "{" + "\"user_id\":100," + "\"user_name\":\"Andres Roa\"," + "\"followers_count\":4" + "}";
 
   public static List<Follower> createListFollowers() {
     List<Follower> followers = new ArrayList<Follower>();
     followers.add(new Follower(100, 101));
     followers.add(new Follower(102, 105));
+    followers.add(new Follower(105, 101));
     followers.add(new Follower(101, 103));
 
     return followers;
@@ -48,6 +90,7 @@ public class TestUtilsGenerator {
 
     return users;
   }
+
 
   public static List<User> getFollowedUsers() {
     List<User> users = new ArrayList<User>();
@@ -109,5 +152,15 @@ public class TestUtilsGenerator {
     return postDTOS;
   }
 
+  public  static  List<Product> getProducts(){
+
+    List<Product> products = new ArrayList<>();
+
+    products.add(new Product(100, "Silla gamer", "Gamer", "Racer", "Negro", "usado"));
+    products.add(new Product(200, "Nevera", "Linea blanca", "Samsung", "Blanca", "usado"));
+    products.add(new Product(300, "Lavadora", "Linea blanca", "Samsung", "Blanca", "usado"));
+
+    return products;
+  }
 
 }
