@@ -58,13 +58,42 @@ public class ProductIntegrationTest {
     }
 
     @Test
-    public void createPostRecentPosts() throws Exception {
+    public void createPost() throws Exception {
+        PostDTO post = TestUtil.createPostDto();
+
+        String payload = mapper.writeValueAsString(post);
+
+        // Test create post bad input
+        mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload))
+                .andDo(print()).andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.title").value("HttpMessageNotReadableException"));
+
+        ProductDTO product = TestUtil.CreateProductDto();
+        post.setProduct(product);
+
+        payload = mapper.writeValueAsString(post);
+
+        // Test create post ok
+        mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(payload))
+                .andDo(print()).andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.title").value("Post created successfully"));
+    }
+
+    @Test
+    public void recentPosts() throws Exception {
         PostDTO post = TestUtil.createPostDto();
         ProductDTO product = TestUtil.CreateProductDto();
         post.setProduct(product);
 
         String payload = mapper.writeValueAsString(post);
 
+        // Create recent post
         mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
@@ -72,6 +101,8 @@ public class ProductIntegrationTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.title").value("Post created successfully"));
 
+
+        // Get recent posts ok
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 2222))
                 .andDo(print()).andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -80,19 +111,12 @@ public class ProductIntegrationTest {
 
         RecentPostsDTO response = mapper.readValue(result.getResponse().getContentAsString(), RecentPostsDTO.class);
         Assertions.assertEquals(product, response.getResponsePostDTOS().get(0).getProduct());
-    }
 
-    @Test
-    public void createPostBadRequest() throws Exception {
-        PostDTO post = TestUtil.createPostDto();
-
-        String payload = mapper.writeValueAsString(post);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(payload))
-                .andDo(print()).andExpect(status().isBadRequest())
+        // Get recent posts not found
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 5555))
+                .andDo(print()).andExpect(status().isNotFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.title").value("HttpMessageNotReadableException"));
+                .andExpect(jsonPath("$.title").value("User Not Found"))
+                .andReturn();
     }
 }
