@@ -1,430 +1,1299 @@
 {
 	"info": {
-		"_postman_id": "4df273dd-5335-48f6-95fd-5437759fe1f8",
-		"name": "Sprint I",
+		"_postman_id": "32de58a2-055a-4a90-a4e1-a019035c24d8",
+		"name": "Sprint II",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17400033"
+		"_exporter_id": "22238626"
 	},
 	"item": [
 		{
 			"name": "Main",
 			"item": [
 				{
-					"name": "US 01 - Follow",
-					"event": [
+					"name": "0001",
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"client_id\", 1);",
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "linkid",
-								"value": "1",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "{{url}}/users/{{client_id}}/follow/{{seller_id}}",
-							"host": [
-								"{{url}}"
+							"name": "US 01 - Follow - User 1 dont exists",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);",
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
 							],
-							"path": [
-								"users",
-								"{{client_id}}",
-								"follow",
-								"{{seller_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 02 - Count Followers",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "linkid",
+										"value": "1",
+										"type": "text",
+										"disabled": true
+									}
 								],
-								"type": "text/javascript"
-							}
+								"url": {
+									"raw": "{{url}}/users/10/follow/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"10",
+										"follow",
+										"2"
+									]
+								}
+							},
+							"response": []
 						},
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/count",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"{{seller_id}}",
-								"followers",
-								"count"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 03 - Followers / US 08",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/users/{{seller_id}}/followers/list?order=name_desc",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"{{seller_id}}",
-								"followers",
-								"list"
-							],
-							"query": [
+							"name": "US 01 - Follow - User 2 don't exists",
+							"event": [
 								{
-									"key": "oder",
-									"value": "name_asc",
-									"disabled": true
-								},
-								{
-									"key": "order",
-									"value": "name_desc"
-								},
-								{
-									"key": "oder",
-									"value": "invalid",
-									"disabled": true
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);",
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 04 - Followed / US 08",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"client_id\", 1);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/users/{{client_id}}/followed/list?order=name_desc",
-							"host": [
-								"{{url}}"
 							],
-							"path": [
-								"users",
-								"{{client_id}}",
-								"followed",
-								"list"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "name_asc",
-									"disabled": true
-								},
-								{
-									"key": "order",
-									"value": "name_desc"
-								},
-								{
-									"key": "order",
-									"value": "invalid",
-									"disabled": true
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 05 - New Post",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "linkid",
+										"value": "1",
+										"type": "text",
+										"disabled": true
+									}
 								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"user_id\": \"{{seller_id}}\",\n    \"date\": \"01-05-2022\",\n    \"detail\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+								"url": {
+									"raw": "{{url}}/users/3/follow/100",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"follow",
+										"100"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{url}}/products/post",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"products",
-								"post"
-							],
-							"query": [
+						{
+							"name": "US 01 - Follow - User 2 is not a seller",
+							"event": [
 								{
-									"key": "clientId",
-									"value": "5001",
-									"disabled": true
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);",
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 06 - Seller's posts / US 09",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"client_id\", 1);"
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "linkid",
+										"value": "1",
+										"type": "text",
+										"disabled": true
+									}
 								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/products/followed/{{client_id}}/list?order=date_asc",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"products",
-								"followed",
-								"{{client_id}}",
-								"list"
-							],
-							"query": [
-								{
-									"key": "order",
-									"value": "date_desc",
-									"disabled": true
-								},
-								{
-									"key": "order",
-									"value": "date_asc"
-								},
-								{
-									"key": "order",
-									"value": "invalid",
-									"disabled": true
+								"url": {
+									"raw": "{{url}}/users/3/follow/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"follow",
+										"2"
+									]
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 07 - Unfollow",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 1);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/users/{{client_id}}/unfollow/{{seller_id}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"users",
-								"{{client_id}}",
-								"unfollow",
-								"{{seller_id}}"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Bonus",
-			"item": [
-				{
-					"name": "US 10 - New Promo Post",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "{{url}}/products/promo-post",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"products",
-								"promo-post"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "US 11 - Count Promo Post",
-					"event": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/products/promo-post/count?user_id={{seller_id}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"products",
-								"promo-post",
-								"count"
-							],
-							"query": [
+							"name": "US 01 - Follow - Success (Primero hay que agregar post al user 2)",
+							"event": [
 								{
-									"key": "user_id",
-									"value": "{{seller_id}}"
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);",
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "linkid",
+										"value": "1",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/users/3/follow/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"follow",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 01 - Follow - Cant follow followed user (Primero hay que hacer que el user 3 siga al 2)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);",
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "linkid",
+										"value": "1",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/users/3/follow/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"follow",
+										"2"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "US 12 - Seller's Promo Post",
-					"event": [
+					"name": "0002",
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"exec": [
-									"pm.collectionVariables.set(\"seller_id\", 2);",
-									"pm.collectionVariables.set(\"client_id\", 3);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/products/promo-post/list?user_id={{seller_id}}",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"products",
-								"promo-post",
-								"list"
-							],
-							"query": [
+							"name": "US 02 - Count Followers - user don't exists",
+							"event": [
 								{
-									"key": "user_id",
-									"value": "{{seller_id}}"
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
 								},
 								{
-									"key": "order",
-									"value": "producName_asc",
-									"disabled": true
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/100/followers/count",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"100",
+										"followers",
+										"count"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 02 - Count Followers - user is not a seller",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/followers/count",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"followers",
+										"count"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 02 - Count Followers - Success (Primero agregar post al user 2)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/2/followers/count",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"followers",
+										"count"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
+				},
+				{
+					"name": "0003 & 0008",
+					"item": [
+						{
+							"name": "US 03 - Followers / US 08 - user dont exists",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/100/followers/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"100",
+										"followers",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "oder",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 03 - Followers / US 08 - user is not a seller",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/followers/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"followers",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "oder",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 03 - Followers / US 08 - Success (Primero crear post para el user 2)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/2/followers/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"followers",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "oder",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 03 - Followers / US 08 - Success (Primero crear post para el user 2) ASC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/2/followers/list?order=name_asc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"followers",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc"
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "oder",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 03 - Followers / US 08 - Success (Primero crear post para el user 2) DESC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/2/followers/list?order=name_desc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"followers",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc"
+										},
+										{
+											"key": "oder",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 03 - Followers / US 08 - Invalid query parameter",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/2/followers/list?order=papa",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"2",
+										"followers",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "papa"
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "oder",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "0004 & 0008",
+					"item": [
+						{
+							"name": "US 04 - Followed / US 08 - user dont exists",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/100/followed/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"100",
+										"followed",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 04 - Followed / US 08 - Success",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/followed/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"followed",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 04 - Followed / US 08 - Success  ASC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/followed/list?order=name_asc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"followed",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc"
+										},
+										{
+											"key": "order",
+											"value": "name_desc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 04 - Followed / US 08 - Success DESC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/followed/list?order=name_desc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"followed",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "name_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "name_desc"
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "0005",
+					"item": [
+						{
+							"name": "US 05 - New Post - Valid",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 3);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 2,\n    \"date\": \"10-08-2022\",\n    \"id_post\": 1,\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red y Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/products/post",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"post"
+									],
+									"query": [
+										{
+											"key": "clientId",
+											"value": "5001",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 05 - New Post  - null UserID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 3);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"10-08-2022\",\n    \"id_post\": 1,\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red y Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/products/post",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"post"
+									],
+									"query": [
+										{
+											"key": "clientId",
+											"value": "5001",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 05 - New Post - caracter especial en color",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 3);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user_id\": 2,\n    \"date\": \"10-08-2022\",\n    \"id_post\": 1,\n    \"product\": {\n        \"product_id\": 1,\n        \"product_name\": \"Silla Gamer\",\n        \"type\": \"Gamer\",\n        \"brand\": \"Racer\",\n        \"color\": \"Red & Black\",\n        \"notes\": \"Special Edition\"\n    },\n    \"category\": 100,\n    \"price\": 1500.50\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/products/post",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"post"
+									],
+									"query": [
+										{
+											"key": "clientId",
+											"value": "5001",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "0006",
+					"item": [
+						{
+							"name": "US 06 - Seller's posts / US 09 - User dont exists",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/products/followed/100/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"followed",
+										"100",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "date_desc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "date_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 06 - Seller's posts / US 09 - Success",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/products/followed/3/list",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"followed",
+										"3",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "date_desc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "date_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 06 - Seller's posts / US 09 - Success DESC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/products/followed/3/list?order=date_desc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"followed",
+										"3",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "date_desc"
+										},
+										{
+											"key": "order",
+											"value": "date_asc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 06 - Seller's posts / US 09 - Success ASC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/products/followed/3/list?order=date_asc",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"products",
+										"followed",
+										"3",
+										"list"
+									],
+									"query": [
+										{
+											"key": "order",
+											"value": "date_desc",
+											"disabled": true
+										},
+										{
+											"key": "order",
+											"value": "date_asc"
+										},
+										{
+											"key": "order",
+											"value": "invalid",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "0007",
+					"item": [
+						{
+							"name": "US 07 - Unfollow - User 1 dont exists",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/100/unfollow/3 ",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"100",
+										"unfollow",
+										"3 "
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 07 - Unfollow - User 2 dont exists",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/1/unfollow/100",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"1",
+										"unfollow",
+										"100"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 07 - Unfollow - User 1 cant follow user 2",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/1/unfollow/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"1",
+										"unfollow",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "US 07 - Unfollow - Success",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"pm.collectionVariables.set(\"seller_id\", 2);",
+											"pm.collectionVariables.set(\"client_id\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/users/3/unfollow/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"users",
+										"3",
+										"unfollow",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
@@ -456,11 +1325,21 @@
 		},
 		{
 			"key": "client_id",
-			"value": "Client id"
+			"value": "1",
+			"disabled": true
 		},
 		{
 			"key": "seller_id",
-			"value": "Seller id"
+			"value": "Seller id",
+			"disabled": true
+		},
+		{
+			"key": "client_id",
+			"value": ""
+		},
+		{
+			"key": "seller_id",
+			"value": ""
 		}
 	]
 }
