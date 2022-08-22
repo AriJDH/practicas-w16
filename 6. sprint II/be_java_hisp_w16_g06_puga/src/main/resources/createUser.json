@@ -1,0 +1,140 @@
+[
+  {
+    "userId": 1,
+    "userName": "Andres",
+    "followed": [
+      {
+        "user_id": 2,
+        "user_name": "JulianaSeguida"
+      },
+      {
+        "user_id": 3,
+        "user_name": "AndreaSeguida"
+      }
+    ],
+    "followers": [
+      {
+        "user_id": 1,
+        "user_name": "Saul"
+      },
+      {
+        "user_id": 2,
+        "user_name": "Puga"
+      }
+    ]
+  },
+  {
+    "userId": 2,
+    "userName": "Boris",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 3,
+    "userName": "Camilo",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 4,
+    "userName": "Daniel",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 5,
+    "userName": "Elquin",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 6,
+    "userName": "Fernanda",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 7,
+    "userName": "Gabriela",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 8,
+    "userName": "Hector",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 9,
+    "userName": "Irene",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 10,
+    "userName": "Ismael",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 11,
+    "userName": "Juan",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 12,
+    "userName": "Jesus",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 13,
+    "userName": "Karen",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 14,
+    "userName": "Kelly",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 15,
+    "userName": "Kimberly",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 16,
+    "userName": "Luisa",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 17,
+    "userName": "Leandro",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 18,
+    "userName": "Manuel",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 19,
+    "userName": "Manuela",
+    "followed": [],
+    "followers": []
+  },
+  {
+    "userId": 20,
+    "userName": "Juan",
+    "followed": [],
+    "followers": []
+  }
+]
