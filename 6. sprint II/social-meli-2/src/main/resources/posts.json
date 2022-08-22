@@ -1,0 +1,87 @@
+[
+    {
+        "postId": 1,
+        "userId": 1,
+        "product": {
+            "productId": 1,
+            "productName": "Silla Gamer",
+            "type": "Gamer",
+            "brand": "Racer",
+            "color": "Red & Black",
+            "notes": "Special Edition"
+        },
+        "date": "19-08-2022",
+        "category": 100,
+        "price": 15000.0,
+        "hasPromo": false,
+        "discount": 0.0
+    },
+    {
+        "postId": 2,
+        "userId": 1,
+        "product": {
+            "productId": 2,
+            "productName": "Headset",
+            "type": "Gamer",
+            "brand": "HyperX",
+            "color": "Rojo",
+            "notes": "Super cool"
+        },
+        "date": "05-08-2022",
+        "category": 10,
+        "price": 3500.0,
+        "hasPromo": true,
+        "discount": 20.0
+    },
+    {
+        "postId": 3,
+        "userId": 1,
+        "product": {
+            "productId": 3,
+            "productName": "Teclado",
+            "type": "Gamer",
+            "brand": "RedDragon",
+            "color": "RGB",
+            "notes": "Muy lindo"
+        },
+        "date": "01-12-2021",
+        "category": 7,
+        "price": 65000.0,
+        "hasPromo": true,
+        "discount": 30.0
+    },
+    {
+        "postId": 4,
+        "userId": 2,
+        "product": {
+            "productId": 4,
+            "productName": "Mouse",
+            "type": "Gamer",
+            "brand": "HyperX",
+            "color": "RGB",
+            "notes": "No anda"
+        },
+        "date": "31-07-2022",
+        "category": 5,
+        "price": 8000.0,
+        "hasPromo": false,
+        "discount": 0.0
+    },
+    {
+        "postId": 5,
+        "userId": 2,
+        "product": {
+            "productId": 5,
+            "productName": "Monitor",
+            "type": "Gamer",
+            "brand": "Samsung",
+            "color": "Negro",
+            "notes": "Nuevo"
+        },
+        "date": "01-01-2022",
+        "category": 2,
+        "price": 5600.0,
+        "hasPromo": false,
+        "discount": 0.0
+    }
+]

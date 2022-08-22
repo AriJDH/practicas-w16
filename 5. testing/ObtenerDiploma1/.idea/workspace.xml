@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma" />
+    <list default="true" id="d75b3f77-2b5a-4820-8c7f-fa11d911ca9a" name="Default Changelist" comment="Spring 2 - Practica TT - Obetener Diploma">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/StudentDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/meli/obtenerdiploma/model/SubjectDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/model/StudentDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/meli/obtenerdiploma/model/StudentDTO.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,6 +70,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "last_opened_file_path": "/Users/cantolin/Documents/AriJDH_Repo/practicas-w16/5. testing/ObtenerDiploma1"
   }
 }]]></component>
