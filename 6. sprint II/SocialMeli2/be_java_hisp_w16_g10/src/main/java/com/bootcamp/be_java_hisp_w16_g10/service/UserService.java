@@ -49,7 +49,7 @@ public class UserService implements IUserService {
         if (user.getFollowed().contains(userToFollow)) //revisa si el usuario1 sigue al usuario2
             throw new BadRequestException("Can't follow a user you already follow.");
 
-        if (this.postService.findByUserId(userIdToFollow).size() == 0) //valida que sea un vendendor
+        if (this.postService.findByUserId(userIdToFollow).isEmpty()) //valida que sea un vendendor
             throw new BadRequestException(String.format("The user with the id %s is not a seller.", userIdToFollow));
 
         user.getFollowed().add(userToFollow);

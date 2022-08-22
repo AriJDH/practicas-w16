@@ -7,6 +7,7 @@ import com.bootcamp.be_java_hisp_w16_g10.entity.Post;
 import com.bootcamp.be_java_hisp_w16_g10.entity.Product;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,5 +96,12 @@ public class Mapper {
                 .price(postReqDTO.getPrice())
                 .id(postReqDTO.getIdPost())
                 .build();
+    }
+
+    public static ProductReqDTO generateProductReqDTO() {
+        return new ProductReqDTO(1,"Super 8","dulce","any","any","any");
+    }
+    public static PostReqDTO genetarePostReqDTO() {
+        return new PostReqDTO(1,1, LocalDate.now(),generateProductReqDTO(),1,590.0);
     }
 }
