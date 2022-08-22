@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,6 +32,7 @@ public class UserIntegrationTesting {
     @Autowired
     private MockMvc mockMvc;
 
+    @DisplayName("Verifica que un usuario pueda seguir a un usuario vendedor")
     @Test
     public void testFollowValidSellerUser() throws Exception {
 
@@ -44,6 +46,7 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("User with id 4444 has followed user with id 5555"));
     }
 
+    @DisplayName("Verifica que un usuario no pueda seguir a un usuario no vendedor")
     @Test
     public void testFollowNoValidSellerUser() throws Exception {
 
@@ -57,12 +60,13 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("User 3333 is not seller"));
     }
 
-    @Test//
+    @DisplayName("Verifica que un usuario no existe")
+    @Test
     public void testFollowNoFoundUser() throws Exception {
 
         this.mockMvc.perform(
-                        post("/users/{userId}/follow/{userIdToFollow}", 4444, 33333)
-                                .contentType(MediaType.APPLICATION_JSON))
+                post("/users/{userId}/follow/{userIdToFollow}", 4444, 33333)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json"))
@@ -70,6 +74,7 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("User with id 33333 not found"));
     }
 
+    @DisplayName("Verifica que un usuario no se pueda seguir asi mismo")
     @Test
     public void testFollowNoValidSameUser() throws Exception {
 
@@ -83,6 +88,7 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("Both user id (5555) are the same, cannot perform this action"));
     }
 
+    @DisplayName("Verifica que un usuario pueda dejar de seguir a un usuario vendedor")
     @Test
     public void testUnFollowValidSellerUser() throws Exception {
 
@@ -96,6 +102,7 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("User with id 4444 has unfollowed user with id 5555"));
     }
 
+    @DisplayName("Verifica que un usuario no es seguidor de otro usuario")
     @Test
     public void testUnFollowUserNoFollowed() throws Exception {
 
@@ -109,6 +116,7 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("User with id 4444 is not following user with id 1111"));
     }
 
+    @DisplayName("Verifica que un mismo usuario no pueda dejar de seguirse asi mismo, no es permitida esa accion")
     @Test
     public void testUnFollowSameUser() throws Exception {
 
@@ -122,6 +130,7 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.message").value("Both user id (1111) are the same, cannot perform this action"));
     }
 
+    @DisplayName("Verifica que un usuario no pueda dejar de seguir a un usuario no existente")
     @Test
     public void testUnFollowNoFoundUser() throws Exception {
 
@@ -134,6 +143,8 @@ public class UserIntegrationTesting {
                 .andExpect(jsonPath("$.title").value("User Not Found"))
                 .andExpect(jsonPath("$.message").value("User with id 55555 not found"));
     }
+
+    @DisplayName("Verifica la lista de seguidos de un usuario seguidor")
     @Test
     public void testGetUserFollowedListOutput() throws Exception {
 
