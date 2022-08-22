@@ -3,6 +3,7 @@ package com.bootcamp.be_java_hisp_w16_g04.util;
 import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
+import com.bootcamp.be_java_hisp_w16_g04.model.Product;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import java.time.LocalDate;
@@ -48,6 +49,7 @@ public class TestUtilsGenerator {
   public static List<Follower> createListFollowers() {
     List<Follower> followers = new ArrayList<Follower>();
     followers.add(new Follower(100, 101));
+    followers.add(new Follower(105, 101));
     followers.add(new Follower(102, 105));
     followers.add(new Follower(101, 103));
 
@@ -123,4 +125,13 @@ public class TestUtilsGenerator {
     return postDTOS;
   }
 
+  public static List<Product> getProducts() {
+    List<Product> products = new ArrayList<>();
+
+    products.add(new Product(100, "Silla gamer", "Gamer", "Racer", "Negro", "usado"));
+    products.add(new Product(200, "Nevera", "Linea blanca", "Samsung", "Blanca", "usado"));
+    products.add(new Product(300, "Lavadora", "Linea blanca", "Samsung", "Blanca", "usado"));
+
+    return products;
+  }
 }

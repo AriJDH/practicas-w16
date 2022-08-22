@@ -20,6 +20,10 @@ public class ProductRepository implements IProductRepository {
     products.add(new Product(300, "Lavadora", "Linea blanca", "Samsung", "Blanca", "usado"));
   }
 
+  public void setProducts(List<Product> users) {
+    this.products = users;
+  }
+
   @Override
   public Product getProductById(Integer idProduct) {
     return products.stream().filter(x -> x.getProductId().equals(idProduct)).findFirst().orElse(null);

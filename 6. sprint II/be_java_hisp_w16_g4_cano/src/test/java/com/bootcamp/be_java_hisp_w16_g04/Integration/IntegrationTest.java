@@ -64,4 +64,37 @@ public class IntegrationTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Successful follow-up"))
                 .andReturn();
     }
+
+    @DisplayName("Deberia ordenar por nombre desc")
+    @Test
+    void testFollowersOrderByNameDesc() throws Exception{
+
+        this.mockito.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list?order=name_desc",100)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @DisplayName("Deberia contar la cantidad de seguidores")
+    @Test
+    void testCountFollowersById() throws Exception{
+
+        this.mockito.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count",100)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.followers_count").value(5)).andReturn();
+    }
+
+    @DisplayName("Deberia no encontrar el usuario")
+    @Test
+    void test3() throws Exception{
+
+        this.mockito.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count",19)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
 }

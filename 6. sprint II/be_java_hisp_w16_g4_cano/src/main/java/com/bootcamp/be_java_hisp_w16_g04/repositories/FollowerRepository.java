@@ -20,6 +20,8 @@ public class FollowerRepository implements IFollowerRepository {
     followers.add(new Follower(104, 105));
     followers.add(new Follower(104, 106));
     followers.add(new Follower(100, 106));
+    followers.add(new Follower(104, 102));
+    followers.add(new Follower(100, 102));
   }
 
   public void setFollowers(List<Follower> followers) {
@@ -67,6 +69,5 @@ public class FollowerRepository implements IFollowerRepository {
     followers = followers.stream()
         .filter(follower -> !(follower.getIdUser().equals(userIdToUnfollow) && follower.getIdFollower().equals(userId)))
         .collect(Collectors.toList());
-
   }
 }

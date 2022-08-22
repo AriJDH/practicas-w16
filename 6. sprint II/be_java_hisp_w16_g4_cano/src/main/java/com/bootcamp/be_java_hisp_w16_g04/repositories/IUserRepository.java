@@ -5,6 +5,6 @@ import com.bootcamp.be_java_hisp_w16_g04.model.User;
 public interface IUserRepository {
   User getByIdUser(Integer userId);
 
-  public boolean isValidUser(Integer userId);
+  boolean isValidUser(Integer userId);
 
 }

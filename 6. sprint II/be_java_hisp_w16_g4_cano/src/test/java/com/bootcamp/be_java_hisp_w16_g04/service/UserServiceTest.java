@@ -1,6 +1,7 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseFollowersListDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowedDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowersCountDTO;
 import com.bootcamp.be_java_hisp_w16_g04.exception.OrderNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Follower;
@@ -162,5 +163,99 @@ public class UserServiceTest {
     UserFollowersCountDTO result = userService.followersCount(userId);
 
     Assertions.assertEquals(resultExpected.getFollowersCount(), result.getFollowersCount());
+  }
+
+  @Test
+  public void orderListUserFollowedTest() {
+    final Integer userId = 102;
+    User user102 = new User(102, "Ruth Cano");
+
+    List<User> listUsers = new ArrayList<>(Arrays.asList(
+            new User(100, "Andres Roa"),
+            new User(104, "Tannia Hernandez")
+    ));
+
+    List<Integer> listIdsFollowers = new ArrayList<>(Arrays.asList(100, 104));
+
+    UserFollowedDTO resultMock = new UserFollowedDTO();
+    resultMock.setFollowed(listUsers);
+    resultMock.setUser_id(userId);
+    resultMock.setUser_name(user102.getUserName());
+
+    when(iUserRepository.isValidUser(userId)).thenReturn(true);
+
+    when(iUserRepository.getByIdUser(userId)).thenReturn(user102);
+
+    when(iFollowerRepository.returnIds(userId)).thenReturn(listIdsFollowers);
+
+    when(iUserRepository.getByIdUser(100)).thenReturn(new User(100, "Andres Roa"));
+    when(iUserRepository.getByIdUser(104)).thenReturn(new User(104, "Tannia Hernandez"));
+
+    UserFollowedDTO resultService = userService.orderListUserFollowed(userId, "");
+
+    Assertions.assertEquals(resultMock.getFollowed(), resultService.getFollowed());
+  }
+
+  @Test
+  public void orderListUserFollowedOrderAscTest() {
+    final Integer userId = 102;
+    User user102 = new User(102, "Ruth Cano");
+
+    List<User> listUsers = new ArrayList<>(Arrays.asList(
+            new User(100, "Andres Roa"),
+            new User(104, "Tannia Hernandez")
+    ));
+
+    List<Integer> listIdsFollowers = new ArrayList<>(Arrays.asList(100, 104));
+
+    UserFollowedDTO resultMock = new UserFollowedDTO();
+    resultMock.setFollowed(listUsers);
+    resultMock.setUser_id(userId);
+    resultMock.setUser_name(user102.getUserName());
+
+    when(iUserRepository.isValidUser(userId)).thenReturn(true);
+
+    when(iUserRepository.getByIdUser(userId)).thenReturn(user102);
+
+    when(iFollowerRepository.returnIds(userId)).thenReturn(listIdsFollowers);
+
+    when(iUserRepository.getByIdUser(100)).thenReturn(new User(100, "Andres Roa"));
+    when(iUserRepository.getByIdUser(104)).thenReturn(new User(104, "Tannia Hernandez"));
+
+    UserFollowedDTO resultService = userService.orderListUserFollowed(userId, "name_asc");
+
+    Assertions.assertEquals(resultMock.getFollowed(), resultService.getFollowed());
+  }
+
+  @Test
+  public void orderListUserFollowedOrderDescTest() {
+    final Integer userId = 102;
+    User user102 = new User(102, "Ruth Cano");
+
+    List<User> listUsers = new ArrayList<>(Arrays.asList(
+            new User(104, "Tannia Hernandez"),
+            new User(100, "Andres Roa")
+
+    ));
+
+    List<Integer> listIdsFollowers = new ArrayList<>(Arrays.asList(100, 104));
+
+    UserFollowedDTO resultMock = new UserFollowedDTO();
+    resultMock.setFollowed(listUsers);
+    resultMock.setUser_id(userId);
+    resultMock.setUser_name(user102.getUserName());
+
+    when(iUserRepository.isValidUser(userId)).thenReturn(true);
+
+    when(iUserRepository.getByIdUser(userId)).thenReturn(user102);
+
+    when(iFollowerRepository.returnIds(userId)).thenReturn(listIdsFollowers);
+
+    when(iUserRepository.getByIdUser(100)).thenReturn(new User(100, "Andres Roa"));
+    when(iUserRepository.getByIdUser(104)).thenReturn(new User(104, "Tannia Hernandez"));
+
+    UserFollowedDTO resultService = userService.orderListUserFollowed(userId, "name_desc");
+
+    Assertions.assertEquals(resultMock.getFollowed(), resultService.getFollowed());
   }
 }

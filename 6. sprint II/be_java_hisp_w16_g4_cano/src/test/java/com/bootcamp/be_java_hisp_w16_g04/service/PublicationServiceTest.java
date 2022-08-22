@@ -1,9 +1,6 @@
 package com.bootcamp.be_java_hisp_w16_g04.service;
 
-import com.bootcamp.be_java_hisp_w16_g04.dto.ListProductByDateDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.PostDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.ProductDTO;
-import com.bootcamp.be_java_hisp_w16_g04.dto.UserFollowedDTO;
+import com.bootcamp.be_java_hisp_w16_g04.dto.*;
 import com.bootcamp.be_java_hisp_w16_g04.exception.OrderNotFoundException;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
@@ -20,6 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -146,5 +145,25 @@ class PublicationServiceTest {
     when(iProductService.getProductById(Mockito.any())).thenReturn(productDTO);
 
     Assertions.assertEquals(listProductByDateDTO, publicationService.getListProductByDate(106, "date_desc"));
+  }
+
+  @Test
+  public void createPublicationTest() {
+    final Integer userId = 102;
+    User user102 = new User(102, "Ruth Cano");
+
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    LocalDate date3 = LocalDate.parse("18-04-2022", dtf);
+
+    PublicationDTO createPublicationDTO = new PublicationDTO();
+    createPublicationDTO.setUserId(userId);
+    createPublicationDTO.setCategory(76);
+    createPublicationDTO.setDate(date3);
+    createPublicationDTO.setPrice(110.0);
+    createPublicationDTO.setProductId(6);
+
+    Publication result = iPublicationRepository.createPublication(createPublicationDTO);
+
+    Assertions.assertEquals(createPublicationDTO.getUserId(), result.getUserId());
   }
 }

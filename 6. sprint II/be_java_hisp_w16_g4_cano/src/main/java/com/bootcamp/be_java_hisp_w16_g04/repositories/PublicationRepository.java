@@ -2,6 +2,7 @@ package com.bootcamp.be_java_hisp_w16_g04.repositories;
 
 import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.model.Publication;
+import com.bootcamp.be_java_hisp_w16_g04.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
@@ -25,6 +26,10 @@ public class PublicationRepository implements IPublicationRepository {
     publications.add(new Publication(1, 104, date1, 100, 100, 150.0));
     publications.add(new Publication(2, 104, date2, 200, 200, 350.0));
     publications.add(new Publication(2, 104, date3, 300, 200, 350.0));
+  }
+
+  public void setPublications(List<Publication> publications) {
+    this.publications = publications;
   }
 
   @Override

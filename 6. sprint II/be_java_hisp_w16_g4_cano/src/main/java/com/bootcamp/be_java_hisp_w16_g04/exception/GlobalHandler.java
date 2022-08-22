@@ -45,7 +45,7 @@ public class GlobalHandler {
 
   @ExceptionHandler(OrderNotFoundException.class)
   public ResponseEntity<ResponseApiDTO> catchException(OrderNotFoundException e) {
-    return new ResponseEntity<>(new ResponseApiDTO("Failed", "Failed to order date"), HttpStatus.BAD_REQUEST);
+    return new ResponseEntity<>(new ResponseApiDTO("Failed", e.getMessage()), HttpStatus.BAD_REQUEST);
   }
 
 }
