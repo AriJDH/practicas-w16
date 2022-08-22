@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/SocialMeli2.iml" filepath="$PROJECT_DIR$/.idea/SocialMeli2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/be_java_hisp_w16_g03/be_java_hisp_w16_g03.iml" filepath="$PROJECT_DIR$/be_java_hisp_w16_g03/be_java_hisp_w16_g03.iml" />
+      <module fileurl="file://$PROJECT_DIR$/be_java_hisp_w16_g03/be_java_hisp_w16_g03_coronel.iml" filepath="$PROJECT_DIR$/be_java_hisp_w16_g03/be_java_hisp_w16_g03_coronel.iml" />
     </modules>
   </component>
 </project>

@@ -7,16 +7,16 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="be_java_hisp_w16_g03" />
+        <module name="be_java_hisp_w16_g03_coronel" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="be_java_hisp_w16_g03" target="11" />
+      <module name="be_java_hisp_w16_g03_coronel" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="be_java_hisp_w16_g03" options="-parameters" />
+      <module name="be_java_hisp_w16_g03_coronel" options="-parameters" />
     </option>
   </component>
 </project>
