@@ -66,20 +66,16 @@ public class PostControllerIntegrationTests {
         postDTO.setProduct(productDTO);
         String postRequestJson = writer.writeValueAsString(postDTO);
 
-
         ResultMatcher expectedStatus = status().isOk();
-        //ResultMatcher expectedJson = content().json(new ResponseEntity<PostDTO>(HttpStatus.OK));
-        //ResultMatcher expectedContentType = content().contentType(MediaType.APPLICATION_JSON);
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(
                 "/products/post")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(postRequestJson);
 
         // Act & Assert
-        var res = mockMvc.perform(request)
+        mockMvc.perform(request)
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(expectedStatus)
                 .andReturn();
-
     }
 }
