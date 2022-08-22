@@ -179,7 +179,7 @@ public class UserRestControllerTest {
     @Test
     @DisplayName("Verifica si se pasa un orden de ordenamiento incorrecto")
     public void getVendorsFollowedByUserExceptionTest() throws  Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list",1).param("order","juan"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followed/list",1).param("order","lalala"))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType("application/json"))
@@ -199,7 +199,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    @DisplayName("Verificar la accion de dejar de seguir a un usuario que no es seguido")
+    @DisplayName("Verificar la accion de dejar de seguir a un usuario que no es vendendor")
     public void requestAllFollowersExceptionTest() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list", 1))
@@ -210,7 +210,7 @@ public class UserRestControllerTest {
     }
 
     @Test
-    @DisplayName("Verificar ")
+    @DisplayName("Verificar los post de un vendedor que sigo")
     public void requestPostFromFollowedTest() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/products/followed/{userId}/list", 1))
