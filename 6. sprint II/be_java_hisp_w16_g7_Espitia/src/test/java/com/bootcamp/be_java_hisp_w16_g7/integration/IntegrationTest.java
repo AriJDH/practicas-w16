@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -145,10 +146,10 @@ public class IntegrationTest {
     }
 
     @Test
-    void getSellersFollowers()throws Exception{
-        mockMvc.perform(MockMvcRequestBuilders.get("/{userId}/followers/list","8888"))
-                .andDo(print()).andExpect(status().isNotFound())
-                .andReturn();
+    void getSellersFollowersNoExists()throws Exception{
+       mockMvc.perform(MockMvcRequestBuilders.get("/{userId}/followers/list",12312))
+                .andDo(print()).andExpect(status().isNotFound());
+
 
 
     }
