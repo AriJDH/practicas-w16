@@ -86,7 +86,7 @@ public class PostService implements IPostService {
     private Post validatePost(Integer postID) {
         Post post = this.postRepository.findById(postID);
         if (post == null) //valida si existe el post, sino devuelve un error
-            throw new NotFoundException(String.format("The post with id: %s don't exists.", postID));
+            throw new NotFoundException(String.format("The post with id: %s doesn't exist.", postID));
         return post;
     }
 

@@ -37,7 +37,7 @@ class UserServiceTest {
     UserService userService;
 
     @Test
-    @DisplayName("Testing find user by id")
+    @DisplayName("Testing find user by id...")
     void shouldFindById() {
         //Arrange
         int id = 1;
@@ -51,8 +51,8 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Testing follow yourself")
-    void shouldRaiseBadRequestExceptionWhenTwoIdsAreEquals() {
+    @DisplayName("Testing follow yourself...")
+    void shouldRaiseBadRequestException_whenTwoIdsAreEquals() {
         BadRequestException badRequestException = assertThrows(
                 BadRequestException.class,
                 () -> this.userService.follow(1, 1)
@@ -61,17 +61,17 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Testing follow a non existing user")
-    void shouldRaiseAnExceptionWhenTheUserDoesNotExists() {
+    @DisplayName("Testing following a non-existing user...")
+    void shouldRaiseAnException_whenTheUserDoesNotExists() {
         when(this.userRepository.findById(1)).thenReturn(null);
         NotFoundException notFoundException = assertThrows(NotFoundException.class,
                 () ->this.userService.follow(1, 2)
         );
-        assertEquals(String.format("The user with id: %s don't exists.", 1), notFoundException.getMessage());
+        assertEquals(String.format("The user with id: %s doesn't exist.", 1), notFoundException.getMessage());
     }
     
     @Test
-    void shouldRaiseAnExceptionWhenTheUserToFollowDoesNotExists() {
+    void shouldRaiseAnException_whenTheUserToFollowDoesNotExists() {
         when(this.userRepository.findById(1)).thenReturn(Factory.generateUser(1));
         when(this.userRepository.findById(2)).thenReturn(null);
 
@@ -79,11 +79,11 @@ class UserServiceTest {
                 () ->this.userService.follow(1, 2)
         );
 
-        assertEquals(String.format("The user with id: %s don't exists.", 2), notFoundException.getMessage());
+        assertEquals(String.format("The user with id: %s doesn't exist.", 2), notFoundException.getMessage());
     }
 
     @Test
-    void shouldRaiseAnExceptionWhenTheUserAlreadyFollowTheUser() {
+    void shouldRaiseAnException_whenTheUserAlreadyFollowTheUser() {
         User user = new User(1,"Ale",new ArrayList<>(),new ArrayList<>());
         User user2 = new User(2,"Mati",null,null);   
         user.getFollowed().add(user2);   
@@ -97,7 +97,7 @@ class UserServiceTest {
         assertEquals("Can't follow a user you already follow.", badRequestException.getMessage());
     }
     @Test
-    void shouldRaiseAnExceptionWhenTheUserToFollowIsNotASeller() {
+    void shouldRaiseAnException_whenTheUserToFollowIsNotASeller() {
         User user = Factory.generateUser(1);
         when(this.userRepository.findById(1)).thenReturn(user);
         when(this.userRepository.findById(2)).thenReturn(Factory.generateUser(2));
@@ -131,7 +131,7 @@ class UserServiceTest {
         //Assert
         NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> userService.findById(id));
         verify(userRepository, atLeastOnce()).findById(id);
-        assertEquals(String.format("The user with id: %s don't exists.", id), notFoundException.getMessage());
+        assertEquals(String.format("The user with id: %s doesn't exist.", id), notFoundException.getMessage());
     }
 
     @Test
@@ -176,7 +176,7 @@ class UserServiceTest {
            userService.validateUser(id);
       });
 
-       assertEquals(String.format("The user with id: %s don't exists.", id), notFoundException.getMessage());
+       assertEquals(String.format("The user with id: %s doesn't exist.", id), notFoundException.getMessage());
    }
 
    @Test
@@ -239,7 +239,7 @@ class UserServiceTest {
       NotFoundException notFoundException=  assertThrows(NotFoundException.class, () -> {
          this.userService.countFollowers(1);
       });
-      assertEquals(String.format("The user with id: %s don't exists.", 1), notFoundException.getMessage());
+      assertEquals(String.format("The user with id: %s doesn't exist.", 1), notFoundException.getMessage());
    }
 
    @Test

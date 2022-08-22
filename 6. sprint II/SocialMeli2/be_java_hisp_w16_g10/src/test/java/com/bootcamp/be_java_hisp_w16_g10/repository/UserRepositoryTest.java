@@ -18,7 +18,7 @@ class UserRepositoryTest {
         users.forEach(user -> this.userRepository.save(user));
     }
     @Test
-    void givenAValidIdShouldReturnTheCorrectUserWhenCalled() {
+    void givenAValidIdShouldReturnCorrectUser_whenCalled() {
         User user = this.userRepository.findById(1);
         assertNotNull(user);
         assertInstanceOf(User.class,user);
@@ -26,7 +26,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void repositoryShouldReturnAllUsersAsListWhenCalled() {
+    void repositoryShouldReturnAllUsersAsList_whenCalled() {
         List<User> users = this.userRepository.findAll();
         assertNotNull(users);
         assertInstanceOf(List.class, users);
@@ -35,7 +35,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void repositoryShouldSaveAnUserWhenGivenAnUser() {
+    void repositoryShouldSaveAnUser_whenGivenAnUser() {
         User user = Factory.generateUser(555,"TestUser",
                 null,null);
         this.userRepository.save(user);
@@ -46,7 +46,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    void repositoryShouldUpdateUserWhenGivenUserId() {
+    void repositoryShouldUpdateUser_whenGivenUserId() {
         User newUser = Factory.generateUser(3,"TestUser",
                 null,null);
         User oldUser = this.userRepository.findById(3);

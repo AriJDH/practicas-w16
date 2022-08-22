@@ -137,7 +137,7 @@ public class UserService implements IUserService {
     public User validateUser(Integer userID) {
         User user = this.userRepository.findById(userID);
         if (user == null) //valida si existe un usuario, sino devuelve un error
-            throw new NotFoundException(String.format("The user with id: %s don't exists.", userID));
+            throw new NotFoundException(String.format("The user with id: %s doesn't exist.", userID));
         return user;
     }
 }

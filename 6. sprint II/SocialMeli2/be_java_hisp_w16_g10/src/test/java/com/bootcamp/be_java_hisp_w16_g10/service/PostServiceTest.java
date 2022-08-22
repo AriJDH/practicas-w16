@@ -74,7 +74,7 @@ class PostServiceTest {
         //Assert
          NotFoundException notFoundException = assertThrows(NotFoundException.class, () -> postService.findById(id));
         verify(postRepository, atLeastOnce()).findById(id);
-        assertEquals(String.format("The post with id: %s don't exists.", id), notFoundException.getMessage());
+        assertEquals(String.format("The post with id: %s doesn't exist.", id), notFoundException.getMessage());
     }
 
     @Test
@@ -122,7 +122,7 @@ class PostServiceTest {
     }
 
     @Test
-    void shouldRaiseExceptionWhenOrderParamIsNotValid() {
+    void shouldRaiseException_whenOrderParamIsNotValid() {
         User user = Factory.generateUser(1);
         when(this.userService.findById(1)).thenReturn(user);
 
@@ -133,7 +133,7 @@ class PostServiceTest {
     }
 
     @Test
-    void shouldReturnOrdererdByDateAscWhenIsCalledWithDateAscParam() {
+    void shouldReturnOrderedByDateAsc_whenIsCalledWithDateAscParam() {
         User user = Factory.generateUserWithFollowed(1);
         //id uno es el usuario, 2, 3, 4 que tienen que tener posts
         List<Post> postsUser2 = Factory.generateListOfPosts(2, 2);
@@ -190,7 +190,7 @@ class PostServiceTest {
     }
 
     @Test
-    void shouldReturnOrdererdByDateDescWhenIsCalledWithDateDescParam() {
+    void shouldReturnOrdererdByDateDesc_whenIsCalledWithDateDescParam() {
         User user = Factory.generateUserWithFollowed(1);
         //id uno es el usuario, 2, 3, 4 que tienen que tener posts
         List<Post> postsUser2 = Factory.generateListOfPosts(2, 2);
@@ -218,7 +218,7 @@ class PostServiceTest {
     }
 
    @Test
-   void shouldReturnUserPostListWhenValidUserIdIsGiven() {
+   void shouldReturnUserPostList_whenValidUserIdIsGiven() {
 
       //arrange
 
