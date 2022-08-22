@@ -12,9 +12,7 @@ import java.util.Optional;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.PostListResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.service.PostService;
-import com.bootcamp.be_java_hisp_w16_g10.service.UserService;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,55 +23,40 @@ import org.springframework.http.ResponseEntity;
 
 @ExtendWith(MockitoExtension.class)
 class PostControllerTest {
+    @Mock
+    private PostService postService;
 
-   @Mock
-   private PostService postService;
+    @InjectMocks
+    private PostController postController;
 
-   @Mock
-   private UserService userService;
+    @Test
+    void shouldReturnListFollowersPost() {
 
-   @InjectMocks
-   private PostController postController;
+        // arrange
+        Optional<String> opt = Optional.empty();
+        PostListResDTO postListResDTO = new PostListResDTO(1, List.of());
 
-   @Test
-   void US005() {
-   }
+        // act
+        when(postService.listFollowersPosts(postListResDTO.getUserId(), "date_desc")).thenReturn(postListResDTO);
+        ResponseEntity<PostListResDTO> resController = postController.US006(postListResDTO.getUserId(), opt);
 
-   @Test
-   void shouldReturnListFollowersPost() {
+        // assert
+        verify(postService, atLeastOnce()).listFollowersPosts(postListResDTO.getUserId(), "date_desc");
+        assertEquals(resController, new ResponseEntity<>(postListResDTO, HttpStatus.OK));
 
-      // arrange
+    }
 
-      Optional<String> opt = Optional.empty();
+    @Test
+    void shouldSavePostReqDTO() {
+        //arrange
+        PostReqDTO postReqDTO = generateProductReqDTO();
 
+        //act
+        var response = postController.US005(postReqDTO);
+        verify(postService).save(postReqDTO);
 
-      PostListResDTO postListResDTO = new PostListResDTO(1, List.of());
-
-      // act
-
-      when(postService.listFollowersPosts(postListResDTO.getUserId(), "date_desc")).thenReturn(postListResDTO);
-
-
-      ResponseEntity<PostListResDTO> resController = postController.US006(postListResDTO.getUserId(), opt);
-
-      // assert
-
-      verify(postService, atLeastOnce()).listFollowersPosts(postListResDTO.getUserId(), "date_desc");
-      Assertions.assertTrue(resController.equals(new ResponseEntity<>(postListResDTO,HttpStatus.OK)));   
-
-   }
-
-   @Test
-   void shouldSavePostReqDTO() {
-      //arrange
-      PostReqDTO postReqDTO = generateProductReqDTO();
-
-      //act
-      var response = postController.US005(postReqDTO);
-      verify(postService).save(postReqDTO);
-
-      //assert
-      assertEquals(200, response.getStatusCodeValue());
-   }
+        //assert
+        assertEquals(200, response.getStatusCodeValue());
+    }
 
 }

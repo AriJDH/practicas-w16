@@ -26,12 +26,12 @@ public class Factory {
                             i,
                             userId,
                             Factory.generateProduct(
-                                i,
-                                "name ".concat(indexString),
-                                "type ".concat(indexString),
-                                "brand ".concat(indexString),
-                                "color ".concat(indexString),
-                                "notes ".concat(indexString)
+                                    i,
+                                    "name ".concat(indexString),
+                                    "type ".concat(indexString),
+                                    "brand ".concat(indexString),
+                                    "color ".concat(indexString),
+                                    "notes ".concat(indexString)
                             ),
                             LocalDate.now().minusDays(i + userId),
                             i + 100D,
@@ -93,7 +93,7 @@ public class Factory {
         return User.builder()
                 .id(id)
                 .userName("user" + id)
-                .followers(Factory.generateUserList(3,1))
+                .followers(Factory.generateUserList(3, 1))
                 .followed(new ArrayList<>())
                 .build();
     }
@@ -103,38 +103,40 @@ public class Factory {
                 .id(id)
                 .userName("user" + id)
                 .followers(new ArrayList<>())
-                .followed(Factory.generateUserList(3,1))
+                .followed(Factory.generateUserList(3, 1))
                 .build();
     }
 
-    static public List<User> generateUserList (Integer amount, Integer firstId) {
+    static public List<User> generateUserList(Integer amount, Integer firstId) {
         List<User> users = new ArrayList<>();
         for (Integer i = firstId; i < firstId + amount; i++) {
             String indexString = Integer.toString(i);
-            users.add(Factory.generateUser(firstId+i,
-                            "User ".concat(indexString),
-                            null, null));
+            users.add(Factory.generateUser(
+                    firstId + i,
+                    "User ".concat(indexString),
+                    null,
+                    null)
+            );
         }
         return users;
     }
 
 
     static public PostReqDTO generateProductReqDTO() {
-        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris","nada");
-        PostReqDTO postReqDTO = new PostReqDTO(1,1, LocalDate.now(),productReqDTO,10,1500.0);
-        return postReqDTO;
+        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris", "nada");
+        return new PostReqDTO(1, 1, LocalDate.now(), productReqDTO, 10, 1500.0);
     }
 
     static public PostReqDTO generateProductReqDTOWithBadDate() {
-        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris","nada");
+        ProductReqDTO productReqDTO = new ProductReqDTO(1, "Mac", "Compu", "Apple", "Gris", "nada");
         LocalDate today = LocalDate.now();
-        return new PostReqDTO(1,1, LocalDate.of(today.plusYears(1).getYear(),today.plusMonths(1).getMonth(),today.getDayOfMonth()),productReqDTO,10,1500.0);
+        return new PostReqDTO(1, 1, LocalDate.of(today.plusYears(1).getYear(), today.plusMonths(1).getMonth(), today.getDayOfMonth()), productReqDTO, 10, 1500.0);
     }
 
     static public List<PostResDTO> generateListPostResDTO(int amount, int userId) {
-        var lista = generateListOfPosts(amount, userId);
-
-        return lista.stream().map(Mapper::parseToPostResDTO).collect(Collectors.toList());
+        return generateListOfPosts(amount, userId).stream()
+                .map(Mapper::parseToPostResDTO)
+                .collect(Collectors.toList());
     }
 }
 
