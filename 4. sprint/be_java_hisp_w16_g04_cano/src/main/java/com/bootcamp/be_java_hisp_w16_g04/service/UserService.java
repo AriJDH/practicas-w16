@@ -98,7 +98,7 @@ public class UserService implements IUserService {
 
     List<User> users = iFollowerRepository
         .returnIds(userId).stream()
-        .map(id -> iUserRepository.getByIdUser(id))
+        .map(iUserRepository::getByIdUser)
         .collect(Collectors.toList());
 
     if (order.equals("name_asc")) {

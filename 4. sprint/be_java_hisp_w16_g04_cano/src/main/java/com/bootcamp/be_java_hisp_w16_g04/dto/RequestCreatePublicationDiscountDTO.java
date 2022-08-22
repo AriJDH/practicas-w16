@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class RequestCreatePublicationDiscountDTO {
+
     private Integer userId;
     @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
     private LocalDate date;

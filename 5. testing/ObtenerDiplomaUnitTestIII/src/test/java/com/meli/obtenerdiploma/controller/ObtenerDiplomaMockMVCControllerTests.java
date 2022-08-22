@@ -57,6 +57,6 @@ public class ObtenerDiplomaMockMVCControllerTests {
                         .andExpect(result -> Assertions.assertEquals("El alumno con Id 9000 no se encuetra registrado.", result.getResolvedException().getMessage()))
                         .andReturn();
 
-        Assertions.assertEquals("application/json", mvcResult.getResponse().getContentType());
+        Assertions.assertEquals("application/json", mvcResult.getResponse().getContentAsString());
     }
 }
