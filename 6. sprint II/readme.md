@@ -60,4 +60,3 @@ Sin importar que valores cambiemos del objeto post el resultado del test sera ve
 
 Esta solucion acarrea la implementacion de test unitarios sobre la clase Mapper ya que al estar encapsulado el servicio el test nunca pasa por dicho metodo de la clase.
 
-
