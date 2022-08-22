@@ -2,6 +2,8 @@ package com.bootcamp.be_java_hisp_w16_g7.integration;
 
 
 import com.bootcamp.be_java_hisp_w16_g7.dto.*;
+import com.bootcamp.be_java_hisp_w16_g7.entity.User;
+import com.bootcamp.be_java_hisp_w16_g7.exception.UserNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -139,6 +141,15 @@ public class IntegrationTest {
         //Assert
 
         Assertions.assertEquals(responseJson,response.getResponse().getContentAsString());
+
+    }
+
+    @Test
+    void getSellersFollowers()throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/{userId}/followers/list","8888"))
+                .andDo(print()).andExpect(status().isNotFound())
+                .andReturn();
+
 
     }
 }
