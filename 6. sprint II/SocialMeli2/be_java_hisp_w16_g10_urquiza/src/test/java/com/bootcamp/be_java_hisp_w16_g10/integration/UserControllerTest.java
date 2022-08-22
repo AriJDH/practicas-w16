@@ -53,10 +53,24 @@ public class UserControllerTest {
     }
 
     @Test
+    @DisplayName("Can't follow an user that's not a seller...")
+    public void shouldNotFollowAnInvalidUser() throws Exception {
+        MvcResult mvcResult = this.mockMvc.perform(
+                        MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}",3,5)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andReturn();
+
+        assertEquals(400, mvcResult.getResponse().getStatus());
+
+    }
+
+    @Test
     @DisplayName("Can follow an user that's a seller...")
     public void shouldFollowAValidUser() throws Exception {
         product = new ProductReqDTO(101,"Silla Ergonómica","Oficina","Erasmo","Black","Con Garantía.");
-        postUser2 = new PostReqDTO(2,301,LocalDate.now(),product,777,28999.99);
+        postUser2 = new PostReqDTO(2,301,LocalDate.now(),product,777,29999.99);
         postService.save(postUser2);
 
         MvcResult mvcResult = this.mockMvc.perform(
@@ -65,16 +79,21 @@ public class UserControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
+
+        assertEquals(200, mvcResult.getResponse().getStatus());;
     }
 
     @Test
-    @DisplayName("Can't follow an user that's not a seller...")
-    public void shouldNotFollowAnInvalidUser() throws Exception {
+    @DisplayName("Can't unfollow someone who isn't followed...")
+    public void shouldNotUnfollowValidUser() throws Exception {
         MvcResult mvcResult = this.mockMvc.perform(
-                        MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}",1,2)
+                        MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}",2,1)
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andReturn();
+
+        assertEquals(400, mvcResult.getResponse().getStatus());;
+
     }
 }
