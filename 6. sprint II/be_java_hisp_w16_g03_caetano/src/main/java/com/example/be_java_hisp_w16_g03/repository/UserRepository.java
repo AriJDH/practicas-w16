@@ -18,6 +18,7 @@ public class UserRepository implements IUserRepository {
     }
 
 
+
     @Override
     public List<User> postData(List<User> users) {
         listUser.addAll(users);
@@ -82,6 +83,10 @@ public class UserRepository implements IUserRepository {
                 .findFirst()
                 .get()
                 .getFolloweds();
+    }
+
+    public void setListUser(List<User> listUser) {
+        this.listUser = listUser;
     }
 
 }
