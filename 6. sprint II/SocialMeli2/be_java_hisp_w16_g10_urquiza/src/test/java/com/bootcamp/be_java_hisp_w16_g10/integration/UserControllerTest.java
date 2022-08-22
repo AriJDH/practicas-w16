@@ -3,6 +3,7 @@ package com.bootcamp.be_java_hisp_w16_g10.integration;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.PostReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.dto.request.ProductReqDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
+import com.bootcamp.be_java_hisp_w16_g10.service.IPostService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -31,11 +32,10 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private ProductReqDTO product1;
-    private ProductReqDTO product2;
-    private User user1;
-    private User user2;
+    @Autowired
+    private IPostService postService;
 
+    private ProductReqDTO product;
     private PostReqDTO postUser2;
 
     @Test
@@ -50,5 +50,31 @@ public class UserControllerTest {
         assertEquals(200, mvcResult.getResponse().getStatus());
         assertEquals(MediaType.APPLICATION_JSON_VALUE,
                         mvcResult.getResponse().getContentType());
+    }
+
+    @Test
+    @DisplayName("Can follow an user that's a seller...")
+    public void shouldFollowAValidUser() throws Exception {
+        product = new ProductReqDTO(101,"Silla Ergonómica","Oficina","Erasmo","Black","Con Garantía.");
+        postUser2 = new PostReqDTO(2,301,LocalDate.now(),product,777,28999.99);
+        postService.save(postUser2);
+
+        MvcResult mvcResult = this.mockMvc.perform(
+                MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}",1,2)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+    }
+
+    @Test
+    @DisplayName("Can't follow an user that's not a seller...")
+    public void shouldNotFollowAnInvalidUser() throws Exception {
+        MvcResult mvcResult = this.mockMvc.perform(
+                        MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}",1,2)
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andReturn();
     }
 }
