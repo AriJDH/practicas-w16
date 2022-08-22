@@ -41,6 +41,8 @@ public class UserRepository implements IUserRepository {
         //------- inicializo la lista para los followeds
         //el uno sigue al dos
         initFolloweds.add(user2);
+        initFolloweds.add(user5);
+        initFolloweds.add(user6);
         user1.setFolloweds(initFolloweds);
         //------- inicializo la lista para los followers
         //al 2 los sigue el uno
