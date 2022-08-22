@@ -1,10 +1,12 @@
-package com.bootcamp.be_java_hisp_w16_g10.service;
+package com.bootcamp.be_java_hisp_w16_g10.unit.service;
 
 import com.bootcamp.be_java_hisp_w16_g10.dto.response.UserResDTO;
 import com.bootcamp.be_java_hisp_w16_g10.entity.User;
 import com.bootcamp.be_java_hisp_w16_g10.exception.BadRequestException;
 import com.bootcamp.be_java_hisp_w16_g10.exception.NotFoundException;
 import com.bootcamp.be_java_hisp_w16_g10.repository.UserRepository;
+import com.bootcamp.be_java_hisp_w16_g10.service.PostService;
+import com.bootcamp.be_java_hisp_w16_g10.service.UserService;
 import com.bootcamp.be_java_hisp_w16_g10.util.Factory;
 import com.bootcamp.be_java_hisp_w16_g10.util.Mapper;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +37,6 @@ class UserServiceTest {
     UserRepository userRepository;
     @InjectMocks
     UserService userService;
-
     @Test
     @DisplayName("Testing find user by id")
     void shouldFindById() {
@@ -51,25 +52,19 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("Testing follow yourself")
     void shouldRaiseBadRequestExceptionWhenTwoIdsAreEquals() {
-        BadRequestException badRequestException = assertThrows(
+        assertThrows( //TODO los nombres de las excepciones
                 BadRequestException.class,
                 () -> this.userService.follow(1, 1)
         );
-        assertEquals("Cannot follow yourself", badRequestException.getMessage());
     }
-
     @Test
-    @DisplayName("Testing follow a non existing user")
     void shouldRaiseAnExceptionWhenTheUserDoesNotExists() {
         when(this.userRepository.findById(1)).thenReturn(null);
-        NotFoundException notFoundException = assertThrows(NotFoundException.class,
+        assertThrows(NotFoundException.class,
                 () ->this.userService.follow(1, 2)
         );
-        assertEquals(String.format("The user with id: %s don't exists.", 1), notFoundException.getMessage());
     }
-    
     @Test
     void shouldRaiseAnExceptionWhenTheUserToFollowDoesNotExists() {
         when(this.userRepository.findById(1)).thenReturn(Factory.generateUser(1));
