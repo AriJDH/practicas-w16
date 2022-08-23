@@ -73,25 +73,4 @@ public class ProductControllerIntegrationTest {
                 .andExpect(jsonPath("$.message").value("User with id 9999 not found"));
     }
 
-/*    @Test
-    public void createPostWithWrongPrice() throws Exception {
-
-        PostDTO postDTO = new PostDTO(1111, LocalDate.now(), new ProductDTO(1234, "Ukelele", "Music", "Ohana", "Brown", "New"), 99, null);
-
-        ObjectWriter writer = new ObjectMapper()
-                .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
-                .registerModule(new JavaTimeModule())
-                .writer().withDefaultPrettyPrinter();
-
-        String payloadJson = writer.writeValueAsString(postDTO);
-
-        this.mockMvc.perform(MockMvcRequestBuilders.post("/products/post")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(payloadJson))
-                .andDo(print())
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.title").value("HttpMessageNotReadableException"))
-                .andExpect(jsonPath("$.status").value("BAD_REQUEST"))
-                .andExpect(jsonPath("$.errors", Matchers.hasEntry("price", "El precio no puede estar vacío.")));
-    }*/
 }
