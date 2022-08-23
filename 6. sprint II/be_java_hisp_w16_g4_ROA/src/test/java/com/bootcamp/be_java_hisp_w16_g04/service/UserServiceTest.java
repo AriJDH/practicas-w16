@@ -109,7 +109,7 @@ public class UserServiceTest {
 
     User user100 = new User(100, "Andres Roa");
 
-    List<Integer> listIdsFollowers = new ArrayList<>(Arrays.asList(105, 103, 101, 106));
+    List<Integer> listIdsFollowers = new ArrayList<>(Arrays.asList(103, 105, 101, 106));
 
     /** fin declaracion objectos **/
 
@@ -118,7 +118,6 @@ public class UserServiceTest {
     when(iUserRepository.getByIdUser(userId)).thenReturn(user100);
 
     when(iFollowerRepository.getFollewersListById(userId)).thenReturn(listIdsFollowers);
-
     when(iUserRepository.getByIdUser(106)).thenReturn(new User(106, "Kevin Molano"));
     when(iUserRepository.getByIdUser(101)).thenReturn(new User(101, "Javier Aguayo"));
     when(iUserRepository.getByIdUser(103)).thenReturn(new User(103, "David Lozano"));

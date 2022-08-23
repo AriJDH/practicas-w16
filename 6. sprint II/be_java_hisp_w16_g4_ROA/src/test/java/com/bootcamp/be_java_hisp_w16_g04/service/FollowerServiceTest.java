@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class FollowerServiceTest {
@@ -45,7 +45,6 @@ class FollowerServiceTest {
 
     Integer userId = 205;
     when(userRepository.isValidUser(Mockito.any())).thenReturn(false);
-
     Assertions.assertThrows(UserNotFoundException.class, () -> followerService.followUser(userId, 100));
   }
 
@@ -53,7 +52,6 @@ class FollowerServiceTest {
   public void followUserWithWrongFollowerUserId() {
     Integer userIdToFollow = 405;
     when(userRepository.isValidUser(Mockito.any())).thenReturn(false);
-
     Assertions.assertThrows(UserNotFoundException.class, () -> followerService.followUser(100, userIdToFollow));
   }
 
@@ -62,8 +60,8 @@ class FollowerServiceTest {
 
     when(userRepository.isValidUser(Mockito.any())).thenReturn(true);
     when(followerRepository.verifyFollower(Mockito.any(), Mockito.any())).thenReturn(false);
-
     Assertions.assertThrows(UserIlegalFollow.class, () -> followerService.followUser(100, 102));
+    verify(userRepository, atLeastOnce()).isValidUser(Mockito.any()); //despues de ejecutar el assertion esto es para verificar que se este llamando el mokito  y no el metodo de la classe
   }
 
   @Test

@@ -21,20 +21,16 @@ public class FollowerRepositoryTest {
   IFollowerRepository iFollowerRepository;
 
   @Test
-  public void verifyFollowerTestFalse() {
+  public void verifyFollowerTestTrue() {
     List<Follower> followers = TestUtilsGenerator.createListFollowers();
-
     followerRepository.setFollowers(followers);
-
-    Assertions.assertTrue(iFollowerRepository.verifyFollower(105, 102));
+    Assertions.assertTrue(iFollowerRepository.verifyFollower(105, 102)); //verfi
   }
 
   @Test
-  public void verifyFollowerTestTrue() {
+  public void verifyFollowerTestFalse() {
     List<Follower> followers = TestUtilsGenerator.createListFollowers();
-
     followerRepository.setFollowers(followers);
-
     Assertions.assertFalse(iFollowerRepository.verifyFollower(101, 103));
   }
 
@@ -42,9 +38,7 @@ public class FollowerRepositoryTest {
   public void getFollewersListByIdTest() {
     List<Follower> followers = TestUtilsGenerator.createListFollowers();
     followerRepository.setFollowers(followers);
-
     List<Integer> result = iFollowerRepository.getFollewersListById(101);
-
     Assertions.assertNotNull(result, "La prueba fue exitosa");
   }
 
