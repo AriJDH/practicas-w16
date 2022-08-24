@@ -10,7 +10,7 @@ INNER JOIN actor_episode ae ON a.id = ae.actor_id
 INNER JOIN episodes e ON ae.episode_id = e.id;
 
 -- Mostrar el título de todas las series y el total de temporadas que tiene cada una de ellas.
-SELECT series.title, COUNT(seasons.serie_id) FROM series
+SELECT series.title, COUNT(*) CANT FROM series
 INNER JOIN seasons ON series.id = seasons.serie_id
 GROUP BY series.title;
 
