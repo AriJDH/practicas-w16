@@ -1,0 +1,6 @@
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+    La PK es dni, porque es un dato unico teniendo en cuenta el contexto en Colombia, no estaría segura si es seria unico a nivel mundial.
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+    La PK es un id - autoincremental, ya que siendo asi aseguramos que sea unico e irrepetible para algun otro plan.
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+    Seria una relación uno a muchos ya que un cliente puede tener mas de un plan de internet, debido a esto la tabla planes de intenet es la que va a tener la FK que seria el id del cliente.
