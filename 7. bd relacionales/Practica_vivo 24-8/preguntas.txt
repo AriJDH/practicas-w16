@@ -1,0 +1,8 @@
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+    Se usa el campo id para poder hacerlo autoincremental, el DNI ademas se puede llegar a repetir, por eso se descarta.
+
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+    Se usa el campo id, ya que no hay otro valor numerico unico para identificarlos
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+    Un cliente puede tener un plan de internet y un plan de internet pertenece a varios clientes. La FK queda en la tabla de cliente
