@@ -1,0 +1,11 @@
+USE empresa_internet;
+SELECT * FROM cliente;
+SELECT * FROM plan;
+SELECT nombre, apellido, fecha_nacimiento FROM cliente ORDER BY fecha_nacimiento;
+SELECT id, velocidad FROM plan ORDER BY velocidad DESC;
+SELECT nombre, apellido, fecha_nacimiento FROM cliente WHERE fecha_nacimiento BETWEEN "1990-01-01" AND "1999-12-31";
+SELECT nombre, apellido, provincia, ciudad FROM cliente WHERE provincia = "buenos aires";
+SELECT nombre, apellido, provincia, ciudad FROM cliente WHERE ciudad LIKE "cordoba";
+SELECT nombre, apellido, plan_id FROM cliente WHERE plan_id > 2 LIMIT 2;
+SELECT COUNT(*) FROM cliente WHERE plan_id = 1;
+SELECT MAX(velocidad) FROM plan;
