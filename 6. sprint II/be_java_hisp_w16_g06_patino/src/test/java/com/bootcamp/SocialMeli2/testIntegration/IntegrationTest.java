@@ -40,6 +40,7 @@ public class IntegrationTest {
     public void start() {
 
         followDTO = new FollowIdDto(1, 10);
+
         writer = new ObjectMapper()
                 .configure(SerializationFeature.WRAP_ROOT_VALUE, false)
                 .writer();
