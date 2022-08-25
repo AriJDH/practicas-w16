@@ -1,10 +1,11 @@
-CREATE DATABASE  IF NOT EXISTS `biblioteca` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `biblioteca`;
 -- MySQL dump 10.13  Distrib 8.0.30, for macos12 (x86_64)
 --
--- Host: 127.0.0.1    Database: biblioteca
+-- Host: localhost    Database: biblioteca
 -- ------------------------------------------------------
 -- Server version	8.0.30
+
+CREATE DATABASE biblioteca;
+USE biblioteca;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +30,7 @@ CREATE TABLE `autor` (
   `nombre` varchar(45) DEFAULT NULL,
   `nacionalidad` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idautor`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +39,7 @@ CREATE TABLE `autor` (
 
 LOCK TABLES `autor` WRITE;
 /*!40000 ALTER TABLE `autor` DISABLE KEYS */;
+INSERT INTO `autor` VALUES (1,'J.K. Rowling','EEUU'),(2,'John Katzenbach','EEUU'),(3,'Stephen King','EEUU'),(4,'Edgar Poe','EEUU'),(5,'C. S. Lewis','Británico');
 /*!40000 ALTER TABLE `autor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +58,7 @@ CREATE TABLE `estudiante` (
   `carrera` varchar(45) DEFAULT NULL,
   `edad` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idLector`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +67,7 @@ CREATE TABLE `estudiante` (
 
 LOCK TABLES `estudiante` WRITE;
 /*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
+INSERT INTO `estudiante` VALUES (1,'Tomas','Rodriguez','Calle','Ingeniero','22'),(2,'Carlos','Samanca','Carrera','Abogado','42'),(3,'Sara','Florez','Carrera','Veterinaria','35'),(4,'José','Garcia','Calle','Diseñador','37'),(5,'Filipo','Galli','Carrera','Abogado','42');
 /*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +84,7 @@ CREATE TABLE `libro` (
   `editorial` varchar(45) DEFAULT NULL,
   `area` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`idlibro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +93,7 @@ CREATE TABLE `libro` (
 
 LOCK TABLES `libro` WRITE;
 /*!40000 ALTER TABLE `libro` DISABLE KEYS */;
+INSERT INTO `libro` VALUES (1,'El Universo: Guía de viaje','Educar Editores','Ficción'),(2,'Los viajes de Gulliver','Editorial Salamandra','Ficción'),(3,'Charlie y la Fabrica de Chocolates','Educar Editores','Ficción'),(4,'El Psicoanalista','Educar Editores','Ficción'),(5,'Under the dome','Educar Editores','Ficción');
 /*!40000 ALTER TABLE `libro` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +121,7 @@ CREATE TABLE `libroautor` (
 
 LOCK TABLES `libroautor` WRITE;
 /*!40000 ALTER TABLE `libroautor` DISABLE KEYS */;
+INSERT INTO `libroautor` VALUES (1,1),(4,2),(4,3),(1,4),(5,5);
 /*!40000 ALTER TABLE `libroautor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +144,7 @@ CREATE TABLE `prestamo` (
   KEY `fk_prestamo_estudiante1_idx` (`estudiante_idLector`),
   CONSTRAINT `fk_prestamo_estudiante1` FOREIGN KEY (`estudiante_idLector`) REFERENCES `estudiante` (`idLector`),
   CONSTRAINT `fk_prestamo_libro1` FOREIGN KEY (`idLibro`) REFERENCES `libro` (`idlibro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -148,6 +153,7 @@ CREATE TABLE `prestamo` (
 
 LOCK TABLES `prestamo` WRITE;
 /*!40000 ALTER TABLE `prestamo` DISABLE KEYS */;
+INSERT INTO `prestamo` VALUES ('2020-02-03 00:00:00','2021-07-16 00:00:00',0,5,1,1),('2020-02-03 00:00:00','2021-01-18 00:00:00',0,1,2,3),('2020-02-03 00:00:00','2021-03-29 00:00:00',0,5,3,5),('2020-02-03 00:00:00','2021-05-06 00:00:00',0,5,4,3),('2020-02-03 00:00:00','2021-07-16 00:00:00',0,1,5,2);
 /*!40000 ALTER TABLE `prestamo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -160,4 +166,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-24 15:38:02
+-- Dump completed on 2022-08-25 18:38:50

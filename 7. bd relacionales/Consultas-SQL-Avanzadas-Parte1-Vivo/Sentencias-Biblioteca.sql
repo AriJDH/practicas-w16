@@ -1,36 +1,66 @@
 #1
-select * from autor a;
+SELECT idautor, nombre, nacionalidad 
+FROM autor;
+
 #2
-select e.nombre ,e.edad  from estudiante e;
+SELECT e.nombre ,e.edad  
+FROM estudiante e;
+
 #3
-SELECT * from estudiante e where e.carrera = 'informática';
+SELECT * FROM estudiante e 
+WHERE e.carrera = 'informática';
+
 #4
-SELECT * from autor a where a.nacionalidad = 'francesa' OR a.nacionalidad = 'italiana';
+SELECT * FROM autor a 
+WHERE a.nacionalidad = 'francesa' OR a.nacionalidad = 'italiana';
+
 #5
-select * from libro l where l.area != 'internet';
+SELECT * FROM libro l 
+WHERE l.area != 'internet';
+
 #6
-select * from libro l where l.editorial = 'salamandra';
+SELECT * FROM libro l 
+WHERE l.editorial = 'Editorial Salamandra';
+
 #7
-select * from estudiante e where e.edad > (select AVG(e.edad) from estudiante e2);
+SELECT * FROM estudiante e 
+WHERE e.edad > (SELECT AVG(e.edad) FROM estudiante e2);
+
 #8
-select * from estudiante e where e.apellido like '%G';
+SELECT * FROM estudiante e 
+WHERE e.apellido LIKE 'G%';
+
 #9
-select a.nombre from libroautor l inner join autor a on a.idautor = l.autor_idautor where l.libro_idlibro = (select l2.idlibro from libro l2 WHERE l2.titulo = 'El Universo: Guía de viaje');
+SELECT a.nombre 
+FROM libroautor l 
+INNER JOIN autor a ON a.idautor = l.autor_idautor 
+WHERE l.libro_idlibro = (SELECT l2.idlibro FROM libro l2 WHERE l2.titulo = 'El Universo: Guia de viaje');
+
 #10
-select * from prestamo p where p.estudiante_idLector = (select e.idLector from estudiante e where e.nombre = 'Filippo Galli');
+SELECT * FROM prestamo p 
+WHERE p.estudiante_idLector = (SELECT e.idLector FROM estudiante e WHERE e.nombre = 'Filippo Galli');
+
 #11
-select e.nombre from estudiante e where e.edad in (SELECT min(e2.edad) from estudiante e2);
+SELECT e.nombre 
+FROM estudiante e 
+WHERE e.edad IN (SELECT MIN(e2.edad) FROM estudiante e2);
+
 #12
-select e.nombre from prestamo p 
-	inner join estudiante e on e.idLector = p.estudiante_idLector
-	inner join libro l on l.idlibro = p.idLibro 
-	where l.area = 'Base de datos';
+SELECT e.nombre 
+FROM prestamo p 
+INNER JOIN estudiante e ON e.idLector = p.estudiante_idLector
+INNER JOIN libro l ON l.idlibro = p.idLibro 
+WHERE l.area = 'Base de datos';
+
 #13
-select l.titulo from libro l 
-	inner join libroautor la on la.libro_idlibro = l.idlibro 
-	inner join autor a  on a.idautor  = la.autor_idautor 
-where a.nombre = 'J.K. Rowling.';
+SELECT l.titulo FROM libro l 
+INNER JOIN libroautor la ON la.libro_idlibro = l.idlibro 
+INNER JOIN autor a ON a.idautor  = la.autor_idautor 
+WHERE a.nombre = 'J.K. Rowling';
+
 #14
-select * from libro l 
-	inner join prestamo p on p.idLibro = l.idlibro
-	where p.fechaDevolucion = '2021-07-16';
+SELECT * FROM libro l 
+INNER JOIN prestamo p ON p.idLibro = l.idlibro
+WHERE p.fechaDevolucion = '2021-07-16';
+    
+
