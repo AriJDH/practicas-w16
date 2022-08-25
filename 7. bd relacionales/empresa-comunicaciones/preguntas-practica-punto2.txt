@@ -1,0 +1,35 @@
+
+a. ¿Cuál es la primary key para la tabla de clientes? Justificar respuesta
+
+Respuesta: 
+
+-la primary key del cliente esta en service.
+
+***El modelo es***
+
+-Un cliente un servicio y un servicio tiene un cliente
+
+
+b. ¿Cuál es la primary key para la tabla de planes de internet? Justificar respuesta.
+
+Respuesta: 
+
+-Planes tiene como primary key id_detail_plan que es la tabla intermedia entre plans y type_plans
+
+c. ¿Cómo serían las relaciones entre tablas? ¿En qué tabla debería haber foreign key? ¿A qué campo de qué tabla hace referencia dicha foreign key? Justificar respuesta.
+
+Respuesta:
+
+-Cliente se relaciona con un servicio - servicio lleva la FK de cliente
+
+-Servicio tiene una relación con contratos, la FK esta en contratos ya que un servicio esta a nombre de un cliente, el servicio esta conectado con contratos que tiene un cliente puede tener muchos contratos.
+
+-Planes esta relacionado con contratos, un contrato puede tener muchos planes y un plan puede estar en muchos contratos lo que genera una tabla intermedia donde están las FK de planes y contratos. En contratos esta la FK de detalle_plan_contrato.
+
+-Tipo de planes esta relacionado con planes, en una relación de muchos a muchos donde se crea una tabla intermedia con las FKS y la clave FK de esa tabla esta en planes
+
+
+
+
+
+
