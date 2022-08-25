@@ -3,6 +3,7 @@ package com.mercadolibre.calculadorametroscuadrados.service;
 import com.mercadolibre.calculadorametroscuadrados.dto.HouseDTO;
 import com.mercadolibre.calculadorametroscuadrados.dto.HouseResponseDTO;
 import com.mercadolibre.calculadorametroscuadrados.dto.RoomDTO;
+import org.springframework.stereotype.Service;
 
 public class CalculateService {
   public HouseResponseDTO calculate(HouseDTO house) {
