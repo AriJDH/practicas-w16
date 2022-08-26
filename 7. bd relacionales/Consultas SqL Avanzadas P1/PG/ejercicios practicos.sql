@@ -1,5 +1,7 @@
 -- Mostrar el título y el nombre del género de todas las series.
-SELECT s.title, g.name FROM series s INNER JOIN genres g ON g.id = s.genre_id;
+SELECT s.title, g.name 
+FROM series s 
+INNER JOIN genres g ON g.id = s.genre_id;
 -- Mostrar el título de los episodios, el nombre y apellido de los actores que trabajan en cada uno de ellos.
 select e.title, a.first_name , a.last_name 
 from actor_episode ae
