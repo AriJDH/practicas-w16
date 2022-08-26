@@ -1,0 +1,6 @@
+Podemos ver que el esquema ya esta 1FN ya que todos los campos son atomicos
+
+Para aplicar la 2FN podemos ver que la descipcion de cada articulo debe estar en una tabla aparte, ya que este no depende de la clave.
+Esto nos abre una relacion N a N entre articulo y factura, donde en esa tabla tiene mas sentido tener el campo cantidad, ya que tampoco esta asociado al id_factura
+
+Finalmente lña tabla queda en 3FN vemos que estan todos los datos del cliente sobre factura, por lo cual procedemos a separar esto en una nueva tabla y luego relacionarla con un FK
