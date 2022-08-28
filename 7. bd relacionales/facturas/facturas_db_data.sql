@@ -26,8 +26,8 @@ DROP TABLE IF EXISTS `Articulo`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Articulo` (
   `id_articulo` int NOT NULL,
-  `descripcion_articulo` varchar(45) DEFAULT NULL,
-  `iva` decimal(10,0) DEFAULT NULL,
+  `descripcion_articulo` varchar(45) NOT NULL,
+  `iva` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id_articulo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,9 +50,9 @@ DROP TABLE IF EXISTS `Cliente`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Cliente` (
   `id_cliente` int NOT NULL,
-  `nombre_cliente` varchar(40) DEFAULT NULL,
-  `apellido_cliente` varchar(40) DEFAULT NULL,
-  `direccion_cliente` varchar(40) DEFAULT NULL,
+  `nombre_cliente` varchar(40) NOT NULL,
+  `apellido_cliente` varchar(40) NOT NULL,
+  `direccion_cliente` varchar(40) NOT NULL,
   PRIMARY KEY (`id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -76,8 +76,8 @@ DROP TABLE IF EXISTS `Factura`;
 CREATE TABLE `Factura` (
   `id_factura` int NOT NULL,
   `id_cliente` int NOT NULL,
-  `fecha_factura` datetime DEFAULT NULL,
-  `importe` decimal(10,0) DEFAULT NULL,
+  `fecha_factura` datetime NOT NULL,
+  `importe` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id_factura`),
   KEY `fk_Factura_Cliente1_idx` (`id_cliente`),
   CONSTRAINT `fk_Factura_Cliente1` FOREIGN KEY (`id_cliente`) REFERENCES `Cliente` (`id_cliente`)
@@ -103,7 +103,7 @@ DROP TABLE IF EXISTS `FacturaArticulo`;
 CREATE TABLE `FacturaArticulo` (
   `id_factura` int NOT NULL,
   `id_articulo` int NOT NULL,
-  `cantidad_articulo` int DEFAULT NULL,
+  `cantidad_articulo` int NOT NULL,
   PRIMARY KEY (`id_factura`,`id_articulo`),
   KEY `fk_Factura_has_Articulo_Articulo1_idx` (`id_articulo`),
   KEY `fk_Factura_has_Articulo_Factura_idx` (`id_factura`),
@@ -131,8 +131,8 @@ DROP TABLE IF EXISTS `Pago`;
 CREATE TABLE `Pago` (
   `id_pago` varchar(45) NOT NULL,
   `id_factura` int NOT NULL,
-  `forma_pago` decimal(10,0) DEFAULT NULL,
-  `importe` decimal(10,0) DEFAULT NULL,
+  `forma_pago` decimal(10,0) NOT NULL,
+  `importe` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id_pago`),
   KEY `fk_Pago_Factura1_idx` (`id_factura`),
   CONSTRAINT `fk_Pago_Factura1` FOREIGN KEY (`id_factura`) REFERENCES `Factura` (`id_factura`)
@@ -157,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-28 17:10:59
+-- Dump completed on 2022-08-28 17:21:54
