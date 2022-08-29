@@ -1,0 +1,215 @@
+PUT /zapatillas_deportivas
+{
+  "mappings":{
+    "properties":{
+      "nombre":{
+        "type":"text"
+      },
+      "marca":{
+        "type":"text"
+      },
+      "genero":{
+        "type":"text"
+      },
+      "talla":{
+        "type":"text"
+      },
+      "precio":{
+        "type":"text"
+      }
+    }
+    
+  }
+  
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 1",
+  "genero":"Hombre",
+  "precio":"35000",
+  "talla":"40"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 2",
+  "marca":"Adidas",
+  "precio":"390000",
+  "talla":"45"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 2",
+  "genero" : "Femenino",
+  "marca" : "Puma",
+  "precio" : "89900",
+  "talla" : "36"
+}
+
+POST /zapatillas_deportivas/_doc/V9Bk64IBQ8n4dQQ77BC8/_update?pretty
+{
+  "doc":
+  {
+  "nombre":"Zapatilla 3"
+  }
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 4",
+  "genero" : "Masculino",
+  "marca" : "Nike",
+  "precio" : "420000",
+  "talla" : "41"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 5",
+  "genero" : "Masculino",
+  "marca" : "Nike",
+  "precio" : "409999",
+  "talla" : "39"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 6",
+  "genero" : "Femenino",
+  "marca" : "Adidas",
+  "precio" : "105600",
+  "talla" : "41"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 7",
+  "genero" : "Masculino",
+  "marca" : "Pollito",
+  "precio" : "15000",
+  "talla" : "38"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 8",
+  "genero" : "Femenino",
+  "marca" : "Adidas",
+  "precio" : "57800",
+  "talla" : "37"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 9",
+  "genero" : "Masculino",
+  "marca" : "Nike",
+  "precio" : "85500",
+  "talla" : "39"
+}
+
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 10",
+  "genero" : "Femenino",
+  "marca" : "Puma",
+  "precio" : "102460",
+  "talla" : "36"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 11",
+  "genero" : "Masculino",
+  "marca" : "Adidas",
+  "precio" : "154600",
+  "talla" : "43"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 12",
+  "genero" : "Femenino",
+  "marca" : "Nike",
+  "precio" : "106400",
+  "talla" : "39"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 13",
+  "genero" : "Femenino",
+  "marca" : "Pollito",
+  "precio" : "98700",
+  "talla" : "39"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 14",
+  "genero" : "Masculino",
+  "marca" : "Adidas",
+  "precio" : "187600",
+  "talla" : "41"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 15",
+  "genero" : "Femenino",
+  "marca" : "Nike",
+  "precio" : "210000",
+  "talla" : "37"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 16",
+  "genero" : "Femenino",
+  "marca" : "Nike",
+  "precio" : "210000",
+  "talla" : "37"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 17",
+  "genero" : "Masculino",
+  "marca" : "Puma",
+  "precio" : "350900",
+  "talla" : "42"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 18",
+  "genero" : "Femenino",
+  "marca" : "Adidas",
+  "precio" : "210500",
+  "talla" : "38"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 19",
+  "genero" : "Masculino",
+  "marca" : "Nike",
+  "precio" : "150000",
+  "talla" : "39"
+}
+
+POST /zapatillas_deportivas/_doc
+{
+  "nombre":"Zapatilla 20",
+  "genero" : "Femenino",
+  "marca" : "Puma",
+  "precio" : "151000",
+  "talla" : "36"
+}
+
+
+GET zapatillas_deportivas/_search
+
