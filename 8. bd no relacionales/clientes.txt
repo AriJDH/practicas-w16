@@ -1,0 +1,24 @@
+GET /clientes/_search
+{"query":{
+  "match":{"column5": "Posadas"}
+  }
+}
+
+POST /clientes/_doc
+{
+  "nombre": "Sabrina",
+  "apellido": "Silvero",
+  "pais": "Argentina",
+  "localidad": "Buenos Aires"
+}
+
+POST /clientes/_doc
+{
+  "column3": "Sabrina",
+  "column2": "Silvero",
+  "column4": "Argentina",
+  "column5": "Lanus"
+}
+
+DELETE  /clientes/_doc/tXpK6oIBYUFQyJ1Nw9qf
+
