@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "05c1ea79-2cc6-430b-b051-fc56c15d4c43",
+		"name": "bdd no relacionales",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22562902"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9200/producto/_doc",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"modelo\":\"zapatilla negras adiddas\",\n    \"marca\":\"Adiddas\",\n    \"talla\":40\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/producto/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"producto",
+						"_doc"
+					]
+				},
+				"description": "save product"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9200/producto/_search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\":{\n        \"match\": {\n            \"marca\": \"nike\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/producto/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"producto",
+						"_search"
+					]
+				},
+				"description": "get products with query"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9200/producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"modelo\":{\"type\":\"text\"},\n            \"marca\":{\"type\":\"text\"},\n            \"talla\":{\"type\":\"long\"}\n        }\n        \n    }\n    \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/producto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"producto"
+					]
+				},
+				"description": "creating doc"
+			},
+			"response": []
+		}
+	]
+}
