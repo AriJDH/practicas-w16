@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "be46fc7e-7407-42ca-bfd0-278eb105e919",
+		"name": "Practica1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Buscar a los clientes de la localidad de Posadas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\": {\n      \"localidad\": \"Posadas\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/clientemisiones/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientemisiones",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar a los clientes del pais de Colombia ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\": {\n      \"pais\": \"CO\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/clientemisiones/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientemisiones",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Creación de un documento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\":\"Paolo\",\n  \"apellido\":\"Maldini\",\n  \"pais\":\"IT\",\n  \"localidad\":\"Posadas\"\n  \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/clientemisiones/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientemisiones",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscamos a los clientes por el pais IT",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\": {\n      \"pais\": \"IT\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/clientemisiones/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientemisiones",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregamos otro documento",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nombre\":\"Anastasia\",\n  \"apellido\":\"Fernandez\",\n  \"pais\":\"CO\",\n  \"localidad\":\"Posadas\"\n  \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/clientemisiones/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientemisiones",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscamos a los clientes que tengan Ana en su nombre ",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\":{\n        \"prefix\":{\n            \"nombre\":\"Ana\"\n        }\n    }    \n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/clientemisiones/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"clientemisiones",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
