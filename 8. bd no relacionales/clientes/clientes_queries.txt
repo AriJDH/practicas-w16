@@ -1,0 +1,22 @@
+# Ejercicio > Modulo 15: BD No Relacionales > Elasticsearch-Parte2-PG
+# ESTADO: Finalizado.
+# @GonzaloNahuelDiPierro
+
+# POST
+POST /clientes/_doc
+{
+  "nombre": "Paolo",
+  "apellido": "Maldini",
+  "pais": "IT",
+  "localidad": "Posadas"
+}
+
+# GET
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "pais": "IT"
+    }
+  }
+}

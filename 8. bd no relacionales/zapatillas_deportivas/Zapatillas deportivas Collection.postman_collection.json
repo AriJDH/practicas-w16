@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "69e4b872-7c77-4eb5-9256-abd483984fc4",
+		"name": "Zapatillas deportivas Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22567154"
+	},
+	"item": [
+		{
+			"name": "Traer todos los índices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_cat/indices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear índice zapatillas_deportivas",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\": {\n        \"properties\": {\n            \"marca\": {\n                \"type\": \"text\",\n                \"fields\": {\n                    \"keyword\": {\n                        \"type\": \"keyword\",\n                        \"ignore_above\": 256\n                    }\n                }\n            },\n            \"modelo\": {\n                \"type\": \"text\",\n                \"fields\": {\n                    \"keyword\": {\n                        \"type\": \"keyword\",\n                        \"ignore_above\": 256\n                    }\n                }\n            },\n            \"color\": {\n                \"type\": \"text\",\n                \"fields\": {\n                    \"keyword\": {\n                        \"type\": \"keyword\",\n                        \"ignore_above\": 256\n                    }\n                }\n            }\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agregar zapatillas deportivas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"marca\": \"Nike\",\n    \"modelo\": \"Volver al Futuro\",\n    \"color\": \"Gris\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar zapatillas deportivas",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"marca\": \"Nike\",\n    \"modelo\": \"Volver al Futuro\",\n    \"color\": \"Grises\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_doc/MavE64IB3EyUjmrQSsNa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_doc",
+						"MavE64IB3EyUjmrQSsNa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las zapatillas deportivas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
