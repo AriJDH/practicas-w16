@@ -1,0 +1,93 @@
+PUT /zapatillas_deportivas
+{
+  "mappings": {
+    "properties": {
+      "Marca":    { "type": "text" },  
+      "Categoria":  { "type": "text"  }, 
+      "Sexo":   { "type": "text"  },  
+      "Talla":   { "type": "integer"},  
+      "Color":   { "type": "text"  }
+    }
+  }
+}
+
+GET /zapatillas_deportivas/_mapping
+
+POST /zapatillas_deportivas/_doc/1
+{
+  "Marca":"Nike",
+  "Categoría":"Atletismo",
+  "Sexo":"Masculino",
+  "Talla":40,
+  "Color":"Negro"
+}
+
+POST /zapatillas_deportivas/_doc/2
+{
+  "Marca":"Adidas Original",
+  "Categoría":"Gimansio",
+  "Sexo":"Masculino",
+  "Talla":42,
+  "Color":"Blanco"
+}
+
+POST /zapatillas_deportivas/_doc/3
+{
+  "Marca":"Reebook",
+  "Categoría":"Gimnasio",
+  "Sexo":"Femenino",
+  "Talla":36,
+  "Color":"Blanco"
+}
+
+POST /zapatillas_deportivas/_doc/4
+{
+  "Marca":"Puma",
+  "Categoría":"Atletismo",
+  "Sexo":"Femenino",
+  "Talla":37,
+  "Color":"Aguamarina"
+}
+
+POST /zapatillas_deportivas/_doc/5
+{
+  "Marca":"Under Armour",
+  "Categoría":"Atletismo",
+  "Sexo":"Masculino",
+  "Talla":42,
+  "Color":"Rojo"
+}
+
+POST /zapatillas_deportivas/_doc/6
+{
+  "Marca":"Nike",
+  "Categoría":"Atletismo",
+  "Sexo":"Femenino",
+  "Talla":38,
+  "Color":"Azul"
+}
+
+
+GET /zapatillas_deportivas/_search
+{
+  "query": { 
+    "bool": { 
+      "must": [
+        { "match": { "Marca":   "Nike"        }},
+        { "match": { "Sexo": "Masculino" }}
+      ]
+    }
+  }
+}
+
+
+GET /zapatillas_deportivas/_search
+{
+  "query": {
+    "match": {
+      "Marca": "Nike"
+    }
+  }
+}
+
+GET /zapatillas_deportivas/_search?q=Talla:36

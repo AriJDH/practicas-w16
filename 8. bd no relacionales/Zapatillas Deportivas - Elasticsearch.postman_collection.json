@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "6b354891-9f45-41d3-a23b-29fe4bf0c803",
+		"name": "Zapatillas Deportivas - Elasticsearch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Index (table)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"mappings\": {\n    \"properties\": {\n      \"Marca\":    { \"type\": \"text\" },  \n      \"Categoria\":  { \"type\": \"text\"  }, \n      \"Sexo\":   { \"type\": \"text\"  },  \n      \"Talla\":   { \"type\": \"integer\"},  \n      \"Color\":   { \"type\": \"text\"  }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas"
+			},
+			"response": []
+		},
+		{
+			"name": "Mapping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{url}}/zapatillas/_mapping"
+			},
+			"response": []
+		},
+		{
+			"name": "New Item 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Marca\":\"Nike\",\n  \"Categoría\":\"Atletismo\",\n  \"Sexo\":\"Masculino\",\n  \"Talla\":40,\n  \"Color\":\"Negro\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas/_doc/1"
+			},
+			"response": []
+		},
+		{
+			"name": "New Item 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Marca\":\"Adidas Original\",\n  \"Categoría\":\"Gimansio\",\n  \"Sexo\":\"Masculino\",\n  \"Talla\":42,\n  \"Color\":\"Blanco\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas/_doc/2"
+			},
+			"response": []
+		},
+		{
+			"name": "New Item 3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Marca\":\"Reebook\",\n  \"Categoría\":\"Gimnasio\",\n  \"Sexo\":\"Femenino\",\n  \"Talla\":36,\n  \"Color\":\"Blanco\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas/_doc/3"
+			},
+			"response": []
+		},
+		{
+			"name": "New Item 4",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Marca\":\"Puma\",\n  \"Categoría\":\"Atletismo\",\n  \"Sexo\":\"Femenino\",\n  \"Talla\":37,\n  \"Color\":\"Aguamarina\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas/_doc/4"
+			},
+			"response": []
+		},
+		{
+			"name": "New Item 5",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Marca\":\"Under Armour\",\n  \"Categoría\":\"Atletismo\",\n  \"Sexo\":\"Masculino\",\n  \"Talla\":42,\n  \"Color\":\"Rojo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas/_doc/5"
+			},
+			"response": []
+		},
+		{
+			"name": "New Item 6",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"Marca\":\"Nike\",\n  \"Categoría\":\"Atletismo\",\n  \"Sexo\":\"Femenino\",\n  \"Talla\":38,\n  \"Color\":\"Azul\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{url}}/zapatillas/_doc/6"
+			},
+			"response": []
+		},
+		{
+			"name": "Search By Marca",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/zapatillas/_search?q=Marca:Nike",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Marca:Nike"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By Talla",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/zapatillas/_search?q=Talla:36",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Talla:36"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:9200"
+		}
+	]
+}
