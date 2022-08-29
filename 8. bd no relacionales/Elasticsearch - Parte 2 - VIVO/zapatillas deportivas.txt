@@ -1,0 +1,20 @@
+Elasticsearch - Base de datos - Productos: zapatillas deportivas
+
+1. Se solicita crear un índice (BBDD) en Elasticsearch, de zapatillas deportivas, donde se guardará información relacionada a estos productos.
+
+PUT zapatillas_deportivas/
+
+2. Guardar 20 registros en la base de datos creada, considerando los campos que crea necesarios.
+
+POST zapatillas_deportivas/_doc
+{
+    "nombre": "Air Force 20",
+    "talla": 46,
+    "color": "Rojo"
+}
+
+3. Comprobar con consultas los registros insertados en la nueva base de datos.
+
+GET zapatillas_deportivas/_search
+GET zapatillas_deportivas/_search?q=nombre:"Air Force 20"
+GET zapatillas_deportivas/_search?q=(nombre:"Air Force 20" OR nombre:"Air Force 1")
