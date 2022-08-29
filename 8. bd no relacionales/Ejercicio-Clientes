@@ -1,0 +1,23 @@
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+POST /clientes/_doc 
+{
+  "nombre":"Tomas",
+  "apellido":"Rodriguez",
+  "pais":"CO",
+  "localidad":"Posadas"
+}
+
+GET /clientes/_search
+{
+  "query":{
+    "match":{
+      "nombre":"Tomas"
+    }
+  }
+}
