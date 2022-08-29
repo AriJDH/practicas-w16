@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "2aa56692-c38c-4c57-a6a9-fed91b8d4d5c",
+		"name": "Zapatillas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22555043"
+	},
+	"item": [
+		{
+			"name": "crear index",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\": {\n            \"nombre\":{\n                \"type\": \"text\"\n            },\n            \"apellido\":{\n                \"type\": \"text\"\n            },\n            \"direccion\":{\n                \"type\": \"text\"\n            }\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/society",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"society"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "elemento en index",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"marca\": \"Nike\",\n                    \"modelo\": \"Revolution\",\n                    \"descripcion\": \"Confeccionadas en poliester\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar indexs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_cat/indices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_cat",
+						"indices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar zapatillas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/zapatillas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

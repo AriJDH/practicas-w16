@@ -1,0 +1,58 @@
+GET /clientes/_search
+{
+  "query": {
+    "match_all": {
+      
+    }
+  }
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Localidad" : "Posadas"
+    }
+  }
+}
+
+POST /clientes/_doc
+{
+        "N�" : "1",
+          "Pais" : "IT",
+          "Localidad" : "Cordoba",
+          "Nombre" : "Pamela",
+          "Apellido" : "Pereyra"
+        }
+
+POST /clientes/_doc
+{
+          "N�" : "1",
+          "Pais" : "IT",
+          "Localidad" : "Cordoba",
+          "Nombre" : "Gonzalo",
+          "Apellido" : "Dipierro"
+        }
+
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Pais": "IT"
+    }
+  }
+}
+
+DELETE /clientes/_doc/7MAm64IBDgrTm-BzAX5k
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Pais": "IT"
+    }
+  }
+}
+
+PUT /new-index-clase
