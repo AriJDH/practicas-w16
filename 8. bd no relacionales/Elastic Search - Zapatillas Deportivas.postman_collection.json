@@ -1,0 +1,141 @@
+{
+	"info": {
+		"_postman_id": "cca4213d-47cd-4b5c-88af-9072e09f140c",
+		"name": "Elastic Search - Zapatillas Deportivas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22562818"
+	},
+	"item": [
+		{
+			"name": "PUT index zapatillas",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"marca\":{\n                \"type\": \"text\"\n            },\n            \"modelo\":{\n                \"type\": \"text\"\n            },\n            \"color\":{\n                \"type\": \"text\"\n            },\n            \"talle\":{\n                \"type\": \"integer\"\n            }\n        }\n    }\n}"
+				},
+				"url": {
+					"raw": "localhost:9200/zapatillas",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST _bulk zapatillas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"index\": {} }\n{ \"marca\":\"Nike\", \"modelo\": \"Air Max SC Hombre Adultos\", \"color\": \"Negro\", \"talle\": 42 }\n{ \"index\":{} }\n{ \"marca\":\"Nike\", \"modelo\": \"Defyallday 9186\", \"color\": \"Blanco\", \"talle\": 41 }\n{ \"index\":{} }\n{ \"marca\":\"Adidas\", \"modelo\": \"Pro Model 2g 8831 Mark\", \"color\": \"Negro\", \"talle\": 40 }\n{ \"index\":{} }\n{ \"marca\":\"Adidas\", \"modelo\": \"Showtheway Sport 78\", \"color\": \"Azul\", \"talle\": 42 }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/zapatillas/_bulk",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET _search zapatillas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/zapatillas/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET _search zapatillas nike",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/zapatillas/_search?q=marca:Nike",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "marca:Nike"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET _search zapatillas talle 42",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/zapatillas/_search?q=talle:42",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "talle:42"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
