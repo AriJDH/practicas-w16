@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "9d0c20e4-7840-4926-9223-2ab0809f83fa",
+		"name": "Productos Zapatillas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22591424"
+	},
+	"item": [
+		{
+			"name": "Create Index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"marca\":{\n                \"type\": \"text\"\n            },\n             \"talle\":{\n                \"type\": \"text\"\n        },\n            \"modelo\":{\n                \"type\": \"text\"\n      }\n    }  \n  }   \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insertion regex index",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"marca\": \"Nike\",\n    \"talle\":  \"41\",\n    \"modelo\": \"Classic\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get zapatilla by Marca",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/zapatillas/_search?q=marca:Nike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "marca:Nike"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get zapatilla by Talle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/zapatillas/_search?q=talle:41",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "talle:41"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get zapatilla by Modelo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/zapatillas/_search?q=modelo:classic",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "modelo:classic"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
