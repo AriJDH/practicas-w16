@@ -9,16 +9,55 @@
 		{
 			"name": "Create index",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"modelo\":{\n                \"type\":\"text\"\n            },\n            \"marca\":{\n                \"type\":\"text\"\n            },\n            \"talla\":{\n                \"type\":\"text\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/zapatillas_deportivas",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas"
+					]
+				}
 			},
 			"response": []
 		},
 		{
 			"name": "insersion",
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"modelo\":\"Zapatilla Gris\",\n    \"marca\":\"Nike\",\n    \"talla\":\"38\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9200/zapatillas_deportivas/_doc",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_doc"
+					]
+				}
 			},
 			"response": []
 		},
@@ -26,7 +65,18 @@
 			"name": "consultar",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "localhost:9200/zapatillas_deportivas/_search",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
 			},
 			"response": []
 		}
