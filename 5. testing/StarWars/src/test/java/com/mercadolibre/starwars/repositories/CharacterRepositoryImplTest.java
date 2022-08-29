@@ -1,7 +1,6 @@
-package com.mercadolibre.starwars;
+package com.mercadolibre.starwars.repositories;
 
 import com.mercadolibre.starwars.dto.CharacterDTO;
-import com.mercadolibre.starwars.repositories.CharacterRepository;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
