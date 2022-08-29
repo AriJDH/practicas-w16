@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "b1ca3f95-b54c-46d9-abef-745b8e7ae864",
+		"name": "Elasticseatch_zapatillas_deportivas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"Nombre\":{\n                \"type\":\"text\"\n            },\n            \"marca\":{\n                \"type\":\"text\"\n            },\n            \"talla\":{\n                \"type\":\"text\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/zapatillasdeportivas",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillasdeportivas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddItems",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Nombre\":\"running\",\n    \"marca\":\"adidas\",\n    \"talla\": 41\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/zapatillasdeportivas/_doc",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillasdeportivas",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search Items",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\":{\n        \"match\":{\n            \"marca\":\"nike\"\n            \n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/zapatillasdeportivas/_search",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillasdeportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "localhost:9200"
+		}
+	]
+}
