@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "39698c5e-7fde-4be3-8b91-68e1ead2a2c6",
+		"name": "Bases de datos no relacionales",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22234685"
+	},
+	"item": [
+		{
+			"name": "Create index",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "insersion",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "consultar",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
