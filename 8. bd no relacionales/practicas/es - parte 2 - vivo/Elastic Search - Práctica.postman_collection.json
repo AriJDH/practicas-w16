@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "6bcb244d-dfde-4d05-b2a3-b8d91faadec8",
+		"name": "Elastic Search - Práctica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22238626"
+	},
+	"item": [
+		{
+			"name": "Create index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"name\":{\n                \"type\":\"text\"\n            },\n            \"branch\":{\n                \"type\":\"text\"\n            },\n            \"pictures\":{\n                \"type\":\"text\"\n            },\n            \"price\":{\n                \"type\": \"double\"\n            },\n            \"price_with_discount\":{\n                \"type\": \"double\"\n            },\n            \"size\":{\n                \"type\": \"double\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"index\": {\"_index\": \"zapatillas\",\"_id\": 1,\"_type\": \"_doc\"}}\n{\"name\": \"Comet 2 Alt Beta\",\"branch\": \"Puma\",\"pictures\": [\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw087c7adf/products/PU_195648-08/PU_195648-08-1.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwbf1c9031/products/PU_195648-08/PU_195648-08-2.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwfa883981/products/PU_195648-08/PU_195648-08-3.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwdd8d2813/products/PU_195648-08/PU_195648-08-4.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa4669064/products/PU_195648-08/PU_195648-08-5.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa4669064/products/PU_195648-08/PU_195648-08-6.JPG\"],\"price\": 11999,\"price_with_discount\": 10799,\"size\": 37.5}\n{\"index\": {\"_index\": \"zapatillas\",\"_id\": 2,\"_type\": \"_doc\"}}\n{\"name\": \"Comet 2 Alt Beta\",\"branch\": \"Puma\",\"pictures\": [\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw087c7adf/products/PU_195648-08/PU_195648-08-1.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwbf1c9031/products/PU_195648-08/PU_195648-08-2.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwfa883981/products/PU_195648-08/PU_195648-08-3.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwdd8d2813/products/PU_195648-08/PU_195648-08-4.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa4669064/products/PU_195648-08/PU_195648-08-5.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa4669064/products/PU_195648-08/PU_195648-08-6.JPG\"],\"price\": 11999,\"price_with_discount\": 10799,\"size\": 37}\n{\"index\": {\"_index\": \"zapatillas\",\"_id\": 3,\"_type\": \"_doc\"}}\n{\"name\": \"Comet 2 Alt Beta\",\"branch\": \"Puma\",\"pictures\": [\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dw087c7adf/products/PU_195648-08/PU_195648-08-1.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwbf1c9031/products/PU_195648-08/PU_195648-08-2.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwfa883981/products/PU_195648-08/PU_195648-08-3.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwdd8d2813/products/PU_195648-08/PU_195648-08-4.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa4669064/products/PU_195648-08/PU_195648-08-5.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwa4669064/products/PU_195648-08/PU_195648-08-6.JPG\"],\"price\": 11999,\"price_with_discount\": 10799,\"size\": 36.5}\n{\"index\": {\"_index\": \"zapatillas\",\"_id\": 4,\"_type\": \"_doc\"}}\n{\"name\": \"R78\",\"branch\": \"Puma\",\"pictures\": [\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-1.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-2.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-3.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-4.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-5.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-6.JPG\"],\"price\": 16799,\"size\": 38}\n{\"index\": {\"_index\": \"zapatillas\",\"_id\": 5,\"_type\": \"_doc\"}}\n{\"name\": \"R78\",\"branch\": \"Puma\",\"pictures\": [\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-1.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-2.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-3.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-4.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-5.JPG\",\"https://www.stockcenter.com.ar/on/demandware.static/-/Sites-dabra-catalog/default/dwd3ac7915/products/PU_381811-01/PU_381811-01-6.JPG\"],\"price\": 16799,\"size\": 44}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas/_bulk",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas/_search",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data filter by size",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"size\": 44\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas/_search",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:9200",
+			"type": "string"
+		}
+	]
+}
