@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 public class PostService implements IPostService {
     @Autowired
@@ -45,7 +44,6 @@ public class PostService implements IPostService {
                 product,
                 postDto.getCategory(),
                 postDto.getPrice());
-
         int id = postRepository.createPost(post);
         post.setPostId(id);
         userRepository.getUser(postDto.getUserId()).addPost(post);

@@ -190,7 +190,6 @@ public class UserControllerTest {
         when(userService.getFollowed(user.getUserId(), "name_asc")).thenReturn(user);
 
         userController.getFollowed(user.getUserId(), "name_asc");
-
         // assert
         verify(userService, atLeastOnce()).getFollowed(4, "name_asc");
     }
