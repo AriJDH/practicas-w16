@@ -42,6 +42,7 @@ ON movies_db.movies (title);
 
 #10.- Chequee que el índice fue creado correctamente.
 SHOW INDEX FROM movies;
+
 #11.- En la base de datos movies ¿Existiría una mejora notable al crear índices? Analizar y justificar la respuesta.
 /*Existe una mejora en términos de eficencia a la hora de realizar una búsqueda cuando la tabla tiene un
 gran volumnen de datos, lo que resulta útil mientras la misma no tenga modificaciones recurrentes.*/

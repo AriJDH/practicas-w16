@@ -1,0 +1,84 @@
+//Creación del índice con algunas configuraciones básicas
+PUT zapatillas
+{
+  "settings" : {
+      "index" : {
+         "number_of_shards" : 1,
+         "number_of_replicas" : 1
+      }
+   }
+}
+
+//Inserción de documentos en el índice
+POST  /zapatillas/_doc 
+{
+    "marca": "Under Armor",
+    "modelo": "Surge 3",
+    "color": "negro",
+    "talla": "CL40",
+    "precio": 29990
+}
+POST  /zapatillas/_doc 
+    "marca": "Nike",
+    "modelo": "Air Max 90",
+    "color": "negro",
+    "talla": "US13C",
+    "precio": 54990
+
+POST  /zapatillas/_doc
+{
+    "marca": "Puma",
+    "modelo": "Wild Rider Rollin'",
+    "color": "multicolor",
+    "talla": "US5",
+    "precio": 44990
+}
+
+POST  /zapatillas/_doc
+{
+    "marca": "Asics",
+    "modelo": "Jolt 3",
+    "color": "negro - rojo",
+    "talla": "CL40.5",
+    "precio": 24990
+}
+
+POST  /zapatillas/_doc
+{
+    "marca": "Adidas",
+    "modelo": "Run Falcon 2.0",
+    "color": "blanco",
+    "talla": "CL41.5",
+    "precio": 29994
+}
+
+//Búsqueda de todos los documentos disponibles en el índice
+GET zapatillas/_search
+
+//Búsqueda de documentos entregando el modelo de zapatilla como parámetro
+GET zapatillas/_search
+{
+    "query":{
+        "match":{
+            "modelo": "Jolt"
+        }
+    }
+}
+
+//Eliminar un documento del índice entregando un criterio de búsqueda
+POST zapatillas/_delete_by_query
+{
+    "query":{
+        "match":{
+            "modelo": "Jolt"
+        }
+    }
+}
+
+//Modificar el precio de un modelo de zapatillas indicando el id
+POST /zapatillas/_update/yUkw8IIBJ45IbOiSlBju/
+{
+    "doc" : {
+        "precio" : 69990
+    }
+}
