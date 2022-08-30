@@ -34,16 +34,4 @@ public class ObtenerDiplomaControllerTests {
         verify(service, atLeastOnce()).analyzeScores(stu.getId());
     }
 
-    @Test
-    public void testAnalyzeScoresWithAnExistingStudent() {
-        // arrange
-        StudentDTO stu = TestUtilsGenerator.getStudentWithId(90L);
-
-        // act
-        controller.analyzeScores(stu.getId());
-
-        // assert
-        verify(service, atLeastOnce()).analyzeScores(stu.getId());
-    }
-
 }

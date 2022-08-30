@@ -1,0 +1,73 @@
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Localidad": "Posadas"
+    }
+  }
+}
+
+POST /clientes/_doc
+{
+  "Localidad" : "Posadas",
+  "Pais" : "AR",
+  "Nombre" : "Erika",
+  "Apellido" : "Altenburger"
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Apellido": "Altenburger"
+    }
+  }
+}
+
+DELETE /clientes/_doc/BxE764IBxpWsRZT7EZZi
+
+POST /clientes/_doc
+{
+  "Localidad" : "Córdoba",
+  "Pais" : "AR",
+  "Nombre" : "Erika",
+  "Apellido" : "Altenburger"
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Localidad": "Córdoba"
+    }
+  }
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "Nombre": "Erika"
+          }
+        },
+        {
+          "term": {
+            "Pais": "AR"
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET /society/_search
+{
+  "query": {
+    "match": {
+      "apellido": "Altenburger"
+    }
+  }
+}

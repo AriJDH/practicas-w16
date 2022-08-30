@@ -30,7 +30,6 @@ public class StudentDAO implements IStudentDAO {
             properties.load(new ClassPathResource("application.properties").getInputStream());
             this.SCOPE = properties.getProperty("api.scope");
             this.loadData();
-            System.out.println(students);
         } catch (IOException e) {
             e.printStackTrace();
         }

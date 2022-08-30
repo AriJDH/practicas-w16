@@ -1,0 +1,44 @@
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "column5": "Posadas"
+    }
+  }
+}
+
+POST /clientes/_doc
+{
+  "column5" : "Posadas",
+  "column4" : "AR",
+  "column3" : "Erika",
+  "column2" : "Altenburger"
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "column2": "Altenburger"
+    }
+  }
+}
+
+DELETE /clientes/_doc/DhFK6oIBxpWsRZT7fpPP
+
+POST /clientes/_doc
+{
+  "column5" : "Córdoba",
+  "column4" : "AR",
+  "column3" : "Erika",
+  "column2" : "Altenburger"
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "column5": "Córdoba"
+    }
+  }
+}
