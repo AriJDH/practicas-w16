@@ -1,0 +1,149 @@
+{
+	"info": {
+		"_postman_id": "97e1ab19-56eb-4fab-a9db-d036728ba9db",
+		"name": "Elastic Search - Práctica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"brand\":{\n                \"type\":\"text\"\n            },\n            \"color\":{\n                \"type\":\"text\"\n            },\n            \"price\":{\n                \"type\": \"text\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Insert data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Yotz\",\"color\":\"Purple\",\"price\":\"$70.23\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Yambee\",\"color\":\"Aquamarine\",\"price\":\"$59.93\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Kanoodle\",\"color\":\"Purple\",\"price\":\"$191.50\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Voomm\",\"color\":\"Orange\",\"price\":\"$57.37\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Oba\",\"color\":\"Yellow\",\"price\":\"$276.60\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Vinder\",\"color\":\"Mauv\",\"price\":\"$93.89\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Twiyo\",\"color\":\"Khaki\",\"price\":\"$231.51\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Divanoodle\",\"color\":\"Aquamarine\",\"price\":\"$273.79\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Quinu\",\"color\":\"Purple\",\"price\":\"$196.61\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Latz\",\"color\":\"Puce\",\"price\":\"$227.31\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Zoonder\",\"color\":\"Khaki\",\"price\":\"$221.24\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Bubblebox\",\"color\":\"Khaki\",\"price\":\"$87.18\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Eimbee\",\"color\":\"Red\",\"price\":\"$140.31\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Aimbo\",\"color\":\"Violet\",\"price\":\"$199.02\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Photofeed\",\"color\":\"Mauv\",\"price\":\"$276.23\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Pixonyx\",\"color\":\"Violet\",\"price\":\"$159.51\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Jabberbean\",\"color\":\"Orange\",\"price\":\"$286.04\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Dynabox\",\"color\":\"Green\",\"price\":\"$238.88\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Quaxo\",\"color\":\"Violet\",\"price\":\"$289.69\"}\n{\"index\": {\"_index\": \"zapatillas\",\"_type\": \"_doc\"}}\n{\"brand\":\"Livepath\",\"color\":\"Puce\",\"price\":\"$105.91\"}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas/_bulk",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all data",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas/_search",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get shoes filtered by name",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\": {\n        \"match\": {\n            \"color\": \"red\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/zapatillas/_search",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:9200",
+			"type": "string"
+		}
+	]
+}
