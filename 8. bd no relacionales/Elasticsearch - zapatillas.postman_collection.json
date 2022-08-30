@@ -169,7 +169,39 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"query\": {\n    \"bool\":{\n      \"must\": [\n        {\n          \"term\": {\n              \"talla\": \"37\"\n          }\n          },\n          {\n          \"term\": {\n              \"genero\": \"Mujer\"\n            }\n  \n          }\n        ]\n    }\n  }\n}",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"match\": {\n            \"talla\": \"37\"\n          }\n        },\n        {\n          \"match\": {\n            \"genero\": \"Mujer\"\n          }\n        }\n      ]\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todos los zapatos de mujer marca New Balance",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"match\": {\n            \"marca\": \"New Balance\"\n          }\n        },\n        {\n          \"match\": {\n            \"genero\": \"Mujer\"\n          }\n        }\n      ]\n    }\n  }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
