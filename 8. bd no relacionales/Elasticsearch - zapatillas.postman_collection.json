@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "8f56de01-f6ac-42d0-bbe1-4480e148431d",
+		"name": "Elasticsearch - zapatillas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22559945"
+	},
+	"item": [
+		{
+			"name": "Crear index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"modelo\":{\n                \"type\": \"text\"\n            },\n            \"marca\":{\n                \"type\": \"text\"\n            },\n            \"talla\":{\n                \"type\": \"text\"\n            },\n            \"color\":{\n                \"type\": \"text\"\n            },\n            \"genero\":{\n                \"type\": \"text\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear registros",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"modelo\": \"Chinese\",\n    \"marca\": \"Adidas\",\n    \"talla\": \"37\",\n    \"color\": \"Negro\",\n    \"genero\": \"Mujer\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todos los zapatos marca adidas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\":{\n      \"marca\": \"Adidas\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Traer todos los datos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match_all\": {}\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todos los zapatos de mujer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"match\":{\n      \"genero\": \"Mujer\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todos los zapatos de mujer talla 37",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\":{\n      \"must\": [\n        {\n          \"term\": {\n              \"talla\": \"37\"\n          }\n          },\n          {\n          \"term\": {\n              \"genero\": \"Mujer\"\n            }\n  \n          }\n        ]\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/sneakers/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"sneakers",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
