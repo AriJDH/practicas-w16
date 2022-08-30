@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserFollowersCountDTO {
-  private Integer userId;
-  private String userName;
-  private Integer followersCount;
+    private Integer userId;
+    private String userName;
+    private Integer followersCount;
 }

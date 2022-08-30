@@ -15,41 +15,41 @@ import java.util.List;
 @SpringBootTest
 public class UserRepositoryTest {
 
-  @Autowired
-  UserRepository UserRepository;
+    @Autowired
+    UserRepository UserRepository;
 
-  @Autowired
-  IUserRepository userRepository;
+    @Autowired
+    IUserRepository userRepository;
 
-  @Test
-  public void iUserValidNull() {
+    @Test
+    public void iUserValidNull() {
 
-    List<User> users = TestUtilsGenerator.createListUsers();
-    UserRepository.setUsers(users);
+        List<User> users = TestUtilsGenerator.createListUsers();
+        UserRepository.setUsers(users);
 
-    Integer userId = 101;
-    Assertions.assertFalse(userRepository.isValidUser(userId));
-  }
+        Integer userId = 101;
+        Assertions.assertFalse(userRepository.isValidUser(userId));
+    }
 
-  @Test
-  public void iUserValidUser() {
-    List<User> users = TestUtilsGenerator.createListUsers();
-    UserRepository.setUsers(users);
+    @Test
+    public void iUserValidUser() {
+        List<User> users = TestUtilsGenerator.createListUsers();
+        UserRepository.setUsers(users);
 
-    Integer userId = 103;
-    Assertions.assertTrue(userRepository.isValidUser(userId));
-  }
+        Integer userId = 103;
+        Assertions.assertTrue(userRepository.isValidUser(userId));
+    }
 
-  @Test
-  public void getByIdUserTest() {
-    List<User> users = TestUtilsGenerator.createListUsers();
-    UserRepository.setUsers(users);
+    @Test
+    public void getByIdUserTest() {
+        List<User> users = TestUtilsGenerator.createListUsers();
+        UserRepository.setUsers(users);
 
-    User andres = new User(103, "David Lozano");
+        User andres = new User(103, "David Lozano");
 
-    User result = userRepository.getByIdUser(103);
+        User result = userRepository.getByIdUser(103);
 
-    Assertions.assertEquals(andres, result);
-  }
+        Assertions.assertEquals(andres, result);
+    }
 
 }

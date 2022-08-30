@@ -11,44 +11,44 @@ import java.util.List;
 @Repository
 public class ProductRepository implements IProductRepository {
 
-  List<Product> products = new ArrayList<Product>();
+    List<Product> products = new ArrayList<Product>();
 
-  @PostConstruct
-  private void loadData() {
-    products.add(new Product(100, "Silla gamer", "Gamer", "Racer", "Negro", "usado"));
-    products.add(new Product(200, "Nevera", "Linea blanca", "Samsung", "Blanca", "usado"));
-    products.add(new Product(300, "Lavadora", "Linea blanca", "Samsung", "Blanca", "usado"));
-  }
+    @PostConstruct
+    private void loadData() {
+        products.add(new Product(100, "Silla gamer", "Gamer", "Racer", "Negro", "usado"));
+        products.add(new Product(200, "Nevera", "Linea blanca", "Samsung", "Blanca", "usado"));
+        products.add(new Product(300, "Lavadora", "Linea blanca", "Samsung", "Blanca", "usado"));
+    }
 
-  @Override
-  public Product getProductById(Integer idProduct) {
-    return products.stream().filter(x -> x.getProductId().equals(idProduct)).findFirst().orElse(null);
-  }
+    @Override
+    public Product getProductById(Integer idProduct) {
+        return products.stream().filter(x -> x.getProductId().equals(idProduct)).findFirst().orElse(null);
+    }
 
-  @Override
-  public Product createProduct(ProductCreateDTO productDTO) {
+    @Override
+    public Product createProduct(ProductCreateDTO productDTO) {
 
-    Boolean SuccessValidate = validateFields(productDTO);
-    if (!SuccessValidate) return null;
+        Boolean SuccessValidate = validateFields(productDTO);
+        if (!SuccessValidate) return null;
 
-    Product product = new Product(productDTO.getProductId(),
-        productDTO.getProductName(),
-        productDTO.getType(),
-        productDTO.getBrand(),
-        productDTO.getColor(),
-        productDTO.getNotes());
+        Product product = new Product(productDTO.getProductId(),
+                productDTO.getProductName(),
+                productDTO.getType(),
+                productDTO.getBrand(),
+                productDTO.getColor(),
+                productDTO.getNotes());
 
-    products.add(product);
-    return product;
+        products.add(product);
+        return product;
 
-  }
+    }
 
-  private Boolean validateFields(ProductCreateDTO productDTO) {
-    return productDTO.getProductId() != null &&
-        productDTO.getProductName() != null &&
-        productDTO.getType() != null &&
-        productDTO.getBrand() != null &&
-        productDTO.getColor() != null &&
-        productDTO.getNotes() != null;
-  }
+    private Boolean validateFields(ProductCreateDTO productDTO) {
+        return productDTO.getProductId() != null &&
+                productDTO.getProductName() != null &&
+                productDTO.getType() != null &&
+                productDTO.getBrand() != null &&
+                productDTO.getColor() != null &&
+                productDTO.getNotes() != null;
+    }
 }

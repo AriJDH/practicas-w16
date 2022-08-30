@@ -13,9 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class PublicationDTO {
-  private Integer userId;
-  private LocalDate date;
-  private Integer category;
-  private Double price;
-  private Integer productId;
+    private Integer userId;
+    private LocalDate date;
+    private Integer category;
+    private Double price;
+    private Integer productId;
 }

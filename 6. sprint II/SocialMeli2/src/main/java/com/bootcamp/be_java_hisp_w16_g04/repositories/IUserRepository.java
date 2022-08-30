@@ -3,8 +3,8 @@ package com.bootcamp.be_java_hisp_w16_g04.repositories;
 import com.bootcamp.be_java_hisp_w16_g04.model.User;
 
 public interface IUserRepository {
-  User getByIdUser(Integer userId);
+    User getByIdUser(Integer userId);
 
-  public boolean isValidUser(Integer userId);
+    public boolean isValidUser(Integer userId);
 
 }

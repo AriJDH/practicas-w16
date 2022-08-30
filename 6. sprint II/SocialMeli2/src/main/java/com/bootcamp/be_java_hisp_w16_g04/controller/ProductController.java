@@ -26,39 +26,41 @@ import java.util.Optional;
 @RequestMapping("products")
 public class ProductController {
 
-  @Autowired
-  IProductService iProductService;
+    @Autowired
+    IProductService iProductService;
 
-  @Autowired
-  IPublicationService iPublicationService;
+    @Autowired
+    IPublicationService iPublicationService;
 
-  /**
-   * Method for creating a publication
-   * @param publicationDTO DTO of the publication to be created
-   * @return ResponseEntity with a DTO to give information to the user
-   */
-  @PostMapping("/post")
-  public ResponseEntity<ResponseApiDTO> createPublicacion(@Valid @RequestBody RequestCreatePublicationDTO publicationDTO) {
-    return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO), HttpStatus.OK);
-  }
+    /**
+     * Method for creating a publication
+     *
+     * @param publicationDTO DTO of the publication to be created
+     * @return ResponseEntity with a DTO to give information to the user
+     */
+    @PostMapping("/post")
+    public ResponseEntity<ResponseApiDTO> createPublicacion(@Valid @RequestBody RequestCreatePublicationDTO publicationDTO) {
+        return new ResponseEntity<>(iProductService.CreateProduct(publicationDTO), HttpStatus.CREATED);
+    }
 
-  //Publicacion
+    //Publicacion
 
-  /**
-   * Method to obtain a list of the publications of the users followed by a user.
-   * @param userId current user id
-   * @param order Order in which the list will be submitted
-   * @return ResponseEntity with a DTO to give information to the user
-   */
-  @GetMapping("/followed/{userId}/list")
-  public ResponseEntity<ListProductByDateDTO> getProductByDate(@PathVariable
+    /**
+     * Method to obtain a list of the publications of the users followed by a user.
+     *
+     * @param userId current user id
+     * @param order  Order in which the list will be submitted
+     * @return ResponseEntity with a DTO to give information to the user
+     */
+    @GetMapping("/followed/{userId}/list")
+    public ResponseEntity<ListProductByDateDTO> getProductByDate(@PathVariable
                                                                  @Min(value = 1, message = "El ID deber ser mayor a cero.")
                                                                  @NotNull(message = "El ID no puede estar vacio.")
                                                                  Integer userId,
-                                                               @RequestParam
-                                                               Optional<String> order) {
+                                                                 @RequestParam
+                                                                 Optional<String> order) {
 
-    ListProductByDateDTO result = iPublicationService.getListProductByDate(userId, order.orElse(""));
-    return new ResponseEntity<>(result, HttpStatus.OK);
-  }
+        ListProductByDateDTO result = iPublicationService.getListProductByDate(userId, order.orElse(""));
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

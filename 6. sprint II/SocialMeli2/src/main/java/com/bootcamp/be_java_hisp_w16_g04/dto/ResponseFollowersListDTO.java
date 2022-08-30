@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ResponseFollowersListDTO {
-  private Integer userId;
-  private String userName;
-  List<User> followers;
+    private Integer userId;
+    private String userName;
+    List<User> followers;
 }

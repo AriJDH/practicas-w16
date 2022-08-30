@@ -18,55 +18,57 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProductService implements IProductService {
 
-  @Autowired
-  IProductRepository iProductRepository;
-  @Autowired
-  IPublicationRepository iPublicationRepository;
+    @Autowired
+    IProductRepository iProductRepository;
+    @Autowired
+    IPublicationRepository iPublicationRepository;
 
-  private final ModelMapper mapper;
+    private final ModelMapper mapper;
 
-  public ProductService() {
-    mapper = new ModelMapper();
-  }
-
-  /**
-   * Method that returns me DTO of product given its id
-   * @param idProduct It is the product id
-   * @return Product DTO
-   */
-  @Override
-  public ProductDTO getProductById(Integer idProduct) {
-    Product product = iProductRepository.getProductById(idProduct);
-    return mapper.map(product, ProductDTO.class);
-  }
-
-
-  /**
-   * Method in charge of creating a product and at the same time creating a publication
-   * @param productCreateDTO Contains the DTO of the publication and the product
-   * @return DTO with a response for the user
-   */
-  @Override
-  public ResponseApiDTO CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
-    //Create product
-    Product product = iProductRepository.createProduct(productCreateDTO.getProduct());
-
-    if (product == null) {
-      throw new FailedToCreateResource("Bad request");
+    public ProductService() {
+        mapper = new ModelMapper();
     }
 
-    //Create publication
-    PublicationDTO publicationDTO = new PublicationDTO(productCreateDTO.getUserId(),
-        productCreateDTO.getDate(),
-        productCreateDTO.getCategory(),
-        productCreateDTO.getPrice(),
-        productCreateDTO.getProduct().getProductId());
-
-    var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
-
-    if (isCreatedPublication == null) {
-      throw new FailedToCreateResource("Bad request");
+    /**
+     * Method that returns me DTO of product given its id
+     *
+     * @param idProduct It is the product id
+     * @return Product DTO
+     */
+    @Override
+    public ProductDTO getProductById(Integer idProduct) {
+        Product product = iProductRepository.getProductById(idProduct);
+        return mapper.map(product, ProductDTO.class);
     }
-    return new ResponseApiDTO("Success", "All ok");
-  }
+
+
+    /**
+     * Method in charge of creating a product and at the same time creating a publication
+     *
+     * @param productCreateDTO Contains the DTO of the publication and the product
+     * @return DTO with a response for the user
+     */
+    @Override
+    public ResponseApiDTO CreateProduct(RequestCreatePublicationDTO productCreateDTO) {
+        //Create product
+        Product product = iProductRepository.createProduct(productCreateDTO.getProduct());
+
+        if (product == null) {
+            throw new FailedToCreateResource("Bad request");
+        }
+
+        //Create publication
+        PublicationDTO publicationDTO = new PublicationDTO(productCreateDTO.getUserId(),
+                productCreateDTO.getDate(),
+                productCreateDTO.getCategory(),
+                productCreateDTO.getPrice(),
+                productCreateDTO.getProduct().getProductId());
+
+        var isCreatedPublication = iPublicationRepository.createPublication(publicationDTO);
+
+        if (isCreatedPublication == null) {
+            throw new FailedToCreateResource("Bad request");
+        }
+        return new ResponseApiDTO("Success", "All ok");
+    }
 }

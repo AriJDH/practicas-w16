@@ -14,52 +14,54 @@ import org.springframework.stereotype.Service;
 @Service
 public class FollowerService implements IFollowerService {
 
-  @Autowired
-  IFollowerRepository ifollowerRepository;
+    @Autowired
+    IFollowerRepository ifollowerRepository;
 
-  @Autowired
-  IUserRepository iUserRepository;
+    @Autowired
+    IUserRepository iUserRepository;
 
-  /**
-   * This method is responsible for creating a record of a user following another user
-   * @param userId Is the id of the current user
-   * @param userIdToFollow This is the user id of the user to be tracked
-   * @return Returns a DTO where with a correct or incorrect action message
-   */
-  @Override
-  public FollowUserDTO followUser(Integer userId, Integer userIdToFollow) {
-    isValidUser(userId);
-    isValidUser(userIdToFollow);
+    /**
+     * This method is responsible for creating a record of a user following another user
+     *
+     * @param userId         Is the id of the current user
+     * @param userIdToFollow This is the user id of the user to be tracked
+     * @return Returns a DTO where with a correct or incorrect action message
+     */
+    @Override
+    public FollowUserDTO followUser(Integer userId, Integer userIdToFollow) {
+        isValidUser(userId);
+        isValidUser(userIdToFollow);
 
-    Boolean verifyFollower = ifollowerRepository.verifyFollower(userIdToFollow, userId);
+        Boolean verifyFollower = ifollowerRepository.verifyFollower(userIdToFollow, userId);
 
-    if (!verifyFollower) {
-      throw new UserIlegalFollow("The user already follows the seller");
+        if (!verifyFollower) {
+            throw new UserIlegalFollow("The user already follows the seller");
+        }
+
+        ifollowerRepository.followUser(userIdToFollow, userId);
+
+        return new FollowUserDTO("Successful follow-up");
     }
 
-    ifollowerRepository.followUser(userIdToFollow, userId);
-
-    return new FollowUserDTO("Successful follow-up");
-  }
-
-  /**
-   * This method is used when a user unfollows another user.
-   * @param userId Is the id of the current user
-   * @param userIdToUnfollow This is the user id of the user to be tracked
-   * @return Returns a DTO where with a correct or incorrect action message
-   */
-  @Override
-  public FollowUserDTO unFollowUser(Integer userId, Integer userIdToUnfollow) {
-    isValidUser(userIdToUnfollow);
-    isValidUser(userId);
+    /**
+     * This method is used when a user unfollows another user.
+     *
+     * @param userId           Is the id of the current user
+     * @param userIdToUnfollow This is the user id of the user to be tracked
+     * @return Returns a DTO where with a correct or incorrect action message
+     */
+    @Override
+    public FollowUserDTO unFollowUser(Integer userId, Integer userIdToUnfollow) {
+        isValidUser(userIdToUnfollow);
+        isValidUser(userId);
 //    ifollowerRepository.unFollowUser(userIdToUnfollow, userId);
-    return new FollowUserDTO("Unfollow successful");
-  }
+        return new FollowUserDTO("Unfollow successful");
+    }
 
-  public void isValidUser(Integer userId) {
-    boolean result = iUserRepository.isValidUser(userId);
+    public void isValidUser(Integer userId) {
+        boolean result = iUserRepository.isValidUser(userId);
 
-    if(!result)
-      throw new UserNotFoundException("User Not Found with User Id: " + userId);
-  }
+        if (!result)
+            throw new UserNotFoundException("User Not Found with User Id: " + userId);
+    }
 }

@@ -10,10 +10,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Publication {
-  private Integer publicationId;
-  private Integer userId;
-  private LocalDate date;
-  private Integer productId;
-  private Integer category;
-  private Double price;
+    private Integer publicationId;
+    private Integer userId;
+    private LocalDate date;
+    private Integer productId;
+    private Integer category;
+    private Double price;
 }

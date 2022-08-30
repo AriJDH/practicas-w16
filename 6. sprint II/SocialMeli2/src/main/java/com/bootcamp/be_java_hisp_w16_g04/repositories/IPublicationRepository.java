@@ -7,10 +7,10 @@ import java.util.List;
 import com.bootcamp.be_java_hisp_w16_g04.dto.PublicationDTO;
 
 public interface IPublicationRepository {
-  List<Publication> getPublications();
+    List<Publication> getPublications();
 
-  List<Publication> getListPublicationsById(Integer userId);
+    List<Publication> getListPublicationsById(Integer userId);
 
-  Publication createPublication(PublicationDTO publicationDTO);
+    Publication createPublication(PublicationDTO publicationDTO);
 
 }

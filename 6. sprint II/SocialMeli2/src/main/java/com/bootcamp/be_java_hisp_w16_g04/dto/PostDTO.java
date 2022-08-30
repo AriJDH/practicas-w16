@@ -14,11 +14,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostDTO {
-  private Integer userId;
-  private Integer postId;
-  @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
-  private LocalDate date;
-  private ProductDTO product;
-  private Integer category;
-  private Double price;
+    private Integer userId;
+    private Integer postId;
+    @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
+    private LocalDate date;
+    private ProductDTO product;
+    private Integer category;
+    private Double price;
 }

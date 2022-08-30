@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ProductDTO {
-  private Integer productId;
-  private String productName;
-  private String type;
-  private String brand;
-  private String color;
-  private String notes;
+    private Integer productId;
+    private String productName;
+    private String type;
+    private String brand;
+    private String color;
+    private String notes;
 }

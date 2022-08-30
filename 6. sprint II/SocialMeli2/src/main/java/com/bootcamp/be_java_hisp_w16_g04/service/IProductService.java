@@ -6,7 +6,7 @@ import com.bootcamp.be_java_hisp_w16_g04.dto.RequestCreatePublicationDTO;
 import com.bootcamp.be_java_hisp_w16_g04.dto.ResponseApiDTO;
 
 public interface IProductService {
-  ProductDTO getProductById(Integer idProduct);
+    ProductDTO getProductById(Integer idProduct);
 
-  ResponseApiDTO CreateProduct(RequestCreatePublicationDTO publicationDTO);
+    ResponseApiDTO CreateProduct(RequestCreatePublicationDTO publicationDTO);
 }

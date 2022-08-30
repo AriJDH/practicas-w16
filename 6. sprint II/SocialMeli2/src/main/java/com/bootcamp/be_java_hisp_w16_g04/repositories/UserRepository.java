@@ -10,39 +10,39 @@ import java.util.List;
 @Repository
 public class UserRepository implements IUserRepository {
 
-  List<User> users = new ArrayList<User>();
+    List<User> users = new ArrayList<User>();
 
-  public UserRepository(){
-    loadData();
-  }
+    public UserRepository() {
+        loadData();
+    }
 
-  private void loadData() {
-    users.add(new User(100, "Andres Roa"));
-    users.add(new User(101, "Javier Aguayo"));
-    users.add(new User(102, "Ruth Cano"));
-    users.add(new User(103, "David Lozano"));
-    users.add(new User(104, "Tannia Hernandez"));
-    users.add(new User(105, "Ana Delgado"));
-    users.add(new User(106, "Kevin Molano"));
-  }
+    private void loadData() {
+        users.add(new User(100, "Andres Roa"));
+        users.add(new User(101, "Javier Aguayo"));
+        users.add(new User(102, "Ruth Cano"));
+        users.add(new User(103, "David Lozano"));
+        users.add(new User(104, "Tannia Hernandez"));
+        users.add(new User(105, "Ana Delgado"));
+        users.add(new User(106, "Kevin Molano"));
+    }
 
-  public void setUsers(List<User> users) {
-    this.users = users;
-  }
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 
-  @Override
-  public User getByIdUser(Integer userId) {
-    return users.stream()
-        .filter(x -> x.getUserId().equals(userId))
-        .findFirst()
-        .orElse(null);
-  }
+    @Override
+    public User getByIdUser(Integer userId) {
+        return users.stream()
+                .filter(x -> x.getUserId().equals(userId))
+                .findFirst()
+                .orElse(null);
+    }
 
-  @Override
-  public boolean isValidUser(Integer userId) {
-    User user = getByIdUser(userId);
-    return user != null;
-  }
+    @Override
+    public boolean isValidUser(Integer userId) {
+        User user = getByIdUser(userId);
+        return user != null;
+    }
 
 
 }

@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BeJavaHispW16G04Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BeJavaHispW16G04Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BeJavaHispW16G04Application.class, args);
+    }
 
 }

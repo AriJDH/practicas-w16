@@ -18,6 +18,6 @@ import javax.validation.constraints.Size;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class User {
 
-  private Integer userId;
-  private String userName;
+    private Integer userId;
+    private String userName;
 }

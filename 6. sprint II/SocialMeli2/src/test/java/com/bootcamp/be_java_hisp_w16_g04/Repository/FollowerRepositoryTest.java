@@ -14,37 +14,37 @@ import java.util.List;
 @SpringBootTest
 public class FollowerRepositoryTest {
 
-  @Autowired
-  FollowerRepository FollowerRepository;
+    @Autowired
+    FollowerRepository FollowerRepository;
 
-  @Autowired
-  IFollowerRepository iFollowerRepository;
+    @Autowired
+    IFollowerRepository iFollowerRepository;
 
-  @Test
-  public void verifyFollowerTestFalse() {
-    List<Follower> followers = TestUtilsGenerator.createListFollowers();
+    @Test
+    public void verifyFollowerTestTrue() {
+        List<Follower> followers = TestUtilsGenerator.createListFollowers();
 
-    FollowerRepository.setFollowers(followers);
+        FollowerRepository.setFollowers(followers);
 
-    Assertions.assertTrue(iFollowerRepository.verifyFollower(105, 102));
-  }
+        Assertions.assertTrue(iFollowerRepository.verifyFollower(105, 102));
+    }
 
-  @Test
-  public void verifyFollowerTestTrue() {
-    List<Follower> followers = TestUtilsGenerator.createListFollowers();
+    @Test
+    public void verifyFollowerTestFalse() {
+        List<Follower> followers = TestUtilsGenerator.createListFollowers();
 
-    FollowerRepository.setFollowers(followers);
+        FollowerRepository.setFollowers(followers);
 
-    Assertions.assertFalse(iFollowerRepository.verifyFollower(101, 103));
-  }
+        Assertions.assertFalse(iFollowerRepository.verifyFollower(101, 103));
+    }
 
-  @Test
-  public void getFollewersListByIdTest() {
-    List<Follower> followers = TestUtilsGenerator.createListFollowers();
-    FollowerRepository.setFollowers(followers);
+    @Test
+    public void getFollewersListByIdTest() {
+        List<Follower> followers = TestUtilsGenerator.createListFollowers();
+        FollowerRepository.setFollowers(followers);
 
-    List<Integer> result = iFollowerRepository.getFollewersListById(101);
+        List<Integer> result = iFollowerRepository.getFollewersListById(101);
 
-    Assertions.assertNotNull(result, "La prueba fue exitosa");
-  }
+        Assertions.assertNotNull(result, "La prueba fue exitosa");
+    }
 }

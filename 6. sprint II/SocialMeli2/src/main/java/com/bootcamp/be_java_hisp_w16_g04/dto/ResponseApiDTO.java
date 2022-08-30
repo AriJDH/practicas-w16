@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResponseApiDTO {
-  private String title;
-  private String message;
+    private String title;
+    private String message;
 }

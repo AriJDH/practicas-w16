@@ -7,6 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 public class Follower {
 
-  private Integer idUser;
-  private Integer idFollower;
+    private Integer idUser;
+    private Integer idFollower;
 }

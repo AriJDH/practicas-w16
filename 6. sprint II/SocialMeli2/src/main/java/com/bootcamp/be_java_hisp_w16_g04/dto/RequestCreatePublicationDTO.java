@@ -20,18 +20,18 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class RequestCreatePublicationDTO {
 
-  @NotNull(message = "El ID no puede estar vacio.")
-  @Min(value = 1, message = "El ID deber ser mayor a cero.")
-  private Integer userId;
+    @NotNull(message = "El ID no puede estar vacio.")
+    @Min(value = 1, message = "El ID deber ser mayor a cero.")
+    private Integer userId;
 
-  @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
-  @NotNull(message = "la fecha no debe estar vacia")
-  private LocalDate date;
+    @JsonFormat(pattern = "dd-MM-yyyy", shape = JsonFormat.Shape.STRING)
+    @NotNull(message = "la fecha no debe estar vacia")
+    private LocalDate date;
 
-  private @Valid ProductCreateDTO product;
-  private Integer category;
+    private @Valid ProductCreateDTO product;
+    private Integer category;
 
-  @NotNull(message = "El campo no debe estar vacio")
-  @Max(value = 10000000)
-  private double price;
+    @NotNull(message = "El campo no debe estar vacio")
+    @Max(value = 10000000)
+    private double price;
 }

@@ -17,6 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ListProductByDateDTO {
-  private Integer userId;
-  private List<PostDTO> posts;
+    private Integer userId;
+    private List<PostDTO> posts;
 }
