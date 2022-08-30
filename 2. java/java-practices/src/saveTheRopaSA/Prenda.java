@@ -4,7 +4,7 @@ public class Prenda {
     private String marca;
     private String modelo;
 
-    public Prenda(){
+    public Prenda() {
         this.marca = "";
         this.modelo = "";
     }
@@ -15,7 +15,7 @@ public class Prenda {
     }
 
     public String getMarca() {
-        return marca;
+        return this.marca;
     }
 
     public void setMarca(String marca) {
@@ -23,7 +23,7 @@ public class Prenda {
     }
 
     public String getModelo() {
-        return modelo;
+        return this.modelo;
     }
 
     public void setModelo(String modelo) {

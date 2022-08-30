@@ -11,29 +11,30 @@ import java.util.List;
  * */
 public class Main {
     public static void main(String[] args) {
-        Prenda pantalon = new Prenda("Tascani", "Jean");
-        Prenda remera = new Prenda("CaraCruz", "Manga corta");
-
-        List<Prenda> prendas = new ArrayList();
-        prendas.add(pantalon);
-        prendas.add(remera);
-
         GuardaRopa guardaRopa = new GuardaRopa();
-        Integer identificador = guardaRopa.guardarPrendas(prendas);
 
-        List<Prenda> misPrendas1 = guardaRopa.devolverPrendas(identificador);
-        System.out.println("IDENTIFICADOR 1: " + identificador);
-        misPrendas1.stream().forEach(System.out::println);
+        // Guardado y recupero 1
+        Prenda pantalon = new Prenda("Tascani", "Jean");
+        Prenda remera1 = new Prenda("CaraCruz", "Manga corta");
+        Integer numero1 = guardaRopa.guardarPrendas(Arrays.asList(pantalon, remera1));
 
-        Prenda pantalon2 = new Prenda("Nike", "Airforce");
-        Prenda remera2 = new Prenda("Nike", "Jordan");
-        Integer identificador2 = guardaRopa.guardarPrendas(Arrays.asList(pantalon2, remera2));
-        List<Prenda> misPrendas2 = guardaRopa.devolverPrendas(identificador2);
+        List<Prenda> listaDePrendas1 = guardaRopa.devolverPrendas(numero1);
+        System.out.println("NUMERO " + numero1 + ": ");
+        listaDePrendas1.stream().forEach(System.out::println);
 
-        //System.out.println("IDENTIFICADOR 2: " + identificador2);
-        misPrendas2.stream().forEach(System.out::println);
+        // Guardado y recupero 2
+        Prenda zapatillas = new Prenda("Nike", "Air Force");
+        Prenda remera2 = new Prenda("Nike", "Manga larga");
+        Integer numero2 = guardaRopa.guardarPrendas(Arrays.asList(zapatillas, remera2));
 
-        misPrendas2.removeIf(prenda -> prenda.getMarca().equals("Tascani"));
-        misPrendas2.stream().forEach(System.out::println);
+        List<Prenda> listaDePrendas2 = guardaRopa.devolverPrendas(numero2);
+        System.out.println("NUMERO " + numero2 + ": ");
+        listaDePrendas2.stream().forEach(System.out::println);
+
+        System.out.println();
+
+        // Muestreo de todas las prendas
+        System.out.println("> MUESTREO DE TODAS LAS PRENDAS:");
+        guardaRopa.mostrarPrendas();
     }
 }
