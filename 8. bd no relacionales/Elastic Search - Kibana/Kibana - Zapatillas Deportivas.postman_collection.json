@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "afebee40-a5c8-47d0-a4ec-336538ab43ad",
+		"name": "Kibana - Zapatillas Deportivas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Index",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"brand\":{\n                \"type\":\"text\"\n            },\n            \"model\":{\n                \"type\":\"text\"\n            },\n            \"color\":{\n                \"type\":\"text\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/zapatillas",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\":\"Nike\",\n    \"model\":\"Air Jordan\",\n    \"color\":\"Red/Black\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/zapatillas/_doc",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillas",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Index - All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/zapatillas/_search",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create New Items in BULK",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"create\" : { \"_index\" : \"zapatillas\"} }\n{ \"brand\": \"Nike\", \"model\":\"Air Force 1\", \"color\":\"White\"}\n{ \"create\" : { \"_index\" : \"zapatillas\"} }\n{ \"brand\": \"Adidas\", \"model\":\"NMD\", \"color\":\"Camo\"}\n{ \"create\" : { \"_index\" : \"zapatillas\"} }\n{ \"brand\": \"Puma\", \"model\":\"RS-X\", \"color\":\"Blue\"}\n{ \"create\" : { \"_index\" : \"zapatillas\"} }\n{ \"brand\": \"Nike\", \"model\":\"Air Jordan 4\", \"color\":\"Grey\"}\n{ \"create\" : { \"_index\" : \"zapatillas\"} }\n{ \"brand\": \"Nike\", \"model\":\"Air Jordan 5\", \"color\":\"Black/White\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/zapatillas/_bulk",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"zapatillas",
+						"_bulk"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "localhost:9200"
+		}
+	]
+}
