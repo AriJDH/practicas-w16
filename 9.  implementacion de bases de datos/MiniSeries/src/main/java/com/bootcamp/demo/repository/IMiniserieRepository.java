@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IMiniserieRepository extends JpaRepository<MiniSerie, Long> {
-    
+
 }
