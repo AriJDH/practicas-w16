@@ -1,0 +1,112 @@
+{
+	"info": {
+		"_postman_id": "136fd5eb-f4fb-473f-b174-4ba895e9b4e3",
+		"name": "Joyeria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22562851"
+	},
+	"item": [
+		{
+			"name": "saveJoya",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"nombre\" : \"Pulsera\",\n\t\"material\": \"Oro\",\n\t\"peso\": 100,\n\t\"particularidad\" : \"Sin esmeralda\",\n\t\"posee_piedra\" : false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/jewerly/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllJoya",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewerly/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteJoya",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewerly/delete/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"delete",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateJoya",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"nombre\" : \"Manilla\",\n\t\"material\": \"Oro\",\n\t\"peso\": 100,\n\t\"particularidad\" : \"Sin esmeralda\",\n\t\"posee_piedra\" : false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/jewerly/update/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"update",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
