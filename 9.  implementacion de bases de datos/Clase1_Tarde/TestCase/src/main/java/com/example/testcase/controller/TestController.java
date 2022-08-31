@@ -45,7 +45,7 @@ public class TestController {
         return new ResponseEntity<>(testCaseService.delete(id),HttpStatus.OK);
     }
 
-    @GetMapping("last_update")
+    @GetMapping("/last_update")
     public ResponseEntity<List<TestCaseIdDTO>> getByDate(@RequestParam LocalDate last_update){
     return new ResponseEntity<>(testCaseService.getByDate(last_update),HttpStatus.OK);
 
