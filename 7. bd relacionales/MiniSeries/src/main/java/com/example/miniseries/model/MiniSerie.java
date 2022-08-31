@@ -15,9 +15,9 @@ public class MiniSerie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    Long id;
-    String name;
-    Double rating;
-    int amount_of_awards;
+    private Long id;
+    private String name;
+    private Double rating;
+    private int amount_of_awards;
 }
 
