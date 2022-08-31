@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ITestCaseService {
     public List<GetTestCasesDTO> getTestCases();
+    public void newTestCase();
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -19,6 +20,12 @@ public class TestCaseController {
     @GetMapping("/testCases")
     public ResponseEntity<List<GetTestCasesDTO>> getTestCases() {
         return new ResponseEntity<>( iTestCaseService.getTestCases(), HttpStatus.OK);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity newTestCase() {
+        iTestCaseService.newTestCase();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
