@@ -17,7 +17,8 @@ public class TestController {
     @PostMapping("/api/testcases/new")
     public ResponseEntity<Object> create(@RequestBody TestCase dto)
     {
-        return  new ResponseEntity<>(null, HttpStatus.OK);
+        services.create(dto);
+        return  new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/api/testcases")

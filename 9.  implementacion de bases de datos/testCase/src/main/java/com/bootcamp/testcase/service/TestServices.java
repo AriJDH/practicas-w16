@@ -18,9 +18,12 @@ public class TestServices implements  ITestServices{
 
     @Override
     public List<TestCase> getTest(String localDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        LocalDate fecha = LocalDate.parse(localDate, formatter);
+
         if(localDate != null) {
-            return repository.findAll().stream().filter(o -> o.getLast_update().format(DateTimeFormatter
-                    .ofLocalizedDate(FormatStyle.SHORT)) == localDate).collect(Collectors.toList());
+            return repository.findAll().stream().filter(o -> o.getLast_update().isBefore(fecha)).collect(Collectors.toList());
         }
         else
             return  repository.findAll();

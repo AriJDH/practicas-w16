@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter @Setter
 public class TestCase {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String descripcion;
     private Boolean tested;
