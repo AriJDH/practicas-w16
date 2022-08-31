@@ -60,7 +60,7 @@ public class JoyaService implements IJoyaService{
     @Override
     public ResponseDTO editJoya(Long id, JoyaDTO joyaDTO) {
         Joya joya = joyaRepository.findById(id).orElse(null);
-        
+
         if (joya!= null){
             joya.setNombre(joyaDTO.getNombre());
             joya.setMaterial(joyaDTO.getMaterial());

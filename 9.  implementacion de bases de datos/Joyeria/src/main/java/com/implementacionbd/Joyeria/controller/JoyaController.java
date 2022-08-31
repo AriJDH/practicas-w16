@@ -19,7 +19,7 @@ public class JoyaController {
 
     @PostMapping("/jewerly/new")
     public ResponseEntity<ResponseDTO> saveJoya (@RequestBody JoyaDTO joya) {
-        return new ResponseEntity<>(joyaService.save(joya), HttpStatus.OK);
+        return new ResponseEntity<>(joyaService.save(joya), HttpStatus.CREATED);
     }
 
     @GetMapping("/jewerly")
