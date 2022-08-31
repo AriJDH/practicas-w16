@@ -6,7 +6,6 @@ import com.myapp.lasperlas.repository.IJoyaRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,6 +43,7 @@ public class JoyaService implements IJoyaService {
         Joya joya = joyaRepository.findById(nroIdentificatorio).orElse(null);
         joya.setVentaONo(false);
         joyaRepository.save(joya);
+        
         return "La joya fue dada de baja correctamente";
     }
 
