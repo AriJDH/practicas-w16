@@ -1,0 +1,79 @@
+
+GET /practice_shoes/_search
+{
+  "query": {
+    "match": {
+      "marca": "Nike"
+    }
+  } 
+}
+
+GET /practice_shoes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "marca": "Nike"
+          }
+        },
+        {
+          "match": {
+            "color": "Blue"
+          }
+        }
+      ]
+    }
+  }
+}
+
+POST /practice_shoes/_doc
+{
+  "marca" : "Nike",
+  "tipo" : "Tenis",
+  "precio" : 2168.06,
+  "color" : "Morado",
+  "talla" : 38,
+  "id" : 40000
+}
+
+
+PUT /person
+{
+  "mappings": {
+    "properties": {
+      "nombre": {
+        "type": "keyword"
+      },
+      "apellido": {
+        "type": "keyword"
+      },
+      "edad": {
+        "type": "integer"
+      },
+      "trabaja": {
+        "type": "boolean"
+      }
+    }
+  }
+}
+
+POST /person/_doc
+{
+  "nombre" : "Mariana",
+  "apellido" : "Cano",
+  "edad" : 23,
+  "trabaja" : true
+}
+
+GET /person/_search
+{
+  "query": {
+    "match": {
+      "nombre": "Mariana"
+    }
+  } 
+}
+
+DELETE /person/_doc/r1n98YIBMdhVv6Ubev58
