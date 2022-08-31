@@ -1,4 +1,4 @@
-package Condicionales;
+package condicionales;
 
 public class Main {
 

@@ -1,4 +1,4 @@
-package Condicionales;
+package condicionales;
 import java.util.LinkedList;
 import java.util.List;
 

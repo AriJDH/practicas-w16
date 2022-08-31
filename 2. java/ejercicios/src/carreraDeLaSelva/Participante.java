@@ -1,4 +1,4 @@
-package CarreraDeLaSelva;
+package carreraDeLaSelva;
 
 public class Participante {
 
