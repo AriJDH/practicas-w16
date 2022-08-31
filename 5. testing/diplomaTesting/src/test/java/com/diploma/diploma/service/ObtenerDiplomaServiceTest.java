@@ -1,7 +1,7 @@
 package com.diploma.diploma.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -28,14 +28,14 @@ public class ObtenerDiplomaServiceTest {
     @Test 
     public void averageScoreOver9MessageWellWritten(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudentWithAverage(9.1);
+        StudentDTO student = UtilTestTools.generateStudentWithAverage("Peter", 9.1);
         when(studentDAO.findById(student.getId())).thenReturn(student);
 
         //Act
         obtenerDiplomaService.analyzeScores(student.getId());
 
         //Assert
-        verify(studentDAO, times(1)).findById(student.getId());
+        verify(studentDAO, atLeastOnce()).findById(student.getId());
         assertEquals(
             String.format(
                 "El alumno %s ha obtenido un promedio de 9.1. %s",
@@ -49,14 +49,14 @@ public class ObtenerDiplomaServiceTest {
     @Test 
     public void averageScoreBelow9MessageWellWritten(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudentWithAverage(6.8);
+        StudentDTO student = UtilTestTools.generateStudentWithAverage("Jhonathan", 6.8);
         when(studentDAO.findById(student.getId())).thenReturn(student);
 
         //Act
         obtenerDiplomaService.analyzeScores(student.getId());
 
         //Assert
-        verify(studentDAO, times(1)).findById(student.getId());
+        verify(studentDAO, atLeastOnce()).findById(student.getId());
         assertEquals(
             String.format(
                 "El alumno %s ha obtenido un promedio de 6.8. %s",
@@ -77,7 +77,7 @@ public class ObtenerDiplomaServiceTest {
         obtenerDiplomaService.analyzeScores(student.getId());
 
         //Assert
-        verify(studentDAO, times(1)).findById(student.getId());
+        verify(studentDAO, atLeastOnce()).findById(student.getId());
         assertEquals(UtilTestTools.calculateAverage(student.getSubjects()), student.getAverageScore());
     }
 }

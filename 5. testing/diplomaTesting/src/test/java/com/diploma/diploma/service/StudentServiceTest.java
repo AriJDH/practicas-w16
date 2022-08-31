@@ -2,7 +2,7 @@ package com.diploma.diploma.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -39,7 +39,7 @@ public class StudentServiceTest {
         studentService.create(student);
 
         //Assert
-        verify(studentDAO, times(1)).save(student);
+        verify(studentDAO, atLeastOnce()).save(student);
 
     }
 
@@ -53,7 +53,7 @@ public class StudentServiceTest {
         StudentDTO readStudent = studentService.read(student.getId());
         
         //Assert
-        verify(studentDAO, times(1)).findById(student.getId());
+        verify(studentDAO, atLeastOnce()).findById(student.getId());
         assertEquals(readStudent, student);
     }
     
@@ -66,7 +66,7 @@ public class StudentServiceTest {
         studentService.update(student);
 
         //Assert
-        verify(studentDAO, times(1)).save(student);
+        verify(studentDAO, atLeastOnce()).save(student);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class StudentServiceTest {
         studentService.delete(student.getId());
 
         //Assert
-        verify(studentDAO, times(1)).delete(student.getId());
+        verify(studentDAO, atLeastOnce()).delete(student.getId());
         assertNull(studentService.read(student.getId()));
     }
     // getAll() {

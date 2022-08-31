@@ -27,7 +27,7 @@ public class StudentDAOTest{
     @Test
     public void createNotExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Marcos", 3L);
         
         //Act
         studentDAO.save(student);
@@ -40,7 +40,7 @@ public class StudentDAOTest{
     @Test
     public void createExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Pedro", 2L);
         
         //Act
         studentDAO.save(student);
@@ -53,7 +53,7 @@ public class StudentDAOTest{
     @Test
     public void updateNotExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Francisco", 1L);
 
         //Act
         studentDAO.save(student);
@@ -67,9 +67,10 @@ public class StudentDAOTest{
     @Test
     public void updateExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Francisco", 1L);
 
         //Act
+        student.setStudentName("Francisco Antonio");
         studentDAO.save(student);
 
         //Assert
@@ -81,7 +82,7 @@ public class StudentDAOTest{
     @Test
     public void findExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Francisco", 1L);
         studentDAO.save(student);
         
         //Act
@@ -94,7 +95,7 @@ public class StudentDAOTest{
     @Test
     public void findNotExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Francisco", 500L);
         
         //Act & Assert
         assertThrows(StudentNotFoundException.class, () -> studentDAO.findById(student.getId() + 1));
@@ -103,7 +104,7 @@ public class StudentDAOTest{
     @Test
     public void deleteExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
+        StudentDTO student = UtilTestTools.generateStudentWithId("Pedro", 2L);
         studentDAO.save(student);
         
         //Act
@@ -117,9 +118,8 @@ public class StudentDAOTest{
     @Test
     public void deleteNotExistingStudent(){
         //Arrange
-        StudentDTO student = UtilTestTools.generateStudent("Jhon");
-        studentDAO.save(student);
-        
+        StudentDTO student = UtilTestTools.generateStudentWithId("Antonio", 4L);
+
         //Act
         studentDAO.delete(student.getId());
         

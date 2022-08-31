@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
 import java.util.Set;
 
 @RestController
@@ -19,7 +20,7 @@ public class StudentController {
     @PostMapping("/registerStudent")
     public ResponseEntity<?> registerStudent(@RequestBody @Valid StudentDTO stu) {
         this.studentService.create(stu);
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok("Student registered");
     }
 
     @GetMapping("/getStudent/{id}")

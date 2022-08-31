@@ -39,8 +39,7 @@ public class StudentRepositoryTest {
         //Act
 
         Set<StudentDTO> studentsFound = studentRepository.findAll();
-        System.out.println(studentsFound);
-        System.out.println(students);
+        
         //Assert
         assertTrue(UtilTestTools.compareSets(students, studentsFound));
     }

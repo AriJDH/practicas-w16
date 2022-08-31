@@ -1,6 +1,6 @@
 package com.diploma.controller;
 
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
@@ -32,6 +32,6 @@ public class ObtenerDiplomaControllerTest {
         obtenerDiplomaController.analyzeScores(student.getId());
 
         //Assert
-        verify(obtenerDiplomaService, times(1)).analyzeScores(student.getId());
+        verify(obtenerDiplomaService, atLeastOnce()).analyzeScores(student.getId());
     }
 }

@@ -2,7 +2,7 @@ package com.diploma.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -36,7 +36,7 @@ public class StudentControllerTest {
         studentController.registerStudent(student);
 
         //Asset
-        verify(studentService, times(1)).create(student);
+        verify(studentService, atLeastOnce()).create(student);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class StudentControllerTest {
         StudentDTO foundStudent = studentController.getStudent(student.getId());
 
         //Asset
-        verify(studentService, times(1)).read(student.getId());
+        verify(studentService, atLeastOnce()).read(student.getId());
         assertEquals(student, foundStudent);
     }
 
@@ -62,7 +62,7 @@ public class StudentControllerTest {
         studentController.modifyStudent(student);
 
         //Asset
-        verify(studentService, times(1)).update(student);
+        verify(studentService, atLeastOnce()).update(student);
     }
 
     @Test 
@@ -74,7 +74,7 @@ public class StudentControllerTest {
         studentController.removeStudent(student.getId());
 
         //Asset
-        verify(studentService, times(1)).delete(student.getId());
+        verify(studentService, atLeastOnce()).delete(student.getId());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class StudentControllerTest {
         Set<StudentDTO> foundStudents = studentController.listStudents();
 
         //Asset
-        verify(studentService, times(1)).getAll();
+        verify(studentService, atLeastOnce()).getAll();
         assertTrue(UtilTestTools.compareSets(students, foundStudents));
     }
 }

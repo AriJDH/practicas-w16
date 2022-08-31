@@ -71,6 +71,13 @@ public class UtilTestTools {
     return student;
   }
 
+  public static StudentDTO generateStudentWithId(String name, Long Id) {
+    StudentDTO student = generateStudent(name);
+    student.setId(Id);
+
+    return student;
+  }
+
   public static Set<StudentDTO> generateStudents(String... names) {
     Set<StudentDTO> students = new HashSet<>();
     for (String name : names) {
@@ -121,7 +128,7 @@ public class UtilTestTools {
     return loadedData;
   }
 
-  public static StudentDTO generateStudentWithAverage(Double average) {
+  public static StudentDTO generateStudentWithAverage(String name, Double average) {
     List<SubjectDTO> subjects = new ArrayList<>();
 
     for (int i = 0; i < 5; i++) {
@@ -130,12 +137,18 @@ public class UtilTestTools {
 
     StudentDTO student = new StudentDTO(
       ++id,
-      "Student " + id,
-      "",
-      average,
+      name,
+      null,
+      null,
       subjects
     );
 
+    return student;
+  }
+
+  public static StudentDTO generateStudentWithIdAndAverage(String name, Double average, Long id) {
+    StudentDTO student = generateStudentWithAverage(name, average);
+    student.setId(id);
     return student;
   }
 

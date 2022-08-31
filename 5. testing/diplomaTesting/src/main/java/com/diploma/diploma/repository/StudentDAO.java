@@ -18,7 +18,7 @@ import java.util.Set;
 @Repository
 public class StudentDAO implements IStudentDAO {
 
-    private String SCOPE;
+    private String SCOPE = "main";
 
     private Set<StudentDTO> students;
 
