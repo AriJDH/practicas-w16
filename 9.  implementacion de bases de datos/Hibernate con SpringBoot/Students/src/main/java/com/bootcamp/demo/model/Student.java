@@ -1,4 +1,4 @@
-package com.bootcamp.demo.clases;
+package com.bootcamp.demo.model;
 
 import lombok.Getter;
 import lombok.Setter;
