@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "1f5c3c8d-58e1-45a9-a538-6f6ea4093646",
+		"name": "Elastic Search",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17400033"
+	},
+	"item": [
+		{
+			"name": "Indices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/_cat/indices",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"_cat",
+						"indices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Index (table)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"mail\":{\n                \"type\":\"text\"\n            },\n            \"pass\":{\n                \"type\":\"text\"\n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/demo",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":\"user 4\",\n    \"pass\":\"pass 12\",\n    \"new prop\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/demo/_create/id",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_create",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Index - filter match",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\":{\n        \"match\":{\n            \"pass\":\"pass\"\n            \n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/demo/_search",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Index - multi match",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"multi_match\": {\n      \"query\": \"asd\",\n      \"fields\": [\"Nombre\", \"Apellido\"]\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/demo/_search",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Index - All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/demo/_search",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user\":\"user 4\",\n    \"pass\":\"pass 12\",\n    \"new prop\": 20\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/demo/_doc/{id}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_doc",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/demo/_doc/{id}",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_doc",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/demo/_doc/1",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_doc",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search General",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/demo/_search?q=content",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "content"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search General field",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/demo/_search?q=field:content",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"demo",
+						"_search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "field:content"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "k66Ct8MUt6MglBIwMSE6",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "elastic",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "192.168.0.21:9200"
+		}
+	]
+}
