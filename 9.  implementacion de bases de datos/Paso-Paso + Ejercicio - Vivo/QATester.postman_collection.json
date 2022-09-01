@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"description\":\"Case de prueba 1\",\n    \"tested\":false,\n    \"passed\":false,\n    \"number_of_tries\":0,\n    \"last_update\":\"31-08-2022\"\n}",
+					"raw": "{\n    \"description\":\"Case de prueba 1\",\n    \"tested\":false,\n    \"passed\":false,\n    \"number_of_tries\":0,\n    \"last_update\":\"31/08/2022\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
