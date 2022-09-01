@@ -1,6 +1,8 @@
 package com.bootcamp.movies.services;
 
+import com.bootcamp.movies.dto.EpisodeDto;
 import com.bootcamp.movies.dto.MovieDto;
+import com.bootcamp.movies.repositories.IEpisodesRepository;
 import com.bootcamp.movies.repositories.IMoviesRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class ServiceM {
     @Autowired
     IMoviesRepository moviesRepository;
 
+    @Autowired
+    IEpisodesRepository episodesRepository;
+
     ModelMapper mapper = new ModelMapper();
 
     public List<MovieDto> getAllMovies(){
@@ -21,6 +26,14 @@ public class ServiceM {
         return movies
                 .stream()
                 .map(movie -> mapper.map(movie, MovieDto.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<EpisodeDto> getAllEpisodes(){
+        var movies = episodesRepository.findAll();
+        return movies
+                .stream()
+                .map(movie -> mapper.map(movie, EpisodeDto.class))
                 .collect(Collectors.toList());
     }
 }

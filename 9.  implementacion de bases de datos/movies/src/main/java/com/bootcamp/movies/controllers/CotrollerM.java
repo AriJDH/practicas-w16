@@ -15,7 +15,7 @@ public class CotrollerM {
 
     @GetMapping
     public ResponseEntity<?> getAllMovies(){
-        var movies = serviceMovies.getAllMovies();
+        var movies = serviceMovies.getAllEpisodes();
         return new ResponseEntity<>(movies, HttpStatus.OK);
 
     }

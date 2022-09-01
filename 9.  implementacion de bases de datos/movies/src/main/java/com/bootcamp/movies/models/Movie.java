@@ -28,6 +28,6 @@ public class Movie {
     @Column(name = "release_date")
     private LocalDate releaseDate;
     private Integer length;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @ManyToOne
     private Genre genre;
 }
