@@ -20,5 +20,6 @@ public interface IActorRepository extends JpaRepository<Actor,Long> {
     @Query("select a from Actor a join a.movie movie where movie.title like %:title%")
     List<Actor> findActorByMovieLike(@Param("title") String title);
 
+    Actor findActorByFirstNameAndLastName(String firstName, String lastName);
 
 }
