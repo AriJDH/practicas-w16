@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "1c37b378-dd9a-4a58-99ad-b14bb43eacf2",
+		"name": "Ejercicio HQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actores con pelicula favorita declarada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/FavoriteMovie",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"FavoriteMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actores con rating superior a un valor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actors/RatingHigher/9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"RatingHigher",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actores que trabajan en una pelicula",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/actors/WorkingMovie/Avatar",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"actors",
+						"WorkingMovie",
+						"Avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Peliculas con un actor mayor a un rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/movies/actorsRatingHigher/9",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"movies",
+						"actorsRatingHigher",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "peliculas que pertenecen a un genero",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/movies/withGenre/Ciencia Ficcion",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"movies",
+						"withGenre",
+						"Ciencia Ficcion"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Series con mas de x temporada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/series/moreSeasonsThan/9",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"series",
+						"moreSeasonsThan",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "episodios donde actuo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/episodes/whereActorWorked/Anna/Gunn",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"episodes",
+						"whereActorWorked",
+						"Anna",
+						"Gunn"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "localhost:8080"
+		}
+	]
+}
