@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "3534e326-5f5e-4abc-a81d-4a6cbf1703ea",
+		"name": "Joyas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una joya",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\":\"Collar\",\n    \"material\":\"plata\",\n    \"peso\":180,\n    \"particularidad\":\"Tiene un dije de nota musical\",\n    \"posee_piedra\":false,\n    \"ventaONo\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/jewerly/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas las joyas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewerly/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar joya de manera logica",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewerly/delete/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar una joya",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\":\"Dije de nota musical\",\n    \"material\":\"plata\",\n    \"peso\":180,\n    \"particularidad\":\"La nota musical es la clave de sol\",\n    \"posee_piedra\":false,\n    \"venatONo\":true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/jewerly/update/6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly",
+						"update",
+						"6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
