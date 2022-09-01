@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface IClienteRepository {
 
-    public
-
+    List<Cliente> getListCliente();
     Cliente findName();
 
 

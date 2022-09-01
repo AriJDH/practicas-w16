@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IClienteService {
     List<ClienteDto> getAllCLientes();
+    List<ClienteDto> kakaka();
 }

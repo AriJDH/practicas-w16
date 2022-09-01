@@ -1,0 +1,10 @@
+insert into autor (id_autor, nombre, nacionalidad) values (1, 'Fitzgerald Hedderly', 'South Africa');
+insert into autor (id_autor, nombre, nacionalidad) values (2, 'Freedman Le Teve', 'Indonesia');
+insert into autor (id_autor, nombre, nacionalidad) values (3, 'Rolando Nabbs', 'Georgia');
+insert into autor (id_autor, nombre, nacionalidad) values (4, 'Valentijn Peaple', 'Indonesia');
+insert into autor (id_autor, nombre, nacionalidad) values (5, 'Caldwell Koppe', 'Laos');
+insert into autor (id_autor, nombre, nacionalidad) values (6, 'Josy Shone', 'Czech Republic');
+insert into autor (id_autor, nombre, nacionalidad) values (7, 'Nadeen Brower', 'Montenegro');
+insert into autor (id_autor, nombre, nacionalidad) values (8, 'Kylen O''Rourke', 'Indonesia');
+insert into autor (id_autor, nombre, nacionalidad) values (9, 'Shurlocke Calfe', 'China');
+insert into autor (id_autor, nombre, nacionalidad) values (10, 'Carlos Biswell', 'Yemen');

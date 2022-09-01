@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  * This service takes care of all matters related to products
  */
 @Service
-public class ProductService implements IProductService {
+public class  ProductService implements IProductService {
 
   @Autowired
   IProductRepository iProductRepository;

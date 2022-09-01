@@ -56,6 +56,7 @@ public class PublicationService implements IPublicationService {
     if (order.equals(DATE_DESC)) {
       listDTO = listDTO.stream().sorted(Comparator.comparing(PostDTO::getDate).reversed()).collect(Collectors.toList());
     }
+
     return new ListProductByDateDTO(userId, listDTO);
   }
 

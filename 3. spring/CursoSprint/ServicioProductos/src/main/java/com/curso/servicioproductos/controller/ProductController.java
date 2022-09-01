@@ -28,4 +28,5 @@ public class ProductController {
   public ResponseEntity<Product> details(@PathVariable Long id){
     return ResponseEntity.ok(iProductService.findById(id));
   }
+
 }

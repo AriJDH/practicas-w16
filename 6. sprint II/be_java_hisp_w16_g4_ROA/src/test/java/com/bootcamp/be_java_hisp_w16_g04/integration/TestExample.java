@@ -34,9 +34,9 @@ public class TestExample {
   ProductService productService;
 
 
-  @DisplayName("Debe dar bad request") // 1%
+  @DisplayName("verify that a bad request status is returned") // 1%
   @Test
-  void test() throws Exception {
+  void verifyStatusIsBadRequestProductsPost() throws Exception {
     MvcResult mvcProductResult = this.mockito.perform(MockMvcRequestBuilders.post("/products/post")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtilsGenerator.TEST_INTEGRATION_STATUS_BAD_REQUEST))
@@ -45,9 +45,9 @@ public class TestExample {
     Assertions.assertEquals("application/json", mvcProductResult.getResponse().getContentType());
   }
 
-  @DisplayName("Debe dar Ok") // 1%
+  @DisplayName("verify that a ok status is returned") // 1%
   @Test
-  void test1_1() throws Exception {
+  void verifyStatusIsOkProductsPost() throws Exception {
     MvcResult mvcProductResult = this.mockito.perform(MockMvcRequestBuilders.post("/products/post")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtilsGenerator.TEST_INTEGRATION_STATUS_OK_BODY))
@@ -56,9 +56,9 @@ public class TestExample {
     Assertions.assertEquals("application/json", mvcProductResult.getResponse().getContentType());
   }
 
-  @DisplayName("Debe contar la cantidad de seguidores") // %1
+  @DisplayName("You must verify that the number of followers is correct, as well as verify that your status is ok.") // %1
   @Test
-  void test2() throws Exception {
+  void verifyCountFollowers() throws Exception {
 
     MvcResult mvcProductResult = this.mockito.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 100)
                     .contentType(MediaType.APPLICATION_JSON))
@@ -70,9 +70,9 @@ public class TestExample {
 
   }
 
-  @DisplayName("test para verificar si el usuario no existe cuando lo cuenta") // %0
+  @DisplayName("Verify the user does not exist") // %0
   @Test
-  void test3() throws Exception {
+  void userVerifyIsNotFound() throws Exception {
 
    this.mockito.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/count", 1000)
                     .contentType(MediaType.APPLICATION_JSON))
@@ -82,9 +82,9 @@ public class TestExample {
     //Assertions.assertEquals(variable, mvcProductResult.getResponse().getContentAsString());
   }
 
-  @DisplayName("Validar si esta siguiendo un usuario")
+  @DisplayName("Verify the user does exist")
   @Test
-  void test4() throws Exception {
+  void userVerifyIsOk() throws Exception {
     this.mockito.perform(MockMvcRequestBuilders.post("/users/{userId}/follow/{userIdToFollow}", 100, 104))
             .andDo(print())
             .andExpect(status().isOk())
@@ -92,9 +92,9 @@ public class TestExample {
   }
 
   //us007
-  @DisplayName("Valida cuando no existe el usuario")
+  @DisplayName("Verify the user does not exist in unfollow")
   @Test
-  void test5() throws Exception {
+  void followerVerifyNotFound() throws Exception {
     Integer userId = 1100;
     this.mockito.perform(MockMvcRequestBuilders.post("/users/{userId}/unfollow/{userIdToUnfollow}", 100, userId))
             .andDo(print())
@@ -103,9 +103,9 @@ public class TestExample {
             .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User Not Found with User Id: " + userId));
   }
 
-  @DisplayName("Valida cuando no existe el usuario")
+  @DisplayName("Verify the user does not exist in unfollow list")
   @Test
-  void test6() throws Exception {
+  void followerListVerifyNotFound() throws Exception {
     MvcResult mvcProductResult = this.mockito.perform(MockMvcRequestBuilders.get("/users/{userId}/followers/list?order=name_asc", 100)
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtilsGenerator.TEST_INTEGRATION_LIST))

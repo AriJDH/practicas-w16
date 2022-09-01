@@ -13,15 +13,19 @@ public class ClienteRepository implements IClienteRepository{
 
     List<Cliente> clientes = new ArrayList<>();
 
-    @PostConstruct
+    //@PostConstruct
     private void loadData() {
         clientes.add(new Cliente(1, "Andres"));
         clientes.add(new Cliente(2, "Felipe"));
         clientes.add(new Cliente(3, "Javier"));
         clientes.add(new Cliente(4, "Johan"));
-
     }
 
+    @Override
+    public List<Cliente> getListCliente(){
+        this.loadData();
+        return clientes;
+    }
     @Override
     public Cliente findName() {
         return null;

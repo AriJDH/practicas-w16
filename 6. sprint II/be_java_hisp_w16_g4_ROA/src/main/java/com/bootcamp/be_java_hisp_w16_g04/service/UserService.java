@@ -108,8 +108,9 @@ public class UserService implements IUserService {
         .collect(Collectors.toList());
 
     if (order.equals("name_asc")) {
-      users = users.stream().sorted(Comparator.comparing(User::getUserName))
+        users = users.stream().sorted(Comparator.comparing(User::getUserName))
           .collect(Collectors.toList());
+
     } else if (order.equals("name_desc")) {
       users = users.stream().sorted(Comparator.comparing(User::getUserName)
               .reversed())
