@@ -1,2 +1,6 @@
-package com.interfaz;public interface IImprimir {
+package com.interfaz;
+
+public interface IImprimir {
+
+    public void imprimir();
 }
