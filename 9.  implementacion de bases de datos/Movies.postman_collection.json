@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "8401117e-17a4-4570-8d21-2701c17cb366",
+		"name": "Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22560861"
+	},
+	"item": [
+		{
+			"name": "episodes_findByActor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/episodes/findByActor/45",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"episodes",
+						"findByActor",
+						"45"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "series_findBySeasonsGreaterThan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/series/findBySeasonsGreaterThan/7",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"series",
+						"findBySeasonsGreaterThan",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies_findByActorsRatingGreaterThan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/movies/findByActorRatingGreaterThan/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"movies",
+						"findByActorRatingGreaterThan",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "movies_findByGenre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/movies/findByGenre?genreName=Ciencia Ficcion",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"movies",
+						"findByGenre"
+					],
+					"query": [
+						{
+							"key": "genreName",
+							"value": "Ciencia Ficcion"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actors_getActorsWithMovie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actors/getActorsWithMovie",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actors",
+						"getActorsWithMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actors_getActorsByRating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/actors/getActorsByRating/8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actors",
+						"getActorsByRating",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actors_getActorsByMovie",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" : 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/actors/getActorsByMovie",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"actors",
+						"getActorsByMovie"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
