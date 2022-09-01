@@ -1,0 +1,456 @@
+{
+	"info": {
+		"_postman_id": "7640697d-f23d-4b1a-a88d-66e59d7db933",
+		"name": "Practica2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crea indice zapatillas_deportivas",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"mappings\":{\n        \"properties\":{\n            \"marca\":{\n                \"type\":\"text\"\n            },\n            \"modelo\":{\n                \"type\":\"text\"\n            },\n            \"color\":{\n                \"type\":\"text\"\n            },\n            \"precio\":{\n                \"type\":\"double\"\n            },\n            \"tallas\":{\n                \"type\":\"float\"\n            },\n            \"genero\":{\n                \"type\":\"text\"\n            },\n            \"cantidad\":{\n                \"type\":\"integer\"\n            },\n            \"material\":{\n                \"type\":\"text\"\n            }    \n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crea un documento(zapatilla)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \"marca\":\"Nike\",\n            \"modelo\":\"Winflo\",\n            \"color\":\"Gris\",\n            \"precio\":5000,\n            \"tallas\":[23,23.5,24,24.5,25,25.5,26],\n            \"genero\":\"Femenino\",\n            \"cantidad\":26,\n            \"material\":\"Sintentico\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_doc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_doc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatillas por color",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": [\n        { \"term\": { \"color\": \"gris\"   }}\n      ]\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por marca",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": [\n        { \"term\": { \"marca\": \"nike\"}}\n      ]\n    }\n  }\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por genero",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": [\n        { \"term\": { \"genero\": \"unisex\"}}\n      ]\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla con precio mayor o igual a 5000",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": [\n        { \"range\": { \"precio\": {\"gte\":5000}}}\n      ]\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por color blanco o precio menor o igual a 3000",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n          \"bool\":{\"should\":\n            [\n                {\"term\":{\"color\":\"blanco\"}},\n                {\"range\":{\"precio\":{\"lte\":3000}}}\n            ]\n          }\n        }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por marca nike y genero femenino",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n          \"bool\":{\"must\":\n            [\n                {\"term\":{\"marca\":\"nike\"}},\n                {\"term\":{\"genero\":\"femenino\"}}\n            ]\n          }\n        }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por color negro y genero unisex",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n          \"bool\":{\"must\":\n            [\n                {\"term\":{\"color\":\"negro\"}},\n                {\"term\":{\"genero\":\"unisex\"}}\n            ]\n          }\n        }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatillas por material piel",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n          \n            \"term\":{\"material\":\"piel\"}\n               \n          }\n        }\n    }\n  }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por marca converse",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"query\":{\n        \"match\":{\"marca\":\"converse\"}\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por cantidad menor o igual a 30",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n        \"range\":{\"cantidad\":{\"lte\":30}}  \n        \n            }\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar zapatilla por color morado o verde",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"query\": {\n    \"bool\": {\n      \"filter\": {\n          \"bool\":{\"should\":\n            [\n                {\"term\":{\"color\":\"morado\"}},\n                {\"term\":{\"color\":\"verde\"}}\n            ]\n          }\n        }\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sacar la media de precios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"aggs\":{\n        \"media_precio\":{\"avg\":{\"field\":\"precio\"}}\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9200/zapatillas_deportivas/_search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"zapatillas_deportivas",
+						"_search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
