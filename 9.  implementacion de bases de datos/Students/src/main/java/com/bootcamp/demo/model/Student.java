@@ -12,7 +12,7 @@ public class Student {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(name = "dni")
     private String dni;
