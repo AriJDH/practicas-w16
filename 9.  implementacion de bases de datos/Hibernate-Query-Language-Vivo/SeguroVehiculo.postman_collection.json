@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "6609a7c5-6bce-4a15-ac1c-e822aaba4d6b",
+		"name": "SeguroVehiculo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Patente de todos los vehículos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/seguro/vehiculos-patente",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"seguro",
+						"vehiculos-patente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patente y marca de todos los vehiculos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/seguro/patente-marca",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"seguro",
+						"patente-marca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patente de vehículos con más de cuatro ruedas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/seguro/vehiculo-mas-cuatro-ruedas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"seguro",
+						"vehiculo-mas-cuatro-ruedas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patente, marca y modelo de vehiculo con siniestro mayor a diezmil",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/seguro/siniestro-mayor-diezmil",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"seguro",
+						"siniestro-mayor-diezmil"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patente, marca y modelo de vehiculo con siniestro mayor a diezmil y sumatoria perdida economica",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/seguro/siniestro-mayor-diezmil-total",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"seguro",
+						"siniestro-mayor-diezmil-total"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
