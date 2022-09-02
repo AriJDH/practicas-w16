@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface IEpisodesRepository extends CrudRepository<Episode, Long> {
 
-    @Query("select a.episodes from Actor a where a.id = :actor")
+    @Query("select a.episodes from Actor a where  year(current_date) a.id = :actor")
     List<Episode> getEpisodesFromActor( Long actor);
 }
