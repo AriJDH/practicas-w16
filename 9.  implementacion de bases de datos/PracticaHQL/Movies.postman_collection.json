@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "0cb46ac4-cc75-42c7-8980-6a5169251d6c",
+		"name": "Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get actors with rating grater than",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/actors/rating/6.6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"actors",
+						"rating",
+						"6.6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get actors with fav movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/actors/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"actors",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get actors from movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/actors/movie/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"actors",
+						"movie",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get movies from actors with rating greater than",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/list?actor_rating=6.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"list"
+					],
+					"query": [
+						{
+							"key": "actor_rating",
+							"value": "6.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get movies from genre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/list/genre/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"list",
+						"genre",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Series with more than x seasons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/series/list?seasons_count=8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"series",
+						"list"
+					],
+					"query": [
+						{
+							"key": "seasons_count",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get episodes from actor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/episodes/list?actor=35",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"episodes",
+						"list"
+					],
+					"query": [
+						{
+							"key": "actor",
+							"value": "35"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
