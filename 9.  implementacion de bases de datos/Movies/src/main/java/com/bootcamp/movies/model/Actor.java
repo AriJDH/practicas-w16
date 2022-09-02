@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -19,7 +21,7 @@ import java.util.Set;
 public class Actor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @JsonFormat(pattern="dd-MM-yyyy")
     @JsonSerialize(using = LocalDateSerializer.class)
@@ -47,8 +49,10 @@ public class Actor {
 
     @ManyToMany
     @JoinTable(
-            name = "actors_movie",
-            joinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "movie_id"))
-    private Set<Movie> movies = new LinkedHashSet<>();
+            name ="actor_movie",
+            joinColumns = @JoinColumn(name="actor_id"),
+            inverseJoinColumns = @JoinColumn(name="movie_id")
+    )
 
+    private Set<Movie> movie;
 }
