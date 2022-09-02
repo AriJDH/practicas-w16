@@ -49,10 +49,4 @@ public class TesterController {
                                                                 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate last_update){
         return new ResponseEntity<>(service.recuperarTestActualizadosPorFecha(last_update),HttpStatus.OK);
     }
-
-//    @PostMapping("/local-date")
-//    public void localDate(@RequestParam("localDate")
-//                          @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate localDate) {
-//        // ...
-    //}
 }

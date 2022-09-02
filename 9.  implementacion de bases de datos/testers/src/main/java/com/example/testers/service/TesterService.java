@@ -70,9 +70,6 @@ public class TesterService implements ITesterService {
     @Override
     public List<TestCaseDTO> recuperarTestActualizadosPorFecha(LocalDate localDate) {
 
-        //SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        //Date fecha = formato.parse(localDate);
-
         return iTesterDAO.findAll()
                 .stream()
                 .filter(x->x.getLastUpdate().isAfter(localDate))
