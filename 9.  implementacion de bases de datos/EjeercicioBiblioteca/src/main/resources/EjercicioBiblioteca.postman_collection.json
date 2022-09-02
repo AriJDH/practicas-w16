@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "7582acd2-ae1d-47e1-93ce-5e5a78a5f4a0",
+		"name": "EjercicioBiblioteca",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Obra Literaria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Harry Potter Y la camara secreta\",\n    \"autor\": \"JK rowling\",\n    \"cant_de_paginas\": 600,\n    \"editorial\": \"Salamandra\",\n    \"anio_primera_publicacion\": 2010\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/obraLiteraria",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todas las obras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obrasLiterarias",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obrasLiterarias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por autor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obraLiteraria/Autor/Jorge",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria",
+						"Autor",
+						"Jorge"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar por obra",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obraLiteraria/Obra/?obra=Harry",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria",
+						"Obra",
+						""
+					],
+					"query": [
+						{
+							"key": "obra",
+							"value": "Harry"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cant paginas mayor a",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obraLiteraria/masCantPaginasQue/400",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria",
+						"masCantPaginasQue",
+						"400"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anio menor a",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obraLiteraria/AnioMenorA/2009",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria",
+						"AnioMenorA",
+						"2009"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Anio mayor a",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obraLiteraria/AnioMayorA/2020",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria",
+						"AnioMayorA",
+						"2020"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buscar por editorial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/obraLiteraria/Editorial/salamandra",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"obraLiteraria",
+						"Editorial",
+						"salamandra"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "localhost:8080"
+		}
+	]
+}

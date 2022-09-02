@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "adfc884e-1311-441c-952a-203350ecc2d3",
+		"name": "EmpresaSeguros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "listallpatentes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/listallpatentes",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"listallpatentes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listallpatentesandmarcabyanio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/listallpatentesandmarcabyanio",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"listallpatentesandmarcabyanio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listAllPatentesOfAllVehiculosWithFourOrMoreRuedas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/listAllPatentesOfAllVehiculosWithFourOrMoreRuedas/2000",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"listAllPatentesOfAllVehiculosWithFourOrMoreRuedas",
+						"2000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listAllVehiculosWithSiniestroGreaterThan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/listAllVehiculosWithSiniestroGreaterThan",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"listAllVehiculosWithSiniestroGreaterThan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "listVehiculoSiniestros",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/listVehiculoSiniestros",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"listVehiculoSiniestros"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local",
+			"value": "localhost:8080"
+		}
+	]
+}
