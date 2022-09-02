@@ -1,6 +1,7 @@
 package com.example.ejerciciomovie.repository;
 
 import com.example.ejerciciomovie.entity.Actor;
+import com.example.ejerciciomovie.entity.Episode;
 import com.example.ejerciciomovie.entity.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,6 +20,9 @@ public interface ActorRepository  extends JpaRepository<Actor,Long> {
     //Listar todos los actores que trabajan en la <película recibida por parámetro>
     @Query("select a from Actor a where a.rating = :title")
     List<Actor> findByTitle(@Param("title") Double rating);
+    @Query("select e.episode from Actor e where e.firstName = :firstName and e.lastName = :lastName")
+    List<Episode> findByActorName(@Param("firstName") String firstName, @Param("lastName") String lastName);
+
 
 
 
