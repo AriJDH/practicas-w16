@@ -1,0 +1,183 @@
+{
+	"info": {
+		"_postman_id": "b7117f22-00ca-4694-9d77-bd439d413618",
+		"name": "ObraLiteraria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22562851"
+	},
+	"item": [
+		{
+			"name": "create Obra Literaria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"El Muro\",\n    \"autor\": \"Sartre\",\n    \"cant_paginas\": 600,\n    \"editorial\": \"El palo\",\n    \"anio_publicacion\": 2016\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/obraLiteraria",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obraLiteraria"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll Obras Literarias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObrasLiterariasPorAutor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias/autor/paolini",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"autor",
+						"paolini"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObraLiterariaByNombreLike",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias/nombre/mur",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"nombre",
+						"mur"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObraLiterariaByCantPaginasGreaterThan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias/paginas/750",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"paginas",
+						"750"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObraLiterariaByAnioPublicacionLessThan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias/antes/2016",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"antes",
+						"2016"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObraLiterariaByAnioPublicacionGreaterThan",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias/despues/2015",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"despues",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllObraLiterariaByEditorialLike",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obrasLiterarias/editorial/palo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"editorial",
+						"palo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
