@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "f8e447c9-cf6d-4337-a39f-c24118f8b154",
+		"name": "Movies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar todos los actores que tengan declarada una película favorita.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/movie/favorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"movie",
+						"favorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos los actores que tengan rating superior a <valor recibido por parámetro> ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/rating/9.2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"rating",
+						"9.2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas las películas que pertenezcan al <género recibido por parámetro>",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/aventuras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"aventuras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas las series que tengan más de <cantidad de temporadas recibida por parámetro> ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/serie/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"serie",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos los actores que trabajan en la <película recibida por parámetro>",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/actors/work/avatar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actors",
+						"work",
+						"avatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas las películas cuyos actores tengan rating superior a <valor recibido por parámetro>",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movies/actors/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movies",
+						"actors",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todos los episodios (de cualquier serie) donde trabaja un <actor recibido por parámetro>",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/episode/Emilia/Clarke",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"episode",
+						"Emilia",
+						"Clarke"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
