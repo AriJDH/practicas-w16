@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "97cb882e-2312-44c8-9582-125d04f5346b",
+		"name": "Joya",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createAros",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"nombre\" : \"Aros\",\n\t\"material\": \"oro\",\n\t\"peso\": 300,\n\t\"particularidad\" : \"Forma circular con triángulos\",\n\t\"posee_piedra\" : false,\n\t\"ventaONo\" : false\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/jewerly",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"jewerly"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createAnillo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"nombre\" : \"Anillo\",\n\t\"material\": \"oro\",\n\t\"peso\": 300,\n\t\"particularidad\" : \"Forma circular con triángulos\",\n\t\"posee_piedra\" : false,\n\t\"ventaONo\" : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPulsera",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"nombre\" : \"Pulsera\",\n\t\"material\": \"oro\",\n\t\"peso\": 300,\n\t\"particularidad\" : \"Forma circular con triángulos\",\n\t\"posee_piedra\" : false,\n\t\"ventaONo\" : false\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
