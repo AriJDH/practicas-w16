@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "aaebd3fa-f841-4a89-ac2a-9870c7a1235a",
+		"name": "MoviesHQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Actors With Favorite Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actorWithFavoriteMovie",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actorWithFavoriteMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Actors Rating Up",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actorRatingUp?rating=7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actorRatingUp"
+					],
+					"query": [
+						{
+							"key": "rating",
+							"value": "7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Actors By Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/actorByMovie?movie=Titanic",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"actorByMovie"
+					],
+					"query": [
+						{
+							"key": "movie",
+							"value": "Titanic"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Movie Where Actors Rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movieByActorRating?rating_actor=9",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movieByActorRating"
+					],
+					"query": [
+						{
+							"key": "rating_actor",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie By Genre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movieGenre?genre=Infantiles",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movieGenre"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "Infantiles"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Series With Max Amount Season",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/movieMaxSeason?amount_season=3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movieMaxSeason"
+					],
+					"query": [
+						{
+							"key": "amount_season",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Episode By Actor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/episodeByActor?first_name=Aaron&last_name=Paul",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"episodeByActor"
+					],
+					"query": [
+						{
+							"key": "first_name",
+							"value": "Aaron"
+						},
+						{
+							"key": "last_name",
+							"value": "Paul"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
