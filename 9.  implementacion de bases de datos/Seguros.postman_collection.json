@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "faf9b9f5-a422-44a9-95b7-53b44ba989ae",
+		"name": "Seguros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22559945"
+	},
+	"item": [
+		{
+			"name": "Marca y patente vehiculos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vehiculosPatenteMarca",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculosPatenteMarca"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patente Vehiculos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vehiculosPatente",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculosPatente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patente vehiculos mas 4 ruedas y año en curso",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vehiculosPatenteMas4ruedas",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculosPatenteMas4ruedas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehiculos con perdidas mayor a 10000",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/vehiculosPerdidaMayor10000",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculosPerdidaMayor10000"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
