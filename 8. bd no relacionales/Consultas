@@ -1,0 +1,73 @@
+GET /clientes/_search
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Localidad": "Posadas"
+    }
+  }
+}
+
+GET /clientes/_search
+{
+  "query": {
+    "match": {
+      "Localidad": "Bogota"
+    }
+  }
+}
+
+POST /clientes/_doc
+{
+  "Nombre": "Anggy",
+  "Apellido": "Arguello",
+  "Pais": "CO",
+  "Localidad": "Bogota"
+}
+
+POST /clientes/_doc
+{
+  "Usuario": "wmurcia",
+  "Municipio": "Funza"
+}
+
+GET /clientes/_search?q=Anggy
+GET /clientes/_search?q=Apellido:Arguello
+
+GET /clientes/_search?q=(Nombre:victor AND Apellido:garcia)
+GET /clientes/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "Nombre": {
+              "value": "Juan cruz"
+            }
+          }
+        }, {
+          "term": {
+            "Apellido": {
+              "value": "Farsoni"
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+
+GET /sneakers/_search
+POST /sneakers/_doc
+{
+  "id": 23,
+  "size": "L",
+  "color": "Red",
+  "price": "$120.365",
+  "brand": "Adidas"
+}
+GET /sneakers/_search?q=brand:Adidas
