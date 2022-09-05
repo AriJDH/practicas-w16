@@ -1,6 +1,5 @@
 package com.bootcamp.movieshql.repository;
 
-import com.bootcamp.movieshql.model.Movie;
 import com.bootcamp.movieshql.model.Serie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface ISerieRepository extends JpaRepository<Serie, Integer> {
+    @Query("select se from Season s inner join s.serie se group by se.id having count(s.id) > :seasonsNumber")
+    List<Serie> getCountSeasonsBySeries(@Param("seasonsNumber") Long seasonsNumber);
 
-/*    @Query("select s.title, count(s) from Serie s inner join s. s where g.name like :name")
-    List<Movie> getMoviesByGenreParameter(@Param("name") String name);*/
 }
