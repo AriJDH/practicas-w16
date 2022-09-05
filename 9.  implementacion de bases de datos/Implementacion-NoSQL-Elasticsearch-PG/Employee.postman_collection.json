@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "0138c80f-d350-4cef-b7bd-a1146e0e1791",
+		"name": "Employee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\":\"Tomas\",\n    \"lastName\":\"Rodriguez\",\n    \"age\":35,\n    \"city\":\"Neiva\",\n    \"state\":\"Ibague\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/employee/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"eEjLD4MB1WTIkjA2hJit\",\n    \"firstName\":\"Tomas Octavio\",\n    \"lastName\":\"Rodriguez Herrera\",\n    \"age\":22,\n    \"city\":\"Neiva\",\n    \"state\":\"Huila\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/employee/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
