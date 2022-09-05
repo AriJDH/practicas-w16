@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "c5f5f946-b305-4fee-a2d4-63feb57757dd",
+		"name": "ObrasLiterarias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Guardar obras literarias",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"nombre\":\"El principito\",\n        \"autor\":\"Jhon\",\n        \"paginas\":500,\n        \"editorial\":\"pengiun\",\n        \"anio_publicacion\":2005\n    },\n    {\n        \"nombre\":\"El psiconalista\",\n        \"autor\":\"Jhon\",\n        \"paginas\":459,\n        \"editorial\":\"pengiun\",\n        \"anio_publicacion\":2015\n    },\n    {\n        \"nombre\":\"El libro desconocido\",\n        \"autor\":\"Sara\",\n        \"paginas\":312,\n        \"editorial\":\"Rolling\",\n        \"anio_publicacion\":2017\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obras por autor indicado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/Jhon",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"Jhon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obras que continene en sus titulos la palabra",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/contiene-titulo/libro",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"contiene-titulo",
+						"libro"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Libro con mayor cantidad de páginas indicada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/paginas-mayor/400",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"paginas-mayor",
+						"400"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Libros con año menor que el indicado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/anio-antes/2006",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"anio-antes",
+						"2006"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Libros con año mayor que el indicado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/anio-despues/2006",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"anio-despues",
+						"2006"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obras de la misma editorial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/obrasLiterarias/misma-editorial/pengiun",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obrasLiterarias",
+						"misma-editorial",
+						"pengiun"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
