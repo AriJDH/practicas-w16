@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,4 +31,6 @@ public class Movie {
     private Integer length;
     @ManyToOne
     private Genre genre;
+    @ManyToMany
+    private Set<Actor> actors;
 }

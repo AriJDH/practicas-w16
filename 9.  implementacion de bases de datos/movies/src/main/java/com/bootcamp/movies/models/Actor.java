@@ -44,5 +44,4 @@ public class Actor {
             inverseJoinColumns = @JoinColumn(name="movie_id")
     )
     private Set<Movie> actedMovies;
-
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.time.LocalDate;
