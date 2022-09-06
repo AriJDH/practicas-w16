@@ -1,19 +1,22 @@
 package com.bootcamp.literarias.repository;
 
+import com.bootcamp.literarias.dto.ObraDto;
 import com.bootcamp.literarias.entity.Obra;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
+import java.util.List;
+
 public interface IObraRepository extends ElasticsearchRepository<Obra, String> {
 
-    Iterable<Obra> getNombreAutor(String nombre);
+    List<Obra> findByAutor(String nombre);
 
-    Iterable<Obra> getNombreObra(String nombre);
+    List<Obra> findByNombreContaining(String nombre);
 
-    Iterable<Obra> getObrasCantidadByPaginas(Integer pages);
+    List<Obra> findByCantidadPaginasGreaterThan(Integer pages);
 
-    Iterable<Obra> getObrasAntesByAnio(String fecha);
+    List<Obra> findByAnioPublicacionLessThanEqual(Integer anio);
 
-    Iterable<Obra> getObrasDespuesByAnio(String fecha);
+    List<Obra> findByAnioPublicacionGreaterThanEqual(Integer anio);
 
-    Iterable<Obra> getObrasEditorial(String editorial);
+   List<Obra> findByEditorial(String editorial);
 }

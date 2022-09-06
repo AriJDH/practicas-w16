@@ -21,8 +21,33 @@ public class ObraController {
         return new ResponseEntity<>(obraService.create(obraDto), HttpStatus.OK);
     }
 
-    @GetMapping("")
+    @GetMapping("/autor")
     public ResponseEntity<List<ObraDto>> getNombreAutor(@RequestParam("nombre") String nombre) {
-        return new ResponseEntity<>(obraService.getNombreAutor(nombre), HttpStatus.OK);
+        return new ResponseEntity<>(obraService.findByAutor(nombre), HttpStatus.OK);
+    }
+
+    @GetMapping("/obra")
+    public ResponseEntity<List<ObraDto>> getNombreObraContaining(@RequestParam("nombre") String nombre) {
+        return new ResponseEntity<>(obraService.findByObraContaining(nombre), HttpStatus.OK);
+    }
+
+    @GetMapping("/cantidad-pag")
+    public ResponseEntity<List<ObraDto>> getCantidadPaginasGreaterThan(@RequestParam("pag") Integer pag) {
+        return new ResponseEntity<>(obraService.findByCantidadPaginasGreaterThan(pag), HttpStatus.OK);
+    }
+
+    @GetMapping("/obra-anio-before")
+    public ResponseEntity<List<ObraDto>> getAnioPublicacionBefore(@RequestParam("anio") Integer anio) {
+        return new ResponseEntity<>(obraService.findByAnioPublicacionLessThanEqual(anio), HttpStatus.OK);
+    }
+
+    @GetMapping("/obra-anio-after")
+    public ResponseEntity<List<ObraDto>> getAnioPublicacionAfter(@RequestParam("anio") Integer anio) {
+        return new ResponseEntity<>(obraService.findByAnioPublicacionGreaterThanEqual(anio), HttpStatus.OK);
+    }
+
+    @GetMapping("/editorial")
+    public ResponseEntity<List<ObraDto>> getEditorial(@RequestParam("editorial") String editorial) {
+        return new ResponseEntity<>(obraService.findByEditorial(editorial), HttpStatus.OK);
     }
 }

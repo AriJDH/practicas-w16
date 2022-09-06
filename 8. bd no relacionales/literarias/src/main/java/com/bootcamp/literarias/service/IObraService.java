@@ -8,15 +8,15 @@ public interface IObraService {
 
     ObraDto create(ObraDto productoDto);
 
-    List<ObraDto> getNombreAutor(String nombre);
+    List<ObraDto> findByAutor(String nombre);
 
-    List<ObraDto> getNombreObra(String nombre);
+   List<ObraDto> findByObraContaining(String nombre);
 
-    List<ObraDto> getObrasCantidadByPaginas(Integer pages);
+    List<ObraDto> findByCantidadPaginasGreaterThan(Integer pages);
 
-    List<ObraDto> getObrasAntesByAnio(String fecha);
+    List<ObraDto> findByAnioPublicacionLessThanEqual(Integer anio);
 
-    List<ObraDto> getObrasDespuesByAnio(String fecha);
+    List<ObraDto> findByAnioPublicacionGreaterThanEqual(Integer anio);
 
-    List<ObraDto> getObrasEditorial(String editorial);
+    List<ObraDto> findByEditorial(String editorial);
 }

@@ -17,6 +17,12 @@ public class Obra {
     @Id
     private String id;
 
+    private String nombre;
+    private String autor;
+    private Integer cantidadPaginas;
+    private String editorial;
+    private Integer anioPublicacion;
+
     public Obra(String nombre, String autor, Integer cantidadPaginas, String editorial, Integer anioPublicacion) {
         this.nombre = nombre;
         this.autor = autor;
@@ -24,10 +30,4 @@ public class Obra {
         this.editorial = editorial;
         this.anioPublicacion = anioPublicacion;
     }
-
-    private String nombre;
-    private String autor;
-    private Integer cantidadPaginas;
-    private String editorial;
-    private Integer anioPublicacion;
 }

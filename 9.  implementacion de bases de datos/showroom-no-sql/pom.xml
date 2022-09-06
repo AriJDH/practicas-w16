@@ -9,22 +9,21 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bootcamp</groupId>
-	<artifactId>literarias</artifactId>
+	<artifactId>showroom-no-sql</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>literarias</name>
-	<description>Obras literarias elasti project for Spring Boot</description>
+	<name>showroom-no-sql</name>
+	<description>showroom-no-sql project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>io.vavr</groupId>
-			<artifactId>vavr</artifactId>
-			<version>0.10.4</version>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -46,11 +45,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>3.1.0</version>
 		</dependency>
 	</dependencies>
 
