@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "c65ee2e3-0a22-4a47-889b-acb67e42a939",
+		"name": "Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create new product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Pan\",\n    \"type\":\"comestible\",\n    \"price_sale\":\"30.00\",\n    \"price_cost\":\"15.00\",\n    \"amount\":\"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/product/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\":\"X5RpEIMBd0WlTf7pu7QS\",\n    \"name\":\"Pan\",\n    \"type\":\"comestible\",\n    \"price_sale\":\"36.55\",\n    \"price_cost\":\"17.12\",\n    \"amount\":\"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/product/update",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"update"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
