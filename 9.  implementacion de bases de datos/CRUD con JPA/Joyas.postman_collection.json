@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "f8f58308-b2d7-4019-9fd1-dbc6f89fa9b4",
+		"name": "Joyas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CreateJoya",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \"nombre\" : \"Brazalete\",\n\t\"material\": \"oro rosa\",\n\t\"peso\": 600,\n\t\"particularidad\" : \"Mediana\",\n\t\"posee_piedra\" : true,\n\t\"ventaONo\" : true\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{joyeria}}/new",
+					"host": [
+						"{{joyeria}}"
+					],
+					"path": [
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListJoyas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{joyeria}}/",
+					"host": [
+						"{{joyeria}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateJoya",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nro_identificatorio\": 2,\n    \"nombre\": \"Cadena\",\n    \"material\": \"plata\",\n    \"peso\": 500,\n    \"particularidad\": \"Pequeña sin dije\",\n    \"posee_piedra\": true,\n    \"ventaONo\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{joyeria}}/update/2",
+					"host": [
+						"{{joyeria}}"
+					],
+					"path": [
+						"update",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteJoya",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{joyeria}}/delete/2",
+					"host": [
+						"{{joyeria}}"
+					],
+					"path": [
+						"delete",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "joyeria",
+			"value": "http://localhost:8081/jewely",
+			"type": "default"
+		}
+	]
+}
