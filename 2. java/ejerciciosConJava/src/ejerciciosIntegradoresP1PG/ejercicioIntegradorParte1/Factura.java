@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Factura {
 
+    private long id;
     private Cliente cliente;
     private List<Item> listaItems;
     private double totalCompra;
@@ -12,9 +13,10 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(Cliente cliente, List<Item> listaItems, double totalCompra) {
+    public Factura(long id, Cliente cliente, List<Item> listaItems, double totalCompra) {
+        this.id = id;
         this.cliente = cliente;
-        this.listaItems = new ArrayList<>();
+        this.listaItems = listaItems;
         this.totalCompra = totalCompra;
     }
 
@@ -35,6 +37,7 @@ public class Factura {
     }
 
     public double getTotalCompra() {
+
         return totalCompra;
     }
 
@@ -42,10 +45,19 @@ public class Factura {
         this.totalCompra = totalCompra;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Factura{" +
-                "cliente=" + cliente +
+                "id=" + id +
+                ", cliente=" + cliente +
                 ", listaItems=" + listaItems +
                 ", totalCompra=" + totalCompra +
                 '}';

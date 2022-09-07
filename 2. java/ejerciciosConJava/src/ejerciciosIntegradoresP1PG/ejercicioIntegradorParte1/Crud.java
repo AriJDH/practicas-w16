@@ -4,6 +4,9 @@ import java.util.List;
 
 public interface Crud<T>  {
      List<T> listar();
-     void encontrarPorDni(int dni);
+     void crear(T t);
+     boolean encontrarPorDni(int dni);
      void eliminarPorDni(int dni);
+
+
 }

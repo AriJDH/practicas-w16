@@ -16,16 +16,23 @@ public class CrudCliente implements Crud<Cliente>{
     }
 
     @Override
-    public void encontrarPorDni(int dni) {
+    public void crear(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    @Override
+    public boolean encontrarPorDni(int dni) {
 
         String mensaje="No existe el cliente";
-        boolean clienteNoEncontrado=true;
+        boolean clienteEncontrado=false;
         for(int i=0;i<clientes.size();i++){
             if(clientes.get(i).getDni()==dni){
                 mensaje=clientes.get(i).toString();
+                clienteEncontrado=true;
             }
         }
         System.out.println(mensaje);
+        return clienteEncontrado;
     }
     @Override
     public void eliminarPorDni(int dni) {
