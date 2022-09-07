@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "0a0d127f-916c-4886-940e-86beb0957aa0",
+		"name": "Aseguradora",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar la matrícula, marca y modelo de todos los vehículos que hayan tenido un siniestro con pérdida mayor de 10000 pesos.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehiculo/patente/marca/modelo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculo",
+						"patente",
+						"marca",
+						"modelo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar la patente de todos los vehículos que tengan más de cuatro ruedas y hayan sido fabricados en el corriente año.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehiculo/patente/ruedas/anio",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculo",
+						"patente",
+						"ruedas",
+						"anio"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar las patentes de todos los vehículos registrados.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehiculo/patente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculo",
+						"patente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar la patente y la marca de todos los vehículos ordenados por año de fabricación.",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vehiculo/patente/marca",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vehiculo",
+						"patente",
+						"marca"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
