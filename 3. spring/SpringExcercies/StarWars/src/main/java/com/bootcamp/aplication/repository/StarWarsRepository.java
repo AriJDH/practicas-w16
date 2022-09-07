@@ -1,6 +1,6 @@
-package com.bootcamp.be_java_hisp_w16_g06.repository;
+package com.bootcamp.aplication.repository;
 
-import com.bootcamp.be_java_hisp_w16_g06.entity.User;
+import com.bootcamp.aplication.entity.SWCharacter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
@@ -15,32 +15,33 @@ import java.util.List;
 
 @Repository
 @Data
-public class UserFollowersRepository {
+public class StarWarsRepository {
 
-    private List<User> usersList = new ArrayList<>();
+    private List<SWCharacter> characterList = new ArrayList<>();
 
-    public UserFollowersRepository() {
-        this.usersList = loadUser();
+    public StarWarsRepository() {
+        this.characterList = loadCharacter();
     }
 
-    private List<User> loadUser() {
-        File file = null;
+    private List<SWCharacter> loadCharacter() {
 
+        File file = null;
         try {
-            file = ResourceUtils.getFile("classpath:createUser.json");
+            file = ResourceUtils.getFile("classpath:starWars.json");
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<User>> typeRef = new TypeReference<>() {};
+        TypeReference<List<SWCharacter>> typeRef = new TypeReference<>() {};
+        List<SWCharacter> charactersList = null;
 
-        List<User> users = null;
         try {
-            users = objectMapper.readValue(file, typeRef);
+            charactersList = objectMapper.readValue(file, typeRef);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return users;
+        return charactersList;
     }
 }

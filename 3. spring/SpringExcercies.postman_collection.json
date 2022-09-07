@@ -1,0 +1,388 @@
+{
+	"info": {
+		"_postman_id": "e38e15b8-1c26-46df-b384-5c89de7d2991",
+		"name": "SpringExcercies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22790821"
+	},
+	"item": [
+		{
+			"name": "MorseCode",
+			"item": [
+				{
+					"name": "code: HOLA SPRING MERCADO LIBRE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/morse/.... --- .-.. .-   ... .--. .-. .. -. --.   -- . .-. -.-. .- -.. ---    .-.. .. -... .-. .                   ",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"morse",
+								".... --- .-.. .-   ... .--. .-. .. -. --.   -- . .-. -.-. .- -.. ---    .-.. .. -... .-. .                   "
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "DANIEL",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CalculateAge",
+			"item": []
+		},
+		{
+			"name": "Deportistas",
+			"item": [
+				{
+					"name": "findSports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/findSports",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"findSports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findSports by Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/findSports/football",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"findSports",
+								"football"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findSportsPersons",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/findSportsPersons",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"findSportsPersons"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Covid19",
+			"item": [
+				{
+					"name": "findSymptom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/findSymptom",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"findSymptom"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findRiskPerson",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/findRiskPerson",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"findRiskPerson"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StarWars",
+			"item": [
+				{
+					"name": "getAllCharactersStarWars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/characters",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findCharacterByContains",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/characters/wil",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"characters",
+								"wil"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Calorias",
+			"item": [
+				{
+					"name": "GetCalorias",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"Perro\",\n        \"mass\": 200\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/allfood",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"allfood"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCalorias Multiple",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"Perro\",\n        \"mass\": 200\n    },\n    {\n        \"name\": \"Hamburguesa\",\n        \"mass\": 350\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/caloriesdata",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"caloriesdata"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Concesionario",
+			"item": [
+				{
+					"name": "Post Vehicles",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"brand\": \"Chevrolet\",\n    \"model\": \"Corsa\",\n    \"manufacturingDate\": \"2000-11-20\",\n    \"nomberOfKilometers\": \"115000\",\n    \"doors\": \"5\",\n    \"price\": \"90000\",\n    \"currency\": \"AR\",\n    \"services\": [\n        {\n            \"date\": \"2003-05-20\",\n            \"kilometers\": \"60000\",\n            \"description\": \"Change air filters\"\n        }\n    ],\n    \"countOfOwners\": \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{$server}}/v1/api/vehicles",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/v1/api/vehicles",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles Since Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/v1/api/vehicles/dates?order=asc",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"vehicles",
+								"dates"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "order",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles Since Price",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/v1/api/vehicles/prices",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"vehicles",
+								"prices"
+							],
+							"query": [
+								{
+									"key": "order",
+									"value": "asc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vehicles By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{$server}}/v1/api/vehicles/1",
+							"host": [
+								"{{$server}}"
+							],
+							"path": [
+								"v1",
+								"api",
+								"vehicles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

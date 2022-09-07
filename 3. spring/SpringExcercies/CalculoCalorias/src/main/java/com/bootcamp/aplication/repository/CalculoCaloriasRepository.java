@@ -1,6 +1,6 @@
-package com.bootcamp.be_java_hisp_w16_g06.repository;
+package com.bootcamp.aplication.repository;
 
-import com.bootcamp.be_java_hisp_w16_g06.entity.User;
+import com.bootcamp.aplication.entity.Food;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
@@ -15,32 +15,34 @@ import java.util.List;
 
 @Repository
 @Data
-public class UserFollowersRepository {
+public class CalculoCaloriasRepository {
 
-    private List<User> usersList = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
 
-    public UserFollowersRepository() {
-        this.usersList = loadUser();
+    public CalculoCaloriasRepository() {
+        this.foodList = loadFood();
     }
 
-    private List<User> loadUser() {
-        File file = null;
+    private List<Food> loadFood() {
 
+        File file = null;
         try {
-            file = ResourceUtils.getFile("classpath:createUser.json");
+            file = ResourceUtils.getFile("classpath:food.json");
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
         ObjectMapper objectMapper = new ObjectMapper();
-        TypeReference<List<User>> typeRef = new TypeReference<>() {};
+        TypeReference<List<Food>> typeRef = new TypeReference<>() {
+        };
+        List<Food> foods = null;
 
-        List<User> users = null;
         try {
-            users = objectMapper.readValue(file, typeRef);
+            foods = objectMapper.readValue(file, typeRef);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return users;
+        return foods;
     }
 }
