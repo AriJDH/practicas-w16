@@ -17,7 +17,7 @@ public interface RepositoryVehiculo extends JpaRepository<Vehiculo,Integer> {
     @Query("SELECT v from Vehiculo v order by v.anio_fabricacion")
     List<Vehiculo> findPatenteMarcaAll();
 
-    @Query("SELECT v.patente FROM Vehiculo v where v.cantidad_ruedas > 4 AND v.anio_fabricacion =(2002)")
+    @Query("SELECT v.patente FROM Vehiculo v where v.cantidad_ruedas > 4 AND v.anio_fabricacion =´2002´")
     List<String> findPatenteByAnioAndRuedas();
 
     @Query("SELECT v FROM Vehiculo v join v.siniestros vs where vs.perdida_economica > 10000")
