@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "f4089775-be2c-4ecb-b9f3-4a370a57c20d",
+		"name": "Starwars",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22624321"
+	},
+	"item": [
+		{
+			"name": "buscar personaje starwars",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/Darth",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Darth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

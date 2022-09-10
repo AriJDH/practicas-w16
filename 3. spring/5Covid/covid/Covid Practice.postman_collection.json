@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "424a3ae2-ef6b-43eb-b754-3f5099733ba2",
+		"name": "Covid Practice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22624321"
+	},
+	"item": [
+		{
+			"name": "Lista de Sintomas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/findSymptom",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"findSymptom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista de Personas",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar sintoma por nombre",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Grupo de Riesgo",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
