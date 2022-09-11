@@ -13,4 +13,5 @@ mvnw
 mvnw.cmd
 .gitignore
 */.mvn/wrapper
+.mvn
 
