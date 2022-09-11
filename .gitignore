@@ -9,3 +9,8 @@
 !**/src/test/**/target/
 target/
 
+mvnw
+mvnw.cmd
+.gitignore
+*/.mvn/wrapper
+
