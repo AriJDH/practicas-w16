@@ -22,6 +22,7 @@ public abstract class Reserva {
                 '}';
     }
 
+
     public void aplicarDescuento(Double indice_descuento){
         precio = precio - precio*(indice_descuento/100);
     };

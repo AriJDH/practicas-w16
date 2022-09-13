@@ -4,8 +4,9 @@ import localizadores.Localizador;
 import localizadores.Localizadores;
 import reservas.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Main {
     public static Localizadores localizadores = new Localizadores();
@@ -23,6 +24,7 @@ public class Main {
         clientes.addCliente(cli2);
         clientes.addCliente(cli3);
 
+        //PARTE 1
 
         //Primer Localizador - Caso 2
         Reserva res = new Hotel(500.0);
@@ -54,7 +56,48 @@ public class Main {
         Localizador loc2 = new Localizador(cli1,reservas3);
         localizadores.addLocalizador(loc2);
 
-        //
+        //PARTE 2
+
+        System.out.println("Cantidad de localizadores vendidos: " + cantidadDeLocalizadoresVendidos());
+        System.out.println("Cantidad total de reservas: " + cantidadTotalDeReservas());
+        reservasClasificadasPorTipo();
+        System.out.println("El total vendido es de: " + totalDeVenta());
+        System.out.println("Promedio total de ventas: " + promedioTotalDeVentas());
 
     }
+
+    private static int cantidadDeLocalizadoresVendidos(){
+        return localizadores.getListaLocalizador().size();
+    }
+
+    private static double cantidadTotalDeReservas(){
+        return localizadores.getListaLocalizador().stream()
+                .map(localizador -> localizador.getListaReservas().size())
+                .mapToDouble(Integer::doubleValue).sum();
+    }
+
+    private static void reservasClasificadasPorTipo(){
+        List<Reserva> reservas = new ArrayList<>();
+
+        localizadores.getListaLocalizador().stream()
+                .forEach(localizador -> localizador.getListaReservas().stream()
+                        .forEach(reserva -> reservas.add(reserva)));
+
+        Map<String, Long> reservasMap = reservas.stream()
+                .collect(Collectors.groupingBy(reserva -> reserva.getClass().getName(), Collectors.counting()));
+
+        System.out.println(reservasMap);
+    }
+
+    private static double totalDeVenta(){
+        return localizadores.getListaLocalizador().stream()
+                .map(localizador -> localizador.getTotal())
+                .mapToDouble(Double::doubleValue).sum();
+    }
+
+    private static double promedioTotalDeVentas(){
+        return totalDeVenta()/cantidadDeLocalizadoresVendidos();
+    }
+
+
 }

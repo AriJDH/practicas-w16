@@ -15,10 +15,10 @@ public class Main {
         System.out.println("1 - Mostrar clientes por pantalla");
         System.out.println(clientes.getListClientes().toString());
 
-        int option = -1;
-        while (option!=0){
+        int suboption = -1;
+        while (suboption!=0){
             menu();
-            int suboption = scanner.nextInt();
+            suboption = scanner.nextInt();
             while (suboption==1){
                 subMenuClientes();
                 int suboptionCliente = -1;
@@ -56,6 +56,7 @@ public class Main {
     }
     public static void menu(){
         System.out.println("1 - Clientes");
+        System.out.println("0 - Salir");
     }
 
     public static void subMenuClientes(){
