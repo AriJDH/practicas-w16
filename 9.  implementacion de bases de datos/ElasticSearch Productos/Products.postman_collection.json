@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "7bfcddf7-232f-4a47-b293-d809eda76c21",
+		"name": "Products",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Actualizar productos",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "     {\n        \"id\": \"u7zVHoMBTz8PSHNPEhvd\",\n        \"name\": \"Florero\",\n        \"tipo\": \"Decoracion\",\n        \"cantidad\": 200,\n        \"precio_venta\": 82.0,\n        \"precio_costo\": 150.0\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear productos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n      \"name\":\"Collar\",\n      \"tipo\":\"Accesorios\",\n      \"precio_venta\":52.4,\n      \"precio_costo\":80,\n      \"cantidad\":170\n    },\n    {\n      \"name\":\"Florero\",\n      \"tipo\":\"Decoracion\",\n      \"precio_venta\":82,\n      \"precio_costo\":150\n      \n    },\n      {\n      \"name\":\"Sarten\",\n      \"tipo\":\"Cocina\",\n      \"precio_venta\":102.30\n      \n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/products/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mostrar productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

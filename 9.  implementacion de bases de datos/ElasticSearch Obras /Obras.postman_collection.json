@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "0643c2fd-ddda-4a4f-a095-5c18ba92bb38",
+		"name": "Obras",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear obra literaria",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\":\"El cuervo\",\n    \"autor\":\"Edgar Allan Poe\",\n    \"cant_paginas\":394,\n    \"fecha_publicacion\":\"17/06/1939\",\n    \"editorial\":\"Leon\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/obra/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obra",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar obras literiarias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obra",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obra"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar obras literarias por autor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obra/listar/William Shakespare",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obra",
+						"listar",
+						"William Shakespare"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar obras literarias con cantida de paginas mayores recibidas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obra/listar/cantidad/300",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obra",
+						"listar",
+						"cantidad",
+						"300"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar obras literarias por editorial",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/obra/listar/editorial/leon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"obra",
+						"listar",
+						"editorial",
+						"leon"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

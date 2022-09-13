@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "bc5d04c9-5607-4fdb-9c62-9d4a62358366",
+		"name": "Employees",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Devolver todos los empleados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear empleados",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"name\":\"Carolina\",\n        \"last_name\":\"Hernandez\",\n        \"age\":22,\n        \"city\":\"CDMX\",\n        \"province\":\"Del Valle\",\n        \"department\":\"Fraccionamiento Madero\",\n        \"fechaNacimiento\":\"09/04/2000\"\n    },\n    {\n        \"name\":\"Antonio\",\n        \"last_name\":\"Lopez\",\n        \"age\":25,\n        \"city\":\"CDMX\",\n        \"fechaNacimiento\":\"14/01/1997\"\n    },\n    {\n        \"name\":\"Sonia\",\n        \"last_name\":\"Suarez\",\n        \"age\":30,\n        \"city\":\"Medellin\"\n    },\n    {\n        \"name\":\"Ernesto\",\n        \"last_name\":\"Arellano\",\n        \"age\":23,\n        \"city\":\"Buenos Aires\",\n        \"department\":\"Fraccionamiento Uno\"\n        \n    },\n    {\n        \"name\":\"Nayelli\",\n        \"last_name\":\"Rodriguez\",\n        \"age\":22,\n        \"city\":\"Buenos Aires\",\n        \"department\":\"Fraccionamiento Dos\"\n        \n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee/created",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"created"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar un empleado",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": \"9E8UG4MB74vjteWTjYUJ\",\n        \"name\": \"Carolina\",\n        \"last_name\": \"Hernandez\",\n        \"age\": 22,\n        \"city\": \"CDMX\",\n        \"province\": \"Del Valle\",\n        \"state\": \"Estado de Mexico\",\n        \"department\": \"Fraccionamiento Madero\",\n        \"fechaNacimiento\": \"09/04/2000\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee/updated",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"updated"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
