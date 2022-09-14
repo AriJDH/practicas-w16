@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ICLothingService {
     List<ClothingDto> getClothing();
-    ClothingDto findClothing(String id);
+    ClothingDto findClothing(Long id);
     List<ClothingDto> findClothingBySize(String size);
     List<ClothingDto> findClothingByName(String name);
     ClothingDto saveClothing(ClothingDto clothingDto);
     ClothingDto updateClothing(ClothingDto clothingDto);
-    void deleteClothingById(String id);
+    void deleteClothingById(Long id);
 }

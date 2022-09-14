@@ -30,16 +30,14 @@ public class ClothingService implements ICLothingService{
     public List<ClothingDto> getClothing() {
         List<Clothing> clothing = clothingRepository.findAll();
         List<ClothingDto> clothingDtos = clothing.stream().map(x -> modelMapper.map(x, ClothingDto.class)).collect(Collectors.toList());
-
         return clothingDtos;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public ClothingDto findClothing(String id) {
+    public ClothingDto findClothing(Long id) {
         Clothing clothing = clothingRepository.findById(id).orElse(null);
         ClothingDto clothingDto = modelMapper.map(clothing, ClothingDto.class);
-
         return clothingDto;
     }
 
@@ -47,9 +45,7 @@ public class ClothingService implements ICLothingService{
     @Transactional(readOnly = true)
     public List<ClothingDto> findClothingBySize(String size) {
         List<Clothing> clothing = clothingRepository.findBySize(size);
-
         List<ClothingDto> clothingDtos = clothing.stream().map(x -> modelMapper.map(x, ClothingDto.class)).collect(Collectors.toList());;
-
         return clothingDtos;
     }
 
@@ -58,25 +54,37 @@ public class ClothingService implements ICLothingService{
     public List<ClothingDto> findClothingByName(String name) {
         List<Clothing> clothing = clothingRepository.findByName(name);
         List<ClothingDto> clothingDtos = clothing.stream().map(x -> modelMapper.map(x, ClothingDto.class)).collect(Collectors.toList());
-
         return clothingDtos;
     }
 
     @Override
     @Transactional
     public ClothingDto saveClothing(ClothingDto clothingDto) {
-        return null;
+        Clothing clothing = modelMapper.map(clothingDto, Clothing.class);
+        clothing = clothingRepository.save(clothing);
+        return modelMapper.map(clothing, ClothingDto.class);
     }
 
     @Override
     @Transactional
     public ClothingDto updateClothing(ClothingDto clothingDto) {
-        return null;
+        Clothing clothing = clothingRepository.findById(clothingDto.getId()).orElse(null);
+
+        clothing.setName(!clothingDto.getName().equals(clothing.getName()) ? clothingDto.getName() : clothing.getName());
+        clothing.setType(!clothingDto.getType().equals(clothing.getType()) ? clothingDto.getType() : clothing.getType());
+        clothing.setBrand(!clothingDto.getBrand().equals(clothing.getBrand()) ? clothingDto.getBrand() : clothing.getBrand());
+        clothing.setColor(!clothingDto.getColor().equals(clothing.getColor()) ? clothingDto.getColor() : clothing.getColor());
+        clothing.setSize(!clothingDto.getSize().equals(clothing.getSize()) ? clothingDto.getSize() : clothing.getSize());
+        clothing.setAmount(clothingDto.getAmount() != clothing.getAmount() ? clothingDto.getAmount() : clothing.getAmount());
+        clothing.setPrice(clothingDto.getPrice() != clothing.getPrice() ? clothingDto.getPrice() : clothing.getPrice());
+
+        clothing = clothingRepository.save(clothing);
+        return modelMapper.map(clothing, ClothingDto.class);
     }
 
     @Override
     @Transactional
-    public void deleteClothingById(String id) {
-
+    public void deleteClothingById(Long id) {
+        clothingRepository.deleteById(id);
     }
 }

@@ -1,6 +1,7 @@
 package com.meli.deportista.Service;
 
 import com.meli.deportista.Dto.SportDto;
+import com.meli.deportista.Dto.SportPeopleDto;
 import com.meli.deportista.Entity.Sport;
 import com.meli.deportista.Repository.ISportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ public class SportService implements ISportService {
 
     @Autowired
     private ISportRepository sportRepository;
+
     @Override
     public List<SportDto> getSports() {
         return sportRepository.getSports();
@@ -21,5 +23,10 @@ public class SportService implements ISportService {
     @Override
     public SportDto getByName(String name) {
         return sportRepository.getByName(name);
+    }
+
+    @Override
+    public List<SportPeopleDto> findSportsPersons() {
+        return sportRepository.findSportsPersons();
     }
 }

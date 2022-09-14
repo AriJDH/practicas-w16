@@ -14,7 +14,8 @@ import javax.persistence.*;
 public class Clothing {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     private String name;
 
