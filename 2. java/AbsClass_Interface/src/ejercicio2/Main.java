@@ -23,9 +23,9 @@ public class Main {
 
         //Impresión de data de los objetos
         System.out.println(curriculumVitae.imprimirDocumento());
-        System.out.println("");
+        System.out.println();
         System.out.println(libro.imprimirDocumento());
-        System.out.println("");
+        System.out.println();
         System.out.println(informe.imprimirDocumento());
     }
 }
