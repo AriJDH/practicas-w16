@@ -11,34 +11,35 @@ public class Main {
     public static void main(String[] args) {
 
         //Primer participante con una nave simple
-        NaveSimple nave1 = new NaveSimple("Furia Roja", generarNumero(), generarNumero());
-        Participante participante1 = new Participante("Bólido", nave1, 0);
+        NaveSimple furiaRoja = new NaveSimple("Furia Roja", generarCoordenada(), generarCoordenada());
+        Participante bolido = new Participante("Bólido", furiaRoja, 0);
 
         //Segundo participante con una flota de naves
         List<NaveSimple> flotaDeNaves = Arrays.asList(
-                new NaveSimple("Nave 1", generarNumero(), generarNumero()),
-                new NaveSimple("Nave 2", generarNumero(), generarNumero()),
-                new NaveSimple("Nave 3", generarNumero(), generarNumero()),
-                new NaveSimple("Nave 4", generarNumero(), generarNumero())
+                new NaveSimple("Nave a", generarCoordenada(), generarCoordenada()),
+                new NaveSimple("Nave b", generarCoordenada(), generarCoordenada()),
+                new NaveSimple("Nave c", generarCoordenada(), generarCoordenada()),
+                new NaveSimple("Nave d", generarCoordenada(), generarCoordenada()),
+                new NaveSimple("Nave e", generarCoordenada(), generarCoordenada())
         );
         FlotaDeNaves flota1 = new FlotaDeNaves(flotaDeNaves);
-        Participante participante2 = new Participante("Jinete Sable", flota1, 0);
+        Participante jineteSable = new Participante("Jinete Sable", flota1, 0);
 
         //Tercer participante con una nave simple
-        NaveSimple nave2 = new NaveSimple("Poder Montado", generarNumero(), generarNumero());
-        Participante participante3 = new Participante("Potro", nave2, 0);
+        NaveSimple poderMontado = new NaveSimple("Poder Montado", generarCoordenada(), generarCoordenada());
+        Participante potro = new Participante("Potro", poderMontado, 0);
 
-        System.out.println("Eje x: " + participante1.getNaveSimple().getX());
-        System.out.println("Eje y: " + participante1.getNaveSimple().getY());
-        System.out.println(nave1.destruirAsteroide());
+        System.out.println("Eje x: " + bolido.getNaveSimple().getX());
+        System.out.println("Eje y: " + bolido.getNaveSimple().getY());
+        System.out.println(furiaRoja.destruirAsteroide());
         System.out.println(flota1.destruirAsteroide());
-        System.out.println(nave2.destruirAsteroide());
+        System.out.println(poderMontado.destruirAsteroide());
 
 
 
     }
 
-    private static int generarNumero(){
+    private static int generarCoordenada(){
         //Se define un rango de coordenadas en un plano de 100 x 100
         int min = 0;
         int max = 100;

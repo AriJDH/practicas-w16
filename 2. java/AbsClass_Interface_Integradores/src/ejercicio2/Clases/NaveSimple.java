@@ -39,6 +39,6 @@ public class NaveSimple implements Nave {
 
     @Override
     public Double destruirAsteroide() {
-        return Math.sqrt(getX() - Math.pow(getX(), 2)) + Math.sqrt(getY() - Math.pow(getY(), 2));
+        return Math.sqrt(Math.pow(getX() - (getX()*2), 2) + Math.pow(getY() - (getY()*2), 2));
     }
 }
