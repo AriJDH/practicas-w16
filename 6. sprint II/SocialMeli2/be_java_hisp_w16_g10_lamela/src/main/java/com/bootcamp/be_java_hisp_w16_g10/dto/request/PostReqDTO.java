@@ -32,7 +32,7 @@ public class PostReqDTO {
     @NotNull(message = "El campo no puede estar vacio")
     @Min(value = 1L, message = "El id debe ser mayor a cero.")
     private Integer category;
-    @NotNull(message = "El campo no puede estar vacio.")
+    @NotNull(message = "DateTimeFormatEl campo no puede estar vacio.")
     @DecimalMax(value = "10000000", message = "El precio máximo por producto es 10.000.000.")
     private Double price;
 }

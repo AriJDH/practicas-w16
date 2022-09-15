@@ -1,0 +1,1 @@
+SELECT first_name AS nombre, last_name AS apellido, rating FROM actors;

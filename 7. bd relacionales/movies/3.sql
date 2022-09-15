@@ -1,0 +1,1 @@
+SELECT title as titulo FROM series;
