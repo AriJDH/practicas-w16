@@ -1,8 +1,7 @@
 package ejercicio2.Clases;
 
-import ejercicio2.Interface.Nave;
+import ejercicio2.Interfaces.Nave;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class FlotaDeNaves implements Nave {
@@ -22,7 +21,14 @@ public class FlotaDeNaves implements Nave {
     }
 
     @Override
-    public Double destruirAsteroide() {
-        return flota.stream().mapToDouble(NaveSimple::destruirAsteroide).average().getAsDouble();
+    public Double destruirAsteroide(Asteroide asteroid) {
+        //return flota.stream().mapToDouble(NaveSimple::destruirAsteroide).average().getAsDouble();
+        double acumulador = 0.0;
+        int index = 0;
+        for (NaveSimple naves : getFlota()){
+            acumulador += Math.sqrt(Math.pow(flota.get(index).getX() - asteroid.getPosx(), 2) + Math.pow(flota.get(index).getY() - asteroid.getPosy(), 2));
+            index++;
+        }
+        return acumulador / index;
     }
 }

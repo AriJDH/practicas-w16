@@ -1,6 +1,6 @@
 package ejercicio2.Clases;
 
-import ejercicio2.Interface.Nave;
+import ejercicio2.Interfaces.Nave;
 
 public class NaveSimple implements Nave {
 
@@ -38,7 +38,7 @@ public class NaveSimple implements Nave {
     }
 
     @Override
-    public Double destruirAsteroide() {
-        return Math.sqrt(Math.pow(getX() - (getX()*2), 2) + Math.pow(getY() - (getY()*2), 2));
+    public Double destruirAsteroide(Asteroide asteroid) {
+        return Math.sqrt(Math.pow(getX() - asteroid.getPosx(), 2) + Math.pow(getY() - asteroid.getPosy(), 2));
     }
 }
