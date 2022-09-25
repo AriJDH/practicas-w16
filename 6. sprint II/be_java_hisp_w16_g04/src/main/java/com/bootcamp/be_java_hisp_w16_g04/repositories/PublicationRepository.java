@@ -18,7 +18,7 @@ public class PublicationRepository implements IPublicationRepository {
   @PostConstruct
   private void loadData() {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    LocalDate date1 = LocalDate.parse("09-08-2022", dtf);
+    LocalDate date1 = LocalDate.parse("11-10-2022", dtf);
     LocalDate date2 = LocalDate.parse("15-08-2022", dtf);
     LocalDate date3 = LocalDate.parse("18-04-2022", dtf);
 
